@@ -1,0 +1,74 @@
+{
+    "siobhanDavies": [
+    {
+      title: 'From 28 Apr10am – 12noon',
+      schedule: 'Programmed by Independent Dance.Open to experienced movement practitioners.',
+      link: 'https://bookwhen.com/independentdance'
+    },
+    {
+      title: 'From 28 Apr6.30 – 8pm',
+      schedule: 'Programmed by Independent Dance.Open to all. Teacher changes weekly.',
+      link: 'https://www.siobhandavies.com/classes/id-improvisation/'
+    },
+    {
+      title: '28 Apr – 28 Jul6:30 – 9.30pm',
+      schedule: 'with Adriano Oliveira',
+      link: 'https://www.siobhandavies.com/classes/brazilian-dance/'
+    },
+    {
+      title: '22 Apr – 8 Jul6.30 – 8.30pm',
+      schedule: 'with Freestylers',
+      link: 'https://www.siobhandavies.com/classes/freestylers-sessions/'
+    },
+    {
+      title: '23 Apr – 9 Jul6.30 – 8.30pm',
+      schedule: 'with Laura Doehler.Programmed by Siobhan Davies Studios.',
+      link: 'https://www.siobhandavies.com/classes/creative-contemporary/#teachers'
+    },
+    {
+      title: '30 Apr – 30 Jul7 – 8.30pm',
+      schedule: 'with Yogabelle',
+      link: 'https://www.siobhandavies.com/classes/yoga/'
+    },
+    {
+      title: '1 May – 31 Jul6.30 – 7.30pm',
+      schedule: 'with Laura Guarnera',
+      link: 'https://www.siobhandavies.com/classes/inspiral-flow/'
+    },
+    {
+      title: '1 May – 31 Jul7.30 – 9pm',
+      schedule: 'with Caroline Muraldo',
+      link: 'https://www.siobhandavies.com/classes/africanistic-movement/'
+    },
+    {
+      title: '2 May – 25 Jul6.30 – 7.30pm',
+      schedule: 'with Gaga London',
+      link: 'https://www.siobhandavies.com/classes/gaga-people/'
+    },
+    {
+      title: '26 Apr – 26 Jul10am – 11.30am',
+      schedule: 'with Yogabelle',
+      link: 'https://www.siobhandavies.com/classes/yoga/'
+    },
+    {
+      title: '27 Apr – 29 Jun2pm – 3.45pm',
+      schedule: 'with A de le Fe',
+      link: 'https://www.siobhandavies.com/classes/klein/'
+    },
+    {
+      title: 'First Sunday of the month 5 – 8pm',
+      schedule: 'with Shannelle ‘Tali’ Fergus',
+      link: 'https://www.siobhandavies.com/classes/sweetspot-sundaze/'
+    },
+    {
+      title: '26 Apr – 12 Jul9.30 – 10.15am',
+      schedule: 'with Kiren Virdee',
+      link: 'https://www.siobhandavies.com/classes/infants-contemporary/'
+    },
+    {
+      title: '26 Apr – 12 Jul10.30 – 11.30am',
+      schedule: 'with Kiren Virdee',
+      link: 'https://www.siobhandavies.com/classes/juniors-contemporary/'
+    }
+  ]
+}
