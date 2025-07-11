@@ -2,6 +2,16 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 
+// TODO:
+// - Add the time to the classes
+// - Add the day to the classes
+// - Add the link to the classes
+// - Add the details to the classes
+// - Add the title to the classes
+// - Add the schedule to the classes
+// Parse Summer Intensives
+// Mark season dates
+
 const scrapeThePlace = async () => {
     const url = 'https://theplace.org.uk/dance/classes-and-courses?levels=%5BLevel%5D&styles=%5BStyle%5D&ages=%5BAdult%5D';
     try {
