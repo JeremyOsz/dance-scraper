@@ -12,6 +12,22 @@ const fs = require('fs');
 // Parse Summer Intensives
 // Mark season dates
 
+// Map of Season Names to Dates
+const seasonDates = {
+    "Summer Intensives 2025": {
+        start: "2025-07-01",
+        end: "2025-07-31"
+    },
+    "Autumn 2025": {
+        start: "2025-09-01",
+        end: "2025-12-31"
+    },
+    "Summer 2025": {
+        start: "2025-06-01",
+        end: "2025-08-31"
+    }
+}
+
 const scrapeThePlace = async () => {
     const url = 'https://theplace.org.uk/dance/classes-and-courses?levels=%5BLevel%5D&styles=%5BStyle%5D&ages=%5BAdult%5D';
     try {
@@ -42,12 +58,26 @@ const scrapeThePlace = async () => {
                 link = 'https://theplace.org.uk' + link;
             }
             if (title) {
+                // Determine season dates based on details
+                let startDate = null;
+                let endDate = null;
+                
+                for (const [seasonName, dates] of Object.entries(seasonDates)) {
+                    if (details && details.includes(seasonName)) {
+                        startDate = dates.start;
+                        endDate = dates.end;
+                        break;
+                    }
+                }
+                
                 classes.push({
                     title,
                     details,
                     day,
                     time,
                     schedule: "weekly",
+                    startDate,
+                    endDate,
                     link: link || null
                 });
             }

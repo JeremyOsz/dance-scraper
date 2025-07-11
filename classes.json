@@ -1,20 +1,124 @@
 {
   "siobhanDavies": [
     {
-      "title": "(All levels)",
+      "title": "MORNING CLASS",
+      "details": "Programmed by Independent Dance.Open to experienced movement practitioners.",
+      "day": null,
+      "time": null,
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://bookwhen.com/independentdance"
+    },
+    {
+      "title": "MONDAY NIGHT IMPROVISATION",
+      "details": "Programmed by Independent Dance.Open to all. Teacher changes weekly.",
+      "day": "Monday",
+      "time": "6.30 – 8pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/id-improvisation/"
+    },
+    {
+      "title": "Capoeira & Afro-Brazilian Fusion",
+      "details": "with Adriano Oliveira",
+      "day": "Monday",
+      "time": "30 – 9.30pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/brazilian-dance/"
+    },
+    {
+      "title": "FREESTYLERS’ SESSIONS",
+      "details": "with Freestylers",
+      "day": "Tuesday",
+      "time": "6.30 – 8.30pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/freestylers-sessions/"
+    },
+    {
+      "title": "CREATIVE CONTEMPORARY DANCE",
+      "details": "with Laura Doehler.Programmed by Siobhan Davies Studios.",
+      "day": "Wednesday",
+      "time": "6.30 – 8.30pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/creative-contemporary/#teachers"
+    },
+    {
+      "title": "YOGA",
       "details": "with Yogabelle",
       "day": "Wednesday",
       "time": "7 – 8.30pm",
       "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
       "link": "https://www.siobhandavies.com/classes/yoga/"
     },
     {
-      "title": "(All levels)",
+      "title": "INSPIRAL FLOW PILATES",
+      "details": "with Laura Guarnera",
+      "day": "Thursday",
+      "time": "6.30 – 7.30pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/inspiral-flow/"
+    },
+    {
+      "title": "FOUNDATION IN AFRICANISTIC MOVEMENT",
+      "details": "with Caroline Muraldo",
+      "day": "Thursday",
+      "time": "7.30 – 9pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/africanistic-movement/"
+    },
+    {
+      "title": "GAGA/PEOPLE CLASSES",
+      "details": "with Gaga London",
+      "day": "Friday",
+      "time": "6.30 – 7.30pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/gaga-people/"
+    },
+    {
+      "title": "YOGA",
       "details": "with Yogabelle",
       "day": "Saturday",
       "time": "10am – 11.30am",
       "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
       "link": "https://www.siobhandavies.com/classes/yoga/"
+    },
+    {
+      "title": "KLEIN TECHNIQUE™ STRETCH AND PLACEMENT",
+      "details": "with A de le Fe",
+      "day": "Sunday",
+      "time": "2pm – 3.45pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/klein/"
+    },
+    {
+      "title": "SWEET SPOT SUNDAZE: THE SESSIONS",
+      "details": "with Shannelle ‘Tali’ Fergus",
+      "day": "Sunday",
+      "time": "5 – 8pm",
+      "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
+      "link": "https://www.siobhandavies.com/classes/sweetspot-sundaze/"
     }
   ],
   "thePlace": [
@@ -24,6 +128,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/creative-dance-3-5-and-grown-ups"
     },
     {
@@ -32,6 +138,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/creative-dance-3-5-and-grown-ups-950am"
     },
     {
@@ -40,6 +148,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-sp25-contemporary-beginners-drop-in-leanne-lieberhong"
     },
     {
@@ -48,6 +158,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-sp25-su25-creative-dance-for-children-ages-3-5-and-grown-ups-900am-drop-in"
     },
     {
@@ -56,6 +168,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-sp25-contemporary-intermediate-drop-in-ellyn-hebron"
     },
     {
@@ -64,6 +178,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-sp25-contemporary-advanced-drop-in-stephen-pelton"
     },
     {
@@ -72,6 +188,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-sp25-contemporary-intermediate-for-over-60s-drop-in-ellyn-hebron"
     },
     {
@@ -80,6 +198,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-sp25-ballet-intermediate-drop-in-kasper-cornish"
     },
     {
@@ -88,6 +208,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-sp25-contemporary-advanced-drop-in-akane-abe"
     },
     {
@@ -96,6 +218,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-sp25-contemporary-intermediate-drop-in-megan-griffiths"
     },
     {
@@ -104,6 +228,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-sp25-ballet-beginners-drop-in-julian-lewis"
     },
     {
@@ -112,6 +238,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
       "link": "https://theplace.org.uk/classes-courses/summer-2025-beatmotion-a-workshop-for-professional-dancers-by-akeim-toussaint-buck"
     },
     {
@@ -120,6 +248,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
       "link": "https://theplace.org.uk/classes-courses/cyd-su25-summer-intensive-folk-11-14"
     },
     {
@@ -128,6 +258,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
       "link": "https://theplace.org.uk/classes-courses/cyd-su25-summer-intensive-contemporary-15-18"
     },
     {
@@ -136,6 +268,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
       "link": "https://theplace.org.uk/classes-courses/cyd-su25-summer-intensive-7-10-bollywood"
     },
     {
@@ -144,6 +278,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-open-level-contemporary-for-over-60s-drop-in-miguel-altunaga"
     },
     {
@@ -152,6 +288,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-choreographic-session-for-over-60s-drop-in-miguel-altunaga"
     },
     {
@@ -160,6 +298,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-professional-class-drop-in-ekleido"
     },
     {
@@ -168,6 +308,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-ballet-intermediate-drop-in-julian-lewis"
     },
     {
@@ -176,6 +318,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-vogue-ekleido"
     },
     {
@@ -184,6 +328,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-contemporary-beginners-drop-in-alleyne-dance"
     },
     {
@@ -192,6 +338,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-contemporary-intermediate-drop-in-alleyne-dance"
     },
     {
@@ -200,6 +348,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-ballet-beginners-drop-in-julian-lewis"
     },
     {
@@ -208,6 +358,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-open-level-contemporary-for-over-60s-drop-in-kate-rogan"
     },
     {
@@ -216,6 +368,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-choreographic-session-for-over-60s-drop-in-kate-rogan"
     },
     {
@@ -224,6 +378,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-professional-class-drop-in-brooke-milliner"
     },
     {
@@ -232,6 +388,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-open-level-hip-hop-drop-in-brooke-milliner"
     },
     {
@@ -240,6 +398,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-contemporary-intermediate-drop-in-laura-gibson"
     },
     {
@@ -248,6 +408,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-ballet-beginners-drop-in-denzil-bailey"
     },
     {
@@ -256,6 +418,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-contemporary-beginners-drop-in-laura-gibson"
     },
     {
@@ -264,6 +428,8 @@
       "day": "Mondays, Tuesdays, Wednesdays, Thursdays, Friday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-su25-intensive-ballet-intermediate-drop-in-denzil-bailey"
     },
     {
@@ -272,6 +438,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": null,
+      "endDate": null,
       "link": "https://theplace.org.uk/classes-courses/jazz-arts-rewired-masterclass-2025"
     },
     {
@@ -280,6 +448,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-ballet-intermediate-kasper-cornish"
     },
     {
@@ -288,6 +458,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-ballet-introduction-julian-lewis"
     },
     {
@@ -296,6 +468,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-advanced-akane-abe"
     },
     {
@@ -304,6 +478,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-intermediate-megan-griffiths"
     },
     {
@@ -312,6 +488,8 @@
       "day": "Monday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-ballet-improvers-julian-lewis"
     },
     {
@@ -320,6 +498,8 @@
       "day": "Tuesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-open-over-60s-sarah-miller"
     },
     {
@@ -328,6 +508,8 @@
       "day": "Tuesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-ballet-improvers-fukiko-takase"
     },
     {
@@ -336,6 +518,8 @@
       "day": "Tuesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-introduction-james-muller"
     },
     {
@@ -344,6 +528,8 @@
       "day": "Tuesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-improvers-james-muller"
     },
     {
@@ -352,6 +538,8 @@
       "day": "Wednesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-introduction-sarah-miller"
     },
     {
@@ -360,6 +548,8 @@
       "day": "Wednesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-improvisation-open-pepa-ubera"
     },
     {
@@ -368,6 +558,8 @@
       "day": "Wednesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-intermediate-luke-birch"
     },
     {
@@ -376,6 +568,8 @@
       "day": "Wednesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-tanztheater-open-adrian-look"
     },
     {
@@ -384,6 +578,8 @@
       "day": "Wednesday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-improvers-adrian-look"
     },
     {
@@ -392,6 +588,8 @@
       "day": "Thursday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-intermediate-over-60s-natalie-dodd"
     },
     {
@@ -400,6 +598,8 @@
       "day": "Thursday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-dance-technique-11-14"
     },
     {
@@ -408,6 +608,8 @@
       "day": "Thursday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-ballet-intermediate-denzil-bailey"
     },
     {
@@ -416,6 +618,8 @@
       "day": "Thursday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-ballet-introduction-ellyn-hebron"
     },
     {
@@ -424,6 +628,8 @@
       "day": "Thursday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-improvers-laura-gibson"
     },
     {
@@ -432,6 +638,8 @@
       "day": "Thursday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-intermediate-akane-abe"
     },
     {
@@ -440,6 +648,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-introduction-simone-sistarelli"
     },
     {
@@ -448,6 +658,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-improvers-leanne-lieberhong"
     },
     {
@@ -456,6 +668,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-8-10"
     },
     {
@@ -464,6 +678,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-7-8"
     },
     {
@@ -472,6 +688,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-5-6"
     },
     {
@@ -480,6 +698,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-6-7"
     },
     {
@@ -488,6 +708,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-12-13"
     },
     {
@@ -496,6 +718,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-13-15"
     },
     {
@@ -504,6 +728,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-15-18"
     },
     {
@@ -512,6 +738,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-advanced-stephen-pelton"
     },
     {
@@ -520,6 +748,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-intermediate-ellyn-hebron"
     },
     {
@@ -528,6 +758,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-10-11"
     },
     {
@@ -536,6 +768,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/cyd-25-26-creative-dance-11-12"
     },
     {
@@ -544,6 +778,8 @@
       "day": "Saturday",
       "time": null,
       "schedule": "weekly",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
       "link": "https://theplace.org.uk/classes-courses/c-c-25-26-contemporary-intermediate-over-60s-ellyn-hebron"
     }
   ]
