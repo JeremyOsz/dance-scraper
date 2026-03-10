@@ -298,8 +298,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     return getVenueMapQuery(mapVenue);
   }, [mapVenue, venues]);
 
-  const clearSummaryActionClass =
-    "ml-auto h-6 px-2 text-xs";
+  const clearSummaryActionClass = "ml-auto h-8 px-3 text-xs sm:h-6 sm:px-2";
 
   const renderFilterSections = () => (
     <div className="space-y-3">
@@ -550,6 +549,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
 
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
+      <h1 className="sr-only">London dance classes calendar</h1>
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader className="px-0">
           <CardTitle className="text-3xl tracking-tight">London Dance Calendar</CardTitle>
@@ -601,21 +601,23 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   Filters
                 </Button>
                 <Badge variant="secondary">{activeFilterCount} filters</Badge>
-              <Button variant={mode === "calendar" ? "default" : "outline"} onClick={() => setMode("calendar")}>
-                Calendar
-              </Button>
-              <Button variant={mode === "venues" ? "default" : "outline"} onClick={() => setMode("venues")}>
-                Venues
-              </Button>
-              <Button variant={mode === "map" ? "default" : "outline"} onClick={() => setMode("map")}>
-                Map
-              </Button>
-              <span className="ml-auto">Showing {filteredSessions.length} classes</span>
-            </div>
+                <Button variant={mode === "calendar" ? "default" : "outline"} onClick={() => setMode("calendar")}>
+                  Calendar
+                </Button>
+                <Button variant={mode === "venues" ? "default" : "outline"} onClick={() => setMode("venues")}>
+                  Venues
+                </Button>
+                <Button variant={mode === "map" ? "default" : "outline"} onClick={() => setMode("map")}>
+                  Map
+                </Button>
+                <span className="w-full text-xs text-muted-foreground sm:ml-auto sm:w-auto sm:text-sm">
+                  Showing {filteredSessions.length} classes
+                </span>
+              </div>
 
             {mode === "calendar" && (
               <>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <Button
                     variant="outline"
                     onClick={() => setAnchorDate((d) => (view === "week" ? subDays(d, 7) : subMonths(d, 1)))}
@@ -647,10 +649,10 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       setAnchorDate(nextAnchor);
                       setView("week");
                     }}
-                    className="w-[160px]"
+                    className="w-full sm:w-[160px]"
                     aria-label="Go to week"
                   />
-                  <div className="ml-auto flex gap-2">
+                  <div className="flex w-full gap-2 sm:ml-auto sm:w-auto">
                     <Button variant={view === "week" ? "default" : "outline"} onClick={() => setView("week")}>
                       Week
                     </Button>
@@ -664,7 +666,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   <div
                     className={
                       view === "week"
-                        ? "grid min-w-[1540px] grid-cols-7 gap-3"
+                        ? "grid grid-cols-1 gap-3 md:min-w-[1540px] md:grid-cols-7"
                         : "grid grid-cols-1 gap-3 md:grid-cols-7"
                     }
                   >
@@ -702,7 +704,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                                     <Button
                                       size="sm"
                                       variant={shortlistSet.has(session.id) ? "default" : "outline"}
-                                      className="h-6 px-2 text-[11px] transition-colors"
+                                      className="h-8 px-3 text-xs transition-colors sm:h-6 sm:px-2 sm:text-[11px]"
                                       onClick={() => toggleShortlist(session.id)}
                                       aria-label={shortlistSet.has(session.id) ? `Remove from shortlist: ${session.title}` : `Add to shortlist: ${session.title}`}
                                     >
@@ -751,7 +753,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                               <Button
                                 size="sm"
                                 variant={shortlistSet.has(session.id) ? "default" : "outline"}
-                                className="h-6 px-2 text-[11px] transition-colors"
+                                className="h-8 px-3 text-xs transition-colors sm:h-6 sm:px-2 sm:text-[11px]"
                                 onClick={() => toggleShortlist(session.id)}
                                 aria-label={
                                   shortlistSet.has(session.id)
@@ -861,7 +863,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   <iframe
                     title="Venue map"
                     src={`https://www.google.com/maps?q=${encodeURIComponent(mapSearchQuery)}&output=embed`}
-                    className="h-[520px] w-full"
+                    className="h-[360px] w-full md:h-[520px]"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
@@ -874,7 +876,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       </Card>
 
       <Dialog open={Boolean(selectedSession)} onOpenChange={(open) => !open && setSelectedSession(null)}>
-        <DialogContent>
+        <DialogContent className="max-h-[90dvh] overflow-y-auto p-4 sm:p-6">
           {selectedSession && (
             <>
               <DialogHeader>
@@ -896,7 +898,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                 <p>
                   Date range: {selectedSession.startDate ?? "Open"} to {selectedSession.endDate ?? "Open"}
                 </p>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <Button
                     variant={shortlistSet.has(selectedSession.id) ? "default" : "outline"}
                     onClick={() => toggleShortlist(selectedSession.id)}
