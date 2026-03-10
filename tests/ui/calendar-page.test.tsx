@@ -66,9 +66,11 @@ describe("CalendarPage", () => {
     window.localStorage.clear();
   });
 
-  it("disables preferred/shortlist-only toggles when nothing is saved", () => {
+  it("disables preferred/shortlist-only toggles when nothing is saved", async () => {
+    const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
+    await user.click(screen.getByRole("button", { name: "Filters" }));
     expect(screen.queryByRole("checkbox", { name: "Preferred venues only" })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Shortlist (0)" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Clear filters" })).toBeDisabled();
@@ -109,6 +111,7 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
+    await user.click(screen.getByRole("button", { name: "Filters" }));
     await user.click(screen.getByRole("button", { name: "Show preferred venues" }));
     await user.click(screen.getByRole("checkbox", { name: "TripSpace" }));
     await user.click(screen.getByRole("checkbox", { name: "Preferred venues only" }));
@@ -124,8 +127,8 @@ describe("CalendarPage", () => {
     const addButtons = screen.getAllByRole("button", { name: /add to shortlist/i });
     await user.click(addButtons[0]);
 
+    await user.click(screen.getByRole("button", { name: "Filters" }));
     expect(screen.getByRole("button", { name: "Clear shortlist (1)" })).not.toBeDisabled();
-
     await user.click(screen.getByRole("button", { name: "Shortlist (1)" }));
 
     expect(screen.getAllByText("Embodied Workshop").length).toBeGreaterThan(0);
@@ -136,7 +139,7 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.type(screen.getByPlaceholderText("Search class, teacher, style"), "technique");
+    await user.type(screen.getAllByPlaceholderText("Search class, teacher, style")[0], "technique");
     expect(screen.queryByText("Embodied Workshop")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Clear filters" })).not.toBeDisabled();
 
@@ -162,7 +165,7 @@ describe("CalendarPage", () => {
     );
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    expect(await screen.findByDisplayValue("technique")).toBeInTheDocument();
+    expect((await screen.findAllByDisplayValue("technique")).length).toBeGreaterThan(0);
     expect(screen.queryByText("Embodied Workshop")).not.toBeInTheDocument();
     expect(screen.getByText("Showing 1 classes")).toBeInTheDocument();
   });

@@ -93,6 +93,30 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.venue).toBe("Ecstatic Dance London");
   });
 
+  it("parses Eventbrite organizer JSON-LD graph and skips malformed dates", async () => {
+    fetchHtml.mockResolvedValue(fixture("eventbrite-organizer-graph.html"));
+    const { scrapeEcstaticDanceLondon } = await import("../../scripts/scrape/adapters/ecstatic-dance-london");
+    const output = await scrapeEcstaticDanceLondon();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]?.title).toBe("Luminous New Moon Monday Dance");
+    expect(output.classes[0]?.startDate).toBe("2026-03-16");
+    expect(output.classes[0]?.endDate).toBe("2026-03-16");
+  });
+
+  it("parses Luminous events from Dandelion ICS feed", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
+      .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
+      .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
+      .mockResolvedValueOnce(fixture("dandelion-luminous.ics"));
+    const { scrapeEcstaticDanceLondon } = await import("../../scripts/scrape/adapters/ecstatic-dance-london");
+    const output = await scrapeEcstaticDanceLondon();
+    expect(output.ok).toBe(true);
+    expect(output.classes.map((item) => item.title)).toContain("Luminous New Moon Monday Dance x FX10K");
+    expect(output.classes.some((item) => item.bookingUrl.includes("dandelion.events/events/6985e5beb0c9d9576952ec22"))).toBe(true);
+  });
+
   it("parses Five Rhythms London adapter", async () => {
     fetchHtml.mockResolvedValue(fixture("five-rhythms.html"));
     const { scrapeFiveRhythmsLondon } = await import("../../scripts/scrape/adapters/five-rhythms-london");
