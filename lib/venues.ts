@@ -41,6 +41,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://www.eventbrite.com/o/73047023743",
     mapQuery: "Ecstatic Dance London"
   },
+  luminousDance: {
+    label: "Luminous Dance",
+    sourceUrl: "https://dandelion.events/o/luminous/events",
+    mapQuery: "Luminous Dance London"
+  },
   fiveRhythmsLondon: {
     label: "Five Rhythms London",
     sourceUrl: "https://www.5rhythms.com/classes/London",
@@ -80,6 +85,36 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     label: "Wednesday Moving",
     sourceUrl: "https://www.wednesdaymoving.co.uk/",
     mapQuery: "Round Chapel Old School Rooms Hackney E5 0PU"
+  },
+  danceworks: {
+    label: "Danceworks",
+    sourceUrl: "https://www.danceworks.com/london/classes/timetable/",
+    mapQuery: "Danceworks London classes"
+  },
+  pineappleDanceStudios: {
+    label: "Pineapple Dance Studios",
+    sourceUrl: "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+    mapQuery: "Pineapple Dance Studios London"
+  },
+  baseDanceStudios: {
+    label: "BASE Dance Studios",
+    sourceUrl: "https://www.basedancestudios.com/weekly-timetable-2",
+    mapQuery: "BASE Dance Studios London"
+  },
+  salsaSoho: {
+    label: "Salsa! Soho",
+    sourceUrl: "https://www.salsa-soho.com/",
+    mapQuery: "Salsa Soho London"
+  },
+  barSalsaTemple: {
+    label: "Bar Salsa Temple",
+    sourceUrl: "https://www.barsalsa.com/temple/",
+    mapQuery: "Bar Salsa Temple London"
+  },
+  mamboCity: {
+    label: "MamboCity",
+    sourceUrl: "https://www.mambocity.co.uk/",
+    mapQuery: "MamboCity London"
   }
 };
 

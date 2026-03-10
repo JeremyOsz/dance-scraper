@@ -5,6 +5,9 @@ import type { AdapterOutput, ScrapedClass } from "./types";
 
 const DAY_MATCH = /(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/i;
 const TIME_RANGE = /(\d{1,2}(?::|\.)?\d{0,2}\s*[ap]m?)\s*(?:-|–|to)\s*(\d{1,2}(?::|\.)?\d{0,2}\s*[ap]m?)/i;
+const TIME_RANGE_RELAXED =
+  /(\d{1,2}(?::|\.)?\d{0,2}\s*(?:[ap]m?)?)\s*(?:-|–|—|to)\s*(\d{1,2}(?::|\.)?\d{0,2}\s*(?:[ap]m?)?)/i;
+const TIME_RANGE_24H = /\b((?:[01]?\d|2[0-3])[:.]\d{2})\s*(?:-|–|—|to)\s*((?:[01]?\d|2[0-3])[:.]\d{2})\b/i;
 
 function slugify(input: string): string {
   return input
@@ -12,6 +15,20 @@ function slugify(input: string): string {
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+}
+
+function normalizeTitleForDedupe(title: string): string {
+  const normalized = title
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/@/g, " at ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+  if (!normalized) return "";
+  return normalized
+    .split(/\s+/)
+    .filter((token) => token !== "x" && token !== "at")
+    .join(" ");
 }
 
 function normalizeDay(input: string | null): DanceSession["dayOfWeek"] {
@@ -23,11 +40,51 @@ function normalizeDay(input: string | null): DanceSession["dayOfWeek"] {
 
 function normalizeTimeRange(input: string | null): { start: string | null; end: string | null } {
   if (!input) return { start: null, end: null };
-  const match = input.replace(/\s+/g, " ").trim().match(TIME_RANGE);
-  if (!match) return { start: input, end: null };
+  const clean = input
+    .replace(/\b12\s*noon\b/gi, "12pm")
+    .replace(/\b12\s*midnight\b/gi, "12am")
+    .replace(/\bnoon\b/gi, "12pm")
+    .replace(/\bmidnight\b/gi, "12am")
+    .replace(/\s+/g, " ")
+    .trim();
+  const match = clean.match(TIME_RANGE);
+  if (match) {
+    return {
+      start: match[1].replace(/\s+/g, " ").trim(),
+      end: match[2].replace(/\s+/g, " ").trim()
+    };
+  }
+  const match24h = clean.match(TIME_RANGE_24H);
+  if (match24h) {
+    return {
+      start: match24h[1].replace(/\s+/g, " ").trim(),
+      end: match24h[2].replace(/\s+/g, " ").trim()
+    };
+  }
+
+  const relaxed = clean.match(TIME_RANGE_RELAXED);
+  if (!relaxed) return { start: clean, end: null };
+
+  const normalizeToken = (token: string) => token.replace(/\s+/g, " ").trim();
+  const inferMeridiem = (token: string) => {
+    const meridiemMatch = token.match(/([ap])m?\b/i);
+    return meridiemMatch ? `${meridiemMatch[1].toLowerCase()}m` : null;
+  };
+  const applyMeridiem = (token: string, meridiem: string | null) => {
+    const normalized = normalizeToken(token);
+    if (!meridiem || /[ap]m?\b/i.test(normalized)) {
+      return normalized;
+    }
+    return `${normalized} ${meridiem}`;
+  };
+
+  const startToken = normalizeToken(relaxed[1]);
+  const endToken = normalizeToken(relaxed[2]);
+  const inferredMeridiem = inferMeridiem(startToken) ?? inferMeridiem(endToken);
+
   return {
-    start: match[1].replace(/\s+/g, " ").trim(),
-    end: match[2].replace(/\s+/g, " ").trim()
+    start: applyMeridiem(startToken, inferredMeridiem),
+    end: applyMeridiem(endToken, inferredMeridiem)
   };
 }
 
@@ -144,8 +201,17 @@ export function buildOutput(results: AdapterOutput[]): ScrapeOutput {
         continue;
       }
       const session = toSession(klass, generatedAt);
-      if (dedupe.has(session.id)) continue;
-      dedupe.add(session.id);
+      const dedupeKey = [
+        session.venue.toLowerCase(),
+        normalizeTitleForDedupe(session.title),
+        session.dayOfWeek ?? "na",
+        session.startDate ?? "na",
+        session.endDate ?? "na",
+        session.startTime ?? "na",
+        session.endTime ?? "na"
+      ].join("|");
+      if (dedupe.has(dedupeKey)) continue;
+      dedupe.add(dedupeKey);
       sessions.push(session);
     }
   }

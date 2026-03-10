@@ -22,6 +22,16 @@ describe("dance type inference", () => {
     expect(inferDanceTypes(session)).toEqual(["Other"]);
   });
 
+  it("does not classify Improvers classes as Improv", () => {
+    const session = {
+      title: "Salsa Improvers",
+      details: "Technique progression class",
+      tags: []
+    };
+
+    expect(inferDanceTypes(session)).toEqual(["Other"]);
+  });
+
   it("matches the requested dance type with 5Rythms spelling variant", () => {
     const session = {
       title: "Sunday 5Rythms Wave",

@@ -9,6 +9,8 @@ const organizerUrls = [
   "https://www.eventbrite.com/o/18505959226",
   "https://www.eventbrite.co.uk/o/ecstatic-dance-uk-17916431216"
 ];
+const luminousDandelionIcsUrl = "https://dandelion.events/o/luminous/events.ics?slug=luminous";
+const luminousDandelionPageUrl = "https://dandelion.events/o/luminous/events";
 
 const browserLikeHeaders = {
   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
@@ -21,6 +23,35 @@ type EventbriteEvent = {
   url?: string;
   name?: string;
 };
+
+function decodeIcsText(value: string | undefined): string | null {
+  if (!value) return null;
+  return value
+    .replace(/\\n/gi, "\n")
+    .replace(/\\,/g, ",")
+    .replace(/\\;/g, ";")
+    .replace(/\\\\/g, "\\")
+    .trim();
+}
+
+function readField(block: string, key: string): string | undefined {
+  const regex = new RegExp(`^${key}(?:;[^:\\n]+)?:([\\s\\S]*?)(?=\\n[A-Z-]+(?:;[^:\\n]+)?:|\\nEND:VEVENT|$)`, "m");
+  const match = block.match(regex);
+  if (!match?.[1]) return undefined;
+  return match[1].replace(/\n[ \t]/g, "").trim();
+}
+
+function parseIcsDate(value: string | undefined): Date | null {
+  if (!value) return null;
+  const text = value.trim();
+  const match = text.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z?$/);
+  if (!match) return null;
+  const [, y, m, d, hh, mm, ss] = match;
+  if (text.endsWith("Z")) {
+    return new Date(Date.UTC(Number(y), Number(m) - 1, Number(d), Number(hh), Number(mm), Number(ss)));
+  }
+  return new Date(Number(y), Number(m) - 1, Number(d), Number(hh), Number(mm), Number(ss));
+}
 
 function toKey(title: string, startDate: string | null, time: string | null) {
   return `${title.trim().toLowerCase()}|${startDate ?? "na"}|${time ?? "na"}`;
@@ -69,7 +100,11 @@ function extractEventsFromLd(ldEntry: unknown): EventbriteEvent[] {
   return collectEvents(ldEntry).filter((event) => Boolean(event.name && event.url && event.startDate));
 }
 
-export async function scrapeEcstaticDanceLondon(): Promise<AdapterOutput> {
+function isLuminous(text: string) {
+  return /\bluminous\b/i.test(text);
+}
+
+export async function scrapeLuminousDance(): Promise<AdapterOutput> {
   try {
     const classes: AdapterOutput["classes"] = [];
 
@@ -80,12 +115,7 @@ export async function scrapeEcstaticDanceLondon(): Promise<AdapterOutput> {
 
       for (const event of events) {
         const lowered = `${event.name} ${event.description ?? ""}`.toLowerCase();
-        if (/\bluminous\b/i.test(lowered)) {
-          continue;
-        }
-        if (!/(dance|ecstatic|conscious|movement|salsa|rueda|bachata|butoh|cuban|latin|theatre)/i.test(lowered)) {
-          continue;
-        }
+        if (!isLuminous(lowered)) continue;
 
         const start = new Date(event.startDate);
         if (Number.isNaN(start.getTime())) continue;
@@ -93,32 +123,62 @@ export async function scrapeEcstaticDanceLondon(): Promise<AdapterOutput> {
         const safeEnd = end && !Number.isNaN(end.getTime()) ? end : null;
 
         classes.push({
-          venue: "Ecstatic Dance London",
-          title: event.name,
+          venue: "Luminous Dance",
+          title: event.name ?? "Luminous Dance",
           details: (event.description ?? "").replace(/\s+/g, " ").trim() || null,
           dayOfWeek: format(start, "EEEE"),
           time: `${format(start, "HH:mm")}${safeEnd ? ` - ${format(safeEnd, "HH:mm")}` : ""}`,
           startDate: format(start, "yyyy-MM-dd"),
           endDate: format(safeEnd ?? start, "yyyy-MM-dd"),
-          bookingUrl: event.url,
+          bookingUrl: event.url ?? organizerUrl,
           sourceUrl: organizerUrl
         });
       }
     }
 
+    try {
+      const icsRaw = await fetchHtml(luminousDandelionIcsUrl, browserLikeHeaders);
+      const eventBlocks = (icsRaw.match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g) ?? []).map((block) => block.trim());
+      for (const eventBlock of eventBlocks) {
+        const title = decodeIcsText(readField(eventBlock, "SUMMARY"));
+        const description = decodeIcsText(readField(eventBlock, "DESCRIPTION"));
+        const location = decodeIcsText(readField(eventBlock, "LOCATION"));
+        const start = parseIcsDate(readField(eventBlock, "DTSTART"));
+        const end = parseIcsDate(readField(eventBlock, "DTEND"));
+        if (!title || !start) continue;
+
+        const lowered = `${title} ${description ?? ""}`.toLowerCase();
+        if (!isLuminous(lowered)) continue;
+
+        classes.push({
+          venue: "Luminous Dance",
+          title,
+          details: [location, description].filter(Boolean).join(" • ") || null,
+          dayOfWeek: format(start, "EEEE"),
+          time: `${format(start, "HH:mm")}${end ? ` - ${format(end, "HH:mm")}` : ""}`,
+          startDate: format(start, "yyyy-MM-dd"),
+          endDate: format(end ?? start, "yyyy-MM-dd"),
+          bookingUrl: description?.match(/^https?:\/\/\S+$/)?.[0] ?? luminousDandelionIcsUrl,
+          sourceUrl: luminousDandelionPageUrl
+        });
+      }
+    } catch {
+      // Keep Eventbrite data even if Dandelion is unavailable.
+    }
+
     return {
-      venueKey: "ecstaticDanceLondon",
-      venue: "Ecstatic Dance London",
-      sourceUrl: organizerUrls[0],
+      venueKey: "luminousDance",
+      venue: "Luminous Dance",
+      sourceUrl: luminousDandelionPageUrl,
       classes: Array.from(new Map(classes.map((c) => [toKey(c.title, c.startDate, c.time), c])).values()),
       ok: true,
       error: null
     };
   } catch (error) {
     return {
-      venueKey: "ecstaticDanceLondon",
-      venue: "Ecstatic Dance London",
-      sourceUrl: organizerUrls[0],
+      venueKey: "luminousDance",
+      venue: "Luminous Dance",
+      sourceUrl: luminousDandelionPageUrl,
       classes: [],
       ok: false,
       error: error instanceof Error ? error.message : "Unknown error"

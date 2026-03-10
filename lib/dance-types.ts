@@ -15,8 +15,8 @@ export type DanceType = (typeof DANCE_TYPES)[number];
 const TYPE_PATTERNS: Record<Exclude<DanceType, "Other">, RegExp[]> = {
   Contemporary: [/\bcontemporary\b/i],
   Ballet: [/\bballet\b/i],
-  Improv: [/\bimprov(?:isation|ization)?\b/i, /\bimprovisation\b/i],
-  "Contact Improv": [/\bcontact\s+improv(?:isation|ization)?\b/i, /\bcontact improvisation\b/i],
+  Improv: [/\bimprov\b/i, /\bimprovis(?:ation|ational)\b/i],
+  "Contact Improv": [/\bcontact\s+improv\b/i, /\bcontact\s+improvis(?:ation|ational)\b/i],
   "Ecstatic Dance/ 5Rythms": [/\becstatic\s+dance\b/i, /\b5\s*rhythms?\b/i, /\bfive\s+rhythms?\b/i, /\b5rythms?\b/i],
   "Hip Hop": [/\bhip[\s-]?hop\b/i]
 };

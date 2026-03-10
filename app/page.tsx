@@ -2,6 +2,9 @@ import { CalendarPage } from "@/components/calendar/calendar-page";
 import { readScrapeOutput } from "@/lib/data-store";
 import { VENUES } from "@/lib/venues";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function Home() {
   const data = readScrapeOutput();
   const venueMap = new Map(

@@ -20,15 +20,15 @@ Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and mo
 - Posthuman Theatre Butoh
 - Hackney Baths
 - Wednesday Moving
-
-## Organisers To Be Added
-
 - Danceworks
 - Pineapple Dance Studios
 - BASE Dance Studios
 - Salsa! Soho
 - Bar Salsa Temple
 - MamboCity
+
+## Organisers To Be Added
+
 - Baila London
 - Salsateca
 - City Academy

@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { readScrapeOutput } from "@/lib/data-store";
 import { filterSessions } from "@/lib/filter-sessions";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
   const venue = params.getAll("venue");
@@ -24,5 +27,5 @@ export async function GET(req: NextRequest) {
     generatedAt: data.generatedAt,
     count: sessions.length,
     sessions
-  });
+  }, { headers: { "cache-control": "no-store" } });
 }

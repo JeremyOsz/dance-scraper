@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { VENUES } from "@/lib/venues";
 
 const fetchHtml = vi.fn();
 
@@ -16,9 +17,65 @@ function fixture(name: string) {
   return fs.readFileSync(path.join(process.cwd(), "tests/unit/fixtures", name), "utf8");
 }
 
+const testedVenueKeys = [
+  "thePlace",
+  "rambert",
+  "siobhanDavies",
+  "tripSpace",
+  "chisenhaleDanceSpace",
+  "ciCalendarLondon",
+  "bachataCommunity",
+  "ecstaticDanceLondon",
+  "luminousDance",
+  "fiveRhythmsLondon",
+  "superMarioSalsa",
+  "salsaRuedaRuedaLibre",
+  "cubaneando",
+  "butohMutation",
+  "posthumanTheatreButoh",
+  "hackneyBaths",
+  "wednesdayMoving",
+  "danceworks",
+  "pineappleDanceStudios",
+  "baseDanceStudios",
+  "salsaSoho",
+  "barSalsaTemple",
+  "mamboCity"
+] as const;
+
+const ecstaticOrganizerUrls = [
+  "https://www.eventbrite.com/o/73047023743",
+  "https://www.eventbrite.com/o/8588572090",
+  "https://www.eventbrite.com/o/18505959226",
+  "https://www.eventbrite.co.uk/o/ecstatic-dance-uk-17916431216"
+] as const;
+
+function organizerFixture(title: string, url: string, start: string) {
+  return `<script type="application/ld+json">${JSON.stringify({
+    "@type": "ItemList",
+    itemListElement: [
+      {
+        position: 1,
+        item: {
+          "@type": "Event",
+          name: title,
+          startDate: start,
+          endDate: start,
+          description: "Conscious dance event in London",
+          url
+        }
+      }
+    ]
+  })}</script>`;
+}
+
 describe("scraper adapters", () => {
   beforeEach(() => {
     fetchHtml.mockReset();
+  });
+
+  it("keeps adapter tests aligned with every supported venue", () => {
+    expect([...testedVenueKeys].sort()).toEqual(Object.keys(VENUES).sort());
   });
 
   it("parses The Place adapter", async () => {
@@ -45,6 +102,28 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
   });
 
+  it("expands Siobhan 'Weekdays' sections into Monday-Friday", async () => {
+    fetchHtml.mockResolvedValue(`
+      <div class="entry-content">
+        <h3>Weekdays</h3>
+        <div>
+          <h4>MORNING CLASS</h4>
+          <p>Open to experienced movement practitioners.</p>
+          <h3>From 28 Apr<br>10am – 12noon</h3>
+          <a href="https://bookwhen.com/independentdance">Book now</a>
+        </div>
+      </div>
+    `);
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    const mornings = output.classes.filter((item) => item.title === "MORNING CLASS");
+    expect(output.ok).toBe(true);
+    expect(mornings).toHaveLength(5);
+    expect(mornings.map((item) => item.dayOfWeek)).toEqual(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]);
+    expect(mornings.every((item) => item.time?.includes("10am"))).toBe(true);
+    expect(mornings.every((item) => item.time?.includes("12"))).toBe(true);
+  });
+
   it("parses TripSpace adapter", async () => {
     fetchHtml.mockResolvedValue(fixture("tripspace.html"));
     const { scrapeTripSpace } = await import("../../scripts/scrape/adapters/trip-space");
@@ -57,10 +136,13 @@ describe("scraper adapters", () => {
     fetchHtml.mockResolvedValue(fixture("chisenhale.html"));
     const { scrapeChisenhale } = await import("../../scripts/scrape/adapters/chisenhale");
     const output = await scrapeChisenhale();
+    const mondayClass = output.classes.find((item) => item.title === "Monday Night Improvisation");
     expect(output.ok).toBe(true);
     expect(output.classes.map((item) => item.title)).toContain("Monday Night Improvisation");
     expect(output.classes.map((item) => item.title)).not.toContain("About");
     expect(output.classes.map((item) => item.title)).not.toContain("Rise Up (6-7 Years)");
+    expect(mondayClass?.startDate).toBe("2026-01-12");
+    expect(mondayClass?.endDate).toBe("2026-07-06");
   });
 
   it("parses CI Calendar London adapter", async () => {
@@ -98,10 +180,7 @@ describe("scraper adapters", () => {
     const { scrapeEcstaticDanceLondon } = await import("../../scripts/scrape/adapters/ecstatic-dance-london");
     const output = await scrapeEcstaticDanceLondon();
     expect(output.ok).toBe(true);
-    expect(output.classes).toHaveLength(1);
-    expect(output.classes[0]?.title).toBe("Luminous New Moon Monday Dance");
-    expect(output.classes[0]?.startDate).toBe("2026-03-16");
-    expect(output.classes[0]?.endDate).toBe("2026-03-16");
+    expect(output.classes).toHaveLength(0);
   });
 
   it("parses Luminous events from Dandelion ICS feed", async () => {
@@ -109,12 +188,89 @@ describe("scraper adapters", () => {
       .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
       .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
       .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
+      .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
       .mockResolvedValueOnce(fixture("dandelion-luminous.ics"));
-    const { scrapeEcstaticDanceLondon } = await import("../../scripts/scrape/adapters/ecstatic-dance-london");
-    const output = await scrapeEcstaticDanceLondon();
+    const { scrapeLuminousDance } = await import("../../scripts/scrape/adapters/luminous-dance");
+    const output = await scrapeLuminousDance();
     expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Luminous Dance");
     expect(output.classes.map((item) => item.title)).toContain("Luminous New Moon Monday Dance x FX10K");
     expect(output.classes.some((item) => item.bookingUrl.includes("dandelion.events/events/6985e5beb0c9d9576952ec22"))).toBe(true);
+  });
+
+  it("parses Luminous events from Eventbrite organizer graph", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
+      .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
+      .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
+      .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
+      .mockResolvedValueOnce("BEGIN:VCALENDAR\nEND:VCALENDAR");
+    const { scrapeLuminousDance } = await import("../../scripts/scrape/adapters/luminous-dance");
+    const output = await scrapeLuminousDance();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Luminous Dance");
+    expect(output.classes.map((item) => item.title)).toContain("Luminous New Moon Monday Dance");
+  });
+
+  it("queries each Ecstatic Dance organiser and keeps per-organiser events", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(
+        organizerFixture(
+          "Ecstatic Dance London Session",
+          "https://www.eventbrite.com/e/example-ecstatic",
+          "2026-03-21T18:00:00+0000"
+        )
+      )
+      .mockResolvedValueOnce(
+        organizerFixture(
+          "Luminous New Moon Monday Dance",
+          "https://www.eventbrite.com/e/luminous-new-moon-monday-dance",
+          "2026-03-16T18:30:00+0000"
+        )
+      )
+      .mockResolvedValueOnce(
+        organizerFixture(
+          "Conscious Dance Community Night",
+          "https://www.eventbrite.com/e/conscious-dance-community-night",
+          "2026-03-28T19:00:00+0000"
+        )
+      )
+      .mockResolvedValueOnce(
+        organizerFixture(
+          "Ecstatic Dance UK - London Gathering",
+          "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-london-gathering",
+          "2026-03-30T19:00:00+0000"
+        )
+      )
+      .mockResolvedValueOnce("BEGIN:VCALENDAR\nEND:VCALENDAR");
+
+    const { scrapeEcstaticDanceLondon } = await import("../../scripts/scrape/adapters/ecstatic-dance-london");
+    const output = await scrapeEcstaticDanceLondon();
+
+    expect(output.ok).toBe(true);
+    expect(output.classes.map((item) => item.title)).toEqual(
+      expect.arrayContaining([
+        "Ecstatic Dance London Session",
+        "Conscious Dance Community Night",
+        "Ecstatic Dance UK - London Gathering"
+      ])
+    );
+    expect(output.classes.map((item) => item.title)).not.toContain("Luminous New Moon Monday Dance");
+    expect(output.classes.map((item) => item.sourceUrl)).toEqual(
+      expect.arrayContaining([
+        "https://www.eventbrite.com/o/73047023743",
+        "https://www.eventbrite.com/o/18505959226",
+        "https://www.eventbrite.co.uk/o/ecstatic-dance-uk-17916431216"
+      ])
+    );
+
+    const userAgentHeaders = expect.objectContaining({
+      "User-Agent": expect.stringContaining("Mozilla/5.0")
+    });
+
+    for (const [index, organizerUrl] of ecstaticOrganizerUrls.entries()) {
+      expect(fetchHtml).toHaveBeenNthCalledWith(index + 1, organizerUrl, userAgentHeaders);
+    }
   });
 
   it("parses Five Rhythms London adapter", async () => {
@@ -151,11 +307,15 @@ describe("scraper adapters", () => {
   });
 
   it("parses Butoh Mutation adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("butoh-mutation.html"));
+    fetchHtml
+      .mockResolvedValueOnce(fixture("butoh-mutation.html"))
+      .mockResolvedValueOnce(fixture("butoh-mutation-tickettailor.html"));
     const { scrapeButohMutation } = await import("../../scripts/scrape/adapters/butoh-mutation");
     const output = await scrapeButohMutation();
     expect(output.ok).toBe(true);
     expect(output.classes[0]?.venue).toBe("Butoh Mutation");
+    expect(output.classes.map((item) => item.startDate)).toContain("2026-03-15");
+    expect(output.classes.map((item) => item.startDate)).toContain("2026-07-05");
   });
 
   it("parses Posthuman Theatre Butoh adapter", async () => {
@@ -182,6 +342,60 @@ describe("scraper adapters", () => {
     expect(output.classes.length).toBe(2);
     expect(output.classes[0]?.venue).toBe("Wednesday Moving");
     expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
+  });
+
+  it("parses Danceworks adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeDanceworks } = await import("../../scripts/scrape/adapters/danceworks");
+    const output = await scrapeDanceworks();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("Danceworks");
+  });
+
+  it("parses Pineapple Dance Studios adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapePineappleDanceStudios } = await import("../../scripts/scrape/adapters/pineapple-dance-studios");
+    const output = await scrapePineappleDanceStudios();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("Pineapple Dance Studios");
+  });
+
+  it("parses BASE Dance Studios adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeBaseDanceStudios } = await import("../../scripts/scrape/adapters/base-dance-studios");
+    const output = await scrapeBaseDanceStudios();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("BASE Dance Studios");
+  });
+
+  it("parses Salsa! Soho adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeSalsaSoho } = await import("../../scripts/scrape/adapters/salsa-soho");
+    const output = await scrapeSalsaSoho();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("Salsa! Soho");
+  });
+
+  it("parses Bar Salsa Temple adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeBarSalsaTemple } = await import("../../scripts/scrape/adapters/bar-salsa-temple");
+    const output = await scrapeBarSalsaTemple();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("Bar Salsa Temple");
+  });
+
+  it("parses MamboCity adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeMamboCity } = await import("../../scripts/scrape/adapters/mambo-city");
+    const output = await scrapeMamboCity();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("MamboCity");
   });
 
   it("handles malformed HTML gracefully", async () => {

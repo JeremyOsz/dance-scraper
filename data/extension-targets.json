@@ -1,10 +1,4 @@
 [
-  {"priority":"P1","venue":"Danceworks","complexity":"low","source":"https://www.danceworks.com/london/classes/timetable/"},
-  {"priority":"P1","venue":"Pineapple Dance Studios","complexity":"medium","source":"https://www.pineapple.uk.com/pages/studio-classes-timetable"},
-  {"priority":"P1","venue":"BASE Dance Studios","complexity":"medium","source":"https://www.basedancestudios.com/weekly-timetable-2"},
-  {"priority":"P1","venue":"Salsa! Soho","complexity":"medium","source":"https://www.salsa-soho.com/"},
-  {"priority":"P1","venue":"Bar Salsa Temple","complexity":"medium","source":"https://www.barsalsa.com/temple/"},
-  {"priority":"P1","venue":"MamboCity","complexity":"medium","source":"https://www.mambocity.co.uk/"},
   {"priority":"P1","venue":"SuperMario Salsa","complexity":"medium","source":"https://www.salsa4fun.co.uk/"},
   {"priority":"P1","venue":"Salsa Rueda (Rueda Libre)","complexity":"medium","source":"https://ruedalibre.co.uk/"},
   {"priority":"P1","venue":"Cubaneando","complexity":"medium","source":"https://www.cubaneando.co.uk/"},

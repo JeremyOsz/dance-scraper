@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import { format, isValid, parse } from "date-fns";
 import type { AdapterOutput } from "../types";
 import { absoluteUrl, fetchHtml } from "./common";
 
@@ -7,6 +8,28 @@ const childrenOnlyPattern = /\b(\d+\s*-\s*\d+\s*years?|kids?|children|child|yout
 const meridiemTimeRangePattern =
   /\b\d{1,2}(?::\d{2})?\s*(?:am|pm)\s*(?:-|–|to)\s*\d{1,2}(?::\d{2})?\s*(?:am|pm)\b/i;
 const twentyFourHourRangePattern = /\b(?:[01]?\d|2[0-3]):[0-5]\d\s*(?:-|–|to)\s*(?:[01]?\d|2[0-3]):[0-5]\d\b/i;
+const fullDateRangePattern =
+  /\b(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})\s*(?:-|–|—|to)\s*(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})\b/i;
+const parseFormats = ["d MMMM yyyy", "d MMM yyyy"];
+
+function parseToIsoDate(raw: string): string | null {
+  const value = raw.replace(/\s+/g, " ").trim();
+  for (const parseFormat of parseFormats) {
+    const parsed = parse(value, parseFormat, new Date());
+    if (isValid(parsed)) {
+      return format(parsed, "yyyy-MM-dd");
+    }
+  }
+  return null;
+}
+
+function extractDateRange(text: string): { startDate: string | null; endDate: string | null } {
+  const match = text.match(fullDateRangePattern);
+  if (!match) return { startDate: null, endDate: null };
+  const startDate = parseToIsoDate(match[1]);
+  const endDate = parseToIsoDate(match[2]);
+  return { startDate, endDate };
+}
 
 export async function scrapeChisenhale(): Promise<AdapterOutput> {
   try {
@@ -23,6 +46,8 @@ export async function scrapeChisenhale(): Promise<AdapterOutput> {
 
       const day = text.match(/(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/i)?.[1] ?? null;
       const classTimeText = $(el).find(".class-time").first().text().trim();
+      const dateRangeText = [$(el).find(".date-range").first().text(), text].filter(Boolean).join(" ");
+      const { startDate, endDate } = extractDateRange(dateRangeText);
       const time =
         classTimeText.match(meridiemTimeRangePattern)?.[0] ??
         classTimeText.match(twentyFourHourRangePattern)?.[0] ??
@@ -41,8 +66,8 @@ export async function scrapeChisenhale(): Promise<AdapterOutput> {
         details: $(el).find("p").first().text().trim() || null,
         dayOfWeek: day,
         time,
-        startDate: null,
-        endDate: null,
+        startDate,
+        endDate,
         bookingUrl,
         sourceUrl
       });

@@ -14,6 +14,13 @@ import { scrapeButohMutation } from "./adapters/butoh-mutation";
 import { scrapePosthumanTheatreButoh } from "./adapters/posthuman-theatre-butoh";
 import { scrapeHackneyBaths } from "./adapters/hackney-baths";
 import { scrapeWednesdayMoving } from "./adapters/wednesday-moving";
+import { scrapeLuminousDance } from "./adapters/luminous-dance";
+import { scrapeDanceworks } from "./adapters/danceworks";
+import { scrapePineappleDanceStudios } from "./adapters/pineapple-dance-studios";
+import { scrapeBaseDanceStudios } from "./adapters/base-dance-studios";
+import { scrapeSalsaSoho } from "./adapters/salsa-soho";
+import { scrapeBarSalsaTemple } from "./adapters/bar-salsa-temple";
+import { scrapeMamboCity } from "./adapters/mambo-city";
 import { buildOutput, writeOutput } from "./normalize";
 
 async function main() {
@@ -28,6 +35,7 @@ async function main() {
     scrapeCiCalendarLondon(),
     scrapeBachataCommunity(),
     scrapeEcstaticDanceLondon(),
+    scrapeLuminousDance(),
     scrapeFiveRhythmsLondon(),
     scrapeSuperMarioSalsa(),
     scrapeSalsaRuedaRuedaLibre(),
@@ -35,7 +43,13 @@ async function main() {
     scrapeButohMutation(),
     scrapePosthumanTheatreButoh(),
     scrapeHackneyBaths(),
-    scrapeWednesdayMoving()
+    scrapeWednesdayMoving(),
+    scrapeDanceworks(),
+    scrapePineappleDanceStudios(),
+    scrapeBaseDanceStudios(),
+    scrapeSalsaSoho(),
+    scrapeBarSalsaTemple(),
+    scrapeMamboCity()
   ]);
 
   const output = buildOutput(results);

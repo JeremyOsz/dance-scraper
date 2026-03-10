@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import { CalendarPage } from "../../components/calendar/calendar-page";
@@ -41,6 +41,24 @@ const sessions: DanceSession[] = [
     audience: "adult",
     isWorkshop: false,
     lastSeenAt: "2026-03-10T00:00:00.000Z"
+  },
+  {
+    id: "s3",
+    venue: "Butoh Mutation",
+    title: "Butoh Mutation Classes & Workshops",
+    details: "Schedule announced via venue site.",
+    dayOfWeek: null,
+    startTime: null,
+    endTime: null,
+    startDate: null,
+    endDate: null,
+    timezone: "Europe/London",
+    bookingUrl: "https://www.butohuk.com/",
+    sourceUrl: "https://www.butohuk.com/",
+    tags: [],
+    audience: "adult",
+    isWorkshop: true,
+    lastSeenAt: "2026-03-10T00:00:00.000Z"
   }
 ];
 
@@ -58,6 +76,13 @@ const venues = [
     count: 1,
     ok: true,
     lastSuccessAt: "2026-03-10T00:00:00.000Z"
+  },
+  {
+    name: "Butoh Mutation",
+    sourceUrl: "https://www.butohuk.com/",
+    count: 1,
+    ok: true,
+    lastSuccessAt: "2026-03-10T00:00:00.000Z"
   }
 ];
 
@@ -67,10 +92,8 @@ describe("CalendarPage", () => {
   });
 
   it("disables preferred/shortlist-only toggles when nothing is saved", async () => {
-    const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Filters" }));
     expect(screen.queryByRole("checkbox", { name: "Preferred venues only" })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Shortlist (0)" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Clear filters" })).toBeDisabled();
@@ -91,6 +114,20 @@ describe("CalendarPage", () => {
     expect(await screen.findByRole("heading", { name: "Embodied Workshop" })).toBeInTheDocument();
   });
 
+  it("jumps to selected week from week picker", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Month" }));
+    fireEvent.change(screen.getByLabelText("Go to week"), { target: { value: "2026-W12" } });
+
+    await waitFor(() => {
+      expect(screen.getByLabelText("Go to week")).toHaveValue("2026-W12");
+      expect(screen.getByRole("button", { name: "Week" })).toHaveClass("bg-primary");
+    });
+    expect(screen.getByText("March 2026")).toBeInTheDocument();
+  });
+
   it("shows venues and map views", async () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
@@ -107,17 +144,48 @@ describe("CalendarPage", () => {
     );
   });
 
-  it("filters by preferred venues only", async () => {
+  it("filters by selected venue chips", async () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Filters" }));
-    await user.click(screen.getByRole("button", { name: "Show preferred venues" }));
-    await user.click(screen.getByRole("checkbox", { name: "TripSpace" }));
-    await user.click(screen.getByRole("checkbox", { name: "Preferred venues only" }));
+    await user.click(screen.getByRole("button", { name: "TripSpace" }));
 
     expect(screen.getAllByText("Embodied Workshop").length).toBeGreaterThan(0);
     expect(screen.queryByText("Evening Technique")).not.toBeInTheDocument();
+  });
+
+  it("collapses week lanes to the selected day", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Tuesday" }));
+
+    expect(screen.queryByRole("heading", { name: /Mon /i })).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Tue /i })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /Wed /i })).not.toBeInTheDocument();
+  });
+
+  it("supports multi-select day filters in the sidebar", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Monday" }));
+    await user.click(screen.getByRole("button", { name: "Tuesday" }));
+
+    expect(screen.getByRole("heading", { name: /Mon /i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Tue /i })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /Wed /i })).not.toBeInTheDocument();
+  });
+
+  it("shows undated sessions when a venue has no schedule metadata", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Butoh Mutation" }));
+
+    expect(screen.getByText("Undated classes")).toBeInTheDocument();
+    expect(screen.getByText("Butoh Mutation Classes & Workshops")).toBeInTheDocument();
+    expect(screen.getByText(/Time TBC/i)).toBeInTheDocument();
   });
 
   it("saves shortlist and can filter to shortlist", async () => {
@@ -127,7 +195,6 @@ describe("CalendarPage", () => {
     const addButtons = screen.getAllByRole("button", { name: /add to shortlist/i });
     await user.click(addButtons[0]);
 
-    await user.click(screen.getByRole("button", { name: "Filters" }));
     expect(screen.getByRole("button", { name: "Clear shortlist (1)" })).not.toBeDisabled();
     await user.click(screen.getByRole("button", { name: "Shortlist (1)" }));
 
@@ -159,7 +226,6 @@ describe("CalendarPage", () => {
         selectedDay: "all",
         selectedType: "all",
         workshopsOnly: false,
-        preferredOnly: false,
         shortlistOnly: false
       })
     );

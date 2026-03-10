@@ -7,6 +7,7 @@ export type VenueKey =
   | "ciCalendarLondon"
   | "bachataCommunity"
   | "ecstaticDanceLondon"
+  | "luminousDance"
   | "fiveRhythmsLondon"
   | "superMarioSalsa"
   | "salsaRuedaRuedaLibre"
@@ -14,7 +15,13 @@ export type VenueKey =
   | "butohMutation"
   | "posthumanTheatreButoh"
   | "hackneyBaths"
-  | "wednesdayMoving";
+  | "wednesdayMoving"
+  | "danceworks"
+  | "pineappleDanceStudios"
+  | "baseDanceStudios"
+  | "salsaSoho"
+  | "barSalsaTemple"
+  | "mamboCity";
 
 export type DayOfWeek =
   | "Monday"

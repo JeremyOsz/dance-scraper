@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useEffect, useMemo, useState } from "react";
-import { format, addDays, addMonths, isSameMonth, subDays, subMonths } from "date-fns";
+import { format, addDays, addMonths, isSameMonth, parseISO, subDays, subMonths } from "date-fns";
 import type { DanceSession } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,21 +12,37 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { canAddSessionToCalendar } from "@/lib/calendar-export";
-import { DANCE_TYPES, matchesDanceType } from "@/lib/dance-types";
+import { DANCE_TYPES, inferDanceTypes, matchesDanceType, type DanceType } from "@/lib/dance-types";
 import { ORDERED_DAYS, formatTimeRange, getMonthGridDates, getWeekDates, isSessionActiveOnDate } from "@/lib/date";
 import { getVenueMapQuery } from "@/lib/venues";
 
-const PREFERRED_VENUES_STORAGE_KEY = "dance-scraper.preferred-venues";
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
 const FILTERS_STORAGE_KEY = "dance-scraper.calendar-filters";
+const DANCE_TYPE_BADGE_CLASS: Record<DanceType, string> = {
+  Contemporary: "border-transparent bg-sky-100 text-sky-800",
+  Ballet: "border-transparent bg-rose-100 text-rose-800",
+  Improv: "border-transparent bg-emerald-100 text-emerald-800",
+  "Contact Improv": "border-transparent bg-teal-100 text-teal-800",
+  "Ecstatic Dance/ 5Rythms": "border-transparent bg-amber-100 text-amber-900",
+  "Hip Hop": "border-transparent bg-violet-100 text-violet-800",
+  Other: "border-transparent bg-stone-200 text-stone-800"
+};
+const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
+  Contemporary: "border-sky-200 bg-sky-50/70",
+  Ballet: "border-rose-200 bg-rose-50/70",
+  Improv: "border-emerald-200 bg-emerald-50/70",
+  "Contact Improv": "border-teal-200 bg-teal-50/70",
+  "Ecstatic Dance/ 5Rythms": "border-amber-200 bg-amber-50/70",
+  "Hip Hop": "border-violet-200 bg-violet-50/70",
+  Other: "border-border bg-secondary/40"
+};
 
 type StoredFilters = {
   search: string;
-  selectedVenue: string;
-  selectedDay: string;
-  selectedType: string;
+  selectedVenues: string[];
+  selectedDays: string[];
+  selectedTypes: string[];
   workshopsOnly: boolean;
-  preferredOnly: boolean;
   shortlistOnly: boolean;
 };
 
@@ -40,6 +56,10 @@ function groupByDate(sessions: DanceSession[], dateList: Date[]) {
     );
   }
   return byDate;
+}
+
+function isUndatedSession(session: DanceSession) {
+  return !session.dayOfWeek && !session.startDate && !session.endDate;
 }
 
 function readStoredList(key: string): string[] {
@@ -74,13 +94,25 @@ function readStoredFilters(): StoredFilters | null {
     if (!parsed || typeof parsed !== "object") {
       return null;
     }
+    const readSelection = (value: unknown, legacyValue?: unknown) => {
+      const source = value ?? legacyValue;
+      if (Array.isArray(source)) {
+        return source.filter((item): item is string => typeof item === "string");
+      }
+      if (typeof source === "string") {
+        return source === "all" ? [] : [source];
+      }
+      return [];
+    };
     return {
       search: typeof parsed.search === "string" ? parsed.search : "",
-      selectedVenue: typeof parsed.selectedVenue === "string" ? parsed.selectedVenue : "all",
-      selectedDay: typeof parsed.selectedDay === "string" ? parsed.selectedDay : "all",
-      selectedType: typeof parsed.selectedType === "string" ? parsed.selectedType : "all",
+      selectedVenues: readSelection(
+        Reflect.get(parsed, "selectedVenues"),
+        Reflect.get(parsed, "selectedVenue")
+      ),
+      selectedDays: readSelection(Reflect.get(parsed, "selectedDays"), Reflect.get(parsed, "selectedDay")),
+      selectedTypes: readSelection(Reflect.get(parsed, "selectedTypes"), Reflect.get(parsed, "selectedType")),
       workshopsOnly: Boolean(parsed.workshopsOnly),
-      preferredOnly: Boolean(parsed.preferredOnly),
       shortlistOnly: Boolean(parsed.shortlistOnly)
     };
   } catch {
@@ -110,43 +142,30 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const [anchorDate, setAnchorDate] = useState(new Date());
   const [selectedSession, setSelectedSession] = useState<DanceSession | null>(null);
   const [search, setSearch] = useState("");
-  const [selectedVenue, setSelectedVenue] = useState<string>("all");
-  const [selectedDay, setSelectedDay] = useState<string>("all");
-  const [selectedType, setSelectedType] = useState<string>("all");
+  const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [workshopsOnly, setWorkshopsOnly] = useState(false);
-  const [preferredVenues, setPreferredVenues] = useState<string[]>([]);
-  const [preferredOnly, setPreferredOnly] = useState(false);
   const [shortlistSessionIds, setShortlistSessionIds] = useState<string[]>([]);
   const [shortlistOnly, setShortlistOnly] = useState(false);
-  const [showPreferredControls, setShowPreferredControls] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [mapVenue, setMapVenue] = useState<string>("all");
 
   const venueNames = useMemo(() => venues.map((venue) => venue.name), [venues]);
 
   useEffect(() => {
-    const storedPreferredVenues = readStoredList(PREFERRED_VENUES_STORAGE_KEY);
     const storedShortlist = readStoredList(SHORTLIST_STORAGE_KEY);
     const storedFilters = readStoredFilters();
-    setPreferredVenues(storedPreferredVenues);
     setShortlistSessionIds(storedShortlist);
     if (storedFilters) {
       setSearch(storedFilters.search);
-      setSelectedVenue(storedFilters.selectedVenue);
-      setSelectedDay(storedFilters.selectedDay);
-      setSelectedType(storedFilters.selectedType);
+      setSelectedVenues(storedFilters.selectedVenues);
+      setSelectedDays(storedFilters.selectedDays);
+      setSelectedTypes(storedFilters.selectedTypes);
       setWorkshopsOnly(storedFilters.workshopsOnly);
-      setPreferredOnly(storedFilters.preferredOnly && storedPreferredVenues.length > 0);
       setShortlistOnly(storedFilters.shortlistOnly && storedShortlist.length > 0);
     }
   }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-    window.localStorage.setItem(PREFERRED_VENUES_STORAGE_KEY, JSON.stringify(preferredVenues));
-  }, [preferredVenues]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -161,21 +180,14 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     }
     const storedFilters: StoredFilters = {
       search,
-      selectedVenue,
-      selectedDay,
-      selectedType,
+      selectedVenues,
+      selectedDays,
+      selectedTypes,
       workshopsOnly,
-      preferredOnly,
       shortlistOnly
     };
     window.localStorage.setItem(FILTERS_STORAGE_KEY, JSON.stringify(storedFilters));
-  }, [search, selectedVenue, selectedDay, selectedType, workshopsOnly, preferredOnly, shortlistOnly]);
-
-  useEffect(() => {
-    if (preferredOnly && preferredVenues.length === 0) {
-      setPreferredOnly(false);
-    }
-  }, [preferredOnly, preferredVenues.length]);
+  }, [search, selectedVenues, selectedDays, selectedTypes, workshopsOnly, shortlistOnly]);
 
   useEffect(() => {
     if (shortlistOnly && shortlistSessionIds.length === 0) {
@@ -185,19 +197,16 @@ export function CalendarPage({ initialSessions, venues }: Props) {
 
   const filteredSessions = useMemo(() => {
     return initialSessions.filter((session) => {
-      if (selectedVenue !== "all" && session.venue !== selectedVenue) {
+      if (selectedVenues.length > 0 && !selectedVenues.includes(session.venue)) {
         return false;
       }
-      if (selectedDay !== "all" && session.dayOfWeek !== selectedDay) {
+      if (selectedDays.length > 0 && !selectedDays.includes(session.dayOfWeek)) {
         return false;
       }
-      if (selectedType !== "all" && !matchesDanceType(session, selectedType)) {
+      if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {
         return false;
       }
       if (workshopsOnly && !session.isWorkshop) {
-        return false;
-      }
-      if (preferredOnly && !preferredVenues.includes(session.venue)) {
         return false;
       }
       if (shortlistOnly && !shortlistSessionIds.includes(session.id)) {
@@ -216,12 +225,10 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [
     initialSessions,
     search,
-    selectedVenue,
-    selectedDay,
-    selectedType,
+    selectedVenues,
+    selectedDays,
+    selectedTypes,
     workshopsOnly,
-    preferredOnly,
-    preferredVenues,
     shortlistOnly,
     shortlistSessionIds
   ]);
@@ -230,23 +237,29 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     () => (view === "week" ? getWeekDates(anchorDate) : getMonthGridDates(anchorDate)),
     [anchorDate, view]
   );
-  const grouped = useMemo(() => groupByDate(filteredSessions, dates), [filteredSessions, dates]);
+  const weekPickerValue = useMemo(() => format(anchorDate, "RRRR-'W'II"), [anchorDate]);
+  const visibleDates = useMemo(() => {
+    if (view !== "week" || selectedDays.length === 0) {
+      return dates;
+    }
+    return dates.filter((date) => selectedDays.includes(format(date, "EEEE")));
+  }, [dates, selectedDays, view]);
+  const grouped = useMemo(() => groupByDate(filteredSessions, visibleDates), [filteredSessions, visibleDates]);
+  const undatedSessions = useMemo(
+    () => filteredSessions.filter((session) => isUndatedSession(session)),
+    [filteredSessions]
+  );
   const shortlistSet = useMemo(() => new Set(shortlistSessionIds), [shortlistSessionIds]);
-
-  const togglePreferredVenue = (venue: string) => {
-    setPreferredVenues((current) => toggleValue(current, venue));
-  };
 
   const toggleShortlist = (sessionId: string) => {
     setShortlistSessionIds((current) => toggleValue(current, sessionId));
   };
   const clearFilters = () => {
     setSearch("");
-    setSelectedVenue("all");
-    setSelectedDay("all");
-    setSelectedType("all");
+    setSelectedVenues([]);
+    setSelectedDays([]);
+    setSelectedTypes([]);
     setWorkshopsOnly(false);
-    setPreferredOnly(false);
     setShortlistOnly(false);
   };
   const clearShortlist = () => {
@@ -255,14 +268,13 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const activeFilterCount = useMemo(() => {
     let count = 0;
     if (search.trim()) count += 1;
-    if (selectedVenue !== "all") count += 1;
-    if (selectedDay !== "all") count += 1;
-    if (selectedType !== "all") count += 1;
+    if (selectedVenues.length > 0) count += 1;
+    if (selectedDays.length > 0) count += 1;
+    if (selectedTypes.length > 0) count += 1;
     if (workshopsOnly) count += 1;
-    if (preferredOnly) count += 1;
     if (shortlistOnly) count += 1;
     return count;
-  }, [search, selectedVenue, selectedDay, selectedType, workshopsOnly, preferredOnly, shortlistOnly]);
+  }, [search, selectedVenues.length, selectedDays.length, selectedTypes.length, workshopsOnly, shortlistOnly]);
 
   const mapSearchQuery = useMemo(() => {
     if (mapVenue === "all") {
@@ -276,6 +288,256 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     }
     return getVenueMapQuery(mapVenue);
   }, [mapVenue, venues]);
+
+  const clearSummaryActionClass =
+    "ml-auto h-6 px-2 text-xs";
+
+  const renderFilterSections = () => (
+    <div className="space-y-3">
+      <div className="rounded-md border border-input bg-background p-2">
+        <details open>
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+            <span>Search</span>
+            <span className="h-px flex-1 bg-border" />
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className={clearSummaryActionClass}
+              disabled={!search.trim()}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSearch("");
+              }}
+            >
+              Clear
+            </Button>
+          </summary>
+          <div className="mt-2">
+            <Input
+              placeholder="Search class, teacher, style"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </details>
+      </div>
+      <div className="rounded-md border border-input bg-background p-2">
+        <details open>
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+            <span>Venue</span>
+            <span className="h-px flex-1 bg-border" />
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className={clearSummaryActionClass}
+              disabled={selectedVenues.length === 0}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSelectedVenues([]);
+              }}
+            >
+              Clear
+            </Button>
+          </summary>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <Button
+              type="button"
+              size="sm"
+              variant={selectedVenues.length === 0 ? "default" : "outline"}
+              onClick={() => setSelectedVenues([])}
+            >
+              Any venue
+            </Button>
+            {venueNames.map((venue) => (
+              <Button
+                key={venue}
+                type="button"
+                size="sm"
+                variant={selectedVenues.includes(venue) ? "default" : "outline"}
+                onClick={() => setSelectedVenues((current) => toggleValue(current, venue))}
+              >
+                {venue}
+              </Button>
+            ))}
+          </div>
+        </details>
+      </div>
+      <div className="rounded-md border border-input bg-background p-2">
+        <details open>
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+            <span>Day</span>
+            <span className="h-px flex-1 bg-border" />
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className={clearSummaryActionClass}
+              disabled={selectedDays.length === 0}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSelectedDays([]);
+              }}
+            >
+              Clear
+            </Button>
+          </summary>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <Button
+              type="button"
+              size="sm"
+              variant={selectedDays.length === 0 ? "default" : "outline"}
+              onClick={() => setSelectedDays([])}
+            >
+              Any day
+            </Button>
+            {ORDERED_DAYS.map((day) => (
+              <Button
+                key={day}
+                type="button"
+                size="sm"
+                variant={selectedDays.includes(day) ? "default" : "outline"}
+                onClick={() => setSelectedDays((current) => toggleValue(current, day))}
+              >
+                {day}
+              </Button>
+            ))}
+          </div>
+        </details>
+      </div>
+      <div className="rounded-md border border-input bg-background p-2">
+        <details open>
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+            <span>Type</span>
+            <span className="h-px flex-1 bg-border" />
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className={clearSummaryActionClass}
+              disabled={selectedTypes.length === 0}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSelectedTypes([]);
+              }}
+            >
+              Clear
+            </Button>
+          </summary>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <Button
+              type="button"
+              size="sm"
+              variant={selectedTypes.length === 0 ? "default" : "outline"}
+              onClick={() => setSelectedTypes([])}
+            >
+              Any type
+            </Button>
+            {DANCE_TYPES.map((type) => (
+              <Button
+                key={type}
+                type="button"
+                size="sm"
+                variant={selectedTypes.includes(type) ? "default" : "outline"}
+                onClick={() => setSelectedTypes((current) => toggleValue(current, type))}
+              >
+                {type}
+              </Button>
+            ))}
+          </div>
+        </details>
+      </div>
+      <div className="rounded-md border border-input bg-background p-2">
+        <details open>
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+            <span>Workshops</span>
+            <span className="h-px flex-1 bg-border" />
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className={clearSummaryActionClass}
+              disabled={!workshopsOnly}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setWorkshopsOnly(false);
+              }}
+            >
+              Clear
+            </Button>
+          </summary>
+          <label className="mt-2 flex items-center gap-2 text-sm">
+            <Checkbox
+              aria-label="Workshops only"
+              checked={workshopsOnly}
+              onChange={(e) => setWorkshopsOnly(e.target.checked)}
+            />
+            <span>Workshops only</span>
+          </label>
+        </details>
+      </div>
+      <div className="rounded-md border border-input bg-background p-2">
+        <details open>
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+            <span>Shortlist</span>
+            <span className="h-px flex-1 bg-border" />
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className={clearSummaryActionClass}
+              disabled={!shortlistOnly}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setShortlistOnly(false);
+              }}
+            >
+              Clear
+            </Button>
+          </summary>
+          <div className="mt-2 space-y-2">
+            <div className="flex items-center gap-2">
+              <Button
+                size="sm"
+                variant={!shortlistOnly ? "default" : "outline"}
+                onClick={() => setShortlistOnly(false)}
+              >
+                All classes
+              </Button>
+              <Button
+                size="sm"
+                variant={shortlistOnly ? "default" : "outline"}
+                disabled={shortlistSessionIds.length === 0}
+                onClick={() => setShortlistOnly(true)}
+              >
+                Shortlist ({shortlistSessionIds.length})
+              </Button>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button variant="outline" size="sm" onClick={clearFilters} disabled={activeFilterCount === 0}>
+                Clear filters
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={clearShortlist}
+                disabled={shortlistSessionIds.length === 0}
+              >
+                Clear shortlist ({shortlistSessionIds.length})
+              </Button>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  );
 
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
@@ -297,131 +559,8 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     Narrow by class, venue, day, dance type, and saved lists.
                   </p>
                 </div>
-                <div className="space-y-3 p-3 transition-all duration-200 ease-out">
-                  <Input
-                    placeholder="Search class, teacher, style"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                  <Select value={selectedVenue} onValueChange={setSelectedVenue}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Venue" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All venues</SelectItem>
-                      {venueNames.map((venue) => (
-                        <SelectItem key={venue} value={venue}>
-                          {venue}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Select value={selectedDay} onValueChange={setSelectedDay}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Day" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All days</SelectItem>
-                      {ORDERED_DAYS.map((day) => (
-                        <SelectItem key={day} value={day}>
-                          {day}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Select value={selectedType} onValueChange={setSelectedType}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All types</SelectItem>
-                      {DANCE_TYPES.map((type) => (
-                        <SelectItem key={type} value={type}>
-                          {type}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <label className="flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm">
-                    <Checkbox
-                      aria-label="Workshops only"
-                      checked={workshopsOnly}
-                      onChange={(e) => setWorkshopsOnly(e.target.checked)}
-                    />
-                    <span>Workshops only</span>
-                  </label>
-                  <div className="space-y-2 rounded-md border border-input bg-background p-2">
-                    <div className="flex flex-wrap items-center gap-2 text-sm">
-                      <Button
-                        variant={showPreferredControls ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setShowPreferredControls((current) => !current)}
-                      >
-                        {showPreferredControls ? "Hide preferred venues" : "Show preferred venues"}
-                      </Button>
-                      {showPreferredControls && (
-                        <label className="flex items-center gap-2">
-                          <Checkbox
-                            aria-label="Preferred venues only"
-                            checked={preferredOnly}
-                            disabled={preferredVenues.length === 0}
-                            onChange={(e) => setPreferredOnly(e.target.checked)}
-                          />
-                          <span>Preferred only</span>
-                        </label>
-                      )}
-                    </div>
-                    <div
-                      className={
-                        showPreferredControls
-                          ? "grid gap-2 opacity-100 transition-opacity duration-200"
-                          : "hidden"
-                      }
-                    >
-                      {venueNames.map((venue) => (
-                        <label key={venue} className="flex items-center gap-2 text-sm">
-                          <Checkbox
-                            aria-label={venue}
-                            checked={preferredVenues.includes(venue)}
-                            onChange={() => togglePreferredVenue(venue)}
-                          />
-                          <span>{venue}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="space-y-2 rounded-md border border-input bg-background p-2">
-                    <div className="flex items-center gap-2">
-                      <Button
-                        size="sm"
-                        variant={!shortlistOnly ? "default" : "outline"}
-                        onClick={() => setShortlistOnly(false)}
-                      >
-                        All classes
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant={shortlistOnly ? "default" : "outline"}
-                        disabled={shortlistSessionIds.length === 0}
-                        onClick={() => setShortlistOnly(true)}
-                      >
-                        Shortlist ({shortlistSessionIds.length})
-                      </Button>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Button variant="outline" size="sm" onClick={clearFilters} disabled={activeFilterCount === 0}>
-                        Clear filters
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={clearShortlist}
-                        disabled={shortlistSessionIds.length === 0}
-                      >
-                        Clear shortlist ({shortlistSessionIds.length})
-                      </Button>
-                    </div>
-                  </div>
+                <div className="p-3 transition-all duration-200 ease-out">
+                  {renderFilterSections()}
                 </div>
               </div>
             </aside>
@@ -440,127 +579,8 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       Close
                     </Button>
                   </div>
-                  <div className="flex-1 space-y-3 overflow-y-auto p-4">
-                    <Input
-                      placeholder="Search class, teacher, style"
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                    />
-                    <Select value={selectedVenue} onValueChange={setSelectedVenue}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Venue" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All venues</SelectItem>
-                        {venueNames.map((venue) => (
-                          <SelectItem key={venue} value={venue}>
-                            {venue}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <Select value={selectedDay} onValueChange={setSelectedDay}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Day" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All days</SelectItem>
-                        {ORDERED_DAYS.map((day) => (
-                          <SelectItem key={day} value={day}>
-                            {day}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <Select value={selectedType} onValueChange={setSelectedType}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All types</SelectItem>
-                        {DANCE_TYPES.map((type) => (
-                          <SelectItem key={type} value={type}>
-                            {type}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <label className="flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <Checkbox
-                        aria-label="Workshops only"
-                        checked={workshopsOnly}
-                        onChange={(e) => setWorkshopsOnly(e.target.checked)}
-                      />
-                      <span>Workshops only</span>
-                    </label>
-                    <div className="space-y-2 rounded-md border border-input bg-background p-2">
-                      <div className="flex flex-wrap items-center gap-2 text-sm">
-                        <Button
-                          variant={showPreferredControls ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => setShowPreferredControls((current) => !current)}
-                        >
-                          {showPreferredControls ? "Hide preferred venues" : "Show preferred venues"}
-                        </Button>
-                        {showPreferredControls && (
-                          <label className="flex items-center gap-2">
-                            <Checkbox
-                              aria-label="Preferred venues only"
-                              checked={preferredOnly}
-                              disabled={preferredVenues.length === 0}
-                              onChange={(e) => setPreferredOnly(e.target.checked)}
-                            />
-                            <span>Preferred only</span>
-                          </label>
-                        )}
-                      </div>
-                      {showPreferredControls && (
-                        <div className="grid gap-2">
-                          {venueNames.map((venue) => (
-                            <label key={venue} className="flex items-center gap-2 text-sm">
-                              <Checkbox
-                                aria-label={venue}
-                                checked={preferredVenues.includes(venue)}
-                                onChange={() => togglePreferredVenue(venue)}
-                              />
-                              <span>{venue}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <div className="space-y-2 rounded-md border border-input bg-background p-2">
-                      <div className="flex items-center gap-2">
-                        <Button
-                          size="sm"
-                          variant={!shortlistOnly ? "default" : "outline"}
-                          onClick={() => setShortlistOnly(false)}
-                        >
-                          All classes
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant={shortlistOnly ? "default" : "outline"}
-                          disabled={shortlistSessionIds.length === 0}
-                          onClick={() => setShortlistOnly(true)}
-                        >
-                          Shortlist ({shortlistSessionIds.length})
-                        </Button>
-                      </div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Button variant="outline" size="sm" onClick={clearFilters} disabled={activeFilterCount === 0}>
-                          Clear filters
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={clearShortlist}
-                          disabled={shortlistSessionIds.length === 0}
-                        >
-                          Clear shortlist ({shortlistSessionIds.length})
-                        </Button>
-                      </div>
-                    </div>
+                  <div className="flex-1 overflow-y-auto p-4">
+                    {renderFilterSections()}
                   </div>
                 </div>
               </DialogContent>
@@ -603,6 +623,24 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     Next
                   </Button>
                   <Badge variant="secondary">{format(anchorDate, "MMMM yyyy")}</Badge>
+                  <label htmlFor="week-picker" className="sr-only">
+                    Go to week
+                  </label>
+                  <Input
+                    id="week-picker"
+                    type="week"
+                    value={weekPickerValue}
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      if (!value) return;
+                      const nextAnchor = parseISO(`${value}-1`);
+                      if (Number.isNaN(nextAnchor.getTime())) return;
+                      setAnchorDate(nextAnchor);
+                      setView("week");
+                    }}
+                    className="w-[160px]"
+                    aria-label="Go to week"
+                  />
                   <div className="ml-auto flex gap-2">
                     <Button variant={view === "week" ? "default" : "outline"} onClick={() => setView("week")}>
                       Week
@@ -617,11 +655,11 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   <div
                     className={
                       view === "week"
-                        ? "grid min-w-[980px] grid-cols-7 gap-3"
+                        ? "grid min-w-[1540px] grid-cols-7 gap-3"
                         : "grid grid-cols-1 gap-3 md:grid-cols-7"
                     }
                   >
-                    {dates.map((date) => {
+                    {visibleDates.map((date) => {
                       const iso = format(date, "yyyy-MM-dd");
                       const sessions = grouped.get(iso) ?? [];
                       const inMonth = isSameMonth(date, anchorDate);
@@ -633,32 +671,38 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                             </CardTitle>
                           </CardHeader>
                           <CardContent className="space-y-2 p-3 pt-0">
-                            {sessions.slice(0, view === "month" ? 3 : 12).map((session) => (
-                              <div
-                                key={session.id + iso}
-                                className="rounded-md border border-border bg-secondary/40 p-2 text-xs"
-                              >
-                                <button
-                                  onClick={() => setSelectedSession(session)}
-                                  className="w-full text-left hover:text-foreground/90"
+                            {sessions.slice(0, view === "month" ? 3 : 12).map((session) => {
+                              const types = inferDanceTypes(session);
+                              const primaryType = types[0] ?? "Other";
+                              return (
+                                <div
+                                  key={session.id + iso}
+                                  className={`rounded-md border p-2 text-xs ${DANCE_TYPE_CARD_CLASS[primaryType]}`}
                                 >
-                                  <p className="font-medium">{session.title}</p>
-                                  <p className="text-muted-foreground">{formatTimeRange(session.startTime, session.endTime)}</p>
-                                  <p>{session.venue}</p>
-                                </button>
-                                <div className="mt-2 flex justify-end">
-                                  <Button
-                                    size="sm"
-                                    variant={shortlistSet.has(session.id) ? "default" : "outline"}
-                                    className="h-6 px-2 text-[11px] transition-colors"
-                                    onClick={() => toggleShortlist(session.id)}
-                                    aria-label={shortlistSet.has(session.id) ? `Remove from shortlist: ${session.title}` : `Add to shortlist: ${session.title}`}
+                                  <button
+                                    onClick={() => setSelectedSession(session)}
+                                    className="w-full text-left hover:text-foreground/90"
                                   >
-                                    {shortlistSet.has(session.id) ? "Saved" : "Shortlist"}
-                                  </Button>
+                                    <p className="font-medium">{session.title}</p>
+                                    <p className="text-muted-foreground">
+                                      {formatTimeRange(session.startTime, session.endTime)}
+                                    </p>
+                                    <p>{session.venue}</p>
+                                  </button>
+                                  <div className="mt-2 flex justify-end">
+                                    <Button
+                                      size="sm"
+                                      variant={shortlistSet.has(session.id) ? "default" : "outline"}
+                                      className="h-6 px-2 text-[11px] transition-colors"
+                                      onClick={() => toggleShortlist(session.id)}
+                                      aria-label={shortlistSet.has(session.id) ? `Remove from shortlist: ${session.title}` : `Add to shortlist: ${session.title}`}
+                                    >
+                                      {shortlistSet.has(session.id) ? "Saved" : "Shortlist"}
+                                    </Button>
+                                  </div>
                                 </div>
-                              </div>
-                            ))}
+                              );
+                            })}
                             {sessions.length === 0 && <p className="text-xs text-muted-foreground">No classes</p>}
                             {view === "month" && sessions.length > 3 && (
                               <p className="text-xs text-muted-foreground">+{sessions.length - 3} more</p>
@@ -669,6 +713,52 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     })}
                   </div>
                 </div>
+
+                {undatedSessions.length > 0 && (
+                  <Card>
+                    <CardHeader className="p-3">
+                      <CardTitle className="text-sm">Undated classes</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2 p-3 pt-0">
+                      {undatedSessions.map((session) => {
+                        const types = inferDanceTypes(session);
+                        const primaryType = types[0] ?? "Other";
+                        return (
+                          <div
+                            key={session.id}
+                            className={`rounded-md border p-2 text-xs ${DANCE_TYPE_CARD_CLASS[primaryType]}`}
+                          >
+                            <button
+                              onClick={() => setSelectedSession(session)}
+                              className="w-full text-left hover:text-foreground/90"
+                            >
+                              <p className="font-medium">{session.title}</p>
+                              <p className="text-muted-foreground">
+                                {session.dayOfWeek ?? "Day TBC"} • {formatTimeRange(session.startTime, session.endTime)}
+                              </p>
+                              <p>{session.venue}</p>
+                            </button>
+                            <div className="mt-2 flex justify-end">
+                              <Button
+                                size="sm"
+                                variant={shortlistSet.has(session.id) ? "default" : "outline"}
+                                className="h-6 px-2 text-[11px] transition-colors"
+                                onClick={() => toggleShortlist(session.id)}
+                                aria-label={
+                                  shortlistSet.has(session.id)
+                                    ? `Remove from shortlist: ${session.title}`
+                                    : `Add to shortlist: ${session.title}`
+                                }
+                              >
+                                {shortlistSet.has(session.id) ? "Saved" : "Shortlist"}
+                              </Button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </CardContent>
+                  </Card>
+                )}
               </>
             )}
 
@@ -770,6 +860,13 @@ export function CalendarPage({ initialSessions, venues }: Props) {
               </DialogHeader>
               <div className="space-y-3 text-sm">
                 <p>{selectedSession.details ?? "No additional description."}</p>
+                <div className="flex flex-wrap gap-2">
+                  {inferDanceTypes(selectedSession).map((type) => (
+                    <Badge key={`${selectedSession.id}-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
+                      {type}
+                    </Badge>
+                  ))}
+                </div>
                 <p>
                   Date range: {selectedSession.startDate ?? "Open"} to {selectedSession.endDate ?? "Open"}
                 </p>
