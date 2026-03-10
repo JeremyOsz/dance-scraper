@@ -145,6 +145,16 @@ type Props = {
   }[];
 };
 
+function getVenueStatus(venue: Props["venues"][number]) {
+  if (!venue.ok) {
+    return { label: "Warning", variant: "outline" as const };
+  }
+  if (venue.count === 0) {
+    return { label: "No events", variant: "outline" as const };
+  }
+  return { label: "OK", variant: "secondary" as const };
+}
+
 export function CalendarPage({ initialSessions, venues }: Props) {
   const [mode, setMode] = useState<"calendar" | "venues" | "map">("calendar");
   const [view, setView] = useState<"week" | "month">("week");
@@ -836,15 +846,16 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   {venues.map((venue) => {
                     const relatedCount = relatedSessionCountByVenue.get(venue.name) ?? 0;
                     const isMuted = relatedCount === 0;
+                    const status = getVenueStatus(venue);
                     return (
                       <Card key={venue.name} className={isMuted ? "opacity-60" : undefined}>
                         <CardHeader className="space-y-2">
                           <div className="flex items-center justify-between gap-2">
                             <CardTitle className="text-base">{venue.name}</CardTitle>
-                            <Badge variant={venue.ok ? "secondary" : "outline"}>{venue.ok ? "OK" : "Warning"}</Badge>
+                            <Badge variant={status.variant}>{status.label}</Badge>
                           </div>
                           <p className="text-xs text-muted-foreground">
-                            {venue.count} sessions last scrape
+                            {venue.count === 0 ? "No sessions found on last scrape" : `${venue.count} sessions last scrape`}
                             {venue.lastSuccessAt
                               ? ` • updated ${format(new Date(venue.lastSuccessAt), "d MMM yyyy, HH:mm")}`
                               : ""}
