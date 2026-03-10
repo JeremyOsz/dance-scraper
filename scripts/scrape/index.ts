@@ -7,6 +7,13 @@ import { scrapeFiveRhythmsLondon } from "./adapters/five-rhythms-london";
 import { scrapeSiobhanDavies } from "./adapters/siobhan-davies";
 import { scrapeThePlace } from "./adapters/the-place";
 import { scrapeTripSpace } from "./adapters/trip-space";
+import { scrapeSuperMarioSalsa } from "./adapters/supermario-salsa";
+import { scrapeSalsaRuedaRuedaLibre } from "./adapters/salsa-rueda-rueda-libre";
+import { scrapeCubaneando } from "./adapters/cubaneando";
+import { scrapeButohMutation } from "./adapters/butoh-mutation";
+import { scrapePosthumanTheatreButoh } from "./adapters/posthuman-theatre-butoh";
+import { scrapeHackneyBaths } from "./adapters/hackney-baths";
+import { scrapeWednesdayMoving } from "./adapters/wednesday-moving";
 import { buildOutput, writeOutput } from "./normalize";
 
 async function main() {
@@ -21,7 +28,14 @@ async function main() {
     scrapeCiCalendarLondon(),
     scrapeBachataCommunity(),
     scrapeEcstaticDanceLondon(),
-    scrapeFiveRhythmsLondon()
+    scrapeFiveRhythmsLondon(),
+    scrapeSuperMarioSalsa(),
+    scrapeSalsaRuedaRuedaLibre(),
+    scrapeCubaneando(),
+    scrapeButohMutation(),
+    scrapePosthumanTheatreButoh(),
+    scrapeHackneyBaths(),
+    scrapeWednesdayMoving()
   ]);
 
   const output = buildOutput(results);

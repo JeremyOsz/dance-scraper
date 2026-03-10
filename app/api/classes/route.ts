@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
   const venue = params.getAll("venue");
   const day = params.getAll("day");
+  const type = params.getAll("type");
   const workshopsOnly = params.get("workshopsOnly") === "true";
 
   const data = readScrapeOutput();
@@ -14,6 +15,7 @@ export async function GET(req: NextRequest) {
     to: params.get("to") ?? undefined,
     venue: venue.length ? venue : undefined,
     day: day.length ? day : undefined,
+    type: type.length ? type : undefined,
     q: params.get("q") ?? undefined,
     workshopsOnly
   });

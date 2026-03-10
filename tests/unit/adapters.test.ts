@@ -101,6 +101,65 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.venue).toBe("Five Rhythms London");
   });
 
+  it("parses SuperMario Salsa adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("supermario-schedule.html"));
+    const { scrapeSuperMarioSalsa } = await import("../../scripts/scrape/adapters/supermario-salsa");
+    const output = await scrapeSuperMarioSalsa();
+    expect(output.ok).toBe(true);
+    expect(output.classes.map((item) => item.dayOfWeek)).toContain("Monday");
+    expect(output.classes.map((item) => item.dayOfWeek)).toContain("Tuesday");
+  });
+
+  it("parses Salsa Rueda (Rueda Libre) adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("rueda-libre.ics"));
+    const { scrapeSalsaRuedaRuedaLibre } = await import("../../scripts/scrape/adapters/salsa-rueda-rueda-libre");
+    const output = await scrapeSalsaRuedaRuedaLibre();
+    expect(output.ok).toBe(true);
+    expect(output.classes.map((item) => item.title)).toContain("Rueda Libre Wednesday");
+  });
+
+  it("parses Cubaneando adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("rueda-libre.ics"));
+    const { scrapeCubaneando } = await import("../../scripts/scrape/adapters/cubaneando");
+    const output = await scrapeCubaneando();
+    expect(output.ok).toBe(true);
+    expect(output.classes.map((item) => item.title)).toContain("Cubaneando");
+  });
+
+  it("parses Butoh Mutation adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("butoh-mutation.html"));
+    const { scrapeButohMutation } = await import("../../scripts/scrape/adapters/butoh-mutation");
+    const output = await scrapeButohMutation();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Butoh Mutation");
+  });
+
+  it("parses Posthuman Theatre Butoh adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("posthuman-butoh.html"));
+    const { scrapePosthumanTheatreButoh } = await import("../../scripts/scrape/adapters/posthuman-theatre-butoh");
+    const output = await scrapePosthumanTheatreButoh();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Posthuman Theatre Butoh");
+  });
+
+  it("parses Hackney Baths adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("hackney-baths.html"));
+    const { scrapeHackneyBaths } = await import("../../scripts/scrape/adapters/hackney-baths");
+    const output = await scrapeHackneyBaths();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Hackney Baths");
+  });
+
+  it("parses Wednesday Moving adapter", async () => {
+    fetchHtml.mockResolvedValueOnce(fixture("wednesday-moving-home.html")).mockResolvedValueOnce(fixture("wednesday-moving.csv"));
+    const { scrapeWednesdayMoving } = await import("../../scripts/scrape/adapters/wednesday-moving");
+    const output = await scrapeWednesdayMoving();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBe(2);
+    expect(output.classes[0]?.venue).toBe("Wednesday Moving");
+    expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
+  });
+
   it("handles malformed HTML gracefully", async () => {
     fetchHtml.mockResolvedValue(fixture("malformed.html"));
     const { scrapeThePlace } = await import("../../scripts/scrape/adapters/the-place");

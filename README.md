@@ -1,8 +1,8 @@
 # Dance Scraper London Calendar
 
-Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and movement classes from selected London venues into a week/month calendar.
+Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and movement classes from selected London organisers into a week/month calendar.
 
-## Included Venues (v1)
+## Included Organisers (v1)
 
 - The Place
 - Rambert
@@ -11,8 +11,32 @@ Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and mo
 - Chisenhale Dance Space
 - CI Calendar London (Contact Improvisation)
 - Bachata Community (Bachata/Salsa events)
-- Ecstatic Dance London (selected Eventbrite organizers)
+- Ecstatic Dance London (selected Eventbrite organisers)
 - Five Rhythms London
+- SuperMario Salsa
+- Salsa Rueda (Rueda Libre)
+- Cubaneando
+- Butoh Mutation
+- Posthuman Theatre Butoh
+- Hackney Baths
+- Wednesday Moving
+
+## Organisers To Be Added
+
+- Danceworks
+- Pineapple Dance Studios
+- BASE Dance Studios
+- Salsa! Soho
+- Bar Salsa Temple
+- MamboCity
+- Baila London
+- Salsateca
+- City Academy
+- Morley College Dance
+- English National Ballet - Move With Us
+- Greenwich Dance
+- Studio 808
+- The Manor LDN
 
 ## Stack
 
@@ -34,7 +58,7 @@ Canonical output file:
 
 ## API Routes
 
-- `GET /api/classes?from=YYYY-MM-DD&to=YYYY-MM-DD&venue=TripSpace&day=Monday&q=improvisation&workshopsOnly=true`
+- `GET /api/classes?from=YYYY-MM-DD&to=YYYY-MM-DD&venue=TripSpace&day=Monday&type=Contact%20Improv&q=improvisation&workshopsOnly=true`
 - `GET /api/venues`
 
 ## Local Development
@@ -49,7 +73,7 @@ Open `http://localhost:3000`.
 
 ## Scripts
 
-- `npm run scrape` scrape + normalize all six venues
+- `npm run scrape` scrape + normalize all configured organisers
 - `npm run dev` run Next.js dev server
 - `npm run build` production build
 - `npm test` run unit/integration/UI tests
@@ -73,6 +97,20 @@ It runs once daily, updates `data/classes.normalized.json`, and commits changes 
 
 ## Extension Targets
 
-Prioritized extension venues live in:
+Prioritized extension organisers live in:
 
 - `data/extension-targets.json`
+
+## Feature Backlog
+
+In progress:
+
+- Filter by preferred organisers
+- Save shortlist
+
+Next:
+
+- Custom event (private)
+- Log in with Google
+- Share to Google Calendar
+- Custom eventbrite organiser 

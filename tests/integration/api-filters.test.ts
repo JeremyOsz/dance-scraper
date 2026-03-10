@@ -58,4 +58,19 @@ describe("filterSessions", () => {
     });
     expect(filtered).toHaveLength(0);
   });
+
+  it("filters by dance type", () => {
+    const filtered = filterSessions(sample, {
+      type: ["Improv"]
+    });
+    expect(filtered).toHaveLength(1);
+    expect(filtered[0]?.id).toBe("1");
+  });
+
+  it("can match Other dance type", () => {
+    const filtered = filterSessions(sample, {
+      type: ["Other"]
+    });
+    expect(filtered).toHaveLength(0);
+  });
 });

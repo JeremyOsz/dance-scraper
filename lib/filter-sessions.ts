@@ -1,11 +1,13 @@
 import { isAfter, isBefore, parseISO } from "date-fns";
 import type { DanceSession } from "@/lib/types";
+import { matchesDanceType } from "@/lib/dance-types";
 
 type Filters = {
   from?: string;
   to?: string;
   venue?: string[];
   day?: string[];
+  type?: string[];
   q?: string;
   workshopsOnly?: boolean;
 };
@@ -27,6 +29,10 @@ export function filterSessions(all: DanceSession[], filters: Filters): DanceSess
     }
 
     if (filters.day?.length && session.dayOfWeek && !filters.day.includes(session.dayOfWeek)) {
+      return false;
+    }
+
+    if (filters.type?.length && !filters.type.some((selectedType) => matchesDanceType(session, selectedType))) {
       return false;
     }
 

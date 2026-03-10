@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART;TZID=Europe/London:20260311T190000
+DTEND;TZID=Europe/London:20260311T210000
+SUMMARY:Rueda Libre Wednesday
+DESCRIPTION:Cuban Salsa and Rueda classes in London.
+URL:https://ruedalibre.co.uk/event/rueda-libre-wednesday-3/
+LOCATION:Coal Drops Yard, King's Cross, London, N1C 4DQ
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/London:20260313T190000
+DTEND;TZID=Europe/London:20260313T190000
+SUMMARY:Cubaneando
+DESCRIPTION:Weekly classes and workshop.
+URL:https://ruedalibre.co.uk/event/cubaneando-presents-weekly-classes-and-saturday-workshop/
+LOCATION:La Pollera Colora, London, SE1 9SG
+END:VEVENT
+END:VCALENDAR

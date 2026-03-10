@@ -7,7 +7,14 @@ export type VenueKey =
   | "ciCalendarLondon"
   | "bachataCommunity"
   | "ecstaticDanceLondon"
-  | "fiveRhythmsLondon";
+  | "fiveRhythmsLondon"
+  | "superMarioSalsa"
+  | "salsaRuedaRuedaLibre"
+  | "cubaneando"
+  | "butohMutation"
+  | "posthumanTheatreButoh"
+  | "hackneyBaths"
+  | "wednesdayMoving";
 
 export type DayOfWeek =
   | "Monday"

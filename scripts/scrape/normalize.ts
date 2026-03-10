@@ -73,7 +73,23 @@ function isInScope(raw: ScrapedClass): boolean {
 
 function inferTags(raw: ScrapedClass): string[] {
   const text = `${raw.title} ${raw.details ?? ""}`.toLowerCase();
-  const tags = ["contemporary", "ballet", "improvisation", "yoga", "pilates", "gaga", "afro", "floorwork"];
+  const tags = [
+    "contemporary",
+    "ballet",
+    "improv",
+    "improvisation",
+    "contact improv",
+    "contact improvisation",
+    "ecstatic dance",
+    "5rhythms",
+    "5rythms",
+    "hip hop",
+    "yoga",
+    "pilates",
+    "gaga",
+    "afro",
+    "floorwork"
+  ];
   return tags.filter((tag) => text.includes(tag));
 }
 

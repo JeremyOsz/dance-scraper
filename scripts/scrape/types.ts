@@ -20,7 +20,14 @@ export type AdapterOutput = {
     | "ciCalendarLondon"
     | "bachataCommunity"
     | "ecstaticDanceLondon"
-    | "fiveRhythmsLondon";
+    | "fiveRhythmsLondon"
+    | "superMarioSalsa"
+    | "salsaRuedaRuedaLibre"
+    | "cubaneando"
+    | "butohMutation"
+    | "posthumanTheatreButoh"
+    | "hackneyBaths"
+    | "wednesdayMoving";
   venue: string;
   sourceUrl: string;
   classes: ScrapedClass[];

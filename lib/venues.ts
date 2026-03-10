@@ -1,40 +1,90 @@
 import type { VenueKey } from "@/lib/types";
 
-export const VENUES: Record<VenueKey, { label: string; sourceUrl: string }> = {
+export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQuery: string }> = {
   thePlace: {
     label: "The Place",
-    sourceUrl: "https://theplace.org.uk/dance/classes-and-courses"
+    sourceUrl: "https://theplace.org.uk/dance/classes-and-courses",
+    mapQuery: "17 Duke's Road, London WC1H 9PY"
   },
   rambert: {
     label: "Rambert",
-    sourceUrl: "https://rambert.org.uk/classes/"
+    sourceUrl: "https://rambert.org.uk/classes/",
+    mapQuery: "Rambert, 99 Upper Ground, London SE1 9PP"
   },
   siobhanDavies: {
     label: "Siobhan Davies Studios",
-    sourceUrl: "https://www.siobhandavies.com/events/classes-2/"
+    sourceUrl: "https://www.siobhandavies.com/events/classes-2/",
+    mapQuery: "Siobhan Davies Studios, 85 St George's Road, London SE1 6ER"
   },
   tripSpace: {
     label: "TripSpace",
-    sourceUrl: "https://tripspace.co.uk/dance/"
+    sourceUrl: "https://tripspace.co.uk/dance/",
+    mapQuery: "339-340 Acton Mews, London E8 4EA"
   },
   chisenhaleDanceSpace: {
     label: "Chisenhale Dance Space",
-    sourceUrl: "https://www.chisenhaledancespace.co.uk/independent-events/"
+    sourceUrl: "https://www.chisenhaledancespace.co.uk/independent-events/",
+    mapQuery: "Chisenhale Dance Space, 64-84 Chisenhale Road, London E3 5QZ"
   },
   ciCalendarLondon: {
     label: "CI Calendar London",
-    sourceUrl: "https://cicalendar.uk/london"
+    sourceUrl: "https://cicalendar.uk/london",
+    mapQuery: "London contact improvisation classes"
   },
   bachataCommunity: {
     label: "Bachata Community",
-    sourceUrl: "https://bachatacommunity.space/"
+    sourceUrl: "https://bachatacommunity.space/",
+    mapQuery: "Bachata Community London classes"
   },
   ecstaticDanceLondon: {
     label: "Ecstatic Dance London",
-    sourceUrl: "https://www.eventbrite.com/o/73047023743"
+    sourceUrl: "https://www.eventbrite.com/o/73047023743",
+    mapQuery: "Ecstatic Dance London"
   },
   fiveRhythmsLondon: {
     label: "Five Rhythms London",
-    sourceUrl: "https://www.5rhythms.com/classes/London"
+    sourceUrl: "https://www.5rhythms.com/classes/London",
+    mapQuery: "5Rhythms London classes"
+  },
+  superMarioSalsa: {
+    label: "SuperMario Salsa",
+    sourceUrl: "https://www.salsa4fun.co.uk/class-schedule",
+    mapQuery: "Salsa4Fun by SuperMario London"
+  },
+  salsaRuedaRuedaLibre: {
+    label: "Salsa Rueda (Rueda Libre)",
+    sourceUrl: "https://ruedalibre.co.uk/events/?ical=1",
+    mapQuery: "Rueda Libre London"
+  },
+  cubaneando: {
+    label: "Cubaneando",
+    sourceUrl: "https://ruedalibre.co.uk/events/?ical=1",
+    mapQuery: "Cubaneando London"
+  },
+  butohMutation: {
+    label: "Butoh Mutation",
+    sourceUrl: "https://www.butohuk.com/",
+    mapQuery: "Butoh Mutation London"
+  },
+  posthumanTheatreButoh: {
+    label: "Posthuman Theatre Butoh",
+    sourceUrl: "https://posthuman.works/butoh-classes-workshops",
+    mapQuery: "Posthuman Theatre Butoh London"
+  },
+  hackneyBaths: {
+    label: "Hackney Baths",
+    sourceUrl: "https://www.the-baths.co.uk/",
+    mapQuery: "Hackney Baths London"
+  },
+  wednesdayMoving: {
+    label: "Wednesday Moving",
+    sourceUrl: "https://www.wednesdaymoving.co.uk/",
+    mapQuery: "Round Chapel Old School Rooms Hackney E5 0PU"
   }
 };
+
+const VENUE_MAP_QUERY_BY_LABEL = new Map(Object.values(VENUES).map((venue) => [venue.label, venue.mapQuery]));
+
+export function getVenueMapQuery(venueName: string) {
+  return VENUE_MAP_QUERY_BY_LABEL.get(venueName) ?? `${venueName} London`;
+}

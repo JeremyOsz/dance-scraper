@@ -58,7 +58,7 @@ export async function scrapeEcstaticDanceLondon(): Promise<AdapterOutput> {
         if (!event.name || !event.url || !event.startDate) continue;
 
         const lowered = `${event.name} ${event.description ?? ""}`.toLowerCase();
-        if (!/(ecstatic|conscious dance|5rhythms|five rhythms|movement|dance)/i.test(lowered)) {
+        if (!/(dance|ecstatic|conscious|movement|salsa|rueda|bachata|butoh|cuban|latin|theatre)/i.test(lowered)) {
           continue;
         }
 
