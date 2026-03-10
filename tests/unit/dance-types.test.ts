@@ -14,7 +14,7 @@ describe("dance type inference", () => {
 
   it("falls back to Other when no known dance type is matched", () => {
     const session = {
-      title: "Somatic Mobility",
+      title: "Mobility Practice",
       details: "Gentle practice",
       tags: ["floorwork"]
     };
@@ -29,7 +29,41 @@ describe("dance type inference", () => {
       tags: []
     };
 
-    expect(inferDanceTypes(session)).toEqual(["Other"]);
+    expect(inferDanceTypes(session)).toEqual(["Salsa"]);
+  });
+
+  it("infers Salsa, Bachata, Butoh and Somatic dance types", () => {
+    expect(
+      inferDanceTypes({
+        title: "Salsa social night",
+        details: null,
+        tags: []
+      })
+    ).toEqual(["Salsa"]);
+
+    expect(
+      inferDanceTypes({
+        title: "Bachata fundamentals",
+        details: null,
+        tags: []
+      })
+    ).toEqual(["Bachata"]);
+
+    expect(
+      inferDanceTypes({
+        title: "Butoh lab",
+        details: null,
+        tags: []
+      })
+    ).toEqual(["Butoh"]);
+
+    expect(
+      inferDanceTypes({
+        title: "Gaga and somatic flow",
+        details: null,
+        tags: []
+      })
+    ).toEqual(["Somatic"]);
   });
 
   it("matches the requested dance type with 5Rythms spelling variant", () => {

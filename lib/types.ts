@@ -21,7 +21,12 @@ export type VenueKey =
   | "baseDanceStudios"
   | "salsaSoho"
   | "barSalsaTemple"
-  | "mamboCity";
+  | "mamboCity"
+  | "cityAcademy"
+  | "adrianOutsavvy"
+  | "lookAtMovement"
+  | "theManorMvmt"
+  | "eastLondonDance";
 
 export type DayOfWeek =
   | "Monday"

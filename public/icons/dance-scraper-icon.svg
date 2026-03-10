@@ -1,0 +1,38 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Dance Scraper Icon</title>
+  <desc id="desc">A stylized dancing figure over a calendar badge.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="28" y1="24" x2="232" y2="232" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#132A4A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="80" y1="64" x2="186" y2="196" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3DDC97"/>
+      <stop offset="1" stop-color="#2AA1FF"/>
+    </linearGradient>
+    <filter id="softGlow" x="42" y="38" width="172" height="182" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="16" y="16" width="224" height="224" rx="52" fill="url(#bg)"/>
+
+  <rect x="56" y="70" width="144" height="128" rx="24" fill="#EAF3FF" opacity="0.94"/>
+  <rect x="56" y="70" width="144" height="30" rx="14" fill="#D4E4FF"/>
+  <circle cx="84" cy="85" r="6" fill="#2AA1FF"/>
+  <circle cx="172" cy="85" r="6" fill="#3DDC97"/>
+
+  <g filter="url(#softGlow)">
+    <circle cx="128" cy="106" r="12" fill="url(#accent)"/>
+    <path d="M129 119C142 119 151 129 151 141V146C151 151 147 155 142 155H133V171C133 176 129 180 124 180C119 180 115 176 115 171V145C115 141 117 137 120 134L129 126V119Z" fill="url(#accent)"/>
+    <path d="M120 139L98 127C93 124 91 118 94 113C97 108 103 106 108 109L130 122L120 139Z" fill="url(#accent)"/>
+    <path d="M136 149L160 162C165 165 167 171 164 176C161 181 155 183 150 180L128 168L136 149Z" fill="url(#accent)"/>
+  </g>
+
+  <path d="M72 196C86 180 106 172 128 172C150 172 170 180 184 196" stroke="#3DDC97" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+</svg>

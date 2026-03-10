@@ -26,17 +26,20 @@ Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and mo
 - Salsa! Soho
 - Bar Salsa Temple
 - MamboCity
+- City Academy
+- Adrian (Outsavvy)
+- Look At Movement
+- The Manor / MVMT
+- East London Dance
 
 ## Organisers To Be Added
 
 - Baila London
 - Salsateca
-- City Academy
 - Morley College Dance
 - English National Ballet - Move With Us
 - Greenwich Dance
 - Studio 808
-- The Manor LDN
 
 ## Stack
 
@@ -58,7 +61,7 @@ Canonical output file:
 
 ## API Routes
 
-- `GET /api/classes?from=YYYY-MM-DD&to=YYYY-MM-DD&venue=TripSpace&day=Monday&type=Contact%20Improv&q=improvisation&workshopsOnly=true`
+- `GET /api/classes?from=YYYY-MM-DD&to=YYYY-MM-DD&type=Contact%20Improv&venue=TripSpace&day=Monday&q=improvisation&workshopsOnly=true`
 - `GET /api/venues`
 
 ## Local Development

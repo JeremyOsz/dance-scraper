@@ -115,6 +115,32 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     label: "MamboCity",
     sourceUrl: "https://www.mambocity.co.uk/",
     mapQuery: "MamboCity London"
+  },
+  cityAcademy: {
+    label: "City Academy",
+    sourceUrl: "https://www.city-academy.com/Dance-Classes",
+    mapQuery: "City Academy Dance London"
+  },
+  adrianOutsavvy: {
+    label: "Adrian (Outsavvy)",
+    sourceUrl:
+      "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+    mapQuery: "Outsavvy dance movement flow workshop London"
+  },
+  lookAtMovement: {
+    label: "Look At Movement",
+    sourceUrl: "https://www.lookatmovement.co.uk/",
+    mapQuery: "Look At Movement London"
+  },
+  theManorMvmt: {
+    label: "The Manor / MVMT",
+    sourceUrl: "https://www.themanorldn.com/mvmt",
+    mapQuery: "The Manor LDN MVMT London"
+  },
+  eastLondonDance: {
+    label: "East London Dance",
+    sourceUrl: "https://eastlondondance.org/",
+    mapQuery: "East London Dance"
   }
 };
 

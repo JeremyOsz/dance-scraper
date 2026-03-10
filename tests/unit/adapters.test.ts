@@ -40,7 +40,12 @@ const testedVenueKeys = [
   "baseDanceStudios",
   "salsaSoho",
   "barSalsaTemple",
-  "mamboCity"
+  "mamboCity",
+  "cityAcademy",
+  "adrianOutsavvy",
+  "lookAtMovement",
+  "theManorMvmt",
+  "eastLondonDance"
 ] as const;
 
 const ecstaticOrganizerUrls = [
@@ -92,6 +97,38 @@ describe("scraper adapters", () => {
     const output = await scrapeRambert();
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
+  });
+
+  it("parses Rambert Momence schedule sessions when host widget is present", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(
+        `<section><script host_id="48546" src="https://momence.com/plugin/host-schedule/host-schedule.js"></script></section>`
+      )
+      .mockResolvedValueOnce(
+        JSON.stringify({
+          payload: [
+            {
+              sessionName: "Professional Class",
+              level: "Open-level professional morning class",
+              startsAt: "2026-03-11T08:00:00.000Z",
+              endsAt: "2026-03-11T09:30:00.000Z",
+              link: "https://momence.com/s/129355302"
+            }
+          ],
+          pagination: {
+            pageSize: 100,
+            totalCount: 1
+          }
+        })
+      );
+    const { scrapeRambert } = await import("../../scripts/scrape/adapters/rambert");
+    const output = await scrapeRambert();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.title).toBe("Professional Class");
+    expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
+    expect(output.classes[0]?.time).toBe("08:00 - 09:30");
+    expect(output.classes[0]?.startDate).toBe("2026-03-11");
+    expect(output.classes[0]?.bookingUrl).toBe("https://momence.com/s/129355302");
   });
 
   it("parses Siobhan Davies adapter", async () => {
@@ -396,6 +433,53 @@ describe("scraper adapters", () => {
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
     expect(output.classes[0]?.venue).toBe("MamboCity");
+  });
+
+  it("parses City Academy adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeCityAcademy } = await import("../../scripts/scrape/adapters/city-academy");
+    const output = await scrapeCityAcademy();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("City Academy");
+  });
+
+  it("parses Adrian Outsavvy adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("adrian-outsavvy.html"));
+    const { scrapeAdrianOutsavvy } = await import("../../scripts/scrape/adapters/adrian-outsavvy");
+    const output = await scrapeAdrianOutsavvy();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Adrian (Outsavvy)");
+    expect(output.classes[0]?.title).toContain("Dance");
+    expect(output.classes[0]?.dayOfWeek).toBe("Sunday");
+    expect(output.classes[0]?.startDate).toBe("2026-04-12");
+  });
+
+  it("parses Look At Movement adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeLookAtMovement } = await import("../../scripts/scrape/adapters/look-at-movement");
+    const output = await scrapeLookAtMovement();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("Look At Movement");
+  });
+
+  it("parses The Manor / MVMT adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeTheManorMvmt } = await import("../../scripts/scrape/adapters/the-manor-mvmt");
+    const output = await scrapeTheManorMvmt();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("The Manor / MVMT");
+  });
+
+  it("parses East London Dance adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeEastLondonDance } = await import("../../scripts/scrape/adapters/east-london-dance");
+    const output = await scrapeEastLondonDance();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("East London Dance");
   });
 
   it("handles malformed HTML gracefully", async () => {

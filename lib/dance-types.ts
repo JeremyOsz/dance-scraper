@@ -6,6 +6,10 @@ export const DANCE_TYPES = [
   "Improv",
   "Contact Improv",
   "Ecstatic Dance/ 5Rythms",
+  "Salsa",
+  "Bachata",
+  "Butoh",
+  "Somatic",
   "Hip Hop",
   "Other"
 ] as const;
@@ -18,6 +22,10 @@ const TYPE_PATTERNS: Record<Exclude<DanceType, "Other">, RegExp[]> = {
   Improv: [/\bimprov\b/i, /\bimprovis(?:ation|ational)\b/i],
   "Contact Improv": [/\bcontact\s+improv\b/i, /\bcontact\s+improvis(?:ation|ational)\b/i],
   "Ecstatic Dance/ 5Rythms": [/\becstatic\s+dance\b/i, /\b5\s*rhythms?\b/i, /\bfive\s+rhythms?\b/i, /\b5rythms?\b/i],
+  Salsa: [/\bsalsa\b/i],
+  Bachata: [/\bbachata\b/i],
+  Butoh: [/\bbutoh\b/i],
+  Somatic: [/\bsomatic\b/i, /\bgaga\b/i],
   "Hip Hop": [/\bhip[\s-]?hop\b/i]
 };
 

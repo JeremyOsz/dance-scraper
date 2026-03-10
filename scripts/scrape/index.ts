@@ -21,6 +21,11 @@ import { scrapeBaseDanceStudios } from "./adapters/base-dance-studios";
 import { scrapeSalsaSoho } from "./adapters/salsa-soho";
 import { scrapeBarSalsaTemple } from "./adapters/bar-salsa-temple";
 import { scrapeMamboCity } from "./adapters/mambo-city";
+import { scrapeCityAcademy } from "./adapters/city-academy";
+import { scrapeAdrianOutsavvy } from "./adapters/adrian-outsavvy";
+import { scrapeLookAtMovement } from "./adapters/look-at-movement";
+import { scrapeTheManorMvmt } from "./adapters/the-manor-mvmt";
+import { scrapeEastLondonDance } from "./adapters/east-london-dance";
 import { buildOutput, writeOutput } from "./normalize";
 
 async function main() {
@@ -49,7 +54,12 @@ async function main() {
     scrapeBaseDanceStudios(),
     scrapeSalsaSoho(),
     scrapeBarSalsaTemple(),
-    scrapeMamboCity()
+    scrapeMamboCity(),
+    scrapeCityAcademy(),
+    scrapeAdrianOutsavvy(),
+    scrapeLookAtMovement(),
+    scrapeTheManorMvmt(),
+    scrapeEastLondonDance()
   ]);
 
   const output = buildOutput(results);

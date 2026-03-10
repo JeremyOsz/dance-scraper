@@ -34,7 +34,12 @@ export type AdapterOutput = {
     | "baseDanceStudios"
     | "salsaSoho"
     | "barSalsaTemple"
-    | "mamboCity";
+    | "mamboCity"
+    | "cityAcademy"
+    | "adrianOutsavvy"
+    | "lookAtMovement"
+    | "theManorMvmt"
+    | "eastLondonDance";
   venue: string;
   sourceUrl: string;
   classes: ScrapedClass[];

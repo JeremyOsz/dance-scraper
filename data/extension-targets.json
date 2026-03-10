@@ -9,10 +9,8 @@
   {"priority":"P2","venue":"Baila London","complexity":"medium","source":"https://www.baila-london.com/"},
   {"priority":"P2","venue":"Salsateca","complexity":"medium","source":"https://salsateca.co.uk/"},
   {"priority":"P2","venue":"Hackney Baths","complexity":"medium","source":"https://www.the-baths.co.uk/"},
-  {"priority":"P2","venue":"City Academy","complexity":"medium","source":"https://www.city-academy.com/Dance-Classes"},
   {"priority":"P2","venue":"Morley College Dance","complexity":"medium","source":"https://www.morleycollege.ac.uk/courses/subject-areas/dance/"},
   {"priority":"P2","venue":"English National Ballet - Move With Us","complexity":"medium","source":"https://www.ballet.org.uk/move-with-us/dance-classes/"},
   {"priority":"P2","venue":"Greenwich Dance","complexity":"medium","source":"https://greenwichdance.org.uk/"},
-  {"priority":"P3","venue":"Studio 808","complexity":"medium","source":"https://studio808ldn.com/"},
-  {"priority":"P3","venue":"The Manor LDN","complexity":"high","source":"https://space.themanorldn.com/hosting-pop-ups-and-classes/"}
+  {"priority":"P3","venue":"Studio 808","complexity":"medium","source":"https://studio808ldn.com/"}
 ]

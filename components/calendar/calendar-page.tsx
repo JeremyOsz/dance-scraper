@@ -18,12 +18,17 @@ import { getVenueMapQuery } from "@/lib/venues";
 
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
 const FILTERS_STORAGE_KEY = "dance-scraper.calendar-filters";
+const VENUE_REQUEST_EMAIL = process.env.NEXT_PUBLIC_VENUE_REQUEST_EMAIL ?? "hello@dance-scraper.local";
 const DANCE_TYPE_BADGE_CLASS: Record<DanceType, string> = {
   Contemporary: "border-transparent bg-sky-100 text-sky-800",
   Ballet: "border-transparent bg-rose-100 text-rose-800",
   Improv: "border-transparent bg-emerald-100 text-emerald-800",
   "Contact Improv": "border-transparent bg-teal-100 text-teal-800",
   "Ecstatic Dance/ 5Rythms": "border-transparent bg-amber-100 text-amber-900",
+  Salsa: "border-transparent bg-red-100 text-red-800",
+  Bachata: "border-transparent bg-pink-100 text-pink-800",
+  Butoh: "border-transparent bg-zinc-200 text-zinc-900",
+  Somatic: "border-transparent bg-lime-100 text-lime-800",
   "Hip Hop": "border-transparent bg-violet-100 text-violet-800",
   Other: "border-transparent bg-stone-200 text-stone-800"
 };
@@ -33,6 +38,10 @@ const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
   Improv: "border-emerald-200 bg-emerald-50/70",
   "Contact Improv": "border-teal-200 bg-teal-50/70",
   "Ecstatic Dance/ 5Rythms": "border-amber-200 bg-amber-50/70",
+  Salsa: "border-red-200 bg-red-50/70",
+  Bachata: "border-pink-200 bg-pink-50/70",
+  Butoh: "border-zinc-300 bg-zinc-100/80",
+  Somatic: "border-lime-200 bg-lime-50/70",
   "Hip Hop": "border-violet-200 bg-violet-50/70",
   Other: "border-border bg-secondary/40"
 };
@@ -326,18 +335,18 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       <div className="rounded-md border border-input bg-background p-2">
         <details open>
           <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
-            <span>Venue</span>
+            <span>Type</span>
             <span className="h-px flex-1 bg-border" />
             <Button
               type="button"
               size="sm"
               variant="ghost"
               className={clearSummaryActionClass}
-              disabled={selectedVenues.length === 0}
+              disabled={selectedTypes.length === 0}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setSelectedVenues([]);
+                setSelectedTypes([]);
               }}
             >
               Clear
@@ -347,20 +356,20 @@ export function CalendarPage({ initialSessions, venues }: Props) {
             <Button
               type="button"
               size="sm"
-              variant={selectedVenues.length === 0 ? "default" : "outline"}
-              onClick={() => setSelectedVenues([])}
+              variant={selectedTypes.length === 0 ? "default" : "outline"}
+              onClick={() => setSelectedTypes([])}
             >
-              Any venue
+              Any type
             </Button>
-            {venueNames.map((venue) => (
+            {DANCE_TYPES.map((type) => (
               <Button
-                key={venue}
+                key={type}
                 type="button"
                 size="sm"
-                variant={selectedVenues.includes(venue) ? "default" : "outline"}
-                onClick={() => setSelectedVenues((current) => toggleValue(current, venue))}
+                variant={selectedTypes.includes(type) ? "default" : "outline"}
+                onClick={() => setSelectedTypes((current) => toggleValue(current, type))}
               >
-                {venue}
+                {type}
               </Button>
             ))}
           </div>
@@ -412,18 +421,18 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       <div className="rounded-md border border-input bg-background p-2">
         <details open>
           <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
-            <span>Type</span>
+            <span>Venue</span>
             <span className="h-px flex-1 bg-border" />
             <Button
               type="button"
               size="sm"
               variant="ghost"
               className={clearSummaryActionClass}
-              disabled={selectedTypes.length === 0}
+              disabled={selectedVenues.length === 0}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setSelectedTypes([]);
+                setSelectedVenues([]);
               }}
             >
               Clear
@@ -433,20 +442,20 @@ export function CalendarPage({ initialSessions, venues }: Props) {
             <Button
               type="button"
               size="sm"
-              variant={selectedTypes.length === 0 ? "default" : "outline"}
-              onClick={() => setSelectedTypes([])}
+              variant={selectedVenues.length === 0 ? "default" : "outline"}
+              onClick={() => setSelectedVenues([])}
             >
-              Any type
+              Any venue
             </Button>
-            {DANCE_TYPES.map((type) => (
+            {venueNames.map((venue) => (
               <Button
-                key={type}
+                key={venue}
                 type="button"
                 size="sm"
-                variant={selectedTypes.includes(type) ? "default" : "outline"}
-                onClick={() => setSelectedTypes((current) => toggleValue(current, type))}
+                variant={selectedVenues.includes(venue) ? "default" : "outline"}
+                onClick={() => setSelectedVenues((current) => toggleValue(current, venue))}
               >
-                {type}
+                {venue}
               </Button>
             ))}
           </div>
@@ -545,7 +554,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
         <CardHeader className="px-0">
           <CardTitle className="text-3xl tracking-tight">London Dance Calendar</CardTitle>
           <p className="text-sm text-muted-foreground">
-            Browse adult and open dance and movement classes across London, then filter quickly by venue, day,
+            Browse adult and open dance and movement classes across London, then filter quickly by type, venue, day,
             style, workshops, and your saved shortlist.
           </p>
         </CardHeader>
@@ -556,7 +565,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                 <div className="border-b px-3 py-2">
                   <p className="text-sm font-medium">Filters</p>
                   <p className="text-xs text-muted-foreground">
-                    Narrow by class, venue, day, dance type, and saved lists.
+                    Narrow by class, dance type, venue, day, and saved lists.
                   </p>
                 </div>
                 <div className="p-3 transition-all duration-200 ease-out">
@@ -572,7 +581,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     <DialogHeader>
                       <DialogTitle>Filters</DialogTitle>
                       <DialogDescription>
-                        Narrow by class, venue, day, dance type, and saved lists.
+                        Narrow by class, dance type, venue, day, and saved lists.
                       </DialogDescription>
                     </DialogHeader>
                     <Button variant="outline" size="sm" onClick={() => setFiltersOpen(false)}>
@@ -769,39 +778,56 @@ export function CalendarPage({ initialSessions, venues }: Props) {
             )}
 
             {mode === "venues" && (
-              <div className="grid gap-3 md:grid-cols-2">
-                {venues.map((venue) => (
-                  <Card key={venue.name}>
-                    <CardHeader className="space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <CardTitle className="text-base">{venue.name}</CardTitle>
-                        <Badge variant={venue.ok ? "secondary" : "outline"}>{venue.ok ? "OK" : "Warning"}</Badge>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        {venue.count} sessions last scrape
-                        {venue.lastSuccessAt ? ` • updated ${format(new Date(venue.lastSuccessAt), "d MMM yyyy, HH:mm")}` : ""}
-                      </p>
-                    </CardHeader>
-                    <CardContent className="flex flex-wrap gap-2">
-                      <Button variant="outline" asChild>
-                        <a href={venue.sourceUrl} target="_blank" rel="noreferrer">
-                          Venue site
-                        </a>
-                      </Button>
-                      <Button variant="outline" asChild>
-                        <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                            venue.mapQuery ?? getVenueMapQuery(venue.name)
-                          )}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Open map
-                        </a>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="space-y-3">
+                <Card>
+                  <CardHeader className="space-y-2">
+                    <CardTitle className="text-base">Request an additional venue</CardTitle>
+                    <p className="text-xs text-muted-foreground">
+                      Email us to suggest a new studio or organiser to include in this calendar.
+                    </p>
+                  </CardHeader>
+                  <CardContent>
+                    <Button variant="outline" asChild>
+                      <a href={`mailto:${VENUE_REQUEST_EMAIL}?subject=${encodeURIComponent("Venue request")}`}>
+                        {VENUE_REQUEST_EMAIL}
+                      </a>
+                    </Button>
+                  </CardContent>
+                </Card>
+                <div className="grid gap-3 md:grid-cols-2">
+                  {venues.map((venue) => (
+                    <Card key={venue.name}>
+                      <CardHeader className="space-y-2">
+                        <div className="flex items-center justify-between gap-2">
+                          <CardTitle className="text-base">{venue.name}</CardTitle>
+                          <Badge variant={venue.ok ? "secondary" : "outline"}>{venue.ok ? "OK" : "Warning"}</Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          {venue.count} sessions last scrape
+                          {venue.lastSuccessAt ? ` • updated ${format(new Date(venue.lastSuccessAt), "d MMM yyyy, HH:mm")}` : ""}
+                        </p>
+                      </CardHeader>
+                      <CardContent className="flex flex-wrap gap-2">
+                        <Button variant="outline" asChild>
+                          <a href={venue.sourceUrl} target="_blank" rel="noreferrer">
+                            Venue site
+                          </a>
+                        </Button>
+                        <Button variant="outline" asChild>
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                              venue.mapQuery ?? getVenueMapQuery(venue.name)
+                            )}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Open map
+                          </a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </div>
             )}
 
