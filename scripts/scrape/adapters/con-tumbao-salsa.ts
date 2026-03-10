@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import type { AnyNode } from "domhandler";
 import type { AdapterOutput } from "../types";
 import { absoluteUrl, fetchHtml } from "./common";
 
@@ -10,11 +11,11 @@ function normalizeText(value: string | null | undefined): string {
   return (value ?? "").replace(/\s+/g, " ").trim();
 }
 
-function findBookingUrl($: cheerio.CheerioAPI, root: cheerio.Cheerio<cheerio.Element>): string {
+function findBookingUrl($: cheerio.CheerioAPI, root: cheerio.Cheerio<AnyNode>): string {
   const block = root.closest(".fe-block");
   const candidates: string[] = [];
 
-  const collect = (node: cheerio.Cheerio<cheerio.Element>) => {
+  const collect = (node: cheerio.Cheerio<AnyNode>) => {
     node.find("a[href]").each((_, link) => {
       const href = absoluteUrl(sourceUrl, $(link).attr("href"));
       if (href) candidates.push(href);
