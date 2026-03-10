@@ -130,24 +130,24 @@ function isInScope(raw: ScrapedClass): boolean {
 
 function inferTags(raw: ScrapedClass): string[] {
   const text = `${raw.title} ${raw.details ?? ""}`.toLowerCase();
-  const tags = [
-    "contemporary",
-    "ballet",
-    "improv",
-    "improvisation",
-    "contact improv",
-    "contact improvisation",
-    "ecstatic dance",
-    "5rhythms",
-    "5rythms",
-    "hip hop",
-    "yoga",
-    "pilates",
-    "gaga",
-    "afro",
-    "floorwork"
+  const tagMatchers: Array<{ tag: string; pattern: RegExp }> = [
+    { tag: "contemporary", pattern: /\bcontemporary\b/i },
+    { tag: "ballet", pattern: /\bballet\b/i },
+    { tag: "improv", pattern: /\bimprov\b/i },
+    { tag: "improvisation", pattern: /\bimprovis(?:ation|ational)\b/i },
+    { tag: "contact improv", pattern: /\bcontact\s+improv\b/i },
+    { tag: "contact improvisation", pattern: /\bcontact\s+improvis(?:ation|ational)\b/i },
+    { tag: "ecstatic dance", pattern: /\becstatic\s+dance\b/i },
+    { tag: "5rhythms", pattern: /\b5\s*rhythms?\b/i },
+    { tag: "5rythms", pattern: /\b5rythms?\b/i },
+    { tag: "hip hop", pattern: /\bhip[\s-]?hop\b/i },
+    { tag: "yoga", pattern: /\byoga\b/i },
+    { tag: "pilates", pattern: /\bpilates\b/i },
+    { tag: "gaga", pattern: /\bgaga\b/i },
+    { tag: "afro", pattern: /\bafro\b/i },
+    { tag: "floorwork", pattern: /\bfloorwork\b/i }
   ];
-  return tags.filter((tag) => text.includes(tag));
+  return tagMatchers.filter(({ pattern }) => pattern.test(text)).map(({ tag }) => tag);
 }
 
 function toSession(raw: ScrapedClass, seenAt: string): DanceSession {

@@ -11,6 +11,11 @@ export const DANCE_TYPES = [
   "Butoh",
   "Somatic",
   "Hip Hop",
+  "Yoga/Pilates",
+  "Jazz",
+  "House",
+  "Commercial/Heels",
+  "Ballroom/Tango",
   "Other"
 ] as const;
 
@@ -26,13 +31,25 @@ const TYPE_PATTERNS: Record<Exclude<DanceType, "Other">, RegExp[]> = {
   Bachata: [/\bbachata\b/i],
   Butoh: [/\bbutoh\b/i],
   Somatic: [/\bsomatic\b/i, /\bgaga\b/i],
-  "Hip Hop": [/\bhip[\s-]?hop\b/i]
+  "Hip Hop": [/\bhip[\s-]?hop\b/i],
+  "Yoga/Pilates": [/\byoga\b/i, /\bpilates\b/i],
+  Jazz: [/\bjazz\b/i],
+  House: [/\bhouse\b/i],
+  "Commercial/Heels": [/\bcommercial\b/i, /\bheels\b/i, /\bk[\s-]?pop\b/i, /\bdancehall\b/i, /\bafro\b/i, /\bvog(?:ue|uing)\b/i],
+  "Ballroom/Tango": [/\bballroom\b/i, /\btango\b/i, /\blatin\b/i, /\blindy\s+hop\b/i, /\bswing\b/i]
 };
 
 export function inferDanceTypes(session: Pick<DanceSession, "title" | "details" | "tags">): DanceType[] {
-  const text = `${session.title} ${session.details ?? ""} ${session.tags.join(" ")}`;
+  const coreText = `${session.title} ${session.details ?? ""}`;
+  const tagText = session.tags.join(" ");
   const detected = (Object.entries(TYPE_PATTERNS) as [Exclude<DanceType, "Other">, RegExp[]][])
-    .filter(([, patterns]) => patterns.some((pattern) => pattern.test(text)))
+    .filter(([type, patterns]) => {
+      // Guard against stale tag false-positives like "improv" on "Improvers" classes.
+      if (type === "Improv" || type === "Contact Improv") {
+        return patterns.some((pattern) => pattern.test(coreText));
+      }
+      return patterns.some((pattern) => pattern.test(coreText) || pattern.test(tagText));
+    })
     .map(([type]) => type);
 
   return detected.length ? detected : ["Other"];

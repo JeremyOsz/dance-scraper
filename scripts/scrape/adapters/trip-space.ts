@@ -3,9 +3,11 @@ import { format, parseISO } from "date-fns";
 import type { AdapterOutput } from "../types";
 import { absoluteUrl, fetchHtml } from "./common";
 
-const sourceUrl = "https://tripspace.co.uk/schedule-bookings/";
+const sourceUrl = "https://momence.com/u/tripspace-bKDjuG";
+const scheduleUrl = "https://tripspace.co.uk/schedule-bookings/";
 const fallbackSourceUrl = "https://tripspace.co.uk/dance/";
 const momenceReadonlyApiBase = "https://readonly-api.momence.com";
+const defaultHostId = "43797";
 
 type MomenceSessionsResponse = {
   payload?: Array<{
@@ -79,11 +81,11 @@ function fallbackDancePageClasses($: cheerio.CheerioAPI): AdapterOutput["classes
 export async function scrapeTripSpace(): Promise<AdapterOutput> {
   try {
     const classes: AdapterOutput["classes"] = [];
-    const html = await fetchHtml(sourceUrl);
+    const html = await fetchHtml(scheduleUrl);
     const $ = cheerio.load(html);
     const momenceHostId = $('script[src*="momence.com/plugin/host-schedule/host-schedule.js"][host_id]')
       .first()
-      .attr("host_id");
+      .attr("host_id") ?? defaultHostId;
 
     if (momenceHostId) {
       try {

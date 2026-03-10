@@ -18,7 +18,7 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
   },
   tripSpace: {
     label: "TripSpace",
-    sourceUrl: "https://tripspace.co.uk/schedule-bookings/",
+    sourceUrl: "https://momence.com/u/tripspace-bKDjuG",
     mapQuery: "339-340 Acton Mews, London E8 4EA"
   },
   chisenhaleDanceSpace: {

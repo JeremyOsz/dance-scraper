@@ -195,12 +195,44 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.time).toBe("18:30 - 20:00");
     expect(output.classes[0]?.startDate).toBe("2026-03-12");
     expect(output.classes[0]?.bookingUrl).toBe("https://momence.com/s/11111111");
-    expect(output.classes[0]?.sourceUrl).toBe("https://tripspace.co.uk/schedule-bookings/");
+    expect(output.classes[0]?.sourceUrl).toBe("https://momence.com/u/tripspace-bKDjuG");
     expect(output.classes[0]?.venue).toBe("TripSpace");
   });
 
+  it("uses default TripSpace Momence host id when embed host_id is missing", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`<section><script src="https://momence.com/plugin/host-schedule/host-schedule.js"></script></section>`)
+      .mockResolvedValueOnce(
+        JSON.stringify({
+          payload: [
+            {
+              sessionName: "Expressive Body Workshop",
+              level: "Movement workshop",
+              startsAt: "2026-03-15T11:00:00.000Z",
+              endsAt: "2026-03-15T13:00:00.000Z",
+              link: "https://momence.com/s/22222222"
+            }
+          ],
+          pagination: {
+            pageSize: 100,
+            totalCount: 1
+          }
+        })
+      );
+    const { scrapeTripSpace } = await import("../../scripts/scrape/adapters/trip-space");
+    const output = await scrapeTripSpace();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.title).toBe("Expressive Body Workshop");
+    expect(fetchHtml).toHaveBeenCalledWith(
+      "https://readonly-api.momence.com/host-plugins/host/43797/host-schedule/sessions?pageSize=100&page=0"
+    );
+  });
+
   it("falls back to TripSpace dance page parsing when Momence schedule is not present", async () => {
-    fetchHtml.mockResolvedValueOnce(`<section><h1>Schedule and bookings</h1></section>`).mockResolvedValueOnce(fixture("tripspace.html"));
+    fetchHtml
+      .mockResolvedValueOnce(`<section><h1>Schedule and bookings</h1></section>`)
+      .mockRejectedValueOnce(new Error("momence unavailable"))
+      .mockResolvedValueOnce(fixture("tripspace.html"));
     const { scrapeTripSpace } = await import("../../scripts/scrape/adapters/trip-space");
     const output = await scrapeTripSpace();
     expect(output.ok).toBe(true);

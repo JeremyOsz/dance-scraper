@@ -32,6 +32,16 @@ describe("dance type inference", () => {
     expect(inferDanceTypes(session)).toEqual(["Salsa"]);
   });
 
+  it("does not classify stale improv tags on Improvers classes as Improv", () => {
+    const session = {
+      title: "Ballet Improvers",
+      details: "Technique progression class",
+      tags: ["improv", "ballet"]
+    };
+
+    expect(inferDanceTypes(session)).toEqual(["Ballet"]);
+  });
+
   it("infers Salsa, Bachata, Butoh and Somatic dance types", () => {
     expect(
       inferDanceTypes({

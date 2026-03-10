@@ -123,4 +123,32 @@ describe("buildOutput", () => {
     expect(evening?.startTime).toBe("6.30 pm");
     expect(evening?.endTime).toBe("8pm");
   });
+
+  it("does not tag Improvers classes as improv", () => {
+    const output = buildOutput([
+      {
+        venueKey: "testVenue",
+        venue: "Test Venue",
+        sourceUrl: "https://example.com",
+        ok: true,
+        error: null,
+        classes: [
+          {
+            venue: "Test Venue",
+            title: "Ballet Improvers",
+            details: "Technique and confidence class",
+            dayOfWeek: "Wednesday",
+            time: "7pm - 8pm",
+            startDate: null,
+            endDate: null,
+            bookingUrl: "https://example.com/class",
+            sourceUrl: "https://example.com"
+          }
+        ]
+      }
+    ]);
+
+    expect(output.sessions[0]?.tags).not.toContain("improv");
+    expect(output.sessions[0]?.tags).toContain("ballet");
+  });
 });
