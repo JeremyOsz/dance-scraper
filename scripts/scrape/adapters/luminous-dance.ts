@@ -24,6 +24,12 @@ type EventbriteEvent = {
   name?: string;
 };
 
+type CompleteEventbriteEvent = EventbriteEvent & {
+  name: string;
+  url: string;
+  startDate: string;
+};
+
 function decodeIcsText(value: string | undefined): string | null {
   if (!value) return null;
   return value
@@ -96,8 +102,10 @@ function collectEvents(value: unknown): EventbriteEvent[] {
   return Object.values(obj).flatMap((next) => collectEvents(next));
 }
 
-function extractEventsFromLd(ldEntry: unknown): EventbriteEvent[] {
-  return collectEvents(ldEntry).filter((event) => Boolean(event.name && event.url && event.startDate));
+function extractEventsFromLd(ldEntry: unknown): CompleteEventbriteEvent[] {
+  return collectEvents(ldEntry).filter((event): event is CompleteEventbriteEvent => {
+    return typeof event.name === "string" && typeof event.url === "string" && typeof event.startDate === "string";
+  });
 }
 
 function isLuminous(text: string) {

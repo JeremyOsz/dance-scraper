@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import type { AnyNode } from "domhandler";
 import type { AdapterOutput, ScrapedClass } from "../types";
 import { absoluteUrl, fetchHtml } from "./common";
 
@@ -27,7 +28,7 @@ function firstNonEmpty(values: Array<string | null | undefined>): string | null 
 
 function extractClassFromElement(
   $: cheerio.CheerioAPI,
-  element: cheerio.Element,
+  element: AnyNode,
   venue: string,
   sourceUrl: string
 ): ScrapedClass | null {

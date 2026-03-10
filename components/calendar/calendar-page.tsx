@@ -209,7 +209,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       if (selectedVenues.length > 0 && !selectedVenues.includes(session.venue)) {
         return false;
       }
-      if (selectedDays.length > 0 && !selectedDays.includes(session.dayOfWeek)) {
+      if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) {
         return false;
       }
       if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {

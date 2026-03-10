@@ -22,6 +22,12 @@ type EventbriteEvent = {
   name?: string;
 };
 
+type CompleteEventbriteEvent = EventbriteEvent & {
+  name: string;
+  url: string;
+  startDate: string;
+};
+
 function toKey(title: string, startDate: string | null, time: string | null) {
   return `${title.trim().toLowerCase()}|${startDate ?? "na"}|${time ?? "na"}`;
 }
@@ -65,8 +71,10 @@ function collectEvents(value: unknown): EventbriteEvent[] {
   return Object.values(obj).flatMap((next) => collectEvents(next));
 }
 
-function extractEventsFromLd(ldEntry: unknown): EventbriteEvent[] {
-  return collectEvents(ldEntry).filter((event) => Boolean(event.name && event.url && event.startDate));
+function extractEventsFromLd(ldEntry: unknown): CompleteEventbriteEvent[] {
+  return collectEvents(ldEntry).filter((event): event is CompleteEventbriteEvent => {
+    return typeof event.name === "string" && typeof event.url === "string" && typeof event.startDate === "string";
+  });
 }
 
 export async function scrapeEcstaticDanceLondon(): Promise<AdapterOutput> {

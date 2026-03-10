@@ -42,7 +42,7 @@ function fallbackTimetableClasses($: cheerio.CheerioAPI): AdapterOutput["classes
   }));
 }
 
-async function fetchMomenceSessions(hostId: string): Promise<MomenceSessionsResponse["payload"]> {
+async function fetchMomenceSessions(hostId: string): Promise<NonNullable<MomenceSessionsResponse["payload"]>> {
   const pageSize = 100;
   const all: NonNullable<MomenceSessionsResponse["payload"]> = [];
   let page = 0;
