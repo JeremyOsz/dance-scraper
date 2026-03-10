@@ -18,10 +18,26 @@ const DAY_TO_INDEX: Record<Exclude<DanceSession["dayOfWeek"], null>, number> = {
 };
 
 function parseDate(session: DanceSession, now: Date): Date | null {
-  if (session.startDate) {
-    const date = parseISO(session.startDate);
-    if (!Number.isNaN(date.getTime())) {
-      return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const nowLocal = new Date(now);
+  const todayMidnight = new Date(nowLocal.getFullYear(), nowLocal.getMonth(), nowLocal.getDate());
+
+  const startDate = session.startDate ? parseISO(session.startDate) : null;
+  const hasValidStartDate = Boolean(startDate && !Number.isNaN(startDate.getTime()));
+  const normalizedStartDate = hasValidStartDate
+    ? new Date(startDate!.getFullYear(), startDate!.getMonth(), startDate!.getDate())
+    : null;
+  const endDate = session.endDate ? parseISO(session.endDate) : null;
+  const hasValidEndDate = Boolean(endDate && !Number.isNaN(endDate.getTime()));
+  const normalizedEndDate = hasValidEndDate
+    ? new Date(endDate!.getFullYear(), endDate!.getMonth(), endDate!.getDate())
+    : null;
+
+  if (normalizedStartDate) {
+    if (normalizedStartDate >= todayMidnight) {
+      return normalizedStartDate;
+    }
+    if (!session.dayOfWeek) {
+      return normalizedStartDate;
     }
   }
 
@@ -29,11 +45,39 @@ function parseDate(session: DanceSession, now: Date): Date | null {
     return null;
   }
 
-  const nowLocal = new Date(now);
-  const todayMidnight = new Date(nowLocal.getFullYear(), nowLocal.getMonth(), nowLocal.getDate());
   const target = DAY_TO_INDEX[session.dayOfWeek];
   const distance = (target - todayMidnight.getDay() + 7) % 7;
-  return addDays(todayMidnight, distance);
+  const nextOccurrence = addDays(todayMidnight, distance);
+
+  if (normalizedStartDate && nextOccurrence < normalizedStartDate) {
+    return normalizedStartDate;
+  }
+
+  if (normalizedEndDate && nextOccurrence > normalizedEndDate) {
+    return null;
+  }
+
+  return nextOccurrence;
+}
+
+function foldIcsLine(line: string, maxLineLength = 75): string[] {
+  if (line.length <= maxLineLength) {
+    return [line];
+  }
+
+  const folded: string[] = [];
+  let index = 0;
+  while (index < line.length) {
+    const chunkSize = index === 0 ? maxLineLength : maxLineLength - 1;
+    const chunk = line.slice(index, index + chunkSize);
+    folded.push(index === 0 ? chunk : ` ${chunk}`);
+    index += chunkSize;
+  }
+  return folded;
+}
+
+function foldIcsLines(lines: string[]): string[] {
+  return lines.flatMap((line) => foldIcsLine(line));
 }
 
 function parseClockTime(value: string | null): { hours: number; minutes: number } | null {
@@ -133,7 +177,7 @@ export function buildSessionIcs(session: DanceSession, now = new Date()) {
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
     `UID:${escapeText(session.id)}@dance-scraper.local`,
-    `DTSTAMP:${toUtcStamp(new Date())}`,
+    `DTSTAMP:${toUtcStamp(now)}`,
     `SUMMARY:${escapeText(session.title)}`,
     `DESCRIPTION:${escapeText(description)}`,
     `LOCATION:${escapeText(session.venue)}`,
@@ -148,6 +192,5 @@ export function buildSessionIcs(session: DanceSession, now = new Date()) {
     "END:VCALENDAR"
   ];
 
-  return `${lines.join("\r\n")}\r\n`;
+  return `${foldIcsLines(lines).join("\r\n")}\r\n`;
 }
-

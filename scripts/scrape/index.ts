@@ -26,6 +26,7 @@ import { scrapeAdrianOutsavvy } from "./adapters/adrian-outsavvy";
 import { scrapeLookAtMovement } from "./adapters/look-at-movement";
 import { scrapeTheManorMvmt } from "./adapters/the-manor-mvmt";
 import { scrapeEastLondonDance } from "./adapters/east-london-dance";
+import { scrapeConTumbaoSalsa } from "./adapters/con-tumbao-salsa";
 import { buildOutput, writeOutput } from "./normalize";
 
 async function main() {
@@ -59,7 +60,8 @@ async function main() {
     scrapeAdrianOutsavvy(),
     scrapeLookAtMovement(),
     scrapeTheManorMvmt(),
-    scrapeEastLondonDance()
+    scrapeEastLondonDance(),
+    scrapeConTumbaoSalsa()
   ]);
 
   const output = buildOutput(results);

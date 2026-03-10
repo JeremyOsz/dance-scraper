@@ -4,12 +4,14 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { VENUES } from "@/lib/venues";
 
 const fetchHtml = vi.fn();
+const fetchJson = vi.fn();
 
 vi.mock("../../scripts/scrape/adapters/common", async () => {
   const actual = await vi.importActual<object>("../../scripts/scrape/adapters/common");
   return {
     ...actual,
-    fetchHtml
+    fetchHtml,
+    fetchJson
   };
 });
 
@@ -45,7 +47,8 @@ const testedVenueKeys = [
   "adrianOutsavvy",
   "lookAtMovement",
   "theManorMvmt",
-  "eastLondonDance"
+  "eastLondonDance",
+  "conTumbaoSalsa"
 ] as const;
 
 const ecstaticOrganizerUrls = [
@@ -77,6 +80,7 @@ function organizerFixture(title: string, url: string, start: string) {
 describe("scraper adapters", () => {
   beforeEach(() => {
     fetchHtml.mockReset();
+    fetchJson.mockReset();
   });
 
   it("keeps adapter tests aligned with every supported venue", () => {
@@ -449,7 +453,7 @@ describe("scraper adapters", () => {
     const { scrapeAdrianOutsavvy } = await import("../../scripts/scrape/adapters/adrian-outsavvy");
     const output = await scrapeAdrianOutsavvy();
     expect(output.ok).toBe(true);
-    expect(output.classes[0]?.venue).toBe("Adrian (Outsavvy)");
+    expect(output.classes[0]?.venue).toBe("StreamMovement");
     expect(output.classes[0]?.title).toContain("Dance");
     expect(output.classes[0]?.dayOfWeek).toBe("Sunday");
     expect(output.classes[0]?.startDate).toBe("2026-04-12");
@@ -465,12 +469,24 @@ describe("scraper adapters", () => {
   });
 
   it("parses The Manor / MVMT adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    fetchJson.mockResolvedValue(JSON.parse(fixture("manor-mvmt-booking-sessions.json")));
     const { scrapeTheManorMvmt } = await import("../../scripts/scrape/adapters/the-manor-mvmt");
     const output = await scrapeTheManorMvmt();
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
     expect(output.classes[0]?.venue).toBe("The Manor / MVMT");
+    expect(output.classes[0]?.bookingUrl).toContain("/mvmt");
+  });
+
+  it("returns empty class list when The Manor / MVMT has no upcoming sessions", async () => {
+    fetchJson.mockResolvedValue({
+      "2026-03-10": [],
+      "2026-03-11": []
+    });
+    const { scrapeTheManorMvmt } = await import("../../scripts/scrape/adapters/the-manor-mvmt");
+    const output = await scrapeTheManorMvmt();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(0);
   });
 
   it("parses East London Dance adapter", async () => {
@@ -480,6 +496,19 @@ describe("scraper adapters", () => {
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
     expect(output.classes[0]?.venue).toBe("East London Dance");
+  });
+
+  it("parses Con Tumbao Salsa adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("contumbao.html"));
+    const { scrapeConTumbaoSalsa } = await import("../../scripts/scrape/adapters/con-tumbao-salsa");
+    const output = await scrapeConTumbaoSalsa();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(2);
+    expect(output.classes.map((item) => item.title)).toEqual(
+      expect.arrayContaining(["Salsa on2 Groove & Technique", "Salsa musicality jam"])
+    );
+    expect(output.classes.every((item) => item.dayOfWeek === "Tuesday")).toBe(true);
+    expect(output.classes.some((item) => item.bookingUrl.includes("buy.stripe.com"))).toBe(true);
   });
 
   it("handles malformed HTML gracefully", async () => {

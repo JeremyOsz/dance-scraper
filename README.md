@@ -27,10 +27,11 @@ Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and mo
 - Bar Salsa Temple
 - MamboCity
 - City Academy
-- Adrian (Outsavvy)
+- StreamMovement
 - Look At Movement
 - The Manor / MVMT
 - East London Dance
+- Con Tumbao Salsa
 
 ## Organisers To Be Added
 

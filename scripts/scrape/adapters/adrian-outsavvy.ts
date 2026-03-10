@@ -100,7 +100,7 @@ export async function scrapeAdrianOutsavvy(): Promise<AdapterOutput> {
     if (!title) {
       return {
         venueKey: "adrianOutsavvy",
-        venue: "Adrian (Outsavvy)",
+        venue: "StreamMovement",
         sourceUrl,
         classes: [],
         ok: true,
@@ -110,11 +110,11 @@ export async function scrapeAdrianOutsavvy(): Promise<AdapterOutput> {
 
     return {
       venueKey: "adrianOutsavvy",
-      venue: "Adrian (Outsavvy)",
+      venue: "StreamMovement",
       sourceUrl,
       classes: [
         {
-          venue: "Adrian (Outsavvy)",
+          venue: "StreamMovement",
           title,
           details,
           dayOfWeek: formatDayOfWeek(start),
@@ -131,7 +131,7 @@ export async function scrapeAdrianOutsavvy(): Promise<AdapterOutput> {
   } catch (error) {
     return {
       venueKey: "adrianOutsavvy",
-      venue: "Adrian (Outsavvy)",
+      venue: "StreamMovement",
       sourceUrl,
       classes: [],
       ok: false,

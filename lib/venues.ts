@@ -122,7 +122,7 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     mapQuery: "City Academy Dance London"
   },
   adrianOutsavvy: {
-    label: "Adrian (Outsavvy)",
+    label: "StreamMovement",
     sourceUrl:
       "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
     mapQuery: "Outsavvy dance movement flow workshop London"
@@ -141,6 +141,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     label: "East London Dance",
     sourceUrl: "https://eastlondondance.org/",
     mapQuery: "East London Dance"
+  },
+  conTumbaoSalsa: {
+    label: "Con Tumbao Salsa",
+    sourceUrl: "https://www.contumbaosalsa.com/",
+    mapQuery: "Happy Feet Studios London"
   }
 };
 

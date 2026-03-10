@@ -73,4 +73,17 @@ describe("filterSessions", () => {
     });
     expect(filtered).toHaveLength(0);
   });
+
+  it("excludes sessions with unknown day when day filter is selected", () => {
+    const undatedDaySession: DanceSession = {
+      ...sample[0],
+      id: "3",
+      dayOfWeek: null
+    };
+    const filtered = filterSessions([...sample, undatedDaySession], {
+      day: ["Monday"]
+    });
+    expect(filtered).toHaveLength(1);
+    expect(filtered[0]?.id).toBe("1");
+  });
 });

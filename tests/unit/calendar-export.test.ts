@@ -58,5 +58,36 @@ describe("calendar export", () => {
     expect(ics).toContain("SUMMARY:Evening Flow");
     expect(ics).toContain("https://example.com/book");
   });
-});
 
+  it("prefers next dayOfWeek occurrence over stale startDate", () => {
+    const session: DanceSession = {
+      ...baseSession,
+      dayOfWeek: "Wednesday",
+      startDate: "2026-01-01",
+      endDate: "2026-12-31",
+      startTime: "6:00 pm",
+      endTime: "7:00 pm"
+    };
+    const timing = getSessionCalendarTiming(session, new Date("2026-03-10T12:00:00.000Z"));
+    expect(timing).not.toBeNull();
+    expect(timing?.start.toISOString().slice(0, 10)).toBe("2026-03-11");
+  });
+
+  it("uses provided now value for DTSTAMP", () => {
+    const now = new Date("2026-03-10T12:34:56.000Z");
+    const ics = buildSessionIcs(baseSession, now);
+    expect(ics).toContain("DTSTAMP:20260310T123456Z");
+  });
+
+  it("folds long description lines in ICS output", () => {
+    const session: DanceSession = {
+      ...baseSession,
+      details: `Long details ${"x".repeat(300)}`
+    };
+    const ics = buildSessionIcs(session, new Date("2026-03-10T12:00:00.000Z"));
+    const descriptionLines = ics
+      .split("\r\n")
+      .filter((line) => line.startsWith("DESCRIPTION:") || line.startsWith(" "));
+    expect(descriptionLines.length).toBeGreaterThan(1);
+  });
+});

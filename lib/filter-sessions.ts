@@ -28,7 +28,7 @@ export function filterSessions(all: DanceSession[], filters: Filters): DanceSess
       return false;
     }
 
-    if (filters.day?.length && session.dayOfWeek && !filters.day.includes(session.dayOfWeek)) {
+    if (filters.day?.length && (!session.dayOfWeek || !filters.day.includes(session.dayOfWeek))) {
       return false;
     }
 

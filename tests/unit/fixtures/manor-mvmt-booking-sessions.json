@@ -1,0 +1,41 @@
+{
+  "2026-03-10": [],
+  "2026-03-11": [
+    {
+      "id": 50882,
+      "start_date": "2026-03-11T18:30:00.000Z",
+      "end_date": "2026-03-11T19:30:00.000Z",
+      "class_name": "Beginners Commercial",
+      "instructor_name": "Danielle Murdock",
+      "class_description": "Learn the basics of Commercial dance in a fun and supportive environment.",
+      "studio_name": "Studio 2",
+      "restriction": "Open To All",
+      "start_time": {
+        "hour": 18,
+        "minutes": 30
+      },
+      "duration": {
+        "hour": 1,
+        "minutes": 0
+      },
+      "business_credit_cost": 1,
+      "is_hide_from_customer": false
+    },
+    {
+      "id": 60000,
+      "start_date": "2026-03-11T17:30:00.000Z",
+      "end_date": "2026-03-11T18:30:00.000Z",
+      "class_name": "Hidden Session",
+      "instructor_name": "Internal",
+      "start_time": {
+        "hour": 17,
+        "minutes": 30
+      },
+      "duration": {
+        "hour": 1,
+        "minutes": 0
+      },
+      "is_hide_from_customer": true
+    }
+  ]
+}
