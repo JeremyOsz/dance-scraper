@@ -11,6 +11,8 @@ type SimpleVenueConfig = {
 
 const DAY_REGEX = /(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/i;
 const TIME_REGEX = /(\d{1,2}(?::\d{2})?\s*[ap]m?\s*(?:-|–|to)\s*\d{1,2}(?::\d{2})?\s*[ap]m?)/i;
+const DATE_REGEX =
+  /\b(?:\d{4}-\d{2}-\d{2}|\d{1,2}(?:st|nd|rd|th)?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*|\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:,\s*\d{4})?)\b/i;
 const DANCE_KEYWORDS =
   /(dance|class|workshop|salsa|bachata|kizomba|zouk|heels|hip\s?hop|ballet|contemporary|jazz|latin|afro|movement)/i;
 
@@ -59,6 +61,19 @@ function extractClassFromElement(
     root.find(".time, .class-time, [data-time]").first().text(),
     contentText.match(TIME_REGEX)?.[1] ?? null
   ]);
+
+  const hasDateSignal = Boolean(
+    firstNonEmpty([
+      root.attr("data-date"),
+      root.attr("data-start-date"),
+      root.attr("datetime"),
+      root.find("time[datetime]").first().attr("datetime"),
+      contentText.match(DATE_REGEX)?.[0] ?? null
+    ])
+  );
+  // Prevent category/navigation tiles from being treated as classes.
+  if (!dayOfWeek && !time && !hasDateSignal) return null;
+
   const bookingUrl = absoluteUrl(sourceUrl, root.find("a[href]").first().attr("href")) ?? sourceUrl;
 
   return {

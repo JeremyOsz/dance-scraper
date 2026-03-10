@@ -448,6 +448,14 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.venue).toBe("City Academy");
   });
 
+  it("ignores City Academy marketing tiles without schedule metadata", async () => {
+    fetchHtml.mockResolvedValue(fixture("city-academy-no-schedule.html"));
+    const { scrapeCityAcademy } = await import("../../scripts/scrape/adapters/city-academy");
+    const output = await scrapeCityAcademy();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(0);
+  });
+
   it("parses Adrian Outsavvy adapter", async () => {
     fetchHtml.mockResolvedValue(fixture("adrian-outsavvy.html"));
     const { scrapeAdrianOutsavvy } = await import("../../scripts/scrape/adapters/adrian-outsavvy");
