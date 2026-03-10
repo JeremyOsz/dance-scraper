@@ -3,14 +3,7 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 
 // TODO:
-// - Add the time to the classes
-// - Add the day to the classes
-// - Add the link to the classes
-// - Add the details to the classes
-// - Add the title to the classes
-// - Add the schedule to the classes
 // Parse Summer Intensives
-// Mark season dates
 
 // Map of Season Names to Dates
 const seasonDates = {

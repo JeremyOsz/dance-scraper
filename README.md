@@ -1,114 +1,78 @@
-# Dance Scraper
+# Dance Scraper London Calendar
 
-A Node.js web scraper that extracts dance class information from multiple dance studios in London.
+Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and movement classes from selected London venues into a week/month calendar.
 
-## Features
+## Included Venues (v1)
 
-- **Multi-studio scraping**: Currently scrapes from Siobhan Davies Studios and The Place
-- **Structured data extraction**: Extracts class titles, details, days, times, and booking links
-- **JSON output**: Saves all data in a structured JSON format
-- **Debug logging**: Console output to track scraping progress
+- The Place
+- Rambert
+- Siobhan Davies Studios
+- TripSpace
+- Chisenhale Dance Space
+- CI Calendar London (Contact Improvisation)
+- Bachata Community (Bachata/Salsa events)
+- Ecstatic Dance London (selected Eventbrite organizers)
+- Five Rhythms London
 
-## Supported Studios
+## Stack
 
-### Siobhan Davies Studios
-- **URL**: https://www.siobhandavies.com/events/classes-2/
-- **Data extracted**: Adult dance classes with day, title, details, time, and booking links
+- Next.js (App Router)
+- Tailwind CSS
+- shadcn-style component setup (`components.json`)
+- Axios + Cheerio scrapers
+- Vitest + Testing Library + Playwright
 
-### The Place
-- **URL**: https://theplace.org.uk/dance/classes-and-courses?levels=%5BLevel%5D&styles=%5BStyle%5D&ages=%5BAdult%5D
-- **Data extracted**: Adult dance classes with day, title, details, time, and booking links
+## Data Contract
 
-## Installation
+Canonical session type:
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd dance-scraper
-```
+`DanceSession = { id, venue, title, details, dayOfWeek, startTime, endTime, startDate, endDate, timezone, bookingUrl, sourceUrl, tags, audience, isWorkshop, lastSeenAt }`
 
-2. Install dependencies:
+Canonical output file:
+
+- `data/classes.normalized.json`
+
+## API Routes
+
+- `GET /api/classes?from=YYYY-MM-DD&to=YYYY-MM-DD&venue=TripSpace&day=Monday&q=improvisation&workshopsOnly=true`
+- `GET /api/venues`
+
+## Local Development
+
 ```bash
 npm install
+npm run scrape
+npm run dev
 ```
 
-## Usage
+Open `http://localhost:3000`.
 
-Run the scraper:
-```bash
-node scraper.js
-```
+## Scripts
 
-The scraper will:
-1. Scrape Siobhan Davies Studios classes
-2. Scrape The Place classes
-3. Combine both datasets into `classes.json`
-4. Save raw HTML from The Place to `theplace-raw.html` for debugging
+- `npm run scrape` scrape + normalize all six venues
+- `npm run dev` run Next.js dev server
+- `npm run build` production build
+- `npm test` run unit/integration/UI tests
+- `npm run test:e2e` run Playwright E2E tests
 
-## Output Format
+## Scheduling
 
-The scraper generates a `classes.json` file with the following structure:
+Daily scrape workflow:
 
-```json
-{
-  "siobhanDavies": [
-    {
-      "title": "MONDAY NIGHT IMPROVISATION",
-      "details": "Programmed by Independent Dance. Open to all. Teacher changes weekly.",
-      "day": "Monday",
-      "time": "6.30 – 8pm",
-      "link": "https://www.siobhandavies.com/classes/id-improvisation/"
-    }
-  ],
-  "thePlace": [
-    {
-      "title": "Contemporary Beginners with Leanne Lieberhong",
-      "details": "Summer 2025",
-      "day": "Saturday",
-      "time": null,
-      "link": "https://theplace.org.uk/..."
-    }
-  ]
-}
-```
+- `.github/workflows/daily-scrape.yml`
 
-## Data Fields
+It runs once daily, updates `data/classes.normalized.json`, and commits changes when data differs.
 
-Each class entry contains:
-- **title**: Name of the dance class
-- **details**: Description, teacher, or additional information
-- **day**: Day of the week (Monday, Tuesday, etc.)
-- **time**: Class time (if available)
-- **link**: Booking or information link
+## Tests Included
 
-## Dependencies
+- Adapter parser unit tests with HTML fixtures (including malformed fixture)
+- Normalization contract/dedupe test
+- Filter integration test
+- UI test for week/month toggle + detail panel
+- Playwright smoke test for calendar page
 
-- **axios**: HTTP client for making requests
-- **cheerio**: Server-side jQuery implementation for HTML parsing
-- **fs**: Node.js file system module (built-in)
+## Extension Targets
 
-## Development
+Prioritized extension venues live in:
 
-### Adding New Studios
-
-To add a new dance studio:
-
-1. Create a new scraping function following the pattern of `scrapeSiobhanDavies()` or `scrapeThePlace()`
-2. Add the function call to the `main()` function
-3. Update the output structure to include the new studio's data
-
-### Debugging
-
-- The scraper includes console logging to track progress
-- Raw HTML from The Place is saved to `theplace-raw.html` for inspection
-- Check the console output for any parsing errors
-
-## Notes
-
-- The scraper uses static HTML parsing with cheerio, so it may not work with JavaScript-heavy sites
-- Some studios may require a headless browser (Puppeteer/Playwright) for dynamic content
-- The scraper is designed for educational purposes and should respect robots.txt and rate limiting
-
-## License
-
-This project is for educational purposes. Please respect the terms of service of the websites being scraped. 
+- `data/extension-targets.json`

@@ -1,15 +1,18 @@
 const fs = require('fs');
 const scrapeSiobhanDavies = require('./scrapeSiobhanDavies');
 const scrapeThePlace = require('./scrapeThePlace');
+const scrapeRambert = require('./scrapeRambert');
 
 const main = async () => {
     const siobhanDaviesClasses = await scrapeSiobhanDavies();
     const thePlaceClasses = await scrapeThePlace();
+    const rambertClasses = await scrapeRambert();
     
-    // Create the final object with both datasets
+    // Create the final object with all datasets
     const output = {
         siobhanDavies: siobhanDaviesClasses,
-        thePlace: thePlaceClasses
+        thePlace: thePlaceClasses,
+        rambert: rambertClasses
     };
     
     // Write the data to a JSON file

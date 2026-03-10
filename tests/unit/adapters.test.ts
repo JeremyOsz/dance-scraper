@@ -1,0 +1,111 @@
+import fs from "node:fs";
+import path from "node:path";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+const fetchHtml = vi.fn();
+
+vi.mock("../../scripts/scrape/adapters/common", async () => {
+  const actual = await vi.importActual<object>("../../scripts/scrape/adapters/common");
+  return {
+    ...actual,
+    fetchHtml
+  };
+});
+
+function fixture(name: string) {
+  return fs.readFileSync(path.join(process.cwd(), "tests/unit/fixtures", name), "utf8");
+}
+
+describe("scraper adapters", () => {
+  beforeEach(() => {
+    fetchHtml.mockReset();
+  });
+
+  it("parses The Place adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("the-place.html"));
+    const { scrapeThePlace } = await import("../../scripts/scrape/adapters/the-place");
+    const output = await scrapeThePlace();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.title).toContain("Contemporary");
+  });
+
+  it("parses Rambert adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("rambert.html"));
+    const { scrapeRambert } = await import("../../scripts/scrape/adapters/rambert");
+    const output = await scrapeRambert();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+  });
+
+  it("parses Siobhan Davies adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("siobhan.html"));
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
+  });
+
+  it("parses TripSpace adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("tripspace.html"));
+    const { scrapeTripSpace } = await import("../../scripts/scrape/adapters/trip-space");
+    const output = await scrapeTripSpace();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("TripSpace");
+  });
+
+  it("parses Chisenhale adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("chisenhale.html"));
+    const { scrapeChisenhale } = await import("../../scripts/scrape/adapters/chisenhale");
+    const output = await scrapeChisenhale();
+    expect(output.ok).toBe(true);
+    expect(output.classes.map((item) => item.title)).toContain("Monday Night Improvisation");
+    expect(output.classes.map((item) => item.title)).not.toContain("About");
+    expect(output.classes.map((item) => item.title)).not.toContain("Rise Up (6-7 Years)");
+  });
+
+  it("parses CI Calendar London adapter", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(fixture("ci-calendar.html"))
+      .mockResolvedValue(fixture("ci-feed.ics"));
+    const { scrapeCiCalendarLondon } = await import("../../scripts/scrape/adapters/ci-calendar");
+    const output = await scrapeCiCalendarLondon();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("CI Calendar London");
+    expect(output.classes[0]?.title).toContain("Contact Improvisation");
+  });
+
+  it("parses Bachata Community adapter", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(fixture("bachata-home.html"))
+      .mockResolvedValue(fixture("bachata-month.json"));
+    const { scrapeBachataCommunity } = await import("../../scripts/scrape/adapters/bachata-community");
+    const output = await scrapeBachataCommunity();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Bachata Community");
+    expect(output.classes[0]?.title).toContain("Bachata");
+  });
+
+  it("parses Ecstatic Dance London adapter from Eventbrite organizers", async () => {
+    fetchHtml.mockResolvedValue(fixture("eventbrite-organizer.html"));
+    const { scrapeEcstaticDanceLondon } = await import("../../scripts/scrape/adapters/ecstatic-dance-london");
+    const output = await scrapeEcstaticDanceLondon();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Ecstatic Dance London");
+  });
+
+  it("parses Five Rhythms London adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("five-rhythms.html"));
+    const { scrapeFiveRhythmsLondon } = await import("../../scripts/scrape/adapters/five-rhythms-london");
+    const output = await scrapeFiveRhythmsLondon();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Five Rhythms London");
+  });
+
+  it("handles malformed HTML gracefully", async () => {
+    fetchHtml.mockResolvedValue(fixture("malformed.html"));
+    const { scrapeThePlace } = await import("../../scripts/scrape/adapters/the-place");
+    const output = await scrapeThePlace();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(0);
+  });
+});

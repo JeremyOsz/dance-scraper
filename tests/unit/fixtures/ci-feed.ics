@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART;TZID=Europe/London:20260312T183000
+DTEND;TZID=Europe/London:20260312T203000
+STATUS:CONFIRMED
+SUMMARY:Thursday Contact Improvisation Jam
+DESCRIPTION:Open level contact class\nAll welcome
+URL:https://example.org/ci-jam
+LOCATION:London Venue
+END:VEVENT
+END:VCALENDAR

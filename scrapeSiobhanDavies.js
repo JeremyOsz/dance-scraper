@@ -54,17 +54,26 @@ const scrapeSiobhanDavies = async () => {
                     const timeMatch = text.match(/(\d{1,2}(?:\.\d{1,2})? ?[ap]m? ?[–-] ?\d{1,2}(?:\.\d{1,2})? ?[ap]m?|\d{1,2}(?:\.\d{1,2})? ?[–-] ?\d{1,2}(?:\.\d{1,2})? ?[ap]m?)/i);
                     const time = timeMatch ? timeMatch[0].replace(/\s+/g, ' ').trim() : null;
                     const link = currentElement.find('a').attr('href');
-                    // Determine season dates based on details
+
+                    // Extract date range like '26 Apr – 12 Jul' from the text
                     let startDate = null;
                     let endDate = null;
-                    for (const [seasonName, dates] of Object.entries(seasonDates)) {
-                        if (details && details.includes(seasonName)) {
-                            startDate = dates.start;
-                            endDate = dates.end;
-                            break;
+                    const dateRangeMatch = text.match(/(\d{1,2} \w{3}) ?[–-] ?(\d{1,2} \w{3})/i);
+                    if (dateRangeMatch) {
+                        // Try to infer the year from the page context or default to current year
+                        const currentYear = new Date().getFullYear();
+                        // If the end month is before the start month, assume the range crosses into the next year
+                        const startStr = dateRangeMatch[1] + ' ' + currentYear;
+                        const endStr = dateRangeMatch[2] + ' ' + currentYear;
+                        let start = new Date(startStr);
+                        let end = new Date(endStr);
+                        if (end < start) {
+                            end = new Date(dateRangeMatch[2] + ' ' + (currentYear + 1));
                         }
+                        startDate = start.toISOString().slice(0, 10);
+                        endDate = end.toISOString().slice(0, 10);
                     }
-                    console.log('Found class:', classTitle, 'on day:', currentDay);
+
                     danceClasses.push({
                         title: classTitle,
                         details,
