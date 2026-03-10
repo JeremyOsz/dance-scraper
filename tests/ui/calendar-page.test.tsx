@@ -154,6 +154,17 @@ describe("CalendarPage", () => {
     expect(screen.queryByText("Evening Technique")).not.toBeInTheDocument();
   });
 
+  it("grays out venue chips when no related events match active filters", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Tuesday" }));
+
+    expect(screen.getByRole("button", { name: "TripSpace" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Butoh Mutation" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Rambert" })).not.toBeDisabled();
+  });
+
   it("collapses week lanes to the selected day", async () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);

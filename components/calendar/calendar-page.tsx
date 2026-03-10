@@ -241,6 +241,35 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     shortlistOnly,
     shortlistSessionIds
   ]);
+  const relatedSessionCountByVenue = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const session of initialSessions) {
+      if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) {
+        continue;
+      }
+      if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {
+        continue;
+      }
+      if (workshopsOnly && !session.isWorkshop) {
+        continue;
+      }
+      if (shortlistOnly && !shortlistSessionIds.includes(session.id)) {
+        continue;
+      }
+      if (search.trim()) {
+        const term = search.toLowerCase();
+        const hit =
+          session.title.toLowerCase().includes(term) ||
+          (session.details ?? "").toLowerCase().includes(term) ||
+          session.tags.some((tag) => tag.toLowerCase().includes(term));
+        if (!hit) {
+          continue;
+        }
+      }
+      counts.set(session.venue, (counts.get(session.venue) ?? 0) + 1);
+    }
+    return counts;
+  }, [initialSessions, search, selectedDays, selectedTypes, workshopsOnly, shortlistOnly, shortlistSessionIds]);
 
   const dates = useMemo(
     () => (view === "week" ? getWeekDates(anchorDate) : getMonthGridDates(anchorDate)),
@@ -446,17 +475,24 @@ export function CalendarPage({ initialSessions, venues }: Props) {
             >
               Any venue
             </Button>
-            {venueNames.map((venue) => (
-              <Button
-                key={venue}
-                type="button"
-                size="sm"
-                variant={selectedVenues.includes(venue) ? "default" : "outline"}
-                onClick={() => setSelectedVenues((current) => toggleValue(current, venue))}
-              >
-                {venue}
-              </Button>
-            ))}
+            {venueNames.map((venue) => {
+              const relatedCount = relatedSessionCountByVenue.get(venue) ?? 0;
+              const isSelected = selectedVenues.includes(venue);
+              const noRelatedSessions = relatedCount === 0;
+              return (
+                <Button
+                  key={venue}
+                  type="button"
+                  size="sm"
+                  variant={isSelected ? "default" : "outline"}
+                  disabled={noRelatedSessions && !isSelected}
+                  className={noRelatedSessions && !isSelected ? "opacity-50" : undefined}
+                  onClick={() => setSelectedVenues((current) => toggleValue(current, venue))}
+                >
+                  {venue}
+                </Button>
+              );
+            })}
           </div>
         </details>
       </div>
@@ -797,38 +833,44 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   </CardContent>
                 </Card>
                 <div className="grid gap-3 md:grid-cols-2">
-                  {venues.map((venue) => (
-                    <Card key={venue.name}>
-                      <CardHeader className="space-y-2">
-                        <div className="flex items-center justify-between gap-2">
-                          <CardTitle className="text-base">{venue.name}</CardTitle>
-                          <Badge variant={venue.ok ? "secondary" : "outline"}>{venue.ok ? "OK" : "Warning"}</Badge>
-                        </div>
-                        <p className="text-xs text-muted-foreground">
-                          {venue.count} sessions last scrape
-                          {venue.lastSuccessAt ? ` • updated ${format(new Date(venue.lastSuccessAt), "d MMM yyyy, HH:mm")}` : ""}
-                        </p>
-                      </CardHeader>
-                      <CardContent className="flex flex-wrap gap-2">
-                        <Button variant="outline" asChild>
-                          <a href={venue.sourceUrl} target="_blank" rel="noreferrer">
-                            Venue site
-                          </a>
-                        </Button>
-                        <Button variant="outline" asChild>
-                          <a
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                              venue.mapQuery ?? getVenueMapQuery(venue.name)
-                            )}`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Open map
-                          </a>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
+                  {venues.map((venue) => {
+                    const relatedCount = relatedSessionCountByVenue.get(venue.name) ?? 0;
+                    const isMuted = relatedCount === 0;
+                    return (
+                      <Card key={venue.name} className={isMuted ? "opacity-60" : undefined}>
+                        <CardHeader className="space-y-2">
+                          <div className="flex items-center justify-between gap-2">
+                            <CardTitle className="text-base">{venue.name}</CardTitle>
+                            <Badge variant={venue.ok ? "secondary" : "outline"}>{venue.ok ? "OK" : "Warning"}</Badge>
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            {venue.count} sessions last scrape
+                            {venue.lastSuccessAt
+                              ? ` • updated ${format(new Date(venue.lastSuccessAt), "d MMM yyyy, HH:mm")}`
+                              : ""}
+                          </p>
+                        </CardHeader>
+                        <CardContent className="flex flex-wrap gap-2">
+                          <Button variant="outline" asChild>
+                            <a href={venue.sourceUrl} target="_blank" rel="noreferrer">
+                              Venue site
+                            </a>
+                          </Button>
+                          <Button variant="outline" asChild>
+                            <a
+                              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                venue.mapQuery ?? getVenueMapQuery(venue.name)
+                              )}`}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              Open map
+                            </a>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
             )}
