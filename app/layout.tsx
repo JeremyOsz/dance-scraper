@@ -9,6 +9,7 @@ const siteDescription =
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  manifest: "/manifest.webmanifest",
   title: {
     default: siteName,
     template: `%s | ${siteName}`

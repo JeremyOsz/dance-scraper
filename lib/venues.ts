@@ -146,6 +146,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     label: "Con Tumbao Salsa",
     sourceUrl: "https://www.contumbaosalsa.com/",
     mapQuery: "Happy Feet Studios London"
+  },
+  underTheSunDance: {
+    label: "Under the Sun Dance",
+    sourceUrl: "https://www.underthesundance.com/",
+    mapQuery: "Under the Sun Dance London"
   }
 };
 

@@ -107,6 +107,11 @@ describe("CalendarPage", () => {
     window.localStorage.clear();
     mockReplace.mockReset();
     mockSearchParams = new URLSearchParams();
+    Object.defineProperty(window.navigator, "share", { configurable: true, value: undefined });
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: { writeText: vi.fn() }
+    });
   });
 
   it("disables preferred/shortlist-only toggles when nothing is saved", async () => {
@@ -303,5 +308,38 @@ describe("CalendarPage", () => {
     await waitFor(() => {
       expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("mode=venues"), { scroll: false });
     });
+  });
+
+  it("uses native share when available", async () => {
+    const user = userEvent.setup();
+    const shareMock = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(window.navigator, "share", { configurable: true, value: shareMock });
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Share" }));
+
+    expect(shareMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        url: window.location.href,
+        title: "Dance Scraper London"
+      })
+    );
+    expect(await screen.findByText("Shared")).toBeInTheDocument();
+  });
+
+  it("copies the current URL when native share is unavailable", async () => {
+    const user = userEvent.setup();
+    const writeTextMock = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(window.navigator, "share", { configurable: true, value: undefined });
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: { writeText: writeTextMock }
+    });
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Share" }));
+
+    expect(writeTextMock).toHaveBeenCalledWith(window.location.href);
+    expect(await screen.findByText("Link copied")).toBeInTheDocument();
   });
 });

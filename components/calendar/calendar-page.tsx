@@ -163,6 +163,8 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [mapVenue, setMapVenue] = useState<string>("all");
   const [urlReady, setUrlReady] = useState(false);
+  const [shareMessage, setShareMessage] = useState<string | null>(null);
+  const [shareFallbackUrl, setShareFallbackUrl] = useState<string | null>(null);
 
   const venueNames = useMemo(() => venues.map((venue) => venue.name), [venues]);
 
@@ -265,6 +267,17 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       setShortlistOnly(false);
     }
   }, [shortlistOnly, shortlistSessionIds.length]);
+
+  useEffect(() => {
+    if (!shareMessage) {
+      return;
+    }
+    if (shareFallbackUrl) {
+      return;
+    }
+    const timeoutId = window.setTimeout(() => setShareMessage(null), 2500);
+    return () => window.clearTimeout(timeoutId);
+  }, [shareMessage, shareFallbackUrl]);
 
   const filteredSessions = useMemo(() => {
     return initialSessions.filter((session) => {
@@ -399,6 +412,65 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [mapVenue, venues]);
 
   const clearSummaryActionClass = "ml-auto h-8 px-3 text-xs sm:h-6 sm:px-2";
+
+  const tryLegacyCopy = (text: string) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "true");
+    textarea.style.position = "fixed";
+    textarea.style.top = "-1000px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const copied = document.execCommand("copy");
+    document.body.removeChild(textarea);
+    return copied;
+  };
+
+  const handleShare = async () => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const shareUrl = window.location.href;
+    try {
+      if (typeof navigator.share === "function") {
+        await navigator.share({
+          title: "Dance Scraper London",
+          text: "London dance and movement classes",
+          url: shareUrl
+        });
+        setShareFallbackUrl(null);
+        setShareMessage("Shared");
+        return;
+      }
+
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        setShareFallbackUrl(null);
+        setShareMessage("Link copied");
+        return;
+      }
+
+      if (tryLegacyCopy(shareUrl)) {
+        setShareFallbackUrl(null);
+        setShareMessage("Link copied");
+        return;
+      }
+
+      setShareFallbackUrl(shareUrl);
+      setShareMessage("Copy link manually");
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") {
+        return;
+      }
+      if (tryLegacyCopy(shareUrl)) {
+        setShareFallbackUrl(null);
+        setShareMessage("Link copied");
+        return;
+      }
+      setShareFallbackUrl(shareUrl);
+      setShareMessage("Copy link manually");
+    }
+  };
 
   const renderFilterSections = () => (
     <div className="space-y-3">
@@ -705,6 +777,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <CardTitle className="text-3xl tracking-tight">London Dance Calendar</CardTitle>
             <div className="flex items-center gap-2">
+              <Button variant="outline" onClick={handleShare}>
+                Share
+              </Button>
               <Button asChild>
                 <Link href="/">Calendar</Link>
               </Button>
@@ -713,6 +788,15 @@ export function CalendarPage({ initialSessions, venues }: Props) {
               </Button>
             </div>
           </div>
+          {shareMessage ? <p className="text-sm text-muted-foreground">{shareMessage}</p> : null}
+          {shareFallbackUrl ? (
+            <Input
+              readOnly
+              value={shareFallbackUrl}
+              onFocus={(event) => event.currentTarget.select()}
+              aria-label="Share link"
+            />
+          ) : null}
           <p className="text-sm text-muted-foreground">
             Browse adult and open dance and movement classes across London, then filter quickly by type, venue, day,
             style, workshops, and your saved shortlist.

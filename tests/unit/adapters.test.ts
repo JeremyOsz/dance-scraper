@@ -48,7 +48,8 @@ const testedVenueKeys = [
   "lookAtMovement",
   "theManorMvmt",
   "eastLondonDance",
-  "conTumbaoSalsa"
+  "conTumbaoSalsa",
+  "underTheSunDance"
 ] as const;
 
 const ecstaticOrganizerUrls = [
@@ -570,6 +571,15 @@ describe("scraper adapters", () => {
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
     expect(output.classes[0]?.venue).toBe("East London Dance");
+  });
+
+  it("parses Under the Sun Dance adapter", async () => {
+    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const { scrapeUnderTheSunDance } = await import("../../scripts/scrape/adapters/under-the-sun-dance");
+    const output = await scrapeUnderTheSunDance();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.venue).toBe("Under the Sun Dance");
   });
 
   it("parses Con Tumbao Salsa adapter", async () => {

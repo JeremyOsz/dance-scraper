@@ -32,6 +32,7 @@ Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and mo
 - The Manor / MVMT
 - East London Dance
 - Con Tumbao Salsa
+- Under the Sun Dance
 
 ## Organisers To Be Added
 
