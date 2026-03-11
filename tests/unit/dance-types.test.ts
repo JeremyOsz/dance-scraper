@@ -76,6 +76,56 @@ describe("dance type inference", () => {
     ).toEqual(["Somatic"]);
   });
 
+  it("infers additional dance and movement categories", () => {
+    expect(
+      inferDanceTypes({
+        title: "Morning Yoga Flow",
+        details: "Open level",
+        tags: []
+      })
+    ).toEqual(["Yoga/Pilates"]);
+
+    expect(
+      inferDanceTypes({
+        title: "Commercial Heels Choreo",
+        details: null,
+        tags: []
+      })
+    ).toEqual(["Commercial/Heels"]);
+
+    expect(
+      inferDanceTypes({
+        title: "Ballroom & Tango Fundamentals",
+        details: null,
+        tags: []
+      })
+    ).toEqual(["Ballroom/Tango"]);
+
+    expect(
+      inferDanceTypes({
+        title: "Vinyasa Flow 75",
+        details: null,
+        tags: []
+      })
+    ).toEqual(["Yoga/Pilates"]);
+
+    expect(
+      inferDanceTypes({
+        title: "CI Peers Practice",
+        details: "Open jam",
+        tags: []
+      })
+    ).toEqual(["Contact Improv"]);
+
+    expect(
+      inferDanceTypes({
+        title: "LindyHopEastLdn social",
+        details: null,
+        tags: []
+      })
+    ).toEqual(["Ballroom/Tango"]);
+  });
+
   it("matches the requested dance type with 5Rythms spelling variant", () => {
     const session = {
       title: "Sunday 5Rythms Wave",
@@ -84,5 +134,42 @@ describe("dance type inference", () => {
     };
 
     expect(matchesDanceType(session, "Ecstatic Dance/ 5Rythms")).toBe(true);
+  });
+
+  it("classifies Luminous events as Ecstatic Dance/ 5Rythms", () => {
+    const session = {
+      title: "Luminous New Moon Dance",
+      details: "Conscious dance journey",
+      tags: []
+    };
+
+    expect(matchesDanceType(session, "Ecstatic Dance/ 5Rythms")).toBe(true);
+    expect(inferDanceTypes(session)).toContain("Ecstatic Dance/ 5Rythms");
+  });
+
+  it("uses venue context for sparse titles", () => {
+    const bachataCommunitySession = {
+      title: "Mojito Club - Classes",
+      details: "Classes calendar",
+      tags: [],
+      venue: "Bachata Community"
+    };
+    expect(inferDanceTypes(bachataCommunitySession)).toContain("Bachata");
+
+    const ciCalendarSession = {
+      title: "Peers Practice Session",
+      details: "Telegraph Hill",
+      tags: [],
+      venue: "CI Calendar London"
+    };
+    expect(inferDanceTypes(ciCalendarSession)).toContain("Contact Improv");
+
+    const rambertSession = {
+      title: "Professional Class",
+      details: null,
+      tags: [],
+      venue: "Rambert"
+    };
+    expect(inferDanceTypes(rambertSession)).toContain("Contemporary");
   });
 });

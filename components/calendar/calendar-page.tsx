@@ -3,6 +3,8 @@
 import React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { format, addDays, addMonths, isSameMonth, parseISO, subDays, subMonths } from "date-fns";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { DanceSession } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,10 +16,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { canAddSessionToCalendar } from "@/lib/calendar-export";
 import { DANCE_TYPES, inferDanceTypes, matchesDanceType, type DanceType } from "@/lib/dance-types";
 import { ORDERED_DAYS, formatTimeRange, getMonthGridDates, getWeekDates, isSessionActiveOnDate } from "@/lib/date";
+import { LEVELS, matchesSessionLevel } from "@/lib/levels";
 import { getVenueMapQuery } from "@/lib/venues";
 
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
-const FILTERS_STORAGE_KEY = "dance-scraper.calendar-filters";
 const VENUE_REQUEST_EMAIL = process.env.NEXT_PUBLIC_VENUE_REQUEST_EMAIL ?? "hello@dance-scraper.local";
 const DANCE_TYPE_BADGE_CLASS: Record<DanceType, string> = {
   Contemporary: "border-transparent bg-sky-100 text-sky-800",
@@ -30,6 +32,11 @@ const DANCE_TYPE_BADGE_CLASS: Record<DanceType, string> = {
   Butoh: "border-transparent bg-zinc-200 text-zinc-900",
   Somatic: "border-transparent bg-lime-100 text-lime-800",
   "Hip Hop": "border-transparent bg-violet-100 text-violet-800",
+  "Yoga/Pilates": "border-transparent bg-cyan-100 text-cyan-800",
+  Jazz: "border-transparent bg-orange-100 text-orange-800",
+  House: "border-transparent bg-indigo-100 text-indigo-800",
+  "Commercial/Heels": "border-transparent bg-fuchsia-100 text-fuchsia-800",
+  "Ballroom/Tango": "border-transparent bg-yellow-100 text-yellow-800",
   Other: "border-transparent bg-stone-200 text-stone-800"
 };
 const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
@@ -43,16 +50,12 @@ const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
   Butoh: "border-zinc-300 bg-zinc-100/80",
   Somatic: "border-lime-200 bg-lime-50/70",
   "Hip Hop": "border-violet-200 bg-violet-50/70",
+  "Yoga/Pilates": "border-cyan-200 bg-cyan-50/70",
+  Jazz: "border-orange-200 bg-orange-50/70",
+  House: "border-indigo-200 bg-indigo-50/70",
+  "Commercial/Heels": "border-fuchsia-200 bg-fuchsia-50/70",
+  "Ballroom/Tango": "border-yellow-200 bg-yellow-50/70",
   Other: "border-border bg-secondary/40"
-};
-
-type StoredFilters = {
-  search: string;
-  selectedVenues: string[];
-  selectedDays: string[];
-  selectedTypes: string[];
-  workshopsOnly: boolean;
-  shortlistOnly: boolean;
 };
 
 function groupByDate(sessions: DanceSession[], dateList: Date[]) {
@@ -90,45 +93,6 @@ function readStoredList(key: string): string[] {
   }
 }
 
-function readStoredFilters(): StoredFilters | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
-  try {
-    const raw = window.localStorage.getItem(FILTERS_STORAGE_KEY);
-    if (!raw) {
-      return null;
-    }
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed !== "object") {
-      return null;
-    }
-    const readSelection = (value: unknown, legacyValue?: unknown) => {
-      const source = value ?? legacyValue;
-      if (Array.isArray(source)) {
-        return source.filter((item): item is string => typeof item === "string");
-      }
-      if (typeof source === "string") {
-        return source === "all" ? [] : [source];
-      }
-      return [];
-    };
-    return {
-      search: typeof parsed.search === "string" ? parsed.search : "",
-      selectedVenues: readSelection(
-        Reflect.get(parsed, "selectedVenues"),
-        Reflect.get(parsed, "selectedVenue")
-      ),
-      selectedDays: readSelection(Reflect.get(parsed, "selectedDays"), Reflect.get(parsed, "selectedDay")),
-      selectedTypes: readSelection(Reflect.get(parsed, "selectedTypes"), Reflect.get(parsed, "selectedType")),
-      workshopsOnly: Boolean(parsed.workshopsOnly),
-      shortlistOnly: Boolean(parsed.shortlistOnly)
-    };
-  } catch {
-    return null;
-  }
-}
-
 function toggleValue(values: string[], value: string) {
   return values.includes(value) ? values.filter((item) => item !== value) : [...values, value];
 }
@@ -155,7 +119,34 @@ function getVenueStatus(venue: Props["venues"][number]) {
   return { label: "OK", variant: "secondary" as const };
 }
 
+function parseCsvParam(params: URLSearchParams | ReadonlyURLSearchParams, key: string) {
+  const value = params.get(key);
+  if (!value) {
+    return [];
+  }
+  return value
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+function parseBooleanParam(params: URLSearchParams | ReadonlyURLSearchParams, key: string) {
+  const value = params.get(key);
+  return value === "1" || value === "true";
+}
+
+function parseAnchorDate(value: string | null) {
+  if (!value) {
+    return new Date();
+  }
+  const parsed = parseISO(value);
+  return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+}
+
 export function CalendarPage({ initialSessions, venues }: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [mode, setMode] = useState<"calendar" | "venues" | "map">("calendar");
   const [view, setView] = useState<"week" | "month">("week");
   const [anchorDate, setAnchorDate] = useState(new Date());
@@ -164,27 +155,59 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [workshopsOnly, setWorkshopsOnly] = useState(false);
   const [shortlistSessionIds, setShortlistSessionIds] = useState<string[]>([]);
   const [shortlistOnly, setShortlistOnly] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [mapVenue, setMapVenue] = useState<string>("all");
+  const [urlReady, setUrlReady] = useState(false);
 
   const venueNames = useMemo(() => venues.map((venue) => venue.name), [venues]);
 
   useEffect(() => {
     const storedShortlist = readStoredList(SHORTLIST_STORAGE_KEY);
-    const storedFilters = readStoredFilters();
     setShortlistSessionIds(storedShortlist);
-    if (storedFilters) {
-      setSearch(storedFilters.search);
-      setSelectedVenues(storedFilters.selectedVenues);
-      setSelectedDays(storedFilters.selectedDays);
-      setSelectedTypes(storedFilters.selectedTypes);
-      setWorkshopsOnly(storedFilters.workshopsOnly);
-      setShortlistOnly(storedFilters.shortlistOnly && storedShortlist.length > 0);
-    }
   }, []);
+
+  useEffect(() => {
+    const modeParam = searchParams.get("mode");
+    const nextMode = modeParam === "venues" || modeParam === "map" ? modeParam : "calendar";
+    setMode(nextMode);
+
+    const viewParam = searchParams.get("view");
+    const nextView = viewParam === "month" ? "month" : "week";
+    setView(nextView);
+
+    setAnchorDate(parseAnchorDate(searchParams.get("date")));
+    setSearch(searchParams.get("q") ?? "");
+
+    const nextVenues = parseCsvParam(searchParams, "venue").filter((venue) => venueNames.includes(venue));
+    setSelectedVenues(nextVenues);
+
+    const nextDays = parseCsvParam(searchParams, "day").filter((day) => ORDERED_DAYS.includes(day));
+    setSelectedDays(nextDays);
+
+    const nextTypes = parseCsvParam(searchParams, "type").filter((type): type is DanceType =>
+      DANCE_TYPES.includes(type as DanceType)
+    );
+    setSelectedTypes(nextTypes);
+
+    const nextLevels = parseCsvParam(searchParams, "level").filter((level) => LEVELS.includes(level));
+    setSelectedLevels(nextLevels);
+
+    setWorkshopsOnly(parseBooleanParam(searchParams, "workshops"));
+    setShortlistOnly(parseBooleanParam(searchParams, "shortlist"));
+
+    const mapParam = searchParams.get("map");
+    if (mapParam === "all" || (mapParam && venueNames.includes(mapParam))) {
+      setMapVenue(mapParam);
+    } else {
+      setMapVenue("all");
+    }
+
+    setUrlReady(true);
+  }, [searchParams, venueNames]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -194,19 +217,43 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [shortlistSessionIds]);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
+    if (!urlReady) {
       return;
     }
-    const storedFilters: StoredFilters = {
-      search,
-      selectedVenues,
-      selectedDays,
-      selectedTypes,
-      workshopsOnly,
-      shortlistOnly
-    };
-    window.localStorage.setItem(FILTERS_STORAGE_KEY, JSON.stringify(storedFilters));
-  }, [search, selectedVenues, selectedDays, selectedTypes, workshopsOnly, shortlistOnly]);
+    const params = new URLSearchParams();
+    params.set("mode", mode);
+    params.set("view", view);
+    params.set("date", format(anchorDate, "yyyy-MM-dd"));
+    if (search.trim()) params.set("q", search.trim());
+    if (selectedVenues.length > 0) params.set("venue", selectedVenues.join(","));
+    if (selectedDays.length > 0) params.set("day", selectedDays.join(","));
+    if (selectedTypes.length > 0) params.set("type", selectedTypes.join(","));
+    if (selectedLevels.length > 0) params.set("level", selectedLevels.join(","));
+    if (workshopsOnly) params.set("workshops", "1");
+    if (shortlistOnly) params.set("shortlist", "1");
+    if (mapVenue !== "all") params.set("map", mapVenue);
+
+    const nextQuery = params.toString();
+    if (nextQuery !== searchParams.toString()) {
+      router.replace(`${pathname}?${nextQuery}`, { scroll: false });
+    }
+  }, [
+    anchorDate,
+    mapVenue,
+    mode,
+    pathname,
+    router,
+    search,
+    searchParams,
+    selectedDays,
+    selectedLevels,
+    selectedTypes,
+    selectedVenues,
+    shortlistOnly,
+    urlReady,
+    view,
+    workshopsOnly
+  ]);
 
   useEffect(() => {
     if (shortlistOnly && shortlistSessionIds.length === 0) {
@@ -223,6 +270,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
         return false;
       }
       if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {
+        return false;
+      }
+      if (selectedLevels.length > 0 && !selectedLevels.some((level) => matchesSessionLevel(session, level))) {
         return false;
       }
       if (workshopsOnly && !session.isWorkshop) {
@@ -247,6 +297,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     selectedVenues,
     selectedDays,
     selectedTypes,
+    selectedLevels,
     workshopsOnly,
     shortlistOnly,
     shortlistSessionIds
@@ -258,6 +309,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
         continue;
       }
       if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {
+        continue;
+      }
+      if (selectedLevels.length > 0 && !selectedLevels.some((level) => matchesSessionLevel(session, level))) {
         continue;
       }
       if (workshopsOnly && !session.isWorkshop) {
@@ -279,7 +333,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       counts.set(session.venue, (counts.get(session.venue) ?? 0) + 1);
     }
     return counts;
-  }, [initialSessions, search, selectedDays, selectedTypes, workshopsOnly, shortlistOnly, shortlistSessionIds]);
+  }, [initialSessions, search, selectedDays, selectedTypes, selectedLevels, workshopsOnly, shortlistOnly, shortlistSessionIds]);
 
   const dates = useMemo(
     () => (view === "week" ? getWeekDates(anchorDate) : getMonthGridDates(anchorDate)),
@@ -307,6 +361,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     setSelectedVenues([]);
     setSelectedDays([]);
     setSelectedTypes([]);
+    setSelectedLevels([]);
     setWorkshopsOnly(false);
     setShortlistOnly(false);
   };
@@ -319,10 +374,11 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     if (selectedVenues.length > 0) count += 1;
     if (selectedDays.length > 0) count += 1;
     if (selectedTypes.length > 0) count += 1;
+    if (selectedLevels.length > 0) count += 1;
     if (workshopsOnly) count += 1;
     if (shortlistOnly) count += 1;
     return count;
-  }, [search, selectedVenues.length, selectedDays.length, selectedTypes.length, workshopsOnly, shortlistOnly]);
+  }, [search, selectedVenues.length, selectedDays.length, selectedTypes.length, selectedLevels.length, workshopsOnly, shortlistOnly]);
 
   const mapSearchQuery = useMemo(() => {
     if (mapVenue === "all") {
@@ -367,6 +423,49 @@ export function CalendarPage({ initialSessions, venues }: Props) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
+          </div>
+        </details>
+      </div>
+      <div className="rounded-md border border-input bg-background p-2">
+        <details open>
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+            <span>Level</span>
+            <span className="h-px flex-1 bg-border" />
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className={clearSummaryActionClass}
+              disabled={selectedLevels.length === 0}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSelectedLevels([]);
+              }}
+            >
+              Clear
+            </Button>
+          </summary>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <Button
+              type="button"
+              size="sm"
+              variant={selectedLevels.length === 0 ? "default" : "outline"}
+              onClick={() => setSelectedLevels([])}
+            >
+              Any level
+            </Button>
+            {LEVELS.map((level) => (
+              <Button
+                key={level}
+                type="button"
+                size="sm"
+                variant={selectedLevels.includes(level) ? "default" : "outline"}
+                onClick={() => setSelectedLevels((current) => toggleValue(current, level))}
+              >
+                {level}
+              </Button>
+            ))}
           </div>
         </details>
       </div>
@@ -598,7 +697,17 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       <h1 className="sr-only">London dance classes calendar</h1>
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader className="px-0">
-          <CardTitle className="text-3xl tracking-tight">London Dance Calendar</CardTitle>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <CardTitle className="text-3xl tracking-tight">London Dance Calendar</CardTitle>
+            <div className="flex items-center gap-2">
+              <Button asChild>
+                <Link href="/">Calendar</Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="/insights">Insights</Link>
+              </Button>
+            </div>
+          </div>
           <p className="text-sm text-muted-foreground">
             Browse adult and open dance and movement classes across London, then filter quickly by type, venue, day,
             style, workshops, and your saved shortlist.
@@ -660,6 +769,18 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   Showing {filteredSessions.length} classes
                 </span>
               </div>
+              {mode === "calendar" && (
+                <div className="rounded-md border border-input bg-card px-3 py-3">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Colour legend</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {DANCE_TYPES.map((type) => (
+                      <Badge key={`legend-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
+                        {type}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
 
             {mode === "calendar" && (
               <>

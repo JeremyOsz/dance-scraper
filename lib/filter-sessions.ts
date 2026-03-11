@@ -1,6 +1,7 @@
 import { isAfter, isBefore, parseISO } from "date-fns";
 import type { DanceSession } from "@/lib/types";
 import { matchesDanceType } from "@/lib/dance-types";
+import { matchesSessionLevel } from "@/lib/levels";
 
 type Filters = {
   from?: string;
@@ -8,6 +9,7 @@ type Filters = {
   venue?: string[];
   day?: string[];
   type?: string[];
+  level?: string[];
   q?: string;
   workshopsOnly?: boolean;
 };
@@ -33,6 +35,10 @@ export function filterSessions(all: DanceSession[], filters: Filters): DanceSess
     }
 
     if (filters.type?.length && !filters.type.some((selectedType) => matchesDanceType(session, selectedType))) {
+      return false;
+    }
+
+    if (filters.level?.length && !filters.level.some((selectedLevel) => matchesSessionLevel(session, selectedLevel))) {
       return false;
     }
 

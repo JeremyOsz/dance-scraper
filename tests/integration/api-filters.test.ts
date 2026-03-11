@@ -6,7 +6,7 @@ const sample: DanceSession[] = [
   {
     id: "1",
     venue: "TripSpace",
-    title: "Open Workshop",
+    title: "Open Level Workshop",
     details: "Improvisation",
     dayOfWeek: "Monday",
     startTime: "6pm",
@@ -25,7 +25,7 @@ const sample: DanceSession[] = [
     id: "2",
     venue: "Rambert",
     title: "Evening Class",
-    details: "Technique",
+    details: "Intermediate technique",
     dayOfWeek: "Tuesday",
     startTime: "7pm",
     endTime: "8pm",
@@ -65,6 +65,14 @@ describe("filterSessions", () => {
     });
     expect(filtered).toHaveLength(1);
     expect(filtered[0]?.id).toBe("1");
+  });
+
+  it("filters by level", () => {
+    const filtered = filterSessions(sample, {
+      level: ["Intermediate"]
+    });
+    expect(filtered).toHaveLength(1);
+    expect(filtered[0]?.id).toBe("2");
   });
 
   it("can match Other dance type", () => {

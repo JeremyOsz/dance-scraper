@@ -1,9 +1,18 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CalendarPage } from "../../components/calendar/calendar-page";
 import type { DanceSession } from "../../lib/types";
+
+const mockReplace = vi.fn();
+let mockSearchParams = new URLSearchParams();
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ replace: mockReplace }),
+  usePathname: () => "/",
+  useSearchParams: () => mockSearchParams
+}));
 
 const sessions: DanceSession[] = [
   {
@@ -96,6 +105,8 @@ const venues = [
 describe("CalendarPage", () => {
   beforeEach(() => {
     window.localStorage.clear();
+    mockReplace.mockReset();
+    mockSearchParams = new URLSearchParams();
   });
 
   it("disables preferred/shortlist-only toggles when nothing is saved", async () => {
@@ -119,6 +130,21 @@ describe("CalendarPage", () => {
       await user.click(classButton);
     }
     expect(await screen.findByRole("heading", { name: "Embodied Workshop" })).toBeInTheDocument();
+  });
+
+  it("shows a colour legend for dance type card colours", () => {
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    const legendHeading = screen.getByText("Colour legend");
+    const legend = legendHeading.closest("div");
+    expect(legend).not.toBeNull();
+    if (!legend) {
+      return;
+    }
+
+    expect(within(legend).getByText("Contemporary")).toBeInTheDocument();
+    expect(within(legend).getByText("Yoga/Pilates")).toBeInTheDocument();
+    expect(within(legend).getByText("Commercial/Heels")).toBeInTheDocument();
   });
 
   it("jumps to selected week from week picker", async () => {
@@ -204,6 +230,16 @@ describe("CalendarPage", () => {
     expect(screen.queryByRole("heading", { name: /Wed /i })).not.toBeInTheDocument();
   });
 
+  it("filters by selected level chips", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Intermediate" }));
+
+    expect(screen.getAllByText("Evening Technique").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Embodied Workshop")).not.toBeInTheDocument();
+  });
+
   it("shows undated sessions when a venue has no schedule metadata", async () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
@@ -244,22 +280,28 @@ describe("CalendarPage", () => {
     expect(screen.getByRole("button", { name: "Clear filters" })).toBeDisabled();
   });
 
-  it("loads stored filter/search state from localStorage", async () => {
-    window.localStorage.setItem(
-      "dance-scraper.calendar-filters",
-      JSON.stringify({
-        search: "technique",
-        selectedVenue: "all",
-        selectedDay: "all",
-        selectedType: "all",
-        workshopsOnly: false,
-        shortlistOnly: false
-      })
-    );
+  it("loads filter state from URL query params", async () => {
+    mockSearchParams = new URLSearchParams("q=technique&venue=Rambert&mode=venues");
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
     expect((await screen.findAllByDisplayValue("technique")).length).toBeGreaterThan(0);
     expect(screen.queryByText("Embodied Workshop")).not.toBeInTheDocument();
     expect(screen.getByText("Showing 1 classes")).toBeInTheDocument();
+    expect((await screen.findAllByRole("link", { name: "Venue site" })).length).toBeGreaterThan(0);
+  });
+
+  it("updates URL params when filters or navigation change", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Tuesday" }));
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("day=Tuesday"), { scroll: false });
+    });
+
+    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("mode=venues"), { scroll: false });
+    });
   });
 });
