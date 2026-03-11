@@ -4,8 +4,9 @@ import React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { format, addDays, addMonths, isSameMonth, parseISO, subDays, subMonths } from "date-fns";
 import Link from "next/link";
+import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import type { DanceSession } from "@/lib/types";
+import type { DanceSession, DayOfWeek } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,7 +17,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { canAddSessionToCalendar } from "@/lib/calendar-export";
 import { DANCE_TYPES, inferDanceTypes, matchesDanceType, type DanceType } from "@/lib/dance-types";
 import { ORDERED_DAYS, formatTimeRange, getMonthGridDates, getWeekDates, isSessionActiveOnDate } from "@/lib/date";
-import { LEVELS, matchesSessionLevel } from "@/lib/levels";
+import { LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
 import { getVenueMapQuery } from "@/lib/venues";
 
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
@@ -119,7 +120,7 @@ function getVenueStatus(venue: Props["venues"][number]) {
   return { label: "OK", variant: "secondary" as const };
 }
 
-function parseCsvParam(params: URLSearchParams | ReadonlyURLSearchParams, key: string) {
+function parseCsvParam(params: URLSearchParams | Readonly<URLSearchParams>, key: string) {
   const value = params.get(key);
   if (!value) {
     return [];
@@ -130,7 +131,7 @@ function parseCsvParam(params: URLSearchParams | ReadonlyURLSearchParams, key: s
     .filter(Boolean);
 }
 
-function parseBooleanParam(params: URLSearchParams | ReadonlyURLSearchParams, key: string) {
+function parseBooleanParam(params: URLSearchParams | Readonly<URLSearchParams>, key: string) {
   const value = params.get(key);
   return value === "1" || value === "true";
 }
@@ -185,7 +186,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     const nextVenues = parseCsvParam(searchParams, "venue").filter((venue) => venueNames.includes(venue));
     setSelectedVenues(nextVenues);
 
-    const nextDays = parseCsvParam(searchParams, "day").filter((day) => ORDERED_DAYS.includes(day));
+    const nextDays = parseCsvParam(searchParams, "day").filter((day): day is Exclude<DayOfWeek, null> =>
+      ORDERED_DAYS.includes(day as Exclude<DayOfWeek, null>)
+    );
     setSelectedDays(nextDays);
 
     const nextTypes = parseCsvParam(searchParams, "type").filter((type): type is DanceType =>
@@ -193,7 +196,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     );
     setSelectedTypes(nextTypes);
 
-    const nextLevels = parseCsvParam(searchParams, "level").filter((level) => LEVELS.includes(level));
+    const nextLevels = parseCsvParam(searchParams, "level").filter((level): level is Level =>
+      LEVELS.includes(level as Level)
+    );
     setSelectedLevels(nextLevels);
 
     setWorkshopsOnly(parseBooleanParam(searchParams, "workshops"));
@@ -235,7 +240,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
 
     const nextQuery = params.toString();
     if (nextQuery !== searchParams.toString()) {
-      router.replace(`${pathname}?${nextQuery}`, { scroll: false });
+      router.replace(`${pathname}?${nextQuery}` as Route, { scroll: false });
     }
   }, [
     anchorDate,
