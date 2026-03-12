@@ -151,6 +151,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     label: "Under the Sun Dance",
     sourceUrl: "https://www.underthesundance.com/",
     mapQuery: "Under the Sun Dance London"
+  },
+  balletForYou: {
+    label: "Ballet for You",
+    sourceUrl: "https://www.balletforyou.co.uk/timetable",
+    mapQuery: "Ballet for You London"
   }
 };
 

@@ -49,7 +49,8 @@ const testedVenueKeys = [
   "theManorMvmt",
   "eastLondonDance",
   "conTumbaoSalsa",
-  "underTheSunDance"
+  "underTheSunDance",
+  "balletForYou"
 ] as const;
 
 const ecstaticOrganizerUrls = [
@@ -453,21 +454,79 @@ describe("scraper adapters", () => {
   });
 
   it("parses Danceworks adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    fetchHtml.mockResolvedValue(`
+      <div>
+        <healcode-widget data-type="schedules" data-widget-id="2314186103cf"></healcode-widget>
+      </div>
+    `);
+    fetchJson.mockResolvedValue({
+      class_sessions: `
+        <div class="bw-widget__day">
+          <div class="bw-widget__date date-2026-03-12">Thursday, March 12</div>
+          <div class="bw-session">
+            <div class="bw-session__name">Classical Ballet - Dmitri Gruzdev - GEN - £13</div>
+            <div class="bw-session__staff">Dmitri Gruzdev</div>
+            <div class="bw-session__level">General</div>
+            <div class="bw-session__room"><span>Room:</span>Studio 2</div>
+            <div class="bw-session__location">Danceworks</div>
+            <div class="bw-session__description"><div>Technique focused ballet class.</div></div>
+            <time class="hc_starttime" datetime="2026-03-12T10:00">10:00</time>
+            <time class="hc_endtime" datetime="2026-03-12T11:30">11:30</time>
+            <button class="bw-widget__cta" data-url="https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Bmbo_id%5D=93935">
+              Book
+            </button>
+          </div>
+        </div>
+      `
+    });
     const { scrapeDanceworks } = await import("../../scripts/scrape/adapters/danceworks");
     const output = await scrapeDanceworks();
     expect(output.ok).toBe(true);
-    expect(output.classes.length).toBeGreaterThan(0);
+    expect(fetchJson).toHaveBeenCalledWith(expect.stringContaining("/widgets/schedules/2314186103cf/load_markup?"));
+    expect(output.classes.length).toBe(1);
     expect(output.classes[0]?.venue).toBe("Danceworks");
+    expect(output.classes[0]?.title).toContain("Classical Ballet");
+    expect(output.classes[0]?.dayOfWeek).toBe("Thursday");
+    expect(output.classes[0]?.time).toBe("10:00 - 11:30");
+    expect(output.classes[0]?.startDate).toBe("2026-03-12");
   });
 
   it("parses Pineapple Dance Studios adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    fetchHtml.mockResolvedValue(`
+      <div>
+        <healcode-widget data-type="schedules" data-widget-id="4a14005545cf"></healcode-widget>
+      </div>
+    `);
+    fetchJson.mockResolvedValue({
+      class_sessions: `
+        <div class="bw-widget__day">
+          <div class="bw-widget__date date-2026-03-12">Thursday, March 12</div>
+          <div class="bw-session">
+            <div class="bw-session__name">Ballet (Beg) £12 Christina</div>
+            <div class="bw-session__staff">Christina Mittelmaier</div>
+            <div class="bw-session__level">Beg</div>
+            <div class="bw-session__room"><span>Room:</span>Studio 11</div>
+            <div class="bw-session__location">In Studio Classes</div>
+            <div class="bw-session__description"><div>Intro ballet class for adults.</div></div>
+            <time class="hc_starttime" datetime="2026-03-12T10:15">10:15</time>
+            <time class="hc_endtime" datetime="2026-03-12T11:45">11:45</time>
+            <button class="bw-widget__cta" data-url="https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Bmbo_id%5D=717323">
+              Book
+            </button>
+          </div>
+        </div>
+      `
+    });
     const { scrapePineappleDanceStudios } = await import("../../scripts/scrape/adapters/pineapple-dance-studios");
     const output = await scrapePineappleDanceStudios();
     expect(output.ok).toBe(true);
-    expect(output.classes.length).toBeGreaterThan(0);
+    expect(fetchJson).toHaveBeenCalledWith(expect.stringContaining("/widgets/schedules/4a14005545cf/load_markup?"));
+    expect(output.classes.length).toBe(1);
     expect(output.classes[0]?.venue).toBe("Pineapple Dance Studios");
+    expect(output.classes[0]?.title).toContain("Ballet");
+    expect(output.classes[0]?.dayOfWeek).toBe("Thursday");
+    expect(output.classes[0]?.time).toBe("10:15 - 11:45");
+    expect(output.classes[0]?.startDate).toBe("2026-03-12");
   });
 
   it("parses BASE Dance Studios adapter", async () => {
@@ -593,6 +652,71 @@ describe("scraper adapters", () => {
     );
     expect(output.classes.every((item) => item.dayOfWeek === "Tuesday")).toBe(true);
     expect(output.classes.some((item) => item.bookingUrl.includes("buy.stripe.com"))).toBe(true);
+  });
+
+  it("parses Ballet for You adapter", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+      <html>
+        <body>
+          <div id="mainNavWrapper">
+            <div class="folder">
+              <div class="folder-toggle">Beginners</div>
+              <div class="subnav">
+                <a href="/level-1">Level 1</a>
+              </div>
+            </div>
+            <div class="folder">
+              <div class="folder-toggle">Special Courses</div>
+              <div class="subnav">
+                <a href="/ballet-floor-barre">Ballet Floor-barre</a>
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
+    `)
+      .mockResolvedValueOnce(`
+      <html>
+        <head>
+          <meta property="og:title" content="Level 1 — Ballet for You" />
+        </head>
+        <body>
+          <div class="sqs-code-container"><div class="boxed"><h1>Beginners Level 1 Ballet</h1></div></div>
+          <div class="sqs-html-content">
+            <p><strong>Day:</strong> Thursdays <strong>Time:</strong> 6.30-7.30pm <strong>Place:</strong> New City Fitness <strong>Dates:</strong> 15th January - 26th March 2026</p>
+            <a href="/enrol-now">Click here to enrol</a>
+          </div>
+        </body>
+      </html>
+    `)
+      .mockResolvedValueOnce(`
+      <html>
+        <head>
+          <meta property="og:title" content="Ballet Floor-Barre — Ballet for You" />
+        </head>
+        <body>
+          <div class="sqs-code-container"><div class="boxed"><h1>Ballet Floor-barre with PBT</h1></div></div>
+          <div class="sqs-html-content">
+            <h1>Saturdays</h1>
+            <p><strong>Day:</strong> Saturdays <strong>Time:</strong> 11.15am-12.25pm <strong>Place:</strong> New City Fitness <strong>Dates:</strong> 17th January - 28th March 2026</p>
+            <a href="/enrol-now">Click here to enrol</a>
+          </div>
+        </body>
+      </html>
+    `);
+    const { scrapeBalletForYou } = await import("../../scripts/scrape/adapters/ballet-for-you");
+    const output = await scrapeBalletForYou();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(2);
+    expect(output.classes[0]?.venue).toBe("Ballet for You");
+    expect(output.classes[0]?.title).toContain("Beginners Level 1 Ballet");
+    expect(output.classes[0]?.dayOfWeek).toBe("Thursdays");
+    expect(output.classes[0]?.sourceUrl).toBe("https://www.balletforyou.co.uk/level-1");
+    expect(output.classes[1]?.title).toContain("Ballet Floor-barre");
+    expect(output.classes[1]?.dayOfWeek).toBe("Saturdays");
+    expect(output.classes[1]?.sourceUrl).toBe("https://www.balletforyou.co.uk/ballet-floor-barre");
+    expect(output.classes[0]?.bookingUrl).toBe("https://www.balletforyou.co.uk/enrol-now");
   });
 
   it("handles malformed HTML gracefully", async () => {

@@ -33,6 +33,7 @@ Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and mo
 - East London Dance
 - Con Tumbao Salsa
 - Under the Sun Dance
+- Ballet for You
 
 ## Organisers To Be Added
 
@@ -79,6 +80,10 @@ Open `http://localhost:3000`.
 ## Scripts
 
 - `npm run scrape` scrape + normalize all configured organisers
+- `npm run scrape -- --empty` scrape only venues that were previously successfully scraped with zero classes
+- `npm run scrape -- --outdated` scrape only venues whose last valid scrape is older than 24 hours (or missing)
+- `npm run scrape -- --force rambert,thePlace` force specific venues by key or name
+- `npm run scrape -- --outdated --force rambert` combine filters with forced venue overrides
 - `npm run dev` run Next.js dev server
 - `npm run build` production build
 - `npm test` run unit/integration/UI tests

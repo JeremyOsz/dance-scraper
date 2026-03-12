@@ -580,7 +580,10 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                 key={type}
                 type="button"
                 size="sm"
-                variant={selectedTypes.includes(type) ? "default" : "outline"}
+                variant="outline"
+                className={`${DANCE_TYPE_BADGE_CLASS[type]} ${
+                  selectedTypes.includes(type) ? "ring-2 ring-primary ring-offset-1" : ""
+                }`}
                 onClick={() => setSelectedTypes((current) => toggleValue(current, type))}
               >
                 {type}
@@ -858,19 +861,6 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   Showing {filteredSessions.length} classes
                 </span>
               </div>
-              {mode === "calendar" && (
-                <div className="rounded-md border border-input bg-card px-3 py-3">
-                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Colour legend</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {DANCE_TYPES.map((type) => (
-                      <Badge key={`legend-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
-                        {type}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
-
             {mode === "calendar" && (
               <>
                 <div className="flex flex-wrap items-center gap-2">

@@ -28,49 +28,93 @@ import { scrapeTheManorMvmt } from "./adapters/the-manor-mvmt";
 import { scrapeEastLondonDance } from "./adapters/east-london-dance";
 import { scrapeConTumbaoSalsa } from "./adapters/con-tumbao-salsa";
 import { scrapeUnderTheSunDance } from "./adapters/under-the-sun-dance";
+import { scrapeBalletForYou } from "./adapters/ballet-for-you";
+import type { VenueKey } from "../../lib/types";
+import { VENUES } from "../../lib/venues";
 import { buildOutput, writeOutput } from "./normalize";
+import {
+  formatCliHelp,
+  mergeOutputWithPrevious,
+  parseScrapeCliArgs,
+  readPreviousOutput,
+  resolveForcedVenueKeys,
+  selectVenueKeys,
+  type ScraperDefinition
+} from "./cli";
+
+const SCRAPERS: ScraperDefinition[] = [
+  { key: "thePlace", scrape: scrapeThePlace },
+  { key: "rambert", scrape: scrapeRambert },
+  { key: "siobhanDavies", scrape: scrapeSiobhanDavies },
+  { key: "tripSpace", scrape: scrapeTripSpace },
+  { key: "chisenhaleDanceSpace", scrape: scrapeChisenhale },
+  { key: "ciCalendarLondon", scrape: scrapeCiCalendarLondon },
+  { key: "bachataCommunity", scrape: scrapeBachataCommunity },
+  { key: "ecstaticDanceLondon", scrape: scrapeEcstaticDanceLondon },
+  { key: "luminousDance", scrape: scrapeLuminousDance },
+  { key: "fiveRhythmsLondon", scrape: scrapeFiveRhythmsLondon },
+  { key: "superMarioSalsa", scrape: scrapeSuperMarioSalsa },
+  { key: "salsaRuedaRuedaLibre", scrape: scrapeSalsaRuedaRuedaLibre },
+  { key: "cubaneando", scrape: scrapeCubaneando },
+  { key: "butohMutation", scrape: scrapeButohMutation },
+  { key: "posthumanTheatreButoh", scrape: scrapePosthumanTheatreButoh },
+  { key: "hackneyBaths", scrape: scrapeHackneyBaths },
+  { key: "wednesdayMoving", scrape: scrapeWednesdayMoving },
+  { key: "danceworks", scrape: scrapeDanceworks },
+  { key: "pineappleDanceStudios", scrape: scrapePineappleDanceStudios },
+  { key: "baseDanceStudios", scrape: scrapeBaseDanceStudios },
+  { key: "salsaSoho", scrape: scrapeSalsaSoho },
+  { key: "barSalsaTemple", scrape: scrapeBarSalsaTemple },
+  { key: "mamboCity", scrape: scrapeMamboCity },
+  { key: "cityAcademy", scrape: scrapeCityAcademy },
+  { key: "adrianOutsavvy", scrape: scrapeAdrianOutsavvy },
+  { key: "lookAtMovement", scrape: scrapeLookAtMovement },
+  { key: "theManorMvmt", scrape: scrapeTheManorMvmt },
+  { key: "eastLondonDance", scrape: scrapeEastLondonDance },
+  { key: "conTumbaoSalsa", scrape: scrapeConTumbaoSalsa },
+  { key: "underTheSunDance", scrape: scrapeUnderTheSunDance },
+  { key: "balletForYou", scrape: scrapeBalletForYou }
+];
 
 async function main() {
   const started = Date.now();
+  const options = parseScrapeCliArgs(process.argv.slice(2));
+  const allVenueKeys = SCRAPERS.map(({ key }) => key);
 
-  const results = await Promise.all([
-    scrapeThePlace(),
-    scrapeRambert(),
-    scrapeSiobhanDavies(),
-    scrapeTripSpace(),
-    scrapeChisenhale(),
-    scrapeCiCalendarLondon(),
-    scrapeBachataCommunity(),
-    scrapeEcstaticDanceLondon(),
-    scrapeLuminousDance(),
-    scrapeFiveRhythmsLondon(),
-    scrapeSuperMarioSalsa(),
-    scrapeSalsaRuedaRuedaLibre(),
-    scrapeCubaneando(),
-    scrapeButohMutation(),
-    scrapePosthumanTheatreButoh(),
-    scrapeHackneyBaths(),
-    scrapeWednesdayMoving(),
-    scrapeDanceworks(),
-    scrapePineappleDanceStudios(),
-    scrapeBaseDanceStudios(),
-    scrapeSalsaSoho(),
-    scrapeBarSalsaTemple(),
-    scrapeMamboCity(),
-    scrapeCityAcademy(),
-    scrapeAdrianOutsavvy(),
-    scrapeLookAtMovement(),
-    scrapeTheManorMvmt(),
-    scrapeEastLondonDance(),
-    scrapeConTumbaoSalsa(),
-    scrapeUnderTheSunDance()
-  ]);
+  if (options.showHelp) {
+    console.log(formatCliHelp(allVenueKeys));
+    return;
+  }
 
-  const output = buildOutput(results);
+  const previousOutput = readPreviousOutput();
+  const venueNameByKey = Object.fromEntries(allVenueKeys.map((key) => [key, VENUES[key].label])) as Record<
+    VenueKey,
+    string
+  >;
+  const { keys: forcedVenueKeys, unknownTokens } = resolveForcedVenueKeys(options.forceVenueTokens, venueNameByKey);
+  if (unknownTokens.length > 0) {
+    throw new Error(`Unknown forced venue(s): ${unknownTokens.join(", ")}\n\n${formatCliHelp(allVenueKeys)}`);
+  }
+
+  const selectedVenueKeys = selectVenueKeys(allVenueKeys, previousOutput, options, forcedVenueKeys);
+  const selectedScrapers = SCRAPERS.filter(({ key }) => selectedVenueKeys.has(key));
+
+  if (selectedScrapers.length === 0) {
+    console.log("No venues matched the selected filters. Nothing to scrape.");
+    return;
+  }
+
+  console.log(`Scraping ${selectedScrapers.length}/${SCRAPERS.length} venues...`);
+  const results = await Promise.all(selectedScrapers.map(({ scrape }) => scrape()));
+
+  const freshOutput = buildOutput(results);
+  const output = mergeOutputWithPrevious(previousOutput, freshOutput, allVenueKeys);
   writeOutput(output);
 
-  console.log(`Generated ${output.sessions.length} sessions from ${results.length} venues in ${Date.now() - started}ms`);
-  for (const venue of output.venues) {
+  console.log(
+    `Generated ${output.sessions.length} sessions after scraping ${results.length} venues in ${Date.now() - started}ms`
+  );
+  for (const venue of freshOutput.venues) {
     console.log(`[${venue.ok ? "ok" : "fail"}] ${venue.venue}: ${venue.count}`);
     if (venue.lastError) {
       console.error(`  error: ${venue.lastError}`);

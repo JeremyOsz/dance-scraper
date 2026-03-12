@@ -41,7 +41,8 @@ export type AdapterOutput = {
     | "theManorMvmt"
     | "eastLondonDance"
     | "conTumbaoSalsa"
-    | "underTheSunDance";
+    | "underTheSunDance"
+    | "balletForYou";
   venue: string;
   sourceUrl: string;
   classes: ScrapedClass[];

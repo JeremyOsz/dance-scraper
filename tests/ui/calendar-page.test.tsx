@@ -137,19 +137,16 @@ describe("CalendarPage", () => {
     expect(await screen.findByRole("heading", { name: "Embodied Workshop" })).toBeInTheDocument();
   });
 
-  it("shows a colour legend for dance type card colours", () => {
+  it("uses colour-coded buttons for dance types in the type filter", () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    const legendHeading = screen.getByText("Colour legend");
-    const legend = legendHeading.closest("div");
-    expect(legend).not.toBeNull();
-    if (!legend) {
-      return;
-    }
+    const contemporaryTypeButton = screen.getAllByRole("button", { name: "Contemporary" })[0];
+    const yogaPilatesTypeButton = screen.getAllByRole("button", { name: "Yoga/Pilates" })[0];
+    const commercialHeelsTypeButton = screen.getAllByRole("button", { name: "Commercial/Heels" })[0];
 
-    expect(within(legend).getByText("Contemporary")).toBeInTheDocument();
-    expect(within(legend).getByText("Yoga/Pilates")).toBeInTheDocument();
-    expect(within(legend).getByText("Commercial/Heels")).toBeInTheDocument();
+    expect(contemporaryTypeButton).toHaveClass("bg-sky-100", "text-sky-800");
+    expect(yogaPilatesTypeButton).toHaveClass("bg-cyan-100", "text-cyan-800");
+    expect(commercialHeelsTypeButton).toHaveClass("bg-fuchsia-100", "text-fuchsia-800");
   });
 
   it("jumps to selected week from week picker", async () => {
