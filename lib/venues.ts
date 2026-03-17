@@ -127,6 +127,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
       "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
     mapQuery: "Outsavvy dance movement flow workshop London"
   },
+  marinaSfyridi: {
+    label: "Marina Sfyridi",
+    sourceUrl: "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
+    mapQuery: "Marina Sfyridi dance classes London"
+  },
   lookAtMovement: {
     label: "Look At Movement",
     sourceUrl: "https://www.lookatmovement.co.uk/",

@@ -77,28 +77,40 @@ const venues = [
     sourceUrl: "https://tripspace.co.uk/dance/",
     count: 1,
     ok: true,
-    lastSuccessAt: "2026-03-10T00:00:00.000Z"
+    lastSuccessAt: "2026-03-10T00:00:00.000Z",
+    lastError: null
   },
   {
     name: "Rambert",
     sourceUrl: "https://rambert.org.uk/classes/",
     count: 1,
     ok: true,
-    lastSuccessAt: "2026-03-10T00:00:00.000Z"
+    lastSuccessAt: "2026-03-10T00:00:00.000Z",
+    lastError: null
   },
   {
     name: "Butoh Mutation",
     sourceUrl: "https://www.butohuk.com/",
     count: 1,
     ok: true,
-    lastSuccessAt: "2026-03-10T00:00:00.000Z"
+    lastSuccessAt: "2026-03-10T00:00:00.000Z",
+    lastError: null
   },
   {
     name: "Danceworks",
     sourceUrl: "https://www.danceworks.com/london/classes/timetable/",
     count: 0,
     ok: true,
-    lastSuccessAt: "2026-03-10T00:00:00.000Z"
+    lastSuccessAt: "2026-03-10T00:00:00.000Z",
+    lastError: null
+  },
+  {
+    name: "Warning Venue",
+    sourceUrl: "https://warning.example.com",
+    count: 0,
+    ok: false,
+    lastSuccessAt: null,
+    lastError: "Request timed out while fetching schedule"
   }
 ];
 
@@ -186,6 +198,15 @@ describe("CalendarPage", () => {
     await user.click(screen.getByRole("button", { name: "Venues" }));
     expect(screen.getAllByText("No events").length).toBeGreaterThan(0);
     expect(screen.getAllByText(/No sessions found on last scrape/i).length).toBeGreaterThan(0);
+  });
+
+  it("shows the scrape error for warning venues", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Venues" }));
+    expect(screen.getByText("Warning")).toBeInTheDocument();
+    expect(screen.getByText("Request timed out while fetching schedule")).toBeInTheDocument();
   });
 
   it("filters by selected venue chips", async () => {

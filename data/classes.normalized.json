@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-12T10:16:11.965Z",
+  "generatedAt": "2026-03-12T21:08:12.266Z",
   "sessions": [
     {
       "id": "the-place-choreographic-class-for-over-60s-with-becky-namgauds-monday-wed-21-jan-sat-7-mar-2026",
@@ -45680,6 +45680,26 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-03-12T10:12:27.265Z"
+    },
+    {
+      "id": "marina-sfyridi-circadian-bodies-march-dance-classes-thursday-18-00",
+      "venue": "Marina Sfyridi",
+      "title": "Circadian Bodies March Dance Classes",
+      "details": "Circadian Bodies / Mar 2026 / In Person Dance Classes in East London. Improvisation, Capoeira & Writing",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2026-03-05",
+      "endDate": "2026-03-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-03-12T21:08:12.266Z"
     }
   ],
   "venues": [
@@ -45906,6 +45926,15 @@
       "count": 1,
       "ok": true,
       "lastSuccessAt": "2026-03-12T10:11:42.087Z",
+      "lastError": null
+    },
+    {
+      "venue": "Marina Sfyridi",
+      "key": "marinaSfyridi",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-03-12T21:08:12.266Z",
       "lastError": null
     },
     {

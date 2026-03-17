@@ -107,6 +107,7 @@ type Props = {
     count: number;
     ok: boolean;
     lastSuccessAt: string | null;
+    lastError: string | null;
   }[];
 };
 
@@ -1027,21 +1028,23 @@ export function CalendarPage({ initialSessions, venues }: Props) {
 
             {mode === "venues" && (
               <div className="space-y-3">
-                <Card>
-                  <CardHeader className="space-y-2">
-                    <CardTitle className="text-base">Request an additional venue</CardTitle>
-                    <p className="text-xs text-muted-foreground">
-                      Email us to suggest a new studio or organiser to include in this calendar.
-                    </p>
-                  </CardHeader>
-                  <CardContent>
-                    <Button variant="outline" asChild>
-                      <a href={`mailto:${VENUE_REQUEST_EMAIL}?subject=${encodeURIComponent("Venue request")}`}>
-                        {VENUE_REQUEST_EMAIL}
-                      </a>
-                    </Button>
-                  </CardContent>
-                </Card>
+                {false && (
+                  <Card>
+                    <CardHeader className="space-y-2">
+                      <CardTitle className="text-base">Request an additional venue</CardTitle>
+                      <p className="text-xs text-muted-foreground">
+                        Email us to suggest a new studio or organiser to include in this calendar.
+                      </p>
+                    </CardHeader>
+                    <CardContent>
+                      <Button variant="outline" asChild>
+                        <a href={`mailto:${VENUE_REQUEST_EMAIL}?subject=${encodeURIComponent("Venue request")}`}>
+                          {VENUE_REQUEST_EMAIL}
+                        </a>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )}
                 <div className="grid gap-3 md:grid-cols-2">
                   {venues.map((venue) => {
                     const relatedCount = relatedSessionCountByVenue.get(venue.name) ?? 0;
@@ -1060,6 +1063,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                               ? ` • updated ${format(new Date(venue.lastSuccessAt), "d MMM yyyy, HH:mm")}`
                               : ""}
                           </p>
+                          {!venue.ok && venue.lastError ? (
+                            <p className="text-xs text-muted-foreground">{venue.lastError}</p>
+                          ) : null}
                         </CardHeader>
                         <CardContent className="flex flex-wrap gap-2">
                           <Button variant="outline" asChild>
@@ -1112,7 +1118,10 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     </a>
                   </Button>
                 </div>
-                <div className="overflow-hidden rounded-md border">
+                <div className="space-y-2 overflow-hidden rounded-md border p-3">
+                  <p className="text-xs text-muted-foreground">
+                    Venue map is under construction. Locations may be incomplete or change without notice.
+                  </p>
                   <iframe
                     title="Venue map"
                     src={`https://www.google.com/maps?q=${encodeURIComponent(mapSearchQuery)}&output=embed`}

@@ -23,6 +23,7 @@ import { scrapeBarSalsaTemple } from "./adapters/bar-salsa-temple";
 import { scrapeMamboCity } from "./adapters/mambo-city";
 import { scrapeCityAcademy } from "./adapters/city-academy";
 import { scrapeAdrianOutsavvy } from "./adapters/adrian-outsavvy";
+import { scrapeMarinaSfyridi } from "./adapters/marina-sfyridi";
 import { scrapeLookAtMovement } from "./adapters/look-at-movement";
 import { scrapeTheManorMvmt } from "./adapters/the-manor-mvmt";
 import { scrapeEastLondonDance } from "./adapters/east-london-dance";
@@ -68,6 +69,7 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "mamboCity", scrape: scrapeMamboCity },
   { key: "cityAcademy", scrape: scrapeCityAcademy },
   { key: "adrianOutsavvy", scrape: scrapeAdrianOutsavvy },
+  { key: "marinaSfyridi", scrape: scrapeMarinaSfyridi },
   { key: "lookAtMovement", scrape: scrapeLookAtMovement },
   { key: "theManorMvmt", scrape: scrapeTheManorMvmt },
   { key: "eastLondonDance", scrape: scrapeEastLondonDance },

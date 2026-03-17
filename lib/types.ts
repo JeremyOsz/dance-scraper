@@ -24,6 +24,7 @@ export type VenueKey =
   | "mamboCity"
   | "cityAcademy"
   | "adrianOutsavvy"
+  | "marinaSfyridi"
   | "lookAtMovement"
   | "theManorMvmt"
   | "eastLondonDance"

@@ -37,6 +37,7 @@ export type AdapterOutput = {
     | "mamboCity"
     | "cityAcademy"
     | "adrianOutsavvy"
+    | "marinaSfyridi"
     | "lookAtMovement"
     | "theManorMvmt"
     | "eastLondonDance"

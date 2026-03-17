@@ -45,6 +45,7 @@ const testedVenueKeys = [
   "mamboCity",
   "cityAcademy",
   "adrianOutsavvy",
+  "marinaSfyridi",
   "lookAtMovement",
   "theManorMvmt",
   "eastLondonDance",
@@ -591,6 +592,68 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.title).toContain("Dance");
     expect(output.classes[0]?.dayOfWeek).toBe("Sunday");
     expect(output.classes[0]?.startDate).toBe("2026-04-12");
+  });
+
+  it("parses Marina Sfyridi Eventbrite adapter", async () => {
+    fetchHtml.mockResolvedValue(`
+      <html>
+        <head>
+          <script type="application/ld+json">
+            ${JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Event",
+                  name: "Circadian Bodies - March Dance Classes",
+                  description: "Monthly movement and dance classes in London.",
+                  startDate: "2026-03-22T10:30:00+00:00",
+                  endDate: "2026-03-22T12:00:00+00:00",
+                  url: "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667"
+                }
+              ]
+            })}
+          </script>
+        </head>
+      </html>
+    `);
+    const { scrapeMarinaSfyridi } = await import("../../scripts/scrape/adapters/marina-sfyridi");
+    const output = await scrapeMarinaSfyridi();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]?.venue).toBe("Marina Sfyridi");
+    expect(output.classes[0]?.title).toContain("Circadian Bodies");
+    expect(output.classes[0]?.dayOfWeek).toBe("Sunday");
+    expect(output.classes[0]?.time).toBe("10:30 - 12:00");
+    expect(output.classes[0]?.startDate).toBe("2026-03-22");
+  });
+
+  it("parses Marina Sfyridi Eventbrite EducationEvent schema", async () => {
+    fetchHtml.mockResolvedValue(`
+      <html>
+        <head>
+          <script type="application/ld+json">
+            ${JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EducationEvent",
+              name: "Circadian Bodies March Dance Classes",
+              description: "In person dance classes",
+              startDate: "2026-03-05T18:00:00Z",
+              endDate: "2026-03-26T20:30:00Z",
+              url: "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667"
+            })}
+          </script>
+        </head>
+      </html>
+    `);
+    const { scrapeMarinaSfyridi } = await import("../../scripts/scrape/adapters/marina-sfyridi");
+    const output = await scrapeMarinaSfyridi();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]?.venue).toBe("Marina Sfyridi");
+    expect(output.classes[0]?.dayOfWeek).toBe("Thursday");
+    expect(output.classes[0]?.time).toBe("18:00 - 20:30");
+    expect(output.classes[0]?.startDate).toBe("2026-03-05");
+    expect(output.classes[0]?.endDate).toBe("2026-03-26");
   });
 
   it("parses Look At Movement adapter", async () => {

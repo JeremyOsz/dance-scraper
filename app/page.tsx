@@ -44,7 +44,8 @@ export default function Home() {
         mapQuery: VENUES[venue.key]?.mapQuery,
         count: venue.count,
         ok: venue.ok,
-        lastSuccessAt: venue.lastSuccessAt
+        lastSuccessAt: venue.lastSuccessAt,
+        lastError: venue.lastError
       }
     ])
   );
