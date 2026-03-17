@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useEffect, useMemo, useState } from "react";
-import { format, addDays, addMonths, isSameMonth, parseISO, subDays, subMonths } from "date-fns";
+import { format, addDays, addMonths, isSameDay, isSameMonth, parseISO, subDays, subMonths } from "date-fns";
 import Link from "next/link";
 import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -166,6 +166,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const [urlReady, setUrlReady] = useState(false);
   const [shareMessage, setShareMessage] = useState<string | null>(null);
   const [shareFallbackUrl, setShareFallbackUrl] = useState<string | null>(null);
+  const [isDesktopViewport, setIsDesktopViewport] = useState(false);
 
   const venueNames = useMemo(() => venues.map((venue) => venue.name), [venues]);
 
@@ -270,6 +271,17 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [shortlistOnly, shortlistSessionIds.length]);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const syncViewport = () => setIsDesktopViewport(mediaQuery.matches);
+    syncViewport();
+    mediaQuery.addEventListener("change", syncViewport);
+    return () => mediaQuery.removeEventListener("change", syncViewport);
+  }, []);
+
+  useEffect(() => {
     if (!shareMessage) {
       return;
     }
@@ -360,11 +372,24 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   );
   const weekPickerValue = useMemo(() => format(anchorDate, "RRRR-'W'II"), [anchorDate]);
   const visibleDates = useMemo(() => {
-    if (view !== "week" || selectedDays.length === 0) {
+    if (view !== "week") {
       return dates;
     }
-    return dates.filter((date) => selectedDays.includes(format(date, "EEEE")));
-  }, [dates, selectedDays, view]);
+    const dayFilteredDates =
+      selectedDays.length === 0 ? dates : dates.filter((date) => selectedDays.includes(format(date, "EEEE")));
+    if (isDesktopViewport) {
+      return dayFilteredDates.filter((date) => {
+        const day = date.getDay();
+        return day >= 1 && day <= 5;
+      });
+    }
+    const todayIso = format(new Date(), "yyyy-MM-dd");
+    const todayIndex = dayFilteredDates.findIndex((date) => format(date, "yyyy-MM-dd") === todayIso);
+    if (todayIndex <= 0) {
+      return dayFilteredDates;
+    }
+    return [...dayFilteredDates.slice(todayIndex), ...dayFilteredDates.slice(0, todayIndex)];
+  }, [dates, isDesktopViewport, selectedDays, view]);
   const grouped = useMemo(() => groupByDate(filteredSessions, visibleDates), [filteredSessions, visibleDates]);
   const undatedSessions = useMemo(
     () => filteredSessions.filter((session) => isUndatedSession(session)),
@@ -921,11 +946,18 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       const iso = format(date, "yyyy-MM-dd");
                       const sessions = grouped.get(iso) ?? [];
                       const inMonth = isSameMonth(date, anchorDate);
+                      const isToday = isSameDay(date, new Date());
                       return (
-                        <Card key={iso} className={inMonth ? "" : "opacity-55"}>
+                        <Card
+                          key={iso}
+                          className={`${inMonth ? "" : "opacity-55"} ${
+                            isToday ? "border-primary/60 bg-primary/5 ring-1 ring-primary/40" : ""
+                          }`}
+                        >
                           <CardHeader className="p-3">
-                            <CardTitle className="text-sm">
-                              {format(date, "EEE d")}
+                            <CardTitle className="flex items-center gap-2 text-sm">
+                              <span>{format(date, "EEE d")}</span>
+                              {isToday ? <Badge variant="secondary">Today</Badge> : null}
                             </CardTitle>
                           </CardHeader>
                           <CardContent className="space-y-2 p-3 pt-0">
