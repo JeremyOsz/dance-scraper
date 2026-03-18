@@ -53,8 +53,8 @@ const sessions: DanceSession[] = [
   },
   {
     id: "s3",
-    venue: "Butoh Mutation",
-    title: "Butoh Mutation Classes & Workshops",
+    venue: "Butoh Mutations",
+    title: "Butoh Mutations Classes & Workshops",
     details: "Schedule announced via venue site.",
     dayOfWeek: null,
     startTime: null,
@@ -89,7 +89,7 @@ const venues = [
     lastError: null
   },
   {
-    name: "Butoh Mutation",
+    name: "Butoh Mutations",
     sourceUrl: "https://www.butohuk.com/",
     count: 1,
     ok: true,
@@ -205,7 +205,7 @@ describe("CalendarPage", () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
     await user.click(screen.getByRole("button", { name: "Venues" }));
-    expect(screen.getByText("Warning")).toBeInTheDocument();
+    expect(screen.getByText("Error scraping")).toBeInTheDocument();
     expect(screen.getByText("Request timed out while fetching schedule")).toBeInTheDocument();
   });
 
@@ -226,7 +226,7 @@ describe("CalendarPage", () => {
     await user.click(screen.getByRole("button", { name: "Tuesday" }));
 
     expect(screen.getByRole("button", { name: "TripSpace" })).toBeDisabled();
-    expect(screen.getByRole("button", { name: "Butoh Mutation" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Butoh Mutations" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Rambert" })).not.toBeDisabled();
   });
 
@@ -267,10 +267,10 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Butoh Mutation" }));
+    await user.click(screen.getByRole("button", { name: "Butoh Mutations" }));
 
     expect(screen.getByText("Undated classes")).toBeInTheDocument();
-    expect(screen.getByText("Butoh Mutation Classes & Workshops")).toBeInTheDocument();
+    expect(screen.getByText("Butoh Mutations Classes & Workshops")).toBeInTheDocument();
     expect(screen.getByText(/Time TBC/i)).toBeInTheDocument();
   });
 

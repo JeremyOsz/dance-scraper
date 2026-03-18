@@ -54,8 +54,8 @@ function collectEvents(value: unknown): JsonLdEvent[] {
 
 function fallbackClass(details: string | null): AdapterOutput["classes"][number] {
   return {
-    venue: "Butoh Mutation",
-    title: "Butoh Mutation Classes & Workshops",
+    venue: "Butoh Mutations",
+    title: "Butoh Mutations Classes & Workshops",
     details: details ?? "Source currently unavailable. Check venue page for latest schedule.",
     dayOfWeek: null,
     time: null,
@@ -92,8 +92,8 @@ export async function scrapeButohMutation(): Promise<AdapterOutput> {
       const safeEnd = end && !Number.isNaN(end.getTime()) ? end : null;
 
       classes.push({
-        venue: "Butoh Mutation",
-        title: event.name?.trim() || "Butoh Mutation Classes & Workshops",
+        venue: "Butoh Mutations",
+        title: event.name?.trim() || "Butoh Mutations Classes & Workshops",
         details: (event.description ?? "").replace(/\s+/g, " ").trim() || metaDescription,
         dayOfWeek: format(start, "EEEE"),
         time: `${format(start, "HH:mm")}${safeEnd ? ` - ${format(safeEnd, "HH:mm")}` : ""}`,
@@ -109,7 +109,7 @@ export async function scrapeButohMutation(): Promise<AdapterOutput> {
 
   return {
     venueKey: "butohMutation",
-    venue: "Butoh Mutation",
+    venue: "Butoh Mutations",
     sourceUrl,
     classes:
       classes.length > 0

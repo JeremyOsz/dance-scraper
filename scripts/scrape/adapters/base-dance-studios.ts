@@ -1,126 +1,152 @@
-import * as cheerio from "cheerio";
 import type { AdapterOutput, ScrapedClass } from "../types";
-import { absoluteUrl, fetchHtml } from "./common";
+import { chromium } from "playwright";
 
 const sourceUrl = "https://www.basedancestudios.com/weekly-timetable-2";
-const timetableIframeUrl =
-  "https://wix-visual-data.appspot.com/index?pageId=j18cf&compId=comp-ks5t3h6z&viewerCompId=comp-ks5t3h6z&siteRevision=1205&viewMode=site&deviceType=desktop&locale=en&regionalLanguage=en&width=878&height=465&currency=GBP&currentCurrency=GBP&currentRoute=.%2Fweekly-timetable-2";
+const dayPages = [
+  { dayOfWeek: "Monday", url: "https://www.basedancestudios.com/monday" },
+  { dayOfWeek: "Tuesday", url: "https://www.basedancestudios.com/copy-of-monday" },
+  { dayOfWeek: "Wednesday", url: "https://www.basedancestudios.com/copy-2-of-monday" },
+  { dayOfWeek: "Thursday", url: "https://www.basedancestudios.com/copy-3-of-monday" },
+  { dayOfWeek: "Friday", url: "https://www.basedancestudios.com/copy-4-of-monday" },
+  { dayOfWeek: "Saturday", url: "https://www.basedancestudios.com/copy-5-of-monday" },
+  { dayOfWeek: "Sunday", url: "https://www.basedancestudios.com/copy-6-of-monday" }
+] as const;
 
-const DAY_REGEX = /\b(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b/i;
-const TIME_REGEX = /\b\d{1,2}(?::\d{2})?\s*(?:am|pm)?\s*(?:-|–|—|to)\s*\d{1,2}(?::\d{2})?\s*(?:am|pm)?\b/i;
-const DANCE_KEYWORDS =
-  /(dance|class|workshop|heels|hip\s?hop|ballet|contemporary|jazz|latin|afro|movement|choreo|commercial|street)/i;
+type BaseRow = {
+  time: string;
+  teacher: string | null;
+  className: string;
+  level: string | null;
+  studio: string | null;
+  price: string | null;
+};
 
 function normalizeText(value: string | null | undefined): string {
   return (value ?? "").replace(/\s+/g, " ").trim();
 }
 
-function toClasses(html: string): ScrapedClass[] {
-  const $ = cheerio.load(html);
-  const classes: ScrapedClass[] = [];
+function extractUrl(value: string | null): string | null {
+  const text = normalizeText(value);
+  const match = text.match(/https?:\/\/\S+/i);
+  return match ? match[0].replace(/[),.;]+$/, "") : null;
+}
 
-  $("table").each((_, table) => {
-    const headerRow = $(table).find("tr").first();
-    if (headerRow.length === 0) return;
+function toClass(row: BaseRow, dayOfWeek: string, pageUrl: string): ScrapedClass {
+  const details = [
+    row.teacher ? `Teacher: ${row.teacher}` : null,
+    row.level ? `Level: ${row.level}` : null,
+    row.studio ? `Studio: ${row.studio}` : null,
+    row.price ? `Price: ${row.price}` : null
+  ]
+    .filter((part): part is string => Boolean(part))
+    .join(" | ");
 
-    const headers = headerRow
-      .find("th, td")
-      .toArray()
-      .map((cell) => normalizeText($(cell).text()).toLowerCase());
+  return {
+    venue: "BASE Dance Studios",
+    title: row.className,
+    details: details || null,
+    dayOfWeek,
+    time: row.time,
+    startDate: null,
+    endDate: null,
+    bookingUrl: extractUrl(row.price) ?? pageUrl,
+    sourceUrl: pageUrl
+  };
+}
 
-    if (headers.length === 0) return;
-
-    const dayIndex =
-      headers.findIndex((text) => /day/i.test(text)) >= 0
-        ? headers.findIndex((text) => /day/i.test(text))
-        : -1;
-    const timeIndex =
-      headers.findIndex((text) => /time/i.test(text)) >= 0
-        ? headers.findIndex((text) => /time/i.test(text))
-        : -1;
-    const titleIndexCandidates = [
-      headers.findIndex((text) => /class\s*name|class|session|style/i.test(text)),
-      0
-    ];
-    const titleIndex = titleIndexCandidates.find((index) => index >= 0) ?? 0;
-
-    $(table)
-      .find("tr")
-      .slice(1)
-      .each((_, row) => {
-        const cells = $(row)
-          .find("td")
-          .toArray()
-          .map((cell) => normalizeText($(cell).text()));
-
-        if (cells.every((text) => !text)) return;
-
-        const rowText = normalizeText(cells.join(" "));
-        if (!DANCE_KEYWORDS.test(rowText)) return;
-
-        const title = cells[titleIndex] || rowText;
-
-        const dayOfWeek =
-          (dayIndex >= 0 ? cells[dayIndex] : null) ||
-          rowText.match(DAY_REGEX)?.[1] ||
-          null;
-
-        const time =
-          (timeIndex >= 0 ? cells[timeIndex] : null) ||
-          rowText.match(TIME_REGEX)?.[0] ||
-          null;
-
-        const detailsParts: string[] = [];
-        cells.forEach((text, index) => {
-          if (!text) return;
-          if (index === titleIndex || index === dayIndex || index === timeIndex) return;
-          detailsParts.push(text);
-        });
-        const details = normalizeText(detailsParts.join(" | ")) || null;
-
-        const bookingUrl =
-          absoluteUrl(
-            sourceUrl,
-            $(row).find("a[href]").first().attr("href") ??
-              $(table).find("a[href]").first().attr("href")
-          ) ?? sourceUrl;
-
-        classes.push({
-          venue: "BASE Dance Studios",
-          title,
-          details,
-          dayOfWeek,
-          time,
-          startDate: null,
-          endDate: null,
-          bookingUrl,
-          sourceUrl
-        });
-      });
-  });
-
-  const deduped = Array.from(
+function dedupe(classes: ScrapedClass[]): ScrapedClass[] {
+  return Array.from(
     new Map(
       classes.map((item) => [
-        `${item.title}|${item.dayOfWeek ?? "na"}|${item.time ?? "na"}`,
+        `${item.dayOfWeek ?? "na"}|${item.time ?? "na"}|${item.title}|${item.details ?? "na"}`,
         item
       ])
     ).values()
   );
+}
 
-  return deduped;
+async function extractRowsFromPage(pageUrl: string): Promise<BaseRow[]> {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+
+  try {
+    await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 45_000 });
+    await page.waitForSelector("iframe", { timeout: 25_000 });
+
+    const iframeHandle = await page.locator("iframe").first().elementHandle();
+    let frame = await iframeHandle?.contentFrame();
+    const frameSearchStarted = Date.now();
+    while (!frame && Date.now() - frameSearchStarted < 30_000) {
+      await page.waitForTimeout(250);
+      frame = await iframeHandle?.contentFrame();
+    }
+
+    if (!frame) {
+      throw new Error(`BASE iframe frame was not available on ${pageUrl}`);
+    }
+
+    let lastError: unknown = null;
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      try {
+        await frame.waitForSelector("table tr", { timeout: 25_000, state: "attached" });
+        return await frame.evaluate(`(() => {
+          const text = (value) => (value ?? "").replace(/\\s+/g, " ").trim();
+          const rows = [];
+          const lines = text(document.body ? document.body.innerText : "").split("\\n").map(text).filter(Boolean);
+          const headerIndex = lines.findIndex(
+            (line) => line.includes("TIME") && line.includes("CLASS") && line.includes("TEACHER")
+          );
+          if (headerIndex >= 0) {
+            for (let i = headerIndex + 1; i < lines.length; i += 1) {
+              const raw = lines[i];
+              if (!raw) continue;
+              const cells = raw.split("\\t").map(text).filter((cell) => cell.length > 0);
+              if (cells.length < 3) continue;
+              const [time, teacher, className, level, studio, ...rest] = cells;
+              if (!time || !className) continue;
+              rows.push({
+                time,
+                teacher: teacher || null,
+                className,
+                level: level || null,
+                studio: studio || null,
+                price: rest.length > 0 ? rest.join(" | ") : null
+              });
+            }
+          }
+          return rows;
+        })()`);
+      } catch (error) {
+        lastError = error;
+        await page.waitForTimeout(300);
+        frame = page.frames().find((entry) => entry.url().includes("wix-visual-data.appspot.com/index")) ?? frame;
+      }
+    }
+
+    throw lastError instanceof Error ? lastError : new Error("Unable to extract BASE iframe rows");
+  } finally {
+    await browser.close();
+  }
 }
 
 export async function scrapeBaseDanceStudios(): Promise<AdapterOutput> {
   try {
-    const iframeHtml = await fetchHtml(timetableIframeUrl);
-    const classes = toClasses(iframeHtml);
+    const classes: ScrapedClass[] = [];
+    for (const page of dayPages) {
+      const rows = await extractRowsFromPage(page.url);
+      if (!Array.isArray(rows)) continue;
+      classes.push(...rows.map((row) => toClass(row, page.dayOfWeek, page.url)));
+    }
+    const deduped = dedupe(classes);
+    if (deduped.length === 0) {
+      throw new Error("BASE iframe loaded but returned zero class rows");
+    }
 
     return {
       venueKey: "baseDanceStudios",
       venue: "BASE Dance Studios",
       sourceUrl,
-      classes,
+      classes: deduped,
       ok: true,
       error: null
     };

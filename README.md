@@ -18,7 +18,7 @@ This is a hobby project maintained by a single developer, so please understand t
 - SuperMario Salsa
 - Salsa Rueda (Rueda Libre)
 - Cubaneando
-- Butoh Mutation
+- Butoh Mutations
 - Posthuman Theatre Butoh
 - Hackney Baths
 - Wednesday Moving

@@ -424,7 +424,7 @@ describe("scraper adapters", () => {
     const { scrapeButohMutation } = await import("../../scripts/scrape/adapters/butoh-mutation");
     const output = await scrapeButohMutation();
     expect(output.ok).toBe(true);
-    expect(output.classes[0]?.venue).toBe("Butoh Mutation");
+    expect(output.classes[0]?.venue).toBe("Butoh Mutations");
     expect(output.classes.map((item) => item.startDate)).toContain("2026-03-15");
     expect(output.classes.map((item) => item.startDate)).toContain("2026-07-05");
   });
@@ -688,12 +688,37 @@ describe("scraper adapters", () => {
   });
 
   it("parses East London Dance adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    const escapedSessionData = JSON.stringify({ access_token: "test-teamup-token" }).replace(/"/g, "\\u0022");
+    fetchHtml.mockResolvedValue(`
+      <html>
+        <body>
+          <script>
+            window.TEAMUP_USER_SESSION_DATA = JSON.parse("${escapedSessionData}");
+          </script>
+        </body>
+      </html>
+    `);
+    fetchJson.mockResolvedValue({
+      next: null,
+      results: [
+        {
+          name: "Popping",
+          description: "<p>Mondays, 7pm - 8:20pm - Beginner Level</p>",
+          starts_at: "2026-03-23T19:00:00+00:00",
+          ends_at: "2026-03-23T20:20:00+00:00",
+          customer_url: "/p/5799650-east-london-dance/e/57985420-popping/",
+          venue: 43266,
+          status: "active"
+        }
+      ]
+    });
     const { scrapeEastLondonDance } = await import("../../scripts/scrape/adapters/east-london-dance");
     const output = await scrapeEastLondonDance();
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
     expect(output.classes[0]?.venue).toBe("East London Dance");
+    expect(output.classes[0]?.time).toBe("7pm - 8:20pm");
+    expect(output.classes[0]?.bookingUrl).toContain("/p/5799650-east-london-dance/e/");
   });
 
   it("parses Under the Sun Dance adapter", async () => {
