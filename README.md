@@ -1,6 +1,8 @@
 # Dance Scraper London Calendar
 
-Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and movement classes from selected London organisers into a week/month calendar.
+London Dance Calendar is a compiled calendar of adult dance and movement workshops across London.
+
+This is a hobby project maintained by a single developer, so please understand there may be errors and inaccuracies.
 
 ## Included Organisers (v1)
 

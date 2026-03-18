@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { getBaseUrl } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/react";
 
 const baseUrl = getBaseUrl();
 const siteName = "Dance Scraper London";
@@ -69,7 +70,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

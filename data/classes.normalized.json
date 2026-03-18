@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-18T04:30:50.401Z",
+  "generatedAt": "2026-03-18T04:58:45.543Z",
   "sessions": [
     {
       "id": "the-place-choreographic-class-for-over-60s-with-becky-namgauds-monday-wed-21-jan-sat-7-mar-2026",
@@ -46266,9 +46266,9 @@
       "key": "baseDanceStudios",
       "sourceUrl": "https://www.basedancestudios.com/weekly-timetable-2",
       "count": 0,
-      "ok": true,
+      "ok": false,
       "lastSuccessAt": "2026-03-12T10:14:09.338Z",
-      "lastError": null
+      "lastError": "Request failed with status code 401"
     },
     {
       "venue": "Salsa! Soho",
@@ -46348,7 +46348,7 @@
       "sourceUrl": "https://eastlondondance.org/",
       "count": 0,
       "ok": true,
-      "lastSuccessAt": "2026-03-12T10:14:09.338Z",
+      "lastSuccessAt": "2026-03-18T04:58:45.543Z",
       "lastError": null
     },
     {
