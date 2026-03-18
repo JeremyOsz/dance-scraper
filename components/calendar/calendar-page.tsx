@@ -975,7 +975,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                                   >
                                     <p className="font-medium">{session.title}</p>
                                     <p className="text-muted-foreground">
-                                      {formatTimeRange(session.startTime, session.endTime)}
+                                      {session.startTime || session.endTime
+                                        ? formatTimeRange(session.startTime, session.endTime)
+                                        : session.dayOfWeek ?? "Time TBC"}
                                     </p>
                                     <p>{session.venue}</p>
                                   </button>

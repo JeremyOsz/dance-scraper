@@ -29,7 +29,7 @@ Next.js + Tailwind + shadcn-style UI app that aggregates adult/open dance and mo
 - City Academy
 - StreamMovement
 - Marina Sfyridi
-- Look At Movement
+- Look At Movement (Tanztheatre)
 - The Manor / MVMT
 - East London Dance
 - Con Tumbao Salsa

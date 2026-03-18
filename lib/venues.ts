@@ -133,9 +133,9 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     mapQuery: "Marina Sfyridi dance classes London"
   },
   lookAtMovement: {
-    label: "Look At Movement",
+    label: "Look At Movement (Tanztheatre)",
     sourceUrl: "https://www.lookatmovement.co.uk/",
-    mapQuery: "Look At Movement London"
+    mapQuery: "Look At Movement Tanztheatre London"
   },
   theManorMvmt: {
     label: "The Manor / MVMT",
@@ -161,6 +161,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     label: "Ballet for You",
     sourceUrl: "https://www.balletforyou.co.uk/timetable",
     mapQuery: "Ballet for You London"
+  },
+  fieldworksDance: {
+    label: "Fieldworks Dance",
+    sourceUrl: "https://www.fieldworksdance.co.uk/book-online",
+    mapQuery: "FieldWorks Dance London"
   }
 };
 

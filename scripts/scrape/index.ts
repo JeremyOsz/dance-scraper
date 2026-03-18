@@ -30,6 +30,7 @@ import { scrapeEastLondonDance } from "./adapters/east-london-dance";
 import { scrapeConTumbaoSalsa } from "./adapters/con-tumbao-salsa";
 import { scrapeUnderTheSunDance } from "./adapters/under-the-sun-dance";
 import { scrapeBalletForYou } from "./adapters/ballet-for-you";
+import { scrapeFieldworksDance } from "./adapters/fieldworks-dance";
 import type { VenueKey } from "../../lib/types";
 import { VENUES } from "../../lib/venues";
 import { buildOutput, writeOutput } from "./normalize";
@@ -75,7 +76,8 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "eastLondonDance", scrape: scrapeEastLondonDance },
   { key: "conTumbaoSalsa", scrape: scrapeConTumbaoSalsa },
   { key: "underTheSunDance", scrape: scrapeUnderTheSunDance },
-  { key: "balletForYou", scrape: scrapeBalletForYou }
+  { key: "balletForYou", scrape: scrapeBalletForYou },
+  { key: "fieldworksDance", scrape: scrapeFieldworksDance }
 ];
 
 async function main() {

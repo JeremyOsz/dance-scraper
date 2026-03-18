@@ -108,8 +108,11 @@ export async function scrapeSimpleScheduleVenue(config: SimpleVenueConfig): Prom
       ".class-row",
       "article",
       "li",
+      "h1",
       "h2",
-      "h3"
+      "h3",
+      "h4",
+      "p"
     ];
 
     for (const selector of selectors) {

@@ -30,7 +30,8 @@ export type VenueKey =
   | "eastLondonDance"
   | "conTumbaoSalsa"
   | "underTheSunDance"
-  | "balletForYou";
+  | "balletForYou"
+  | "fieldworksDance";
 
 export type DayOfWeek =
   | "Monday"

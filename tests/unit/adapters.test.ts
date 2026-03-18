@@ -51,7 +51,8 @@ const testedVenueKeys = [
   "eastLondonDance",
   "conTumbaoSalsa",
   "underTheSunDance",
-  "balletForYou"
+  "balletForYou",
+  "fieldworksDance"
 ] as const;
 
 const ecstaticOrganizerUrls = [
@@ -662,7 +663,7 @@ describe("scraper adapters", () => {
     const output = await scrapeLookAtMovement();
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
-    expect(output.classes[0]?.venue).toBe("Look At Movement");
+    expect(output.classes[0]?.venue).toBe("Look At Movement (Tanztheatre)");
   });
 
   it("parses The Manor / MVMT adapter", async () => {
@@ -780,6 +781,20 @@ describe("scraper adapters", () => {
     expect(output.classes[1]?.dayOfWeek).toBe("Saturdays");
     expect(output.classes[1]?.sourceUrl).toBe("https://www.balletforyou.co.uk/ballet-floor-barre");
     expect(output.classes[0]?.bookingUrl).toBe("https://www.balletforyou.co.uk/enrol-now");
+  });
+
+  it("parses Fieldworks Dance adapter and keeps adult classes only", async () => {
+    fetchHtml.mockResolvedValue(fixture("fieldworks-book-online.html"));
+    const { scrapeFieldworksDance } = await import("../../scripts/scrape/adapters/fieldworks-dance");
+    const output = await scrapeFieldworksDance();
+
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(2);
+    expect(output.classes.map((item) => item.title)).toEqual(
+      expect.arrayContaining(["Absolute Beginner Ballet", "Beginner Contemporary"])
+    );
+    expect(output.classes.some((item) => /tiny dancer|year olds/i.test(`${item.title} ${item.details ?? ""}`))).toBe(false);
+    expect(output.classes[0]?.venue).toBe("Fieldworks Dance");
   });
 
   it("handles malformed HTML gracefully", async () => {
