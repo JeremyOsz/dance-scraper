@@ -37,6 +37,7 @@ This is a hobby project maintained by a single developer, so please understand t
 - Con Tumbao Salsa
 - Under the Sun Dance
 - Ballet for You
+- Custom listings (manual entries in `data/custom-events.json`)
 
 ## Organisers To Be Added
 
@@ -64,6 +65,10 @@ Canonical session type:
 Canonical output file:
 
 - `data/classes.normalized.json`
+
+Curated one-off or hard-to-scrape series:
+
+- `data/custom-events.json` — add objects under `events`; use the same `venue` string for every row in that file so incremental scrapes replace prior sessions correctly (see `scripts/scrape/adapters/custom-events.ts`).
 
 ## API Routes
 

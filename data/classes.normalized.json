@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-18T06:12:47.890Z",
+  "generatedAt": "2026-03-19T22:25:01.043Z",
   "sessions": [
     {
       "id": "the-place-choreographic-class-for-over-60s-with-becky-namgauds-monday-wed-21-jan-sat-7-mar-2026",
@@ -46803,6 +46803,26 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-03-18T05:11:51.253Z"
+    },
+    {
+      "id": "jw3-move-reset-thursday-12-30pm",
+      "venue": "JW3",
+      "title": "Move & Reset",
+      "details": "Lunchtime movement class (60 min) with Yael Flexer. Open to adults of all ages and abilities; improvisation, guided exercises, and gentle movement. £12 per session; £40 for the 4-week course (booking fee applies on site).",
+      "dayOfWeek": "Thursday",
+      "startTime": "12.30pm",
+      "endTime": "1.30pm",
+      "startDate": "2026-01-22",
+      "endDate": "2026-03-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+      "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "all-ages",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-03-19T22:25:01.043Z"
     }
   ],
   "venues": [
@@ -46919,15 +46939,6 @@
       "key": "cubaneando",
       "sourceUrl": "https://ruedalibre.co.uk/events/?ical=1",
       "count": 5,
-      "ok": true,
-      "lastSuccessAt": "2026-03-12T10:11:42.087Z",
-      "lastError": null
-    },
-    {
-      "venue": "Butoh Mutation",
-      "key": "butohMutation",
-      "sourceUrl": "https://www.butohuk.com/",
-      "count": 1,
       "ok": true,
       "lastSuccessAt": "2026-03-12T10:11:42.087Z",
       "lastError": null
@@ -47101,6 +47112,24 @@
       "count": 11,
       "ok": true,
       "lastSuccessAt": "2026-03-18T04:28:52.166Z",
+      "lastError": null
+    },
+    {
+      "venue": "JW3",
+      "key": "customEvents",
+      "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-03-19T22:25:01.043Z",
+      "lastError": null
+    },
+    {
+      "venue": "Butoh Mutation",
+      "key": "butohMutation",
+      "sourceUrl": "https://www.butohuk.com/",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-03-12T10:11:42.087Z",
       "lastError": null
     }
   ]

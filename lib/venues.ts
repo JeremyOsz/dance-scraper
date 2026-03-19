@@ -166,6 +166,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     label: "Fieldworks Dance",
     sourceUrl: "https://www.fieldworksdance.co.uk/book-online",
     mapQuery: "FieldWorks Dance London"
+  },
+  customEvents: {
+    label: "Custom listings",
+    sourceUrl: "https://www.jw3.org.uk/whats-on",
+    mapQuery: "JW3, 341-351 Finchley Road, London NW3 6ET"
   }
 };
 

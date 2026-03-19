@@ -1,3 +1,5 @@
+import type { VenueKey } from "../../lib/types";
+
 export type ScrapedClass = {
   venue: string;
   title: string;
@@ -11,40 +13,7 @@ export type ScrapedClass = {
 };
 
 export type AdapterOutput = {
-  venueKey:
-    | "thePlace"
-    | "rambert"
-    | "siobhanDavies"
-    | "tripSpace"
-    | "chisenhaleDanceSpace"
-    | "ciCalendarLondon"
-    | "bachataCommunity"
-    | "ecstaticDanceLondon"
-    | "luminousDance"
-    | "fiveRhythmsLondon"
-    | "superMarioSalsa"
-    | "salsaRuedaRuedaLibre"
-    | "cubaneando"
-    | "butohMutations"
-    | "posthumanTheatreButoh"
-    | "hackneyBaths"
-    | "wednesdayMoving"
-    | "danceworks"
-    | "pineappleDanceStudios"
-    | "baseDanceStudios"
-    | "salsaSoho"
-    | "barSalsaTemple"
-    | "mamboCity"
-    | "cityAcademy"
-    | "adrianOutsavvy"
-    | "marinaSfyridi"
-    | "lookAtMovement"
-    | "theManorMvmt"
-    | "eastLondonDance"
-    | "conTumbaoSalsa"
-    | "underTheSunDance"
-    | "balletForYou"
-    | "fieldworksDance";
+  venueKey: VenueKey;
   venue: string;
   sourceUrl: string;
   classes: ScrapedClass[];

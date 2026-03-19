@@ -76,7 +76,7 @@ const testedVenueKeys = [
   "superMarioSalsa",
   "salsaRuedaRuedaLibre",
   "cubaneando",
-  "butohMutation",
+  "butohMutations",
   "posthumanTheatreButoh",
   "hackneyBaths",
   "wednesdayMoving",
@@ -95,7 +95,8 @@ const testedVenueKeys = [
   "conTumbaoSalsa",
   "underTheSunDance",
   "balletForYou",
-  "fieldworksDance"
+  "fieldworksDance",
+  "customEvents"
 ] as const;
 
 const ecstaticOrganizerUrls = [
@@ -871,5 +872,16 @@ describe("scraper adapters", () => {
     const output = await scrapeThePlace();
     expect(output.ok).toBe(true);
     expect(output.classes).toHaveLength(0);
+  });
+
+  it("loads custom events from data/custom-events.json", async () => {
+    const { scrapeCustomEvents } = await import("../../scripts/scrape/adapters/custom-events");
+    const output = await scrapeCustomEvents();
+    expect(output.ok).toBe(true);
+    expect(output.venueKey).toBe("customEvents");
+    expect(output.venue).toBe("JW3");
+    const moveReset = output.classes.find((c) => c.title.includes("Move & Reset"));
+    expect(moveReset?.bookingUrl).toContain("jw3.org.uk");
+    expect(moveReset?.dayOfWeek).toBe("Thursday");
   });
 });
