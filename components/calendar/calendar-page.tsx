@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { useEffect, useMemo, useState } from "react";
-import { format, addDays, addMonths, isSameDay, isSameMonth, parseISO, subDays, subMonths } from "date-fns";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { format, addDays, addMonths, isSameDay, isSameMonth, parseISO, startOfDay, subDays, subMonths } from "date-fns";
 import Link from "next/link";
 import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -16,11 +16,14 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { canAddSessionToCalendar } from "@/lib/calendar-export";
 import { DANCE_TYPES, inferDanceTypes, matchesDanceType, type DanceType } from "@/lib/dance-types";
-import { ORDERED_DAYS, formatTimeRange, getMonthGridDates, getWeekDates, isSessionActiveOnDate } from "@/lib/date";
+import { ORDERED_DAYS, formatTimeRange, getForwardDayWindow, getMonthGridDates, isSessionActiveOnDate } from "@/lib/date";
 import { LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
 import { getVenueMapQuery } from "@/lib/venues";
 
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
+const INITIAL_WEEK_DAY_COUNT = 7;
+const LAZY_LOAD_DAY_CHUNK = 7;
+const MAX_LOADED_CALENDAR_DAYS = 56;
 const DANCE_TYPE_BADGE_CLASS: Record<DanceType, string> = {
   Contemporary: "border-transparent bg-sky-100 text-sky-800",
   Ballet: "border-transparent bg-rose-100 text-rose-800",
@@ -138,10 +141,10 @@ function parseBooleanParam(params: URLSearchParams | Readonly<URLSearchParams>, 
 
 function parseAnchorDate(value: string | null) {
   if (!value) {
-    return new Date();
+    return startOfDay(new Date());
   }
   const parsed = parseISO(value);
-  return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+  return Number.isNaN(parsed.getTime()) ? startOfDay(new Date()) : startOfDay(parsed);
 }
 
 export function CalendarPage({ initialSessions, venues }: Props) {
@@ -150,7 +153,8 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<"calendar" | "venues" | "map">("calendar");
   const [view, setView] = useState<"week" | "month">("week");
-  const [anchorDate, setAnchorDate] = useState(new Date());
+  const [anchorDate, setAnchorDate] = useState(() => startOfDay(new Date()));
+  const [loadedDayCount, setLoadedDayCount] = useState(INITIAL_WEEK_DAY_COUNT);
   const [selectedSession, setSelectedSession] = useState<DanceSession | null>(null);
   const [search, setSearch] = useState("");
   const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
@@ -165,9 +169,16 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const [urlReady, setUrlReady] = useState(false);
   const [shareMessage, setShareMessage] = useState<string | null>(null);
   const [shareFallbackUrl, setShareFallbackUrl] = useState<string | null>(null);
-  const [isDesktopViewport, setIsDesktopViewport] = useState(false);
+
+  const weekScrollRef = useRef<HTMLDivElement>(null);
+  const weekLoadSentinelRef = useRef<HTMLDivElement>(null);
 
   const venueNames = useMemo(() => venues.map((venue) => venue.name), [venues]);
+  const selectedDaysKey = useMemo(() => selectedDays.join(","), [selectedDays]);
+
+  useEffect(() => {
+    setLoadedDayCount(INITIAL_WEEK_DAY_COUNT);
+  }, [anchorDate, view, selectedDaysKey]);
 
   useEffect(() => {
     const storedShortlist = readStoredList(SHORTLIST_STORAGE_KEY);
@@ -270,17 +281,6 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [shortlistOnly, shortlistSessionIds.length]);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-    const syncViewport = () => setIsDesktopViewport(mediaQuery.matches);
-    syncViewport();
-    mediaQuery.addEventListener("change", syncViewport);
-    return () => mediaQuery.removeEventListener("change", syncViewport);
-  }, []);
-
-  useEffect(() => {
     if (!shareMessage) {
       return;
     }
@@ -366,8 +366,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [initialSessions, search, selectedDays, selectedTypes, selectedLevels, workshopsOnly, shortlistOnly, shortlistSessionIds]);
 
   const dates = useMemo(
-    () => (view === "week" ? getWeekDates(anchorDate) : getMonthGridDates(anchorDate)),
-    [anchorDate, view]
+    () =>
+      view === "week" ? getForwardDayWindow(anchorDate, loadedDayCount) : getMonthGridDates(anchorDate),
+    [anchorDate, loadedDayCount, view]
   );
   const weekPickerValue = useMemo(() => format(anchorDate, "RRRR-'W'II"), [anchorDate]);
   const visibleDates = useMemo(() => {
@@ -376,19 +377,49 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     }
     const dayFilteredDates =
       selectedDays.length === 0 ? dates : dates.filter((date) => selectedDays.includes(format(date, "EEEE")));
-    if (isDesktopViewport) {
-      return dayFilteredDates.filter((date) => {
-        const day = date.getDay();
-        return day >= 1 && day <= 5;
-      });
+    return dayFilteredDates;
+  }, [dates, selectedDays, view]);
+
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      return;
     }
-    const todayIso = format(new Date(), "yyyy-MM-dd");
-    const todayIndex = dayFilteredDates.findIndex((date) => format(date, "yyyy-MM-dd") === todayIso);
-    if (todayIndex <= 0) {
-      return dayFilteredDates;
+    if (view !== "week" || loadedDayCount >= MAX_LOADED_CALENDAR_DAYS) {
+      return;
     }
-    return [...dayFilteredDates.slice(todayIndex), ...dayFilteredDates.slice(0, todayIndex)];
-  }, [dates, isDesktopViewport, selectedDays, view]);
+    const sentinel = weekLoadSentinelRef.current;
+    const scrollRoot = weekScrollRef.current;
+    if (!sentinel || !scrollRoot) {
+      return;
+    }
+
+    const makeObserver = (horizontal: boolean) =>
+      new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) {
+            return;
+          }
+          setLoadedDayCount((n) => Math.min(n + LAZY_LOAD_DAY_CHUNK, MAX_LOADED_CALENDAR_DAYS));
+        },
+        { root: horizontal ? scrollRoot : null, rootMargin: "160px", threshold: 0 }
+      );
+
+    let observer = makeObserver(window.matchMedia("(min-width: 768px)").matches);
+    observer.observe(sentinel);
+
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onMqChange = () => {
+      observer.disconnect();
+      observer = makeObserver(mq.matches);
+      observer.observe(sentinel);
+    };
+    mq.addEventListener("change", onMqChange);
+    return () => {
+      mq.removeEventListener("change", onMqChange);
+      observer.disconnect();
+    };
+  }, [view, loadedDayCount, visibleDates.length]);
+
   const grouped = useMemo(() => groupByDate(filteredSessions, visibleDates), [filteredSessions, visibleDates]);
   const undatedSessions = useMemo(
     () => filteredSessions.filter((session) => isUndatedSession(session)),
@@ -896,7 +927,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   >
                     Previous
                   </Button>
-                  <Button variant="outline" onClick={() => setAnchorDate(new Date())}>
+                  <Button variant="outline" onClick={() => setAnchorDate(startOfDay(new Date()))}>
                     Today
                   </Button>
                   <Button
@@ -906,32 +937,36 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     Next
                   </Button>
                   <Badge variant="secondary">{format(anchorDate, "MMMM yyyy")}</Badge>
-                  <label htmlFor="week-picker" className="sr-only">
-                    Go to week
-                  </label>
-                  <Input
-                    id="week-picker"
-                    type="week"
-                    value={weekPickerValue}
-                    onChange={(event) => {
-                      const value = event.currentTarget.value;
-                      if (!value) return;
-                      const nextAnchor = parseISO(`${value}-1`);
-                      if (Number.isNaN(nextAnchor.getTime())) return;
-                      setAnchorDate(nextAnchor);
-                      setView("week");
-                    }}
-                    onInput={(event) => {
-                      const value = event.currentTarget.value;
-                      if (!value) return;
-                      const nextAnchor = parseISO(`${value}-1`);
-                      if (Number.isNaN(nextAnchor.getTime())) return;
-                      setAnchorDate(nextAnchor);
-                      setView("week");
-                    }}
-                    className="w-full sm:w-[160px]"
-                    aria-label="Go to week"
-                  />
+                  {view === "week" ? (
+                    <>
+                      <label htmlFor="week-picker" className="sr-only">
+                        Jump to ISO week (week view starts from Monday of that week)
+                      </label>
+                      <Input
+                        id="week-picker"
+                        type="week"
+                        value={weekPickerValue}
+                        onChange={(event) => {
+                          const value = event.currentTarget.value;
+                          if (!value) return;
+                          const nextAnchor = parseISO(`${value}-1`);
+                          if (Number.isNaN(nextAnchor.getTime())) return;
+                          setAnchorDate(nextAnchor);
+                          setView("week");
+                        }}
+                        onInput={(event) => {
+                          const value = event.currentTarget.value;
+                          if (!value) return;
+                          const nextAnchor = parseISO(`${value}-1`);
+                          if (Number.isNaN(nextAnchor.getTime())) return;
+                          setAnchorDate(nextAnchor);
+                          setView("week");
+                        }}
+                        className="w-full sm:w-[160px]"
+                        aria-label="Jump to ISO week"
+                      />
+                    </>
+                  ) : null}
                   <div className="flex w-full gap-2 sm:ml-auto sm:w-auto">
                     <Button variant={view === "week" ? "default" : "outline"} onClick={() => setView("week")}>
                       Week
@@ -942,11 +977,11 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   </div>
                 </div>
 
-                <div className={view === "week" ? "overflow-x-auto pb-2" : ""}>
+                <div ref={view === "week" ? weekScrollRef : undefined} className={view === "week" ? "overflow-x-auto pb-2" : ""}>
                   <div
                     className={
                       view === "week"
-                        ? "grid grid-cols-1 gap-3 md:min-w-[1540px] md:grid-cols-7"
+                        ? "flex w-full flex-col gap-3 md:w-max md:flex-row md:items-stretch"
                         : "grid grid-cols-1 gap-3 md:grid-cols-7"
                     }
                   >
@@ -958,9 +993,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       return (
                         <Card
                           key={iso}
-                          className={`${inMonth ? "" : "opacity-55"} ${
-                            isToday ? "border-primary/60 bg-primary/5 ring-1 ring-primary/40" : ""
-                          }`}
+                          className={`min-w-0 w-full ${
+                            view === "week" ? "md:min-w-[220px] md:max-w-[220px] md:shrink-0" : ""
+                          } ${inMonth ? "" : "opacity-55"} ${isToday ? "border-primary/60 bg-primary/5 ring-1 ring-primary/40" : ""}`}
                         >
                           <CardHeader className="p-3">
                             <CardTitle className="flex items-center gap-2 text-sm">
@@ -1011,6 +1046,13 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                         </Card>
                       );
                     })}
+                    {view === "week" && loadedDayCount < MAX_LOADED_CALENDAR_DAYS ? (
+                      <div
+                        ref={weekLoadSentinelRef}
+                        className="pointer-events-none flex min-h-[1px] w-full shrink-0 md:h-auto md:min-h-[80px] md:w-6"
+                        aria-hidden
+                      />
+                    ) : null}
                   </div>
                 </div>
 

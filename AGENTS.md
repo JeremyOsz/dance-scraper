@@ -3,7 +3,7 @@
 - Keep contact/feedback reachable but lightweight; configure destinations via env vars rather than hardcoding.
 - Prefer moving/placing CTAs intentionally (e.g., reuse the old “suggest a venue” slot; show contact CTA at the bottom of other views).
 - Prefer clear, user-facing status labels (e.g., “Error scraping” instead of softer wording).
-- For calendar UX: desktop should highlight today but show Monday–Friday; mobile should start from today.
+- For calendar UX: week view is a continuous rolling strip starting from the anchor date (default today, local midnight), lazy-loading seven more days at a time when the user scrolls near the end (cap 56 days); highlight today; month view stays a standard grid.
 - When renaming venues/labels, update all user-facing instances consistently (UI + data + tests), without changing stable keys/URLs; use “Butoh Mutations” (plural), never “Butoh Mutation,” in copy.
 - Public product name is “London Dance Calendar” (not “London Dance Scraper” or “Dance Scraper London”) in metadata, manifest, share strings, and similar surfaces.
 

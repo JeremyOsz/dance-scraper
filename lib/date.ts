@@ -7,6 +7,7 @@ import {
   isAfter,
   isBefore,
   parseISO,
+  startOfDay,
   startOfMonth,
   startOfWeek
 } from "date-fns";
@@ -27,9 +28,16 @@ export function todayIso() {
   return format(new Date(), "yyyy-MM-dd");
 }
 
+/** ISO week Mon–Sun (legacy / week-picker jumps still align to Monday via anchor). */
 export function getWeekDates(anchor: Date) {
   const weekStart = startOfWeek(anchor, { weekStartsOn: 1 });
   return eachDayOfInterval({ start: weekStart, end: addDays(weekStart, 6) });
+}
+
+/** `dayCount` consecutive calendar days from local midnight of `anchor` (default 7). */
+export function getForwardDayWindow(anchor: Date, dayCount = 7) {
+  const start = startOfDay(anchor);
+  return eachDayOfInterval({ start, end: addDays(start, dayCount - 1) });
 }
 
 export function getMonthGridDates(anchor: Date) {
