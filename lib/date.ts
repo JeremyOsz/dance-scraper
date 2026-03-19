@@ -11,6 +11,7 @@ import {
   startOfWeek
 } from "date-fns";
 import type { DanceSession, DayOfWeek } from "@/lib/types";
+import { isDateInExcludedRanges } from "@/lib/session-excluded-dates";
 
 export const ORDERED_DAYS: Exclude<DayOfWeek, null>[] = [
   "Monday",
@@ -53,6 +54,10 @@ export function isSessionActiveOnDate(session: DanceSession, dateIso: string) {
     return false;
   }
   if (session.endDate && isAfter(parseISO(dateIso), parseISO(session.endDate))) {
+    return false;
+  }
+
+  if (isDateInExcludedRanges(dateIso, session.excludedDateRanges)) {
     return false;
   }
 

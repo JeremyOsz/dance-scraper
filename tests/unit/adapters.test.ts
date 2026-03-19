@@ -136,11 +136,39 @@ describe("scraper adapters", () => {
   });
 
   it("parses The Place adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("the-place.html"));
+    fetchHtml.mockReset();
+    fetchHtml
+      .mockResolvedValueOnce(fixture("the-place.html"))
+      .mockResolvedValueOnce("<html></html>");
     const { scrapeThePlace } = await import("../../scripts/scrape/adapters/the-place");
     const output = await scrapeThePlace();
     expect(output.ok).toBe(true);
     expect(output.classes[0]?.title).toContain("Contemporary");
+    expect(output.classes[0]?.excludedDateRanges?.length).toBeGreaterThan(0);
+    expect(output.classes[0]?.excludedDateRanges?.some((r) => r.start === "2026-02-16")).toBe(true);
+    expect(output.classes[0]?.excludedDateRanges?.some((r) => r.start === "2025-12-22")).toBe(true);
+    expect(output.classes[0]?.excludedDateRanges?.some((r) => r.start === "2026-07-21")).toBe(true);
+  });
+
+  it("expands The Place courses when detail page lists session startDate values", async () => {
+    fetchHtml.mockReset();
+    fetchHtml
+      .mockResolvedValueOnce(fixture("the-place.html"))
+      .mockResolvedValueOnce(`
+        <html>
+          "startDate": "2026-03-25T18:30:00+00:00",
+          "startDate": "2026-04-22T18:30:00+01:00",
+        </html>
+      `);
+    const { scrapeThePlace } = await import("../../scripts/scrape/adapters/the-place");
+    const output = await scrapeThePlace();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(2);
+    expect(output.classes.map((c) => c.startDate)).toEqual(["2026-03-25", "2026-04-22"]);
+    expect(output.classes.map((c) => c.endDate)).toEqual(["2026-03-25", "2026-04-22"]);
+    expect(output.classes.every((c) => c.excludedDateRanges === undefined)).toBe(true);
+    expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
+    expect(output.classes[1]?.dayOfWeek).toBe("Wednesday");
   });
 
   it("parses Rambert adapter", async () => {

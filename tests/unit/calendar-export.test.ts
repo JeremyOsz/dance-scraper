@@ -43,6 +43,22 @@ describe("calendar export", () => {
     expect(timing?.start.getDate()).toBe(11);
   });
 
+  it("skips excluded week for recurring sessions when choosing next occurrence", () => {
+    const session: DanceSession = {
+      ...baseSession,
+      startDate: null,
+      dayOfWeek: "Wednesday",
+      startTime: "6:00 pm",
+      endTime: "7:00 pm",
+      excludedDateRanges: [{ start: "2026-03-11", end: "2026-03-11" }]
+    };
+    const timing = getSessionCalendarTiming(session, new Date("2026-03-10T12:00:00.000Z"));
+    expect(timing).not.toBeNull();
+    expect(timing?.start.getFullYear()).toBe(2026);
+    expect(timing?.start.getMonth()).toBe(2);
+    expect(timing?.start.getDate()).toBe(18);
+  });
+
   it("returns false when no date can be inferred", () => {
     const session: DanceSession = {
       ...baseSession,

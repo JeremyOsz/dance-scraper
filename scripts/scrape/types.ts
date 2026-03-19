@@ -1,4 +1,4 @@
-import type { VenueKey } from "../../lib/types";
+import type { SessionExcludedDateRange, VenueKey } from "../../lib/types";
 
 export type ScrapedClass = {
   venue: string;
@@ -8,6 +8,7 @@ export type ScrapedClass = {
   time: string | null;
   startDate: string | null;
   endDate: string | null;
+  excludedDateRanges?: SessionExcludedDateRange[];
   bookingUrl: string;
   sourceUrl: string;
 };

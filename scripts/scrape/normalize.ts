@@ -166,6 +166,7 @@ function toSession(raw: ScrapedClass, seenAt: string): DanceSession {
     endTime: time.end,
     startDate: raw.startDate,
     endDate: raw.endDate,
+    excludedDateRanges: raw.excludedDateRanges,
     timezone: "Europe/London",
     bookingUrl: raw.bookingUrl,
     sourceUrl: raw.sourceUrl,

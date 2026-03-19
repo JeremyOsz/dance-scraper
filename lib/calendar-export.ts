@@ -1,5 +1,6 @@
 import { addDays, format, parseISO } from "date-fns";
 import type { DanceSession } from "@/lib/types";
+import { resolveSessionDatePastExclusions } from "@/lib/session-excluded-dates";
 
 type SessionTiming = {
   start: Date;
@@ -32,32 +33,41 @@ function parseDate(session: DanceSession, now: Date): Date | null {
     ? new Date(endDate!.getFullYear(), endDate!.getMonth(), endDate!.getDate())
     : null;
 
+  let candidate: Date | null = null;
+
   if (normalizedStartDate) {
     if (normalizedStartDate >= todayMidnight) {
-      return normalizedStartDate;
-    }
-    if (!session.dayOfWeek) {
-      return normalizedStartDate;
+      candidate = normalizedStartDate;
+    } else if (!session.dayOfWeek) {
+      candidate = normalizedStartDate;
     }
   }
 
-  if (!session.dayOfWeek) {
+  if (candidate === null && session.dayOfWeek) {
+    const target = DAY_TO_INDEX[session.dayOfWeek];
+    const distance = (target - todayMidnight.getDay() + 7) % 7;
+    let nextOccurrence = addDays(todayMidnight, distance);
+
+    if (normalizedStartDate && nextOccurrence < normalizedStartDate) {
+      nextOccurrence = normalizedStartDate;
+    }
+
+    if (normalizedEndDate && nextOccurrence > normalizedEndDate) {
+      return null;
+    }
+
+    candidate = nextOccurrence;
+  }
+
+  if (candidate === null) {
     return null;
   }
 
-  const target = DAY_TO_INDEX[session.dayOfWeek];
-  const distance = (target - todayMidnight.getDay() + 7) % 7;
-  const nextOccurrence = addDays(todayMidnight, distance);
-
-  if (normalizedStartDate && nextOccurrence < normalizedStartDate) {
-    return normalizedStartDate;
-  }
-
-  if (normalizedEndDate && nextOccurrence > normalizedEndDate) {
+  if (normalizedEndDate && candidate > normalizedEndDate) {
     return null;
   }
 
-  return nextOccurrence;
+  return resolveSessionDatePastExclusions(session, candidate, normalizedEndDate);
 }
 
 function foldIcsLine(line: string, maxLineLength = 75): string[] {

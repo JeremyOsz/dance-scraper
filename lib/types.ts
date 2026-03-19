@@ -44,6 +44,9 @@ export type DayOfWeek =
   | "Sunday"
   | null;
 
+/** Inclusive ISO date range (yyyy-MM-dd) when a session does not run (e.g. school half-term). */
+export type SessionExcludedDateRange = { start: string; end: string };
+
 export type DanceSession = {
   id: string;
   venue: string;
@@ -54,6 +57,8 @@ export type DanceSession = {
   endTime: string | null;
   startDate: string | null;
   endDate: string | null;
+  /** Weekly (or dated) sessions omitted on these inclusive dates — used by The Place term-time classes. */
+  excludedDateRanges?: SessionExcludedDateRange[];
   timezone: "Europe/London";
   bookingUrl: string;
   sourceUrl: string;
