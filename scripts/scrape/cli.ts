@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { ScrapeOutput, VenueKey } from "../../lib/types";
+import type { DanceSession, ScrapeOutput, VenueKey } from "../../lib/types";
 import type { AdapterOutput } from "./types";
 
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
@@ -110,12 +110,18 @@ export function resolveForcedVenueKeys(
   return { keys, unknownTokens };
 }
 
+export type VenueIntervalConfig = {
+  /** Per-venue cooldown (ms since last success) when using --outdated. Keys not present fall back to 24h. */
+  intervalMsByVenueKey?: Map<VenueKey, number>;
+};
+
 export function selectVenueKeys(
   allVenueKeys: VenueKey[],
   previousOutput: ScrapeOutput | null,
   options: Pick<ScrapeCliOptions, "onlyEmptyVenues" | "onlyOutdatedVenues">,
   forcedVenueKeys: Set<VenueKey>,
-  nowMs = Date.now()
+  nowMs = Date.now(),
+  venueIntervalConfig?: VenueIntervalConfig
 ): Set<VenueKey> {
   const hasFilter = options.onlyEmptyVenues || options.onlyOutdatedVenues;
   let selected = hasFilter ? new Set(allVenueKeys) : new Set<VenueKey>();
@@ -140,6 +146,7 @@ export function selectVenueKeys(
 
   if (options.onlyOutdatedVenues) {
     const outdated = new Set<VenueKey>();
+    const thresholdMs = (key: VenueKey) => venueIntervalConfig?.intervalMsByVenueKey?.get(key) ?? ONE_DAY_MS;
 
     if (!previousOutput) {
       for (const key of allVenueKeys) {
@@ -153,7 +160,7 @@ export function selectVenueKeys(
           outdated.add(key);
           continue;
         }
-        if (nowMs - parsedSuccessTime > ONE_DAY_MS) {
+        if (nowMs - parsedSuccessTime > thresholdMs(key)) {
           outdated.add(key);
         }
       }
@@ -169,13 +176,19 @@ export function selectVenueKeys(
   return selected;
 }
 
+export type MergeOutputResult = {
+  merged: ScrapeOutput;
+  /** Sessions dropped from the previous file because a successful re-scrape replaced that venue (candidates for past archive). */
+  evictedSessions: DanceSession[];
+};
+
 export function mergeOutputWithPrevious(
   previousOutput: ScrapeOutput | null,
   freshOutput: ScrapeOutput,
   allVenueKeys: VenueKey[]
-): ScrapeOutput {
+): MergeOutputResult {
   if (!previousOutput) {
-    return freshOutput;
+    return { merged: freshOutput, evictedSessions: [] };
   }
 
   const previousStatusByKey = new Map(previousOutput.venues.map((status) => [status.key, status]));
@@ -200,6 +213,7 @@ export function mergeOutputWithPrevious(
     }
   }
 
+  const evictedSessions = previousOutput.sessions.filter((session) => staleSessionVenues.has(session.venue));
   const preservedPreviousSessions = previousOutput.sessions.filter((session) => !staleSessionVenues.has(session.venue));
   const mergedSessions = [...preservedPreviousSessions, ...freshOutput.sessions];
 
@@ -210,9 +224,12 @@ export function mergeOutputWithPrevious(
   ];
 
   return {
-    generatedAt: freshOutput.generatedAt,
-    sessions: mergedSessions,
-    venues: mergedVenues
+    merged: {
+      generatedAt: freshOutput.generatedAt,
+      sessions: mergedSessions,
+      venues: mergedVenues
+    },
+    evictedSessions
   };
 }
 
@@ -220,9 +237,11 @@ export function formatCliHelp(allVenueKeys: VenueKey[]): string {
   return [
     "Usage: npm run scrape -- [options]",
     "",
+    "Each run updates data/scrape-change-stats.json (per-venue fingerprints) and may append dated past rows to data/classes.past.json.",
+    "",
     "Options:",
     "  --empty               Only scrape venues that previously had a valid scrape with zero classes",
-    "  --outdated            Only scrape venues whose last valid scrape is older than 24 hours",
+    "  --outdated            Only scrape venues past their cooldown (from scrape-change-stats: 24h–7d per venue)",
     "  --force <venues>      Force specific venues (keys or names, comma-separated)",
     "  --help                Show help",
     "",

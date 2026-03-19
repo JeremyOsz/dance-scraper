@@ -83,3 +83,9 @@ export type ScrapeOutput = {
   sessions: DanceSession[];
   venues: VenueStatus[];
 };
+
+/** Archived dated sessions evicted from the live file after a successful venue re-scrape. */
+export type PastSessionsArchive = {
+  updatedAt: string;
+  sessions: DanceSession[];
+};

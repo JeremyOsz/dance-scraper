@@ -100,6 +100,32 @@ describe("selectVenueKeys", () => {
 
     expect([...selected].sort()).toEqual(["rambert", "thePlace"]);
   });
+
+  it("honours per-venue outdated interval when provided", () => {
+    const previous: ScrapeOutput = {
+      generatedAt: "2026-03-10T12:00:00.000Z",
+      sessions: [],
+      venues: [
+        makeStatus({
+          key: "thePlace",
+          venue: "The Place",
+          ok: true,
+          count: 1,
+          lastSuccessAt: "2026-03-10T12:00:00.000Z"
+        })
+      ]
+    };
+    const intervalMs = new Map<VenueKey, number>([["thePlace", 14 * 24 * 60 * 60 * 1000]]);
+    const selected = selectVenueKeys(
+      ["thePlace"],
+      previous,
+      { onlyEmptyVenues: false, onlyOutdatedVenues: true },
+      new Set(),
+      Date.parse("2026-03-12T12:00:00.000Z"),
+      { intervalMsByVenueKey: intervalMs }
+    );
+    expect([...selected]).toEqual([]);
+  });
 });
 
 describe("resolveForcedVenueKeys", () => {
@@ -156,9 +182,10 @@ describe("mergeOutputWithPrevious", () => {
       ]
     };
 
-    const merged = mergeOutputWithPrevious(previous, fresh, ["thePlace", "rambert"]);
+    const { merged, evictedSessions } = mergeOutputWithPrevious(previous, fresh, ["thePlace", "rambert"]);
     const rambertStatus = merged.venues.find((venue) => venue.key === "rambert");
 
+    expect(evictedSessions).toEqual([]);
     expect(merged.sessions.map((session) => session.id).sort()).toEqual(["prev-rambert", "prev-theplace"]);
     expect(rambertStatus?.ok).toBe(false);
     expect(rambertStatus?.lastSuccessAt).toBe("2026-03-10T10:00:00.000Z");
@@ -188,7 +215,8 @@ describe("mergeOutputWithPrevious", () => {
       ]
     };
 
-    const merged = mergeOutputWithPrevious(previous, fresh, ["thePlace", "rambert"]);
+    const { merged, evictedSessions } = mergeOutputWithPrevious(previous, fresh, ["thePlace", "rambert"]);
+    expect(evictedSessions.map((s) => s.id).sort()).toEqual(["prev-rambert"]);
     expect(merged.sessions.map((session) => session.id).sort()).toEqual(["new-rambert", "prev-theplace"]);
   });
 });

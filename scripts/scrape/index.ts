@@ -35,6 +35,7 @@ import { scrapeCustomEvents } from "./adapters/custom-events";
 import type { VenueKey } from "../../lib/types";
 import { VENUES } from "../../lib/venues";
 import { buildOutput, writeOutput } from "./normalize";
+import path from "node:path";
 import {
   formatCliHelp,
   mergeOutputWithPrevious,
@@ -44,6 +45,13 @@ import {
   selectVenueKeys,
   type ScraperDefinition
 } from "./cli";
+import { appendPastArchive } from "./past-archive";
+import {
+  appendScrapeStatsRun,
+  buildVenueChangeStats,
+  computeIntervalHoursByVenueKey,
+  readScrapeStatsFile
+} from "./scrape-stats";
 
 const SCRAPERS: ScraperDefinition[] = [
   { key: "thePlace", scrape: scrapeThePlace },
@@ -93,6 +101,8 @@ async function main() {
   }
 
   const previousOutput = readPreviousOutput();
+  const dataDir = path.join(process.cwd(), "data");
+  const statsPath = path.join(dataDir, "scrape-change-stats.json");
   const venueNameByKey = Object.fromEntries(allVenueKeys.map((key) => [key, VENUES[key].label])) as Record<
     VenueKey,
     string
@@ -102,7 +112,23 @@ async function main() {
     throw new Error(`Unknown forced venue(s): ${unknownTokens.join(", ")}\n\n${formatCliHelp(allVenueKeys)}`);
   }
 
-  const selectedVenueKeys = selectVenueKeys(allVenueKeys, previousOutput, options, forcedVenueKeys);
+  const statsFile = readScrapeStatsFile(statsPath);
+  const intervalHoursByKey = computeIntervalHoursByVenueKey(statsFile, allVenueKeys);
+  const intervalMsByVenueKey = new Map<VenueKey, number>(
+    [...intervalHoursByKey.entries()].map(([key, hours]) => [key, hours * 60 * 60 * 1000])
+  );
+
+  const selectedVenueKeys = selectVenueKeys(allVenueKeys, previousOutput, options, forcedVenueKeys, Date.now(), {
+    intervalMsByVenueKey: options.onlyOutdatedVenues ? intervalMsByVenueKey : undefined
+  });
+
+  if (options.onlyOutdatedVenues) {
+    const sample = [...intervalHoursByKey.entries()]
+      .slice(0, 3)
+      .map(([k, h]) => `${k}:${h}h`)
+      .join(", ");
+    console.log(`Outdated mode: per-venue intervals from stats (e.g. ${sample}…)`);
+  }
   const selectedScrapers = SCRAPERS.filter(({ key }) => selectedVenueKeys.has(key));
 
   if (selectedScrapers.length === 0) {
@@ -114,11 +140,22 @@ async function main() {
   const results = await Promise.all(selectedScrapers.map(({ scrape }) => scrape()));
 
   const freshOutput = buildOutput(results);
-  const output = mergeOutputWithPrevious(previousOutput, freshOutput, allVenueKeys);
+  const venueStats = buildVenueChangeStats(
+    results.map((r) => ({ venueKey: r.venueKey, venue: r.venue, ok: r.ok })),
+    previousOutput?.sessions,
+    freshOutput.sessions
+  );
+  const { merged: output, evictedSessions } = mergeOutputWithPrevious(previousOutput, freshOutput, allVenueKeys);
+
+  appendScrapeStatsRun(path.join(dataDir, "scrape-change-stats.json"), freshOutput.generatedAt, venueStats);
+  appendPastArchive(evictedSessions, path.join(dataDir, "classes.past.json"), Date.now(), freshOutput.generatedAt);
+
   writeOutput(output);
 
+  const changedOk = venueStats.filter((v) => v.scrapeOk && v.changed).length;
+  const okCount = venueStats.filter((v) => v.scrapeOk).length;
   console.log(
-    `Generated ${output.sessions.length} sessions after scraping ${results.length} venues in ${Date.now() - started}ms`
+    `Generated ${output.sessions.length} sessions after scraping ${results.length} venues in ${Date.now() - started}ms (changed data: ${changedOk}/${okCount} successful venues)`
   );
   for (const venue of freshOutput.venues) {
     console.log(`[${venue.ok ? "ok" : "fail"}] ${venue.venue}: ${venue.count}`);
