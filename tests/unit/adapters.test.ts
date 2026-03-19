@@ -460,7 +460,7 @@ describe("scraper adapters", () => {
     expect(output.classes.map((item) => item.title)).toContain("Cubaneando");
   });
 
-  it("parses Butoh Mutation adapter", async () => {
+  it("parses Butoh Mutations adapter", async () => {
     fetchHtml
       .mockResolvedValueOnce(fixture("butoh-mutation.html"))
       .mockResolvedValueOnce(fixture("butoh-mutation-tickettailor.html"));

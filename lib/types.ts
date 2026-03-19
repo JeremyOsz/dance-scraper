@@ -12,7 +12,7 @@ export type VenueKey =
   | "superMarioSalsa"
   | "salsaRuedaRuedaLibre"
   | "cubaneando"
-  | "butohMutation"
+  | "butohMutations"
   | "posthumanTheatreButoh"
   | "hackneyBaths"
   | "wednesdayMoving"
