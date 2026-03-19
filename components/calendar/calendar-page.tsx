@@ -459,7 +459,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     try {
       if (typeof navigator.share === "function") {
         await navigator.share({
-          title: "Dance Scraper London",
+          title: "London Dance Calendar",
           text: "London dance and movement classes",
           url: shareUrl
         });
@@ -914,7 +914,15 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     type="week"
                     value={weekPickerValue}
                     onChange={(event) => {
-                      const value = event.target.value;
+                      const value = event.currentTarget.value;
+                      if (!value) return;
+                      const nextAnchor = parseISO(`${value}-1`);
+                      if (Number.isNaN(nextAnchor.getTime())) return;
+                      setAnchorDate(nextAnchor);
+                      setView("week");
+                    }}
+                    onInput={(event) => {
+                      const value = event.currentTarget.value;
                       if (!value) return;
                       const nextAnchor = parseISO(`${value}-1`);
                       if (Number.isNaN(nextAnchor.getTime())) return;

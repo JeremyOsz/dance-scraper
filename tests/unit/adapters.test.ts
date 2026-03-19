@@ -15,6 +15,49 @@ vi.mock("../../scripts/scrape/adapters/common", async () => {
   };
 });
 
+vi.mock("playwright", () => {
+  const mockFrame = {
+    waitForSelector: vi.fn(async () => {}),
+    evaluate: vi.fn(async () => [
+      {
+        time: "7:00pm",
+        teacher: "Teacher",
+        className: "Example Class",
+        level: "Open",
+        studio: "Studio 1",
+        price: "Free"
+      }
+    ])
+  };
+
+  const mockIframeHandle = {
+    contentFrame: vi.fn(() => mockFrame)
+  };
+
+  const mockPage = {
+    goto: vi.fn(async () => {}),
+    waitForSelector: vi.fn(async () => {}),
+    locator: vi.fn(() => ({
+      first: () => ({
+        elementHandle: vi.fn(async () => mockIframeHandle)
+      })
+    })),
+    waitForTimeout: vi.fn(async () => {}),
+    frames: vi.fn(() => [])
+  };
+
+  const mockBrowser = {
+    newPage: vi.fn(async () => mockPage),
+    close: vi.fn(async () => {})
+  };
+
+  return {
+    chromium: {
+      launch: vi.fn(async () => mockBrowser)
+    }
+  };
+});
+
 function fixture(name: string) {
   return fs.readFileSync(path.join(process.cwd(), "tests/unit/fixtures", name), "utf8");
 }

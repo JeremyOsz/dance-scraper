@@ -4,7 +4,7 @@ import { getBaseUrl } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/react";
 
 const baseUrl = getBaseUrl();
-const siteName = "Dance Scraper London";
+const siteName = "London Dance Calendar";
 const siteDescription =
   "Find adult and open dance and movement classes across London with a searchable calendar, venue index, and map.";
 

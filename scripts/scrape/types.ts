@@ -25,7 +25,7 @@ export type AdapterOutput = {
     | "superMarioSalsa"
     | "salsaRuedaRuedaLibre"
     | "cubaneando"
-    | "butohMutation"
+    | "butohMutations"
     | "posthumanTheatreButoh"
     | "hackneyBaths"
     | "wednesdayMoving"

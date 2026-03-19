@@ -66,7 +66,7 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://ruedalibre.co.uk/events/?ical=1",
     mapQuery: "Cubaneando London"
   },
-  butohMutation: {
+  butohMutations: {
     label: "Butoh Mutations",
     sourceUrl: "https://www.butohuk.com/",
     mapQuery: "Butoh Mutations London"

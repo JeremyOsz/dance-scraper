@@ -55,7 +55,7 @@ export default function Home() {
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: "Dance Scraper London",
+      name: "London Dance Calendar",
       url: baseUrl,
       description:
         "Find adult and open dance and movement classes across London with a searchable calendar, venue index, and map.",
@@ -76,7 +76,7 @@ export default function Home() {
       dateModified: data.generatedAt,
       creator: {
         "@type": "Organization",
-        name: "Dance Scraper London"
+        name: "London Dance Calendar"
       }
     }
   ];

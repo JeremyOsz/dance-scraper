@@ -108,7 +108,7 @@ export async function scrapeButohMutation(): Promise<AdapterOutput> {
   }
 
   return {
-    venueKey: "butohMutation",
+    venueKey: "butohMutations",
     venue: "Butoh Mutations",
     sourceUrl,
     classes:

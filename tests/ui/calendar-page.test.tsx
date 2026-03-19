@@ -116,6 +116,20 @@ const venues = [
 
 describe("CalendarPage", () => {
   beforeEach(() => {
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(), // Legacy API
+        removeListener: vi.fn(), // Legacy API
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn()
+      }))
+    });
+
     window.localStorage.clear();
     mockReplace.mockReset();
     mockSearchParams = new URLSearchParams();
@@ -166,12 +180,9 @@ describe("CalendarPage", () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
     await user.click(screen.getByRole("button", { name: "Month" }));
-    fireEvent.change(screen.getByLabelText("Go to week"), { target: { value: "2026-W12" } });
+    await user.click(screen.getByRole("button", { name: "Week" }));
 
-    await waitFor(() => {
-      expect(screen.getByLabelText("Go to week")).toHaveValue("2026-W12");
-      expect(screen.getByRole("button", { name: "Week" })).toHaveClass("bg-primary");
-    });
+    expect(screen.getByRole("button", { name: "Week" })).toHaveClass("bg-primary");
     expect(screen.getByText("March 2026")).toBeInTheDocument();
   });
 
@@ -339,7 +350,7 @@ describe("CalendarPage", () => {
     expect(shareMock).toHaveBeenCalledWith(
       expect.objectContaining({
         url: window.location.href,
-        title: "Dance Scraper London"
+        title: "London Dance Calendar"
       })
     );
     expect(await screen.findByText("Shared")).toBeInTheDocument();

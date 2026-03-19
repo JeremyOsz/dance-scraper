@@ -58,7 +58,7 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "superMarioSalsa", scrape: scrapeSuperMarioSalsa },
   { key: "salsaRuedaRuedaLibre", scrape: scrapeSalsaRuedaRuedaLibre },
   { key: "cubaneando", scrape: scrapeCubaneando },
-  { key: "butohMutation", scrape: scrapeButohMutation },
+  { key: "butohMutations", scrape: scrapeButohMutation },
   { key: "posthumanTheatreButoh", scrape: scrapePosthumanTheatreButoh },
   { key: "hackneyBaths", scrape: scrapeHackneyBaths },
   { key: "wednesdayMoving", scrape: scrapeWednesdayMoving },
