@@ -1004,7 +1004,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                             </CardTitle>
                           </CardHeader>
                           <CardContent className="space-y-2 p-3 pt-0">
-                            {sessions.slice(0, view === "month" ? 3 : 12).map((session) => {
+                            {(view === "month" ? sessions.slice(0, 3) : sessions).map((session) => {
                               const types = inferDanceTypes(session);
                               const primaryType = types[0] ?? "Other";
                               return (

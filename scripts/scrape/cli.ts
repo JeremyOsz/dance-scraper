@@ -207,9 +207,16 @@ export function mergeOutputWithPrevious(
   const staleSessionVenues = new Set<string>();
   for (const status of successfulFreshStatuses) {
     staleSessionVenues.add(status.venue);
-    const previousVenueName = previousStatusByKey.get(status.key)?.venue;
+    const previousStatus = previousStatusByKey.get(status.key);
+    const previousVenueName = previousStatus?.venue;
     if (previousVenueName) {
       staleSessionVenues.add(previousVenueName);
+    }
+    for (const label of status.replacedVenueLabels ?? []) {
+      staleSessionVenues.add(label);
+    }
+    for (const label of previousStatus?.replacedVenueLabels ?? []) {
+      staleSessionVenues.add(label);
     }
   }
 

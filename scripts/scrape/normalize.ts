@@ -191,7 +191,8 @@ export function buildOutput(results: AdapterOutput[]): ScrapeOutput {
       count: result.classes.length,
       ok: result.ok,
       lastSuccessAt: result.ok ? generatedAt : null,
-      lastError: result.error
+      lastError: result.error,
+      replacedVenueLabels: result.replacedVenueLabels
     });
 
     for (const klass of result.classes) {

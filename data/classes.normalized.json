@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-19T22:41:40.278Z",
+  "generatedAt": "2026-03-21T13:02:10.809Z",
   "sessions": [
     {
       "id": "rambert-line-dancing-beginners-thursday-18-20",
@@ -46237,26 +46237,6 @@
       "lastSeenAt": "2026-03-18T05:11:51.253Z"
     },
     {
-      "id": "jw3-move-reset-thursday-12-30pm",
-      "venue": "JW3",
-      "title": "Move & Reset",
-      "details": "Lunchtime movement class (60 min) with Yael Flexer. Open to adults of all ages and abilities; improvisation, guided exercises, and gentle movement. £12 per session; £40 for the 4-week course (booking fee applies on site).",
-      "dayOfWeek": "Thursday",
-      "startTime": "12.30pm",
-      "endTime": "1.30pm",
-      "startDate": "2026-01-22",
-      "endDate": "2026-03-26",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.jw3.org.uk/whats-on/move-reset",
-      "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
-      "tags": [
-        "improvisation"
-      ],
-      "audience": "all-ages",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-03-19T22:25:01.043Z"
-    },
-    {
       "id": "the-place-choreographic-class-for-over-60s-with-becky-namgauds-monday-wed-21-jan-sat-7-mar-2026",
       "venue": "The Place",
       "title": "Choreographic Class for Over 60s with Becky Namgauds",
@@ -51791,6 +51771,101 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-03-19T22:41:40.278Z"
+    },
+    {
+      "id": "cplay-cy-flow-floor-connection-march-workshops-na-na",
+      "venue": "cplay.cy",
+      "title": "Flow, Floor & Connection - March Workshops",
+      "details": "Google Form registration via Linktree",
+      "dayOfWeek": null,
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://forms.gle/5x3CntVCTSs56D5SA",
+      "sourceUrl": "https://linktr.ee/cplay.cy",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-03-21T12:57:57.032Z"
+    },
+    {
+      "id": "cplay-cy-5-april-easter-pop-up-class-sunday-na",
+      "venue": "cplay.cy",
+      "title": "5 April 🐣Easter Pop-up Class",
+      "details": "Google Form registration via Linktree",
+      "dayOfWeek": "Sunday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-04-05",
+      "endDate": "2026-04-05",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://forms.gle/BxNaFRn5mivK3mDo6",
+      "sourceUrl": "https://linktr.ee/cplay.cy",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-03-21T12:57:57.032Z"
+    },
+    {
+      "id": "cplay-cy-flow-floor-connection-april-workshops-na-na",
+      "venue": "cplay.cy",
+      "title": "Flow, Floor & Connection - April Workshops",
+      "details": "Google Form registration via Linktree",
+      "dayOfWeek": null,
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://forms.gle/k2ntAoqvZVt5bzY7A",
+      "sourceUrl": "https://linktr.ee/cplay.cy",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-03-21T12:57:57.032Z"
+    },
+    {
+      "id": "jw3-move-reset-thursday-12-30pm",
+      "venue": "JW3",
+      "title": "Move & Reset",
+      "details": "Lunchtime movement class (60 min) with Yael Flexer. Open to adults of all ages and abilities; improvisation, guided exercises, and gentle movement. £12 per session; £40 for the 4-week course (booking fee applies on site).",
+      "dayOfWeek": "Thursday",
+      "startTime": "12.30pm",
+      "endTime": "1.30pm",
+      "startDate": "2026-01-22",
+      "endDate": "2026-03-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+      "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "all-ages",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-03-21T13:02:10.809Z"
+    },
+    {
+      "id": "omnibus-theatre-how-the-voice-moves-a-poetry-dance-improv-workshop-friday-7-00pm",
+      "venue": "Omnibus Theatre",
+      "title": "How the voice moves: a poetry & dance improv workshop",
+      "details": "Poetry and dance improvisation workshop. Omnibus Theatre, SW4 0QW.",
+      "dayOfWeek": "Friday",
+      "startTime": "7:00pm",
+      "endTime": "9:00pm",
+      "startDate": "2026-03-27",
+      "endDate": "2026-03-27",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
+      "sourceUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
+      "tags": [
+        "improv",
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-03-21T13:02:10.809Z"
     }
   ],
   "venues": [
@@ -52083,13 +52158,26 @@
       "lastError": null
     },
     {
+      "venue": "cplay.cy",
+      "key": "cplayCy",
+      "sourceUrl": "https://linktr.ee/cplay.cy",
+      "count": 3,
+      "ok": true,
+      "lastSuccessAt": "2026-03-21T12:57:57.032Z",
+      "lastError": null
+    },
+    {
       "venue": "JW3",
       "key": "customEvents",
       "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
-      "count": 1,
+      "count": 2,
       "ok": true,
-      "lastSuccessAt": "2026-03-19T22:25:01.043Z",
-      "lastError": null
+      "lastSuccessAt": "2026-03-21T13:02:10.809Z",
+      "lastError": null,
+      "replacedVenueLabels": [
+        "JW3",
+        "Omnibus Theatre"
+      ]
     },
     {
       "venue": "Butoh Mutation",

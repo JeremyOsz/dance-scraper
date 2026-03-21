@@ -6,6 +6,8 @@ const DATA_FILE = path.join(process.cwd(), "data", "custom-events.json");
 
 type CustomEventEntry = {
   title: string;
+  /** Overrides top-level `venue` for this row (e.g. a different theatre). */
+  venue?: string | null;
   details?: string | null;
   dayOfWeek?: string | null;
   time?: string | null;
@@ -30,10 +32,24 @@ function readCustomEvents(): CustomEventsFile {
   return parsed;
 }
 
-function toRow(entry: CustomEventEntry, venue: string, fallbackSourceUrl: string): ScrapedClass | null {
+function collectReplacedVenueLabels(file: CustomEventsFile): string[] {
+  const defaultVenue = file.venue.trim();
+  const labels = new Set<string>();
+  if (defaultVenue) labels.add(defaultVenue);
+  for (const entry of file.events) {
+    const v = entry.venue?.trim() || defaultVenue;
+    if (v) labels.add(v);
+  }
+  return [...labels];
+}
+
+function toRow(entry: CustomEventEntry, defaultVenue: string, fallbackSourceUrl: string): ScrapedClass | null {
   const title = entry.title?.trim();
   const bookingUrl = entry.bookingUrl?.trim();
   if (!title || !bookingUrl) return null;
+
+  const venue = (entry.venue?.trim() || defaultVenue).trim();
+  if (!venue) return null;
 
   return {
     venue,
@@ -65,7 +81,8 @@ export async function scrapeCustomEvents(): Promise<AdapterOutput> {
       sourceUrl: file.sourceUrl,
       classes,
       ok: true,
-      error: null
+      error: null,
+      replacedVenueLabels: collectReplacedVenueLabels(file)
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

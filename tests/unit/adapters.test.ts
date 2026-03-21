@@ -95,6 +95,7 @@ const testedVenueKeys = [
   "conTumbaoSalsa",
   "underTheSunDance",
   "balletForYou",
+  "cplayCy",
   "fieldworksDance",
   "customEvents"
 ] as const;

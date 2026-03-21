@@ -20,4 +20,6 @@ export type AdapterOutput = {
   classes: ScrapedClass[];
   ok: boolean;
   error: string | null;
+  /** Distinct venue labels in this scrape; merge uses with prior labels to evict replaced sessions. */
+  replacedVenueLabels?: string[];
 };

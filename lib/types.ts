@@ -32,6 +32,7 @@ export type VenueKey =
   | "underTheSunDance"
   | "balletForYou"
   | "fieldworksDance"
+  | "cplayCy"
   | "customEvents";
 
 export type DayOfWeek =
@@ -76,6 +77,8 @@ export type VenueStatus = {
   ok: boolean;
   lastSuccessAt: string | null;
   lastError: string | null;
+  /** When set (e.g. custom listings), merge evicts prior sessions for any of these venue labels. */
+  replacedVenueLabels?: string[];
 };
 
 export type ScrapeOutput = {

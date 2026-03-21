@@ -167,6 +167,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://www.fieldworksdance.co.uk/book-online",
     mapQuery: "FieldWorks Dance London"
   },
+  cplayCy: {
+    label: "cplay.cy",
+    sourceUrl: "https://linktr.ee/cplay.cy",
+    mapQuery: "cplay.cy London dance"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",

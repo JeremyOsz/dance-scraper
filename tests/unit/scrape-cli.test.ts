@@ -31,7 +31,8 @@ function makeStatus(input: Partial<VenueStatus> & Pick<VenueStatus, "key" | "ven
     count: input.count ?? 0,
     ok: input.ok ?? true,
     lastSuccessAt: input.lastSuccessAt ?? "2026-03-10T10:00:00.000Z",
-    lastError: input.lastError ?? null
+    lastError: input.lastError ?? null,
+    ...(input.replacedVenueLabels !== undefined ? { replacedVenueLabels: input.replacedVenueLabels } : {})
   };
 }
 
@@ -218,5 +219,44 @@ describe("mergeOutputWithPrevious", () => {
     const { merged, evictedSessions } = mergeOutputWithPrevious(previous, fresh, ["thePlace", "rambert"]);
     expect(evictedSessions.map((s) => s.id).sort()).toEqual(["prev-rambert"]);
     expect(merged.sessions.map((session) => session.id).sort()).toEqual(["new-rambert", "prev-theplace"]);
+  });
+
+  it("evicts sessions for all replaced venue labels when a scrape carries replacedVenueLabels", () => {
+    const previous: ScrapeOutput = {
+      generatedAt: "2026-03-10T10:00:00.000Z",
+      sessions: [
+        makeSession("prev-a", "JW3"),
+        makeSession("prev-b", "Omnibus Theatre"),
+        makeSession("prev-other", "Rambert")
+      ],
+      venues: [
+        makeStatus({
+          key: "customEvents",
+          venue: "JW3",
+          count: 2,
+          replacedVenueLabels: ["JW3", "Omnibus Theatre"]
+        }),
+        makeStatus({ key: "rambert", venue: "Rambert", count: 1 })
+      ]
+    };
+
+    const fresh: ScrapeOutput = {
+      generatedAt: "2026-03-12T10:00:00.000Z",
+      sessions: [makeSession("new-jw3", "JW3")],
+      venues: [
+        makeStatus({
+          key: "customEvents",
+          venue: "JW3",
+          ok: true,
+          count: 1,
+          lastSuccessAt: "2026-03-12T10:00:00.000Z",
+          replacedVenueLabels: ["JW3", "Omnibus Theatre"]
+        })
+      ]
+    };
+
+    const { merged, evictedSessions } = mergeOutputWithPrevious(previous, fresh, ["customEvents", "rambert"]);
+    expect(evictedSessions.map((s) => s.id).sort()).toEqual(["prev-a", "prev-b"]);
+    expect(merged.sessions.map((s) => s.id).sort()).toEqual(["new-jw3", "prev-other"]);
   });
 });
