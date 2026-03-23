@@ -32,7 +32,7 @@ export type FeaturedRule = {
 |---|---|
 | `FEATURED_RULES: FeaturedRule[]` | Array of rules; initially empty (no featured items until populated). |
 | `isFeaturedSession(session: DanceSession): boolean` | Returns true if any rule matches the session. Matching: `venueKey` checks `VENUES[key].label === session.venue`; `titleContains` is a case-insensitive `includes`; `tag` is an exact match against `session.tags`. |
-| `isFeaturedVenueKey(key: VenueKey): boolean` | Returns true if any rule has `venueKey === key`. Used by the venues tab. |
+| `isFeaturedVenueName(name: string): boolean` | Returns true if any rule has a `venueKey` whose `VENUES[venueKey].label === name`. Used by the venues tab, which only has venue label strings, not `VenueKey` values. |
 
 ### Matching semantics
 
@@ -105,7 +105,7 @@ A `★ Featured` badge is added alongside the existing status badge:
 | File | Change |
 |---|---|
 | `lib/featured.ts` | **New.** Config array and two utility functions. |
-| `components/calendar/calendar-page.tsx` | Import `isFeaturedSession` and `isFeaturedVenueKey`; apply sort and styles in calendar and venues tab. |
+| `components/calendar/calendar-page.tsx` | Import `isFeaturedSession` and `isFeaturedVenueName`; apply sort and styles in calendar and venues tab. |
 
 No changes to scrapers, data files, API routes, or types.
 
