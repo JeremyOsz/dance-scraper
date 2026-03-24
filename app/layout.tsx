@@ -4,6 +4,7 @@ import { getBaseUrl } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/react";
 
 const baseUrl = getBaseUrl();
+const isProductionDeployment = process.env.VERCEL_ENV === "production" || process.env.NODE_ENV === "production";
 const siteName = "London Dance Calendar";
 const siteDescription =
   "Find adult and open dance and movement classes across London with a searchable calendar, venue index, and map.";
@@ -41,15 +42,18 @@ export const metadata: Metadata = {
     description: siteDescription
   },
   robots: {
-    index: true,
-    follow: true,
+    index: isProductionDeployment,
+    follow: isProductionDeployment,
     googleBot: {
-      index: true,
-      follow: true,
+      index: isProductionDeployment,
+      follow: isProductionDeployment,
       "max-image-preview": "large",
       "max-snippet": -1,
       "max-video-preview": -1
     }
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION
   },
   category: "events",
   icons: {

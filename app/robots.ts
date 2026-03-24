@@ -3,6 +3,18 @@ import { getBaseUrl } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = getBaseUrl();
+  const isProductionDeployment = process.env.VERCEL_ENV === "production";
+
+  if (!isProductionDeployment) {
+    return {
+      rules: [
+        {
+          userAgent: "*",
+          disallow: "/"
+        }
+      ]
+    };
+  }
 
   return {
     rules: [
