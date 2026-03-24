@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-21T13:02:10.809Z",
+  "generatedAt": "2026-03-24T10:03:03.777Z",
   "sessions": [
     {
       "id": "rambert-line-dancing-beginners-thursday-18-20",
@@ -51844,7 +51844,7 @@
       ],
       "audience": "all-ages",
       "isWorkshop": false,
-      "lastSeenAt": "2026-03-21T13:02:10.809Z"
+      "lastSeenAt": "2026-03-24T10:03:03.777Z"
     },
     {
       "id": "omnibus-theatre-how-the-voice-moves-a-poetry-dance-improv-workshop-friday-7-00pm",
@@ -51865,7 +51865,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-03-21T13:02:10.809Z"
+      "lastSeenAt": "2026-03-24T10:03:03.777Z"
     }
   ],
   "venues": [
@@ -52172,7 +52172,7 @@
       "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
       "count": 2,
       "ok": true,
-      "lastSuccessAt": "2026-03-21T13:02:10.809Z",
+      "lastSuccessAt": "2026-03-24T10:03:03.777Z",
       "lastError": null,
       "replacedVenueLabels": [
         "JW3",
