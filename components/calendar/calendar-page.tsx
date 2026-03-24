@@ -17,6 +17,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { canAddSessionToCalendar } from "@/lib/calendar-export";
 import { DANCE_TYPES, inferDanceTypes, matchesDanceType, type DanceType } from "@/lib/dance-types";
 import { ORDERED_DAYS, formatTimeRange, getForwardDayWindow, getMonthGridDates, isSessionActiveOnDate } from "@/lib/date";
+import { isFeaturedSession, isFeaturedVenueName } from "@/lib/featured";
 import { LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
 import { getVenueMapQuery } from "@/lib/venues";
 
@@ -98,6 +99,10 @@ function readStoredList(key: string): string[] {
 
 function toggleValue(values: string[], value: string) {
   return values.includes(value) ? values.filter((item) => item !== value) : [...values, value];
+}
+
+function sortSessionsByFeatured(sessions: DanceSession[]) {
+  return [...sessions].sort((a, b) => Number(isFeaturedSession(b)) - Number(isFeaturedSession(a)));
 }
 
 type Props = {
@@ -422,10 +427,28 @@ export function CalendarPage({ initialSessions, venues }: Props) {
 
   const grouped = useMemo(() => groupByDate(filteredSessions, visibleDates), [filteredSessions, visibleDates]);
   const undatedSessions = useMemo(
-    () => filteredSessions.filter((session) => isUndatedSession(session)),
+    () => sortSessionsByFeatured(filteredSessions.filter((session) => isUndatedSession(session))),
     [filteredSessions]
   );
   const shortlistSet = useMemo(() => new Set(shortlistSessionIds), [shortlistSessionIds]);
+  const sortedVenues = useMemo(() => {
+    return venues
+      .map((venue, index) => ({ venue, index }))
+      .sort((a, b) => {
+        const aFeatured = isFeaturedVenueName(a.venue.name);
+        const bFeatured = isFeaturedVenueName(b.venue.name);
+        if (aFeatured !== bFeatured) {
+          return Number(bFeatured) - Number(aFeatured);
+        }
+        const aActive = (relatedSessionCountByVenue.get(a.venue.name) ?? 0) > 0;
+        const bActive = (relatedSessionCountByVenue.get(b.venue.name) ?? 0) > 0;
+        if (aActive !== bActive) {
+          return Number(bActive) - Number(aActive);
+        }
+        return a.index - b.index;
+      })
+      .map(({ venue }) => venue);
+  }, [relatedSessionCountByVenue, venues]);
 
   const toggleShortlist = (sessionId: string) => {
     setShortlistSessionIds((current) => toggleValue(current, sessionId));
@@ -987,7 +1010,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   >
                     {visibleDates.map((date) => {
                       const iso = format(date, "yyyy-MM-dd");
-                      const sessions = grouped.get(iso) ?? [];
+                      const sessions = sortSessionsByFeatured(grouped.get(iso) ?? []);
                       const inMonth = isSameMonth(date, anchorDate);
                       const isToday = isSameDay(date, new Date());
                       return (
@@ -1004,18 +1027,26 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                             </CardTitle>
                           </CardHeader>
                           <CardContent className="space-y-2 p-3 pt-0">
-                            {(view === "month" ? sessions.slice(0, 3) : sessions).map((session) => {
+                            {(view === "month" ? sessions.slice(0, 3) : sessions).map((session, index) => {
                               const types = inferDanceTypes(session);
                               const primaryType = types[0] ?? "Other";
+                              const featured = isFeaturedSession(session);
                               return (
                                 <div
-                                  key={session.id + iso}
-                                  className={`rounded-md border p-2 text-xs ${DANCE_TYPE_CARD_CLASS[primaryType]}`}
+                                  key={`${session.id}-${iso}-${session.bookingUrl}-${index}`}
+                                  className={`rounded-md border p-2 text-xs ${
+                                    featured
+                                      ? "border-amber-400 bg-amber-50 ring-1 ring-amber-300"
+                                      : DANCE_TYPE_CARD_CLASS[primaryType]
+                                  }`}
                                 >
                                   <button
                                     onClick={() => setSelectedSession(session)}
                                     className="w-full text-left hover:text-foreground/90"
                                   >
+                                    {featured ? (
+                                      <span className="text-[10px] font-semibold text-amber-600">★ Featured</span>
+                                    ) : null}
                                     <p className="font-medium">{session.title}</p>
                                     <p className="text-muted-foreground">
                                       {session.startTime || session.endTime
@@ -1062,18 +1093,26 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       <CardTitle className="text-sm">Undated classes</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-2 p-3 pt-0">
-                      {undatedSessions.map((session) => {
+                      {undatedSessions.map((session, index) => {
                         const types = inferDanceTypes(session);
                         const primaryType = types[0] ?? "Other";
+                        const featured = isFeaturedSession(session);
                         return (
                           <div
-                            key={session.id}
-                            className={`rounded-md border p-2 text-xs ${DANCE_TYPE_CARD_CLASS[primaryType]}`}
+                            key={`${session.id}-${session.bookingUrl}-${index}`}
+                            className={`rounded-md border p-2 text-xs ${
+                              featured
+                                ? "border-amber-400 bg-amber-50 ring-1 ring-amber-300"
+                                : DANCE_TYPE_CARD_CLASS[primaryType]
+                            }`}
                           >
                             <button
                               onClick={() => setSelectedSession(session)}
                               className="w-full text-left hover:text-foreground/90"
                             >
+                              {featured ? (
+                                <span className="text-[10px] font-semibold text-amber-600">★ Featured</span>
+                              ) : null}
                               <p className="font-medium">{session.title}</p>
                               <p className="text-muted-foreground">
                                 {session.dayOfWeek ?? "Day TBC"} • {formatTimeRange(session.startTime, session.endTime)}
@@ -1128,16 +1167,25 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   </CardContent>
                 </Card>
                 <div className="grid gap-3 md:grid-cols-2">
-                  {venues.map((venue) => {
+                  {sortedVenues.map((venue) => {
                     const relatedCount = relatedSessionCountByVenue.get(venue.name) ?? 0;
                     const isMuted = relatedCount === 0;
                     const status = getVenueStatus(venue);
+                    const featured = isFeaturedVenueName(venue.name);
                     return (
-                      <Card key={venue.name} className={isMuted ? "opacity-60" : undefined}>
+                      <Card
+                        key={venue.name}
+                        className={`${isMuted ? "opacity-60" : ""} ${featured ? "border-amber-400 ring-1 ring-amber-300" : ""}`.trim()}
+                      >
                         <CardHeader className="space-y-2">
                           <div className="flex items-center justify-between gap-2">
                             <CardTitle className="text-base">{venue.name}</CardTitle>
-                            <Badge variant={status.variant}>{status.label}</Badge>
+                            <div className="flex items-center gap-2">
+                              {featured ? (
+                                <Badge className="border-amber-400 bg-amber-50 text-amber-700">★ Featured</Badge>
+                              ) : null}
+                              <Badge variant={status.variant}>{status.label}</Badge>
+                            </div>
                           </div>
                           <p className="text-xs text-muted-foreground">
                             {venue.count === 0 ? "No sessions found on last scrape" : `${venue.count} sessions last scrape`}
