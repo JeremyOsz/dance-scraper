@@ -33,6 +33,8 @@ export type VenueKey =
   | "balletForYou"
   | "fieldworksDance"
   | "cplayCy"
+  | "citylit"
+  | "dancebuzz"
   | "customEvents";
 
 export type DayOfWeek =
@@ -66,6 +68,8 @@ export type DanceSession = {
   tags: string[];
   audience: "adult" | "open" | "all-ages";
   isWorkshop: boolean;
+  /** True when the class requires upfront enrollment (term/block booking), not drop-in. */
+  enrollmentOnly?: boolean;
   lastSeenAt: string;
 };
 

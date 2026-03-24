@@ -172,6 +172,16 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://linktr.ee/cplay.cy",
     mapQuery: "cplay.cy London dance"
   },
+  citylit: {
+    label: "Citylit",
+    sourceUrl: "https://www.citylit.ac.uk/courses/arts-and-culture/dance",
+    mapQuery: "Citylit, 1 Keeley Street, London WC2B 4BA"
+  },
+  dancebuzz: {
+    label: "Dancebuzz",
+    sourceUrl: "https://www.dancebuzz.co.uk/",
+    mapQuery: "Dancebuzz London dance classes"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",

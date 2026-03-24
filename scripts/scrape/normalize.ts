@@ -99,6 +99,17 @@ function inferWorkshop(text: string): boolean {
   return /(workshop|masterclass|intensive|lab|immersion)/i.test(text);
 }
 
+/** Venues where all classes require term/block enrollment rather than drop-in attendance. */
+const ENROLLMENT_ONLY_VENUES = new Set(["City Academy", "Citylit", "Dancebuzz"]);
+
+function inferEnrollmentOnly(raw: ScrapedClass): boolean {
+  if (raw.enrollmentOnly !== undefined) return raw.enrollmentOnly;
+  if (ENROLLMENT_ONLY_VENUES.has(raw.venue)) return true;
+  // The Place fundamentals/foundation classes run as term courses requiring enrollment
+  if (raw.venue === "The Place" && /\bfundamentals?\b/i.test(raw.title)) return true;
+  return false;
+}
+
 function isNoiseTitle(rawTitle: string): boolean {
   const title = rawTitle.trim().toLowerCase();
   return [
@@ -173,6 +184,7 @@ function toSession(raw: ScrapedClass, seenAt: string): DanceSession {
     tags: inferTags(raw),
     audience: inferAudience(text),
     isWorkshop: inferWorkshop(text),
+    enrollmentOnly: inferEnrollmentOnly(raw) || undefined,
     lastSeenAt: seenAt
   };
 }

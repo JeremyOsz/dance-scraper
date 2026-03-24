@@ -11,7 +11,7 @@ export function generateMetadata(): Metadata {
   const data = readScrapeOutput();
   const venueCount = data.venues.length;
   const classCount = data.sessions.length;
-  const title = "London Dance Class Calendar and Venues";
+  const title = "London Dance Class Calendar";
   const description = `Browse ${classCount} dance and movement classes from ${venueCount} London venues in a searchable weekly and monthly calendar.`;
 
   return {

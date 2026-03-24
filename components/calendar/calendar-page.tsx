@@ -151,7 +151,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [mode, setMode] = useState<"calendar" | "venues" | "map">("calendar");
+  const [mode, setMode] = useState<"calendar" | "venues" | "map" | "courses">("calendar");
   const [view, setView] = useState<"week" | "month">("week");
   const [anchorDate, setAnchorDate] = useState(() => startOfDay(new Date()));
   const [loadedDayCount, setLoadedDayCount] = useState(INITIAL_WEEK_DAY_COUNT);
@@ -187,7 +187,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
 
   useEffect(() => {
     const modeParam = searchParams.get("mode");
-    const nextMode = modeParam === "venues" || modeParam === "map" ? modeParam : "calendar";
+    const nextMode = modeParam === "venues" || modeParam === "map" || modeParam === "courses" ? modeParam : "calendar";
     setMode(nextMode);
 
     const viewParam = searchParams.get("view");
@@ -908,6 +908,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                 <Button variant={mode === "calendar" ? "default" : "outline"} onClick={() => setMode("calendar")}>
                   Calendar
                 </Button>
+                <Button variant={mode === "courses" ? "default" : "outline"} onClick={() => setMode("courses")}>
+                  Courses
+                </Button>
                 <Button variant={mode === "venues" ? "default" : "outline"} onClick={() => setMode("venues")}>
                   Venues
                 </Button>
@@ -1109,6 +1112,83 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                 No matching classes. Try clearing filters or broadening search.
               </div>
             )}
+
+            {mode === "courses" && (() => {
+              const courseSessions = filteredSessions.filter((s) => s.enrollmentOnly);
+              const byVenue = new Map<string, typeof courseSessions>();
+              for (const session of courseSessions) {
+                const list = byVenue.get(session.venue) ?? [];
+                list.push(session);
+                byVenue.set(session.venue, list);
+              }
+              const venueGroups = [...byVenue.entries()].sort(([a], [b]) => a.localeCompare(b));
+              if (venueGroups.length === 0) {
+                return (
+                  <div className="rounded-md border border-dashed border-input bg-card p-4 text-sm text-muted-foreground">
+                    No enrollment-only courses found. Try clearing filters.
+                  </div>
+                );
+              }
+              return (
+                <div className="space-y-3">
+                  <p className="text-xs text-muted-foreground">
+                    Classes below require upfront enrollment (term or block booking) rather than drop-in attendance.
+                  </p>
+                  {venueGroups.map(([venueName, sessions]) => (
+                    <Card key={venueName}>
+                      <CardHeader className="p-3 pb-2">
+                        <CardTitle className="text-base">{venueName}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 p-3 pt-0">
+                        {sessions.map((session) => {
+                          const types = inferDanceTypes(session);
+                          const primaryType = types[0] ?? "Other";
+                          return (
+                            <div key={session.id} className={`rounded-md border p-2 text-xs ${DANCE_TYPE_CARD_CLASS[primaryType]}`}>
+                              <button
+                                onClick={() => setSelectedSession(session)}
+                                className="w-full text-left hover:text-foreground/90"
+                              >
+                                <p className="font-medium">{session.title}</p>
+                                {session.dayOfWeek || session.startTime ? (
+                                  <p className="text-muted-foreground">
+                                    {session.dayOfWeek ?? ""}
+                                    {session.dayOfWeek && (session.startTime || session.endTime) ? " • " : ""}
+                                    {formatTimeRange(session.startTime, session.endTime)}
+                                  </p>
+                                ) : null}
+                                {session.startDate ? (
+                                  <p className="text-muted-foreground">
+                                    From {session.startDate}{session.endDate && session.endDate !== session.startDate ? ` – ${session.endDate}` : ""}
+                                  </p>
+                                ) : null}
+                                {session.details ? (
+                                  <p className="mt-1 text-muted-foreground line-clamp-2">{session.details}</p>
+                                ) : null}
+                              </button>
+                              <div className="mt-2 flex items-center gap-2">
+                                <Button size="sm" variant="outline" className="h-8 px-3 text-xs sm:h-6 sm:px-2 sm:text-[11px]" asChild>
+                                  <a href={session.bookingUrl} target="_blank" rel="noreferrer">Enroll</a>
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant={shortlistSet.has(session.id) ? "default" : "outline"}
+                                  className="h-8 px-3 text-xs transition-colors sm:h-6 sm:px-2 sm:text-[11px]"
+                                  onClick={() => toggleShortlist(session.id)}
+                                  aria-label={shortlistSet.has(session.id) ? `Remove from shortlist: ${session.title}` : `Add to shortlist: ${session.title}`}
+                                >
+                                  {shortlistSet.has(session.id) ? "Saved" : "Shortlist"}
+                                </Button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              );
+            })()}
 
             {mode === "venues" && (
               <div className="space-y-3">

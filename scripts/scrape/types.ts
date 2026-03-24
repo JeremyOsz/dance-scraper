@@ -11,6 +11,8 @@ export type ScrapedClass = {
   excludedDateRanges?: SessionExcludedDateRange[];
   bookingUrl: string;
   sourceUrl: string;
+  /** Override: true when the class requires upfront enrollment, not drop-in. */
+  enrollmentOnly?: boolean;
 };
 
 export type AdapterOutput = {
