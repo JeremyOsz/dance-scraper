@@ -22,6 +22,7 @@ export default function Head() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={siteName} />
       <meta name="twitter:description" content={description} />
+      <meta name="google-site-verification" content="6L2YCyrL4QMNv24tNJdXYjJWsMh5ni5Cunqnsq1n1lo" />
     </>
   );
 }
