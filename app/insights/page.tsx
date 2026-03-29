@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { readScrapeOutput } from "@/lib/data-store";
 import { ORDERED_DAYS } from "@/lib/date";
 import { buildInsights } from "@/lib/insights";
+import { SiteSocialLinks } from "@/components/site-social-links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -62,6 +63,7 @@ export default function InsightsPage() {
           <p className="text-sm text-muted-foreground">
             Trends from the latest scrape: compare day popularity, then see which class types lead on each day.
           </p>
+          <SiteSocialLinks className="mt-1" />
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary">Total classes: {insights.totalSessions}</Badge>
             <Badge variant="secondary">With known day: {insights.sessionsWithKnownDay}</Badge>

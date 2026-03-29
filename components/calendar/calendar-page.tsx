@@ -20,6 +20,7 @@ import { ORDERED_DAYS, formatTimeRange, getForwardDayWindow, getMonthGridDates, 
 import { isFeaturedSession, isFeaturedVenueName } from "@/lib/featured";
 import { LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
 import { getVenueMapQuery } from "@/lib/venues";
+import { SiteSocialLinks } from "@/components/site-social-links";
 
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
 const INITIAL_WEEK_DAY_COUNT = 7;
@@ -884,6 +885,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
             filters for style, level, location, and date to quickly find relevant sessions. Listings are aggregated
             from multiple studio sources and refreshed regularly, though occasional inaccuracies may occur.
           </p>
+          <SiteSocialLinks className="mt-2" />
         </CardHeader>
         <CardContent className="space-y-4 px-0">
           <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
@@ -1158,12 +1160,13 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       Send feedback on the contact page and I&apos;ll try to fix issues when I can.
                     </p>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
                     <Button asChild size="sm">
                       <Link href={"/contact" as Route} prefetch={false}>
                         Open contact page
                       </Link>
                     </Button>
+                    <SiteSocialLinks />
                   </CardContent>
                 </Card>
                 <div className="grid gap-3 md:grid-cols-2">
@@ -1270,11 +1273,14 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                 <p className="mb-3 text-xs text-muted-foreground">
                   Send feedback on the contact page and I&apos;ll try to fix issues when I can.
                 </p>
-                <Button asChild size="sm">
-                  <Link href={"/contact" as Route} prefetch={false}>
-                    Open contact page
-                  </Link>
-                </Button>
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                  <Button asChild size="sm">
+                    <Link href={"/contact" as Route} prefetch={false}>
+                      Open contact page
+                    </Link>
+                  </Button>
+                  <SiteSocialLinks />
+                </div>
               </section>
             )}
 

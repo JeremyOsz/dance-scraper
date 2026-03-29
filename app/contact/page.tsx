@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact/contact-form";
+import { SiteSocialLinks } from "@/components/site-social-links";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function ContactPage() {
         </Button>
       </div>
       <ContactForm />
+      <SiteSocialLinks className="mt-10 border-t border-border pt-6" />
     </main>
   );
 }
