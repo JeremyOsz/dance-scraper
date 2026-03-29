@@ -52,9 +52,9 @@ export const metadata: Metadata = {
       "max-video-preview": -1
     }
   },
-  verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION
-  },
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+    : {}),
   category: "events",
   icons: {
     icon: "/icons/dance-scraper-icon.svg",
