@@ -18,11 +18,45 @@ function buildVenueSummary(venueNames: string[], maxVisible = 8) {
   return `${visible.join(", ")}${suffix}`;
 }
 
+/** Order = biggest typical search/brand impact first (metadata snippet + keywords). */
+const PRIORITY_VENUES = [
+  "The Place",
+  "Rambert",
+  "Danceworks",
+  "Pineapple Dance Studios",
+  "City Academy",
+  "Siobhan Davies Studios",
+  "TripSpace",
+  "BASE Dance Studios",
+  "East London Dance",
+  "Chisenhale Dance Space",
+] as const;
+
+function sortVenuesForSeo(venueNames: string[]) {
+  const priorityOrder = new Map(PRIORITY_VENUES.map((name, index) => [name.toLowerCase(), index]));
+  return [...venueNames].sort((a, b) => {
+    const aPriority = priorityOrder.get(a.toLowerCase());
+    const bPriority = priorityOrder.get(b.toLowerCase());
+
+    if (aPriority !== undefined && bPriority !== undefined) {
+      return aPriority - bPriority;
+    }
+    if (aPriority !== undefined) {
+      return -1;
+    }
+    if (bPriority !== undefined) {
+      return 1;
+    }
+
+    return a.localeCompare(b);
+  });
+}
+
 export function generateMetadata(): Metadata {
   const data = readScrapeOutput();
   const venueCount = data.venues.length;
   const classCount = data.sessions.length;
-  const venueNames = [...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const venueNames = sortVenuesForSeo([...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))]);
   const venueSummary = buildVenueSummary(venueNames);
   const title = "London Dance Calendar";
   const description = `Browse ${classCount} dance and movement classes from ${venueCount} London venues, including ${venueSummary}. Explore ballet, salsa, contemporary, contact improvisation, and more in a searchable weekly and monthly calendar.`;
