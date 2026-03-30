@@ -1,17 +1,17 @@
 import type { MetadataRoute } from "next";
+import { readScrapeOutput } from "@/lib/data-store";
 import { getBaseUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  if (process.env.VERCEL_ENV !== "production") {
-    return [];
-  }
-
   const baseUrl = getBaseUrl();
+  const data = readScrapeOutput();
+  const parsedGeneratedAt = new Date(data.generatedAt);
+  const dataLastModified = Number.isNaN(parsedGeneratedAt.getTime()) ? new Date() : parsedGeneratedAt;
 
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: dataLastModified,
       changeFrequency: "daily",
       priority: 1
     },
@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/insights`,
-      lastModified: new Date(),
+      lastModified: dataLastModified,
       changeFrequency: "weekly",
       priority: 0.6
     }

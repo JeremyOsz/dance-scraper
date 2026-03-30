@@ -1,85 +1,105 @@
 {
   "version": 1,
   "transcripts": {
+    "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/1c5c325a-1a24-453c-8f8d-2e9148175622/1c5c325a-1a24-453c-8f8d-2e9148175622.jsonl": {
+      "mtimeMs": 1774346589827,
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
+    },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/2f287296-63b3-43b6-8e74-154255570229/2f287296-63b3-43b6-8e74-154255570229.jsonl": {
       "mtimeMs": 1773960086910,
-      "lastProcessedAt": "2026-03-19T22:48:37.207Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/3e4807f0-5ab3-4ece-8295-0194115466f6/3e4807f0-5ab3-4ece-8295-0194115466f6.jsonl": {
       "mtimeMs": 1773809836529,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
+    },
+    "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/416af6b3-7605-4fa8-9807-9510dbd16132/416af6b3-7605-4fa8-9807-9510dbd16132.jsonl": {
+      "mtimeMs": 1774381477474,
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/425c511f-c094-47d4-ae3e-b03048593891/425c511f-c094-47d4-ae3e-b03048593891.jsonl": {
       "mtimeMs": 1773750413753,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/438822ac-ffba-46ba-8d05-50e5ffef2b8c/438822ac-ffba-46ba-8d05-50e5ffef2b8c.jsonl": {
       "mtimeMs": 1773951733050,
-      "lastProcessedAt": "2026-03-19T22:48:37.207Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/55a25670-1904-4804-8773-7b31699ada25/55a25670-1904-4804-8773-7b31699ada25.jsonl": {
       "mtimeMs": 1773845604417,
-      "lastProcessedAt": "2026-03-19T22:48:37.207Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/60d89656-fbff-46b7-9f36-d1586b5c20f1/60d89656-fbff-46b7-9f36-d1586b5c20f1.jsonl": {
       "mtimeMs": 1773808258958,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/691d4549-42cb-4380-9adf-16818844ff7a/691d4549-42cb-4380-9adf-16818844ff7a.jsonl": {
       "mtimeMs": 1773810149948,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/7a104443-ec71-462f-90a8-19a32fa419d5/7a104443-ec71-462f-90a8-19a32fa419d5.jsonl": {
       "mtimeMs": 1773853438208,
-      "lastProcessedAt": "2026-03-19T22:48:37.207Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/84f1bbea-f238-4641-b356-a338d0f51e02/84f1bbea-f238-4641-b356-a338d0f51e02.jsonl": {
       "mtimeMs": 1773809820165,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/8fd34527-f2b4-46ec-a1c5-3330ee1fc4d4/8fd34527-f2b4-46ec-a1c5-3330ee1fc4d4.jsonl": {
       "mtimeMs": 1773809136283,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/905f5f31-306e-4561-8af7-fac38709ae1e/905f5f31-306e-4561-8af7-fac38709ae1e.jsonl": {
       "mtimeMs": 1773811092733,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/998c9ce5-2ea0-4835-9db8-864be07b99c6/998c9ce5-2ea0-4835-9db8-864be07b99c6.jsonl": {
       "mtimeMs": 1773961707046,
-      "lastProcessedAt": "2026-03-24T09:59:43Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
+    },
+    "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/b5017cc9-30eb-4dd1-992f-8555234576c6/b5017cc9-30eb-4dd1-992f-8555234576c6.jsonl": {
+      "mtimeMs": 1774786388215,
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/b9af29d6-7682-40eb-bc8b-d0ff39ee5d44/b9af29d6-7682-40eb-bc8b-d0ff39ee5d44.jsonl": {
       "mtimeMs": 1773959117744,
-      "lastProcessedAt": "2026-03-19T22:48:37.207Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
+    },
+    "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/bca00bac-6a26-4a49-a124-08b0b8c206ee/bca00bac-6a26-4a49-a124-08b0b8c206ee.jsonl": {
+      "mtimeMs": 1774786563700,
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/c01fcfe7-f8e0-4c67-adc8-d034ca9987ee/c01fcfe7-f8e0-4c67-adc8-d034ca9987ee.jsonl": {
       "mtimeMs": 1774098232690,
-      "lastProcessedAt": "2026-03-24T09:59:43Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/c3b027da-abc4-4460-9386-d8673ff614cc/c3b027da-abc4-4460-9386-d8673ff614cc.jsonl": {
-      "mtimeMs": 1774346344593,
-      "lastProcessedAt": "2026-03-24T09:59:43Z"
+      "mtimeMs": 1774346391275,
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/c3d2f4ef-14bc-4232-aa95-2a495fda9b1c/c3d2f4ef-14bc-4232-aa95-2a495fda9b1c.jsonl": {
       "mtimeMs": 1773188054814,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/d2eebc8d-e7d6-47cc-818c-ed1618ac3618/d2eebc8d-e7d6-47cc-818c-ed1618ac3618.jsonl": {
       "mtimeMs": 1773155405588,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/e053a6fb-dce6-4347-8738-aaa1671496de/e053a6fb-dce6-4347-8738-aaa1671496de.jsonl": {
       "mtimeMs": 1773810974658,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
+    },
+    "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/e844437e-dcaa-4bad-9de6-5a86e5aa6f2c/e844437e-dcaa-4bad-9de6-5a86e5aa6f2c.jsonl": {
+      "mtimeMs": 1774348273154,
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/eef0c22d-6f18-4ed7-b46d-b784f77c31c7/eef0c22d-6f18-4ed7-b46d-b784f77c31c7.jsonl": {
       "mtimeMs": 1773165892514,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     },
     "/Users/jeremy/.cursor/projects/Users-jeremy-Documents-Code-code-projects-dance-scraper/agent-transcripts/f9ee733a-52d5-4f4e-8f89-5d59751598f9/f9ee733a-52d5-4f4e-8f89-5d59751598f9.jsonl": {
       "mtimeMs": 1773759259894,
-      "lastProcessedAt": "2026-03-19T22:48:28.130Z"
+      "lastProcessedAt": "2026-03-29T14:16:21.062Z"
     }
   }
 }
