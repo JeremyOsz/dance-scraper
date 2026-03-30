@@ -7,16 +7,42 @@ import { VENUES } from "@/lib/venues";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+function buildVenueSummary(venueNames: string[], maxVisible = 8) {
+  if (venueNames.length === 0) {
+    return "London dance venues";
+  }
+
+  const visible = venueNames.slice(0, maxVisible);
+  const remaining = venueNames.length - visible.length;
+  const suffix = remaining > 0 ? `, and ${remaining} more` : "";
+  return `${visible.join(", ")}${suffix}`;
+}
+
 export function generateMetadata(): Metadata {
   const data = readScrapeOutput();
   const venueCount = data.venues.length;
   const classCount = data.sessions.length;
-  const title = "London Dance Class Calendar";
-  const description = `Browse ${classCount} dance and movement classes from ${venueCount} London venues in a searchable weekly and monthly calendar.`;
+  const venueNames = [...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const venueSummary = buildVenueSummary(venueNames);
+  const title = "London Dance Calendar";
+  const description = `Browse ${classCount} dance and movement classes from ${venueCount} London venues, including ${venueSummary}. Explore ballet, salsa, contemporary, contact improvisation, and more in a searchable weekly and monthly calendar.`;
+  const keywords = [
+    "London dance classes",
+    "London dance calendar",
+    "adult dance classes London",
+    "open dance classes London",
+    "dance workshops London",
+    "ballet classes London",
+    "salsa classes London",
+    "contemporary dance classes London",
+    "contact improvisation London",
+    ...venueNames.map((name) => `${name} classes`)
+  ];
 
   return {
     title,
     description,
+    keywords,
     alternates: {
       canonical: "/"
     },
