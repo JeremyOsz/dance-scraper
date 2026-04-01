@@ -25,6 +25,10 @@ type MomenceSessionsResponse = {
   };
 };
 
+function isYogaSession(text: string) {
+  return /\byoga\b/i.test(text);
+}
+
 async function fetchMomenceSessions(hostId: string): Promise<NonNullable<MomenceSessionsResponse["payload"]>> {
   const pageSize = 100;
   const all: NonNullable<MomenceSessionsResponse["payload"]> = [];
@@ -60,7 +64,9 @@ function fallbackDancePageClasses($: cheerio.CheerioAPI): AdapterOutput["classes
     const href = $(el).find('a[href*="event"], a[href*="workshop"], a[href*="dance"], a[href*="booking"]').first().attr("href");
     const bookingUrl = absoluteUrl(fallbackSourceUrl, href);
     if (!bookingUrl) return;
-    if (!/(dance|movement|yoga|workshop|somatic|improv|class)/i.test(`${title} ${text}`)) return;
+    const combinedText = `${title} ${text}`;
+    if (isYogaSession(combinedText)) return;
+    if (!/(dance|movement|yoga|workshop|somatic|improv|class)/i.test(combinedText)) return;
 
     classes.push({
       venue: "TripSpace",
@@ -95,6 +101,9 @@ export async function scrapeTripSpace(): Promise<AdapterOutput> {
             continue;
           }
           if (!session.sessionName || !session.startsAt || !session.endsAt || !session.link) {
+            continue;
+          }
+          if (isYogaSession(`${session.sessionName} ${session.level ?? ""}`)) {
             continue;
           }
 

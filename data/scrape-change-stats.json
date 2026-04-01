@@ -2,6 +2,68 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-01T11:53:33.201Z",
+      "venues": [
+        {
+          "key": "tripSpace",
+          "venue": "TripSpace",
+          "scrapeOk": true,
+          "previousSessionCount": 317,
+          "newSessionCount": 317,
+          "changed": false
+        },
+        {
+          "key": "ecstaticDanceLondon",
+          "venue": "Ecstatic Dance London",
+          "scrapeOk": true,
+          "previousSessionCount": 40,
+          "newSessionCount": 41,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 2,
+        "okVenues": 2,
+        "changedAmongOk": 1
+      }
+    },
+    {
+      "at": "2026-04-01T11:48:03.668Z",
+      "venues": [
+        {
+          "key": "tripSpace",
+          "venue": "TripSpace",
+          "scrapeOk": true,
+          "previousSessionCount": 1402,
+          "newSessionCount": 317,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
+      "at": "2026-04-01T11:41:53.903Z",
+      "venues": [
+        {
+          "key": "danielRodriguezEventbrite",
+          "venue": "Daniel Rodriguez",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 3,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-03-24T10:03:03.777Z",
       "venues": [
         {

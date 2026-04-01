@@ -172,6 +172,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://linktr.ee/cplay.cy",
     mapQuery: "cplay.cy London dance"
   },
+  danielRodriguezEventbrite: {
+    label: "Daniel Rodriguez",
+    sourceUrl: "https://www.eventbrite.com/o/88584641013",
+    mapQuery: "Daniel Rodriguez dance workshop London"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",

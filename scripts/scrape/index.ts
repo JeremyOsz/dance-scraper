@@ -33,7 +33,8 @@ import { scrapeBalletForYou } from "./adapters/ballet-for-you";
 import { scrapeFieldworksDance } from "./adapters/fieldworks-dance";
 import { scrapeCplayCyLinktree } from "./adapters/cplay-cy-linktree";
 import { scrapeCustomEvents } from "./adapters/custom-events";
-import type { VenueKey } from "../../lib/types";
+import { scrapeDanielRodriguezEventbrite } from "./adapters/daniel-rodriguez-eventbrite";
+import type { ScrapeOutput, VenueKey } from "../../lib/types";
 import { VENUES } from "../../lib/venues";
 import { buildOutput, writeOutput } from "./normalize";
 import path from "node:path";
@@ -89,8 +90,47 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "balletForYou", scrape: scrapeBalletForYou },
   { key: "fieldworksDance", scrape: scrapeFieldworksDance },
   { key: "cplayCy", scrape: scrapeCplayCyLinktree },
+  { key: "danielRodriguezEventbrite", scrape: scrapeDanielRodriguezEventbrite },
   { key: "customEvents", scrape: scrapeCustomEvents }
 ];
+
+const HIDDEN_VENUE_KEYS = new Set<VenueKey>(["ecstaticDanceLondon"]);
+const HIDDEN_SESSION_TITLE_PATTERNS = [/\bvinyasa\s*flow\b/i];
+
+function applyOutputCuration(output: ScrapeOutput): ScrapeOutput {
+  const hiddenVenueLabels = new Set(
+    output.venues.filter((venue) => HIDDEN_VENUE_KEYS.has(venue.key)).map((venue) => venue.venue)
+  );
+  hiddenVenueLabels.add("Ecstatic Dance London");
+
+  const curatedSessions = output.sessions.filter((session) => {
+    if (hiddenVenueLabels.has(session.venue)) {
+      return false;
+    }
+    if (HIDDEN_SESSION_TITLE_PATTERNS.some((pattern) => pattern.test(session.title))) {
+      return false;
+    }
+    return true;
+  });
+
+  const sessionCountByVenue = new Map<string, number>();
+  for (const session of curatedSessions) {
+    sessionCountByVenue.set(session.venue, (sessionCountByVenue.get(session.venue) ?? 0) + 1);
+  }
+
+  const curatedVenues = output.venues
+    .filter((venue) => !HIDDEN_VENUE_KEYS.has(venue.key) && !hiddenVenueLabels.has(venue.venue))
+    .map((venue) => ({
+      ...venue,
+      count: sessionCountByVenue.get(venue.venue) ?? 0
+    }));
+
+  return {
+    ...output,
+    sessions: curatedSessions,
+    venues: curatedVenues
+  };
+}
 
 async function main() {
   const started = Date.now();
@@ -147,7 +187,8 @@ async function main() {
     previousOutput?.sessions,
     freshOutput.sessions
   );
-  const { merged: output, evictedSessions } = mergeOutputWithPrevious(previousOutput, freshOutput, allVenueKeys);
+  const { merged, evictedSessions } = mergeOutputWithPrevious(previousOutput, freshOutput, allVenueKeys);
+  const output = applyOutputCuration(merged);
 
   appendScrapeStatsRun(path.join(dataDir, "scrape-change-stats.json"), freshOutput.generatedAt, venueStats);
   appendPastArchive(evictedSessions, path.join(dataDir, "classes.past.json"), Date.now(), freshOutput.generatedAt);

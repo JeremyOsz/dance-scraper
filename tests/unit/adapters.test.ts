@@ -96,6 +96,7 @@ const testedVenueKeys = [
   "underTheSunDance",
   "balletForYou",
   "cplayCy",
+  "danielRodriguezEventbrite",
   "fieldworksDance",
   "customEvents"
 ] as const;
@@ -274,6 +275,42 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.bookingUrl).toBe("https://momence.com/s/11111111");
     expect(output.classes[0]?.sourceUrl).toBe("https://momence.com/u/tripspace-bKDjuG");
     expect(output.classes[0]?.venue).toBe("TripSpace");
+  });
+
+  it("filters out TripSpace yoga sessions from Momence data", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(
+        `<section><script host_id="43797" src="https://momence.com/plugin/host-schedule/host-schedule.js"></script></section>`
+      )
+      .mockResolvedValueOnce(
+        JSON.stringify({
+          payload: [
+            {
+              sessionName: "Open Improvisation",
+              level: "All levels",
+              startsAt: "2026-03-12T18:30:00.000Z",
+              endsAt: "2026-03-12T20:00:00.000Z",
+              link: "https://momence.com/s/11111111"
+            },
+            {
+              sessionName: "Vinyasa Yoga",
+              level: "Open level",
+              startsAt: "2026-03-12T08:00:00.000Z",
+              endsAt: "2026-03-12T09:00:00.000Z",
+              link: "https://momence.com/s/99999999"
+            }
+          ],
+          pagination: {
+            pageSize: 100,
+            totalCount: 2
+          }
+        })
+      );
+    const { scrapeTripSpace } = await import("../../scripts/scrape/adapters/trip-space");
+    const output = await scrapeTripSpace();
+    expect(output.ok).toBe(true);
+    expect(output.classes.map((item) => item.title)).toContain("Open Improvisation");
+    expect(output.classes.map((item) => item.title)).not.toContain("Vinyasa Yoga");
   });
 
   it("uses default TripSpace Momence host id when embed host_id is missing", async () => {

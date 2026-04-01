@@ -69,7 +69,13 @@ export function isSessionActiveOnDate(session: DanceSession, dateIso: string) {
     return false;
   }
 
-  if (!session.dayOfWeek) return true;
+  if (!session.dayOfWeek) {
+    // Without a weekday, treat dated records as one-off sessions to avoid
+    // projecting uncertain recurrence across an entire date range.
+    if (session.startDate) return dateIso === session.startDate;
+    if (session.endDate) return dateIso === session.endDate;
+    return false;
+  }
   const dayName = format(parseISO(dateIso), "EEEE") as Exclude<DayOfWeek, null>;
   return dayName === session.dayOfWeek;
 }
