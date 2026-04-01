@@ -3,6 +3,7 @@ import { CalendarPage } from "@/components/calendar/calendar-page";
 import { readScrapeOutput } from "@/lib/data-store";
 import { getBaseUrl } from "@/lib/seo";
 import { VENUES } from "@/lib/venues";
+import { sortVenueRecordsForUi } from "@/lib/venue-order";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -109,7 +110,7 @@ export default function Home() {
       }
     ])
   );
-  const venues = Array.from(venueMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+  const venues = sortVenueRecordsForUi(Array.from(venueMap.values()));
 
   const structuredData = [
     {

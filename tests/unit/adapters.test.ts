@@ -388,6 +388,28 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.title).toContain("Bachata");
   });
 
+  it("keeps Bachata Community adapter working when one month payload is malformed", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(fixture("bachata-home.html"))
+      .mockResolvedValueOnce("<html>temporarily unavailable</html>")
+      .mockResolvedValue(fixture("bachata-month.json"));
+    const { scrapeBachataCommunity } = await import("../../scripts/scrape/adapters/bachata-community");
+    const output = await scrapeBachataCommunity();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.error).toContain("Unexpected token");
+  });
+
+  it("falls back to default calendar IDs when Bachata homepage is unavailable", async () => {
+    fetchHtml
+      .mockRejectedValueOnce(new Error("Request failed with status code 503"))
+      .mockResolvedValue(fixture("bachata-month.json"));
+    const { scrapeBachataCommunity } = await import("../../scripts/scrape/adapters/bachata-community");
+    const output = await scrapeBachataCommunity();
+    expect(output.ok).toBe(true);
+    expect(output.classes.length).toBeGreaterThan(0);
+  });
+
   it("parses Ecstatic Dance London adapter from Eventbrite organizers", async () => {
     fetchHtml.mockResolvedValue(fixture("eventbrite-organizer.html"));
     const { scrapeEcstaticDanceLondon } = await import("../../scripts/scrape/adapters/ecstatic-dance-london");

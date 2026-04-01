@@ -20,6 +20,7 @@ import { ORDERED_DAYS, formatTimeRange, getForwardDayWindow, getMonthGridDates, 
 import { isFeaturedSession, isFeaturedVenueName } from "@/lib/featured";
 import { LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
 import { getVenueMapQuery } from "@/lib/venues";
+import { isBigStudioVenueName, sortVenueRecordsForUi } from "@/lib/venue-order";
 import { SiteSocialLinks } from "@/components/site-social-links";
 
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
@@ -102,8 +103,33 @@ function toggleValue(values: string[], value: string) {
   return values.includes(value) ? values.filter((item) => item !== value) : [...values, value];
 }
 
-function sortSessionsByFeatured(sessions: DanceSession[]) {
-  return [...sessions].sort((a, b) => Number(isFeaturedSession(b)) - Number(isFeaturedSession(a)));
+function sortSessionsForDisplay(sessions: DanceSession[], countByVenue: Map<string, number>) {
+  return [...sessions].sort((a, b) => {
+    const aFeatured = isFeaturedSession(a);
+    const bFeatured = isFeaturedSession(b);
+    if (aFeatured !== bFeatured) {
+      return Number(bFeatured) - Number(aFeatured);
+    }
+
+    const aVenueCount = countByVenue.get(a.venue) ?? 0;
+    const bVenueCount = countByVenue.get(b.venue) ?? 0;
+    if (aVenueCount !== bVenueCount) {
+      return aVenueCount - bVenueCount;
+    }
+
+    const aTime = a.startTime ?? "99:99";
+    const bTime = b.startTime ?? "99:99";
+    if (aTime !== bTime) {
+      return aTime.localeCompare(bTime);
+    }
+
+    const venueCmp = a.venue.localeCompare(b.venue);
+    if (venueCmp !== 0) {
+      return venueCmp;
+    }
+
+    return a.title.localeCompare(b.title);
+  });
 }
 
 type Props = {
@@ -179,7 +205,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const weekScrollRef = useRef<HTMLDivElement>(null);
   const weekLoadSentinelRef = useRef<HTMLDivElement>(null);
 
-  const venueNames = useMemo(() => venues.map((venue) => venue.name), [venues]);
+  const venueNames = useMemo(() => sortVenueRecordsForUi(venues).map((venue) => venue.name), [venues]);
   const selectedDaysKey = useMemo(() => selectedDays.join(","), [selectedDays]);
 
   useEffect(() => {
@@ -385,6 +411,73 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       selectedDays.length === 0 ? dates : dates.filter((date) => selectedDays.includes(format(date, "EEEE")));
     return dayFilteredDates;
   }, [dates, selectedDays, view]);
+  const visibleDateIsos = useMemo(() => visibleDates.map((date) => format(date, "yyyy-MM-dd")), [visibleDates]);
+  const venueOptionCountByVenue = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const session of initialSessions) {
+      if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) {
+        continue;
+      }
+      if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {
+        continue;
+      }
+      if (selectedLevels.length > 0 && !selectedLevels.some((level) => matchesSessionLevel(session, level))) {
+        continue;
+      }
+      if (workshopsOnly && !session.isWorkshop) {
+        continue;
+      }
+      if (shortlistOnly && !shortlistSessionIds.includes(session.id)) {
+        continue;
+      }
+      if (search.trim()) {
+        const term = search.toLowerCase();
+        const hit =
+          session.title.toLowerCase().includes(term) ||
+          (session.details ?? "").toLowerCase().includes(term) ||
+          session.tags.some((tag) => tag.toLowerCase().includes(term));
+        if (!hit) {
+          continue;
+        }
+      }
+      if (!visibleDateIsos.some((iso) => isSessionActiveOnDate(session, iso))) {
+        continue;
+      }
+      counts.set(session.venue, (counts.get(session.venue) ?? 0) + 1);
+    }
+    return counts;
+  }, [
+    initialSessions,
+    search,
+    selectedDays,
+    selectedLevels,
+    selectedTypes,
+    shortlistOnly,
+    shortlistSessionIds,
+    visibleDateIsos,
+    workshopsOnly
+  ]);
+  const sortedVenueNamesByRelatedCount = useMemo(() => {
+    return [...venueNames].sort((a, b) => {
+      const aRelatedCount = venueOptionCountByVenue.get(a) ?? 0;
+      const bRelatedCount = venueOptionCountByVenue.get(b) ?? 0;
+      const aEnabled = aRelatedCount > 0 || selectedVenues.includes(a);
+      const bEnabled = bRelatedCount > 0 || selectedVenues.includes(b);
+      if (aEnabled !== bEnabled) {
+        return Number(bEnabled) - Number(aEnabled);
+      }
+
+      const aBigStudio = isBigStudioVenueName(a);
+      const bBigStudio = isBigStudioVenueName(b);
+      if (aBigStudio !== bBigStudio) {
+        return Number(aBigStudio) - Number(bBigStudio);
+      }
+      if (aRelatedCount !== bRelatedCount) {
+        return aRelatedCount - bRelatedCount;
+      }
+      return a.localeCompare(b);
+    });
+  }, [selectedVenues, venueNames, venueOptionCountByVenue]);
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") {
@@ -427,24 +520,36 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [view, loadedDayCount, visibleDates.length]);
 
   const grouped = useMemo(() => groupByDate(filteredSessions, visibleDates), [filteredSessions, visibleDates]);
+  const listingVenueCountByVenue = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const session of filteredSessions) {
+      counts.set(session.venue, (counts.get(session.venue) ?? 0) + 1);
+    }
+    return counts;
+  }, [filteredSessions]);
   const undatedSessions = useMemo(
-    () => sortSessionsByFeatured(filteredSessions.filter((session) => isUndatedSession(session))),
-    [filteredSessions]
+    () => sortSessionsForDisplay(filteredSessions.filter((session) => isUndatedSession(session)), listingVenueCountByVenue),
+    [filteredSessions, listingVenueCountByVenue]
   );
   const shortlistSet = useMemo(() => new Set(shortlistSessionIds), [shortlistSessionIds]);
   const sortedVenues = useMemo(() => {
     return venues
       .map((venue, index) => ({ venue, index }))
       .sort((a, b) => {
+        const aBigStudio = isBigStudioVenueName(a.venue.name);
+        const bBigStudio = isBigStudioVenueName(b.venue.name);
+        if (aBigStudio !== bBigStudio) {
+          return Number(aBigStudio) - Number(bBigStudio);
+        }
         const aFeatured = isFeaturedVenueName(a.venue.name);
         const bFeatured = isFeaturedVenueName(b.venue.name);
+        const aRelatedCount = relatedSessionCountByVenue.get(a.venue.name) ?? 0;
+        const bRelatedCount = relatedSessionCountByVenue.get(b.venue.name) ?? 0;
+        if (aRelatedCount !== bRelatedCount) {
+          return aRelatedCount - bRelatedCount;
+        }
         if (aFeatured !== bFeatured) {
           return Number(bFeatured) - Number(aFeatured);
-        }
-        const aActive = (relatedSessionCountByVenue.get(a.venue.name) ?? 0) > 0;
-        const bActive = (relatedSessionCountByVenue.get(b.venue.name) ?? 0) > 0;
-        if (aActive !== bActive) {
-          return Number(bActive) - Number(aActive);
         }
         return a.index - b.index;
       })
@@ -744,8 +849,8 @@ export function CalendarPage({ initialSessions, venues }: Props) {
             >
               Any venue
             </Button>
-            {venueNames.map((venue) => {
-              const relatedCount = relatedSessionCountByVenue.get(venue) ?? 0;
+            {sortedVenueNamesByRelatedCount.map((venue) => {
+              const relatedCount = venueOptionCountByVenue.get(venue) ?? 0;
               const isSelected = selectedVenues.includes(venue);
               const noRelatedSessions = relatedCount === 0;
               return (
@@ -1012,7 +1117,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   >
                     {visibleDates.map((date) => {
                       const iso = format(date, "yyyy-MM-dd");
-                      const sessions = sortSessionsByFeatured(grouped.get(iso) ?? []);
+                      const sessions = sortSessionsForDisplay(grouped.get(iso) ?? [], listingVenueCountByVenue);
                       const inMonth = isSameMonth(date, anchorDate);
                       const isToday = isSameDay(date, new Date());
                       return (
@@ -1234,7 +1339,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All venues (London dance classes)</SelectItem>
-                      {venueNames.map((venue) => (
+                      {sortedVenueNamesByRelatedCount.map((venue) => (
                         <SelectItem key={venue} value={venue}>
                           {venue}
                         </SelectItem>
