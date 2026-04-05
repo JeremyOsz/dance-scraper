@@ -34,6 +34,7 @@ export type VenueKey =
   | "fieldworksDance"
   | "cplayCy"
   | "danielRodriguezEventbrite"
+  | "rachelMannMarlonWhoHenry"
   | "customEvents";
 
 export type DayOfWeek =

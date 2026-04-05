@@ -8,7 +8,9 @@ export type FeaturedRule = {
 };
 
 export const FEATURED_RULES: FeaturedRule[] = [
-  { titleContains: "How the voice moves: a poetry & dance improv workshop" }
+  { titleContains: "How the voice moves: a poetry & dance improv workshop" },
+  { titleContains: "Play and Expression Workshop" },
+  { venueKey: "luminousDance" }
 ];
 
 export function isFeaturedSession(session: DanceSession): boolean {

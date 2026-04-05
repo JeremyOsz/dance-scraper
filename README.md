@@ -37,6 +37,7 @@ This is a hobby project maintained by a single developer, so please understand t
 - Con Tumbao Salsa
 - Under the Sun Dance
 - Ballet for You
+- Rachel Mann & Marlon Who Henry
 - Custom listings (manual entries in `data/custom-events.json`)
 
 ## Organisers To Be Added

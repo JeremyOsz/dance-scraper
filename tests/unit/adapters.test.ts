@@ -97,6 +97,7 @@ const testedVenueKeys = [
   "balletForYou",
   "cplayCy",
   "danielRodriguezEventbrite",
+  "rachelMannMarlonWhoHenry",
   "fieldworksDance",
   "customEvents"
 ] as const;
@@ -514,6 +515,26 @@ describe("scraper adapters", () => {
     for (const [index, organizerUrl] of ecstaticOrganizerUrls.entries()) {
       expect(fetchHtml).toHaveBeenNthCalledWith(index + 1, organizerUrl, userAgentHeaders);
     }
+  });
+
+  it("parses Rachel Mann & Marlon Who Henry organiser events from Eventbrite", async () => {
+    fetchHtml.mockResolvedValue(
+      organizerFixture(
+        "Play and Expression Workshop",
+        "https://www.eventbrite.com/e/play-and-expression-workshop-tickets-1985045836533",
+        "2026-04-12T18:30:00+0100"
+      )
+    );
+    const { scrapeRachelMannMarlonWhoHenry } = await import(
+      "../../scripts/scrape/adapters/rachel-mann-marlon-who-henry"
+    );
+    const output = await scrapeRachelMannMarlonWhoHenry();
+    expect(output.ok).toBe(true);
+    expect(output.classes[0]?.venue).toBe("Rachel Mann & Marlon Who Henry");
+    expect(output.classes[0]?.title).toBe("Play and Expression Workshop");
+    expect(output.classes[0]?.dayOfWeek).toBe("Sunday");
+    expect(output.classes[0]?.time).toBe("18:30 - 18:30");
+    expect(output.classes[0]?.sourceUrl).toBe("https://www.eventbrite.com/o/79771578413");
   });
 
   it("parses Five Rhythms London adapter", async () => {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-05T13:59:59.314Z",
+  "generatedAt": "2026-04-05T14:26:16.396Z",
   "sessions": [
     {
       "id": "the-place-choreographic-class-for-over-60s-with-becky-namgauds-monday-wed-21-jan-sat-7-mar-2026",
@@ -30465,6 +30465,24 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-05T13:59:59.314Z"
+    },
+    {
+      "id": "rachel-mann-marlon-who-henry-play-and-expression-workshop-sunday-18-30",
+      "venue": "Rachel Mann & Marlon Who Henry",
+      "title": "Play and Expression Workshop",
+      "details": "A playful space where authenticity is celebrated through an energising mix of vocal warm-ups, improvised movement and group",
+      "dayOfWeek": "Sunday",
+      "startTime": "18:30",
+      "endTime": "20:30",
+      "startDate": "2026-04-12",
+      "endDate": "2026-04-12",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.com/e/play-and-expression-workshop-tickets-1985045836533",
+      "sourceUrl": "https://www.eventbrite.com/o/79771578413",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-05T14:26:16.396Z"
     }
   ],
   "venues": [
@@ -30772,6 +30790,15 @@
       "count": 3,
       "ok": true,
       "lastSuccessAt": "2026-04-01T13:01:40.751Z",
+      "lastError": null
+    },
+    {
+      "venue": "Rachel Mann & Marlon Who Henry",
+      "key": "rachelMannMarlonWhoHenry",
+      "sourceUrl": "https://www.eventbrite.com/o/79771578413",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-05T14:26:16.396Z",
       "lastError": null
     },
     {

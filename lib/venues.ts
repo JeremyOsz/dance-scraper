@@ -177,6 +177,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://www.eventbrite.com/o/88584641013",
     mapQuery: "Daniel Rodriguez dance workshop London"
   },
+  rachelMannMarlonWhoHenry: {
+    label: "Rachel Mann & Marlon Who Henry",
+    sourceUrl: "https://www.eventbrite.com/o/79771578413",
+    mapQuery: "Rachel Mann Marlon Who Henry London"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",

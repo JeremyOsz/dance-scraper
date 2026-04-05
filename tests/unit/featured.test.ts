@@ -2,6 +2,8 @@ import { afterEach, describe, expect, it } from "vitest";
 import type { DanceSession } from "../../lib/types";
 import { FEATURED_RULES, isFeaturedSession, isFeaturedVenueName } from "../../lib/featured";
 
+const defaultRules = FEATURED_RULES.map((rule) => ({ ...rule }));
+
 const baseSession: DanceSession = {
   id: "session-1",
   venue: "The Place",
@@ -22,7 +24,7 @@ const baseSession: DanceSession = {
 };
 
 afterEach(() => {
-  FEATURED_RULES.length = 0;
+  FEATURED_RULES.splice(0, FEATURED_RULES.length, ...defaultRules.map((rule) => ({ ...rule })));
 });
 
 describe("featured rules", () => {
@@ -44,5 +46,22 @@ describe("featured rules", () => {
     FEATURED_RULES.push({ venueKey: "thePlace", tag: "not-present" });
 
     expect(isFeaturedSession(baseSession)).toBe(false);
+  });
+
+  it("features Luminous Dance by venue and Play and Expression Workshop by title", () => {
+    const luminousSession: DanceSession = {
+      ...baseSession,
+      venue: "Luminous Dance",
+      title: "Luminous New Moon Monday Dance"
+    };
+    const playSession: DanceSession = {
+      ...baseSession,
+      venue: "Rachel Mann & Marlon Who Henry",
+      title: "Play and Expression Workshop"
+    };
+
+    expect(isFeaturedSession(luminousSession)).toBe(true);
+    expect(isFeaturedVenueName("Luminous Dance")).toBe(true);
+    expect(isFeaturedSession(playSession)).toBe(true);
   });
 });

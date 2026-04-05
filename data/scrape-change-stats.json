@@ -2,6 +2,24 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-05T14:26:16.396Z",
+      "venues": [
+        {
+          "key": "rachelMannMarlonWhoHenry",
+          "venue": "Rachel Mann & Marlon Who Henry",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 1,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-04-05T13:59:59.314Z",
       "venues": [
         {
