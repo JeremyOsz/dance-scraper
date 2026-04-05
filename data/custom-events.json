@@ -1,6 +1,19 @@
 {
   "venue": "JW3",
   "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+  "ticketTailorOrganizers": [
+    {
+      "venue": "UK Dancers for Palestine",
+      "organizerUrl": "https://www.tickettailor.com/events/ukdancersforpalestine",
+      "fallbackTitle": "UK Dancers for Palestine events",
+      "fallbackDetails": "Campaign updates, ticketed events, and community actions from UK Dancers for Palestine. Check the organiser page or Instagram for the latest activity."
+    },
+    {
+      "venue": "DabkeRoots",
+      "organizerUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "titlePattern": "^DABKEROOTS$"
+    }
+  ],
   "events": [
     {
       "title": "Move & Reset",
@@ -11,6 +24,15 @@
       "endDate": "2026-03-26",
       "bookingUrl": "https://www.jw3.org.uk/whats-on/move-reset",
       "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset"
+    },
+    {
+      "title": "DABKEROOTS",
+      "venue": "DabkeRoots",
+      "details": "DabkeRoots class on 11 April 2026. Check the organiser page for the current time and venue details.",
+      "startDate": "2026-04-11",
+      "endDate": "2026-04-11",
+      "bookingUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "sourceUrl": "https://www.tickettailor.com/events/dabkeroots"
     },
     {
       "title": "How the voice moves: a poetry & dance improv workshop",

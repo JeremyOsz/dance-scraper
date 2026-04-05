@@ -68,6 +68,24 @@ const sessions: DanceSession[] = [
     audience: "adult",
     isWorkshop: true,
     lastSeenAt: "2026-03-10T00:00:00.000Z"
+  },
+  {
+    id: "s4",
+    venue: "TripSpace",
+    title: "Gaga People",
+    details: "Open Gaga class",
+    dayOfWeek: "Wednesday",
+    startTime: "6pm",
+    endTime: "7pm",
+    startDate: null,
+    endDate: null,
+    timezone: "Europe/London",
+    bookingUrl: "https://example.com/gaga",
+    sourceUrl: "https://example.com/gaga",
+    tags: ["gaga", "somatic"],
+    audience: "adult",
+    isWorkshop: false,
+    lastSeenAt: "2026-03-10T00:00:00.000Z"
   }
 ];
 
@@ -283,6 +301,31 @@ describe("CalendarPage", () => {
     expect(screen.getByText("Undated classes")).toBeInTheDocument();
     expect(screen.getByText("Butoh Mutations Classes & Workshops")).toBeInTheDocument();
     expect(screen.getByText(/Time TBC/i)).toBeInTheDocument();
+  });
+
+  it("replaces Gaga listings with a boycott card and support links", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    expect(screen.getByText("Gaga People")).toBeInTheDocument();
+    expect(screen.getByText(/Boycott called by Dancers for Palestine/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Article" })).toHaveAttribute(
+      "href",
+      "https://dancersgroup.org/2025/02/dancing-with-solidarity-the-case-for-boycotting-batsheva-and-gaga/"
+    );
+    expect(screen.queryByRole("link", { name: "UK Dancers for Palestine" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Instagram" })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /Gaga People/i }));
+    expect(await screen.findByRole("heading", { name: /Gaga People/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "UK Dancers for Palestine" })).toHaveAttribute(
+      "href",
+      "https://www.instagram.com/uk_dancers_for_palestine/"
+    );
+    expect(screen.getByRole("link", { name: "Why Boycott Batsheva" })).toHaveAttribute(
+      "href",
+      "https://dancersgroup.org/2025/02/dancing-with-solidarity-the-case-for-boycotting-batsheva-and-gaga/"
+    );
   });
 
   it("saves shortlist and can filter to shortlist", async () => {

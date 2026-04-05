@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-01T13:01:40.751Z",
+  "generatedAt": "2026-04-05T13:59:59.314Z",
   "sessions": [
     {
       "id": "the-place-choreographic-class-for-over-60s-with-becky-namgauds-monday-wed-21-jan-sat-7-mar-2026",
@@ -30407,7 +30407,25 @@
       ],
       "audience": "all-ages",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-05T13:59:59.314Z"
+    },
+    {
+      "id": "dabkeroots-dabkeroots-na-na",
+      "venue": "DabkeRoots",
+      "title": "DABKEROOTS",
+      "details": "DabkeRoots class on 11 April 2026. Check the organiser page for the current time and venue details.",
+      "dayOfWeek": null,
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-04-11",
+      "endDate": "2026-04-11",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "sourceUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-05T13:59:59.314Z"
     },
     {
       "id": "omnibus-theatre-how-the-voice-moves-a-poetry-dance-improv-workshop-friday-7-00pm",
@@ -30428,7 +30446,25 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-05T13:59:59.314Z"
+    },
+    {
+      "id": "uk-dancers-for-palestine-uk-dancers-for-palestine-events-na-na",
+      "venue": "UK Dancers for Palestine",
+      "title": "UK Dancers for Palestine events",
+      "details": "Campaign updates, ticketed events, and community actions from UK Dancers for Palestine. Check the organiser page or Instagram for the latest activity.",
+      "dayOfWeek": null,
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/ukdancersforpalestine",
+      "sourceUrl": "https://www.tickettailor.com/events/ukdancersforpalestine",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-05T13:59:59.314Z"
     }
   ],
   "venues": [
@@ -30744,11 +30780,13 @@
       "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
       "count": 1,
       "ok": true,
-      "lastSuccessAt": "2026-04-01T13:01:40.751Z",
+      "lastSuccessAt": "2026-04-05T13:59:59.314Z",
       "lastError": null,
       "replacedVenueLabels": [
         "JW3",
-        "Omnibus Theatre"
+        "DabkeRoots",
+        "Omnibus Theatre",
+        "UK Dancers for Palestine"
       ]
     },
     {

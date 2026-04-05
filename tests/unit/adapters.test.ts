@@ -963,6 +963,9 @@ describe("scraper adapters", () => {
   });
 
   it("loads custom events from data/custom-events.json", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(fixture("uk-dancers-for-palestine-tickettailor-organizer.html"))
+      .mockResolvedValueOnce(fixture("dabkeroots-tickettailor-organizer.html"));
     const { scrapeCustomEvents } = await import("../../scripts/scrape/adapters/custom-events");
     const output = await scrapeCustomEvents();
     expect(output.ok).toBe(true);
@@ -971,5 +974,14 @@ describe("scraper adapters", () => {
     const moveReset = output.classes.find((c) => c.title.includes("Move & Reset"));
     expect(moveReset?.bookingUrl).toContain("jw3.org.uk");
     expect(moveReset?.dayOfWeek).toBe("Thursday");
+    const ukDancers = output.classes.find((c) => c.venue === "UK Dancers for Palestine");
+    expect(ukDancers?.title).toBe("UK Dancers for Palestine events");
+    expect(ukDancers?.startDate).toBeNull();
+    const dabke = output.classes.find((c) => c.bookingUrl.includes("/dabkeroots/2104687"));
+    expect(dabke?.venue).toBe("DabkeRoots");
+    expect(dabke?.title).toBe("DABKEROOTS");
+    expect(dabke?.dayOfWeek).toBe("Saturday");
+    expect(dabke?.startDate).toBe("2026-04-11");
+    expect(dabke?.time).toBe("17:00 - 19:00");
   });
 });

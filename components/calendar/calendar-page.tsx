@@ -63,6 +63,11 @@ const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
   "Ballroom/Tango": "border-yellow-200 bg-yellow-50/70",
   Other: "border-border bg-secondary/40"
 };
+const GAGA_BOYCOTT_ARTICLE_URL =
+  "https://dancersgroup.org/2025/02/dancing-with-solidarity-the-case-for-boycotting-batsheva-and-gaga/";
+const UK_DANCERS_FOR_PALESTINE_TICKETS_URL = "https://www.tickettailor.com/events/ukdancersforpalestine";
+const UK_DANCERS_FOR_PALESTINE_INSTAGRAM_URL = "https://www.instagram.com/uk_dancers_for_palestine/";
+const GAGA_BOYCOTT_MESSAGE_REMAINDER = "Consider supporting UK Dancers for Palestine or an independent teacher instead.";
 
 function groupByDate(sessions: DanceSession[], dateList: Date[]) {
   const byDate = new Map<string, DanceSession[]>();
@@ -78,6 +83,121 @@ function groupByDate(sessions: DanceSession[], dateList: Date[]) {
 
 function isUndatedSession(session: DanceSession) {
   return !session.dayOfWeek && !session.startDate && !session.endDate;
+}
+
+function isGagaSession(session: Pick<DanceSession, "title" | "details" | "tags">) {
+  return /\bgaga\b/i.test(`${session.title} ${session.details ?? ""}`) || session.tags.some((tag) => /\bgaga\b/i.test(tag));
+}
+
+function GagaBoycottCard({ session, onOpen }: { session: DanceSession; onOpen: () => void }) {
+  return (
+    <div className="overflow-hidden rounded-[18px] border-[3px] border-emerald-700 bg-[#ff5b76] text-xs text-zinc-900 shadow-sm">
+      <div className="relative h-20 w-full overflow-hidden" aria-hidden>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg"
+          alt=""
+          className="block h-full w-full object-cover"
+        />
+      </div>
+      <div className="space-y-2.5 bg-[linear-gradient(180deg,rgba(255,246,248,0.98)_0%,rgba(255,239,242,0.98)_100%)] px-5 py-4">
+        <button onClick={onOpen} className="block w-full text-left hover:text-foreground/90">
+          <div className="space-y-1">
+            <p className="font-medium text-foreground">{session.title}</p>
+            <p className="text-muted-foreground">
+              {session.startTime || session.endTime
+                ? formatTimeRange(session.startTime, session.endTime)
+                : session.dayOfWeek ?? "Time TBC"}
+            </p>
+            <p>{session.venue}</p>
+          </div>
+          <p className="leading-relaxed text-foreground/90">
+            <strong>Boycott called by Dancers for Palestine.</strong>{" "}
+            {GAGA_BOYCOTT_MESSAGE_REMAINDER}
+          </p>
+        </button>
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          <a
+            href={GAGA_BOYCOTT_ARTICLE_URL}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(event) => event.stopPropagation()}
+            className="relative z-10 inline-flex cursor-pointer items-center rounded-full border border-stone-300 bg-white px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-stone-50"
+          >
+            Article
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GagaSessionDialogContent({
+  session,
+  shortlistSet,
+  toggleShortlist
+}: {
+  session: DanceSession;
+  shortlistSet: Set<string>;
+  toggleShortlist: (sessionId: string) => void;
+}) {
+  return (
+    <>
+      <DialogHeader>
+        <DialogTitle className="text-2xl sm:text-3xl">{session.title.toUpperCase()}</DialogTitle>
+        <DialogDescription asChild>
+          <div className="space-y-1 pt-1 text-base not-italic text-foreground/70">
+            <div>
+              {session.venue} • {session.dayOfWeek ?? "Day TBC"} • {formatTimeRange(session.startTime, session.endTime)}
+            </div>
+          </div>
+        </DialogDescription>
+      </DialogHeader>
+      <div className="space-y-5 pt-2 text-sm">
+        <div className="flex flex-wrap gap-2">
+          {inferDanceTypes(session).map((type) => (
+            <Badge key={`${session.id}-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
+              {type}
+            </Badge>
+          ))}
+        </div>
+        <p className="text-base">
+          <strong>Boycott called by Dancers for Palestine.</strong> {GAGA_BOYCOTT_MESSAGE_REMAINDER}
+        </p>
+        <p className="text-base">
+          Date range: {session.startDate ?? "Open"} to {session.endDate ?? "Open"}
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Button
+            variant={shortlistSet.has(session.id) ? "default" : "outline"}
+            onClick={() => toggleShortlist(session.id)}
+          >
+            {shortlistSet.has(session.id) ? "Remove from shortlist" : "Save to shortlist"}
+          </Button>
+          {canAddSessionToCalendar(session) ? (
+            <Button variant="outline" asChild>
+              <a href={`/api/classes/${encodeURIComponent(session.id)}/calendar`}>Add to calendar</a>
+            </Button>
+          ) : (
+            <Button variant="outline" disabled>
+              Add to calendar unavailable
+            </Button>
+          )}
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="outline" asChild>
+            <a href={UK_DANCERS_FOR_PALESTINE_INSTAGRAM_URL} target="_blank" rel="noreferrer">
+              UK Dancers for Palestine
+            </a>
+          </Button>
+          <Button variant="outline" asChild>
+            <a href={GAGA_BOYCOTT_ARTICLE_URL} target="_blank" rel="noreferrer">
+              Why Boycott Batsheva
+            </a>
+          </Button>
+        </div>
+      </div>
+    </>
+  );
 }
 
 function readStoredList(key: string): string[] {
@@ -1135,6 +1255,15 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                           </CardHeader>
                           <CardContent className="space-y-2 p-3 pt-0">
                             {(view === "month" ? sessions.slice(0, 3) : sessions).map((session, index) => {
+                              if (isGagaSession(session)) {
+                                return (
+                                  <GagaBoycottCard
+                                    key={`${session.id}-${iso}-${session.bookingUrl}-${index}`}
+                                    session={session}
+                                    onOpen={() => setSelectedSession(session)}
+                                  />
+                                );
+                              }
                               const types = inferDanceTypes(session);
                               const primaryType = types[0] ?? "Other";
                               const featured = isFeaturedSession(session);
@@ -1201,6 +1330,15 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     </CardHeader>
                     <CardContent className="space-y-2 p-3 pt-0">
                       {undatedSessions.map((session, index) => {
+                        if (isGagaSession(session)) {
+                          return (
+                            <GagaBoycottCard
+                              key={`${session.id}-${session.bookingUrl}-${index}`}
+                              session={session}
+                              onOpen={() => setSelectedSession(session)}
+                            />
+                          );
+                        }
                         const types = inferDanceTypes(session);
                         const primaryType = types[0] ?? "Other";
                         const featured = isFeaturedSession(session);
@@ -1396,57 +1534,65 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       <Dialog open={Boolean(selectedSession)} onOpenChange={(open) => !open && setSelectedSession(null)}>
         <DialogContent className="max-h-[90dvh] overflow-y-auto p-4 sm:p-6">
           {selectedSession && (
-            <>
-              <DialogHeader>
-                <DialogTitle>{selectedSession.title}</DialogTitle>
-                <DialogDescription>
-                  {selectedSession.venue} • {selectedSession.dayOfWeek ?? "Day TBC"} •{" "}
-                  {formatTimeRange(selectedSession.startTime, selectedSession.endTime)}
-                </DialogDescription>
-              </DialogHeader>
-              <div className="space-y-3 text-sm">
-                <p>{selectedSession.details ?? "No additional description."}</p>
-                <div className="flex flex-wrap gap-2">
-                  {inferDanceTypes(selectedSession).map((type) => (
-                    <Badge key={`${selectedSession.id}-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
-                      {type}
-                    </Badge>
-                  ))}
-                </div>
-                <p>
-                  Date range: {selectedSession.startDate ?? "Open"} to {selectedSession.endDate ?? "Open"}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Button
-                    variant={shortlistSet.has(selectedSession.id) ? "default" : "outline"}
-                    onClick={() => toggleShortlist(selectedSession.id)}
-                  >
-                    {shortlistSet.has(selectedSession.id) ? "Remove from shortlist" : "Save to shortlist"}
-                  </Button>
-                  <Button asChild>
-                    <a href={selectedSession.bookingUrl} target="_blank" rel="noreferrer">
-                      Booking
-                    </a>
-                  </Button>
-                  {canAddSessionToCalendar(selectedSession) ? (
-                    <Button variant="outline" asChild>
-                      <a href={`/api/classes/${encodeURIComponent(selectedSession.id)}/calendar`}>
-                        Add to calendar
+            isGagaSession(selectedSession) ? (
+              <GagaSessionDialogContent
+                session={selectedSession}
+                shortlistSet={shortlistSet}
+                toggleShortlist={toggleShortlist}
+              />
+            ) : (
+              <>
+                <DialogHeader>
+                  <DialogTitle>{selectedSession.title}</DialogTitle>
+                  <DialogDescription>
+                    {selectedSession.venue} • {selectedSession.dayOfWeek ?? "Day TBC"} •{" "}
+                    {formatTimeRange(selectedSession.startTime, selectedSession.endTime)}
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-3 text-sm">
+                  <p>{selectedSession.details ?? "No additional description."}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {inferDanceTypes(selectedSession).map((type) => (
+                      <Badge key={`${selectedSession.id}-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
+                        {type}
+                      </Badge>
+                    ))}
+                  </div>
+                  <p>
+                    Date range: {selectedSession.startDate ?? "Open"} to {selectedSession.endDate ?? "Open"}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      variant={shortlistSet.has(selectedSession.id) ? "default" : "outline"}
+                      onClick={() => toggleShortlist(selectedSession.id)}
+                    >
+                      {shortlistSet.has(selectedSession.id) ? "Remove from shortlist" : "Save to shortlist"}
+                    </Button>
+                    <Button asChild>
+                      <a href={selectedSession.bookingUrl} target="_blank" rel="noreferrer">
+                        Booking
                       </a>
                     </Button>
-                  ) : (
-                    <Button variant="outline" disabled>
-                      Add to calendar unavailable
+                    {canAddSessionToCalendar(selectedSession) ? (
+                      <Button variant="outline" asChild>
+                        <a href={`/api/classes/${encodeURIComponent(selectedSession.id)}/calendar`}>
+                          Add to calendar
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button variant="outline" disabled>
+                        Add to calendar unavailable
+                      </Button>
+                    )}
+                    <Button variant="outline" asChild>
+                      <a href={selectedSession.sourceUrl} target="_blank" rel="noreferrer">
+                        Source
+                      </a>
                     </Button>
-                  )}
-                  <Button variant="outline" asChild>
-                    <a href={selectedSession.sourceUrl} target="_blank" rel="noreferrer">
-                      Source
-                    </a>
-                  </Button>
+                  </div>
                 </div>
-              </div>
-            </>
+              </>
+            )
           )}
         </DialogContent>
       </Dialog>

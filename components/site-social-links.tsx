@@ -1,3 +1,5 @@
+import React from "react";
+
 const LINKEDIN_URL = "https://www.linkedin.com/in/jeremy-osztreicher-72236a125/";
 const INSTAGRAM_URL = "https://www.instagram.com/JeremyOsz/";
 

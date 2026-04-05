@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { AdapterOutput, ScrapedClass } from "../types";
+import { fetchHtml } from "./common";
+import { browserLikeHeaders, scrapeTicketTailorOrganizerHtml } from "./ticket-tailor";
 
 const DATA_FILE = path.join(process.cwd(), "data", "custom-events.json");
 
@@ -21,6 +23,14 @@ type CustomEventsFile = {
   venue: string;
   sourceUrl: string;
   events: CustomEventEntry[];
+  ticketTailorOrganizers?: {
+    venue: string;
+    organizerUrl: string;
+    titlePattern?: string | null;
+    fallbackTitle?: string | null;
+    fallbackDetails?: string | null;
+    defaultDetails?: string | null;
+  }[];
 };
 
 function readCustomEvents(): CustomEventsFile {
@@ -39,6 +49,10 @@ function collectReplacedVenueLabels(file: CustomEventsFile): string[] {
   for (const entry of file.events) {
     const v = entry.venue?.trim() || defaultVenue;
     if (v) labels.add(v);
+  }
+  for (const organizer of file.ticketTailorOrganizers ?? []) {
+    const venue = organizer.venue?.trim();
+    if (venue) labels.add(venue);
   }
   return [...labels];
 }
@@ -64,6 +78,17 @@ function toRow(entry: CustomEventEntry, defaultVenue: string, fallbackSourceUrl:
   };
 }
 
+function dedupeClasses(classes: ScrapedClass[]) {
+  return Array.from(
+    new Map(
+      classes.map((row) => [
+        `${row.venue}|${row.title.toLowerCase()}|${row.startDate ?? "open"}|${row.endDate ?? "open"}|${row.time ?? "time-tbc"}`,
+        row
+      ])
+    ).values()
+  );
+}
+
 export async function scrapeCustomEvents(): Promise<AdapterOutput> {
   try {
     const file = readCustomEvents();
@@ -75,11 +100,53 @@ export async function scrapeCustomEvents(): Promise<AdapterOutput> {
       if (row) classes.push(row);
     }
 
+    for (const organizer of file.ticketTailorOrganizers ?? []) {
+      const organizerUrl = organizer.organizerUrl?.trim();
+      const organizerVenue = organizer.venue?.trim();
+      if (!organizerUrl || !organizerVenue) {
+        continue;
+      }
+
+      let scrapedAny = false;
+      try {
+        const html = await fetchHtml(organizerUrl, browserLikeHeaders);
+        const scraped = scrapeTicketTailorOrganizerHtml(html, {
+          venue: organizerVenue,
+          organizerUrl,
+          titlePattern: organizer.titlePattern ?? null,
+          defaultDetails: organizer.defaultDetails ?? null
+        });
+        if (scraped.length > 0) {
+          classes.push(...scraped);
+          scrapedAny = true;
+        }
+      } catch {
+        // Fall through to optional fallback record.
+      }
+
+      if (!scrapedAny && organizer.fallbackTitle?.trim()) {
+        const fallback = toRow(
+          {
+            title: organizer.fallbackTitle,
+            venue: organizerVenue,
+            details: organizer.fallbackDetails ?? null,
+            bookingUrl: organizerUrl,
+            sourceUrl: organizerUrl
+          },
+          venue,
+          file.sourceUrl
+        );
+        if (fallback) {
+          classes.push(fallback);
+        }
+      }
+    }
+
     return {
       venueKey: "customEvents",
       venue,
       sourceUrl: file.sourceUrl,
-      classes,
+      classes: dedupeClasses(classes),
       ok: true,
       error: null,
       replacedVenueLabels: collectReplacedVenueLabels(file)
