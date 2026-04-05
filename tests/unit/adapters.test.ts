@@ -926,7 +926,7 @@ describe("scraper adapters", () => {
         <body>
           <div class="sqs-code-container"><div class="boxed"><h1>Beginners Level 1 Ballet</h1></div></div>
           <div class="sqs-html-content">
-            <p><strong>Day:</strong> Thursdays <strong>Time:</strong> 6.30-7.30pm <strong>Place:</strong> New City Fitness <strong>Dates:</strong> 15th January - 26th March 2026</p>
+            <p><strong>Day:</strong> Thursdays <strong>Time:</strong> 6.30-7.30pm <strong>Place:</strong> New City Fitness <strong>Dates:</strong> 15th January - 15th December 2026</p>
             <a href="/enrol-now">Click here to enrol</a>
           </div>
         </body>
@@ -941,7 +941,7 @@ describe("scraper adapters", () => {
           <div class="sqs-code-container"><div class="boxed"><h1>Ballet Floor-barre with PBT</h1></div></div>
           <div class="sqs-html-content">
             <h1>Saturdays</h1>
-            <p><strong>Day:</strong> Saturdays <strong>Time:</strong> 11.15am-12.25pm <strong>Place:</strong> New City Fitness <strong>Dates:</strong> 17th January - 28th March 2026</p>
+            <p><strong>Day:</strong> Saturdays <strong>Time:</strong> 11.15am-12.25pm <strong>Place:</strong> New City Fitness <strong>Dates:</strong> 17th January - 15th December 2026</p>
             <a href="/enrol-now">Click here to enrol</a>
           </div>
         </body>

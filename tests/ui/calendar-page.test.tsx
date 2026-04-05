@@ -1,6 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { format, startOfDay } from "date-fns";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CalendarPage } from "../../components/calendar/calendar-page";
 import type { DanceSession } from "../../lib/types";
@@ -201,7 +202,7 @@ describe("CalendarPage", () => {
     await user.click(screen.getByRole("button", { name: "Week" }));
 
     expect(screen.getByRole("button", { name: "Week" })).toHaveClass("bg-primary");
-    expect(screen.getByText("March 2026")).toBeInTheDocument();
+    expect(screen.getByText(format(startOfDay(new Date()), "MMMM yyyy"))).toBeInTheDocument();
   });
 
   it("shows venues and map views", async () => {

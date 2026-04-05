@@ -71,6 +71,12 @@ export type DanceSession = {
   lastSeenAt: string;
 };
 
+/** Optional signed `/api/go` targets, attached on the server for click tracking. */
+export type DanceSessionOutbound = DanceSession & {
+  outboundBookingHref?: string;
+  outboundSourceHref?: string;
+};
+
 export type VenueStatus = {
   venue: string;
   key: VenueKey;

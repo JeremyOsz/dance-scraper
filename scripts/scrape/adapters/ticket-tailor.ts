@@ -1,5 +1,6 @@
 import { format, parse } from "date-fns";
 import * as cheerio from "cheerio";
+import type { AnyNode } from "domhandler";
 import type { ScrapedClass } from "../types";
 import { absoluteUrl } from "./common";
 
@@ -35,7 +36,7 @@ function parseTicketTailorDate(raw: string) {
   return null;
 }
 
-function findEventContainer($: cheerio.CheerioAPI, element: cheerio.AnyNode) {
+function findEventContainer($: cheerio.CheerioAPI, element: AnyNode) {
   const anchor = $(element);
   const ancestors = anchor.parents().toArray();
   for (const parent of ancestors) {
@@ -47,7 +48,7 @@ function findEventContainer($: cheerio.CheerioAPI, element: cheerio.AnyNode) {
   return anchor.parent();
 }
 
-function findTitle($: cheerio.CheerioAPI, container: cheerio.Cheerio<cheerio.AnyNode>, fallbackTitle: string) {
+function findTitle($: cheerio.CheerioAPI, container: cheerio.Cheerio<AnyNode>, fallbackTitle: string) {
   const candidates = container
     .find("h1, h2, h3, h4, a")
     .toArray()

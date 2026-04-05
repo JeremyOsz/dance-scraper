@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CalendarPage } from "@/components/calendar/calendar-page";
 import { readScrapeOutput } from "@/lib/data-store";
+import { signOutboundRedirectUrl } from "@/lib/outbound-redirect";
 import { getBaseUrl } from "@/lib/seo";
 import { VENUES } from "@/lib/venues";
 import { sortVenueRecordsForUi } from "@/lib/venue-order";
@@ -110,7 +111,16 @@ export default function Home() {
       }
     ])
   );
-  const venues = sortVenueRecordsForUi(Array.from(venueMap.values()));
+  const venues = sortVenueRecordsForUi(Array.from(venueMap.values())).map((venue) => ({
+    ...venue,
+    outboundSourceHref: signOutboundRedirectUrl(venue.sourceUrl, "venue") ?? venue.sourceUrl
+  }));
+
+  const sessionsWithOutbound = data.sessions.map((session) => ({
+    ...session,
+    outboundBookingHref: signOutboundRedirectUrl(session.bookingUrl, "booking") ?? session.bookingUrl,
+    outboundSourceHref: signOutboundRedirectUrl(session.sourceUrl, "source") ?? session.sourceUrl
+  }));
 
   const structuredData = [
     {
@@ -145,7 +155,7 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <CalendarPage initialSessions={data.sessions} venues={venues} />
+      <CalendarPage initialSessions={sessionsWithOutbound} venues={venues} />
     </>
   );
 }

@@ -6,7 +6,9 @@ import { format, addDays, addMonths, isSameDay, isSameMonth, parseISO, startOfDa
 import Link from "next/link";
 import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import type { DanceSession, DayOfWeek } from "@/lib/types";
+import { TrackedOutboundLink } from "@/components/tracked-outbound-link";
+import { extractOutboundHostname } from "@/lib/outbound-utils";
+import type { DanceSession, DanceSessionOutbound, DayOfWeek } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -252,18 +254,33 @@ function sortSessionsForDisplay(sessions: DanceSession[], countByVenue: Map<stri
   });
 }
 
-type Props = {
-  initialSessions: DanceSession[];
-  venues: {
-    name: string;
-    sourceUrl: string;
-    mapQuery?: string;
-    count: number;
-    ok: boolean;
-    lastSuccessAt: string | null;
-    lastError: string | null;
-  }[];
+type VenueCard = {
+  name: string;
+  sourceUrl: string;
+  outboundSourceHref?: string;
+  mapQuery?: string;
+  count: number;
+  ok: boolean;
+  lastSuccessAt: string | null;
+  lastError: string | null;
 };
+
+type Props = {
+  initialSessions: DanceSessionOutbound[];
+  venues: VenueCard[];
+};
+
+function hrefForOutboundBooking(session: DanceSessionOutbound) {
+  return session.outboundBookingHref ?? session.bookingUrl;
+}
+
+function hrefForOutboundSource(session: DanceSessionOutbound) {
+  return session.outboundSourceHref ?? session.sourceUrl;
+}
+
+function hrefForVenueSite(venue: VenueCard) {
+  return venue.outboundSourceHref ?? venue.sourceUrl;
+}
 
 function getVenueStatus(venue: Props["venues"][number]) {
   if (!venue.ok) {
@@ -307,7 +324,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   const [view, setView] = useState<"week" | "month">("week");
   const [anchorDate, setAnchorDate] = useState(() => startOfDay(new Date()));
   const [loadedDayCount, setLoadedDayCount] = useState(INITIAL_WEEK_DAY_COUNT);
-  const [selectedSession, setSelectedSession] = useState<DanceSession | null>(null);
+  const [selectedSession, setSelectedSession] = useState<DanceSessionOutbound | null>(null);
   const [search, setSearch] = useState("");
   const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
@@ -1445,9 +1462,13 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                         </CardHeader>
                         <CardContent className="flex flex-wrap gap-2">
                           <Button variant="outline" asChild>
-                            <a href={venue.sourceUrl} target="_blank" rel="noreferrer">
+                            <TrackedOutboundLink
+                              href={hrefForVenueSite(venue)}
+                              analyticsKind="venue"
+                              destHost={extractOutboundHostname(venue.sourceUrl)}
+                            >
                               Venue site
-                            </a>
+                            </TrackedOutboundLink>
                           </Button>
                           <Button variant="outline" asChild>
                             <a
@@ -1569,9 +1590,13 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       {shortlistSet.has(selectedSession.id) ? "Remove from shortlist" : "Save to shortlist"}
                     </Button>
                     <Button asChild>
-                      <a href={selectedSession.bookingUrl} target="_blank" rel="noreferrer">
+                      <TrackedOutboundLink
+                        href={hrefForOutboundBooking(selectedSession)}
+                        analyticsKind="booking"
+                        destHost={extractOutboundHostname(selectedSession.bookingUrl)}
+                      >
                         Booking
-                      </a>
+                      </TrackedOutboundLink>
                     </Button>
                     {canAddSessionToCalendar(selectedSession) ? (
                       <Button variant="outline" asChild>
@@ -1585,9 +1610,13 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       </Button>
                     )}
                     <Button variant="outline" asChild>
-                      <a href={selectedSession.sourceUrl} target="_blank" rel="noreferrer">
+                      <TrackedOutboundLink
+                        href={hrefForOutboundSource(selectedSession)}
+                        analyticsKind="source"
+                        destHost={extractOutboundHostname(selectedSession.sourceUrl)}
+                      >
                         Source
-                      </a>
+                      </TrackedOutboundLink>
                     </Button>
                   </div>
                 </div>
