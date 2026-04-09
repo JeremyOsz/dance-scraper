@@ -1002,7 +1002,7 @@ describe("scraper adapters", () => {
     expect(output.classes.map((item) => item.title)).toEqual(
       expect.arrayContaining(["Salsa on2 Groove & Technique", "Salsa musicality jam"])
     );
-    expect(output.classes.every((item) => item.dayOfWeek === "Tuesday")).toBe(true);
+    expect(output.classes.every((item) => item.dayOfWeek === "Thursday")).toBe(true);
     expect(output.classes.some((item) => item.bookingUrl.includes("buy.stripe.com"))).toBe(true);
   });
 

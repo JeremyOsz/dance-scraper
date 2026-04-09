@@ -66,7 +66,7 @@ const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
   Other: "border-border bg-secondary/40"
 };
 const GAGA_BOYCOTT_ARTICLE_URL = "https://www.instagram.com/p/DSXaLAIiIh2/";
-const UK_DANCERS_FOR_PALESTINE_TICKETS_URL = "https://www.tickettailor.com/events/ukdancersforpalestine";
+// const UK_DANCERS_FOR_PALESTINE_TICKETS_URL = "https://www.tickettailor.com/events/ukdancersforpalestine";
 const UK_DANCERS_FOR_PALESTINE_INSTAGRAM_URL = "https://www.instagram.com/uk_dancers_for_palestine/";
 const GAGA_BOYCOTT_MESSAGE_REMAINDER = "This studio hosts other independent teachers. Please consider supporting them instead.";
 

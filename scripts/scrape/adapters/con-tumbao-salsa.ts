@@ -6,6 +6,7 @@ import { absoluteUrl, fetchHtml } from "./common";
 const sourceUrl = "https://www.contumbaosalsa.com/";
 
 const TIME_RANGE_REGEX = /\b\d{1,2}:\d{2}\s*(?:-|–|—)\s*\d{1,2}:\d{2}\b/;
+const DAY_REGEX = /\b(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b/i;
 
 function normalizeText(value: string | null | undefined): string {
   return (value ?? "").replace(/\s+/g, " ").trim();
@@ -37,6 +38,24 @@ function findBookingUrl($: cheerio.CheerioAPI, root: cheerio.Cheerio<AnyNode>): 
   return preferred ?? candidates[0] ?? sourceUrl;
 }
 
+function extractDayOfWeek($: cheerio.CheerioAPI, root: cheerio.Cheerio<AnyNode>, details: string): string | null {
+  const directSignals = [root.text(), details].map((text) => normalizeText(text).match(DAY_REGEX)?.[1] ?? null);
+  for (const signal of directSignals) {
+    if (signal) return signal;
+  }
+
+  const block = root.closest(".fe-block");
+  let prev = block.prev();
+  for (let hops = 0; hops < 4 && prev.length > 0; hops += 1) {
+    const headingText = normalizeText(prev.find("h1, h2, h3, h4").text());
+    const match = headingText.match(DAY_REGEX)?.[1] ?? null;
+    if (match) return match;
+    prev = prev.prev();
+  }
+
+  return null;
+}
+
 export async function scrapeConTumbaoSalsa(): Promise<AdapterOutput> {
   try {
     const html = await fetchHtml(sourceUrl);
@@ -63,12 +82,13 @@ export async function scrapeConTumbaoSalsa(): Promise<AdapterOutput> {
           .map((p) => $(p).text())
           .join(" ")
       );
+      const dayOfWeek = extractDayOfWeek($, root, details);
 
       classes.push({
         venue: "Con Tumbao Salsa",
         title,
         details: details || null,
-        dayOfWeek: "Tuesday",
+        dayOfWeek,
         time,
         startDate: null,
         endDate: null,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T07:15:43.679Z",
+  "generatedAt": "2026-04-09T07:30:46.578Z",
   "sessions": [
     {
       "id": "the-place-choreographic-class-for-over-60s-with-becky-namgauds-monday-wed-21-jan-sat-7-mar-2026",
@@ -29717,42 +29717,6 @@
       "lastSeenAt": "2026-04-01T13:01:40.751Z"
     },
     {
-      "id": "con-tumbao-salsa-salsa-on2-groove-technique-tuesday-19-00",
-      "venue": "Con Tumbao Salsa",
-      "title": "Salsa on2 Groove & Technique",
-      "details": "New to salsa, or curious to explore the groove and flow of salsa on2? This is the perfect place to start. You’ll build strong foundations in technique, partner connection while discovering how dance fits with the music. We offer 2 levels: Beginners: This class is designed to give you strong foundations from the very beginning. You’ll learn the groove, the stepping, and the connection to the music in a supportive and fun environment. No partner or prior experience needed. Transition & Foundations group: Already dancing salsa? Join this group if you want to feel more grounded in salsa on2. Expect footwork and partnerwork technique, body movement and plenty of groove! This class connects musicality training with salsa technique helping you really feel the music as you dance. 6-week course - every Tuesday at 7pm. London, Happy Feet Studios.",
-      "dayOfWeek": "Tuesday",
-      "startTime": "19:00",
-      "endTime": "20:15",
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://buy.stripe.com/00wcN55WzgDvcgd4P28N200",
-      "sourceUrl": "https://www.contumbaosalsa.com/",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
-    },
-    {
-      "id": "con-tumbao-salsa-salsa-musicality-jam-tuesday-20-15",
-      "venue": "Con Tumbao Salsa",
-      "title": "Salsa musicality jam",
-      "details": "Each month we explore a different musicality theme in a progressive way — from diving into the role of individual instruments and the rhythms they create, to interpreting song structure, learning about salsa history and playing salsa percussion ourselves. You’ll learn how to connect to the music through both solo dancing and partnerwork. You will discover new ways to express salsa with groove, playfulness, and confidence. Sign up for a 6-week course. Not suitable for absolute beginners.",
-      "dayOfWeek": "Tuesday",
-      "startTime": "20:15",
-      "endTime": "21:30",
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://buy.stripe.com/28E5kD98L3QJbc95T68N201",
-      "sourceUrl": "https://www.contumbaosalsa.com/",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
-    },
-    {
       "id": "ballet-for-you-prep-for-pointe-mondays-in-shoreditch-monday-8-45-pm",
       "venue": "Ballet for You",
       "title": "Prep for Pointe - Mondays in Shoreditch",
@@ -30696,9 +30660,9 @@
       "venue": "Con Tumbao Salsa",
       "key": "conTumbaoSalsa",
       "sourceUrl": "https://www.contumbaosalsa.com/",
-      "count": 2,
+      "count": 0,
       "ok": true,
-      "lastSuccessAt": "2026-04-01T13:01:40.751Z",
+      "lastSuccessAt": "2026-04-09T07:30:46.578Z",
       "lastError": null
     },
     {

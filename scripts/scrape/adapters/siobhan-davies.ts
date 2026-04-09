@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import type { Element } from "domhandler";
 import type { AdapterOutput } from "../types";
 import { absoluteUrl, fetchHtml } from "./common";
 
@@ -63,7 +64,7 @@ async function resolveSourceUrl(): Promise<string> {
   return legacySourceUrl;
 }
 
-function selectMostRecentClassesUrl($: cheerio.CheerioAPI, links: cheerio.Element[]): string | null {
+function selectMostRecentClassesUrl($: cheerio.CheerioAPI, links: Element[]): string | null {
   const candidates = links
     .map((el) => {
       const card = $(el).closest("article.event");
