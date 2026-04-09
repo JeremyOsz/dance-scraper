@@ -215,25 +215,88 @@ describe("scraper adapters", () => {
   });
 
   it("parses Siobhan Davies adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("siobhan.html"));
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockResolvedValueOnce(fixture("siobhan.html"));
     const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
     const output = await scrapeSiobhanDavies();
     expect(output.ok).toBe(true);
+    expect(output.sourceUrl).toBe("https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/");
+    expect(output.classes[0]?.sourceUrl).toBe("https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/");
     expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
   });
 
+  it("prefers the most recent Siobhan season when archive lists multiple Dance Classes at SDS pages", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/spring-2026-dance-classes-at-sds/">
+                  Spring 2026 | Dance Classes at SDS
+                  <span>Thu 8 Jan - Sun 12 Apr 2026</span>
+                </a>
+              </h2>
+            </header>
+          </article>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                  <span>Thu 9 Apr - Sun 26 Jul 2026</span>
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockResolvedValueOnce(fixture("siobhan.html"));
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    expect(output.ok).toBe(true);
+    expect(output.sourceUrl).toBe("https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/");
+  });
+
   it("expands Siobhan 'Weekdays' sections into Monday-Friday", async () => {
-    fetchHtml.mockResolvedValue(`
-      <div class="entry-content">
-        <h3>Weekdays</h3>
-        <div>
-          <h4>MORNING CLASS</h4>
-          <p>Open to experienced movement practitioners.</p>
-          <h3>From 28 Apr<br>10am – 12noon</h3>
-          <a href="https://bookwhen.com/independentdance">Book now</a>
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Weekdays</h3>
+          <div>
+            <h4>MORNING CLASS</h4>
+            <p>Open to experienced movement practitioners.</p>
+            <h3>From 28 Apr<br>10am – 12noon</h3>
+            <a href="https://bookwhen.com/independentdance">Book now</a>
+          </div>
         </div>
-      </div>
-    `);
+      `);
     const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
     const output = await scrapeSiobhanDavies();
     const mornings = output.classes.filter((item) => item.title === "MORNING CLASS");
@@ -242,6 +305,53 @@ describe("scraper adapters", () => {
     expect(mornings.map((item) => item.dayOfWeek)).toEqual(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]);
     expect(mornings.every((item) => item.time?.includes("10am"))).toBe(true);
     expect(mornings.every((item) => item.time?.includes("12"))).toBe(true);
+  });
+
+  it("falls back to the legacy Siobhan page when the archive has no active classes link", async () => {
+    fetchHtml.mockResolvedValueOnce(`<main><article class="event"></article></main>`).mockResolvedValueOnce(fixture("siobhan.html"));
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    expect(output.ok).toBe(true);
+    expect(output.sourceUrl).toBe("https://www.siobhandavies.com/events/classes-2/");
+    expect(output.classes[0]?.sourceUrl).toBe("https://www.siobhandavies.com/events/classes-2/");
+  });
+
+  it("filters out Siobhan yoga and pilates classes", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Wednesday</h3>
+          <div>
+            <h4>YOGA (All levels)</h4>
+            <a href="https://www.siobhandavies.com/classes/yoga/">Book now</a>
+          </div>
+          <div>
+            <h4>INSPIRAL FLOW PILATES</h4>
+            <a href="https://www.siobhandavies.com/classes/inspiral-flow/">Book now</a>
+          </div>
+          <div>
+            <h4>CREATIVE CONTEMPORARY DANCE</h4>
+            <a href="https://www.siobhandavies.com/classes/creative-contemporary/">Book now</a>
+          </div>
+        </div>
+      `);
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    expect(output.ok).toBe(true);
+    expect(output.classes.map((item) => item.title)).toEqual(["CREATIVE CONTEMPORARY DANCE"]);
   });
 
   it("parses TripSpace adapter from Momence host schedule sessions", async () => {

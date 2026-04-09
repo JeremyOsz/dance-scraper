@@ -13,7 +13,7 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
   },
   siobhanDavies: {
     label: "Siobhan Davies Studios",
-    sourceUrl: "https://www.siobhandavies.com/events/classes-2/",
+    sourceUrl: "https://www.siobhandavies.com/events/",
     mapQuery: "Siobhan Davies Studios, 85 St George's Road, London SE1 6ER"
   },
   tripSpace: {

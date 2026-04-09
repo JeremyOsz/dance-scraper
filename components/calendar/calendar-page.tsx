@@ -65,11 +65,10 @@ const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
   "Ballroom/Tango": "border-yellow-200 bg-yellow-50/70",
   Other: "border-border bg-secondary/40"
 };
-const GAGA_BOYCOTT_ARTICLE_URL =
-  "https://dancersgroup.org/2025/02/dancing-with-solidarity-the-case-for-boycotting-batsheva-and-gaga/";
+const GAGA_BOYCOTT_ARTICLE_URL = "https://www.instagram.com/p/DSXaLAIiIh2/";
 const UK_DANCERS_FOR_PALESTINE_TICKETS_URL = "https://www.tickettailor.com/events/ukdancersforpalestine";
 const UK_DANCERS_FOR_PALESTINE_INSTAGRAM_URL = "https://www.instagram.com/uk_dancers_for_palestine/";
-const GAGA_BOYCOTT_MESSAGE_REMAINDER = "Consider supporting UK Dancers for Palestine or an independent teacher instead.";
+const GAGA_BOYCOTT_MESSAGE_REMAINDER = "This studio hosts other independent teachers. Please consider supporting them instead.";
 
 function groupByDate(sessions: DanceSession[], dateList: Date[]) {
   const byDate = new Map<string, DanceSession[]>();
@@ -113,7 +112,7 @@ function GagaBoycottCard({ session, onOpen }: { session: DanceSession; onOpen: (
             <p>{session.venue}</p>
           </div>
           <p className="leading-relaxed text-foreground/90">
-            <strong>Boycott called by Dancers for Palestine.</strong>{" "}
+            <strong>Boycott of Batsheva/ Gaga called by Dancers for Palestine.</strong>{" "}<br />
             {GAGA_BOYCOTT_MESSAGE_REMAINDER}
           </p>
         </button>
@@ -125,7 +124,7 @@ function GagaBoycottCard({ session, onOpen }: { session: DanceSession; onOpen: (
             onClick={(event) => event.stopPropagation()}
             className="relative z-10 inline-flex cursor-pointer items-center rounded-full border border-stone-300 bg-white px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-stone-50"
           >
-            Article
+            Why Boycott
           </a>
         </div>
       </div>

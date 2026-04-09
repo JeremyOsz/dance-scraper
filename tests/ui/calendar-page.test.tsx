@@ -310,9 +310,9 @@ describe("CalendarPage", () => {
 
     expect(screen.getByText("Gaga People")).toBeInTheDocument();
     expect(screen.getByText(/Boycott called by Dancers for Palestine/i)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Article" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Why Boycott" })).toHaveAttribute(
       "href",
-      "https://dancersgroup.org/2025/02/dancing-with-solidarity-the-case-for-boycotting-batsheva-and-gaga/"
+      "https://www.instagram.com/p/DSXaLAIiIh2/"
     );
     expect(screen.queryByRole("link", { name: "UK Dancers for Palestine" })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Instagram" })).not.toBeInTheDocument();
@@ -325,7 +325,7 @@ describe("CalendarPage", () => {
     );
     expect(screen.getByRole("link", { name: "Why Boycott Batsheva" })).toHaveAttribute(
       "href",
-      "https://dancersgroup.org/2025/02/dancing-with-solidarity-the-case-for-boycotting-batsheva-and-gaga/"
+      "https://www.instagram.com/p/DSXaLAIiIh2/"
     );
   });
 
