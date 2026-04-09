@@ -7,6 +7,7 @@ const archiveUrl = "https://www.siobhandavies.com/events/";
 const legacySourceUrl = "https://www.siobhandavies.com/events/classes-2/";
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const;
 const excludedClassPattern = /\b(yoga|pilates)\b/i;
+const toMoveTogetherPathPattern = /\/classes\/to-move-together\/?$/i;
 const timeRangePattern =
   /\d{1,2}(?::|\.)?\d{0,2}\s*(?:am|pm)?\s*(?:-|–|—|to)\s*(?:\d{1,2}(?::|\.)?\d{0,2}\s*(?:am|pm)|\d{1,2}\s*(?:noon|midnight)|noon|midnight)/i;
 
@@ -24,12 +25,13 @@ export async function scrapeSiobhanDavies(): Promise<AdapterOutput> {
     );
     const cleaned = unique.filter((item) => !(item.dayOfWeek === null && weekdayKeys.has(`${item.title}|${item.bookingUrl}`)));
     const filtered = cleaned.filter((item) => !excludedClassPattern.test(`${item.title} ${item.details ?? ""}`));
+    const withMonthlyExpansion = await expandMonthlyOneOffs(filtered, sourceUrl);
 
     return {
       venueKey: "siobhanDavies",
       venue: "Siobhan Davies Studios",
       sourceUrl,
-      classes: filtered,
+      classes: withMonthlyExpansion,
       ok: true,
       error: null
     };
@@ -170,4 +172,76 @@ function parseClasses(html: string, sourceUrl: string): AdapterOutput["classes"]
   });
 
   return classes;
+}
+
+async function expandMonthlyOneOffs(classes: AdapterOutput["classes"], sourceUrl: string): Promise<AdapterOutput["classes"]> {
+  const expanded = await Promise.all(classes.map((item) => expandClassMonthlyInstances(item, sourceUrl)));
+  return expanded.flat();
+}
+
+async function expandClassMonthlyInstances(
+  klass: AdapterOutput["classes"][number],
+  sourceUrl: string
+): Promise<AdapterOutput["classes"]> {
+  if (!toMoveTogetherPathPattern.test(klass.bookingUrl)) {
+    return [klass];
+  }
+
+  try {
+    const html = await fetchHtml(klass.bookingUrl);
+    const $ = cheerio.load(html);
+    const timetableText = $(".entry-content h3, .entry-content p")
+      .toArray()
+      .map((el) => $(el).text().replace(/\s+/g, " ").trim())
+      .find((text) => /\bmonthly\b/i.test(text) && /\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b/i.test(text));
+
+    if (!timetableText) {
+      return [klass];
+    }
+
+    const year = inferSeasonYear(sourceUrl);
+    const dates = parseMonthDayInstances(timetableText, year);
+    if (dates.length === 0) {
+      return [klass];
+    }
+
+    return dates.map((iso) => ({
+      ...klass,
+      dayOfWeek: isoToDayName(iso),
+      startDate: iso,
+      endDate: iso
+    }));
+  } catch {
+    return [klass];
+  }
+}
+
+function inferSeasonYear(sourceUrl: string): number {
+  const match = sourceUrl.match(/\b(20\d{2})\b/);
+  return match ? Number(match[1]) : new Date().getUTCFullYear();
+}
+
+function parseMonthDayInstances(text: string, year: number): string[] {
+  const matches = Array.from(text.matchAll(/\b([A-Za-z]{3,9})\s+(\d{1,2})(?=[^\d]|\d[.:])/g));
+  const dates = matches
+    .map(([, monthToken, dayToken]) => {
+      const month = monthIndex(monthToken.toLowerCase());
+      const day = Number(dayToken);
+      if (month === null || Number.isNaN(day)) return null;
+      return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    })
+    .filter((value): value is string => Boolean(value));
+
+  return Array.from(new Set(dates));
+}
+
+function isoToDayName(iso: string): string | null {
+  const [yearToken, monthToken, dayToken] = iso.split("-");
+  const year = Number(yearToken);
+  const month = Number(monthToken);
+  const day = Number(dayToken);
+  if (Number.isNaN(year) || Number.isNaN(month) || Number.isNaN(day)) return null;
+
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return new Intl.DateTimeFormat("en-GB", { weekday: "long", timeZone: "UTC" }).format(date);
 }

@@ -354,6 +354,48 @@ describe("scraper adapters", () => {
     expect(output.classes.map((item) => item.title)).toEqual(["CREATIVE CONTEMPORARY DANCE"]);
   });
 
+  it("expands Siobhan 'To Move Together' monthly Fridays into dated one-offs", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Fridays</h3>
+          <div>
+            <h4>TO MOVE TOGETHER</h4>
+            <p>with Akeim Toussaint Buck</p>
+            <h3>Monthly Fridays<br>6.30 - 8pm</h3>
+            <a href="https://www.siobhandavies.com/classes/to-move-together/">More info</a>
+          </div>
+        </div>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Monthly Fridays <br>Apr 24, May 29, Jun 26, Jul 24<br>6.30-8pm</h3>
+        </div>
+      `);
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    const sessions = output.classes.filter((item) => item.title === "TO MOVE TOGETHER");
+
+    expect(output.ok).toBe(true);
+    expect(sessions).toHaveLength(4);
+    expect(sessions.map((item) => item.startDate)).toEqual(["2026-04-24", "2026-05-29", "2026-06-26", "2026-07-24"]);
+    expect(sessions.every((item) => item.endDate === item.startDate)).toBe(true);
+    expect(sessions.every((item) => item.dayOfWeek === "Friday")).toBe(true);
+  });
+
   it("parses TripSpace adapter from Momence host schedule sessions", async () => {
     fetchHtml
       .mockResolvedValueOnce(

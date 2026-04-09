@@ -2,6 +2,60 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-09T10:51:33.297Z",
+      "venues": [
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 16,
+          "newSessionCount": 17,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
+      "at": "2026-04-09T10:50:52.131Z",
+      "venues": [
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 16,
+          "newSessionCount": 16,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 0
+      }
+    },
+    {
+      "at": "2026-04-09T10:48:55.853Z",
+      "venues": [
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 14,
+          "newSessionCount": 16,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-04-09T07:30:46.578Z",
       "venues": [
         {
