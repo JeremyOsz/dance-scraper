@@ -59,9 +59,21 @@ describe("featured rules", () => {
       venue: "Rachel Mann & Marlon Who Henry",
       title: "Play and Expression Workshop"
     };
+    const unscaryKrumpSession: DanceSession = {
+      ...baseSession,
+      venue: "Siobhan Davies Studios",
+      title: "Unscary Saturdays | Krump with Sasha Mahfouz Shadid"
+    };
+    const wednesdayMovingJuanSession: DanceSession = {
+      ...baseSession,
+      venue: "Wednesday Moving",
+      title: "Wednesday Moving - Juan Sanchez Plaza"
+    };
 
     expect(isFeaturedSession(luminousSession)).toBe(true);
     expect(isFeaturedVenueName("Luminous Dance")).toBe(true);
     expect(isFeaturedSession(playSession)).toBe(true);
+    expect(isFeaturedSession(unscaryKrumpSession)).toBe(true);
+    expect(isFeaturedSession(wednesdayMovingJuanSession)).toBe(true);
   });
 });

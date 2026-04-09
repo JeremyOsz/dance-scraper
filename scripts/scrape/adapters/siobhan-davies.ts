@@ -13,11 +13,20 @@ const timeRangePattern =
 
 export async function scrapeSiobhanDavies(): Promise<AdapterOutput> {
   try {
-    const sourceUrl = await resolveSourceUrl();
+    let archiveHtml: string | null = null;
+    try {
+      archiveHtml = await fetchHtml(archiveUrl);
+    } catch {
+      archiveHtml = null;
+    }
+
+    const sourceUrl = archiveHtml ? resolveSourceUrlFromArchive(archiveHtml) : legacySourceUrl;
     const html = await fetchHtml(sourceUrl);
     const classes = parseClasses(html, sourceUrl);
+    const unscaryEvents = archiveHtml ? parseUnscarySaturdaysFromArchive(archiveHtml) : [];
+    const combined = [...classes, ...unscaryEvents];
 
-    const unique = Array.from(new Map(classes.map((c) => [c.title + c.bookingUrl + (c.dayOfWeek ?? "na"), c])).values());
+    const unique = Array.from(new Map(combined.map((c) => [c.title + c.bookingUrl + (c.dayOfWeek ?? "na"), c])).values());
     const weekdayKeys = new Set(
       unique
         .filter((item) => weekdays.some((day) => item.dayOfWeek === day))
@@ -47,23 +56,12 @@ export async function scrapeSiobhanDavies(): Promise<AdapterOutput> {
   }
 }
 
-async function resolveSourceUrl(): Promise<string> {
-  try {
-    const html = await fetchHtml(archiveUrl);
-    const $ = cheerio.load(html);
-    const archiveMatches = $("article.event a[href]")
-      .toArray()
-      .filter((el) => /\bdance classes at sds\b/i.test($(el).text().replace(/\s+/g, " ").trim()));
-
-    const discoveredUrl = selectMostRecentClassesUrl($, archiveMatches);
-    if (discoveredUrl) {
-      return discoveredUrl;
-    }
-  } catch {
-    // Fall back to the legacy page if the archive is unavailable.
-  }
-
-  return legacySourceUrl;
+function resolveSourceUrlFromArchive(html: string): string {
+  const $ = cheerio.load(html);
+  const archiveMatches = $("article.event a[href]")
+    .toArray()
+    .filter((el) => /\bdance classes at sds\b/i.test($(el).text().replace(/\s+/g, " ").trim()));
+  return selectMostRecentClassesUrl($, archiveMatches) ?? legacySourceUrl;
 }
 
 function selectMostRecentClassesUrl($: cheerio.CheerioAPI, links: Element[]): string | null {
@@ -172,6 +170,53 @@ function parseClasses(html: string, sourceUrl: string): AdapterOutput["classes"]
   });
 
   return classes;
+}
+
+function parseUnscarySaturdaysFromArchive(html: string): AdapterOutput["classes"] {
+  const $ = cheerio.load(html);
+  const classes: AdapterOutput["classes"] = [];
+
+  $("article.event").each((_, article) => {
+    const link = $(article).find(".entry-title a[href]").first();
+    const href = absoluteUrl(archiveUrl, link.attr("href"));
+    if (!href) return;
+
+    const title = link.clone().find("span").remove().end().text().replace(/\s+/g, " ").trim();
+    if (!/\bunscary\s+saturdays\b/i.test(title)) return;
+
+    const meta = link.find("span").first().text().replace(/\s+/g, " ").trim();
+    const startDate = parseArchiveIsoDate(meta);
+
+    classes.push({
+      venue: "Siobhan Davies Studios",
+      title,
+      details: null,
+      dayOfWeek: startDate ? isoToDayName(startDate) : null,
+      time: parseArchiveTimeRange(meta),
+      startDate,
+      endDate: startDate,
+      bookingUrl: href,
+      sourceUrl: href
+    });
+  });
+
+  return classes;
+}
+
+function parseArchiveIsoDate(text: string): string | null {
+  const match = text.match(/(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{4})/i);
+  if (!match) return null;
+
+  const day = Number(match[1]);
+  const month = monthIndex(match[2].toLowerCase());
+  const year = Number(match[3]);
+  if (month === null || Number.isNaN(day) || Number.isNaN(year)) return null;
+
+  return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+function parseArchiveTimeRange(text: string): string | null {
+  return text.match(timeRangePattern)?.[0] ?? null;
 }
 
 async function expandMonthlyOneOffs(classes: AdapterOutput["classes"], sourceUrl: string): Promise<AdapterOutput["classes"]> {

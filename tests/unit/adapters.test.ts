@@ -396,6 +396,45 @@ describe("scraper adapters", () => {
     expect(sessions.every((item) => item.dayOfWeek === "Friday")).toBe(true);
   });
 
+  it("includes Siobhan Unscary Saturdays events from the archive as dated sessions", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                </a>
+              </h2>
+            </header>
+          </article>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/unscary-saturdays-krump/">
+                  Unscary Saturdays | Krump with Sasha Mahfouz Shadid
+                  <span>Sat 11 Apr 2026, 1 – 3pm</span>
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockResolvedValueOnce(fixture("siobhan.html"));
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    const unscary = output.classes.find((item) => /unscary/i.test(item.title));
+
+    expect(output.ok).toBe(true);
+    expect(unscary?.title).toContain("Unscary Saturdays");
+    expect(unscary?.dayOfWeek).toBe("Saturday");
+    expect(unscary?.startDate).toBe("2026-04-11");
+    expect(unscary?.endDate).toBe("2026-04-11");
+    expect(unscary?.time).toContain("1");
+    expect(unscary?.bookingUrl).toBe("https://www.siobhandavies.com/events/unscary-saturdays-krump/");
+  });
+
   it("parses TripSpace adapter from Momence host schedule sessions", async () => {
     fetchHtml
       .mockResolvedValueOnce(
