@@ -410,7 +410,6 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     const params = new URLSearchParams();
     params.set("mode", mode);
     params.set("view", view);
-    params.set("date", format(anchorDate, "yyyy-MM-dd"));
     if (search.trim()) params.set("q", search.trim());
     if (selectedVenues.length > 0) params.set("venue", selectedVenues.join(","));
     if (selectedDays.length > 0) params.set("day", selectedDays.join(","));
@@ -425,7 +424,6 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       router.replace(`${pathname}?${nextQuery}` as Route, { scroll: false });
     }
   }, [
-    anchorDate,
     mapVenue,
     mode,
     pathname,
@@ -539,6 +537,20 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     [anchorDate, loadedDayCount, view]
   );
   const weekPickerValue = useMemo(() => format(anchorDate, "RRRR-'W'II"), [anchorDate]);
+  const weekRangeLabel = useMemo(() => {
+    if (view !== "week" || dates.length === 0) {
+      return null;
+    }
+    const start = dates[0];
+    const end = dates[dates.length - 1];
+    if (!start || !end) {
+      return null;
+    }
+    if (isSameMonth(start, end)) {
+      return `${format(start, "d")} - ${format(end, "d MMM yyyy")}`;
+    }
+    return `${format(start, "d MMM")} - ${format(end, "d MMM yyyy")}`;
+  }, [dates, view]);
   const visibleDates = useMemo(() => {
     if (view !== "week") {
       return dates;
@@ -751,7 +763,19 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     if (typeof window === "undefined") {
       return;
     }
-    const shareUrl = window.location.href;
+    const params = new URLSearchParams();
+    params.set("mode", mode);
+    params.set("view", view);
+    params.set("date", format(anchorDate, "yyyy-MM-dd"));
+    if (search.trim()) params.set("q", search.trim());
+    if (selectedVenues.length > 0) params.set("venue", selectedVenues.join(","));
+    if (selectedDays.length > 0) params.set("day", selectedDays.join(","));
+    if (selectedTypes.length > 0) params.set("type", selectedTypes.join(","));
+    if (selectedLevels.length > 0) params.set("level", selectedLevels.join(","));
+    if (workshopsOnly) params.set("workshops", "1");
+    if (shortlistOnly) params.set("shortlist", "1");
+    if (mapVenue !== "all") params.set("map", mapVenue);
+    const shareUrl = `${window.location.origin}${pathname}?${params.toString()}`;
     try {
       if (typeof navigator.share === "function") {
         await navigator.share({
@@ -1202,7 +1226,14 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   >
                     Next
                   </Button>
-                  <Badge variant="secondary">{format(anchorDate, "MMMM yyyy")}</Badge>
+                  {view === "week" ? (
+                    <>
+                      <Badge variant="secondary">From {format(anchorDate, "EEE d MMM yyyy")}</Badge>
+                      {weekRangeLabel ? <Badge variant="outline">Showing {weekRangeLabel}</Badge> : null}
+                    </>
+                  ) : (
+                    <Badge variant="secondary">{format(anchorDate, "MMMM yyyy")}</Badge>
+                  )}
                   {view === "week" ? (
                     <>
                       <label htmlFor="week-picker" className="sr-only">
@@ -1251,23 +1282,33 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                         : "grid grid-cols-1 gap-3 md:grid-cols-7"
                     }
                   >
-                    {visibleDates.map((date) => {
+                    {visibleDates.map((date, index) => {
                       const iso = format(date, "yyyy-MM-dd");
                       const sessions = sortSessionsForDisplay(grouped.get(iso) ?? [], listingVenueCountByVenue);
                       const inMonth = isSameMonth(date, anchorDate);
                       const isToday = isSameDay(date, new Date());
+                      const showMonthMarker = view === "week" && (index === 0 || !isSameMonth(date, visibleDates[index - 1]));
                       return (
                         <Card
                           key={iso}
                           className={`min-w-0 w-full ${
                             view === "week" ? "md:min-w-[220px] md:max-w-[220px] md:shrink-0" : ""
-                          } ${inMonth ? "" : "opacity-55"} ${isToday ? "border-primary/60 bg-primary/5 ring-1 ring-primary/40" : ""}`}
+                          } ${
+                            view === "month" && !inMonth ? "opacity-55" : ""
+                          } ${
+                            view === "week" && !inMonth ? "bg-muted/20" : ""
+                          } ${isToday ? "border-primary/60 bg-primary/5 ring-1 ring-primary/40" : ""}`}
                         >
                           <CardHeader className="p-3">
                             <CardTitle className="flex items-center gap-2 text-sm">
                               <span>{format(date, "EEE d")}</span>
                               {isToday ? <Badge variant="secondary">Today</Badge> : null}
                             </CardTitle>
+                            {showMonthMarker ? (
+                              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                                {format(date, "MMMM yyyy")}
+                              </p>
+                            ) : null}
                           </CardHeader>
                           <CardContent className="space-y-2 p-3 pt-0">
                             {(view === "month" ? sessions.slice(0, 3) : sessions).map((session, index) => {
