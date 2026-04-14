@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-05T13:59:59.314Z",
+  "updatedAt": "2026-04-13T14:04:17.261Z",
   "sessions": [
     {
       "id": "tripspace-vinyasa-flow-thursday-09-15",
@@ -17650,7 +17650,7 @@
       ],
       "audience": "all-ages",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-05T13:58:59.539Z"
+      "lastSeenAt": "2026-04-05T13:59:59.314Z"
     },
     {
       "id": "omnibus-theatre-how-the-voice-moves-a-poetry-dance-improv-workshop-friday-7-00pm",
@@ -17671,7 +17671,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-05T13:58:59.539Z"
+      "lastSeenAt": "2026-04-05T13:59:59.314Z"
     },
     {
       "id": "dabkeroots-dabkeroots-na-4-00pm",
@@ -17708,6 +17708,24 @@
       "audience": "open",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-05T13:46:04.984Z"
+    },
+    {
+      "id": "dabkeroots-dabkeroots-na-na",
+      "venue": "DabkeRoots",
+      "title": "DABKEROOTS",
+      "details": "DabkeRoots class on 11 April 2026. Check the organiser page for the current time and venue details.",
+      "dayOfWeek": null,
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-04-11",
+      "endDate": "2026-04-11",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "sourceUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-05T13:59:59.314Z"
     }
   ]
 }

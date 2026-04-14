@@ -2,6 +2,42 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-13T15:41:49.471Z",
+      "venues": [
+        {
+          "key": "gelNow",
+          "venue": "Gel",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 0
+      }
+    },
+    {
+      "at": "2026-04-13T14:04:17.261Z",
+      "venues": [
+        {
+          "key": "customEvents",
+          "venue": "JW3",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 0
+      }
+    },
+    {
       "at": "2026-04-09T16:54:00.021Z",
       "venues": [
         {

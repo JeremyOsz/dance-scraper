@@ -35,6 +35,7 @@ export type VenueKey =
   | "cplayCy"
   | "danielRodriguezEventbrite"
   | "rachelMannMarlonWhoHenry"
+  | "gelNow"
   | "customEvents";
 
 export type DayOfWeek =

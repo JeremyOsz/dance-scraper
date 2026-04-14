@@ -182,6 +182,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://www.eventbrite.com/o/79771578413",
     mapQuery: "Rachel Mann Marlon Who Henry London"
   },
+  gelNow: {
+    label: "Gel",
+    sourceUrl: "https://gel.now/?search=dance&category=workshop",
+    mapQuery: "Gel grassroots events London"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",

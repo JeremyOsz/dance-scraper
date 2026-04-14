@@ -35,6 +35,7 @@ import { scrapeCplayCyLinktree } from "./adapters/cplay-cy-linktree";
 import { scrapeCustomEvents } from "./adapters/custom-events";
 import { scrapeDanielRodriguezEventbrite } from "./adapters/daniel-rodriguez-eventbrite";
 import { scrapeRachelMannMarlonWhoHenry } from "./adapters/rachel-mann-marlon-who-henry";
+import { scrapeGelNow } from "./adapters/gel-now";
 import type { ScrapeOutput, VenueKey } from "../../lib/types";
 import { VENUES } from "../../lib/venues";
 import { buildOutput, writeOutput } from "./normalize";
@@ -93,6 +94,7 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "cplayCy", scrape: scrapeCplayCyLinktree },
   { key: "danielRodriguezEventbrite", scrape: scrapeDanielRodriguezEventbrite },
   { key: "rachelMannMarlonWhoHenry", scrape: scrapeRachelMannMarlonWhoHenry },
+  { key: "gelNow", scrape: scrapeGelNow },
   { key: "customEvents", scrape: scrapeCustomEvents }
 ];
 

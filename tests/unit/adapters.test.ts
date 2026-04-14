@@ -99,6 +99,7 @@ const testedVenueKeys = [
   "danielRodriguezEventbrite",
   "rachelMannMarlonWhoHenry",
   "fieldworksDance",
+  "gelNow",
   "customEvents"
 ] as const;
 
@@ -1172,6 +1173,38 @@ describe("scraper adapters", () => {
     const output = await scrapeThePlace();
     expect(output.ok).toBe(true);
     expect(output.classes).toHaveLength(0);
+  });
+
+  it("parses Gel listings API (dance + workshop search)", async () => {
+    fetchJson.mockResolvedValueOnce({
+      events: [
+        {
+          id: 97,
+          name: "Test Dance Workshop",
+          start_time: "2026-01-14T10:00:00Z",
+          end_time: "2026-01-14T12:00:00Z",
+          description: "Workshop details.",
+          venues: [{ name: "Britannia Row", address: "35 Britannia Row", city: "London" }]
+        }
+      ],
+      total_count: 1
+    });
+    const { scrapeGelNow } = await import("../../scripts/scrape/adapters/gel-now");
+    const output = await scrapeGelNow();
+    expect(output.ok).toBe(true);
+    expect(output.venueKey).toBe("gelNow");
+    expect(output.venue).toBe("Gel");
+    expect(output.sourceUrl).toContain("gel.now");
+    expect(fetchJson).toHaveBeenCalledWith(expect.stringContaining("api/events/listings"));
+    expect(fetchJson).toHaveBeenCalledWith(expect.stringContaining("search=dance"));
+    expect(fetchJson).toHaveBeenCalledWith(expect.stringContaining("category=workshop"));
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]?.venue).toBe("Britannia Row");
+    expect(output.classes[0]?.title).toBe("Test Dance Workshop");
+    expect(output.classes[0]?.bookingUrl).toBe("https://gel.now/events/97");
+    expect(output.classes[0]?.startDate).toBe("2026-01-14");
+    expect(output.classes[0]?.time).toBe("10:00am - 12:00pm");
+    expect(output.replacedVenueLabels).toEqual(["Britannia Row"]);
   });
 
   it("loads custom events from data/custom-events.json", async () => {
