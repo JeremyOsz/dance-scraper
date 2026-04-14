@@ -187,6 +187,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://gel.now/?search=dance&category=workshop",
     mapQuery: "Gel grassroots events London"
   },
+  oneSyllable: {
+    label: "1Syllable",
+    sourceUrl: "https://1syllable.org/events/category/classes-and-training/",
+    mapQuery: "1Syllable London"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",
