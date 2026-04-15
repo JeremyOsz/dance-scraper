@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-14T12:59:04.210Z",
+  "updatedAt": "2026-04-15T06:11:54.745Z",
   "sessions": [
     {
       "id": "tripspace-vinyasa-flow-thursday-09-15",
@@ -27613,6 +27613,26 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-09T16:54:00.021Z"
+    },
+    {
+      "id": "britannia-row-bianca-scout-and-elena-isolini-daughter-mary-dance-workshop-tuesday-11-00am",
+      "venue": "Britannia Row",
+      "title": "Bianca Scout and Elena Isolini (Daughter Mary) Dance Workshop",
+      "details": "Bianca Scout & Elena Isolini (Daughter Mary) will be offering a workshop to develop “Act 1” of their next project. Daughter Mary began as accessible ballet workshops that were held weekly at SET Lewisham between 2018-2020. As long term collaborators across music, film and dance - Bianca & Elena are now in the process of writing and workshopping “Anon’s Ballet” together. With Bianca’s background in dance and Elena’s background in film, together they approach storytelling through gestural and emotive group work. The movement blends classical ballet technique with unrestricted gestures while exploring scene making and character study. No previous dance experience required. This workshop is part of a series curated by the artist Mica Georgis as part of a Residency at The Writers’ Room, Florence Trust in April 2026. The workshops are open to dancers and non-dancers. No previous dance experience is necessary. N.B The venue is not accessible, the studio is up two flights of stairs.",
+      "dayOfWeek": "Tuesday",
+      "startTime": "11:00am",
+      "endTime": "1:00pm",
+      "startDate": "2026-04-14",
+      "endDate": "2026-04-14",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://gel.now/events/97",
+      "sourceUrl": "https://gel.now/events/97",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-13T15:41:49.471Z"
     }
   ]
 }
