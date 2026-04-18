@@ -2,6 +2,320 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-18T06:01:19.622Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 306,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "rambert",
+          "venue": "Rambert",
+          "scrapeOk": true,
+          "previousSessionCount": 163,
+          "newSessionCount": 163,
+          "changed": false
+        },
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 18,
+          "newSessionCount": 18,
+          "changed": false
+        },
+        {
+          "key": "tripSpace",
+          "venue": "TripSpace",
+          "scrapeOk": true,
+          "previousSessionCount": 205,
+          "newSessionCount": 299,
+          "changed": true
+        },
+        {
+          "key": "chisenhaleDanceSpace",
+          "venue": "Chisenhale Dance Space",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "ciCalendarLondon",
+          "venue": "CI Calendar London",
+          "scrapeOk": true,
+          "previousSessionCount": 298,
+          "newSessionCount": 296,
+          "changed": true
+        },
+        {
+          "key": "bachataCommunity",
+          "venue": "Bachata Community",
+          "scrapeOk": false,
+          "previousSessionCount": 20,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "ecstaticDanceLondon",
+          "venue": "Ecstatic Dance London",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 21,
+          "changed": true
+        },
+        {
+          "key": "luminousDance",
+          "venue": "Luminous Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 14,
+          "newSessionCount": 14,
+          "changed": true
+        },
+        {
+          "key": "fiveRhythmsLondon",
+          "venue": "Five Rhythms London",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "superMarioSalsa",
+          "venue": "SuperMario Salsa",
+          "scrapeOk": true,
+          "previousSessionCount": 3,
+          "newSessionCount": 3,
+          "changed": false
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": true,
+          "previousSessionCount": 23,
+          "newSessionCount": 24,
+          "changed": true
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": true,
+          "previousSessionCount": 6,
+          "newSessionCount": 5,
+          "changed": true
+        },
+        {
+          "key": "butohMutations",
+          "venue": "Butoh Mutations",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "posthumanTheatreButoh",
+          "venue": "Posthuman Theatre Butoh",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "hackneyBaths",
+          "venue": "Hackney Baths",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "wednesdayMoving",
+          "venue": "Wednesday Moving",
+          "scrapeOk": true,
+          "previousSessionCount": 6,
+          "newSessionCount": 6,
+          "changed": false
+        },
+        {
+          "key": "danceworks",
+          "venue": "Danceworks",
+          "scrapeOk": true,
+          "previousSessionCount": 129,
+          "newSessionCount": 129,
+          "changed": true
+        },
+        {
+          "key": "pineappleDanceStudios",
+          "venue": "Pineapple Dance Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 303,
+          "newSessionCount": 302,
+          "changed": true
+        },
+        {
+          "key": "baseDanceStudios",
+          "venue": "BASE Dance Studios",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "barSalsaTemple",
+          "venue": "Bar Salsa Temple",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "mamboCity",
+          "venue": "MamboCity",
+          "scrapeOk": true,
+          "previousSessionCount": 2,
+          "newSessionCount": 2,
+          "changed": false
+        },
+        {
+          "key": "cityAcademy",
+          "venue": "City Academy",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "adrianOutsavvy",
+          "venue": "StreamMovement",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "marinaSfyridi",
+          "venue": "Marina Sfyridi",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "lookAtMovement",
+          "venue": "Look At Movement (Tanztheatre)",
+          "scrapeOk": true,
+          "previousSessionCount": 9,
+          "newSessionCount": 9,
+          "changed": false
+        },
+        {
+          "key": "theManorMvmt",
+          "venue": "The Manor / MVMT",
+          "scrapeOk": true,
+          "previousSessionCount": 32,
+          "newSessionCount": 32,
+          "changed": true
+        },
+        {
+          "key": "eastLondonDance",
+          "venue": "East London Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 42,
+          "newSessionCount": 42,
+          "changed": false
+        },
+        {
+          "key": "conTumbaoSalsa",
+          "venue": "Con Tumbao Salsa",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "balletForYou",
+          "venue": "Ballet for You",
+          "scrapeOk": true,
+          "previousSessionCount": 19,
+          "newSessionCount": 19,
+          "changed": false
+        },
+        {
+          "key": "fieldworksDance",
+          "venue": "Fieldworks Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 11,
+          "newSessionCount": 11,
+          "changed": false
+        },
+        {
+          "key": "cplayCy",
+          "venue": "cplay.cy",
+          "scrapeOk": true,
+          "previousSessionCount": 2,
+          "newSessionCount": 2,
+          "changed": false
+        },
+        {
+          "key": "danielRodriguezEventbrite",
+          "venue": "Daniel Rodriguez",
+          "scrapeOk": true,
+          "previousSessionCount": 2,
+          "newSessionCount": 1,
+          "changed": true
+        },
+        {
+          "key": "rachelMannMarlonWhoHenry",
+          "venue": "Rachel Mann & Marlon Who Henry",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "gelNow",
+          "venue": "Gel",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "oneSyllable",
+          "venue": "1Syllable",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 38,
+        "okVenues": 33,
+        "changedAmongOk": 10
+      }
+    },
+    {
       "at": "2026-04-17T06:13:36.712Z",
       "venues": [
         {
