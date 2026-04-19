@@ -18783,24 +18783,6 @@
       "lastSeenAt": "2026-04-01T13:01:40.751Z"
     },
     {
-      "id": "luminous-dance-luminous-new-moon-monday-dance-monday-18-30",
-      "venue": "Luminous Dance",
-      "title": "Luminous New Moon Monday Dance",
-      "details": "Conscious sober dance event with DJ GUMBO and guest DJ where we will focus on dancing, jamming, fun and heart centered",
-      "dayOfWeek": "Monday",
-      "startTime": "18:30",
-      "endTime": "21:30",
-      "startDate": "2026-04-20",
-      "endDate": "2026-04-20",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.eventbrite.com/e/luminous-new-moon-monday-dance-tickets-1738549752109",
-      "sourceUrl": "https://www.eventbrite.com/o/73047023743",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
-    },
-    {
       "id": "luminous-dance-luminous-soul-friday-18-30",
       "venue": "Luminous Dance",
       "title": "Luminous &Soul",
@@ -18873,8 +18855,8 @@
       "lastSeenAt": "2026-04-01T13:01:40.751Z"
     },
     {
-      "id": "salsa-rueda-rueda-libre-cubaneando-friday-19-00",
-      "venue": "Salsa Rueda (Rueda Libre)",
+      "id": "cubaneando-cubaneando-friday-19-00",
+      "venue": "Cubaneando",
       "title": "Cubaneando",
       "details": "La Pollera Colora, La Pollera Colora, 4-6 London Bridge St,, London, SE1 9SG, United Kingdom • Payment for the sessions will be collected by cash at the door, However, you can still pay by card for your drinks at the Bar and the cloakroom. Classes and Social £10 for 1h or £15 if you do 2h – A Nightclub “Standing” entrance is included with the lessons. (Club only entry fee is £10) If you would like to reserve a table, please contact the venue directly on: 0730 864 9434 Cuban Salsa 7 & 8:15pm (2 levels each) with Esther Alvero & Antonio de Freitas1",
       "dayOfWeek": "Friday",
@@ -18891,8 +18873,8 @@
       "lastSeenAt": "2026-04-01T13:01:40.751Z"
     },
     {
-      "id": "salsa-rueda-rueda-libre-cubaneando-saturday-workshop-saturday-17-00",
-      "venue": "Salsa Rueda (Rueda Libre)",
+      "id": "cubaneando-cubaneando-saturday-workshop-saturday-17-00",
+      "venue": "Cubaneando",
       "title": "Cubaneando saturday workshop",
       "details": "O2 Centre,The Venue Hall, O2 Centre,The Venue Hall, 255 Finchley Road, London, NW3 6LU, United Kingdom • ★SATURDAYS INFO: If you booked for Saturday you have already paid online Remember there are 10h & 12h Bundles available for £60 depending on your level. We’re hosting an exciting night of intensive salsa courses and free social dancing at the O2 Shopping Centre on Finchley Road. Join us from 5 PM to 8 PM for classes, and then keep the energy going with free dancing from 8 PM to 11:30 PM. It’s a great opportunity to hone your skills and connect with our lively salsa community! Everyone is welcome, whether you join the lessons or just want to dance. We’ll be grooving on Level 2 near the seating area, so come on down! Plus, don’t forget to check out the nearby restaurants and supermarkets to complete your night—there’s even 2 hours of free parking when you shop at Sainsbury’s!",
       "dayOfWeek": "Saturday",
@@ -18999,8 +18981,8 @@
       "lastSeenAt": "2026-04-01T13:01:40.751Z"
     },
     {
-      "id": "salsa-rueda-rueda-libre-cubaneando-tuesday-tuesday-18-30",
-      "venue": "Salsa Rueda (Rueda Libre)",
+      "id": "cubaneando-cubaneando-tuesday-tuesday-18-30",
+      "venue": "Cubaneando",
       "title": "Cubaneando Tuesday",
       "details": "Miraflores Bar & Lounge, Miraflores Bar & Lounge, 60 Southwark Street, London, SE1 1UN, United Kingdom • Payment for the sessions will be collected by cash at the door, However, you can still pay by card for your drinks at the Bar and the cloakroom. TUESDAY’S PRICES: (Classes only) FREE – from 6:30pm to 7pm £10 for 1h or £15 if you do 2h – £2 off for Students and NHS staff only when booking for 2 classes Cuban Salsa 7 & 8:15pm (2 levels each) with Esther Alvero & Antonio de Freitas Price: £15 for 2h Phone: + 0795 018 4131",
       "dayOfWeek": "Tuesday",
@@ -19088,60 +19070,6 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
-    },
-    {
-      "id": "cubaneando-cubaneando-friday-19-00",
-      "venue": "Cubaneando",
-      "title": "Cubaneando",
-      "details": "La Pollera Colora, La Pollera Colora, 4-6 London Bridge St,, London, SE1 9SG, United Kingdom • Payment for the sessions will be collected by cash at the door, However, you can still pay by card for your drinks at the Bar and the cloakroom. Classes and Social £10 for 1h or £15 if you do 2h – A Nightclub “Standing” entrance is included with the lessons. (Club only entry fee is £10) If you would like to reserve a table, please contact the venue directly on: 0730 864 9434 Cuban Salsa 7 & 8:15pm (2 levels each) with Esther Alvero & Antonio de Freitas1",
-      "dayOfWeek": "Friday",
-      "startTime": "19:00",
-      "endTime": "19:00",
-      "startDate": "2026-04-03",
-      "endDate": "2026-04-03",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://ruedalibre.co.uk/event/cubaneando-presents-weekly-classes-and-saturday-workshop/2026-04-03/",
-      "sourceUrl": "https://ruedalibre.co.uk/events/?ical=1",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
-    },
-    {
-      "id": "cubaneando-cubaneando-saturday-workshop-saturday-17-00",
-      "venue": "Cubaneando",
-      "title": "Cubaneando saturday workshop",
-      "details": "O2 Centre,The Venue Hall, O2 Centre,The Venue Hall, 255 Finchley Road, London, NW3 6LU, United Kingdom • ★SATURDAYS INFO: If you booked for Saturday you have already paid online Remember there are 10h & 12h Bundles available for £60 depending on your level. We’re hosting an exciting night of intensive salsa courses and free social dancing at the O2 Shopping Centre on Finchley Road. Join us from 5 PM to 8 PM for classes, and then keep the energy going with free dancing from 8 PM to 11:30 PM. It’s a great opportunity to hone your skills and connect with our lively salsa community! Everyone is welcome, whether you join the lessons or just want to dance. We’ll be grooving on Level 2 near the seating area, so come on down! Plus, don’t forget to check out the nearby restaurants and supermarkets to complete your night—there’s even 2 hours of free parking when you shop at Sainsbury’s!",
-      "dayOfWeek": "Saturday",
-      "startTime": "17:00",
-      "endTime": "23:30",
-      "startDate": "2026-04-04",
-      "endDate": "2026-04-04",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://ruedalibre.co.uk/event/cubaneando-saturday-workshop/2026-04-04/",
-      "sourceUrl": "https://ruedalibre.co.uk/events/?ical=1",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
-    },
-    {
-      "id": "cubaneando-cubaneando-tuesday-tuesday-18-30",
-      "venue": "Cubaneando",
-      "title": "Cubaneando Tuesday",
-      "details": "Miraflores Bar & Lounge, Miraflores Bar & Lounge, 60 Southwark Street, London, SE1 1UN, United Kingdom • Payment for the sessions will be collected by cash at the door, However, you can still pay by card for your drinks at the Bar and the cloakroom. TUESDAY’S PRICES: (Classes only) FREE – from 6:30pm to 7pm £10 for 1h or £15 if you do 2h – £2 off for Students and NHS staff only when booking for 2 classes Cuban Salsa 7 & 8:15pm (2 levels each) with Esther Alvero & Antonio de Freitas Price: £15 for 2h Phone: + 0795 018 4131",
-      "dayOfWeek": "Tuesday",
-      "startTime": "18:30",
-      "endTime": "21:00",
-      "startDate": "2026-04-07",
-      "endDate": "2026-04-07",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://ruedalibre.co.uk/event/cubaneando-tuesday/2026-04-07/",
-      "sourceUrl": "https://ruedalibre.co.uk/events/?ical=1",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
       "lastSeenAt": "2026-04-01T13:01:40.751Z"
     },
     {
@@ -19677,26 +19605,6 @@
       "endDate": "2026-04-17",
       "timezone": "Europe/London",
       "bookingUrl": "https://www.eventbrite.co.uk/e/expressive-movement-and-dance-improvisation-with-musician-louis-laporte-tickets-1986154330067",
-      "sourceUrl": "https://www.eventbrite.co.uk/o/daniel-rodriguez-88584641013",
-      "tags": [
-        "improvisation"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
-    },
-    {
-      "id": "daniel-rodriguez-expressive-movement-and-dance-improvisation-with-musician-louis-laporte-thursday-19-00",
-      "venue": "Daniel Rodriguez",
-      "title": "Expressive Movement and Dance Improvisation with musician Louis LaPorte",
-      "details": "A dance improvisation workshop where you can learn to connect with your body, emotions, music, and others. Music mixed live by Louis",
-      "dayOfWeek": "Thursday",
-      "startTime": "19:00",
-      "endTime": "21:00",
-      "startDate": "2026-04-23",
-      "endDate": "2026-04-23",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.eventbrite.co.uk/e/expressive-movement-and-dance-improvisation-with-musician-louis-laporte-tickets-1986154463466",
       "sourceUrl": "https://www.eventbrite.co.uk/o/daniel-rodriguez-88584641013",
       "tags": [
         "improvisation"
@@ -20450,6 +20358,341 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-19T14:07:10.779Z"
+    }
+  ],
+  "venues": [
+    {
+      "venue": "AAJA",
+      "key": "customEvents",
+      "sourceUrl": "https://gel.now/events/116",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Bachata Community",
+      "key": "bachataCommunity",
+      "sourceUrl": "https://bachatacommunity.space/",
+      "count": 33,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Ballet for You",
+      "key": "balletForYou",
+      "sourceUrl": "https://www.balletforyou.co.uk/level-1",
+      "count": 19,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Britannia Row",
+      "key": "customEvents",
+      "sourceUrl": "https://gel.now/events/236",
+      "count": 4,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Butoh Mutations",
+      "key": "butohMutations",
+      "sourceUrl": "https://www.butohuk.com/",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Chisenhale Dance Space",
+      "key": "chisenhaleDanceSpace",
+      "sourceUrl": "https://www.chisenhaledancespace.co.uk/independent-events/",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "CI Calendar London",
+      "key": "ciCalendarLondon",
+      "sourceUrl": "https://cicalendar.uk/feeds/ricknodine.ics",
+      "count": 205,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "cplay.cy",
+      "key": "cplayCy",
+      "sourceUrl": "https://linktr.ee/cplay.cy",
+      "count": 3,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Cubaneando",
+      "key": "cubaneando",
+      "sourceUrl": "https://ruedalibre.co.uk/events/?ical=1",
+      "count": 3,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "DabkeRoots",
+      "key": "customEvents",
+      "sourceUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Danceworks",
+      "key": "danceworks",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "count": 132,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Daniel Rodriguez",
+      "key": "danielRodriguezEventbrite",
+      "sourceUrl": "https://www.eventbrite.co.uk/o/daniel-rodriguez-88584641013",
+      "count": 3,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "East London Dance",
+      "key": "eastLondonDance",
+      "sourceUrl": "https://goteamup.com/w5799650/p/5799650-east-london-dance/c/schedule?url=list&view=schedule.day&venue=43266&disableVenueSelector=1",
+      "count": 44,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Fieldworks Dance",
+      "key": "fieldworksDance",
+      "sourceUrl": "https://www.fieldworksdance.co.uk/book-online",
+      "count": 11,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Five Rhythms London",
+      "key": "fiveRhythmsLondon",
+      "sourceUrl": "https://www.5rhythms.com/classes/London",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Florence Trust (Writers' Room)",
+      "key": "customEvents",
+      "sourceUrl": "https://gel.now/events/97",
+      "count": 4,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Hackney Baths",
+      "key": "hackneyBaths",
+      "sourceUrl": "https://www.the-baths.co.uk/",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "JW3",
+      "key": "customEvents",
+      "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Laban Building",
+      "key": "customEvents",
+      "sourceUrl": "https://1syllable.org/events/women-only-vocal-nasheeds-beginner/",
+      "count": 6,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Look At Movement (Tanztheatre)",
+      "key": "lookAtMovement",
+      "sourceUrl": "https://www.lookatmovement.co.uk/",
+      "count": 9,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Luminous Dance",
+      "key": "luminousDance",
+      "sourceUrl": "https://dandelion.events/o/luminous/events",
+      "count": 14,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "MamboCity",
+      "key": "mamboCity",
+      "sourceUrl": "https://www.mambocity.co.uk/",
+      "count": 2,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Marina Sfyridi",
+      "key": "marinaSfyridi",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Omnibus Theatre",
+      "key": "customEvents",
+      "sourceUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Pineapple Dance Studios",
+      "key": "pineappleDanceStudios",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "count": 318,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Posthuman Theatre Butoh",
+      "key": "posthumanTheatreButoh",
+      "sourceUrl": "https://posthuman.works/butoh-classes-workshops",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Rachel Mann & Marlon Who Henry",
+      "key": "rachelMannMarlonWhoHenry",
+      "sourceUrl": "https://www.eventbrite.com/o/79771578413",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Rambert",
+      "key": "rambert",
+      "sourceUrl": "https://rambert.org.uk/classes/",
+      "count": 28,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Salsa Rueda (Rueda Libre)",
+      "key": "salsaRuedaRuedaLibre",
+      "sourceUrl": "https://ruedalibre.co.uk/events/?ical=1",
+      "count": 12,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Siobhan Davies Studios",
+      "key": "siobhanDavies",
+      "sourceUrl": "https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/",
+      "count": 15,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "StreamMovement",
+      "key": "adrianOutsavvy",
+      "sourceUrl": "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+      "count": 2,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "SuperMario Salsa",
+      "key": "superMarioSalsa",
+      "sourceUrl": "https://www.salsa4fun.co.uk/class-schedule",
+      "count": 3,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "The Manor / MVMT",
+      "key": "theManorMvmt",
+      "sourceUrl": "https://www.themanorldn.com/mvmt",
+      "count": 33,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "The Place",
+      "key": "thePlace",
+      "sourceUrl": "https://theplace.org.uk/dance/classes-and-courses",
+      "count": 40,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "TripSpace",
+      "key": "tripSpace",
+      "sourceUrl": "https://momence.com/u/tripspace-bKDjuG",
+      "count": 98,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "UK Dancers for Palestine",
+      "key": "customEvents",
+      "sourceUrl": "https://www.tickettailor.com/events/ukdancersforpalestine",
+      "count": 1,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
+    },
+    {
+      "venue": "Wednesday Moving",
+      "key": "wednesdayMoving",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "count": 7,
+      "ok": true,
+      "lastSuccessAt": "2026-04-19T14:07:10.779Z",
+      "lastError": null
     }
   ]
 }

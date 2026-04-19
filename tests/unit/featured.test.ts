@@ -69,11 +69,17 @@ describe("featured rules", () => {
       venue: "Wednesday Moving",
       title: "Wednesday Moving - Juan Sanchez Plaza"
     };
+    const toMoveTogetherSession: DanceSession = {
+      ...baseSession,
+      venue: "Siobhan Davies Studios",
+      title: "TO MOVE TOGETHER"
+    };
 
     expect(isFeaturedSession(luminousSession)).toBe(true);
     expect(isFeaturedVenueName("Luminous Dance")).toBe(true);
     expect(isFeaturedSession(playSession)).toBe(true);
     expect(isFeaturedSession(unscaryKrumpSession)).toBe(true);
     expect(isFeaturedSession(wednesdayMovingJuanSession)).toBe(true);
+    expect(isFeaturedSession(toMoveTogetherSession)).toBe(true);
   });
 });

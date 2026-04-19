@@ -9,6 +9,8 @@
  */
 import { execFileSync } from "node:child_process";
 import { writeFile } from "node:fs/promises";
+import { coerceScrapeOutput } from "../lib/data-store";
+import type { ScrapeOutput, VenueStatus } from "../lib/types";
 
 interface Session {
   id: string;
@@ -30,10 +32,7 @@ function gitShow(stage: number, path: string): string {
   });
 }
 
-function mergeSessionFile(path: string, timeKey: "generatedAt" | "updatedAt"): string {
-  const ours = JSON.parse(gitShow(2, path)) as SessionFile;
-  const theirs = JSON.parse(gitShow(3, path)) as SessionFile;
-
+function mergeSessionsById(ours: SessionFile, theirs: SessionFile): Session[] {
   const byId = new Map<string, Session>();
   for (const s of theirs.sessions) {
     byId.set(s.id, s);
@@ -41,19 +40,37 @@ function mergeSessionFile(path: string, timeKey: "generatedAt" | "updatedAt"): s
   for (const s of ours.sessions) {
     byId.set(s.id, s);
   }
-
-  const sessions = Array.from(byId.values()).map((s) => {
+  return Array.from(byId.values()).map((s) => {
     if (s.venue === "Rambert") {
       return { ...s, isWorkshop: false };
     }
     return s;
   });
+}
 
+function mergeNormalizedClasses(path: string): string {
+  const ours = JSON.parse(gitShow(2, path)) as Partial<ScrapeOutput>;
+  const theirs = JSON.parse(gitShow(3, path)) as Partial<ScrapeOutput>;
+  const sessions = mergeSessionsById(
+    { sessions: ours.sessions ?? [] } as SessionFile,
+    { sessions: theirs.sessions ?? [] } as SessionFile,
+  );
+  const out = coerceScrapeOutput({
+    generatedAt: ours.generatedAt,
+    sessions,
+    venues: Array.isArray(ours.venues) && ours.venues.length > 0 ? (ours.venues as VenueStatus[]) : undefined,
+  });
+  return JSON.stringify(out, null, 2) + "\n";
+}
+
+function mergePastArchive(path: string): string {
+  const ours = JSON.parse(gitShow(2, path)) as SessionFile;
+  const theirs = JSON.parse(gitShow(3, path)) as SessionFile;
+  const sessions = mergeSessionsById(ours, theirs);
   const out: SessionFile = {
-    [timeKey]: ours[timeKey],
+    updatedAt: ours.updatedAt,
     sessions,
   } as SessionFile;
-
   return JSON.stringify(out, null, 2) + "\n";
 }
 
@@ -62,13 +79,13 @@ async function main() {
   const pastPath = "data/classes.past.json";
   const statsPath = "data/scrape-change-stats.json";
 
-  const normJson = mergeSessionFile(normalizedPath, "generatedAt");
+  const normJson = mergeNormalizedClasses(normalizedPath);
   await writeFile(normalizedPath, normJson, "utf8");
   console.error(
-    `Wrote ${normalizedPath} (${(JSON.parse(normJson) as SessionFile).sessions.length} sessions)`,
+    `Wrote ${normalizedPath} (${(JSON.parse(normJson) as ScrapeOutput).sessions.length} sessions)`,
   );
 
-  const pastJson = mergeSessionFile(pastPath, "updatedAt");
+  const pastJson = mergePastArchive(pastPath);
   await writeFile(pastPath, pastJson, "utf8");
   console.error(
     `Wrote ${pastPath} (${(JSON.parse(pastJson) as SessionFile).sessions.length} sessions)`,

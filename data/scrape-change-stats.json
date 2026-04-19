@@ -2,6 +2,24 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-19T14:43:36.275Z",
+      "venues": [
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 15,
+          "newSessionCount": 18,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-04-19T14:07:10.779Z",
       "venues": [
         {
