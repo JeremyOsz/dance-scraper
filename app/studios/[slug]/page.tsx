@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Route } from "next";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
@@ -94,7 +95,7 @@ export default async function StudioPage({ params }: PageProps) {
               <Link href="/studios">All studios</Link>
             </Button>
             <Button asChild>
-              <Link href={calendarHref}>View studio classes</Link>
+              <Link href={calendarHref as Route}>View studio classes</Link>
             </Button>
           </div>
         </CardHeader>
@@ -174,7 +175,7 @@ export default async function StudioPage({ params }: PageProps) {
                 </a>
               </Button>
               <Button asChild>
-                <Link href={calendarHref}>Filter calendar by this studio</Link>
+                <Link href={calendarHref as Route}>Filter calendar by this studio</Link>
               </Button>
               <Button variant="outline" asChild>
                 <Link href="/contact">Report incorrect info</Link>
