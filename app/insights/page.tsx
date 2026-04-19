@@ -58,6 +58,9 @@ export default function InsightsPage() {
               <Button asChild>
                 <Link href="/insights">Insights</Link>
               </Button>
+              <Button variant="outline" asChild>
+                <Link href="/studios">Studios</Link>
+              </Button>
             </div>
           </div>
           <p className="text-sm text-muted-foreground">

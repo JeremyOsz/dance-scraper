@@ -1161,6 +1161,9 @@ export function CalendarPage({ initialSessions, venues }: Props) {
               <Button variant="outline" asChild>
                 <Link href="/insights">Insights</Link>
               </Button>
+              <Button variant="outline" asChild>
+                <Link href="/studios">Studios</Link>
+              </Button>
             </div>
           </div>
           {shareMessage ? <p className="text-sm text-muted-foreground">{shareMessage}</p> : null}

@@ -2,6 +2,72 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-19T14:07:10.779Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": true,
+          "previousSessionCount": 305,
+          "newSessionCount": 305,
+          "changed": false
+        },
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 18,
+          "newSessionCount": 18,
+          "changed": false
+        },
+        {
+          "key": "bachataCommunity",
+          "venue": "Bachata Community",
+          "scrapeOk": true,
+          "previousSessionCount": 41,
+          "newSessionCount": 80,
+          "changed": true
+        },
+        {
+          "key": "baseDanceStudios",
+          "venue": "BASE Dance Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "oneSyllable",
+          "venue": "1Syllable",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 7,
+        "okVenues": 7,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-04-19T13:59:56.296Z",
       "venues": [
         {

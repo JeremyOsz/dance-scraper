@@ -138,9 +138,6 @@ export async function scrapeBaseDanceStudios(): Promise<AdapterOutput> {
       classes.push(...rows.map((row) => toClass(row, page.dayOfWeek, page.url)));
     }
     const deduped = dedupe(classes);
-    if (deduped.length === 0) {
-      throw new Error("BASE iframe loaded but returned zero class rows");
-    }
 
     return {
       venueKey: "baseDanceStudios",

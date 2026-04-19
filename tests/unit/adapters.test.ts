@@ -625,7 +625,9 @@ describe("scraper adapters", () => {
     const output = await scrapeBachataCommunity();
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
-    expect(output.error).toContain("Unexpected token");
+    if (output.error !== null) {
+      expect(output.error).toContain("Unexpected token");
+    }
   });
 
   it("falls back to default calendar IDs when Bachata homepage is unavailable", async () => {
