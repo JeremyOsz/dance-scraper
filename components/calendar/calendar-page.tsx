@@ -2,7 +2,20 @@
 
 import React from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { format, addDays, addMonths, isSameDay, isSameMonth, parseISO, startOfDay, subDays, subMonths } from "date-fns";
+import {
+  format,
+  addDays,
+  addMonths,
+  differenceInCalendarDays,
+  differenceInCalendarMonths,
+  isSameDay,
+  isSameMonth,
+  parseISO,
+  startOfMonth,
+  startOfDay,
+  subDays,
+  subMonths
+} from "date-fns";
 import Link from "next/link";
 import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -536,7 +549,8 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       view === "week" ? getForwardDayWindow(anchorDate, loadedDayCount) : getMonthGridDates(anchorDate),
     [anchorDate, loadedDayCount, view]
   );
-  const weekPickerValue = useMemo(() => format(anchorDate, "RRRR-'W'II"), [anchorDate]);
+  const weekRangeStartValue = useMemo(() => format(anchorDate, "yyyy-MM-dd"), [anchorDate]);
+  const weekRangeEndValue = useMemo(() => format(addDays(anchorDate, Math.max(loadedDayCount - 1, 0)), "yyyy-MM-dd"), [anchorDate, loadedDayCount]);
   const weekRangeLabel = useMemo(() => {
     if (view !== "week" || dates.length === 0) {
       return null;
@@ -560,6 +574,19 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     return dayFilteredDates;
   }, [dates, selectedDays, view]);
   const visibleDateIsos = useMemo(() => visibleDates.map((date) => format(date, "yyyy-MM-dd")), [visibleDates]);
+  const weekMonthBandClassByIso = useMemo(() => {
+    const classes = new Map<string, string>();
+    if (view !== "week") {
+      return classes;
+    }
+    const anchorMonth = startOfMonth(anchorDate);
+    for (const date of visibleDates) {
+      const iso = format(date, "yyyy-MM-dd");
+      const monthDelta = differenceInCalendarMonths(startOfMonth(date), anchorMonth);
+      classes.set(iso, monthDelta % 2 === 0 ? "bg-card" : "bg-slate-100");
+    }
+    return classes;
+  }, [anchorDate, view, visibleDates]);
   const venueOptionCountByVenue = useMemo(() => {
     const counts = new Map<string, number>();
     for (const session of initialSessions) {
@@ -1235,34 +1262,48 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                     <Badge variant="secondary">{format(anchorDate, "MMMM yyyy")}</Badge>
                   )}
                   {view === "week" ? (
-                    <>
-                      <label htmlFor="week-picker" className="sr-only">
-                        Jump to ISO week (week view starts from Monday of that week)
+                    <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+                      <label htmlFor="range-start" className="sr-only">
+                        Week view range start date
                       </label>
                       <Input
-                        id="week-picker"
-                        type="week"
-                        value={weekPickerValue}
+                        id="range-start"
+                        type="date"
+                        value={weekRangeStartValue}
                         onChange={(event) => {
                           const value = event.currentTarget.value;
                           if (!value) return;
-                          const nextAnchor = parseISO(`${value}-1`);
+                          const nextAnchor = parseISO(value);
                           if (Number.isNaN(nextAnchor.getTime())) return;
-                          setAnchorDate(nextAnchor);
+                          setAnchorDate(startOfDay(nextAnchor));
                           setView("week");
                         }}
-                        onInput={(event) => {
+                        className="w-full sm:w-[170px]"
+                        aria-label="Range start date"
+                      />
+                      <span className="text-xs text-muted-foreground">to</span>
+                      <label htmlFor="range-end" className="sr-only">
+                        Week view range end date
+                      </label>
+                      <Input
+                        id="range-end"
+                        type="date"
+                        value={weekRangeEndValue}
+                        min={weekRangeStartValue}
+                        onChange={(event) => {
                           const value = event.currentTarget.value;
                           if (!value) return;
-                          const nextAnchor = parseISO(`${value}-1`);
-                          if (Number.isNaN(nextAnchor.getTime())) return;
-                          setAnchorDate(nextAnchor);
+                          const nextEnd = parseISO(value);
+                          if (Number.isNaN(nextEnd.getTime())) return;
+                          const inclusiveDays = differenceInCalendarDays(startOfDay(nextEnd), anchorDate) + 1;
+                          const boundedDays = Math.max(1, Math.min(MAX_LOADED_CALENDAR_DAYS, inclusiveDays));
+                          setLoadedDayCount(boundedDays);
                           setView("week");
                         }}
-                        className="w-full sm:w-[160px]"
-                        aria-label="Jump to ISO week"
+                        className="w-full sm:w-[170px]"
+                        aria-label="Range end date"
                       />
-                    </>
+                    </div>
                   ) : null}
                   <div className="flex w-full gap-2 sm:ml-auto sm:w-auto">
                     <Button variant={view === "week" ? "default" : "outline"} onClick={() => setView("week")}>
@@ -1296,7 +1337,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                           } ${
                             view === "month" && !inMonth ? "opacity-55" : ""
                           } ${
-                            view === "week" && !inMonth ? "bg-muted/20" : ""
+                            view === "week" ? weekMonthBandClassByIso.get(iso) ?? "bg-card" : ""
                           } ${isToday ? "border-primary/60 bg-primary/5 ring-1 ring-primary/40" : ""}`}
                         >
                           <CardHeader className="p-3">

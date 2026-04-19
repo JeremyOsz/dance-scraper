@@ -1,5 +1,4 @@
 import * as cheerio from "cheerio";
-import type { Element } from "domhandler";
 import type { AdapterOutput } from "../types";
 import { absoluteUrl, fetchHtml } from "./common";
 
@@ -20,8 +19,8 @@ export async function scrapeSiobhanDavies(): Promise<AdapterOutput> {
       archiveHtml = null;
     }
 
-    const sourceUrl = archiveHtml ? resolveSourceUrlFromArchive(archiveHtml) : legacySourceUrl;
-    const html = await fetchHtml(sourceUrl);
+    const candidateSourceUrls = archiveHtml ? resolveSourceUrlsFromArchive(archiveHtml) : [legacySourceUrl];
+    const { sourceUrl, html } = await fetchFirstAvailableSourcePage(candidateSourceUrls);
     const classes = parseClasses(html, sourceUrl);
     const unscaryEvents = archiveHtml ? parseUnscarySaturdaysFromArchive(archiveHtml) : [];
     const combined = [...classes, ...unscaryEvents];
@@ -56,34 +55,66 @@ export async function scrapeSiobhanDavies(): Promise<AdapterOutput> {
   }
 }
 
-function resolveSourceUrlFromArchive(html: string): string {
+function resolveSourceUrlsFromArchive(html: string): string[] {
   const $ = cheerio.load(html);
+  const candidatesByHref = new Map<
+    string,
+    {
+      href: string;
+      endDate: number | null;
+    }
+  >();
+
   const archiveMatches = $("article.event a[href]")
     .toArray()
-    .filter((el) => /\bdance classes at sds\b/i.test($(el).text().replace(/\s+/g, " ").trim()));
-  return selectMostRecentClassesUrl($, archiveMatches) ?? legacySourceUrl;
+    .filter((el) => {
+      const text = $(el).text().replace(/\s+/g, " ").trim();
+      const href = el.attribs.href ?? "";
+      return /\bdance classes at sds\b/i.test(text) || /\/dance-classes-at-sds\/?$/i.test(href);
+    });
+
+  for (const el of archiveMatches) {
+    const href = absoluteUrl(archiveUrl, el.attribs.href);
+    if (!href) continue;
+    const card = $(el).closest("article.event");
+    const dateText = card.find(".entry-title span").first().text().replace(/\s+/g, " ").trim();
+    const endDate = parseArchiveEndDate(dateText);
+    const previous = candidatesByHref.get(href);
+    if (!previous || (endDate ?? -1) > (previous.endDate ?? -1)) {
+      candidatesByHref.set(href, { href, endDate });
+    }
+  }
+
+  const ordered = [...candidatesByHref.values()]
+    .sort((a, b) => {
+      const aDate = a.endDate ?? -1;
+      const bDate = b.endDate ?? -1;
+      if (aDate !== bDate) return bDate - aDate;
+      return a.href.localeCompare(b.href);
+    })
+    .map((item) => item.href);
+
+  if (!ordered.includes(legacySourceUrl)) {
+    ordered.push(legacySourceUrl);
+  }
+
+  return ordered;
 }
 
-function selectMostRecentClassesUrl($: cheerio.CheerioAPI, links: Element[]): string | null {
-  const candidates = links
-    .map((el) => {
-      const card = $(el).closest("article.event");
-      const dateText = card.find(".entry-title span").first().text().replace(/\s+/g, " ").trim();
-      return {
-        href: el.attribs.href,
-        endDate: parseArchiveEndDate(dateText)
-      };
-    })
-    .filter((item) => item.href);
-
-  if (candidates.length === 0) return null;
-
-  const withParsedDates = candidates.filter((item) => item.endDate !== null);
-  const preferred = withParsedDates.length > 0
-    ? withParsedDates.sort((a, b) => (a.endDate as number) - (b.endDate as number)).at(-1)
-    : candidates.at(-1);
-
-  return absoluteUrl(archiveUrl, preferred?.href);
+async function fetchFirstAvailableSourcePage(
+  candidateSourceUrls: string[]
+): Promise<{ sourceUrl: string; html: string }> {
+  const uniqueUrls = Array.from(new Set(candidateSourceUrls.filter(Boolean)));
+  let lastError: unknown = null;
+  for (const sourceUrl of uniqueUrls) {
+    try {
+      const html = await fetchHtml(sourceUrl);
+      return { sourceUrl, html };
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error("No Siobhan source page could be fetched");
 }
 
 function parseArchiveEndDate(text: string): number | null {

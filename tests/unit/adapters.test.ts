@@ -317,6 +317,41 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.sourceUrl).toBe("https://www.siobhandavies.com/events/classes-2/");
   });
 
+  it("tries older Siobhan classes pages when the newest archive page fails to load", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                  <span>Thu 9 Apr - Sun 26 Jul 2026</span>
+                </a>
+              </h2>
+            </header>
+          </article>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/spring-2026-dance-classes-at-sds/">
+                  Spring 2026 | Dance Classes at SDS
+                  <span>Thu 8 Jan - Sun 12 Apr 2026</span>
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockRejectedValueOnce(new Error("503"))
+      .mockResolvedValueOnce(fixture("siobhan.html"));
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+
+    expect(output.ok).toBe(true);
+    expect(output.sourceUrl).toBe("https://www.siobhandavies.com/events/spring-2026-dance-classes-at-sds/");
+  });
+
   it("filters out Siobhan yoga and pilates classes", async () => {
     fetchHtml
       .mockResolvedValueOnce(`

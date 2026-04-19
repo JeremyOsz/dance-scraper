@@ -2,6 +2,90 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-19T13:59:56.296Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": true,
+          "previousSessionCount": 306,
+          "newSessionCount": 305,
+          "changed": true
+        },
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 18,
+          "newSessionCount": 18,
+          "changed": false
+        },
+        {
+          "key": "bachataCommunity",
+          "venue": "Bachata Community",
+          "scrapeOk": false,
+          "previousSessionCount": 41,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "baseDanceStudios",
+          "venue": "BASE Dance Studios",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "oneSyllable",
+          "venue": "1Syllable",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 7,
+        "okVenues": 4,
+        "changedAmongOk": 1
+      }
+    },
+    {
+      "at": "2026-04-19T13:57:10.942Z",
+      "venues": [
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 19,
+          "newSessionCount": 18,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-04-14T12:48:19.381Z",
       "venues": [
         {

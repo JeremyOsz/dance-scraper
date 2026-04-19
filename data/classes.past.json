@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-13T14:04:17.261Z",
+  "updatedAt": "2026-04-19T13:57:10.942Z",
   "sessions": [
     {
       "id": "tripspace-vinyasa-flow-thursday-09-15",
@@ -17726,6 +17726,24 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-05T13:59:59.314Z"
+    },
+    {
+      "id": "siobhan-davies-studios-unscary-saturdays-krump-with-sasha-mahfouz-shadid-saturday-1-pm",
+      "venue": "Siobhan Davies Studios",
+      "title": "Unscary Saturdays | Krump with Sasha Mahfouz Shadid",
+      "details": null,
+      "dayOfWeek": "Saturday",
+      "startTime": "1 pm",
+      "endTime": "3pm",
+      "startDate": "2026-04-11",
+      "endDate": "2026-04-11",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.siobhandavies.com/events/unscary-saturdays-krump/",
+      "sourceUrl": "https://www.siobhandavies.com/events/unscary-saturdays-krump/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-09T16:54:00.021Z"
     }
   ]
 }
