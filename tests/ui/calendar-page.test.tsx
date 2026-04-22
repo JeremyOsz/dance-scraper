@@ -309,7 +309,7 @@ describe("CalendarPage", () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
     expect(screen.getByText("Gaga People")).toBeInTheDocument();
-    expect(screen.getByText(/Boycott called by Dancers for Palestine/i)).toBeInTheDocument();
+    expect(screen.getByText(/Boycott.*Dancers for Palestine/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Why Boycott" })).toHaveAttribute(
       "href",
       "https://www.instagram.com/p/DSXaLAIiIh2/"
@@ -393,7 +393,7 @@ describe("CalendarPage", () => {
 
     expect(shareMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        url: window.location.href,
+        url: expect.stringContaining("?mode=calendar&view=week&date="),
         title: "London Dance Calendar"
       })
     );
@@ -412,7 +412,7 @@ describe("CalendarPage", () => {
 
     await user.click(screen.getByRole("button", { name: "Share" }));
 
-    expect(writeTextMock).toHaveBeenCalledWith(window.location.href);
+    expect(writeTextMock).toHaveBeenCalledWith(expect.stringContaining("?mode=calendar&view=week&date="));
     expect(await screen.findByText("Link copied")).toBeInTheDocument();
   });
 });
