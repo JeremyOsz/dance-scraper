@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { DanceSession } from "@/lib/types";
-import { buildSessionIcs, canAddSessionToCalendar, getSessionCalendarTiming } from "@/lib/calendar-export";
+import { buildMultiSessionIcs, buildSessionIcs, canAddSessionToCalendar, getSessionCalendarTiming } from "@/lib/calendar-export";
 
 const baseSession: DanceSession = {
   id: "sess-1",
@@ -105,5 +105,31 @@ describe("calendar export", () => {
       .split("\r\n")
       .filter((line) => line.startsWith("DESCRIPTION:") || line.startsWith(" "));
     expect(descriptionLines.length).toBeGreaterThan(1);
+  });
+
+  it("builds a multi-session calendar and skips sessions without timing", () => {
+    const missingTiming: DanceSession = {
+      ...baseSession,
+      id: "sess-missing",
+      title: "No Timing",
+      startDate: null,
+      dayOfWeek: null
+    };
+    const result = buildMultiSessionIcs([baseSession, missingTiming], {
+      calendarName: "My Dance Plan",
+      now: new Date("2026-03-10T12:00:00.000Z")
+    });
+
+    expect(result.ics).toContain("X-WR-CALNAME:My Dance Plan");
+    expect(result.ics).toContain("UID:sess-1@dance-scraper.local");
+    expect(result.ics).not.toContain("UID:sess-missing@dance-scraper.local");
+    expect(result.included).toHaveLength(1);
+    expect(result.skipped).toEqual([
+      {
+        id: "sess-missing",
+        title: "No Timing",
+        reason: "Session does not contain enough date information for calendar export."
+      }
+    ]);
   });
 });

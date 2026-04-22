@@ -75,6 +75,8 @@ Curated one-off or hard-to-scrape series:
 
 - `GET /api/classes?from=YYYY-MM-DD&to=YYYY-MM-DD&type=Contact%20Improv&venue=TripSpace&day=Monday&q=improvisation&workshopsOnly=true`
 - `GET /api/venues`
+- `GET /api/calendar?ids=<session-id>,<session-id>&calendarName=My%20Classes`
+- `POST /mcp` — MCP connector for class search, schedule planning, and ICS generation. See `docs/mcp-chatgpt-connector.md`.
 
 ## Local Development
 

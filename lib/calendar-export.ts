@@ -8,6 +8,12 @@ type SessionTiming = {
   allDay: boolean;
 };
 
+export type MultiSessionIcsResult = {
+  ics: string;
+  included: DanceSession[];
+  skipped: { id: string; title: string; reason: string }[];
+};
+
 const DAY_TO_INDEX: Record<Exclude<DanceSession["dayOfWeek"], null>, number> = {
   Sunday: 0,
   Monday: 1,
@@ -169,7 +175,16 @@ export function buildCalendarFilename(session: DanceSession) {
   return `${slug || "dance-session"}.ics`;
 }
 
-export function buildSessionIcs(session: DanceSession, now = new Date()) {
+export function buildScheduleCalendarFilename(calendarName = "London Dance Calendar") {
+  const slug = calendarName
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+  return `${slug || "london-dance-calendar"}.ics`;
+}
+
+function buildSessionEventLines(session: DanceSession, now: Date) {
   const timing = getSessionCalendarTiming(session, now);
   if (!timing) {
     throw new Error("Session does not have enough date information for calendar export.");
@@ -179,12 +194,7 @@ export function buildSessionIcs(session: DanceSession, now = new Date()) {
     .filter(Boolean)
     .join("\n");
 
-  const lines = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//Dance Scraper//London Dance Calendar//EN",
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
+  return [
     "BEGIN:VEVENT",
     `UID:${escapeText(session.id)}@dance-scraper.local`,
     `DTSTAMP:${toUtcStamp(now)}`,
@@ -198,9 +208,61 @@ export function buildSessionIcs(session: DanceSession, now = new Date()) {
       ? `DTEND;VALUE=DATE:${format(timing.end, "yyyyMMdd")}`
       : `DTEND;TZID=Europe/London:${toLocalStamp(timing.end)}`,
     `URL:${escapeText(session.bookingUrl)}`,
-    "END:VEVENT",
+    "END:VEVENT"
+  ];
+}
+
+export function buildSessionIcs(session: DanceSession, now = new Date()) {
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Dance Scraper//London Dance Calendar//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    ...buildSessionEventLines(session, now),
     "END:VCALENDAR"
   ];
 
   return `${foldIcsLines(lines).join("\r\n")}\r\n`;
+}
+
+export function buildMultiSessionIcs(
+  sessions: DanceSession[],
+  options: { calendarName?: string; now?: Date } = {}
+): MultiSessionIcsResult {
+  const now = options.now ?? new Date();
+  const calendarName = options.calendarName?.trim() || "London Dance Calendar";
+  const included: DanceSession[] = [];
+  const skipped: MultiSessionIcsResult["skipped"] = [];
+  const eventLines: string[] = [];
+
+  for (const session of sessions) {
+    try {
+      eventLines.push(...buildSessionEventLines(session, now));
+      included.push(session);
+    } catch {
+      skipped.push({
+        id: session.id,
+        title: session.title,
+        reason: "Session does not contain enough date information for calendar export."
+      });
+    }
+  }
+
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Dance Scraper//London Dance Calendar//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    `X-WR-CALNAME:${escapeText(calendarName)}`,
+    ...eventLines,
+    "END:VCALENDAR"
+  ];
+
+  return {
+    ics: `${foldIcsLines(lines).join("\r\n")}\r\n`,
+    included,
+    skipped
+  };
 }
