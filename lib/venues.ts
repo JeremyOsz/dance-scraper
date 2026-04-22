@@ -192,6 +192,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://1syllable.org/events/category/classes-and-training/",
     mapQuery: "1Syllable London"
   },
+  coletHouse: {
+    label: "Colet House",
+    sourceUrl: "https://www.colethouse.org/whats-on",
+    mapQuery: "Colet House, 151 Talgarth Road, London W14 9DA"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",

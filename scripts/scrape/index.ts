@@ -37,6 +37,7 @@ import { scrapeDanielRodriguezEventbrite } from "./adapters/daniel-rodriguez-eve
 import { scrapeRachelMannMarlonWhoHenry } from "./adapters/rachel-mann-marlon-who-henry";
 import { scrapeGelNow } from "./adapters/gel-now";
 import { scrapeOneSyllable } from "./adapters/one-syllable";
+import { scrapeColetHouse } from "./adapters/colet-house";
 import type { ScrapeOutput, VenueKey } from "../../lib/types";
 import { VENUES } from "../../lib/venues";
 import { buildOutput, writeOutput } from "./normalize";
@@ -97,6 +98,7 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "rachelMannMarlonWhoHenry", scrape: scrapeRachelMannMarlonWhoHenry },
   { key: "gelNow", scrape: scrapeGelNow },
   { key: "oneSyllable", scrape: scrapeOneSyllable },
+  { key: "coletHouse", scrape: scrapeColetHouse },
   { key: "customEvents", scrape: scrapeCustomEvents }
 ];
 
