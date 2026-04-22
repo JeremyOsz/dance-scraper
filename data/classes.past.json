@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-21T06:13:52.418Z",
+  "updatedAt": "2026-04-22T06:11:37.236Z",
   "sessions": [
     {
       "id": "tripspace-vinyasa-flow-thursday-09-15",
@@ -26645,6 +26645,24 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-19T14:07:10.779Z"
+    },
+    {
+      "id": "britannia-row-jules-cunningham-dance-workshop-tuesday-11-00am",
+      "venue": "Britannia Row",
+      "title": "Jules Cunningham Dance Workshop",
+      "details": "Jules Cunningham (they/them), originally from Liverpool, worked as an award-winning dancer for 20+ years with Merce Cunningham Dance Company and Michael Clark Company. Jules founded Julie Cunningham & Company in 2017, to create and present work that combines clarity of form with an interest in gender identity and the body. Jules uses movement language that draws on their technical dance training, expanding and queering it collaboratively, working between sound, text, visual art. Creative work is informed by solo and collaborative movement exploration, queerness, lived experience of mental illness, disability and exclusion based on Jules’ working-class background and non-binary identity. This workshop is part of a series curated by the artist Mica Georgis as part of a Residency at The Writers’ Room, Florence Trust in April 2026. The workshops are open to dancers and non-dancers. No previous dance experience is necessary.",
+      "dayOfWeek": "Tuesday",
+      "startTime": "11:00am",
+      "endTime": "1:00pm",
+      "startDate": "2026-04-21",
+      "endDate": "2026-04-21",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://gel.now/events/236",
+      "sourceUrl": "https://gel.now/events/236",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-20T06:18:52.294Z"
     }
   ]
 }
