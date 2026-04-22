@@ -2,6 +2,24 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-22T11:12:46.864Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": true,
+          "previousSessionCount": 40,
+          "newSessionCount": 295,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-04-22T06:11:37.236Z",
       "venues": [
         {
