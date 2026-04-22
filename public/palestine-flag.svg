@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title">
+  <title>Palestinian flag</title>
+  <rect width="900" height="200" fill="#000000" />
+  <rect y="200" width="900" height="200" fill="#FFFFFF" />
+  <rect y="400" width="900" height="200" fill="#007A3D" />
+  <polygon points="0,0 300,300 0,600" fill="#CE1126" />
+</svg>

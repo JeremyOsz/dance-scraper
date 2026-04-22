@@ -17,6 +17,7 @@ import {
   subMonths
 } from "date-fns";
 import Link from "next/link";
+import Image from "next/image";
 import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TrackedOutboundLink } from "@/components/tracked-outbound-link";
@@ -107,11 +108,7 @@ function GagaBoycottCard({ session, onOpen }: { session: DanceSession; onOpen: (
   return (
     <div className="overflow-hidden rounded-[18px] border-[3px] border-emerald-700 bg-[#ff5b76] text-xs text-zinc-900 shadow-sm">
       <div className="relative h-20 w-full overflow-hidden" aria-hidden>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg"
-          alt=""
-          className="block h-full w-full object-cover"
-        />
+        <Image src="/palestine-flag.svg" alt="" fill className="object-cover" sizes="100vw" />
       </div>
       <div className="space-y-2.5 bg-[linear-gradient(180deg,rgba(255,246,248,0.98)_0%,rgba(255,239,242,0.98)_100%)] px-5 py-4">
         <button onClick={onOpen} className="block w-full text-left hover:text-foreground/90">
