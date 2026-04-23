@@ -697,6 +697,24 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     };
   }, [view, loadedDayCount, visibleDates.length]);
 
+  useEffect(() => {
+    if (view !== "week" || selectedVenues.length === 0 || filteredSessions.length === 0) {
+      return;
+    }
+
+    const fullWindow = getForwardDayWindow(anchorDate, MAX_LOADED_CALENDAR_DAYS);
+    for (let index = loadedDayCount; index < fullWindow.length; index += 1) {
+      const date = fullWindow[index];
+      if (!date) continue;
+      const iso = format(date, "yyyy-MM-dd");
+      const hasMatchOnDate = filteredSessions.some((session) => isSessionActiveOnDate(session, iso));
+      if (hasMatchOnDate) {
+        setLoadedDayCount(index + 1);
+        return;
+      }
+    }
+  }, [anchorDate, filteredSessions, loadedDayCount, selectedVenues, view]);
+
   const grouped = useMemo(() => groupByDate(filteredSessions, visibleDates), [filteredSessions, visibleDates]);
   const listingVenueCountByVenue = useMemo(() => {
     const counts = new Map<string, number>();
@@ -1049,8 +1067,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   type="button"
                   size="sm"
                   variant={isSelected ? "default" : "outline"}
-                  disabled={noRelatedSessions && !isSelected}
-                  className={noRelatedSessions && !isSelected ? "opacity-50" : undefined}
+                  className={noRelatedSessions && !isSelected ? "opacity-70" : undefined}
                   onClick={() => setSelectedVenues((current) => toggleValue(current, venue))}
                 >
                   {venue}
