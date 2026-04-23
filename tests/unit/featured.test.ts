@@ -74,6 +74,11 @@ describe("featured rules", () => {
       venue: "Siobhan Davies Studios",
       title: "TO MOVE TOGETHER"
     };
+    const pepaSession: DanceSession = {
+      ...baseSession,
+      venue: "Colet House",
+      title: "Improvisation with Pepa Ubera"
+    };
 
     expect(isFeaturedSession(luminousSession)).toBe(true);
     expect(isFeaturedVenueName("Luminous Dance")).toBe(true);
@@ -81,5 +86,6 @@ describe("featured rules", () => {
     expect(isFeaturedSession(unscaryKrumpSession)).toBe(true);
     expect(isFeaturedSession(wednesdayMovingJuanSession)).toBe(true);
     expect(isFeaturedSession(toMoveTogetherSession)).toBe(true);
+    expect(isFeaturedSession(pepaSession)).toBe(true);
   });
 });

@@ -10,6 +10,7 @@ export type FeaturedRule = {
 export const FEATURED_RULES: FeaturedRule[] = [
   { titleContains: "How the voice moves: a poetry & dance improv workshop" },
   { titleContains: "Play and Expression Workshop" },
+  { titleContains: "Improvisation with Pepa Ubera" },
   { venueKey: "siobhanDavies", titleContains: "to move together" },
   { titleContains: "Unscary Saturdays | Krump with Sasha Mahfouz Shadid" },
   { titleContains: "Wednesday Moving - Juan Sanchez Plaza" },
