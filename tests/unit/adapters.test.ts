@@ -770,32 +770,44 @@ describe("scraper adapters", () => {
   });
 
   it("parses Luminous events from Dandelion ICS feed", async () => {
-    fetchHtml
-      .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
-      .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
-      .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
-      .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
-      .mockResolvedValueOnce(fixture("dandelion-luminous.ics"));
-    const { scrapeLuminousDance } = await import("../../scripts/scrape/adapters/luminous-dance");
-    const output = await scrapeLuminousDance();
-    expect(output.ok).toBe(true);
-    expect(output.classes[0]?.venue).toBe("Luminous Dance");
-    expect(output.classes.map((item) => item.title)).toContain("Luminous New Moon Monday Dance x FX10K");
-    expect(output.classes.some((item) => item.bookingUrl.includes("dandelion.events/events/6985e5beb0c9d9576952ec22"))).toBe(true);
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-03-01T00:00:00Z"));
+    try {
+      fetchHtml
+        .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
+        .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
+        .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
+        .mockResolvedValueOnce(fixture("eventbrite-organizer.html"))
+        .mockResolvedValueOnce(fixture("dandelion-luminous.ics"));
+      const { scrapeLuminousDance } = await import("../../scripts/scrape/adapters/luminous-dance");
+      const output = await scrapeLuminousDance();
+      expect(output.ok).toBe(true);
+      expect(output.classes[0]?.venue).toBe("Luminous Dance");
+      expect(output.classes.map((item) => item.title)).toContain("Luminous New Moon Monday Dance x FX10K");
+      expect(output.classes.some((item) => item.bookingUrl.includes("dandelion.events/events/6985e5beb0c9d9576952ec22"))).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("parses Luminous events from Eventbrite organizer graph", async () => {
-    fetchHtml
-      .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
-      .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
-      .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
-      .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
-      .mockResolvedValueOnce("BEGIN:VCALENDAR\nEND:VCALENDAR");
-    const { scrapeLuminousDance } = await import("../../scripts/scrape/adapters/luminous-dance");
-    const output = await scrapeLuminousDance();
-    expect(output.ok).toBe(true);
-    expect(output.classes[0]?.venue).toBe("Luminous Dance");
-    expect(output.classes.map((item) => item.title)).toContain("Luminous New Moon Monday Dance");
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-03-01T00:00:00Z"));
+    try {
+      fetchHtml
+        .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
+        .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
+        .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
+        .mockResolvedValueOnce(fixture("eventbrite-organizer-graph.html"))
+        .mockResolvedValueOnce("BEGIN:VCALENDAR\nEND:VCALENDAR");
+      const { scrapeLuminousDance } = await import("../../scripts/scrape/adapters/luminous-dance");
+      const output = await scrapeLuminousDance();
+      expect(output.ok).toBe(true);
+      expect(output.classes[0]?.venue).toBe("Luminous Dance");
+      expect(output.classes.map((item) => item.title)).toContain("Luminous New Moon Monday Dance");
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("queries each Ecstatic Dance organiser and keeps per-organiser events", async () => {
