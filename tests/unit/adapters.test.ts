@@ -241,6 +241,117 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
   });
 
+  it("enriches Siobhan Monday Night Improvisation titles with Independent Dance leaders", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Monday</h3>
+          <div>
+            <h4>MONDAY NIGHT IMPROVISATION</h4>
+            <p>Programmed by Independent Dance. Open to all. Teacher changes weekly.</p>
+            <h3>6.30 - 8pm</h3>
+            <a href="https://www.siobhandavies.com/classes/id-improvisation/">More info</a>
+          </div>
+        </div>
+      `)
+      .mockResolvedValueOnce(`
+        <article class="index-item index-item--event">
+          <header class="entry-header">
+            <h2 class="entry-title">Monday Night Improvisation: Théïa Maldoom</h2>
+            <h3 class="entry-subtitle">27 April</h3>
+          </header>
+          <a href="https://independentdance.co.uk/event/monday-night-improvisation-theia-maldoom/"></a>
+        </article>
+        <article class="index-item index-item--event">
+          <header class="entry-header">
+            <h2 class="entry-title">Monday Night Improvisation: Pepa Ubera</h2>
+            <h3 class="entry-subtitle">18 May</h3>
+          </header>
+          <a href="https://independentdance.co.uk/event/monday-night-improvisation-pepa-ubera/"></a>
+        </article>
+      `);
+
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    const mondayTitles = output.classes
+      .filter((item) => item.title.startsWith("MONDAY NIGHT IMPROVISATION with "))
+      .map((item) => item.title);
+    const mondayDates = output.classes
+      .filter((item) => item.title.startsWith("MONDAY NIGHT IMPROVISATION with "))
+      .map((item) => item.startDate);
+
+    expect(output.ok).toBe(true);
+    expect(mondayTitles).toEqual([
+      "MONDAY NIGHT IMPROVISATION with Théïa Maldoom",
+      "MONDAY NIGHT IMPROVISATION with Pepa Ubera"
+    ]);
+    expect(mondayDates).toEqual(["2026-04-27", "2026-05-18"]);
+  });
+
+  it("enriches Siobhan Morning Class titles with Independent Dance teachers", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <main>
+          <article class="event">
+            <header class="entry-header">
+              <h2 class="entry-title">
+                <a href="https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/">
+                  Summer 2026 | Dance Classes at SDS
+                </a>
+              </h2>
+            </header>
+          </article>
+        </main>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Weekdays</h3>
+          <div>
+            <h4>MORNING CLASS</h4>
+            <p>Programmed by Independent Dance. Open to experienced movement practitioners.</p>
+            <h3>10am - 12pm</h3>
+            <a href="https://bookwhen.com/independentdance">Book now</a>
+          </div>
+        </div>
+      `)
+      .mockResolvedValueOnce(`
+        <article class="index-item index-item--event">
+          <a href="https://independentdance.co.uk/event/morning-class-fernanda-munoz-newsome-3/2026-04-27/"></a>
+          <header class="entry-header">
+            <h2 class="entry-title">Morning Class: Fernanda Muñoz-Newsome</h2>
+            <h3 class="entry-subtitle">27 April – 1 May</h3>
+          </header>
+        </article>
+      `);
+
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    const morningSessions = output.classes.filter((item) => item.title === "MORNING CLASS with Fernanda Muñoz-Newsome");
+
+    expect(output.ok).toBe(true);
+    expect(morningSessions).toHaveLength(5);
+    expect(morningSessions.map((item) => item.startDate)).toEqual([
+      "2026-04-27",
+      "2026-04-28",
+      "2026-04-29",
+      "2026-04-30",
+      "2026-05-01"
+    ]);
+  });
+
   it("prefers the most recent Siobhan season when archive lists multiple Dance Classes at SDS pages", async () => {
     fetchHtml
       .mockResolvedValueOnce(`

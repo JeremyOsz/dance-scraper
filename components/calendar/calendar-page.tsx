@@ -36,7 +36,7 @@ import { ORDERED_DAYS, formatTimeRange, getForwardDayWindow, getMonthGridDates, 
 import { isFeaturedSession, isFeaturedVenueName } from "@/lib/featured";
 import { LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
 import { getVenueMapQuery } from "@/lib/venues";
-import { isBigStudioVenueName, sortVenueRecordsForUi } from "@/lib/venue-order";
+import { getVenuePriorityBucket, sortVenueRecordsForUi } from "@/lib/venue-order";
 import { SiteSocialLinks } from "@/components/site-social-links";
 
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
@@ -240,6 +240,12 @@ function sortSessionsForDisplay(sessions: DanceSession[], countByVenue: Map<stri
     const bFeatured = isFeaturedSession(b);
     if (aFeatured !== bFeatured) {
       return Number(bFeatured) - Number(aFeatured);
+    }
+
+    const aVenuePriority = getVenuePriorityBucket(a.venue);
+    const bVenuePriority = getVenuePriorityBucket(b.venue);
+    if (aVenuePriority !== bVenuePriority) {
+      return aVenuePriority - bVenuePriority;
     }
 
     const aVenueCount = countByVenue.get(a.venue) ?? 0;
@@ -639,10 +645,10 @@ export function CalendarPage({ initialSessions, venues }: Props) {
         return Number(bEnabled) - Number(aEnabled);
       }
 
-      const aBigStudio = isBigStudioVenueName(a);
-      const bBigStudio = isBigStudioVenueName(b);
-      if (aBigStudio !== bBigStudio) {
-        return Number(aBigStudio) - Number(bBigStudio);
+      const aVenuePriority = getVenuePriorityBucket(a);
+      const bVenuePriority = getVenuePriorityBucket(b);
+      if (aVenuePriority !== bVenuePriority) {
+        return aVenuePriority - bVenuePriority;
       }
       if (aRelatedCount !== bRelatedCount) {
         return aRelatedCount - bRelatedCount;
@@ -708,10 +714,10 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     return venues
       .map((venue, index) => ({ venue, index }))
       .sort((a, b) => {
-        const aBigStudio = isBigStudioVenueName(a.venue.name);
-        const bBigStudio = isBigStudioVenueName(b.venue.name);
-        if (aBigStudio !== bBigStudio) {
-          return Number(aBigStudio) - Number(bBigStudio);
+        const aVenuePriority = getVenuePriorityBucket(a.venue.name);
+        const bVenuePriority = getVenuePriorityBucket(b.venue.name);
+        if (aVenuePriority !== bVenuePriority) {
+          return aVenuePriority - bVenuePriority;
         }
         const aFeatured = isFeaturedVenueName(a.venue.name);
         const bFeatured = isFeaturedVenueName(b.venue.name);

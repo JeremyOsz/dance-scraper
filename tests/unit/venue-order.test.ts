@@ -10,16 +10,28 @@ describe("venue-order", () => {
 
   it("sorts independent venues ahead of big studios", () => {
     const input = [
+      "The Manor / MVMT",
       "Pineapple Dance Studios",
+      "Marina Sfyridi",
+      "Daniel Rodriguez",
+      "Look At Movement (Tanztheatre)",
       "The Place",
+      "Salsa! Soho",
+      "TripSpace",
       "Danceworks",
       "Chisenhale Dance Space",
       "BASE Dance Studios"
     ];
 
     expect(sortVenueNamesForUi(input)).toEqual([
-      "Chisenhale Dance Space",
+      "Daniel Rodriguez",
+      "Look At Movement (Tanztheatre)",
+      "Marina Sfyridi",
       "The Place",
+      "Chisenhale Dance Space",
+      "The Manor / MVMT",
+      "TripSpace",
+      "Salsa! Soho",
       "BASE Dance Studios",
       "Danceworks",
       "Pineapple Dance Studios"
@@ -31,14 +43,16 @@ describe("venue-order", () => {
       { name: "Danceworks", count: 10 },
       { name: "The Place", count: 9 },
       { name: "Chisenhale Dance Space", count: 2 },
+      { name: "Salsa! Soho", count: 1 },
       { name: "Pineapple Dance Studios", count: 1 },
       { name: "TripSpace", count: 4 }
     ];
 
     expect(sortVenueRecordsForUi(input).map((venue) => venue.name)).toEqual([
+      "The Place",
       "Chisenhale Dance Space",
       "TripSpace",
-      "The Place",
+      "Salsa! Soho",
       "Pineapple Dance Studios",
       "Danceworks"
     ]);
