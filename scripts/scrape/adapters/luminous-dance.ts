@@ -125,22 +125,22 @@ function extractEventsFromNextData(html: string): CompleteEventbriteEvent[] {
     const upcomingEvents = parsed?.props?.pageProps?.upcomingEvents;
     if (!Array.isArray(upcomingEvents)) return [];
 
-    return upcomingEvents
-      .map((event) => {
-        const startDate = event.start_date && event.start_time ? `${event.start_date}T${event.start_time}` : event.start_date;
-        if (!startDate || !event.name || !event.url) {
-          return null;
-        }
-        const endDate = event.end_date && event.end_time ? `${event.end_date}T${event.end_time}` : event.end_date;
-        return {
-          name: event.name,
-          url: event.url,
-          startDate,
-          endDate,
-          description: event.summary ?? event.description
-        };
-      })
-      .filter((event): event is CompleteEventbriteEvent => Boolean(event));
+    const normalized: CompleteEventbriteEvent[] = [];
+    for (const event of upcomingEvents) {
+      const startDate = event.start_date && event.start_time ? `${event.start_date}T${event.start_time}` : event.start_date;
+      if (!startDate || !event.name || !event.url) {
+        continue;
+      }
+      const endDate = event.end_date && event.end_time ? `${event.end_date}T${event.end_time}` : event.end_date;
+      normalized.push({
+        name: event.name,
+        url: event.url,
+        startDate,
+        ...(endDate ? { endDate } : {}),
+        description: event.summary ?? event.description
+      });
+    }
+    return normalized;
   } catch {
     return [];
   }
