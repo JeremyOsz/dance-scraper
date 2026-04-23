@@ -19,7 +19,12 @@ const browserLikeHeaders = {
 type EventbriteEvent = {
   startDate?: string;
   endDate?: string;
+  start_date?: string;
+  end_date?: string;
+  start_time?: string;
+  end_time?: string;
   description?: string;
+  summary?: string;
   url?: string;
   name?: string;
 };
@@ -108,18 +113,57 @@ function extractEventsFromLd(ldEntry: unknown): CompleteEventbriteEvent[] {
   });
 }
 
+function extractEventsFromNextData(html: string): CompleteEventbriteEvent[] {
+  const $ = cheerio.load(html);
+  const rawNextData = $('script[id="__NEXT_DATA__"]').first().text().trim();
+  if (!rawNextData) return [];
+
+  try {
+    const parsed = JSON.parse(rawNextData) as {
+      props?: { pageProps?: { upcomingEvents?: EventbriteEvent[] } };
+    };
+    const upcomingEvents = parsed?.props?.pageProps?.upcomingEvents;
+    if (!Array.isArray(upcomingEvents)) return [];
+
+    return upcomingEvents
+      .map((event) => {
+        const startDate = event.start_date && event.start_time ? `${event.start_date}T${event.start_time}` : event.start_date;
+        if (!startDate || !event.name || !event.url) {
+          return null;
+        }
+        const endDate = event.end_date && event.end_time ? `${event.end_date}T${event.end_time}` : event.end_date;
+        return {
+          name: event.name,
+          url: event.url,
+          startDate,
+          endDate,
+          description: event.summary ?? event.description
+        };
+      })
+      .filter((event): event is CompleteEventbriteEvent => Boolean(event));
+  } catch {
+    return [];
+  }
+}
+
 function isLuminous(text: string) {
   return /\bluminous\b/i.test(text);
+}
+
+function toLocalDayStart(now = new Date()) {
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
 }
 
 export async function scrapeLuminousDance(): Promise<AdapterOutput> {
   try {
     const classes: AdapterOutput["classes"] = [];
+    const today = toLocalDayStart();
 
     for (const organizerUrl of organizerUrls) {
       const html = await fetchHtml(organizerUrl, browserLikeHeaders);
       const ldEntries = extractJsonLd(html);
-      const events = ldEntries.flatMap(extractEventsFromLd);
+      const ldEvents = ldEntries.flatMap(extractEventsFromLd);
+      const events = ldEvents.length > 0 ? ldEvents : extractEventsFromNextData(html);
 
       for (const event of events) {
         const lowered = `${event.name} ${event.description ?? ""}`.toLowerCase();
@@ -127,6 +171,7 @@ export async function scrapeLuminousDance(): Promise<AdapterOutput> {
 
         const start = new Date(event.startDate);
         if (Number.isNaN(start.getTime())) continue;
+        if (start < today) continue;
         const end = event.endDate ? new Date(event.endDate) : null;
         const safeEnd = end && !Number.isNaN(end.getTime()) ? end : null;
 
@@ -154,6 +199,7 @@ export async function scrapeLuminousDance(): Promise<AdapterOutput> {
         const start = parseIcsDate(readField(eventBlock, "DTSTART"));
         const end = parseIcsDate(readField(eventBlock, "DTEND"));
         if (!title || !start) continue;
+        if (start < today) continue;
 
         const lowered = `${title} ${description ?? ""}`.toLowerCase();
         if (!isLuminous(lowered)) continue;

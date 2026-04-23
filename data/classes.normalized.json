@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-23T16:26:30.196Z",
+  "generatedAt": "2026-04-23T16:48:15.634Z",
   "sessions": [
     {
       "id": "jw3-move-reset-thursday-12-30pm",
@@ -20623,42 +20623,6 @@
       "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
-      "id": "luminous-dance-luminous-conscious-dance-dj-gumbo-s-bday-special-saturday-17-00",
-      "venue": "Luminous Dance",
-      "title": "Luminous Conscious Dance & DJ Gumbo's bday special!",
-      "details": "St Mary's Hornsey Rise, Ashley Road, London, UK • https://dandelion.events/e/q0pxz",
-      "dayOfWeek": "Saturday",
-      "startTime": "17:00",
-      "endTime": "20:00",
-      "startDate": "2026-04-04",
-      "endDate": "2026-04-04",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://dandelion.events/e/q0pxz",
-      "sourceUrl": "https://dandelion.events/o/luminous/events",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-04-23T06:16:12.687Z"
-    },
-    {
-      "id": "luminous-dance-luminous-new-moon-monday-dance-with-dj-azyre-blue-monday-17-30",
-      "venue": "Luminous Dance",
-      "title": "Luminous New Moon Monday Dance with DJ AZYRE BLUE",
-      "details": "St Mary's Hornsey Rise, Ashley Road, London, UK • https://dandelion.events/e/b4m54",
-      "dayOfWeek": "Monday",
-      "startTime": "17:30",
-      "endTime": "20:30",
-      "startDate": "2026-04-20",
-      "endDate": "2026-04-20",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://dandelion.events/e/b4m54",
-      "sourceUrl": "https://dandelion.events/o/luminous/events",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-04-23T06:16:12.687Z"
-    },
-    {
       "id": "five-rhythms-london-5rhythms-london-class-na-na",
       "venue": "Five Rhythms London",
       "title": "5Rhythms London Class",
@@ -29690,27 +29654,6 @@
       "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
-      "id": "streammovement-contemporary-dance-streammovement-workshop-monday-12-00pm",
-      "venue": "StreamMovement",
-      "title": "Contemporary Dance StreamMovement Workshop",
-      "details": "StreamMovement Dance Workshop ExperienceThis experience is all about connecting your body and mind with the body and mind of others in a kind and creative setting. Come connect with us and flow freely.In this in-person workshop we dive into the magic of StreamMovement dance techniques. Whether you&#39;re new or experienced, all are welcome to our studio where we combine improvisation, choreography, partnering and creation tasks along with physical training, breath awareness and somatic connection.",
-      "dayOfWeek": "Monday",
-      "startTime": "12:00pm",
-      "endTime": "12:00pm",
-      "startDate": "2025-12-08",
-      "endDate": "2025-12-13",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
-      "sourceUrl": "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
-      "tags": [
-        "contemporary",
-        "improvisation"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-04-23T06:16:12.687Z"
-    },
-    {
       "id": "marina-sfyridi-circadian-bodies-march-dance-classes-thursday-na",
       "venue": "Marina Sfyridi",
       "title": "Circadian Bodies March Dance Classes",
@@ -33565,6 +33508,83 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-23T16:26:30.196Z"
+    },
+    {
+      "id": "luminous-dance-luminous-new-moon-x-the-sanctuary-soul-saturday-12-30",
+      "venue": "Luminous Dance",
+      "title": "Luminous New Moon  x The Sanctuary &Soul",
+      "details": null,
+      "dayOfWeek": "Saturday",
+      "startTime": "12:30",
+      "endTime": "12:30",
+      "startDate": "2026-05-16",
+      "endDate": "2026-05-16",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.com/e/luminous-new-moon-x-the-sanctuary-soul-tickets-1987815810600",
+      "sourceUrl": "https://www.eventbrite.com/o/73047023743",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T16:48:15.634Z"
+    },
+    {
+      "id": "luminous-dance-luminous-conscious-dance-full-moon-saturday-18-00",
+      "venue": "Luminous Dance",
+      "title": "Luminous Conscious Dance Full Moon",
+      "details": null,
+      "dayOfWeek": "Saturday",
+      "startTime": "18:00",
+      "endTime": "18:00",
+      "startDate": "2026-05-30",
+      "endDate": "2026-05-30",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.com/e/luminous-conscious-dance-full-moon-tickets-1738653572639",
+      "sourceUrl": "https://www.eventbrite.com/o/73047023743",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T16:48:15.634Z"
+    },
+    {
+      "id": "streammovement-contemporary-dance-streammovement-workshop-monday-0-00pm",
+      "venue": "StreamMovement",
+      "title": "Contemporary Dance StreamMovement Workshop",
+      "details": "StreamMovement Dance Workshop ExperienceThis experience is all about connecting your body and mind with the body and mind of others in a kind and creative setting. Come connect with us and flow freely.In this in-person workshop we dive into the magic of StreamMovement dance techniques. Whether you&#39;re new or experienced, all are welcome to our studio where we combine improvisation, choreography, partnering and creation tasks along with physical training, breath awareness and somatic connection.",
+      "dayOfWeek": "Monday",
+      "startTime": "0:00pm",
+      "endTime": "0:00pm",
+      "startDate": "2025-12-08",
+      "endDate": "2025-12-13",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.outsavvy.com/event/32134/contemporary-dance-streammovement-workshop",
+      "sourceUrl": "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+      "tags": [
+        "contemporary",
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T16:48:15.634Z"
+    },
+    {
+      "id": "daniel-rodriguez-expressive-movement-and-dance-improvisation-with-musician-louis-laporte-thursday-19-00",
+      "venue": "Daniel Rodriguez",
+      "title": "Expressive Movement and Dance Improvisation with musician Louis LaPorte",
+      "details": null,
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.co.uk/e/expressive-movement-and-dance-improvisation-with-musician-louis-laporte-tickets-1986154463466",
+      "sourceUrl": "https://www.eventbrite.co.uk/o/daniel-rodriguez-88584641013",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T16:48:15.634Z"
     }
   ],
   "venues": [
@@ -33637,7 +33657,7 @@
       "sourceUrl": "https://dandelion.events/o/luminous/events",
       "count": 2,
       "ok": true,
-      "lastSuccessAt": "2026-04-23T06:16:12.687Z",
+      "lastSuccessAt": "2026-04-23T16:48:15.634Z",
       "lastError": null
     },
     {
@@ -33781,7 +33801,7 @@
       "sourceUrl": "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
       "count": 1,
       "ok": true,
-      "lastSuccessAt": "2026-04-23T06:16:12.687Z",
+      "lastSuccessAt": "2026-04-23T16:48:15.634Z",
       "lastError": null
     },
     {
@@ -33869,9 +33889,9 @@
       "venue": "Daniel Rodriguez",
       "key": "danielRodriguezEventbrite",
       "sourceUrl": "https://www.eventbrite.co.uk/o/daniel-rodriguez-88584641013",
-      "count": 0,
+      "count": 1,
       "ok": true,
-      "lastSuccessAt": "2026-04-23T06:16:12.687Z",
+      "lastSuccessAt": "2026-04-23T16:48:15.634Z",
       "lastError": null
     },
     {

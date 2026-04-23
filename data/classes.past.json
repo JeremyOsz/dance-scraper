@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-23T06:16:12.687Z",
+  "updatedAt": "2026-04-23T16:48:15.634Z",
   "sessions": [
     {
       "id": "tripspace-vinyasa-flow-thursday-09-15",
@@ -12531,7 +12531,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T16:38:24.143Z"
     },
     {
       "id": "the-manor-mvmt-beginners-commercial-thursday-18-30",
@@ -15129,7 +15129,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T16:38:24.143Z"
     },
     {
       "id": "salsa-rueda-rueda-libre-3-week-beginners-cuban-salsa-course-wednesday-19-00",
@@ -16947,7 +16947,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "wednesday-moving-wednesday-moving-juan-sanchez-plaza-wednesday-18-45",
@@ -17004,7 +17004,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "the-manor-mvmt-beginners-commercial-cover-wednesday-18-30",
@@ -17750,7 +17750,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "luminous-dance-luminous-new-moon-monday-dance-x-fx10k-monday-18-30",
@@ -30659,6 +30659,45 @@
       "audience": "open",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-21T06:13:52.418Z"
+    },
+    {
+      "id": "luminous-dance-luminous-new-moon-monday-dance-with-dj-azyre-blue-monday-18-30",
+      "venue": "Luminous Dance",
+      "title": "Luminous New Moon Monday Dance with DJ AZYRE BLUE",
+      "details": "St Mary's Hornsey Rise, Ashley Road, London, UK • https://dandelion.events/e/b4m54",
+      "dayOfWeek": "Monday",
+      "startTime": "18:30",
+      "endTime": "21:30",
+      "startDate": "2026-04-20",
+      "endDate": "2026-04-20",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://dandelion.events/e/b4m54",
+      "sourceUrl": "https://dandelion.events/o/luminous/events",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T16:38:24.143Z"
+    },
+    {
+      "id": "streammovement-contemporary-dance-streammovement-workshop-monday-0-00pm",
+      "venue": "StreamMovement",
+      "title": "Contemporary Dance StreamMovement Workshop",
+      "details": "StreamMovement Dance Workshop ExperienceThis experience is all about connecting your body and mind with the body and mind of others in a kind and creative setting. Come connect with us and flow freely.In this in-person workshop we dive into the magic of StreamMovement dance techniques. Whether you&#39;re new or experienced, all are welcome to our studio where we combine improvisation, choreography, partnering and creation tasks along with physical training, breath awareness and somatic connection.",
+      "dayOfWeek": "Monday",
+      "startTime": "0:00pm",
+      "endTime": "0:00pm",
+      "startDate": "2025-12-08",
+      "endDate": "2025-12-13",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.outsavvy.com/event/32134/contemporary-dance-streammovement-workshop",
+      "sourceUrl": "https://www.outsavvy.com/event/32134/dance-movement-flow-workshop-experience?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+      "tags": [
+        "contemporary",
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T16:46:43.812Z"
     }
   ]
 }
