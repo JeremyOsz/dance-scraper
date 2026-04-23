@@ -1246,6 +1246,38 @@ describe("scraper adapters", () => {
     expect(output.replacedVenueLabels).toEqual(["Britannia Row"]);
   });
 
+  it("keeps One Syllable classes under venue label and tracks replaced location labels", async () => {
+    fetchJson.mockResolvedValue({
+      events: [
+        {
+          id: 1,
+          title: "Women-only Stretch Class",
+          excerpt: "<p>Guided stretch class.</p>",
+          url: "https://1syllable.org/events/women-only-stretch-class/",
+          all_day: false,
+          utc_start_date: "2026-05-18 18:30:00",
+          utc_end_date: "2026-05-18 20:00:00",
+          venue: {
+            venue: "Laban Building",
+            address: "Creekside, London, SE8 3DZ, UK",
+            city: "London"
+          }
+        }
+      ],
+      total_pages: 1
+    });
+    const { scrapeOneSyllable } = await import("../../scripts/scrape/adapters/one-syllable");
+    const output = await scrapeOneSyllable();
+
+    expect(output.ok).toBe(true);
+    expect(output.venue).toBe("1Syllable");
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]?.venue).toBe("1Syllable");
+    expect(output.classes[0]?.details).toContain("Laban Building");
+    expect(output.classes[0]?.details).toContain("Creekside");
+    expect(output.replacedVenueLabels).toEqual(["Laban Building"]);
+  });
+
   it("loads custom events from data/custom-events.json", async () => {
     fetchHtml
       .mockResolvedValueOnce(fixture("uk-dancers-for-palestine-tickettailor-organizer.html"))

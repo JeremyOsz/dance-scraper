@@ -4,6 +4,7 @@ import { fetchJson } from "./common";
 
 const sourceUrl = "https://1syllable.org/events/category/classes-and-training/";
 const apiBaseUrl = "https://1syllable.org/wp-json/tribe/events/v1/events/";
+const venueName = "1Syllable";
 
 type OneSyllableEvent = {
   id: number;
@@ -73,10 +74,10 @@ function toClassRow(event: OneSyllableEvent): ScrapedClass | null {
   const end = parseUtcDate(event.utc_end_date) ?? start;
   if (!title || !start) return null;
 
-  const venueName = event.venue?.venue?.trim() || "1Syllable";
   const venueAddress = [event.venue?.address, event.venue?.city].filter(Boolean).join(", ");
   const bodyText = stripHtml(event.excerpt) ?? stripHtml(event.description);
-  const details = [venueAddress || null, bodyText].filter(Boolean).join(" • ") || null;
+  const venueLocation = event.venue?.venue?.trim();
+  const details = [venueLocation, venueAddress || null, bodyText].filter(Boolean).join(" • ") || null;
 
   const time =
     event.all_day === true || !end
@@ -84,7 +85,7 @@ function toClassRow(event: OneSyllableEvent): ScrapedClass | null {
       : `${formatLocalTime(start)}${start.getTime() === end.getTime() ? "" : ` - ${formatLocalTime(end)}`}`;
 
   return {
-    venue: venueName,
+      venue: venueName,
     title,
     details,
     dayOfWeek: formatLocalDay(start),
@@ -108,6 +109,7 @@ function buildApiUrl(page: number): string {
 export async function scrapeOneSyllable(): Promise<AdapterOutput> {
   try {
     const rows: ScrapedClass[] = [];
+    const replacedVenueLabels = new Set<string>();
     let page = 1;
     let totalPages = 1;
 
@@ -115,6 +117,10 @@ export async function scrapeOneSyllable(): Promise<AdapterOutput> {
       const response = await fetchJson<OneSyllableEventsResponse>(buildApiUrl(page));
       totalPages = Math.max(1, response.total_pages ?? 1);
       for (const event of response.events ?? []) {
+        const locationVenue = event.venue?.venue?.trim();
+        if (locationVenue && locationVenue !== venueName) {
+          replacedVenueLabels.add(locationVenue);
+        }
         const row = toClassRow(event);
         if (row) rows.push(row);
       }
@@ -124,16 +130,17 @@ export async function scrapeOneSyllable(): Promise<AdapterOutput> {
     const uniqueRows = Array.from(new Map(rows.map((row) => [`${row.title}|${row.startDate}|${row.time}`, row])).values());
     return {
       venueKey: "oneSyllable",
-      venue: "1Syllable",
+      venue: venueName,
       sourceUrl,
       classes: uniqueRows,
       ok: true,
-      error: null
+      error: null,
+      replacedVenueLabels: [...replacedVenueLabels]
     };
   } catch (error) {
     return {
       venueKey: "oneSyllable",
-      venue: "1Syllable",
+      venue: venueName,
       sourceUrl,
       classes: [],
       ok: false,
