@@ -102,7 +102,11 @@ export async function scrapeColetHouse(): Promise<AdapterOutput> {
     const coletLocationIds = new Set(
       locations.filter((entry) => (entry.name ?? "").toLowerCase().includes("colet house")).map((entry) => entry.id).filter(Boolean)
     );
-    const locationById = new Map(locations.map((entry) => [entry.id, entry]).filter((entry): entry is [string, NonNullable<typeof entry[1]>] => Boolean(entry[0])));
+    const locationById = new Map<string, (typeof locations)[number]>();
+    for (const entry of locations) {
+      if (!entry.id) continue;
+      locationById.set(entry.id, entry);
+    }
 
     const classes: ScrapedClass[] = [];
     for (const event of events) {
