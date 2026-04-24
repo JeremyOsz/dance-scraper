@@ -197,6 +197,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://www.colethouse.org/whats-on",
     mapQuery: "Colet House, 151 Talgarth Road, London W14 9DA"
   },
+  studio66: {
+    label: "Studio 66",
+    sourceUrl: "https://online.wellyx.com/studiosixtysix/londonuk/classes",
+    mapQuery: "Studio 66 London"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",

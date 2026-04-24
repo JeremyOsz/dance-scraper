@@ -79,6 +79,11 @@ describe("featured rules", () => {
       venue: "Colet House",
       title: "Improvisation with Pepa Ubera"
     };
+    const womensTouchSession: DanceSession = {
+      ...baseSession,
+      venue: "CI Calendar London",
+      title: "Women's Touch by Marie Chabert"
+    };
 
     expect(isFeaturedSession(luminousSession)).toBe(true);
     expect(isFeaturedVenueName("Luminous Dance")).toBe(true);
@@ -87,5 +92,6 @@ describe("featured rules", () => {
     expect(isFeaturedSession(wednesdayMovingJuanSession)).toBe(true);
     expect(isFeaturedSession(toMoveTogetherSession)).toBe(true);
     expect(isFeaturedSession(pepaSession)).toBe(true);
+    expect(isFeaturedSession(womensTouchSession)).toBe(true);
   });
 });

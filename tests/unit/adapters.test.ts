@@ -102,6 +102,7 @@ const testedVenueKeys = [
   "gelNow",
   "oneSyllable",
   "coletHouse",
+  "studio66",
   "customEvents"
 ] as const;
 
@@ -1399,6 +1400,81 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.details).toContain("Laban Building");
     expect(output.classes[0]?.details).toContain("Creekside");
     expect(output.replacedVenueLabels).toEqual(["Laban Building"]);
+  });
+
+  it("parses Studio 66 Wellyx feed and keeps Pole/Aerial classes", async () => {
+    fetchJson
+      .mockResolvedValueOnce({
+        MessageCode: 1,
+        Result: {
+          ClassCategoryList: [
+            { ClassCategoryID: 304, ClassCategoryName: "Pole" },
+            { ClassCategoryID: 366, ClassCategoryName: "Framework" },
+            { ClassCategoryID: 500, ClassCategoryName: "Pilates" }
+          ]
+        }
+      })
+      .mockResolvedValueOnce({
+        MessageCode: 1,
+        Result: {
+          ClassList: [
+            {
+              OccurrenceDate: "04/27/2026 00:00:00",
+              ClassPOSList: [
+                {
+                  ClassID: 13305,
+                  ClassCategoryID: 304,
+                  Name: "[POLE] Tricks + Technique",
+                  SubTitle: null,
+                  StartTime: "19:30:00",
+                  EndTime: "20:30:00",
+                  AssignedToStaffName: "Studio 66",
+                  ClassLevel: "Intermediate",
+                  FacilityName: "Main Studio"
+                },
+                {
+                  ClassID: 13306,
+                  ClassCategoryID: 366,
+                  Name: "[HOOP] Hoop Flow",
+                  SubTitle: null,
+                  StartTime: "18:30:00",
+                  EndTime: "19:30:00",
+                  AssignedToStaffName: "Kayleigh Hide",
+                  ClassLevel: "Beginner",
+                  FacilityName: "Main Studio"
+                },
+                {
+                  ClassID: 13307,
+                  ClassCategoryID: 500,
+                  Name: "Pilates Core",
+                  SubTitle: null,
+                  StartTime: "12:00:00",
+                  EndTime: "13:00:00",
+                  AssignedToStaffName: "Coach",
+                  ClassLevel: "Open",
+                  FacilityName: "Main Studio"
+                }
+              ]
+            }
+          ]
+        }
+      });
+
+    const { scrapeStudio66 } = await import("../../scripts/scrape/adapters/studio66");
+    const output = await scrapeStudio66();
+
+    expect(output.ok).toBe(true);
+    expect(output.venueKey).toBe("studio66");
+    expect(output.venue).toBe("Studio 66");
+    expect(output.classes).toHaveLength(2);
+    expect(output.classes.map((item) => item.title)).toEqual(
+      expect.arrayContaining(["[POLE] Tricks + Technique", "[HOOP] Hoop Flow"])
+    );
+    expect(output.classes.every((item) => /(pole|hoop|aerial|arial)/i.test(item.title))).toBe(true);
+    expect(output.classes[0]?.startDate).toBe("2026-04-27");
+    expect(output.classes[0]?.time).toBe("19:30 - 20:30");
+    expect(fetchJson).toHaveBeenNthCalledWith(1, expect.stringContaining("/Class/Fundamental"), expect.any(Object));
+    expect(fetchJson).toHaveBeenNthCalledWith(2, expect.stringContaining("/Class/ViewAllClasses?"), expect.any(Object));
   });
 
   it("loads custom events from data/custom-events.json", async () => {

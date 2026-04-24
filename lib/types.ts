@@ -38,6 +38,7 @@ export type VenueKey =
   | "gelNow"
   | "oneSyllable"
   | "coletHouse"
+  | "studio66"
   | "customEvents";
 
 export type DayOfWeek =

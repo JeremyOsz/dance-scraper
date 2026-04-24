@@ -14,6 +14,8 @@ export const FEATURED_RULES: FeaturedRule[] = [
   { venueKey: "siobhanDavies", titleContains: "to move together" },
   { titleContains: "Unscary Saturdays | Krump with Sasha Mahfouz Shadid" },
   { titleContains: "Wednesday Moving - Juan Sanchez Plaza" },
+  { venueKey: "ciCalendarLondon", titleContains: "women's touch by marie chabert" },
+  { venueKey: "ciCalendarLondon", titleContains: "women’s touch by marie chabert" },
   { venueKey: "luminousDance" }
 ];
 
