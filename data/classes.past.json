@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-23T16:48:15.634Z",
+  "updatedAt": "2026-04-24T06:17:52.629Z",
   "sessions": [
     {
       "id": "tripspace-vinyasa-flow-thursday-09-15",
@@ -1793,7 +1793,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-course-of-6-classes-monday-18-30",
@@ -1814,7 +1814,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-single-class-monday-18-30",
@@ -1832,7 +1832,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -1853,7 +1853,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-1-friday-11-00",
@@ -1871,7 +1871,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-saturday-ci-workshop-skin-saturday-14-30",
@@ -1947,7 +1947,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-saturday-ci-workshop-with-laura-doehler-the-felt-proximity-of-weight-saturday-14-30",
@@ -1965,7 +1965,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-intensive-with-rick-nodine-training-ground-winter-edition-thursday-10-00",
@@ -1986,7 +1986,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-intensive-with-rick-nodine-training-ground-winter-edition-friday-10-00",
@@ -2007,7 +2007,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-intensive-with-rick-nodine-training-ground-winter-edition-saturday-10-00",
@@ -2028,7 +2028,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-intensive-with-rick-nodine-training-ground-winter-edition-sunday-10-00",
@@ -2049,7 +2049,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -2067,7 +2067,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -2085,7 +2085,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-2-friday-11-00",
@@ -2103,7 +2103,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-saturday-ci-workshop-suspension-saturday-14-30",
@@ -2123,7 +2123,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-bound-unbound-weekend-spring-edition-exploring-the-edges-of-contact-improvisation-friday-18-30",
@@ -2144,7 +2144,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-bound-unbound-weekend-spring-edition-exploring-the-edges-of-contact-improvisation-saturday-10-00",
@@ -2165,7 +2165,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-bound-unbound-weekend-spring-edition-exploring-the-edges-of-contact-improvisation-sunday-10-00",
@@ -2186,7 +2186,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-groundwards-ci-class-with-emily-yuiming-wong-jam-soundscape-from-david-leahy-drop-in-for-the-jam-always-available-sunday-13-00",
@@ -2250,7 +2250,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-flow-fall-fly-ci-class-with-zoe-solomons-jam-soundscape-from-gloria-yehilevsky-drop-in-for-the-jam-always-available-sunday-13-00",
@@ -2272,7 +2272,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-in-sight-in-motion-ci-feldenkrais-workshop-with-simonetta-alessandri-saturday-11-00",
@@ -2294,7 +2294,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-workshop-with-touchdown-dance-sunday-11-00",
@@ -2316,7 +2316,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-earthflow-ci-class-with-akeim-toussaint-buck-with-jam-soundscape-from-tbc-drop-in-for-the-jam-always-available-sunday-13-00",
@@ -2340,7 +2340,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-braiding-bass-body-space-ci-class-with-nathaniel-parchment-jam-soundscape-from-cyan-saturday-13-00",
@@ -2361,7 +2361,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-jam-with-warm-up-saturday-13-00",
@@ -2379,7 +2379,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-dance-improvisation-practices-that-offer-resilience-and-support-in-difficult-times-contact-improvisation-workshop-with-kirstie-simson-sunday-11-00",
@@ -2400,7 +2400,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-between-self-other-ci-class-with-laura-doehler-jam-soundscape-from-tbc-drop-in-for-the-jam-always-available-sunday-13-00",
@@ -2442,7 +2442,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-class-with-annie-pui-ling-lok-jam-soundscape-from-tbc-drop-in-for-the-jam-always-available-saturday-13-00",
@@ -2532,7 +2532,7 @@
       ],
       "audience": "open",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-jam-monday-18-30",
@@ -2555,7 +2555,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-contemplative-practice-into-silent-jam-monday-18-30",
@@ -2578,7 +2578,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-improv-philosophy-playshop-dancing-gender-less-saturday-14-00",
@@ -2601,7 +2601,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-jam-live-music-monday-18-30",
@@ -2624,7 +2624,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-7-9-pm-contactango-with-adriana-pegorer-thursday-19-00",
@@ -2645,7 +2645,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-tripspace-class-with-sole-sunday-14-00",
@@ -2683,7 +2683,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-anasta-wednesday-18-15",
@@ -2777,7 +2777,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-the-place-ci-jam-tuesday-18-00",
@@ -2795,7 +2795,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-03-12T10:11:42.087Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-at-tripspace-sunday-14-00",
@@ -2835,7 +2835,7 @@
       ],
       "audience": "open",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-tripspace-class-with-sole-sunday-13-00",
@@ -2873,7 +2873,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-class-12-1-15-thursday-12-00",
@@ -2893,7 +2893,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-the-place-contact-jam-tuesday-18-00",
@@ -2911,7 +2911,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-03-12T10:11:42.087Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-touch-as-language-3-a-guided-movement-space-with-chevon-edwards-independent-dance-sunday-11-00",
@@ -2929,7 +2929,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-burgess-park-ci-jam-thursday-18-00",
@@ -2983,7 +2983,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-03-12T10:11:42.087Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-london-ci-jam-sunday-11-00",
@@ -3001,7 +3001,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-peers-practice-jam-at-telegraph-hill-centre-friday-15-00",
@@ -3019,7 +3019,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-03-12T10:11:42.087Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-nothing-a-night-of-joyfully-unpredictable-contact-improvisation-performances-saturday-19-15",
@@ -3040,7 +3040,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-no-monthly-contactango-session-see-special-workshop-on-sunday-10-august-thursday-19-00",
@@ -3058,7 +3058,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-ella-wednesday-18-00",
@@ -3096,7 +3096,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-jam-at-elizabeth-house-with-john-wednesday-18-45",
@@ -3114,7 +3114,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-manuela-sarcone-s-class-and-jam-for-temenos-friday-19-30",
@@ -3134,7 +3134,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-peers-practice-session-telegraph-hill-friday-15-00",
@@ -3172,7 +3172,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-harriet-roberts-ci-workshop-sunday-11-00",
@@ -3190,7 +3190,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-100-ways-to-fall-into-contact-saturday-13-00",
@@ -3228,7 +3228,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-park-jam-in-regent-s-park-wednesday-00-00",
@@ -3246,7 +3246,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-lucia-walkers-ci-class-friday-18-00",
@@ -3347,7 +3347,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-class-jam-jo-dyer-sunday-16-00",
@@ -3365,7 +3365,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-park-jam-in-highbury-fields-wednesday-18-45",
@@ -3401,7 +3401,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-laura-doehler-ci-mixed-level-thursday-19-30",
@@ -3421,7 +3421,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-03-12T10:11:42.087Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-introduction-to-ci-saturday-10-45",
@@ -3442,7 +3442,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-no-contact-tango-monthly-session-thursday-19-00",
@@ -3460,7 +3460,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-developmental-patterns-into-contact-19-00-21-00-tuesday-21-30",
@@ -3478,7 +3478,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-class-and-jam-at-chisenhale-sunday-14-00",
@@ -3498,7 +3498,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-emily-yuiming-wong-wednesday-18-00",
@@ -3534,7 +3534,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-easter-weekend-ci-intensive-saturday-10-00",
@@ -3573,7 +3573,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-class-lab-dancing-with-becky-horne-tuesday-19-30",
@@ -3591,7 +3591,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-jo-dyer-class-jam-with-live-music-from-patrick-carpenter-saturday-18-00",
@@ -3629,7 +3629,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-winter-warmer-thursday-11-00",
@@ -3647,7 +3647,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-peers-practice-jam-telegraph-hill-friday-15-00",
@@ -3665,7 +3665,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-maksim-wednesday-18-00",
@@ -3742,7 +3742,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-contemporary-at-rockingham-tuesday-19-00",
@@ -3762,7 +3762,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-intensive-visibly-unstable-france-with-laura-doehler-harriet-roberts-and-asaf-bachrach-wednesday-00-00",
@@ -3783,7 +3783,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contact-tango-with-adriana-pegorer-friday-00-00",
@@ -3804,7 +3804,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-weaving-spatial-support-into-the-body-laura-doehler-sunday-11-00",
@@ -3822,7 +3822,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-lab-sole-and-laura-tuesday-19-00",
@@ -3840,7 +3840,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-manuela-and-sole-s-class-jam-friday-19-00",
@@ -3958,7 +3958,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-moor-than-contact-friday-00-00",
@@ -3976,7 +3976,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-moor-than-contact-2025-friday-16-00",
@@ -4012,7 +4012,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-green-earth-awakening-soma-ci-wednesday-12-00",
@@ -4030,7 +4030,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-soma-space-ci-green-earth-awakening-wednesday-00-00",
@@ -4048,7 +4048,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-spring-ci-weekend-jam-friday-16-00",
@@ -4084,7 +4084,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-online-study-group-ci-power-with-chrys-papaioannou-the-cruel-optimism-of-contact-improvisation-dancing-between-neoliberal-subjectivation-and-practices-of-commoning-monday-18-00",
@@ -4123,7 +4123,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-findhorn-residential-wednesday-00-00",
@@ -4141,7 +4141,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "salsa-rueda-rueda-libre-cuban-roots-social-dance-secrets-with-osbanis-anneta-thursday-20-00",
@@ -14546,7 +14546,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-class-with-annie-pui-ling-lok-jam-with-soundscape-from-ansuman-biswas-drop-in-for-the-jam-always-available-saturday-13-00",
@@ -14567,7 +14567,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-thursday-10-00",
@@ -14607,7 +14607,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-upside-down-with-lewis-and-laura-sunday-11-00",
@@ -15926,7 +15926,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "the-manor-mvmt-beginners-commercial-sunday-15-00",
@@ -16118,7 +16118,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-friday-10-00",
@@ -16140,7 +16140,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-saturday-10-00",
@@ -16162,7 +16162,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-sunday-10-00",
@@ -16184,7 +16184,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-anasta-wednesday-17-00",
@@ -16202,7 +16202,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-maksim-wednesday-17-00",
@@ -16220,7 +16220,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-park-jam-wednesday-17-45",
@@ -16238,7 +16238,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-at-tripspace-sunday-13-00",
@@ -16258,7 +16258,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-peers-practice-jam-at-telegraph-hill-centre-friday-14-00",
@@ -16276,7 +16276,7 @@
       "tags": [],
       "audience": "open",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contactango-workshop-4-8-pm-sunday-15-00",
@@ -16294,7 +16294,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-saturday-09-00",
@@ -16316,7 +16316,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-friday-09-00",
@@ -16338,7 +16338,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-tripspace-class-with-sole-sunday-12-00",
@@ -16358,7 +16358,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-annie-pui-ling-lok-class-at-unscary-saturdays-saturday-12-00",
@@ -16379,7 +16379,7 @@
       ],
       "audience": "all-ages",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-peers-practice-session-telegraph-hill-friday-14-00",
@@ -16397,7 +16397,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-100-ways-to-fall-into-contact-saturday-12-00",
@@ -16415,7 +16415,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-contacttango-with-guest-kathy-crick-thursday-18-00",
@@ -16436,7 +16436,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-7-9-pm-contacttango-with-adriana-pegorer-thursday-18-00",
@@ -16457,7 +16457,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-park-jam-in-highbury-fields-wednesday-17-45",
@@ -16475,7 +16475,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-7-9-pm-contactango-with-simonetta-alessandri-thursday-18-00",
@@ -16497,7 +16497,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-7-9-pm-contactango-with-adriana-pegorer-thursday-18-00",
@@ -16518,7 +16518,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-the-place-contact-jam-tuesday-17-00",
@@ -16536,7 +16536,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-18T06:01:19.622Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-lucia-walkers-ci-class-friday-17-00",
@@ -16554,7 +16554,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-global-underscore-2025-3-7pm-university-of-roehampton-saturday-14-00",
@@ -16572,7 +16572,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-manuela-and-sole-s-class-jam-friday-18-00",
@@ -16592,7 +16592,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-lucia-walker-workshop-saturday-09-00",
@@ -16610,7 +16610,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-fundraiser-ci-class-jam-thursday-17-00",
@@ -16628,7 +16628,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-underscore-practice-chisenhale-dance-space-sunday-10-00",
@@ -16646,7 +16646,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-easter-weekend-ci-intensive-saturday-09-00",
@@ -16664,7 +16664,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-london-ci-weekender-2-days-of-contact-improvisation-exploring-the-concepts-of-reaching-and-meeting-and-elements-of-the-jam-w-josh-jones-and-lily-antonia-saturday-10-00",
@@ -16688,7 +16688,7 @@
       ],
       "audience": "open",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-emily-yuiming-wong-wednesday-17-00",
@@ -16706,7 +16706,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-easter-weekend-ci-intensive-friday-09-00",
@@ -16724,7 +16724,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-upside-down-with-lewis-and-laura-monday-10-00",
@@ -16742,7 +16742,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-burgess-park-ci-jam-thursday-17-00",
@@ -16760,7 +16760,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-upside-down-with-lewis-and-laura-sunday-10-00",
@@ -16778,7 +16778,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-ella-wednesday-17-00",
@@ -16796,7 +16796,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-anasta-wednesday-17-15",
@@ -16814,7 +16814,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-sunday-09-00",
@@ -16836,7 +16836,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-jo-dyer-class-jam-with-live-music-from-patrick-carpenter-saturday-17-00",
@@ -16854,7 +16854,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-moor-than-contact-2025-friday-15-00",
@@ -16872,7 +16872,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-online-study-group-ci-power-with-chrys-papaioannou-the-cruel-optimism-of-contact-improvisation-dancing-between-neoliberal-subjectivation-and-practices-of-commoning-monday-17-00",
@@ -16893,7 +16893,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-spring-ci-weekend-jam-friday-15-00",
@@ -16911,7 +16911,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-leicester-ci-class-with-jo-dyer-create-studios-sunday-16-00",
@@ -16929,7 +16929,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "luminous-dance-luminous-conscious-dance-dj-gumbo-s-bday-special-saturday-17-00",
@@ -16965,7 +16965,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "pineapple-dance-studios-jazz-musical-theatre-showdance-adv-pro-15-ashley-nottingham-wednesday-14-45",
@@ -17082,7 +17082,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-course-at-national-centre-for-circus-arts-thursday-19-30",
@@ -17102,7 +17102,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "pineapple-dance-studios-jazz-musical-theatre-parisian-showgirl-technique-w-shop-all-13-tracey-thursday-16-30",
@@ -17604,7 +17604,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-the-place-ci-jam-tuesday-18-00",
@@ -17622,7 +17622,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-the-place-contact-jam-tuesday-18-00",
@@ -17640,7 +17640,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-peers-practice-session-telegraph-hill-friday-15-00",
@@ -17658,7 +17658,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-peers-practice-session-telegraph-hill-centre-friday-15-00",
@@ -17676,7 +17676,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-laura-doehler-ci-mixed-level-thursday-19-30",
@@ -17696,7 +17696,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-01T13:01:40.751Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-ci-peers-practice-jam-at-telegraph-hill-centre-friday-15-00",
@@ -17732,7 +17732,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-19T06:10:31.994Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "luminous-dance-luminous-new-moon-monday-dance-with-dj-azyre-blue-monday-17-30",
@@ -27000,7 +27000,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-course-of-6-classes-monday-18-30",
@@ -27021,7 +27021,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-single-class-monday-18-30",
@@ -27039,7 +27039,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -27060,7 +27060,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27081,7 +27081,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-1-friday-11-00",
@@ -27099,7 +27099,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-course-of-6-classes-monday-18-30",
@@ -27120,7 +27120,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-single-class-monday-18-30",
@@ -27140,7 +27140,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -27161,7 +27161,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27182,7 +27182,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-1-friday-11-00",
@@ -27200,7 +27200,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -27221,7 +27221,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27242,7 +27242,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -27260,7 +27260,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -27278,7 +27278,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -27299,7 +27299,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27320,7 +27320,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-2-friday-11-00",
@@ -27338,7 +27338,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -27356,7 +27356,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -27374,7 +27374,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -27395,7 +27395,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27416,7 +27416,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-2-friday-11-00",
@@ -27434,7 +27434,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -27452,7 +27452,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -27470,7 +27470,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -27491,7 +27491,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27512,7 +27512,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-2-friday-11-00",
@@ -27530,7 +27530,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -27548,7 +27548,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -27566,7 +27566,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -27587,7 +27587,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27608,7 +27608,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -27626,7 +27626,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -27644,7 +27644,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -27665,7 +27665,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27686,7 +27686,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27707,7 +27707,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-tuesday-intermediates-course-of-5-classes-tuesday-18-30",
@@ -27727,7 +27727,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-tuesday-intermediates-single-class-tuesday-18-30",
@@ -27747,7 +27747,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -27768,7 +27768,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-class-jam-monday-18-30",
@@ -27791,7 +27791,7 @@
       ],
       "audience": "open",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-class-jam-monday-18-30",
@@ -27814,7 +27814,7 @@
       ],
       "audience": "open",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "bachata-community-pura-nights-tuesday-19-30",
@@ -28088,7 +28088,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-21T06:13:52.418Z"
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     },
     {
       "id": "danceworks-ballet-floor-barre-alice-crawford-all-12-tuesday-10-00",
@@ -30698,6 +30698,1817 @@
       "audience": "adult",
       "isWorkshop": true,
       "lastSeenAt": "2026-04-23T16:46:43.812Z"
+    },
+    {
+      "id": "rambert-professional-class-thursday-07-00",
+      "venue": "Rambert",
+      "title": "Professional Class",
+      "details": "*Please note, professional class now runs from Tuesday to Thursday (8:00am-9:30am). Our daily classes for professional-level dancers are led each week by a different artist from the international dance community. Each teacher brings their own style and technique to class, from their experience performing with world-leading dance companies and choreographers. With a strong focus on honing and maintaining technique, you’ll be challenged and inspired amongst peers. Professional class is ‘drop in’ and be booked by the day. You can still drop in and pay at Rambert, however as our spaces are strictly limited we recommend you book online before travelling to the building. Check out our line up for Summer 2026 below: w/c 20th April – Jose Agudo w/c 27th April – Dylan Tedaldi w/c 4th May – Ching-Ying Chien w/c 11th May – David Blake w/c 18th May – Gerrard Martin w/c 25th May – Eileih Muir w/c 1st June – Livia Massarelli w/c 8th June – Finleigh Zack w/c 15th June – Sadé Alleyne w/c 22nd June – Kieran Brown w/c 29th June – Noah Oast w/c 6th July – Belinda Roy Terms and Conditions of Booking If you need to cancel your booking, you can do so up to 48 hours before a drop in for a full refund in class credits by logging into your Momence account. If you'd prefer a monetary refund, just email us to let us know.",
+      "dayOfWeek": "Thursday",
+      "startTime": "07:00",
+      "endTime": "08:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://momence.com/s/133677707",
+      "sourceUrl": "https://rambert.org.uk/classes/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "rambert-line-dancing-beginners-thursday-17-20",
+      "venue": "Rambert",
+      "title": "Line Dancing Beginners",
+      "details": "Hold ‘em like they do in Texas with our new line dance class. Learn a range of short, up tempo line dance routines to a range of music including Country & Western classics from the likes of Dolly Parton and Shania Twain, to current TikTok trends like Boots on the Ground and House of Bamboo. Heel tapping, thigh slapping and suitable for all experience and fitness levels, this class is all the Thursday evening fun you need to get ready for the weekend. Wear whatever is comfortable but to save our lovely dance floors, please wear jazz shoes or light soled trainers and leave your cowboy boots at the door. sure you have removed jewellery before class, and long hair is tied back. Please note, as the studios are used by our professional dancers we ask that you refrain from using hair products and body lotions as these can make the floor slippery. Terms and Conditions of Booking If you need to cancel your booking, you can do so up to 48 hours before a drop in and up to 48 hours before the first class of a term booking for a full refund in class credits by logging into your Momence account. If you'd prefer a monetary refund, just email us to let us know. PLEASE NOTE: There will be no class on Thurs 18th June, and you will not be charged for this class when booking a term.",
+      "dayOfWeek": "Thursday",
+      "startTime": "17:20",
+      "endTime": "18:20",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://momence.com/s/133676026",
+      "sourceUrl": "https://rambert.org.uk/classes/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "rambert-ballet-improvers-thursday-17-20",
+      "venue": "Rambert",
+      "title": "Ballet Improvers",
+      "details": "Nina’s upbeat class will explore placement, spatial expansion, lyricism, and musicality. The focus will be on artistic expression, and how correct technique and coordination facilitates pace and speed. Nina began as an actress and dancer, appearing in over 60 TV, film, and stage productions before moving on to teach and coach ballet companies and dancers. Suitable if: you are 18+ and comfortable with the basics of Ballet and want to progress your technique with new challenges and combinations. We'd recommend around one year of ballet experience for this class. Building Information Classes take place at Rambert, 99 Upper Ground SE1 9PP. We have a fully accessible building, including accessible toilets and showers. There is on-street parking for Blue Badge holders with step-free access to the building, and lifts to all levels. Changing facilities are available on the first floor. A water fountain is available on the second floor- please bring your own reuse-able bottle for this. You can wear whatever your are comfortable moving in, and you’re welcome to wear dance shoes if you have them (although no dark/black soles) or bare-feet. Please make sure you have removed jewellery before class, and long hair is tied back. Please note, as the studios are used by our professional dancers we ask that you refrain from using hair products and body lotions as these can make the floor slippery. Terms and Conditions of Booking If you need to cancel your booking, you can do so up to 48 hours before a drop in and up to 48 hours before the first class of a term booking for a full refund in class credits by logging into your Momence account. If you'd prefer a monetary refund, just email us to let us know.",
+      "dayOfWeek": "Thursday",
+      "startTime": "17:20",
+      "endTime": "18:35",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://momence.com/s/133675928",
+      "sourceUrl": "https://rambert.org.uk/classes/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "tripspace-prodance-class-with-finleigh-zack-thursday-09-30",
+      "venue": "TripSpace",
+      "title": "ProDance class with Finleigh Zack",
+      "details": "Finleigh’s teaching practice approaches movement through a mindful and emotionally connected lens. Her classes begin with guided improvisation and somatic exploration, allowing dancers to tune into their physical and emotional bodies before building toward more energized contemporary phrase work. By starting from sensations, dancers are invited to discover authentic movement impulses that later expand into expansive choreography. Throughout the class, mindfulness tools such as breath and reflection are used to deepen awareness and support dancers in connecting to the emotional body of movement. These practices create space for dancers to explore themes of self, relationships, and community while remaining grounded in their own experience. Improvisational tasks gradually develop into structured phrase work, allowing dancers to shift from introspective exploration into full-bodied contemporary movement. Finleigh’s classes are designed to be both reflective and energizing, offering artists a process that nurtures creativity while challenging physicality. By the end of the class, dancers will experience how Finleigh Zack Dance develops material, from investigation to expressive contemporary movement, while cultivating a movement practice rooted in mindfulness, emotional awareness, and connection.",
+      "dayOfWeek": "Thursday",
+      "startTime": "09:30",
+      "endTime": "11:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://momence.com/s/132865749",
+      "sourceUrl": "https://momence.com/u/tripspace-bKDjuG",
+      "tags": [
+        "contemporary",
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-the-place-ci-jam-tuesday-18-00",
+      "venue": "CI Calendar London",
+      "title": "The Place CI jam",
+      "details": "The Place, 16 Flaxman Terrace, London WC1H 9AT • studio 10<br><br>link to book: <a href=\"https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAaYWjayxkQJ7fM1crcxDWJkxHG059pSCpoYUJSWdqjQBSUQDnAIIIKxnZMQ_aem_NbTzoLaHaWtqEdaruzAinw\">https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAaYWjayxkQJ7fM1crcxDWJkxHG059pSCpoYUJSWdqjQBSUQDnAIIIKxnZMQ_aem_NbTzoLaHaWtqEdaruzAinw</a><br><br>form for new participants: <a href=\"https://docs.google.com/forms/d/e/1FAIpQLScSaDgTDCYpKLmc-ZQIMUF8saWlZXu8O3a_eHM-dZCb9t-Tqg/viewform\">https://docs.google.com/forms/d/e/1FAIpQLScSaDgTDCYpKLmc-ZQIMUF8saWlZXu8O3a_eHM-dZCb9t-Tqg/viewform</a>",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2025-02-04",
+      "endDate": "2025-02-04",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-park-jam-in-regent-s-park-wednesday-00-00",
+      "venue": "CI Calendar London",
+      "title": "Park jam in Regent's Park",
+      "details": "https://maps.app.goo.gl/moArpJGKSK9BjDSN6 • Time: Meet at 6:45pm for 7pm opening circle and warm-up into jam by Anasta - best to be on time 🫶<br>Venue: <a href=\"https://maps.app.goo.gl/moArpJGKSK9BjDSN6\">Regent's Park</a><br>Facilitator: Anasta &amp; John<br>Cost: Free, just turn up at this map pin: 📍 <a href=\"https://maps.app.goo.gl/moArpJGKSK9BjDSN6\">https://maps.app.goo.gl/moArpJGKSK9BjDSN6</a><br><br><a href=\"https://ci-jams.pages.dev/\" target=\"_blank\">https://ci-jams.pages.dev/</a>",
+      "dayOfWeek": "Wednesday",
+      "startTime": "00:00",
+      "endTime": "00:00",
+      "startDate": "2024-08-07",
+      "endDate": "2024-08-07",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-tripspace-class-with-sole-sunday-13-00",
+      "venue": "CI Calendar London",
+      "title": "Tripspace Class with Sole",
+      "details": "TRIPSPACE, 339 Acton Mews, London E8 4EA, UK • https://momence.com/Sole-De-la-Hoz/Contact-Improvisation/114973056?skipPreview=true",
+      "dayOfWeek": "Sunday",
+      "startTime": "13:00",
+      "endTime": "15:00",
+      "startDate": "2025-04-27",
+      "endDate": "2025-04-27",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-the-place-ci-jam-tuesday-18-00",
+      "venue": "CI Calendar London",
+      "title": "The Place CI jam",
+      "details": "The Place, Flaxman Terrace, London WC1H 9AT • <a href=\"https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A\">https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A</a>",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2025-04-29",
+      "endDate": "2025-04-29",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-ci-at-tripspace-sunday-14-00",
+      "venue": "CI Calendar London",
+      "title": "CI at Tripspace",
+      "details": "<a href=\"https://momence.com/TRIPSPACE/Contact-Improvisation/122191914?skipPreview=true\">https://momence.com/TRIPSPACE/Contact-Improvisation/122191914?skipPreview=true</a>",
+      "dayOfWeek": "Sunday",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "startDate": "2025-10-26",
+      "endDate": "2025-10-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-foundations-of-ci-thursday-19-30",
+      "venue": "CI Calendar London",
+      "title": "Foundations of CI",
+      "details": "National Centre For Circus Arts • <a href=\"https://www.nationalcircus.org.uk/course/contact-improvisation/\">https://www.nationalcircus.org.uk/course/contact-improvisation/</a><br><br>suitable for beginners and all who want to track the specifics with greater detail and attention. Generally really useful even if you've danced for a couple of years but haven't had the time to get more thorough with it.",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "21:45",
+      "startDate": "2025-01-09",
+      "endDate": "2025-01-09",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-ci-lab-sole-and-laura-tuesday-19-00",
+      "venue": "CI Calendar London",
+      "title": "CI Lab - Sole and Laura -",
+      "details": "Pembroke House, 80 Tatum St, London SE17 1QR, UK • https://www.eventbrite.co.uk/e/1982194321575?aff=oddtdtcreator",
+      "dayOfWeek": "Tuesday",
+      "startTime": "19:00",
+      "endTime": "21:30",
+      "startDate": "2026-03-31",
+      "endDate": "2026-03-31",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-ci-peers-practice-jam-at-telegraph-hill-centre-friday-15-00",
+      "venue": "CI Calendar London",
+      "title": "CI Peers Practice/ Jam at Telegraph Hill Centre",
+      "details": "<a href=\"https://www.eventbrite.co.uk/e/fridays-ci-peers-practice-tickets-1338313655169?aff=oddtdtcreator\">https://www.eventbrite.co.uk/e/fridays-ci-peers-practice-tickets-1338313655169?aff=oddtdtcreator</a>",
+      "dayOfWeek": "Friday",
+      "startTime": "15:00",
+      "endTime": "17:00",
+      "startDate": "2025-05-02",
+      "endDate": "2025-05-02",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-peers-practice-session-telegraph-hill-friday-15-00",
+      "venue": "CI Calendar London",
+      "title": "Peers Practice Session. Telegraph Hill",
+      "details": "Telegraph Hill Centre, entrance from, Pepys Rd, London SE14 5TY, UK • <a href=\"https://www.eventbrite.co.uk/e/fridays-ci-peers-practice-sessions-1st-3rd-friday-oct-dec25-tickets-1657474202959?aff=oddtdtcreator\">https://www.eventbrite.co.uk/e/fridays-ci-peers-practice-sessions-1st-3rd-friday-oct-dec25-tickets-1657474202959?aff=oddtdtcreator</a>",
+      "dayOfWeek": "Friday",
+      "startTime": "15:00",
+      "endTime": "17:00",
+      "startDate": "2025-11-07",
+      "endDate": "2025-11-07",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-peers-practice-session-telegraph-hill-centre-friday-15-00",
+      "venue": "CI Calendar London",
+      "title": "Peers Practice Session. Telegraph Hill Centre",
+      "details": "Telegraph Hill Centre, entrance from, Pepys Rd, London SE14 5TY, UK • <a href=\"https://www.eventbrite.co.uk/e/fridays-ci-peers-practice-sessions-2nd-4th-friday-jan-jun26-tickets-1977503084960?aff=oddtdtcreator\">https://www.eventbrite.co.uk/e/fridays-ci-peers-practice-sessions-2nd-4th-friday-jan-jun26-tickets-1977503084960?aff=oddtdtcreator</a>",
+      "dayOfWeek": "Friday",
+      "startTime": "15:00",
+      "endTime": "17:00",
+      "startDate": "2026-02-13",
+      "endDate": "2026-02-13",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-the-place-contact-jam-tuesday-18-00",
+      "venue": "CI Calendar London",
+      "title": "The Place Contact Jam",
+      "details": "The Place, 16 Flaxman Terrace, London WC1H 9AT, UK • Studio 10<br><br><a href=\"https://theplace.org.uk/classes-courses/lcds-contact-jam-2024\">https://theplace.org.uk/classes-courses/lcds-contact-jam-2024</a>",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2024-11-05",
+      "endDate": "2024-11-05",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-the-place-ci-jam-tuesday-18-00",
+      "venue": "CI Calendar London",
+      "title": "The Place CI jam",
+      "details": "The Place, Flaxman Terrace, London WC1H 9AT - studio 2 • <a href=\"https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A\">https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A</a>",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2025-06-24",
+      "endDate": "2025-06-24",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-7-9-pm-contactango-with-adriana-pegorer-thursday-19-00",
+      "venue": "CI Calendar London",
+      "title": "7-9 PM ContacTango with Adriana Pegorer",
+      "details": "Ringcross Community Centre, 60 Lough Rd, London N7 8RH, UK • A few ideas to get us in focus and moving, playing with the fundamentals of Contact Improvisation, Argentine Tango and ContacTango. Followed by an hour of freestyle dancing.<br>&lt; Please arrive at 6.30 PM if you wish to warm up. Space is also available from 9 to 9.30 PM for warm-down &gt; Complete beginners welcome. Tubes: Caledonian Road, Highbury &amp; Islington, Holloway.<br>More info and bookings: <a href=\"https://www.adrianapegorer.com/contact-tango/\">https://www.adrianapegorer.com/contact-tango/</a>",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "21:00",
+      "startDate": "2025-07-03",
+      "endDate": "2025-07-03",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [
+        "improvisation",
+        "contact improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-the-place-ci-jam-tuesday-18-00",
+      "venue": "CI Calendar London",
+      "title": "The Place CI jam",
+      "details": "The Place, Flaxman Terrace, London WC1H 9AT - studio 2 • <a href=\"https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A\">https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A</a>",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2025-07-08",
+      "endDate": "2025-07-08",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-7-9-pm-contactango-with-adriana-pegorer-thursday-19-00",
+      "venue": "CI Calendar London",
+      "title": "7-9 PM ContacTango with Adriana Pegorer",
+      "details": "Ringcross Community Centre, 60 Lough Rd, London N7 8RH, UK • A one-hour class playing with the fundamentals of Contact Improvisation and Argentine Tango followed by an hour dancing with various music. < Please arrive at 6.30 PM if you wish to warm up. Space is also available from 9 to 9.30 PM for warm-down > More info and bookings: https://adrianapegorer.com/contact-tango.html",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "21:00",
+      "startDate": "2025-03-06",
+      "endDate": "2025-03-06",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [
+        "improvisation",
+        "contact improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-ci-class-12-1-15-thursday-12-00",
+      "venue": "CI Calendar London",
+      "title": "CI class 12-1.15",
+      "details": "<a href=\"https://momence.com/The-Sanctuary-%26Soul/Contact-Improvisation/116172947\">https://momence.com/The-Sanctuary-%26Soul/Contact-Improvisation/116172947</a>",
+      "dayOfWeek": "Thursday",
+      "startTime": "12:00",
+      "endTime": "13:00",
+      "startDate": "2025-08-14",
+      "endDate": "2025-08-14",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-peers-practice-session-telegraph-hill-friday-14-00",
+      "venue": "CI Calendar London",
+      "title": "Peers Practice Session. Telegraph Hill",
+      "details": "Telegraph Hill Centre, entrance from, Pepys Rd, London SE14 5TY, UK • <a href=\"https://www.eventbrite.co.uk/e/fridays-ci-peers-practice-sessions-1st-3rd-friday-oct-dec25-tickets-1657474202959?aff=oddtdtcreator\">https://www.eventbrite.co.uk/e/fridays-ci-peers-practice-sessions-1st-3rd-friday-oct-dec25-tickets-1657474202959?aff=oddtdtcreator</a>",
+      "dayOfWeek": "Friday",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "startDate": "2025-10-03",
+      "endDate": "2025-10-03",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-the-place-contact-jam-tuesday-17-00",
+      "venue": "CI Calendar London",
+      "title": "The Place Contact Jam",
+      "details": "The Place, 16 Flaxman Terrace, London WC1H 9AT, UK • Studio 10<br><br><a href=\"https://theplace.org.uk/classes-courses/lcds-contact-jam-2024\">https://theplace.org.uk/classes-courses/lcds-contact-jam-2024</a>",
+      "dayOfWeek": "Tuesday",
+      "startTime": "17:00",
+      "endTime": "19:30",
+      "startDate": "2024-10-22",
+      "endDate": "2024-10-22",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-ci-class-12-1-15-thursday-12-00",
+      "venue": "CI Calendar London",
+      "title": "CI class 12-1.15",
+      "details": "<a href=\"https://momence.com/The-Sanctuary-%26Soul/Contact-Improvisation/116172948\">https://momence.com/The-Sanctuary-%26Soul/Contact-Improvisation/116172948</a>",
+      "dayOfWeek": "Thursday",
+      "startTime": "12:00",
+      "endTime": "13:00",
+      "startDate": "2025-05-29",
+      "endDate": "2025-05-29",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-the-place-ci-jam-tuesday-18-00",
+      "venue": "CI Calendar London",
+      "title": "The Place CI jam",
+      "details": "The Place, Flaxman Terrace, London WC1H 9AT - studio 10 • <a href=\"https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A\">https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A</a>",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2025-06-10",
+      "endDate": "2025-06-10",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "ci-calendar-london-the-place-ci-jam-tuesday-18-00",
+      "venue": "CI Calendar London",
+      "title": "The Place CI jam",
+      "details": "The Place, Flaxman Terrace, London WC1H 9AT - studio 10 • <a href=\"https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A\">https://theplace.org.uk/classes-courses/lcds-contact-jam-2025?fbclid=PAZXh0bgNhZW0CMTEAAafac0Rh85d8RspoL92ZJ5F33MacvNnraYMwcS0TvR2kaA_0S8SUzMgP_NEMBg_aem_mOxYbHsp4Pg3z-pMBTK58A</a>",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2025-05-13",
+      "endDate": "2025-05-13",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "bachata-community-wild-bachata-thursday-19-30",
+      "venue": "Bachata Community",
+      "title": "Wild Bachata",
+      "details": "Forge • Bachata Calendar (London)",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "23:55",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://bachatacommunity.space/event/0ba8bc1e-0345-44bf-9fe6-6c64df071f20",
+      "sourceUrl": "https://bachatacommunity.space/london-gb/calendar",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "bachata-community-latino-flava-wednesdays-wednesday-19-30",
+      "venue": "Bachata Community",
+      "title": "Latino Flava Wednesdays",
+      "details": "Forge • Bachata Calendar (London)",
+      "dayOfWeek": "Wednesday",
+      "startTime": "19:30",
+      "endTime": "23:00",
+      "startDate": "2026-04-22",
+      "endDate": "2026-04-22",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://bachatacommunity.space/event/460e499a-4915-4af2-b62a-d1e7b84e0ffd",
+      "sourceUrl": "https://bachatacommunity.space/london-gb/calendar",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-ballet-classical-ballet-dmitri-gruzdev-gen-13-thursday-10-00",
+      "venue": "Danceworks",
+      "title": "Ballet - Classical Ballet - Dmitri Gruzdev - GEN - £13",
+      "details": "Instructor: Inga George (substitute) | Level: General | Room: Studio 2 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com.CLASS DESCRIPTIONThe classes are geared to help dancers maintain and further their technique, strengthen the core centre, work on their musicality and speed while at the same time investigate and explore deeper level of their artistry. The class is based on the Russian ballet style, teaching dance, musicality, and technique in a fun and engaging manner.This class is not suited for absolute beginners.Minimum age: 14 (Younger with exception, contact reception )",
+      "dayOfWeek": "Thursday",
+      "startTime": "10:00",
+      "endTime": "11:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026+10%3A00+am&item%5Bmbo_id%5D=93941&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Classical+Ballet+-+Dmitri+Gruzdev+-+GEN+-+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-ballet-classical-ballet-inga-george-int-12-thursday-11-30",
+      "venue": "Danceworks",
+      "title": "Ballet - Classical Ballet - Inga George - INT - £12",
+      "details": "Instructor: Inga George | Level: Intermediate | Room: Studio 2 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com.CLASS DESCRIPTION A moving class created for students with previous ballet experience and familiarity with ballet terminology. Progress through barre and center work designed to increase strength, flexibility, and technique and dance through graceful combinations. Special attention to epaulement (turning of the shoulders and upper body), correct training of the arms (port de bras), fluidity, placement, coordination with the head and all movements and precise coordination of the whole body, working as one unit.Recommended for those with around one year’s worth of knowledge of basic ballet steps or for returning students looking to go back to the basics. Minimum age: 16 (12+ as long as they have prior experience)",
+      "dayOfWeek": "Thursday",
+      "startTime": "11:30",
+      "endTime": "13:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026+11%3A30+am&item%5Bmbo_id%5D=79382&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Classical+Ballet+-+Inga+George+-+INT+-+%C2%A312&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-ballet-classical-ballet-juan-rodriguez-beg-2-13-thursday-13-00",
+      "venue": "Danceworks",
+      "title": "Ballet - Classical Ballet - Juan Rodriguez - BEG 2 - £13",
+      "details": "Instructor: Juan Rodriguez | Level: Beginner | Room: Studio 2 | Location: Danceworks | Please note this class is not suitable for absolute beginners",
+      "dayOfWeek": "Thursday",
+      "startTime": "13:00",
+      "endTime": "14:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++1%3A00+pm&item%5Bmbo_id%5D=94037&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Classical+Ballet+-+Juan+Rodriguez+-+BEG++2+-++%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-ballet-classical-ballet-adela-ramirez-int-12-thursday-14-30",
+      "venue": "Danceworks",
+      "title": "Ballet - Classical Ballet - Adela Ramirez - INT - £12",
+      "details": "Instructor: Juan Rodriguez (substitute) | Level: Intermediate | Room: Studio 2 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com.CLASS DESCRIPTION In this class, there will be a flow of manageable but challenging exercises with a fun approach, designed to improve coordination, strength, flexibility, style, and musicality. Minimum age: 10",
+      "dayOfWeek": "Thursday",
+      "startTime": "14:30",
+      "endTime": "16:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++2%3A30+pm&item%5Bmbo_id%5D=77774&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Classical+Ballet+-+Adela+Ramirez+-+INT+-+%C2%A312&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-ballet-classical-ballet-denzil-bailey-int-adv-12-thursday-16-00",
+      "venue": "Danceworks",
+      "title": "Ballet - Classical Ballet - Denzil Bailey - INT/ADV - £12",
+      "details": "Instructor: Owen Morris (substitute) | Level: Interm/Advanced | Room: Studio 2 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTIONThese classes are for intermediate and professional level dancers, offering a versatile and engaging approach to ballet. These are fast-paced and challenging classes delivered with Denzil’s high-energy demeanour. With a variety of exercises at the barre leading to movement sequences that stretch your facility, Denzil encourages free-flowing movement and expression within the ballet technique. Minimum age: 14",
+      "dayOfWeek": "Thursday",
+      "startTime": "16:00",
+      "endTime": "17:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++4%3A00+pm&item%5Bmbo_id%5D=79173&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Classical+Ballet+-+Denzil+Bailey+-+INT%2FADV+-+%C2%A312&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-ballet-classical-ballet-adela-ramirez-beg-imp-13-thursday-17-30",
+      "venue": "Danceworks",
+      "title": "Ballet - Classical Ballet - Adela Ramirez - BEG/IMP - £13",
+      "details": "Instructor: Tiffany Hedman (substitute) | Level: Beginner/Improver | Room: Studio 2 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com.CLASS DESCRIPTION In this class, there will be a flow of manageable but challenging exercises with a fun approach, designed to improve coordination, strength, flexibility, style, and musicality. Minimum age: 10 This class is not suitable for absolute beginners",
+      "dayOfWeek": "Thursday",
+      "startTime": "17:30",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++5%3A30+pm&item%5Bmbo_id%5D=94090&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Classical+Ballet+-+Adela+Ramirez+-+BEG%2FIMP+-+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-world-dance-bollywood-for-beginners-absolute-bollywood-beg-13-thursday-18-00",
+      "venue": "Danceworks",
+      "title": "World Dance - Bollywood for Beginners - Absolute Bollywood - BEG - £13",
+      "details": "Instructor: Absolute Bollywood | Level: Beginner | Room: Studio 9 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. THIS CLASS is suitable for beginners or anybody who enjoys Bollywood music and dance! Every week Arushi will teach a new routine to a new song in a super supportive and friendly manner! PARTICIPANTS can expect training at a slow and steady pace to ensure you grasp the techniques and choreography well. In addition, individually tailored corrections and feedback will also be provided to you, helping everyone to maximise their potential!",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=69830&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Bollywood+for+Beginners+-+Absolute+Bollywood+-+BEG+-+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-street-commercial-hip-hop-commercial-ezzy-nzewi-beg-13-thursday-18-00",
+      "venue": "Danceworks",
+      "title": "Street & Commercial - Hip-Hop/Commercial - Ezzy Nzewi - BEG - £13",
+      "details": "Instructor: Ezzy Nzewi | Level: Beginner | Room: Studio 8 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTIONHip Hop / Commercial is an energetic class that blends the foundations of Hip-Hop with the polished, performance-driven style seen in music videos, commercials, and live performances.Each class includes a warm-up to build strength and flexibility, drills to refine technique, and a fun routine that focuses on expanding the abilities of each student in areas such as musicality, performance & movement quality.Whether you’re looking to improve your freestyle, master trending moves, or prepare for the stage, this class is perfect for dancers who want to train hard and have fun while doing it!Minimum age: 16",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=74205&item%5Bmbo_location_id%5D=1&item%5Bname%5D=+Hip-Hop%2FCommercial+-+Ezzy+Nzewi+-+BEG+-+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "hip hop"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-street-commercial-shuffling-dominic-simpson-int-13-thursday-18-00",
+      "venue": "Danceworks",
+      "title": "Street & Commercial - Shuffling - Dominic Simpson - INT - £13",
+      "details": "Instructor: Dominic Simpson | Level: Intermediate | Room: Studio 6 | Location: Danceworks",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=92587&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Shuffling+-+Dominic+Simpson+-+INT+-+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-contemporary-jazz-fosse-jazz-thomas-langdale-beg-13-thursday-18-00",
+      "venue": "Danceworks",
+      "title": "Contemporary & Jazz - Fosse Jazz - Thomas Langdale - BEG - £13",
+      "details": "Instructor: Thomas Langdale | Level: Beginner | Room: Studio 1 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTION Join ‘Fosse Man’ Tommy Langdale for a weekly dive into the life and movements of the genius choreographer, Movie Director and Dancer. Music choices will always be showstopping jazz tunes, fosses achieves and of course award winning shows. Learn how to egg walk and why to “whoopie” Suitable for show heels and the use of a hat: (Some props provided when desired) Minimum age: 16",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=94186&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Fosse+Jazz+-+Thomas+Langdale+-+BEG+-+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "contemporary"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-contemporary-jazz-cunningham-technique-philip-mcdermott-beg-13-thursday-18-30",
+      "venue": "Danceworks",
+      "title": "Contemporary & Jazz - Cunningham Technique - Philip McDermott - BEG - £13",
+      "details": "Instructor: Philip McDermott | Level: Beginner | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes, 48 hours for masterclasses. For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. This class focuses on the fundamentals of modern dance technique. Philip will guide participants through a dynamic blend of cardio and technical training, while also encouraging the development of individual artistry. The class works through specific movement patterns designed to build strength, enhance physicality, improve spinal mobility, and deepen core engagement.",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:30",
+      "endTime": "20:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://danceworks.com/london/membership/terms-and-conditions/",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "contemporary"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-world-dance-salsa-nelson-batista-beg-int-14-thursday-19-00",
+      "venue": "Danceworks",
+      "title": "World Dance - Salsa - Nelson Batista - BEG/INT - £14",
+      "details": "Instructor: Nelson Batista | Level: Beginner/Intermed. | Room: Studio 9 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTIONThese are intensive classes for with a minimum age of 16, suitable for the levels stated. In the absolute beginners class there is a focus on the basics steps and techniques in a comfortable and easy manner.Every week, class participants will also be taught turns, spins, foot patterns and new dance routines to be executed while dancing in couples as well as individually.Salsa has proven to be the most sociable dance form in the UK, with thousands of enthusiasts taking part in classes every week. It’s also a great way to keep fit and meet new people in a fun and safe environment.No partner needed, no need to book, drop in any time.Minimum age: 18",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=67307&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Salsa+-+Nelson+Batista+-+BEG%2FINT+-+%C2%A314&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-world-dance-afrobeats-verona-patterson-all-14-thursday-19-00",
+      "venue": "Danceworks",
+      "title": "World Dance - Afrobeats - Verona Patterson - ALL - £14",
+      "details": "Instructor: Verona Patterson | Level: All Levels | Room: Studio 1 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTION Join Verona in her exciting, high-energy, empowering Afrobeats dance class which focuses on Modern African social dances from Nigeria, Ghana, and more! You will learn the latest moves, grooves, and contextualized choreography encompassing feel-good African rhythms in a social dance setting. Minimum age: 16 This class is not suitable for absolute beginners",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=69302&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Afrobeats+-+Verona+Patterson+-+ALL+-+%C2%A314&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-contemporary-jazz-contemporary-stuart-thomas-all-13-thursday-19-00",
+      "venue": "Danceworks",
+      "title": "Contemporary & Jazz - Contemporary - Stuart Thomas - ALL - £13",
+      "details": "Instructor: Stuart Thomas | Level: All Levels | Room: Studio 2 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTIONStuart’s contemporary classes are a reflection of his eclectic and varied dance history. He began his dance career on the London club scene, an element present in his classes through his raw passion for movement. His formal dance training is based on the teachings of dance legends Martha Graham, whose graceful yet rigorous floor-work is employed in the class warm-up, and Alvin Ailey, whose spirit and joy for dance permeate the final choreography that students practise at the end of each lesson. Minimum age: 13 (Younger, if a parent/ guardian is present)",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "20:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=79068&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Contemporary+-+Stuart+Thomas+-+ALL+-+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "contemporary"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-ballet-pointe-technique-eliska-bouzkova-beg-12-thursday-19-00",
+      "venue": "Danceworks",
+      "title": "Ballet - Pointe Technique - Eliska Bouzkova - BEG - £12",
+      "details": "Instructor: Eliska Bouzkova | Level: Beginner | Room: Studio 8 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTIONThis class is for adult students who are ready to strengthen their feet in preparation for pointe or in their first or second year of pointe. Class includes a basic pointe barre and for those who are ready, basic centre pointe work.Minimum age: 16 (12+ as long as they have prior experience)THIS CLASS IS NOT SUITED FOR ABSOLUTE BEGINNERS!",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "20:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=89986&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Pointe+Technique+-+Eliska+Bouzkova+-+BEG+-+%C2%A312&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-world-dance-flamenco-maika-jim-nez-blanco-imp-13-thursday-19-00",
+      "venue": "Danceworks",
+      "title": "World Dance - Flamenco - Maika Jiménez Blanco - IMP - £13",
+      "details": "Instructor: Maika Jimenez Blanco | Level: Improver | Room: Studio 6 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes, 48 hours for masterclasses. For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTIONMaika’s classes are designed to extract every student’s natural ability to dance and show them how wonderful and fun, this art form is. You will work on the placement of the body, the perception of the rhythm, clapping, footwork, movements of arms and head. Choreography styles : Sevillanas, Alegrías, Bulerías, Tangos, etc.If you have dancing shoes and clothes, bring them. Otherwise, don’t worry, just feel comfortable to dance! Minimum age: 16",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=94282&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Flamenco+-+Maika+Jim%C3%A9nez+Blanco+-+IMP+-+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-world-dance-salsa-nelson-batista-int-adv-14-thursday-20-00",
+      "venue": "Danceworks",
+      "title": "World Dance - Salsa - Nelson Batista - INT/ADV - £14",
+      "details": "Instructor: Nelson Batista | Level: Interm/Advanced | Room: Studio 9 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTIONThese are intensive classes for with a minimum age of 16, suitable for the levels stated. In the absolute beginners class there is a focus on the basics steps and techniques in a comfortable and easy manner.Every week, class participants will also be taught turns, spins, foot patterns and new dance routines to be executed while dancing in couples as well as individually.Salsa has proven to be the most sociable dance form in the UK, with thousands of enthusiasts taking part in classes every week. It’s also a great way to keep fit and meet new people in a fun and safe environment.No partner needed, no need to book, drop in any time.Minimum age: 18",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:00",
+      "endTime": "21:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A00+pm&item%5Bmbo_id%5D=67620&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Salsa+-+Nelson+Batista+-+INT%2FADV+-+%C2%A314&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-world-dance-female-dancehall-shelaine-prince-beg-14-thursday-20-00",
+      "venue": "Danceworks",
+      "title": "World Dance - Female Dancehall - Shelaine Prince - BEG - £14",
+      "details": "Instructor: Shelaine Prince | Level: Beginner | Room: Studio 1 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTION Female Dancehall class with Shelaine from Ignition Dance is a time to focus on moves and grooves within Female Jamaican Dancehall. We will be dancing & drilling the old, middle & new school of DHQ steps while empowering our minds and igniting our bodies. Come bruk it down, laugh sweat and feel sexy within this safe space. Class is open for Women Only & Over 18’s.",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:00",
+      "endTime": "21:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A00+pm&item%5Bmbo_id%5D=69407&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Female+Dancehall+-+Shelaine+Prince+-+BEG+-+%C2%A314&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-contemporary-jazz-partnering-lifts-foundations-philip-mcdermott-gen-13-thursday-20-00",
+      "venue": "Danceworks",
+      "title": "Contemporary & Jazz - Partnering & Lifts Foundations - Philip McDermott - GEN - £13",
+      "details": "Instructor: Philip McDermott | Level: General | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes, 48 hours for masterclasses. For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. CLASS DESCRIPTION This class delivers an approach to partnering where participants from all experience levels are on an equal playing field. Momentum, anchoring, and the architectural structure of the body allow participants of all genders to soar through the air, defying expectations and moving beyond the limitations of typical partner work. Skills to be developed include multi-level movement, articulate and sophisticated response to the point of contact, lofting through propulsion, and weight transfer. Minimum age: 16 This class is not suitable for absolute beginners",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:00",
+      "endTime": "21:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://danceworks.com/london/membership/terms-and-conditions/",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "contemporary"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "danceworks-ballet-classical-ballet-eliska-bouzkova-beg-1-12-thursday-20-30",
+      "venue": "Danceworks",
+      "title": "Ballet - Classical Ballet - Eliska Bouzkova - BEG 1 - £12",
+      "details": "Instructor: Eliska Bouzkova | Level: Beginner | Room: Studio 2 | Location: Danceworks | Classes are bookable 7 days in advance. Concessions and packages are available.Please note if you have to cancel your booking for any reason, our cancellation policy is 24 hours for open classes , 48 hours for masterclasses . For our terms and conditions click here.If you have any questions or technical issues call 020 7629 6183 or email membership@danceworks.com. Always wanted to try ballet but didn’t know where to start? Or maybe you danced as a child and want to return to the basics? This class is designed just for you.Absolute Beginners Ballet is a slow-paced, supportive introduction to classical ballet. You’ll learn the essential positions, steps, and techniques, all while developing strength, flexibility, posture, and coordination. No experience is needed—just a willingness to learn and move. Each session includes foundational barre work and simple centre exercises to help you feel confident and graceful, even as a beginner. We keep things light and enjoyable, blending technique with fun, flowing movement. Whether you’re curious about ballet or simply looking for a new way to move your body, this class offers a welcoming space to begin. You’ll improve your posture, balance, coordination and overall strength and flexibility.”",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:30",
+      "endTime": "22:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/96024/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=90089&item%5Bmbo_location_id%5D=1&item%5Bname%5D=Classical+Ballet+-+Eliska+Bouzkova+-+BEG+1+-+%C2%A312&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.danceworks.com/london/classes/timetable/",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-jazz-musical-theatre-stagey-jazz-adv-pro-13-brian-thursday-10-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Jazz/Musical Theatre - Stagey Jazz (Adv/Pro) £13 Brian",
+      "details": "Instructor: Brian O'Muiri | Level: Adv/Pro | Room: Studio 1 | Location: In Studio Classes | This class will be a high energy, Full out, Showbiz performance class with a range of genres across musical theatre and Jazz styles. We will focus on storytelling through dance giving you the chance to be unapologetically yourself, while still mainting a strong technical foundation.",
+      "dayOfWeek": "Thursday",
+      "startTime": "10:00",
+      "endTime": "11:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026+10%3A00+am&item%5Bmbo_id%5D=723159&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Stagey+Jazz+%28Adv%2FPro%29+%C2%A313+Brian&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-ballet-ballet-beg-12-christina-thursday-10-15",
+      "venue": "Pineapple Dance Studios",
+      "title": "Ballet - Ballet (Beg) £12 Christina",
+      "details": "Instructor: Christina Mittelmaier | Level: Beg | Room: Studio 11 | Location: In Studio Classes | This class is for you if you are interested in ballet, but have had no or very few ballet classes in the past. It is suitable for people of any age and level of fitness and is a sound and careful introduction into ballet technique. Each class consists of barre and centre work. The barre exercises, while warming up the body, help you improve posture and develop strength and mobility. The centre work builds on the exercises done at the barre and it takes you from more simple steps onto travelling ones and simple jumps.Ballet, if practised correctly, is a great way of keeping fit, improving posture and of maintaining a healthy body and mind.Christina’s very varied experience as a dancer, teacher and coach plays a major part in her teaching, making her classes particularly inspiring and enjoyable. If you are uncertain as to whether this class may be suitable for you or have any further questions regarding this class, please email Christina cmm@xristina.com and she will gladly advise you.",
+      "dayOfWeek": "Thursday",
+      "startTime": "10:15",
+      "endTime": "11:45",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026+10%3A15+am&item%5Bmbo_id%5D=717329&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Ballet+%28Beg%29+%C2%A312+Christina&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-jazz-musical-theatre-broadway-jazz-adv-pro-13-jj-thursday-11-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Jazz/Musical Theatre - Broadway Jazz (Adv/Pro) £13 JJ",
+      "details": "Instructor: Jacqui Jameson | Level: Adv/Pro | Room: Studio 1 | Location: In Studio Classes | This class will have a 45 minute technical warm up, incorporating corner work with footwork, turns and leaps.There will be a different, stylised routine every week. Having worked with Broadway legends, Gwen Verdon, Chita Rivera, Anne Reinking, Joel Grey and Susan Stroman, Jacqui will be using her wealth of experience and knowledge to bring to future generations. An inclusive class where everyone is welcome.",
+      "dayOfWeek": "Thursday",
+      "startTime": "11:30",
+      "endTime": "13:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026+11%3A30+am&item%5Bmbo_id%5D=685591&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Broadway+Jazz+%28Adv%2FPro%29+%C2%A313+JJ&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-ballet-classical-ballet-gen-13-anna-thursday-12-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Ballet - Classical Ballet (Gen) £13 Anna",
+      "details": "Instructor: Christina Mittelmaier (substitute) | Level: Gen | Room: Studio 11 | Location: In Studio Classes | A basic knowledge of ballet is required and a love of dance. The focus of the class is on achieving a sound technique based on musicality.Any age from 12 up is most welcome.Dance with me in the studio or on Zoom with live music by John Sweeny and Nicki Williamson",
+      "dayOfWeek": "Thursday",
+      "startTime": "12:00",
+      "endTime": "13:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026+12%3A00+pm&item%5Bmbo_id%5D=714187&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Classical+Ballet+%28Gen%29+%C2%A313+Anna&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-jazz-musical-theatre-musical-theatre-jazz-adv-pro-14-laura-hills-thursday-13-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Jazz/Musical Theatre - Musical Theatre Jazz (Adv/Pro) £14 Laura Hills",
+      "details": "Instructor: Carolyn Rupp (substitute) | Level: Adv/Pro | Room: Studio 1 | Location: In Studio Classes | This Musical Theatre class is aimed at professional level dancers, or those currently in training. Join Laura to brush up on style, musicality and technique in a relaxed and friendly setting.",
+      "dayOfWeek": "Thursday",
+      "startTime": "13:00",
+      "endTime": "14:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++1%3A00+pm&item%5Bmbo_id%5D=685800&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Musical+Theatre+Jazz+%28Adv%2FPro%29+%C2%A314+Laura+Hills&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-ballet-ballet-pro-12-raymond-thursday-13-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Ballet - Ballet (Pro) £12 Raymond",
+      "details": "Instructor: Raymond Chai | Level: Pro | Room: Studio 11 | Location: In Studio Classes | The class will focus on strength of technique and correct alignment, with special attention paid to musicality, quality of movement and the physicality of the individual dancer.We will also work on the use of speed and the use of space with different changes of direction. Most importantly, we will explore the artistry of dance and the joy in dancing.",
+      "dayOfWeek": "Thursday",
+      "startTime": "13:30",
+      "endTime": "15:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++1%3A30+pm&item%5Bmbo_id%5D=715919&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Ballet+%28Pro%29+%C2%A312+Raymond&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-commercial-beg-int-12yrs-11-ella-gilling-thursday-14-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Commercial (Beg/Int +12yrs) £11 Ella Gilling",
+      "details": "Instructor: Ella Gilling | Level: Beg/Int | Room: Studio 2 | Location: In Studio Classes | For anyone who loves commercial but gets a little scared attending classes. I want this environment to be fun and a feel good environment so you leave feeling funky, fresh and fabulous.",
+      "dayOfWeek": "Thursday",
+      "startTime": "14:00",
+      "endTime": "15:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++2%3A00+pm&item%5Bmbo_id%5D=702866&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Commercial+%28Beg%2FInt+%2B12yrs%29+%C2%A311+Ella+Gilling&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-jazz-musical-theatre-jazz-technique-int-adv-13-kat-thursday-14-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Jazz/Musical Theatre - Jazz Technique (Int/Adv) £13 Kat",
+      "details": "Instructor: Abbie Steele (substitute) | Level: Int/Adv | Room: Studio 1 | Location: In Studio Classes | A great work out, advanced technical drills and high-energy corner work. Get ready to fly across the room! Achieve the kicks, leaps and turns that will set you apart in your next audition with Kat’s individual feedback and step-by step instruction. Develop your strength, technical understanding and confidence for all genres of dance.",
+      "dayOfWeek": "Thursday",
+      "startTime": "14:30",
+      "endTime": "16:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++2%3A30+pm&item%5Bmbo_id%5D=685958&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Jazz+Technique+%28Int%2FAdv%29+%C2%A313+Kat&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-ballet-ballet-gen-13-dpk-thursday-15-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Ballet - Ballet (Gen) £13 DPK",
+      "details": "Instructor: David Kierce | Level: Gen | Room: Studio 11 | Location: In Studio Classes",
+      "dayOfWeek": "Thursday",
+      "startTime": "15:00",
+      "endTime": "16:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++3%3A00+pm&item%5Bmbo_id%5D=662139&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Ballet+%28Gen%29+%C2%A313+DPK+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-commercial-int-12-becky-izad-thursday-15-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Commercial (Int) £12 Becky Izad",
+      "details": "Instructor: Becky Izad | Level: All | Room: Studio 2 | Location: In Studio Classes | Becky’s Commercial class is a high-energy space rooted in strong hip hop foundations with a bold, sassy edge. Expect dynamic choreography focused on groove, musicality, and performance, pushing you to move with confidence and intention. With an empowering and supportive atmosphere, dancers are encouraged to take risks, trust themselves, and leave feeling strong, expressive, and unapologetically confident.",
+      "dayOfWeek": "Thursday",
+      "startTime": "15:00",
+      "endTime": "16:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++3%3A00+pm&item%5Bmbo_id%5D=729683&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Commercial+%28Int%29+%C2%A312+Becky+Izad&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "hip hop"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-jazz-musical-theatre-pro-theatre-jazz-with-kp-adv-pro-13-thursday-16-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Jazz/Musical Theatre - Pro Theatre Jazz with KP (Adv/Pro) £13",
+      "details": "Instructor: Katharine Pearson | Level: Adv/Pro | Room: Studio 1 | Location: In Studio Classes | This is an MT jazz class where you can expect a gradual full body warm up, centre & travelling combos to refresh your technique and then a musical theatre routine that focuses on musicality, storytelling and performance. I’m all about providing a safe environment so that we can collectively create and challenge ourselves to be the best that we can be!",
+      "dayOfWeek": "Thursday",
+      "startTime": "16:00",
+      "endTime": "17:45",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++4%3A00+pm&item%5Bmbo_id%5D=686273&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Pro+Theatre+Jazz+with+KP+%28Adv%2FPro%29+%C2%A313&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-fitness-all-levels-stretch-inc-pnf-12-rolfe-klement-thursday-16-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Fitness - All Levels Stretch (inc PNF) £12 Rolfe Klement",
+      "details": "Instructor: Rolfe Klement | Level: All | Room: Studio 2 | Location: In Studio Classes | This 60-minute Stretch Lab is a calm, structured session designed to improve mobility, flexibility, and long-term joint health in a way that’s both intelligent and accessible.",
+      "dayOfWeek": "Thursday",
+      "startTime": "16:00",
+      "endTime": "17:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++4%3A00+pm&item%5Bmbo_id%5D=726074&item%5Bmbo_location_id%5D=2&item%5Bname%5D=All+Levels+Stretch+%28inc+PNF%29+%C2%A312+Rolfe+Klement+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-contemporary-contemporary-lyrical-adv-13-ella-gilling-thursday-16-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Contemporary - Contemporary/Lyrical (Adv) £13 Ella Gilling",
+      "details": "Instructor: Ella Gilling | Level: Adv | Room: Studio 11 | Location: In Studio Classes | This will be a place to challenge yourself in a safe, no pressured environment. We will test our technique, musicality and dynamics whilst being in a fun, non-judgemental creative space. Let's get dancing.",
+      "dayOfWeek": "Thursday",
+      "startTime": "16:30",
+      "endTime": "18:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++4%3A30+pm&item%5Bmbo_id%5D=703181&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Contemporary%2FLyrical+%28Adv%29+%C2%A313+Ella+Gilling+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "contemporary"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-commercial-hip-hop-all-15-12-polly-thursday-17-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Commercial Hip Hop (All 15+) £12 Polly",
+      "details": "Instructor: Polly Towers | Level: All | Room: Studio 2 | Location: In Studio Classes | This is a fun and high-energy class, aimed to infuse groove techniques and performance into commercial choreography! Using both old school and new school tunes, my choreography is inspired by Hip Hop foundations, providing an opportunity to work on your performance, stage presence and groove. My experience working on stage and in music videos makes up for a class designed for both stage and camera work!Come have fun, get your groove on and be prepared to sweat!",
+      "dayOfWeek": "Thursday",
+      "startTime": "17:00",
+      "endTime": "18:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++5%3A00+pm&item%5Bmbo_id%5D=718029&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Commercial+Hip+Hop+%28All+15%2B%29+%C2%A312+Polly&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "hip hop"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-commercial-hiphop-fusion-all-11-melody-thursday-18-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Commercial HipHop Fusion (All) £11 Melody",
+      "details": "Instructor: Polly Towers (substitute) | Level: All | Room: Studio 2 | Location: In Studio Classes | About This class :This session is for All levels and All ages! If you’re looking for a little weekly soft challenge, vibrant, fun and supportive atmosphere where everyone is welcome.. then book onto this session! Melody will take this class at your pace and you will always be leaving this session on a high :)",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=662758&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Commercial+HipHop+Fusion+%28All%29+%C2%A311+Melody&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "hip hop"
+      ],
+      "audience": "all-ages",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-jazz-musical-theatre-commercial-jazz-elem-int-13-fleur-thursday-18-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Jazz/Musical Theatre - Commercial Jazz (Elem/Int) £13 Fleur",
+      "details": "Instructor: Fleur Murray | Level: Gen | Room: Studio 7 | Location: In Studio Classes | Fleur's class has a thorough jazz warmup involving technique, strength and flexibility and she teaches a new routine every week using popular music. Her style is a fusion of jazz, commercial and lyrical dance to create her own unique journey through movement. It's great forthose with some dance experience or for people returning to dance after some time away.",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:15",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=662862&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Commercial+Jazz+%28Elem%2FInt%29+%C2%A313+Fleur&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-ballet-ballet-beginners-12-hannah-thursday-18-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Ballet - Ballet Beginners £12 Hannah",
+      "details": "Instructor: Hannah Frost | Level: Beg | Room: Studio 11 | Location: In Studio Classes | Suitable for people who have never done ballet before or those who have had a long break and want to come back slowly. Also suitable for dancers coming back from injury.The class focuses on building correct technique safely through the repetition of basic exercises, enabling students to move on to higher levels with a good, solid foundation. Repetition not magic!The class will be streamed live to students who cannot come to the studio if you prefer not to be on camera speak to your teacher before the class",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=662446&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Ballet+Beginners+%C2%A312+Hannah&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-jazz-musical-theatre-burlesque-all-13-house-of-burlesque-thursday-18-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Jazz/Musical Theatre - Burlesque (All) £13 House of Burlesque",
+      "details": "Instructor: Tempest Rose | Level: All | Room: Studio 1 | Location: In Studio Classes | Come and feel sexy, fierce and fabulous in this upbeat dance class promoting body confidence and diva moves. Taught by one of the stars of HOB each week, dance heels encouraged but optional.House of Burlesque, created by Tempest Rose, is the UK's top burlesque company. Channel 4, MTV, BBC, The Metro, The Stylist, Evening Standard. @HOBTempestRose",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=662550&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Burlesque+%28All%29+%C2%A313+House+of+Burlesque&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-beginner-heels-choreography-12-maxy-thursday-18-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Beginner Heels Choreography £12 Maxy",
+      "details": "Instructor: Maxy Razor | Level: Beg | Room: Studio 12 | Location: In Studio Classes | Join Maxy for a fun and encouraging hour of beginner heels choreography. A welcoming environment where you’ll learn at a slower pace and leave feeling empowered & improved.",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=711063&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Beginner+Heels+Choreography+%C2%A312+Maxy&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-world-solo-latin-ballroom-improvers-12-eddie-thursday-18-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "World - Solo Latin/Ballroom (Improvers) £12 Eddie",
+      "details": "Instructor: Eddie Slattery | Level: Beg/Int | Room: Studio 10 | Location: In Studio Classes | Step into the rhythm of passion and energy with our Open Level Solo Latin Dance Class with Eddie! Whether you're a seasoned dancer or just starting out, this dynamic class offers an exhilarating journey through the world of Latin dance. Learn the cheeky cha-cha, fiery samba, and electrifying jive while improving your coordination, balance, and confidence.No partner required – just bring your enthusiasm and get ready to move and groove to infectious beats in a fun and supportive environment!",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A00+pm&item%5Bmbo_id%5D=731529&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Solo+Latin%2FBallroom+%28Improvers%29+%C2%A312+Eddie+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "open",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-hip-hop-house-foundations-beg-12-ani-thursday-18-05",
+      "venue": "Pineapple Dance Studios",
+      "title": "Hip Hop - House Foundations (Beg) £12 Ani",
+      "details": "Instructor: Ani Khets | Level: Beg | Room: Studio 9 | Location: In Studio Classes | In this class we will work on House groove and foundational footwork, building towards step variations and linking them together.Everyone is welcome.",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:05",
+      "endTime": "19:05",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A05+pm&item%5Bmbo_id%5D=672145&item%5Bmbo_location_id%5D=2&item%5Bname%5D=House+Foundations+%28Beg%29+%C2%A312+Ani&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "hip hop"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-contemporary-lyrical-contemporary-int-adv-12-madeleine-friends-thursday-18-15",
+      "venue": "Pineapple Dance Studios",
+      "title": "Contemporary - Lyrical/Contemporary (Int/Adv) £12 Madeleine & Friends",
+      "details": "Instructor: Amber Howorth (substitute) | Level: Int/Adv | Room: Studio 79 | Location: In Studio Classes | Join the MovesLikeWaters community every Thursday evening for a lyrical/contemporary class that challenges you to explore your unique movement and storytelling abilities. This class is taught by a rotation of teachers, including Madeleine. Each teacher has been training with Madeleine for many years and brings their own skills they have developed dancing around the world!",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:15",
+      "endTime": "19:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A15+pm&item%5Bmbo_id%5D=736691&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Lyrical%2FContemporary+%28Int%2FAdv%29+%C2%A312+Madeleine+%26+Friends+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "contemporary"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-sassy-commercial-beg-int-11-lil-j-thursday-18-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Sassy Commercial (Beg/Int) £11 Lil J",
+      "details": "Instructor: Lil J | Level: Beg/Int | Room: Studio 6 | Location: In Studio Classes | Sassy Commercial classes comprise of a combination of dance styles, mainly commercial, that are fused together to upbeat popular tunes!",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:30",
+      "endTime": "19:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A30+pm&item%5Bmbo_id%5D=666795&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Sassy+Commercial+%28Beg%2FInt%29+%C2%A311++Lil+J&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-tap-tap-int-13-adele-thursday-18-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Tap - Tap (Int) £13 Adele",
+      "details": "Instructor: Adele Joel | Level: Int | Room: Studio 5 | Location: In Studio Classes",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:30",
+      "endTime": "19:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++6%3A30+pm&item%5Bmbo_id%5D=666900&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Tap+%28Int%29+%C2%A313+Adele&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-world-salsa-for-beginners-12-jorge-elena-thursday-19-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "World - Salsa for Beginners £12 Jorge & Elena",
+      "details": "Instructor: Jorge & Elena | Level: Beg | Room: Studio 10 | Location: In Studio Classes | Beginner Salsa Styling Class is a fun Latin dance open to both ladies and gentlemen.We will work on learning the foundation of the basic steps of salsa such as the basic step, side to side step, right and left turn, Suzie Q and moreWe will also focus on musicality, body movement and sensuality whilst salsa dancing.This class is for everyone who always wanted to learn salsa and cannot wait to travel to South America and be able to dance with the locals.Dancers of other dance styles are very welcome! The timing will be Salsa on one, no dance partner is needed as it is solo dance but feel free to invite your partner, family and friendsClass for 16 years+",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=696152&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Salsa+for+Beginners+%C2%A312+Jorge+%26+Elena&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "all-ages",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-michael-jackson-style-beg-11-anthony-king-thursday-19-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Michael Jackson Style (Beg) £11 Anthony King",
+      "details": "Instructor: Anthony King | Level: Beg | Room: Studio 12 | Location: In Studio Classes | Learn to dance like the king of pop at 'Anthony King's Michael Jackson Style Dance Class!'. Anthony King will teach you to dance to all of MJ's classic hits, with a new routine each week! Anthony was the original co choreographer of the west end musical, “Thriller Live” and Michael Jackson officially endorsed Anthony King’s Michael Jackson Style Dance Class on his official website in 2005! Suitable for beginners and all levels.",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=709490&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Michael+Jackson+Style+%28Beg%29+%C2%A311+Anthony+King&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-hip-hop-hip-hop-choreo-beg-11-tiger-thursday-19-15",
+      "venue": "Pineapple Dance Studios",
+      "title": "Hip Hop - Hip Hop Choreo (Beg) £11 Tiger",
+      "details": "Instructor: Tiger Heslop | Level: Beg | Room: Studio 9 | Location: In Studio Classes | This class focuses on infusing the essence of Hip Hop Dance which is the \"Bounce Rock and Flow\". With the latest cool Hip Hop steps and dances to keep the routines \"Hip and Fresh!\"Expect to have fun, learn, sweat and enjoy an hour of Hip Hop Choreography to some awesome music!The party is over here! This is an adult class although kids 11+ are welcome to join but please expect occasional adult language/hip-hop vibe music.",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:15",
+      "endTime": "20:15",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A15+pm&item%5Bmbo_id%5D=696048&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Hip+Hop+Choreo+%28Beg%29+%C2%A311+Tiger&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "hip hop"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-world-commercial-bollywood-all-12-aaron-mistry-thursday-19-15",
+      "venue": "Pineapple Dance Studios",
+      "title": "World - Commercial Bollywood (All) £12 Aaron Mistry",
+      "details": "Instructor: Aaron Mistry | Level: All | Room: Studio 1 | Location: In Studio Classes | Commercial Bollywood is a performance and choreography based class combining commercial dance styles with modern Bollywood songs and South Asian chart hits!",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:15",
+      "endTime": "20:15",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A15+pm&item%5Bmbo_id%5D=671937&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Commercial+Bollywood+%28All%29+%C2%A312+Aaron+Mistry&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-world-reggaeton-beg-16-12-marina-thursday-19-15",
+      "venue": "Pineapple Dance Studios",
+      "title": "World - Reggaeton (Beg 16+) £12 Marina",
+      "details": "Instructor: Marina Angemi | Level: Beg | Room: Studio 7 | Location: In Studio Classes | Come dance, sweat and feel amazing to Reggaeton - a high-energy, spicy, free-spirited Latin style!If you’re looking for a different experience in a safe, supportive space and want to have fun whilst learning, this class is for you!",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:15",
+      "endTime": "20:15",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A15+pm&item%5Bmbo_id%5D=713124&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Reggaeton+%28Beg+16%2B%29+%C2%A312+Marina&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-commercial-beg-16-12-sophie-thursday-19-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Commercial (Beg 16+) £12 Sophie",
+      "details": "Instructor: Sophie Ferrero | Level: Beg | Room: Studio 79 | Location: In Studio Classes | Choreography based class, working on building confidence and basic dance steps in a sexy, fun routine, with hip hop and Jazz foundations.",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "20:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A30+pm&item%5Bmbo_id%5D=657482&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Commercial+%28Beg+16%2B%29+%C2%A312+Sophie&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "hip hop"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-heels-for-beginners-16-11-ella-thursday-19-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Heels for Beginners (16+) £11 Ella",
+      "details": "Instructor: Ella Gilling | Level: Beg | Room: Studio 5 | Location: In Studio Classes | This heels class will be for absolute beginners who would love to go to a heels class but don't know where to start or feel as though they don't know how to move their body. Anyone and everyone is welcome but it is prominently for people who haven't danced much before and want to get more connected to their body. It is a heels class but they are optional. We will work on routines but in a very slow calm environment with no pressure. We don't only learn moves but this is also for your confidence in your whole body and skin. Hopefully boosting your self belief and knowing that we are all incredible humans.",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "20:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A30+pm&item%5Bmbo_id%5D=715071&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Heels+for+Beginners+%2816%2B%29+%C2%A311+Ella&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-commercial-int-13-charlie-downs-thursday-19-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Commercial (Int) £13 Charlie Downs",
+      "details": "Instructor: Charlie Downs | Level: Int | Room: Studio 6 | Location: In Studio Classes | Inter level choreography spanning from commercial to hip hop to a fusion. Expect the unexpected! Will be focusing on power, dynamics and style. Beginners welcome for a challenge and advance welcome to work on detail and craftsmanship. My classes are about having fun, creating a vibe and a community.",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "20:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A30+pm&item%5Bmbo_id%5D=731758&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Commercial+%28Int%29+%C2%A313+Charlie+Downs+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "hip hop"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-ballet-ballet-gen-int-13-christina-thursday-19-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Ballet - Ballet (Gen/Int) £13 Christina",
+      "details": "Instructor: Christina Mittelmaier | Level: Gen/Int | Room: Studio 11 | Location: In Studio Classes | This class is for you if you have a good understanding of ballet technique and love to dance! Christina’s experience as a dancer, teacher and coach plays a major part in her teaching, making her classes particularly dynamic and inspiring. While artistic expression is a main feature in her approach, she always makes correct technique a priority to help you dance injury-free.The class is with a LIVE pianist! The wonderful Guy Attew will be playing for us.",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "21:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++7%3A30+pm&item%5Bmbo_id%5D=733062&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Ballet+%28Gen%2FInt%29+%C2%A313+Christina+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-jazz-musical-theatre-theatre-jazz-all-13-adam-denman-thursday-20-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Jazz/Musical Theatre - Theatre Jazz (All) £13 Adam Denman",
+      "details": "Instructor: Adam Denman | Level: All | Room: Studio 12 | Location: In Studio Classes",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:00",
+      "endTime": "21:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A00+pm&item%5Bmbo_id%5D=724277&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Theatre+Jazz+%28All%29+%C2%A313+Adam+Denman&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-waacking-beg-int-12-moririn-thursday-20-00",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Waacking (Beg/Int) £12 Moririn",
+      "details": "Instructor: Moririn . | Level: Beg/Int | Room: Studio 10 | Location: In Studio Classes | My foundation-focused WAACKING class for Beginner / Intermediate.",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:00",
+      "endTime": "21:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A00+pm&item%5Bmbo_id%5D=736912&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Waacking+%28Beg%2FInt%29+%C2%A312+Moririn&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-locking-jazzrock-boogie-tech-all-11-jimmy-thursday-20-15",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Locking & Jazzrock/Boogie Tech (All) £11 Jimmy",
+      "details": "Instructor: Jimmy Williams | Level: All | Room: Studio 1 | Location: In Studio Classes | This is a techniques class covering the styles of Locking and Jazzrock/Boogie. Be prepared to work hard and have fun!",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:15",
+      "endTime": "21:15",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A15+pm&item%5Bmbo_id%5D=695943&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Locking+%26+Jazzrock%2FBoogie+Tech+%28All%29+%C2%A311+Jimmy&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-popping-13-all-brooke-fiya-house-thursday-20-15",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Popping £13 (All) Brooke (Fiya House)",
+      "details": "Instructor: Brooke (Fiya House) | Level: All | Room: Studio 9 | Location: In Studio Classes | This class covers the fundamentals of Popping through drills, techniques, and creative exercises. Dancers of all levels are welcome. Let’s have some fun!",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:15",
+      "endTime": "21:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A15+pm&item%5Bmbo_id%5D=722532&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Popping+%C2%A313+%28All%29+Brooke+%28Fiya+House%29+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-world-irish-step-dancing-all-13-erin-thursday-20-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "World - Irish Step Dancing (All) £13 Erin",
+      "details": "Instructor: Erin Coyle | Level: All | Room: Studio 6 | Location: In Studio Classes | Our classes are designed for dancers of any ability to learn the many forms of Irish Dancing as a group. Each week we aim to learn a new routine which could be anything from a Reel or Treble Jig to a group Ceili or Showpiece. Lesson will focus on rhythm, timing and technique and hints of Irish culture here and there, all while learning different movements and routines-Dancers of all abilities are welcome-Dancers do not need Irish Dance Shoes, trainers, dance sneakers or pumps are suitable.",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:30",
+      "endTime": "21:45",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=644343&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Irish+Step+Dancing+%28All%29+%C2%A313+Erin+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-r-b-choreography-int-16-11-tiger-thursday-20-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - R&B Choreography (Int 16+) £11 Tiger",
+      "details": "Instructor: Tiger Heslop | Level: Int | Room: Studio 5 | Location: In Studio Classes | Get ready to move and groove to the smooth rhythms of R&B, feel the lyrics in your body and express yourself. This class is all about connecting to the music from the lyrics to the beats, feeling the vibe, and letting your body tell the story. I’ll break down the choreography's intricate movements, body rolls and smooth isolations, as we harness the emotional energy and groove of each song. We'll dance to slow jams, songs with more swag, to more up tempo R&B tunes. Get ready to sweat, smile, and have a good time!",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:30",
+      "endTime": "21:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=722739&item%5Bmbo_location_id%5D=2&item%5Bname%5D=R%26B+Choreography+%28Int+16%2B%29+%C2%A311+Tiger&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-street-dance-commercial-heels-all-12-maxy-thursday-20-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "Street Dance/Commercial - Heels (All) £12 Maxy",
+      "details": "Instructor: Maxy Razor | Level: All | Room: Studio 2 | Location: In Studio Classes | Maxy’s heels class is a fun and encouraging hour of sassy heels choreography. Designed to make you feel sexy and empowered whilst learning a different routine every week. Open to All Levels",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:30",
+      "endTime": "21:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=711273&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Heels+%28All%29+%C2%A312+Maxy&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "open",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "pineapple-dance-studios-world-reggaeton-int-16-12-marina-thursday-20-30",
+      "venue": "Pineapple Dance Studios",
+      "title": "World - Reggaeton (Int 16+) £12 Marina",
+      "details": "Instructor: Marina Angemi | Level: Int | Room: Studio 7 | Location: In Studio Classes | Come dance, sweat and feel amazing to Reggaeton - a high-energy, spicy, free-spirited Latin style!If you’re looking for a different experience in a safe, supportive space and want to have fun whilst learning, this class is for you!",
+      "dayOfWeek": "Thursday",
+      "startTime": "20:30",
+      "endTime": "21:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+Apr+23%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=737656&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Reggaeton+%28Int+16%2B%29+%C2%A312+Marina+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
+      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "the-manor-mvmt-beginners-commercial-thursday-18-30",
+      "venue": "The Manor / MVMT",
+      "title": "Beginners Commercial",
+      "details": "In this commercial dance class, you'll start with an energising warm-up that includes key commercial dance drills to get your body moving and ready for the session. Afterward, we’ll dive into learning a fun and dynamic routine set to a popular, upbeat song. You'll have the opportunity to develop your style, timing, and performance skills as you work through the choreography. This class is designed to help you grow and have fun while learning the latest moves! | Maisie Randle | 16 yrs and over | Studio 4",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:30",
+      "endTime": "19:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.themanorldn.com/mvmt#mvmt-timetable",
+      "sourceUrl": "https://www.themanorldn.com/mvmt",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "the-manor-mvmt-improvers-commercial-thursday-19-30",
+      "venue": "The Manor / MVMT",
+      "title": "Improvers Commercial",
+      "details": "Ready to take your dancing to the next level? Our Improvers Commercial class is perfect for those looking for a challenge! Expect high-energy combos, industry-style movement, and a focus on musicality, performance, and execution. This class will push your technique, build confidence, and help you bring that star quality to your dancing. If you're comfortable picking up choreography and ready to level up, this one’s for you! | Maisie Randle | 16 yrs and over | Studio 3",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "20:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.themanorldn.com/mvmt#mvmt-timetable",
+      "sourceUrl": "https://www.themanorldn.com/mvmt",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "the-manor-mvmt-beginners-heels-thursday-19-30",
+      "venue": "The Manor / MVMT",
+      "title": "Beginners Heels",
+      "details": "Step into confidence and unleash your inner diva with our Beginners Heels Class! Perfect for those new to dancing in heels, this class focuses on foundational skills, posture, and poise.Our experienced instructor will guide you through fun and empowering routines, teaching essential techniques from basic walks to sultry combinations. No dance experience is needed—just bring your favorite heels and get ready to shine!Join us to boost your self-confidence, improve your dance skills, and have a blast. See you on the dance floor! | Mslawrensky . | 18 yrs and over | Studio 4",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "20:30",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.themanorldn.com/mvmt#mvmt-timetable",
+      "sourceUrl": "https://www.themanorldn.com/mvmt",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "colet-house-5rhythms-with-flow-wednesday-19-00",
+      "venue": "Colet House",
+      "title": "5Rhythms with Flow",
+      "details": "Colet House, 151 Talgarth Rd, London W14 9DA • In 5Rhythms, we hand over prayer to the body, allowing it to become our wisest teacher. Through movement, we invite the body to express its unique rhythm in the present moment, uncovering its often suppressed intelligence.Flow Vulk brings her own energy and vision to the dance. In her words:\"I found my feet on a 5Rhythms dance floor in 2014. This is when and where it all magnificently fell apart before falling into place and making sense. It is in our bones, blood and breath - the beat, the rhythm, the Song of Songs. The Song of Life. Dance it. This is how we wake up, how we become alive again, how we find answers and resolutions. We dance not to forget but to remember, not to get lost but to find ourselves, not to disappear but to arise in our full, authentic glory. So let this be an open invitation to shake off the cobwebs, rattle those bones, let that breath flow and let your feet find their beat. Let Life In.\"All are welcome, whether you’re new to 5Rhythms or have danced it for years.In 5Rhythms, we hand over prayer to the body, allowing it to become our wisest teacher. Through movement, we invite the body to express its unique rhythm in the present moment, uncovering its often suppressed intelligence.Flow Vulk brings her own energy and vision to the dance. In her words:\"I found my feet on a 5Rhythms dance floor in 2014. This is when and where it all magnificently fell apart before falling into place and making sense. It is in our bones, blood and breath - the beat, the rhythm, the Song of Songs. The Song of Life. Dance it. This is how we wake up, how we become alive again, how we find answers and resolutions. We dance not to forget but to remember, not to get lost but to find ourselves, not to disappear but to arise in our full, authentic glory. So let this be an open invitation to shake off the cobwebs, rattle those bones, let that breath flow and let your feet find their beat. Let Life In.\"All are welcome, whether you’re new to 5Rhythms or have danced it for years.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "19:00",
+      "endTime": "21:00",
+      "startDate": "2026-01-07",
+      "endDate": "2026-01-07",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/thestudysociety/1506384/select-date?entry_link=%2Fall-tickets%2Fthestudysociety%2F%3F%26entry_link%3D%252Fall-tickets%252Fthestudysociety%252F%253F#top",
+      "sourceUrl": "https://www.colethouse.org/whats-on",
+      "tags": [
+        "5rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "colet-house-the-movements-monday-20-00",
+      "venue": "Colet House",
+      "title": "The Movements",
+      "details": "Colet House, 151 Talgarth Rd, London W14 9DA • Meditation through movementThe Movements are a collection of sacred dances, exercises, prayers and their accompanying music that originated from various schools, dervish orders and monasteries across the Middle East and Central Asia. They were collected and brought to the West by the philosopher and mystic, G.I. Gurdjieff. They were first taught in England to Ouspensky’s pupils at Lyne Place and Colet House in the 1930s. The Study Society is unique in teaching the early repertoire of Movements as they were originally taught, in an unchanged line to the present day.The Movements provide a non-verbal way of experiencing the essence of the Fourth Way teaching. They convey knowledge about the great universal laws and can be a vehicle for expressing universal truths. They can be thought of as a special form of ‘moving meditation’. Through the practice of attention they can enable participants to experience the working of finer energies, bringing all parts of the human organism into a more harmonious whole.The Study Society offers these evenings free of charge, but you are invited to make a donation to support the charity in its works.Meditation through movementThe Movements are a collection of sacred dances, exercises, prayers and their accompanying music that originated from various schools, dervish orders and monasteries across the Middle East and Central Asia. They were collected and brought to the West by the philosopher and mystic, G.I. Gurdjieff. They were first taught in England to Ouspensky’s pupils at Lyne Place and Colet House in the 1930s. The Study Society is unique in teaching the early repertoire of Movements as they were originally taught, in an unchanged line to the present day.The Movements provide a non-verbal way of experiencing the essence of the Fourth Way teaching. They convey knowledge about the great universal laws and can be a vehicle for expressing universal truths. They can be thought of as a special form of ‘moving meditation’. Through the practice of attention they can enable participants to experience the working of finer energies, bringing all parts of the human organism into a more harmonious whole.The Study Society offers these evenings free of charge, but you are invited to make a donation to support the charity in its works.",
+      "dayOfWeek": "Monday",
+      "startTime": "20:00",
+      "endTime": null,
+      "startDate": "2026-01-12",
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.colethouse.org/whats-on",
+      "sourceUrl": "https://www.colethouse.org/whats-on",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "colet-house-whirling-dervish-slow-turning-practice-tuesday-19-45",
+      "venue": "Colet House",
+      "title": "Whirling Dervish Slow Turning Practice",
+      "details": "Colet House, 151 Talgarth Rd, London W14 9DA • Slow Turning sessions are held on Tuesday evenings from 19:45 to 20:30, offering a gentle introduction to the Whirling Dervish group at The Study Society. If you’d like to stay for supper afterwards, please bring a dish of food to share.Please arrive sufficiently early - latecomers may not be admitted so as not to disturb the practice.Click here to find out more about the Dervish Community.Slow Turning sessions are held on Tuesday evenings from 19:45 to 20:30, offering a gentle introduction to the Whirling Dervish group at The Study Society. If you’d like to stay for supper afterwards, please bring a dish of food to share.Please arrive sufficiently early - latecomers may not be admitted so as not to disturb the practice.Click here to find out more about the Dervish Community.",
+      "dayOfWeek": "Tuesday",
+      "startTime": "19:45",
+      "endTime": "20:30",
+      "startDate": "2026-01-06",
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.colethouse.org/whats-on",
+      "sourceUrl": "https://www.colethouse.org/whats-on",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "colet-house-drum-circle-6-session-series-thursday-19-30",
+      "venue": "Colet House",
+      "title": "Drum Circle (6-session series)",
+      "details": "Colet House, 151 Talgarth Rd, London W14 9DA • Get ready to drum up some rhythm at our Drum Circle event! Immerse yourself in a beat-packed 6-session series – whether you're in for the whole groove with full-course tickets or feel like jamming spontaneously with our drop-in tickets. Let's keep the vibe rhythmic!Alternate Thursdays 19:30 - 21:00, West Studio (Jan 22nd - Apr 2nd)Our African Drum Circle workshop in London gives you the chance to learn to play the African “Djembe” Drum. Explore the “bass, tone, slap” sounds of this instrument and discover why African drumming is irresistible.Drumming is a great way to release stress and develop creativity, and it’s also the oldest form of communal musical bonding. The class will also include time to dance, shake and move to the beat.Drums are provided. No experience needed!With Ailon & KayKay SmithI have been playing djembe for 15 years and love to perform and teach. I like to describe my drum circle sessions as an introduction to the Joys of Djembe. I love what I do and it makes me happy to be able to share my passion with others. My goal is to create an enjoyable experience for all levels and experience of participants.Ailon FreeFor the last 30 years, Ailon’s professional life has been devoted to the synthesis of spiritual practice with creative self expression. In 2001, he set up The Lotus Exchange -London’s first corporate yoga service, and since then he has worked as a yoga teacher, bodyworker and corporate facilitator as well as an artist, comedian, clown and drumming teacher.Get ready to drum up some rhythm at our Drum Circle event! Immerse yourself in a beat-packed 6-session series – whether you're in for the whole groove with full-course tickets or feel like jamming spontaneously with our drop-in tickets. Let's keep the vibe rhythmic!Alternate Thursdays 19:30 - 21:00, West Studio (Jan 22nd - Apr 2nd)Our African Drum Circle workshop in London gives you the chance to learn to play the African “Djembe” Drum. Explore the “bass, tone, slap” sounds of this instrument and discover why African drumming is irresistible.Drumming is a great way to release stress and develop creativity, and it’s also the oldest form of communal musical bonding. The class will also include time to dance, shake and move to the beat.Drums are provided. No experience needed!With Ailon & KayKay SmithI have been playing djembe for 15 years and love to perform and teach. I like to describe my drum circle sessions as an introduction to the Joys of Djembe. I love what I do and it makes me happy to be able to share my passion with others. My goal is to create an enjoyable experience for all levels and experience of participants.Ailon FreeFor the last 30 years, Ailon’s professional life has been devoted to the synthesis of spiritual practice with creative self expression. In 2001, he set up The Lotus Exchange -London’s first corporate yoga service, and since then he has worked as a yoga teacher, bodyworker and corporate facilitator as well as an artist, comedian, clown and drumming teacher.",
+      "dayOfWeek": "Thursday",
+      "startTime": "19:30",
+      "endTime": "21:00",
+      "startDate": "2026-01-22",
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/thestudysociety/1964080",
+      "sourceUrl": "https://www.colethouse.org/whats-on",
+      "tags": [
+        "yoga"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "colet-house-human-garage-fascia-maneuver-workshop-tuesday-19-00",
+      "venue": "Colet House",
+      "title": "Human Garage Fascia Maneuver Workshop",
+      "details": "Colet House, 151 Talgarth Rd, London W14 9DA • Fascia Maneuvers by Human Garage Workshop – March Tuesday SeriesReady to unlock stuck trauma & energy from your body? With Human Garage Fascia Maneuvers, you can master a quiet mind and rejuvenated body!Fascial Maneuver Workshop- Guided by Human Garage Certified CoachJoin us for a restorative Fascia Maneuver Workshop — a guided journey of movement, breath, and awareness designed to release stored tension and trauma within the body’s connective tissue. Combining posture, breathwork, and mindful intention, this experience helps realign the body, expand mobility, and encourage emotional balance. Discover how gentle, self-applied techniques can unlock your body’s natural flow and restore harmony from the inside out.What are Fascia Maneuvers?Fascial Maneuvers, created by Human Garage, are self-applied movements & breathwork techniques that release tension and trauma stored in the fascia—the connective tissue around muscles and organs. Combining posture, breath, intention, motion, they restore alignment, mobility, emotional balance.Why participate in this Fascia Maneuver workshop?Release built-up tension and trauma held in the body’s connective tissues, restore natural alignment, and support emotional release and flow.What to expect?Participants will practice guided self-movements, breathwork, posture shifts, and intention to gradually unlock fascial restrictions and expand mobility in a safe, supportive setting. PLEASE BRING A YOGA MAT, WATER and Curious Mind!Precautions and Limitations:Not suitable during acute injury, open wounds, deep vein thrombosis, unstable spine, or for those with conditions such as uncontrolled hypertension or severe osteoporosis. Please consult your healthcare provider if pregnant or managing serious health issues.Fascia Maneuvers by Human Garage Workshop – March Tuesday SeriesReady to unlock stuck trauma & energy from your body? With Human Garage Fascia Maneuvers, you can master a quiet mind and rejuvenated body!Fascial Maneuver Workshop- Guided by Human Garage Certified CoachJoin us for a restorative Fascia Maneuver Workshop — a guided journey of movement, breath, and awareness designed to release stored tension and trauma within the body’s connective tissue. Combining posture, breathwork, and mindful intention, this experience helps realign the body, expand mobility, and encourage emotional balance. Discover how gentle, self-applied techniques can unlock your body’s natural flow and restore harmony from the inside out.What are Fascia Maneuvers?Fascial Maneuvers, created by Human Garage, are self-applied movements & breathwork techniques that release tension and trauma stored in the fascia—the connective tissue around muscles and organs. Combining posture, breath, intention, motion, they restore alignment, mobility, emotional balance.Why participate in this Fascia Maneuver workshop?Release built-up tension and trauma held in the body’s connective tissues, restore natural alignment, and support emotional release and flow.What to expect?Participants will practice guided self-movements, breathwork, posture shifts, and intention to gradually unlock fascial restrictions and expand mobility in a safe, supportive setting. PLEASE BRING A YOGA MAT, WATER and Curious Mind!Precautions and Limitations:Not suitable during acute injury, open wounds, deep vein thrombosis, unstable spine, or for those with conditions such as uncontrolled hypertension or severe osteoporosis. Please consult your healthcare provider if pregnant or managing serious health issues.",
+      "dayOfWeek": "Tuesday",
+      "startTime": "19:00",
+      "endTime": "20:30",
+      "startDate": "2026-03-17",
+      "endDate": "2026-04-01",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.co.uk/e/fascia-maneuvers-by-human-garage-workshop-march-tuesday-series-tickets-1983391750116?aff=oddtdtcreator",
+      "sourceUrl": "https://www.colethouse.org/whats-on",
+      "tags": [
+        "yoga"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-23T06:16:12.687Z"
     }
   ]
 }
