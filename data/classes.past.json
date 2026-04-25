@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-24T06:17:52.629Z",
+  "updatedAt": "2026-04-25T06:05:20.361Z",
   "sessions": [
     {
       "id": "tripspace-vinyasa-flow-thursday-09-15",
@@ -30697,7 +30697,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-23T16:46:43.812Z"
+      "lastSeenAt": "2026-04-23T16:48:15.634Z"
     },
     {
       "id": "rambert-professional-class-thursday-07-00",
@@ -32509,6 +32509,44 @@
       "audience": "adult",
       "isWorkshop": true,
       "lastSeenAt": "2026-04-23T06:16:12.687Z"
+    },
+    {
+      "id": "siobhan-davies-studios-to-move-together-friday-6-30-pm",
+      "venue": "Siobhan Davies Studios",
+      "title": "TO MOVE TOGETHER",
+      "details": "with Akeim Toussaint Buck",
+      "dayOfWeek": "Friday",
+      "startTime": "6.30 pm",
+      "endTime": "8pm",
+      "startDate": "2026-04-24",
+      "endDate": "2026-04-24",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.siobhandavies.com/classes/to-move-together/",
+      "sourceUrl": "https://www.siobhandavies.com/events/summer-2026-dance-classes-at-sds/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T16:26:30.196Z"
+    },
+    {
+      "id": "daniel-rodriguez-expressive-movement-and-dance-improvisation-with-musician-louis-laporte-thursday-19-00",
+      "venue": "Daniel Rodriguez",
+      "title": "Expressive Movement and Dance Improvisation with musician Louis LaPorte",
+      "details": null,
+      "dayOfWeek": "Thursday",
+      "startTime": "19:00",
+      "endTime": "19:00",
+      "startDate": "2026-04-23",
+      "endDate": "2026-04-23",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.co.uk/e/expressive-movement-and-dance-improvisation-with-musician-louis-laporte-tickets-1986154463466",
+      "sourceUrl": "https://www.eventbrite.co.uk/o/daniel-rodriguez-88584641013",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-23T16:48:15.634Z"
     }
   ]
 }
