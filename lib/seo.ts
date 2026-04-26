@@ -5,8 +5,6 @@ export const SITE_DESCRIPTION =
 const TITLE_MAX_LENGTH = 60;
 const DESCRIPTION_MAX_LENGTH = 155;
 
-export type SearchParamRecord = Record<string, string | string[] | undefined>;
-
 function normalizeWhitespace(value: string): string {
   return value.replace(/\s+/g, " ").trim();
 }
@@ -41,37 +39,12 @@ export function buildMetaDescription(description: string, maxLength = DESCRIPTIO
   return truncateText(description, maxLength);
 }
 
-export function hasSearchParamValues(params?: SearchParamRecord | URLSearchParams | null): boolean {
-  if (!params) {
-    return false;
-  }
-
-  if (params instanceof URLSearchParams) {
-    return [...params.values()].some((value) => value.trim().length > 0);
-  }
-
-  return Object.values(params).some((value) => {
-    if (Array.isArray(value)) {
-      return value.some((item) => item.trim().length > 0);
-    }
-    return typeof value === "string" && value.trim().length > 0;
-  });
-}
-
 export function buildCanonicalRobots({
-  isProduction,
-  hasQuery
+  isProduction
 }: {
   isProduction: boolean;
   hasQuery: boolean;
 }) {
-  if (hasQuery) {
-    return {
-      index: false,
-      follow: true
-    };
-  }
-
   return {
     index: isProduction,
     follow: isProduction

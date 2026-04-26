@@ -4,7 +4,6 @@ import {
   buildMetaDescription,
   buildPageTitle,
   buildStudioSeoText,
-  hasSearchParamValues,
   isIndexableDeployment,
   SITE_NAME
 } from "../../lib/seo";
@@ -28,22 +27,15 @@ describe("seo helpers", () => {
     expect(description).not.toMatch(/\s$/);
   });
 
-  it("uses noindex for filtered or query-param calendar URLs while keeping the root indexable", () => {
+  it("keeps the homepage indexable even for query-param URLs because they canonicalize to root", () => {
     expect(buildCanonicalRobots({ isProduction: true, hasQuery: false })).toEqual({
       index: true,
       follow: true
     });
     expect(buildCanonicalRobots({ isProduction: true, hasQuery: true })).toEqual({
-      index: false,
+      index: true,
       follow: true
     });
-  });
-
-  it("detects meaningful search params from Next metadata inputs", () => {
-    expect(hasSearchParamValues({})).toBe(false);
-    expect(hasSearchParamValues({ mode: "calendar" })).toBe(true);
-    expect(hasSearchParamValues({ venue: ["The Place", "Rambert"] })).toBe(true);
-    expect(hasSearchParamValues({ empty: "" })).toBe(false);
   });
 
   it("treats the public production hostname as indexable even when Vercel env metadata is missing", () => {

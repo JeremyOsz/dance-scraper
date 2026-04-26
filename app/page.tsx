@@ -11,11 +11,9 @@ import {
   buildMetaDescription,
   buildPageTitle,
   getBaseUrl,
-  hasSearchParamValues,
   isIndexableDeployment,
   SITE_DESCRIPTION,
-  SITE_NAME,
-  type SearchParamRecord
+  SITE_NAME
 } from "@/lib/seo";
 import { getUpcomingSessionOccurrences, type UpcomingSessionOccurrence } from "@/lib/upcoming-sessions";
 import { VENUES } from "@/lib/venues";
@@ -102,18 +100,12 @@ function UpcomingClassesSnapshot({ occurrences, title }: { occurrences: Upcoming
   );
 }
 
-type HomeMetadataProps = {
-  searchParams?: Promise<SearchParamRecord>;
-};
-
-export async function generateMetadata({ searchParams }: HomeMetadataProps): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const data = readScrapeOutput();
   const baseUrl = getBaseUrl();
   const venueCount = data.venues.length;
   const classCount = data.sessions.length;
   const venueNames = sortVenuesForSeo([...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))]);
-  const resolvedSearchParams = await Promise.resolve(searchParams ?? {});
-  const hasQuery = hasSearchParamValues(resolvedSearchParams);
   const title = buildPageTitle("London Dance Classes & Workshops");
   const description = buildMetaDescription(
     `Browse ${classCount} adult dance and movement classes from ${venueCount} London venues by date, style, level, and venue. Explore ballet, salsa, contemporary, improv, and workshops.`
@@ -140,7 +132,7 @@ export async function generateMetadata({ searchParams }: HomeMetadataProps): Pro
     alternates: {
       canonical: "/"
     },
-    robots: buildCanonicalRobots({ isProduction: isIndexableDeployment(baseUrl), hasQuery }),
+    robots: buildCanonicalRobots({ isProduction: isIndexableDeployment(baseUrl), hasQuery: false }),
     openGraph: {
       title,
       description,
