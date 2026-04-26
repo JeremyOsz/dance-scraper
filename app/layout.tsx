@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { getBaseUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
+import { getBaseUrl, isIndexableDeployment, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/react";
 
 const baseUrl = getBaseUrl();
-const isProductionDeployment = process.env.VERCEL_ENV === "production" || process.env.NODE_ENV === "production";
+const isProductionDeployment = isIndexableDeployment(baseUrl);
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

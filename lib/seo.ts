@@ -78,6 +78,19 @@ export function buildCanonicalRobots({
   };
 }
 
+export function isIndexableDeployment(baseUrl = getBaseUrl()): boolean {
+  if (process.env.VERCEL_ENV === "production") {
+    return true;
+  }
+
+  try {
+    const hostname = new URL(baseUrl).hostname.replace(/^www\./, "");
+    return hostname === "londondancecalendar.com";
+  } catch {
+    return false;
+  }
+}
+
 export function buildStudioSeoText({
   name,
   classCount,

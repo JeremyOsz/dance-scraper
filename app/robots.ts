@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getBaseUrl } from "@/lib/seo";
+import { getBaseUrl, isIndexableDeployment } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = getBaseUrl();
-  const isProductionDeployment = process.env.VERCEL_ENV === "production";
+  const isProductionDeployment = isIndexableDeployment(baseUrl);
 
   if (!isProductionDeployment) {
     return {

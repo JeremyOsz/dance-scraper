@@ -12,6 +12,7 @@ import {
   buildPageTitle,
   getBaseUrl,
   hasSearchParamValues,
+  isIndexableDeployment,
   SITE_DESCRIPTION,
   SITE_NAME,
   type SearchParamRecord
@@ -22,7 +23,6 @@ import { sortVenueRecordsForUi } from "@/lib/venue-order";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-const isProductionDeployment = process.env.VERCEL_ENV === "production" || process.env.NODE_ENV === "production";
 const SEO_SNAPSHOT_ITEMS = 6;
 const SEO_SNAPSHOT_DAYS = 56;
 
@@ -108,6 +108,7 @@ type HomeMetadataProps = {
 
 export async function generateMetadata({ searchParams }: HomeMetadataProps): Promise<Metadata> {
   const data = readScrapeOutput();
+  const baseUrl = getBaseUrl();
   const venueCount = data.venues.length;
   const classCount = data.sessions.length;
   const venueNames = sortVenuesForSeo([...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))]);
@@ -139,7 +140,7 @@ export async function generateMetadata({ searchParams }: HomeMetadataProps): Pro
     alternates: {
       canonical: "/"
     },
-    robots: buildCanonicalRobots({ isProduction: isProductionDeployment, hasQuery }),
+    robots: buildCanonicalRobots({ isProduction: isIndexableDeployment(baseUrl), hasQuery }),
     openGraph: {
       title,
       description,

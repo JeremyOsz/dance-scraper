@@ -5,6 +5,7 @@ import {
   buildPageTitle,
   buildStudioSeoText,
   hasSearchParamValues,
+  isIndexableDeployment,
   SITE_NAME
 } from "../../lib/seo";
 
@@ -43,6 +44,12 @@ describe("seo helpers", () => {
     expect(hasSearchParamValues({ mode: "calendar" })).toBe(true);
     expect(hasSearchParamValues({ venue: ["The Place", "Rambert"] })).toBe(true);
     expect(hasSearchParamValues({ empty: "" })).toBe(false);
+  });
+
+  it("treats the public production hostname as indexable even when Vercel env metadata is missing", () => {
+    expect(isIndexableDeployment("https://www.londondancecalendar.com")).toBe(true);
+    expect(isIndexableDeployment("https://londondancecalendar.com")).toBe(true);
+    expect(isIndexableDeployment("https://example.vercel.app")).toBe(false);
   });
 
   it("generates unique concise studio metadata text", () => {
