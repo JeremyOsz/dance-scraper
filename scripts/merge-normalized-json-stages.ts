@@ -10,21 +10,15 @@
 import { execFileSync } from "node:child_process";
 import { writeFile } from "node:fs/promises";
 import { coerceScrapeOutput } from "../lib/data-store";
-import type { ScrapeOutput, VenueStatus } from "../lib/types";
+import type { PastSessionsArchive, ScrapeOutput, VenueStatus } from "../lib/types";
 import { dedupeSessionsByStableBookingUrl } from "./scrape/normalize";
 
-interface Session {
+/** Minimal shape for id-keyed merge + Rambert `isWorkshop` override. */
+type MergeableSession = {
   id: string;
   venue: string;
   isWorkshop?: boolean;
-  [key: string]: unknown;
-}
-
-interface SessionFile {
-  generatedAt?: string;
-  updatedAt?: string;
-  sessions: Session[];
-}
+};
 
 function gitShow(stage: number, path: string): string {
   return execFileSync("git", ["show", `:${stage}:${path}`], {
@@ -33,8 +27,8 @@ function gitShow(stage: number, path: string): string {
   });
 }
 
-function mergeSessionsById(ours: SessionFile, theirs: SessionFile): Session[] {
-  const byId = new Map<string, Session>();
+function mergeSessionsById<T extends MergeableSession>(ours: { sessions: T[] }, theirs: { sessions: T[] }): T[] {
+  const byId = new Map<string, T>();
   for (const s of theirs.sessions) {
     byId.set(s.id, s);
   }
@@ -54,8 +48,8 @@ function mergeNormalizedClasses(path: string): string {
   const theirs = JSON.parse(gitShow(3, path)) as Partial<ScrapeOutput>;
   const sessions = dedupeSessionsByStableBookingUrl(
     mergeSessionsById(
-      { sessions: ours.sessions ?? [] } as SessionFile,
-      { sessions: theirs.sessions ?? [] } as SessionFile,
+      { sessions: ours.sessions ?? [] },
+      { sessions: theirs.sessions ?? [] },
     ),
   );
   const out = coerceScrapeOutput({
@@ -67,13 +61,13 @@ function mergeNormalizedClasses(path: string): string {
 }
 
 function mergePastArchive(path: string): string {
-  const ours = JSON.parse(gitShow(2, path)) as SessionFile;
-  const theirs = JSON.parse(gitShow(3, path)) as SessionFile;
+  const ours = JSON.parse(gitShow(2, path)) as PastSessionsArchive;
+  const theirs = JSON.parse(gitShow(3, path)) as PastSessionsArchive;
   const sessions = mergeSessionsById(ours, theirs);
-  const out: SessionFile = {
+  const out: PastSessionsArchive = {
     updatedAt: ours.updatedAt,
     sessions,
-  } as SessionFile;
+  };
   return JSON.stringify(out, null, 2) + "\n";
 }
 
@@ -91,7 +85,7 @@ async function main() {
   const pastJson = mergePastArchive(pastPath);
   await writeFile(pastPath, pastJson, "utf8");
   console.error(
-    `Wrote ${pastPath} (${(JSON.parse(pastJson) as SessionFile).sessions.length} sessions)`,
+    `Wrote ${pastPath} (${(JSON.parse(pastJson) as PastSessionsArchive).sessions.length} sessions)`,
   );
 
   const stats = gitShow(2, statsPath);
