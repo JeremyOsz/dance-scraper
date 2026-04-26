@@ -2,8 +2,8 @@ const FALLBACK_BASE_URL = "http://localhost:3000";
 export const SITE_NAME = "London Dance Calendar";
 export const SITE_DESCRIPTION =
   "Find adult and open dance and movement classes across London with a searchable calendar, venue index, and map.";
-const TITLE_MAX_LENGTH = 60;
-const DESCRIPTION_MAX_LENGTH = 155;
+const TITLE_MAX_LENGTH = 55;
+const DESCRIPTION_MAX_LENGTH = 145;
 
 function normalizeWhitespace(value: string): string {
   return value.replace(/\s+/g, " ").trim();

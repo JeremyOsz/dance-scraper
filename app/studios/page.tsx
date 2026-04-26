@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CalendarVenueFilterButton } from "@/components/calendar-venue-filter-button";
 import { SiteSocialLinks } from "@/components/site-social-links";
 import { readScrapeOutput } from "@/lib/data-store";
-import { signOutboundRedirectUrl } from "@/lib/outbound-redirect";
 import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
 import { getStudioProfiles } from "@/lib/studios";
 
@@ -80,8 +80,6 @@ export default function StudiosPage() {
           <h2 className="sr-only">Studio profiles</h2>
           {studios.map((studio) => {
             const studioLink = `/studios/${studio.slug}`;
-            const calendarLink = `/?mode=calendar&venue=${encodeURIComponent(studio.name)}`;
-            const sourceHref = signOutboundRedirectUrl(studio.sourceUrl, "venue") ?? studio.sourceUrl;
             return (
               <Card key={studio.slug}>
                 <CardHeader className="space-y-2">
@@ -110,14 +108,9 @@ export default function StudiosPage() {
                   <Button asChild size="sm">
                     <Link href={studioLink as Route}>Open studio page</Link>
                   </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href={calendarLink as Route}>View classes</Link>
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={sourceHref} target="_blank" rel="noreferrer">
-                      Studio site
-                    </a>
-                  </Button>
+                  <CalendarVenueFilterButton venue={studio.name} variant="outline" size="sm">
+                    View classes
+                  </CalendarVenueFilterButton>
                 </CardContent>
               </Card>
             );
