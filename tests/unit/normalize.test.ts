@@ -1,5 +1,70 @@
 import { describe, expect, it } from "vitest";
-import { buildOutput } from "../../scripts/scrape/normalize";
+import { buildOutput, dedupeSessionsByStableBookingUrl } from "../../scripts/scrape/normalize";
+import type { DanceSession } from "../../lib/types";
+
+function session(partial: Partial<DanceSession> & Pick<DanceSession, "id" | "venue" | "title" | "bookingUrl">): DanceSession {
+  return {
+    details: null,
+    dayOfWeek: "Tuesday",
+    startTime: "7pm",
+    endTime: "8pm",
+    startDate: null,
+    endDate: null,
+    excludedDateRanges: undefined,
+    timezone: "Europe/London",
+    sourceUrl: "https://example.com",
+    tags: [],
+    audience: "adult",
+    isWorkshop: false,
+    lastSeenAt: "2026-04-26T00:00:00.000Z",
+    ...partial
+  };
+}
+
+describe("dedupeSessionsByStableBookingUrl", () => {
+  it("keeps one TeamUp row per event id at a venue (prefers newer lastSeenAt)", () => {
+    const a = session({
+      id: "east-london-dance-salsa-x-soca-tuesday-17-00",
+      venue: "East London Dance",
+      title: "SALSA X SOCA - Road to Carnival",
+      bookingUrl: "https://goteamup.com/p/5799650-east-london-dance/e/90432252-salsa-x-soca-road-to-carnival/",
+      startTime: "17:00",
+      endTime: "21:00",
+      lastSeenAt: "2026-04-26T06:17:10.175Z"
+    });
+    const b = session({
+      id: "east-london-dance-salsa-x-soca-tuesday-18-00",
+      venue: "East London Dance",
+      title: "SALSA X SOCA - Road to Carnival",
+      bookingUrl: "https://goteamup.com/p/5799650-east-london-dance/e/90432252-salsa-x-soca-road-to-carnival/",
+      startTime: "18:00",
+      endTime: "22:00",
+      lastSeenAt: "2026-04-26T21:28:08.469Z"
+    });
+    const out = dedupeSessionsByStableBookingUrl([a, b]);
+    expect(out).toHaveLength(1);
+    expect(out[0]?.id).toBe(b.id);
+    expect(out[0]?.startTime).toBe("18:00");
+  });
+
+  it("does not merge different TeamUp events at the same venue", () => {
+    const out = dedupeSessionsByStableBookingUrl([
+      session({
+        id: "eld-a",
+        venue: "East London Dance",
+        title: "Popping",
+        bookingUrl: "https://goteamup.com/p/5799650-east-london-dance/e/57985420-popping/"
+      }),
+      session({
+        id: "eld-b",
+        venue: "East London Dance",
+        title: "Popping Taster",
+        bookingUrl: "https://goteamup.com/p/5799650-east-london-dance/e/57599101-popping-taster/"
+      })
+    ]);
+    expect(out).toHaveLength(2);
+  });
+});
 
 describe("buildOutput", () => {
   it("deduplicates by normalized id", () => {

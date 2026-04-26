@@ -23,6 +23,40 @@ const base = (over: Partial<DanceSession>): DanceSession => ({
 });
 
 describe("dedupeSessionsByCanonicalBooking", () => {
+  it("merges duplicate GoTeamUp rows that share the same /e/{eventId}- booking but differ in parsed times", () => {
+    const url = "https://goteamup.com/p/5799650-east-london-dance/e/90432252-salsa-x-soca-road-to-carnival/";
+    const sessions = [
+      base({
+        id: "east-london-dance-salsa-x-soca-tuesday-17-00",
+        venue: "East London Dance",
+        title: "SALSA X SOCA - Road to Carnival",
+        dayOfWeek: "Tuesday",
+        startDate: null,
+        endDate: null,
+        startTime: "17:00",
+        endTime: "21:00",
+        bookingUrl: url,
+        lastSeenAt: "2026-04-26T06:17:10.175Z"
+      }),
+      base({
+        id: "east-london-dance-salsa-x-soca-tuesday-18-00",
+        venue: "East London Dance",
+        title: "SALSA X SOCA - Road to Carnival",
+        dayOfWeek: "Tuesday",
+        startDate: null,
+        endDate: null,
+        startTime: "18:00",
+        endTime: "22:00",
+        bookingUrl: url,
+        lastSeenAt: "2026-04-26T21:28:08.469Z"
+      })
+    ];
+    const out = dedupeSessionsByCanonicalBooking(sessions);
+    expect(out).toHaveLength(1);
+    expect(out[0]?.startTime).toBe("18:00");
+    expect(out[0]?.id).toBe("east-london-dance-salsa-x-soca-tuesday-18-00");
+  });
+
   it("keeps one row when two adapters share the same bookable slot", () => {
     const sessions = [
       base({

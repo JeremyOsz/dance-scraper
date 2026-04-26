@@ -174,8 +174,28 @@ function dedupeLuminousNewMoonMondaySameDate(sessions: DanceSession[]): DanceSes
   return sessions.filter((s) => !dropIds.has(s.id));
 }
 
+const TEAMUP_EVENT_ID = /\/e\/(\d+)-/;
+
+/** GoTeamUp `/e/{id}-slug/` is stable across duplicate rows that only differ by parsed clock times or slugified ids. */
+function teamupBookingStableId(bookingUrl: string | null | undefined): string | null {
+  const raw = bookingUrl?.trim();
+  if (!raw) return null;
+  try {
+    const u = new URL(raw);
+    if (!u.hostname.toLowerCase().includes("goteamup.com")) return null;
+    const m = u.pathname.match(TEAMUP_EVENT_ID);
+    return m ? `goteamup:${m[1]}` : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Same bookable slot listed twice (e.g. overlapping adapters) — collapse to one row. */
 function canonicalSessionDedupeKey(s: DanceSession): string {
+  const teamup = teamupBookingStableId(s.bookingUrl);
+  if (teamup !== null) {
+    return [s.venue.toLowerCase(), teamup].join("\0");
+  }
   return [
     s.bookingUrl ?? "",
     s.title.trim().toLowerCase(),

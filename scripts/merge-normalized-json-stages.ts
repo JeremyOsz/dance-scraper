@@ -11,6 +11,7 @@ import { execFileSync } from "node:child_process";
 import { writeFile } from "node:fs/promises";
 import { coerceScrapeOutput } from "../lib/data-store";
 import type { ScrapeOutput, VenueStatus } from "../lib/types";
+import { dedupeSessionsByStableBookingUrl } from "./scrape/normalize";
 
 interface Session {
   id: string;
@@ -51,9 +52,11 @@ function mergeSessionsById(ours: SessionFile, theirs: SessionFile): Session[] {
 function mergeNormalizedClasses(path: string): string {
   const ours = JSON.parse(gitShow(2, path)) as Partial<ScrapeOutput>;
   const theirs = JSON.parse(gitShow(3, path)) as Partial<ScrapeOutput>;
-  const sessions = mergeSessionsById(
-    { sessions: ours.sessions ?? [] } as SessionFile,
-    { sessions: theirs.sessions ?? [] } as SessionFile,
+  const sessions = dedupeSessionsByStableBookingUrl(
+    mergeSessionsById(
+      { sessions: ours.sessions ?? [] } as SessionFile,
+      { sessions: theirs.sessions ?? [] } as SessionFile,
+    ),
   );
   const out = coerceScrapeOutput({
     generatedAt: ours.generatedAt,

@@ -150,6 +150,74 @@ function inferTags(raw: ScrapedClass): string[] {
   return tagMatchers.filter(({ pattern }) => pattern.test(text)).map(({ tag }) => tag);
 }
 
+/** GoTeamUp booking URLs include a stable numeric event id in `/e/{id}-slug/`. */
+const TEAMUP_EVENT_ID = /\/e\/(\d+)-/;
+
+function teamupEventDedupeKey(session: DanceSession): string | null {
+  const raw = session.bookingUrl?.trim();
+  if (!raw) return null;
+  try {
+    const u = new URL(raw);
+    if (!u.hostname.toLowerCase().includes("goteamup.com")) return null;
+    const teamup = u.pathname.match(TEAMUP_EVENT_ID);
+    if (!teamup) return null;
+    return `${session.venue.toLowerCase()}|teamup:${teamup[1]}`;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Collapse only GoTeamUp rows that share the same `/e/{eventId}-…` booking target (e.g. merge
+ * artifacts where `id` / parsed times differ). All other sessions are left untouched — never
+ * bucket by bare URL (venues reuse one enrol page, ICS feed, or course URL for many classes).
+ */
+export function dedupeSessionsByStableBookingUrl(sessions: DanceSession[]): DanceSession[] {
+  type Tagged = { session: DanceSession; i: number };
+  const teamupBuckets = new Map<string, Tagged[]>();
+  const out: Tagged[] = [];
+
+  sessions.forEach((session, i) => {
+    const key = teamupEventDedupeKey(session);
+    if (key === null) {
+      out.push({ session, i });
+      return;
+    }
+    const list = teamupBuckets.get(key) ?? [];
+    list.push({ session, i });
+    teamupBuckets.set(key, list);
+  });
+
+  for (const group of teamupBuckets.values()) {
+    const winner =
+      group.length === 1
+        ? group[0]
+        : (() => {
+            const picked = pickPreferredDuplicateSession(group.map((g) => g.session));
+            return group.find((g) => g.session === picked) ?? group[0];
+          })();
+    out.push(winner);
+  }
+
+  out.sort((a, b) => a.i - b.i);
+  return out.map((t) => t.session);
+}
+
+function pickPreferredDuplicateSession(group: DanceSession[]): DanceSession {
+  return group.reduce((best, cur) => {
+    const seenCur = cur.lastSeenAt ?? "";
+    const seenBest = best.lastSeenAt ?? "";
+    if (seenCur > seenBest) return cur;
+    if (seenCur < seenBest) return best;
+    const lenCur = cur.details?.length ?? 0;
+    const lenBest = best.details?.length ?? 0;
+    if (lenCur !== lenBest) {
+      return lenCur > lenBest ? cur : best;
+    }
+    return cur.id < best.id ? cur : best;
+  });
+}
+
 function toSession(raw: ScrapedClass, seenAt: string): DanceSession {
   const time = normalizeTimeRange(raw.time);
   const text = `${raw.title} ${raw.details ?? ""}`;
@@ -220,7 +288,7 @@ export function buildOutput(results: AdapterOutput[]): ScrapeOutput {
 
   return {
     generatedAt,
-    sessions,
+    sessions: dedupeSessionsByStableBookingUrl(sessions),
     venues: venueStatus
   };
 }
