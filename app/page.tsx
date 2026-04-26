@@ -10,6 +10,7 @@ import {
   buildCanonicalRobots,
   buildMetaDescription,
   buildPageTitle,
+  DATASET_LICENSE_URL,
   getBaseUrl,
   isIndexableDeployment,
   SITE_DESCRIPTION,
@@ -201,6 +202,7 @@ export default function Home() {
       name: "London Dance Classes Calendar",
       description: "Aggregated schedule of dance and movement classes across London venues.",
       url: baseUrl,
+      license: DATASET_LICENSE_URL,
       inLanguage: "en-GB",
       dateModified: data.generatedAt,
       creator: {
