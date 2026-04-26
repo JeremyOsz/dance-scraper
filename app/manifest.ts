@@ -15,9 +15,9 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["lifestyle", "education", "entertainment"],
     icons: [
       {
-        src: "/icons/dance-scraper-icon.svg",
-        sizes: "any",
-        type: "image/svg+xml",
+        src: "/icons/favicon.png",
+        sizes: "1024x1024",
+        type: "image/png",
         purpose: "any"
       }
     ]

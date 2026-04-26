@@ -2,6 +2,60 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-26T21:28:08.469Z",
+      "venues": [
+        {
+          "key": "eastLondonDance",
+          "venue": "East London Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 28,
+          "newSessionCount": 26,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
+      "at": "2026-04-26T21:22:55.151Z",
+      "venues": [
+        {
+          "key": "eastLondonDance",
+          "venue": "East London Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 42,
+          "newSessionCount": 28,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
+      "at": "2026-04-26T21:21:47.140Z",
+      "venues": [
+        {
+          "key": "eastLondonDance",
+          "venue": "East London Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 42,
+          "newSessionCount": 42,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-04-24T06:17:52.629Z",
       "venues": [
         {

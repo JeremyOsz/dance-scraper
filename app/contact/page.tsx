@@ -3,21 +3,27 @@ import Link from "next/link";
 import { ContactForm } from "@/components/contact/contact-form";
 import { SiteSocialLinks } from "@/components/site-social-links";
 import { Button } from "@/components/ui/button";
+import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
+
+const title = buildPageTitle("Contact London Dance Calendar");
+const description = buildMetaDescription("Send feedback about incorrect, missing, or outdated London dance class listings.");
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Send feedback about incorrect or missing dance classes.",
+  title: {
+    absolute: title
+  },
+  description,
   alternates: {
     canonical: "/contact"
   },
   openGraph: {
-    title: "Contact",
-    description: "Send feedback about incorrect or missing dance classes.",
+    title,
+    description,
     url: "/contact"
   },
   twitter: {
-    title: "Contact",
-    description: "Send feedback about incorrect or missing dance classes."
+    title,
+    description
   }
 };
 
@@ -30,6 +36,7 @@ export default function ContactPage() {
           <Link href="/">Back to calendar</Link>
         </Button>
       </div>
+      <h2 className="sr-only">Send feedback</h2>
       <ContactForm />
       <SiteSocialLinks className="mt-10 border-t border-border pt-6" />
     </main>

@@ -1,23 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { getBaseUrl } from "@/lib/seo";
+import { getBaseUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/react";
 
 const baseUrl = getBaseUrl();
 const isProductionDeployment = process.env.VERCEL_ENV === "production" || process.env.NODE_ENV === "production";
-const siteName = "London Dance Calendar";
-const siteDescription =
-  "Find adult and open dance and movement classes across London with a searchable calendar, venue index, and map.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   manifest: "/manifest.webmanifest",
   title: {
-    default: siteName,
-    template: `%s | ${siteName}`
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`
   },
-  description: siteDescription,
-  applicationName: siteName,
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
   keywords: [
     "London dance classes",
     "dance classes London",
@@ -32,14 +29,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
     url: "/",
-    siteName,
-    title: siteName,
-    description: siteDescription
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION
   },
   twitter: {
     card: "summary_large_image",
-    title: siteName,
-    description: siteDescription
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION
   },
   robots: {
     index: isProductionDeployment,
@@ -57,9 +54,9 @@ export const metadata: Metadata = {
     : {}),
   category: "events",
   icons: {
-    icon: "/icons/dance-scraper-icon.svg",
-    shortcut: "/icons/dance-scraper-icon.svg",
-    apple: "/icons/dance-scraper-icon.svg"
+    icon: [{ url: "/icons/favicon.png", type: "image/png" }],
+    shortcut: "/icons/favicon.png",
+    apple: "/icons/favicon.png"
   }
 };
 

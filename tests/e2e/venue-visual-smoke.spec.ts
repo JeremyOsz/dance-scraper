@@ -14,12 +14,13 @@ const noisyLabels = [
 ];
 
 async function selectVenue(page: import("@playwright/test").Page, venue: string) {
-  const venueSelect = page.getByRole("combobox").first();
-  await venueSelect.click();
-  const option = page.getByRole("option", { name: venue, exact: true });
-  await expect(option).toBeVisible();
-  await option.click();
-  await page.waitForTimeout(500);
+  await expect(page.getByText(/Showing \d+ classes/)).toBeVisible({ timeout: 10000 });
+  const clearFilters = page.getByRole("button", { name: "Clear filters" });
+  if (await clearFilters.isEnabled()) {
+    await clearFilters.click();
+  }
+  await page.getByRole("button", { name: venue, exact: true }).click();
+  await expect(page.getByText(/Showing \d+ classes/)).toBeVisible();
 }
 
 test("venue pages avoid obvious nav/footer pollution", async ({ page }) => {

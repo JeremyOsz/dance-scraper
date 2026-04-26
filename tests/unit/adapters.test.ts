@@ -1217,6 +1217,53 @@ describe("scraper adapters", () => {
           customer_url: "/p/5799650-east-london-dance/e/57985420-popping/",
           venue: 43266,
           status: "active"
+        },
+        {
+          name: "Krump Taster",
+          description: "<p>Monday 28 September, 8:30pm - 10:00pm - All Levels, beginners welcome</p>",
+          starts_at: "2099-09-28T20:30:00+01:00",
+          ends_at: "2099-09-28T22:00:00+01:00",
+          customer_url: "/p/5799650-east-london-dance/e/92181945-krump-taster/",
+          venue: 43266,
+          status: "active"
+        },
+        {
+          name: "Bollywood Taster",
+          description: "<p>Tuesday 30 September, 7pm - 8:20pm - All Levels, beginners welcome</p>",
+          starts_at: "2025-09-30T19:00:00+01:00",
+          ends_at: "2025-09-30T20:20:00+01:00",
+          customer_url: "/p/5799650-east-london-dance/e/92181820-bollywood-taster/",
+          venue: 43266,
+          status: "active"
+        },
+        {
+          name: "Krump",
+          description:
+            "<p>Mondays, 8:30pm - 9:50pm - All Levels, beginners welcome with Toby Jackman - This session is a 30 minute class followed by a 50 minute Jam.</p>",
+          starts_at: "2026-04-27T20:30:00+01:00",
+          ends_at: "2026-04-27T21:50:00+01:00",
+          customer_url: "/p/5799650-east-london-dance/e/97729217-krump/",
+          venue: 43266,
+          status: "active"
+        },
+        {
+          name: "Krump (Class & Jam)",
+          description:
+            "<p>Mondays, 8:30pm - 9:50pm - All Levels, beginners welcome with Toby Jackman - This session is a 30 minute class followed by a 50 minute Jam.</p>",
+          starts_at: "2026-04-27T20:30:00+01:00",
+          ends_at: "2026-04-27T21:50:00+01:00",
+          customer_url: "/p/5799650-east-london-dance/e/102141295-krump-class-jam/",
+          venue: 43266,
+          status: "active"
+        },
+        {
+          name: "Krump (Jam)",
+          description: "<p>Mondays, 9pm - 9:50pm - Recommended for intermediate/advanced level Krumpers.</p>",
+          starts_at: "2026-04-27T21:00:00+01:00",
+          ends_at: "2026-04-27T21:50:00+01:00",
+          customer_url: "/p/5799650-east-london-dance/e/102319176-krump-jam/",
+          venue: 43266,
+          status: "active"
         }
       ]
     });
@@ -1227,6 +1274,15 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.venue).toBe("East London Dance");
     expect(output.classes[0]?.time).toBe("7pm - 8:20pm");
     expect(output.classes[0]?.bookingUrl).toContain("/p/5799650-east-london-dance/e/");
+    expect(output.classes.find((klass) => klass.title === "Popping")?.startDate).toBeNull();
+    expect(output.classes.find((klass) => klass.title === "Krump Taster")).toMatchObject({
+      startDate: "2099-09-28",
+      endDate: "2099-09-28",
+      time: "8:30pm - 10:00pm"
+    });
+    expect(output.classes.some((klass) => klass.title === "Bollywood Taster")).toBe(false);
+    expect(output.classes.some((klass) => klass.title === "Krump")).toBe(false);
+    expect(output.classes.map((klass) => klass.title)).toEqual(expect.arrayContaining(["Krump (Class & Jam)", "Krump (Jam)"]));
   });
 
   it("parses Under the Sun Dance adapter", async () => {

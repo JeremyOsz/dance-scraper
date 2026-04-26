@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { SiteSocialLinks } from "@/components/site-social-links";
 import { readScrapeOutput } from "@/lib/data-store";
 import { signOutboundRedirectUrl } from "@/lib/outbound-redirect";
+import { buildPageTitle, buildStudioSeoText } from "@/lib/seo";
 import { getStudioBySlug } from "@/lib/studios";
 
 export const dynamic = "force-dynamic";
@@ -31,16 +32,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!studio) {
     return {
-      title: "Studio Not Found"
+      title: {
+        absolute: buildPageTitle("Studio Not Found")
+      }
     };
   }
 
-  const title = `${studio.name} Studio Profile`;
-  const description = buildDescription(studio.name, studio.classCount, studio.topTypes);
+  const { title, description } = buildStudioSeoText({
+    name: studio.name,
+    classCount: studio.classCount,
+    topTypes: studio.topTypes,
+    activeDays: studio.activeDays,
+    ok: studio.ok
+  });
   const url = `/studios/${studio.slug}`;
 
   return {
-    title,
+    title: {
+      absolute: title
+    },
     description,
     alternates: {
       canonical: url
@@ -75,7 +85,7 @@ export default async function StudioPage({ params }: PageProps) {
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader className="space-y-4 px-0">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <CardTitle className="text-3xl tracking-tight">{studio.name}</CardTitle>
+            <h1 className="text-3xl font-semibold tracking-tight">{studio.name} dance classes</h1>
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant={studio.ok ? "secondary" : "outline"}>
                 {studio.ok ? "OK" : "Error scraping"}
@@ -84,6 +94,11 @@ export default async function StudioPage({ params }: PageProps) {
             </div>
           </div>
           <p className="text-sm text-muted-foreground">{buildDescription(studio.name, studio.classCount, studio.topTypes)}</p>
+          <p className="text-sm text-muted-foreground">
+            {studio.name} currently contributes {studio.classCount} listed classes to London Dance Calendar
+            {studio.topTypes.length > 0 ? `, with common styles including ${studio.topTypes.join(", ")}` : ""}
+            {studio.activeDays.length > 0 ? ` and activity on ${studio.activeDays.join(", ")}` : ""}.
+          </p>
           {studio.summary ? (
             <p className="rounded-md border border-input bg-card p-3 text-sm text-muted-foreground">{studio.summary}</p>
           ) : null}
@@ -102,7 +117,7 @@ export default async function StudioPage({ params }: PageProps) {
         <CardContent className="space-y-4 px-0">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Quick Facts</CardTitle>
+              <h2 className="text-lg font-semibold leading-none tracking-tight">Quick Facts</h2>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
               <p>
@@ -125,7 +140,7 @@ export default async function StudioPage({ params }: PageProps) {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Class Mix</CardTitle>
+              <h2 className="text-lg font-semibold leading-none tracking-tight">Class Mix</h2>
             </CardHeader>
             <CardContent className="space-y-2">
               {studio.topTypes.length === 0 ? (
@@ -144,7 +159,7 @@ export default async function StudioPage({ params }: PageProps) {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Example Classes</CardTitle>
+              <h2 className="text-lg font-semibold leading-none tracking-tight">Example Classes</h2>
             </CardHeader>
             <CardContent className="space-y-2">
               {studio.sampleTitles.length === 0 ? (
@@ -161,7 +176,7 @@ export default async function StudioPage({ params }: PageProps) {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Links</CardTitle>
+              <h2 className="text-lg font-semibold leading-none tracking-tight">Links</h2>
             </CardHeader>
             <CardContent className="flex flex-wrap gap-2">
               <Button variant="outline" asChild>

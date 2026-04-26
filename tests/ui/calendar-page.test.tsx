@@ -162,6 +162,8 @@ describe("CalendarPage", () => {
   it("disables preferred/shortlist-only toggles when nothing is saved", async () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
+    expect(screen.getByRole("heading", { level: 1, name: "London Dance Calendar" })).toBeVisible();
+    expect(screen.getByRole("heading", { level: 2, name: "Find dance classes" })).toBeInTheDocument();
     expect(screen.queryByRole("checkbox", { name: "Preferred venues only" })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Shortlist (0)" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Clear filters" })).toBeDisabled();
@@ -192,6 +194,27 @@ describe("CalendarPage", () => {
     expect(contemporaryTypeButton).toHaveClass("bg-sky-100", "text-sky-800");
     expect(yogaPilatesTypeButton).toHaveClass("bg-cyan-100", "text-cyan-800");
     expect(commercialHeelsTypeButton).toHaveClass("bg-fuchsia-100", "text-fuchsia-800");
+  });
+
+  it("loads class listings from the API when sessions are not embedded", async () => {
+    const originalFetch = globalThis.fetch;
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ generatedAt: "2026-03-10T00:00:00.000Z", count: sessions.length, sessions })
+    });
+    Object.defineProperty(globalThis, "fetch", { configurable: true, value: fetchMock });
+
+    try {
+      render(<CalendarPage venues={venues} />);
+
+      expect(screen.getByText("Loading latest classes")).toBeInTheDocument();
+      expect(screen.getByText("Loading latest class listings")).toBeInTheDocument();
+      expect(screen.queryByText("No classes")).not.toBeInTheDocument();
+      expect(await screen.findByText("Embodied Workshop")).toBeInTheDocument();
+      expect(fetchMock).toHaveBeenCalledWith("/api/classes", { headers: { Accept: "application/json" } });
+    } finally {
+      Object.defineProperty(globalThis, "fetch", { configurable: true, value: originalFetch });
+    }
   });
 
   it("jumps to selected week from week picker", async () => {

@@ -53,8 +53,26 @@ function toText(html: string | null | undefined): string {
   return normalizeText($.text());
 }
 
+function isDatedOneOffEvent(title: string, descriptionText: string): boolean {
+  return /\btaster\b/i.test(`${title} ${descriptionText}`);
+}
+
+function toIsoDate(value: Date | null): string | null {
+  return value && !Number.isNaN(value.getTime()) ? format(value, "yyyy-MM-dd") : null;
+}
+
+function removeRedundantBookingOptions(classes: ScrapedClass[]): ScrapedClass[] {
+  const hasSpecificKrumpOptions = classes.some((item) => item.title === "Krump (Class & Jam)" || item.title === "Krump (Jam)");
+  if (!hasSpecificKrumpOptions) {
+    return classes;
+  }
+
+  return classes.filter((item) => item.title !== "Krump");
+}
+
 function parseClassesFromEvents(events: NonNullable<TeamUpEventsResponse["results"]>): ScrapedClass[] {
   const classes: ScrapedClass[] = [];
+  const todayIso = format(new Date(), "yyyy-MM-dd");
 
   for (const event of events) {
     const title = normalizeText(event.name);
@@ -64,6 +82,12 @@ function parseClassesFromEvents(events: NonNullable<TeamUpEventsResponse["result
     const descriptionText = toText(event.description);
     const start = event.starts_at ? parseISO(event.starts_at) : null;
     const end = event.ends_at ? parseISO(event.ends_at) : null;
+    const isOneOff = isDatedOneOffEvent(title, descriptionText);
+    const startDate = isOneOff ? toIsoDate(start) : null;
+    const endDate = isOneOff ? toIsoDate(end) ?? startDate : null;
+    if (isOneOff && (endDate ?? startDate) && (endDate ?? startDate)! < todayIso) {
+      continue;
+    }
 
     const dayOfWeek = descriptionText.match(DAY_REGEX)?.[1] ?? (start && !Number.isNaN(start.getTime()) ? format(start, "EEEE") : null);
     const time =
@@ -79,14 +103,15 @@ function parseClassesFromEvents(events: NonNullable<TeamUpEventsResponse["result
       details: descriptionText || null,
       dayOfWeek,
       time,
-      startDate: null,
-      endDate: null,
+      startDate,
+      endDate,
       bookingUrl,
       sourceUrl
     });
   }
 
-  return Array.from(new Map(classes.map((item) => [`${item.title}|${item.dayOfWeek ?? "na"}|${item.time ?? "na"}`, item])).values());
+  const dedupedClasses = Array.from(new Map(classes.map((item) => [`${item.title}|${item.dayOfWeek ?? "na"}|${item.time ?? "na"}`, item])).values());
+  return removeRedundantBookingOptions(dedupedClasses);
 }
 
 async function fetchAllEvents(accessToken: string): Promise<NonNullable<TeamUpEventsResponse["results"]>> {

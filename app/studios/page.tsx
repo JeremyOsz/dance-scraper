@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SiteSocialLinks } from "@/components/site-social-links";
 import { readScrapeOutput } from "@/lib/data-store";
 import { signOutboundRedirectUrl } from "@/lib/outbound-redirect";
+import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
 import { getStudioProfiles } from "@/lib/studios";
 
 export const dynamic = "force-dynamic";
@@ -19,20 +20,26 @@ function pluralize(value: number, singular: string, plural = `${singular}s`) {
 export function generateMetadata(): Metadata {
   const data = readScrapeOutput();
   const studios = getStudioProfiles(data);
+  const title = buildPageTitle("London Dance Studios");
+  const description = buildMetaDescription(
+    `Browse ${studios.length} London dance studios and organisers with current class counts, styles, scrape status, and links to filtered listings.`
+  );
   return {
-    title: "Studios",
-    description: `Browse ${studios.length} London studios and organisers, with scrape status and quick summaries of listed classes.`,
+    title: {
+      absolute: title
+    },
+    description,
     alternates: {
       canonical: "/studios"
     },
     openGraph: {
-      title: "Studios",
-      description: `Browse ${studios.length} London studios and organisers, with scrape status and quick summaries of listed classes.`,
+      title,
+      description,
       url: "/studios"
     },
     twitter: {
-      title: "Studios",
-      description: `Browse ${studios.length} London studios and organisers, with scrape status and quick summaries of listed classes.`
+      title,
+      description
     }
   };
 }
@@ -46,7 +53,7 @@ export default function StudiosPage() {
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader className="space-y-4 px-0">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <CardTitle className="text-3xl tracking-tight">Studios</CardTitle>
+            <h1 className="text-3xl font-semibold tracking-tight">London Dance Studios</h1>
             <div className="flex items-center gap-2">
               <Button variant="outline" asChild>
                 <Link href="/">Calendar</Link>
@@ -70,6 +77,7 @@ export default function StudiosPage() {
           <SiteSocialLinks className="mt-1" />
         </CardHeader>
         <CardContent className="grid gap-3 px-0 md:grid-cols-2">
+          <h2 className="sr-only">Studio profiles</h2>
           {studios.map((studio) => {
             const studioLink = `/studios/${studio.slug}`;
             const calendarLink = `/?mode=calendar&venue=${encodeURIComponent(studio.name)}`;

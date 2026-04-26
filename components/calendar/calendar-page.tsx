@@ -43,6 +43,7 @@ const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
 const INITIAL_WEEK_DAY_COUNT = 7;
 const LAZY_LOAD_DAY_CHUNK = 7;
 const MAX_LOADED_CALENDAR_DAYS = 56;
+const LOADING_CARD_ROW_COUNTS = [3, 2, 2, 3, 1, 2, 1] as const;
 const DANCE_TYPE_BADGE_CLASS: Record<DanceType, string> = {
   Contemporary: "border-transparent bg-sky-100 text-sky-800",
   Ballet: "border-transparent bg-rose-100 text-rose-800",
@@ -281,8 +282,9 @@ type VenueCard = {
 };
 
 type Props = {
-  initialSessions: DanceSessionOutbound[];
+  initialSessions?: DanceSessionOutbound[];
   venues: VenueCard[];
+  seoSnapshot?: React.ReactNode;
 };
 
 function hrefForOutboundBooking(session: DanceSessionOutbound) {
@@ -305,6 +307,39 @@ function getVenueStatus(venue: Props["venues"][number]) {
     return { label: "No events", variant: "outline" as const };
   }
   return { label: "OK", variant: "secondary" as const };
+}
+
+function CalendarLoadingState() {
+  return (
+    <div className="rounded-md border border-input bg-card p-3" role="status" aria-live="polite">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <p className="text-sm font-medium">Loading latest class listings</p>
+          <p className="text-xs text-muted-foreground">Preparing the calendar from current venue data.</p>
+        </div>
+        <Badge variant="secondary">Live schedule</Badge>
+      </div>
+      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
+        <div className="h-full w-1/2 animate-pulse rounded-full bg-primary/70" />
+      </div>
+    </div>
+  );
+}
+
+function CalendarDayLoadingSkeleton({ count }: { count: number }) {
+  return (
+    <div className="space-y-2" aria-hidden="true">
+      {Array.from({ length: count }).map((_, index) => (
+        <div key={index} className="rounded-md border border-input bg-background/80 p-2">
+          <div className="animate-pulse space-y-2">
+            <div className="h-3 w-3/4 rounded bg-muted" />
+            <div className="h-2.5 w-1/2 rounded bg-muted" />
+            <div className="h-2.5 w-2/3 rounded bg-muted" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 function parseCsvParam(params: URLSearchParams | Readonly<URLSearchParams>, key: string) {
@@ -331,10 +366,14 @@ function parseAnchorDate(value: string | null) {
   return Number.isNaN(parsed.getTime()) ? startOfDay(new Date()) : startOfDay(parsed);
 }
 
-export function CalendarPage({ initialSessions, venues }: Props) {
+export function CalendarPage({ initialSessions, venues, seoSnapshot }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const hasInitialSessions = initialSessions !== undefined;
+  const [sessions, setSessions] = useState<DanceSessionOutbound[]>(() => initialSessions ?? []);
+  const [sessionsLoading, setSessionsLoading] = useState(!hasInitialSessions);
+  const [sessionsError, setSessionsError] = useState<string | null>(null);
   const [mode, setMode] = useState<"calendar" | "venues" | "map">("calendar");
   const [view, setView] = useState<"week" | "month">("week");
   const [anchorDate, setAnchorDate] = useState(() => startOfDay(new Date()));
@@ -359,6 +398,47 @@ export function CalendarPage({ initialSessions, venues }: Props) {
 
   const venueNames = useMemo(() => sortVenueRecordsForUi(venues).map((venue) => venue.name), [venues]);
   const selectedDaysKey = useMemo(() => selectedDays.join(","), [selectedDays]);
+
+  useEffect(() => {
+    if (hasInitialSessions) {
+      setSessions(initialSessions);
+      setSessionsLoading(false);
+      setSessionsError(null);
+      return;
+    }
+
+    let cancelled = false;
+    setSessionsLoading(true);
+    setSessionsError(null);
+
+    fetch("/api/classes", { headers: { Accept: "application/json" } })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error(`Classes API returned ${response.status}`);
+        }
+        const payload = (await response.json()) as { sessions?: DanceSessionOutbound[] };
+        if (!Array.isArray(payload.sessions)) {
+          throw new Error("Classes API response did not include sessions");
+        }
+        if (!cancelled) {
+          setSessions(payload.sessions);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setSessionsError("Unable to load class listings. Please refresh and try again.");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setSessionsLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hasInitialSessions, initialSessions]);
 
   useEffect(() => {
     setLoadedDayCount(INITIAL_WEEK_DAY_COUNT);
@@ -474,7 +554,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [shareMessage, shareFallbackUrl]);
 
   const filteredSessions = useMemo(() => {
-    return initialSessions.filter((session) => {
+    return sessions.filter((session) => {
       if (selectedVenues.length > 0 && !selectedVenues.includes(session.venue)) {
         return false;
       }
@@ -504,7 +584,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       return true;
     });
   }, [
-    initialSessions,
+    sessions,
     search,
     selectedVenues,
     selectedDays,
@@ -516,7 +596,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   ]);
   const relatedSessionCountByVenue = useMemo(() => {
     const counts = new Map<string, number>();
-    for (const session of initialSessions) {
+    for (const session of sessions) {
       if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) {
         continue;
       }
@@ -545,7 +625,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
       counts.set(session.venue, (counts.get(session.venue) ?? 0) + 1);
     }
     return counts;
-  }, [initialSessions, search, selectedDays, selectedTypes, selectedLevels, workshopsOnly, shortlistOnly, shortlistSessionIds]);
+  }, [sessions, search, selectedDays, selectedTypes, selectedLevels, workshopsOnly, shortlistOnly, shortlistSessionIds]);
 
   const dates = useMemo(
     () =>
@@ -592,7 +672,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
   }, [anchorDate, view, visibleDates]);
   const venueOptionCountByVenue = useMemo(() => {
     const counts = new Map<string, number>();
-    for (const session of initialSessions) {
+    for (const session of sessions) {
       if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) {
         continue;
       }
@@ -625,7 +705,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
     }
     return counts;
   }, [
-    initialSessions,
+    sessions,
     search,
     selectedDays,
     selectedLevels,
@@ -1166,11 +1246,10 @@ export function CalendarPage({ initialSessions, venues }: Props) {
 
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
-      <h1 className="sr-only">London dance classes calendar</h1>
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader className="px-0">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <CardTitle className="text-3xl tracking-tight">London Dance Calendar</CardTitle>
+            <h1 className="text-3xl font-semibold tracking-tight">London Dance Calendar</h1>
             <div className="flex items-center gap-2">
               <Button variant="outline" onClick={handleShare}>
                 Share
@@ -1201,6 +1280,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
             from multiple studio sources and refreshed regularly, though occasional inaccuracies may occur.
           </p>
           <SiteSocialLinks className="mt-2" />
+          {seoSnapshot}
         </CardHeader>
         <CardContent className="space-y-4 px-0">
           <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
@@ -1240,6 +1320,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
             </Dialog>
 
             <section className="space-y-4">
+              <h2 className="text-xl font-semibold tracking-tight">Find dance classes</h2>
               <div className="flex flex-wrap items-center gap-2 rounded-md border border-input bg-card px-3 py-2 text-sm">
                 <Button className="lg:hidden" variant="outline" onClick={() => setFiltersOpen(true)}>
                   Filters
@@ -1254,10 +1335,16 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                 <Button variant={mode === "map" ? "default" : "outline"} onClick={() => setMode("map")}>
                   Map
                 </Button>
-                <span className="w-full text-xs text-muted-foreground sm:ml-auto sm:w-auto sm:text-sm">
-                  Showing {filteredSessions.length} classes
+                <span className="w-full text-xs text-muted-foreground sm:ml-auto sm:w-auto sm:text-sm" aria-live="polite">
+                  {sessionsLoading ? "Loading latest classes" : `Showing ${filteredSessions.length} classes`}
                 </span>
               </div>
+              {sessionsLoading ? <CalendarLoadingState /> : null}
+              {sessionsError ? (
+                <div className="rounded-md border border-destructive/40 bg-card p-3 text-sm text-destructive" role="status">
+                  {sessionsError}
+                </div>
+              ) : null}
             {mode === "calendar" && (
               <>
                 <div className="flex flex-wrap items-center gap-2">
@@ -1338,7 +1425,11 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                   </div>
                 </div>
 
-                <div ref={view === "week" ? weekScrollRef : undefined} className={view === "week" ? "overflow-x-auto pb-2" : ""}>
+                <div
+                  ref={view === "week" ? weekScrollRef : undefined}
+                  className={view === "week" ? "overflow-x-auto pb-2" : ""}
+                  aria-busy={sessionsLoading}
+                >
                   <div
                     className={
                       view === "week"
@@ -1352,6 +1443,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                       const inMonth = isSameMonth(date, anchorDate);
                       const isToday = isSameDay(date, new Date());
                       const showMonthMarker = view === "week" && (index === 0 || !isSameMonth(date, visibleDates[index - 1]));
+                      const loadingRowCount = LOADING_CARD_ROW_COUNTS[index % LOADING_CARD_ROW_COUNTS.length];
                       return (
                         <Card
                           key={iso}
@@ -1375,7 +1467,8 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                             ) : null}
                           </CardHeader>
                           <CardContent className="space-y-2 p-3 pt-0">
-                            {(view === "month" ? sessions.slice(0, 3) : sessions).map((session, index) => {
+                            {sessionsLoading ? <CalendarDayLoadingSkeleton count={loadingRowCount} /> : null}
+                            {!sessionsLoading && (view === "month" ? sessions.slice(0, 3) : sessions).map((session, index) => {
                               if (isGagaSession(session)) {
                                 return (
                                   <GagaBoycottCard
@@ -1426,8 +1519,8 @@ export function CalendarPage({ initialSessions, venues }: Props) {
                                 </div>
                               );
                             })}
-                            {sessions.length === 0 && <p className="text-xs text-muted-foreground">No classes</p>}
-                            {view === "month" && sessions.length > 3 && (
+                            {!sessionsLoading && sessions.length === 0 && <p className="text-xs text-muted-foreground">No classes</p>}
+                            {!sessionsLoading && view === "month" && sessions.length > 3 && (
                               <p className="text-xs text-muted-foreground">+{sessions.length - 3} more</p>
                             )}
                           </CardContent>
@@ -1509,7 +1602,7 @@ export function CalendarPage({ initialSessions, venues }: Props) {
               </>
             )}
 
-            {mode === "calendar" && filteredSessions.length === 0 && (
+            {mode === "calendar" && !sessionsLoading && filteredSessions.length === 0 && (
               <div className="rounded-md border border-dashed border-input bg-card p-4 text-sm text-muted-foreground">
                 No matching classes. Try clearing filters or broadening search.
               </div>

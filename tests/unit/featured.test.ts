@@ -64,15 +64,30 @@ describe("featured rules", () => {
       venue: "Siobhan Davies Studios",
       title: "Unscary Saturdays | Krump with Sasha Mahfouz Shadid"
     };
+    const krumpTasterSession: DanceSession = {
+      ...baseSession,
+      venue: "East London Dance",
+      title: "Krump Taster"
+    };
     const wednesdayMovingJuanSession: DanceSession = {
       ...baseSession,
       venue: "Wednesday Moving",
       title: "Wednesday Moving - Juan Sanchez Plaza"
     };
+    const wednesdayMovingJuliaSession: DanceSession = {
+      ...baseSession,
+      venue: "Wednesday Moving",
+      title: "Wednesday Moving - Julia Testas"
+    };
     const toMoveTogetherSession: DanceSession = {
       ...baseSession,
       venue: "Siobhan Davies Studios",
       title: "TO MOVE TOGETHER"
+    };
+    const theiaSession: DanceSession = {
+      ...baseSession,
+      venue: "Siobhan Davies Studios",
+      title: "MONDAY NIGHT IMPROVISATION with Théïa Maldoom"
     };
     const pepaSession: DanceSession = {
       ...baseSession,
@@ -84,14 +99,23 @@ describe("featured rules", () => {
       venue: "CI Calendar London",
       title: "Women's Touch by Marie Chabert"
     };
+    const womensTouchCommunitySession: DanceSession = {
+      ...baseSession,
+      venue: "CI Calendar London",
+      title: "**Women’s Touch : Community as a relational process with Marie Chabert & Manuela Albrecht**"
+    };
 
     expect(isFeaturedSession(luminousSession)).toBe(true);
     expect(isFeaturedVenueName("Luminous Dance")).toBe(true);
     expect(isFeaturedSession(playSession)).toBe(true);
     expect(isFeaturedSession(unscaryKrumpSession)).toBe(true);
+    expect(isFeaturedSession(krumpTasterSession)).toBe(true);
     expect(isFeaturedSession(wednesdayMovingJuanSession)).toBe(true);
+    expect(isFeaturedSession(wednesdayMovingJuliaSession)).toBe(true);
     expect(isFeaturedSession(toMoveTogetherSession)).toBe(true);
+    expect(isFeaturedSession(theiaSession)).toBe(true);
     expect(isFeaturedSession(pepaSession)).toBe(true);
     expect(isFeaturedSession(womensTouchSession)).toBe(true);
+    expect(isFeaturedSession(womensTouchCommunitySession)).toBe(true);
   });
 });

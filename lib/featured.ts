@@ -11,11 +11,15 @@ export const FEATURED_RULES: FeaturedRule[] = [
   { titleContains: "How the voice moves: a poetry & dance improv workshop" },
   { titleContains: "Play and Expression Workshop" },
   { titleContains: "Improvisation with Pepa Ubera" },
+  { venueKey: "siobhanDavies", titleContains: "MONDAY NIGHT IMPROVISATION with Théïa Maldoom" },
   { venueKey: "siobhanDavies", titleContains: "to move together" },
   { titleContains: "Unscary Saturdays | Krump with Sasha Mahfouz Shadid" },
+  { venueKey: "eastLondonDance", titleContains: "Krump Taster" },
   { titleContains: "Wednesday Moving - Juan Sanchez Plaza" },
+  { venueKey: "wednesdayMoving", titleContains: "Wednesday Moving - Julia Testas" },
   { venueKey: "ciCalendarLondon", titleContains: "women's touch by marie chabert" },
   { venueKey: "ciCalendarLondon", titleContains: "women’s touch by marie chabert" },
+  { venueKey: "ciCalendarLondon", titleContains: "Women’s Touch : Community as a relational process" },
   { venueKey: "luminousDance" }
 ];
 

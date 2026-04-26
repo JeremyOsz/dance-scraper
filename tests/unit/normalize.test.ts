@@ -127,7 +127,7 @@ describe("buildOutput", () => {
   it("does not tag Improvers classes as improv", () => {
     const output = buildOutput([
       {
-        venueKey: "testVenue",
+        venueKey: "rambert",
         venue: "Test Venue",
         sourceUrl: "https://example.com",
         ok: true,
