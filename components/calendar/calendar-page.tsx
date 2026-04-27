@@ -282,8 +282,12 @@ type VenueCard = {
 };
 
 type Props = {
+  classCount?: number;
   initialSessions?: DanceSessionOutbound[];
+  /** Preformatted for display; avoids client/server date formatting skew. */
+  listingsUpdatedText?: string;
   venues: VenueCard[];
+  venueCount?: number;
   seoSnapshot?: React.ReactNode;
 };
 
@@ -366,7 +370,7 @@ function parseAnchorDate(value: string | null) {
   return Number.isNaN(parsed.getTime()) ? startOfDay(new Date()) : startOfDay(parsed);
 }
 
-export function CalendarPage({ initialSessions, venues, seoSnapshot }: Props) {
+export function CalendarPage({ classCount, initialSessions, listingsUpdatedText, venues, venueCount, seoSnapshot }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -397,6 +401,11 @@ export function CalendarPage({ initialSessions, venues, seoSnapshot }: Props) {
   const weekLoadSentinelRef = useRef<HTMLDivElement>(null);
 
   const venueNames = useMemo(() => sortVenueRecordsForUi(venues).map((venue) => venue.name), [venues]);
+
+  const thisWeekHref = useMemo(
+    () => `/?mode=calendar&view=week&date=${format(startOfDay(new Date()), "yyyy-MM-dd")}`,
+    []
+  );
   const selectedDaysKey = useMemo(() => selectedDays.join(","), [selectedDays]);
 
   useEffect(() => {
@@ -1248,9 +1257,30 @@ export function CalendarPage({ initialSessions, venues, seoSnapshot }: Props) {
     <main className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader className="px-0">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <h1 className="text-3xl font-semibold tracking-tight">London Dance Calendar</h1>
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div className="min-w-0 max-w-2xl space-y-3">
+              <p className="text-sm font-medium text-muted-foreground">London Dance Calendar</p>
+              <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Find dance classes in London — fast</h1>
+              <p className="text-base text-muted-foreground">Filter by style, level, and location.</p>
+              {listingsUpdatedText ? <p className="text-sm text-muted-foreground">{listingsUpdatedText}</p> : null}
+              {typeof classCount === "number" && typeof venueCount === "number" ? (
+                <p className="text-sm font-medium text-foreground">
+                  {classCount.toLocaleString("en-GB")}+ classes · Across {venueCount} London venues
+                </p>
+              ) : null}
+              <div className="flex flex-wrap gap-2 pt-1">
+                <Button asChild>
+                  <Link href="/#browse-classes">Browse classes</Link>
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link href={thisWeekHref as Route}>This week&apos;s classes</Link>
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Listings are aggregated from studio sources; occasional inaccuracies may occur.
+              </p>
+            </div>
+            <div className="flex flex-shrink-0 flex-wrap items-center gap-2 lg:pt-1">
               <Button variant="outline" onClick={handleShare}>
                 Share
               </Button>
@@ -1274,11 +1304,6 @@ export function CalendarPage({ initialSessions, venues, seoSnapshot }: Props) {
               aria-label="Share link"
             />
           ) : null}
-          <p className="text-sm text-muted-foreground">
-            London Dance Calendar is a single place to discover adult dance and movement classes across London. Use
-            filters for style, level, location, and date to quickly find relevant sessions. Listings are aggregated
-            from multiple studio sources and refreshed regularly, though occasional inaccuracies may occur.
-          </p>
           <SiteSocialLinks className="mt-2" />
           {seoSnapshot}
         </CardHeader>
@@ -1319,7 +1344,7 @@ export function CalendarPage({ initialSessions, venues, seoSnapshot }: Props) {
               </DialogContent>
             </Dialog>
 
-            <section className="space-y-4">
+            <section id="browse-classes" className="scroll-mt-8 space-y-4">
               <h2 className="text-xl font-semibold tracking-tight">Find dance classes</h2>
               <div className="flex flex-wrap items-center gap-2 rounded-md border border-input bg-card px-3 py-2 text-sm">
                 <Button className="lg:hidden" variant="outline" onClick={() => setFiltersOpen(true)}>

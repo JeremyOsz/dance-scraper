@@ -3,7 +3,6 @@ import { inferDanceTypes } from "@/lib/dance-types";
 import type { ScrapeOutput, VenueStatus } from "@/lib/types";
 import { slugify } from "@/lib/utils";
 import { getVenueMapQuery, VENUES } from "@/lib/venues";
-import { sortVenueRecordsForUi } from "@/lib/venue-order";
 
 export type StudioProfile = {
   slug: string;
@@ -64,11 +63,9 @@ function getTopKeys(countByKey: Map<string, number>, max = 3) {
 
 export function getStudioProfiles(data: ScrapeOutput): StudioProfile[] {
   const usedSlugs = new Set<string>();
-  const sortedStatuses = sortVenueRecordsForUi(
-    data.venues.map((venue) => ({ ...venue, name: venue.venue }))
-  );
+  const sortedByName = [...data.venues].sort((a, b) => a.venue.localeCompare(b.venue, "en-GB"));
 
-  return sortedStatuses.map((status) => {
+  return sortedByName.map((status) => {
     const sessions = data.sessions.filter((session) => session.venue === status.venue);
     const countByType = new Map<string, number>();
     const countByDay = new Map<string, number>();

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { format } from "date-fns";
+import { format, isValid, parseISO } from "date-fns";
 import { CalendarPage } from "@/components/calendar/calendar-page";
 import { readScrapeOutput } from "@/lib/data-store";
 import { formatTimeRange } from "@/lib/date";
@@ -109,7 +109,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const venueNames = sortVenuesForSeo([...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))]);
   const title = buildPageTitle("London Dance Classes & Workshops");
   const description = buildMetaDescription(
-    `Browse ${classCount} adult dance and movement classes from ${venueCount} London venues by date, style, level, and venue. Explore ballet, salsa, contemporary, improv, and workshops.`
+    `Find dance classes in London — fast. Browse ${classCount} adult classes from ${venueCount} venues: filter by style, level, and location. Ballet, salsa, contemporary, improv, and more.`
   );
   const keywords = [
     "London dance classes",
@@ -182,6 +182,11 @@ export default function Home() {
   const snapshotOccurrences = featuredOccurrences.length > 0 ? featuredOccurrences : fallbackOccurrences;
   const snapshotTitle = featuredOccurrences.length > 0 ? "Featured upcoming classes" : "Upcoming classes";
 
+  const generatedDate = parseISO(data.generatedAt);
+  const listingsUpdatedText = isValid(generatedDate)
+    ? `Listings last updated ${format(generatedDate, "d MMM yyyy")}.`
+    : undefined;
+
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -216,6 +221,9 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <CalendarPage
+        classCount={data.sessions.length}
+        listingsUpdatedText={listingsUpdatedText}
+        venueCount={data.venues.length}
         venues={venues}
         seoSnapshot={<UpcomingClassesSnapshot occurrences={snapshotOccurrences} title={snapshotTitle} />}
       />

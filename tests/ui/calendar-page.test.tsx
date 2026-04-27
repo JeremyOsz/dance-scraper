@@ -162,7 +162,7 @@ describe("CalendarPage", () => {
   it("disables preferred/shortlist-only toggles when nothing is saved", async () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    expect(screen.getByRole("heading", { level: 1, name: "London Dance Calendar" })).toBeVisible();
+    expect(screen.getByRole("heading", { level: 1, name: "Find dance classes in London — fast" })).toBeVisible();
     expect(screen.getByRole("heading", { level: 2, name: "Find dance classes" })).toBeInTheDocument();
     expect(screen.queryByRole("checkbox", { name: "Preferred venues only" })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Shortlist (0)" })).toBeDisabled();

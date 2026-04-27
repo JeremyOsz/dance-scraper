@@ -1,7 +1,7 @@
 const FALLBACK_BASE_URL = "http://localhost:3000";
 export const SITE_NAME = "London Dance Calendar";
 export const SITE_DESCRIPTION =
-  "Find adult and open dance and movement classes across London with a searchable calendar, venue index, and map.";
+  "Find dance classes in London — fast. Filter by style, level, and location across a searchable calendar, venue index, and map.";
 export const DATASET_LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/";
 const TITLE_MAX_LENGTH = 55;
 const DESCRIPTION_MAX_LENGTH = 145;

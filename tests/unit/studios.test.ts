@@ -88,6 +88,7 @@ describe("getStudioProfiles", () => {
     const rambert = studios.find((studio) => studio.name === "Rambert");
 
     expect(studios).toHaveLength(2);
+    expect(studios.map((s) => s.name)).toEqual(["Alpha Studio", "Rambert"]);
     expect(rambert).toBeDefined();
     expect(rambert?.classCount).toBe(2);
     expect(rambert?.workshopCount).toBe(1);
