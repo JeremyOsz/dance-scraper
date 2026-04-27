@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-27T10:43:18.910Z",
+  "updatedAt": "2026-04-27T11:39:30.169Z",
   "sessions": [
     {
       "id": "tripspace-vinyasa-flow-thursday-09-15",
@@ -1793,7 +1793,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-course-of-6-classes-monday-18-30",
@@ -1814,7 +1814,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-single-class-monday-18-30",
@@ -1834,7 +1834,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -1855,7 +1855,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-1-friday-11-00",
@@ -1873,7 +1873,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-saturday-ci-workshop-skin-saturday-14-30",
@@ -1949,7 +1949,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-saturday-ci-workshop-with-laura-doehler-the-felt-proximity-of-weight-saturday-14-30",
@@ -1967,7 +1967,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-intensive-with-rick-nodine-training-ground-winter-edition-thursday-10-00",
@@ -1988,7 +1988,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-intensive-with-rick-nodine-training-ground-winter-edition-friday-10-00",
@@ -2009,7 +2009,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-intensive-with-rick-nodine-training-ground-winter-edition-saturday-10-00",
@@ -2030,7 +2030,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-intensive-with-rick-nodine-training-ground-winter-edition-sunday-10-00",
@@ -2051,7 +2051,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -2069,7 +2069,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -2087,7 +2087,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-2-friday-11-00",
@@ -2105,7 +2105,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-saturday-ci-workshop-suspension-saturday-14-30",
@@ -2125,7 +2125,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-bound-unbound-weekend-spring-edition-exploring-the-edges-of-contact-improvisation-friday-18-30",
@@ -2146,7 +2146,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-bound-unbound-weekend-spring-edition-exploring-the-edges-of-contact-improvisation-saturday-10-00",
@@ -2167,7 +2167,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-bound-unbound-weekend-spring-edition-exploring-the-edges-of-contact-improvisation-sunday-10-00",
@@ -2188,7 +2188,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-groundwards-ci-class-with-emily-yuiming-wong-jam-soundscape-from-david-leahy-drop-in-for-the-jam-always-available-sunday-13-00",
@@ -2296,7 +2296,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-contact-improvisation-workshop-with-touchdown-dance-sunday-11-00",
@@ -2318,7 +2318,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-earthflow-ci-class-with-akeim-toussaint-buck-with-jam-soundscape-from-tbc-drop-in-for-the-jam-always-available-sunday-13-00",
@@ -2342,7 +2342,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-braiding-bass-body-space-ci-class-with-nathaniel-parchment-jam-soundscape-from-cyan-saturday-13-00",
@@ -2363,7 +2363,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-ci-jam-with-warm-up-saturday-13-00",
@@ -2381,7 +2381,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-dance-improvisation-practices-that-offer-resilience-and-support-in-difficult-times-contact-improvisation-workshop-with-kirstie-simson-sunday-11-00",
@@ -2402,7 +2402,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-between-self-other-ci-class-with-laura-doehler-jam-soundscape-from-tbc-drop-in-for-the-jam-always-available-sunday-13-00",
@@ -2444,7 +2444,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-ci-class-with-annie-pui-ling-lok-jam-soundscape-from-tbc-drop-in-for-the-jam-always-available-saturday-13-00",
@@ -2534,7 +2534,7 @@
       ],
       "audience": "open",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-jam-monday-18-30",
@@ -2557,7 +2557,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-contemplative-practice-into-silent-jam-monday-18-30",
@@ -2580,7 +2580,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-contact-improv-philosophy-playshop-dancing-gender-less-saturday-14-00",
@@ -2603,7 +2603,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-jam-live-music-monday-18-30",
@@ -2626,7 +2626,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-7-9-pm-contactango-with-adriana-pegorer-thursday-19-00",
@@ -12533,7 +12533,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-23T16:48:15.634Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "the-manor-mvmt-beginners-commercial-thursday-18-30",
@@ -14372,7 +14372,7 @@
       ],
       "audience": "all-ages",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-13T14:04:17.261Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "omnibus-theatre-how-the-voice-moves-a-poetry-dance-improv-workshop-friday-7-00pm",
@@ -14393,7 +14393,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-13T14:04:17.261Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "dabkeroots-dabkeroots-na-4-00pm",
@@ -14447,7 +14447,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-13T14:04:17.261Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "tripspace-yin-myofascial-release-saturday-13-15",
@@ -14548,7 +14548,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-ci-class-with-annie-pui-ling-lok-jam-with-soundscape-from-ansuman-biswas-drop-in-for-the-jam-always-available-saturday-13-00",
@@ -14569,7 +14569,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-thursday-10-00",
@@ -15928,7 +15928,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "the-manor-mvmt-beginners-commercial-sunday-15-00",
@@ -16120,7 +16120,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-friday-10-00",
@@ -16142,7 +16142,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-saturday-10-00",
@@ -16164,7 +16164,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-sensational-moves-9-12-april-4-day-intensive-feldenkrais-movement-exploration-ci-with-simonetta-alessandri-thomas-kampe-sunday-10-00",
@@ -16186,7 +16186,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-with-anasta-wednesday-17-00",
@@ -17570,7 +17570,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "luminous-dance-luminous-new-moon-monday-dance-with-dj-azyre-blue-monday-17-30",
@@ -18984,7 +18984,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-23T16:26:30.196Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "daniel-rodriguez-expressive-movement-and-dance-improvisation-with-musician-louis-laporte-thursday-19-00",
@@ -19042,7 +19042,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-meeting-connecting-playing-contact-improvisation-workshop-with-lucia-walker-saturday-11-00",
@@ -19063,7 +19063,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "bachata-community-monthly-latin-fridays-friday-19-30",
@@ -20042,7 +20042,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-1-friday-11-00",
@@ -20060,7 +20060,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -20081,7 +20081,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20102,7 +20102,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-course-of-6-classes-monday-18-30",
@@ -20123,7 +20123,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-single-class-monday-18-30",
@@ -20141,7 +20141,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -20162,7 +20162,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20183,7 +20183,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-1-friday-11-00",
@@ -20201,7 +20201,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -20219,7 +20219,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -20237,7 +20237,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -20258,7 +20258,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20279,7 +20279,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-2-friday-11-00",
@@ -20297,7 +20297,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -20315,7 +20315,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -20333,7 +20333,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -20354,7 +20354,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20375,7 +20375,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-2-friday-11-00",
@@ -20393,7 +20393,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -20411,7 +20411,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -20429,7 +20429,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -20450,7 +20450,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20471,7 +20471,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -20489,7 +20489,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -20507,7 +20507,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -20528,7 +20528,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20549,7 +20549,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-friday-core-practice-group-spring-term-2-friday-11-00",
@@ -20567,7 +20567,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20588,7 +20588,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30",
@@ -20606,7 +20606,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -20624,7 +20624,7 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-12-classes-monday-18-30",
@@ -20645,7 +20645,7 @@
       ],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20666,7 +20666,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-wednesdays-open-class-jam-wednesday-18-30",
@@ -20687,7 +20687,7 @@
       ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-class-jam-monday-18-30",
@@ -20710,7 +20710,7 @@
       ],
       "audience": "open",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-class-jam-monday-18-30",
@@ -20733,7 +20733,7 @@
       ],
       "audience": "open",
       "isWorkshop": false,
-      "lastSeenAt": "2026-04-24T06:17:52.629Z"
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     },
     {
       "id": "ci-calendar-london-ci-lab-sole-and-laura-tuesday-19-00",
@@ -25052,6 +25052,120 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-24T06:17:52.629Z"
+    },
+    {
+      "id": "ci-calendar-london-tuesday-intermediates-class-jam-course-of-5-classes-tuesday-18-30",
+      "venue": "CI Calendar London",
+      "title": "Tuesday Intermediates Class & Jam (Course of 5 classes)",
+      "details": "Acland Burghley School Sports Centre, Churchill Road, London, NW5 1AN • Tuesdays 21/04, 28/04, 05/05, 12/05 and 19/05 from 6:30 to 8:30pm. Classes taught by Rick Nodine. This course is aimed at dancers willing to improve their embodied confidence, expand their technical CI skills and deepen their improvisational repertoire. It is designed to offer a platform for dancers who want to continue their CI journey beyond Beginners 1 and Beginners 2:Improvers and to Open Class dancers willing to get more serious about their CI learning. https://bookwhen.com/ricknodine/e/ev-smg2h-20260421183000",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:30",
+      "endTime": "20:30",
+      "startDate": "2026-04-21",
+      "endDate": "2026-04-21",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://bookwhen.com/ricknodine/e/ev-smg2h-20260421183000",
+      "sourceUrl": "https://cicalendar.uk/feeds/ricknodine.ics",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
+    },
+    {
+      "id": "ci-calendar-london-tuesday-intermediates-class-jam-single-class-tuesday-18-30",
+      "venue": "CI Calendar London",
+      "title": "Tuesday Intermediates Class & Jam (single class)",
+      "details": "Acland Burghley School Sports Centre, Churchill Road, London, NW5 1AN • Tuesdays 21/04, 28/04, 05/05, 12/05 and 19/05 from 6:30 to 8:30pm. Classes taught by Rick Nodine. These classes are aimed at dancers willing to improve their embodied confidence, expand their technical CI skills and deepen their improvisational repertoire. It is designed to offer a platform for dancers who want to continue their CI journey beyond Beginners 1 and Beginners 2:Improvers and to Wednesday Open Floor dancers willing to get a bit more serious about their CI learning. https://bookwhen.com/ricknodine/e/ev-soeta-20260421183000",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:30",
+      "endTime": "20:30",
+      "startDate": "2026-04-21",
+      "endDate": "2026-04-21",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://bookwhen.com/ricknodine/e/ev-soeta-20260421183000",
+      "sourceUrl": "https://cicalendar.uk/feeds/ricknodine.ics",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
+    },
+    {
+      "id": "bachata-community-musketeers-sunday-19-00",
+      "venue": "Bachata Community",
+      "title": "Musketeers",
+      "details": "Colab Tower • Bachata Calendar (London)",
+      "dayOfWeek": "Sunday",
+      "startTime": "19:00",
+      "endTime": "00:00",
+      "startDate": "2026-04-26",
+      "endDate": "2026-04-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://bachatacommunity.space/event/1bb2d7d0-4430-41ea-a031-7f62652882d2",
+      "sourceUrl": "https://bachatacommunity.space/london-gb/calendar",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
+    },
+    {
+      "id": "bachata-community-musketeers-saturday-19-00",
+      "venue": "Bachata Community",
+      "title": "Musketeers",
+      "details": "Colab Tower • Bachata Calendar (London)",
+      "dayOfWeek": "Saturday",
+      "startTime": "19:00",
+      "endTime": "00:00",
+      "startDate": "2026-04-25",
+      "endDate": "2026-04-25",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://bachatacommunity.space/event/1bb2d7d0-4430-41ea-a031-7f62652882d2",
+      "sourceUrl": "https://bachatacommunity.space/london-gb/calendar",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
+    },
+    {
+      "id": "wednesday-moving-wednesday-moving-juan-sanchez-plaza-wednesday-18-45",
+      "venue": "Wednesday Moving",
+      "title": "Wednesday Moving - Juan Sanchez Plaza",
+      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Juan is the founder of The 5 Elements Practice, a holistic platform where movement, sound and meditation meet. This is an invitation into a transformative journey; to move, to sense, and to reconnect with yourself beyond the thinking mind. We begin with a guided meditation, from which movement unfolds. As always, the session is open to everyone and the space is held as an inclusive, welcoming and queer-friend environment where all bodies and identities are respected.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "18:45",
+      "endTime": "20:00",
+      "startDate": "2026-04-15",
+      "endDate": "2026-04-15",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
+    },
+    {
+      "id": "wednesday-moving-wednesday-moving-olly-otley-wednesday-18-45",
+      "venue": "Wednesday Moving",
+      "title": "Wednesday Moving - Olly Otley",
+      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • As a community dance artist and forest school leader, Olly brings a natural playfulness and a love of nature to her work. Olly moves because it makes her feel good and her mission is to share that feeling with others. She teaches a mix of guided improvisation, partner work and simple skill-building sequences.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "18:45",
+      "endTime": "20:00",
+      "startDate": "2026-04-22",
+      "endDate": "2026-04-22",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-04-27T10:43:18.910Z"
     }
   ]
 }
