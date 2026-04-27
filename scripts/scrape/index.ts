@@ -104,7 +104,7 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "customEvents", scrape: scrapeCustomEvents }
 ];
 
-const HIDDEN_VENUE_KEYS = new Set<VenueKey>(["ecstaticDanceLondon"]);
+const HIDDEN_VENUE_KEYS = new Set<VenueKey>();
 const HIDDEN_SESSION_TITLE_PATTERNS = [/\bvinyasa\s*flow\b/i];
 
 function applyOutputCuration(output: ScrapeOutput): ScrapeOutput {
@@ -112,7 +112,6 @@ function applyOutputCuration(output: ScrapeOutput): ScrapeOutput {
   const hiddenVenueLabels = new Set(
     output.venues.filter((venue) => HIDDEN_VENUE_KEYS.has(venue.key)).map((venue) => venue.venue)
   );
-  hiddenVenueLabels.add("Ecstatic Dance London");
 
   const curatedSessions = dedupedSessions.filter((session) => {
     if (hiddenVenueLabels.has(session.venue)) {

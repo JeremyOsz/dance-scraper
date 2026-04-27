@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-27T10:43:18.910Z",
+  "generatedAt": "2026-04-27T11:35:47.356Z",
   "sessions": [
     {
       "id": "florence-trust-writers-room-bianca-scout-and-elena-isolini-daughter-mary-dance-workshop-tuesday-10-00am",
@@ -32287,6 +32287,15 @@
       "count": 139,
       "ok": true,
       "lastSuccessAt": "2026-04-27T10:43:18.910Z",
+      "lastError": null
+    },
+    {
+      "venue": "Ecstatic Dance London",
+      "key": "ecstaticDanceLondon",
+      "sourceUrl": "https://www.eventbrite.com/o/73047023743",
+      "count": 0,
+      "ok": true,
+      "lastSuccessAt": "2026-04-27T11:35:47.356Z",
       "lastError": null
     },
     {

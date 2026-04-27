@@ -1268,14 +1268,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   {classCount.toLocaleString("en-GB")}+ classes · Across {venueCount} London venues
                 </p>
               ) : null}
-              <div className="flex flex-wrap gap-2 pt-1">
-                <Button asChild>
-                  <Link href="/#browse-classes">Browse classes</Link>
-                </Button>
-                <Button variant="outline" asChild>
-                  <Link href={thisWeekHref as Route}>This week&apos;s classes</Link>
-                </Button>
-              </div>
+              
               <p className="text-sm text-muted-foreground">
                 Listings are aggregated from studio sources; occasional inaccuracies may occur.
               </p>

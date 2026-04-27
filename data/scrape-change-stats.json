@@ -2,6 +2,24 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-04-27T11:35:47.356Z",
+      "venues": [
+        {
+          "key": "ecstaticDanceLondon",
+          "venue": "Ecstatic Dance London",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 0
+      }
+    },
+    {
       "at": "2026-04-27T10:43:18.910Z",
       "venues": [
         {
