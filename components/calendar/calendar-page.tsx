@@ -20,6 +20,21 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  Bookmark,
+  Building2,
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  ExternalLink,
+  Filter,
+  ListFilter,
+  MapPin,
+  Search,
+  Share2,
+  Star
+} from "lucide-react";
 import { TrackedOutboundLink } from "@/components/tracked-outbound-link";
 import { extractOutboundHostname } from "@/lib/outbound-utils";
 import type { DanceSession, DanceSessionOutbound, DayOfWeek } from "@/lib/types";
@@ -63,23 +78,27 @@ const DANCE_TYPE_BADGE_CLASS: Record<DanceType, string> = {
   Other: "border-transparent bg-stone-200 text-stone-800"
 };
 const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
-  Contemporary: "border-sky-200 bg-sky-50/70",
-  Ballet: "border-rose-200 bg-rose-50/70",
-  Improv: "border-emerald-200 bg-emerald-50/70",
-  "Contact Improv": "border-teal-200 bg-teal-50/70",
-  "Ecstatic Dance/ 5Rythms": "border-amber-200 bg-amber-50/70",
-  Salsa: "border-red-200 bg-red-50/70",
-  Bachata: "border-pink-200 bg-pink-50/70",
-  Butoh: "border-zinc-300 bg-zinc-100/80",
-  Somatic: "border-lime-200 bg-lime-50/70",
-  "Hip Hop": "border-violet-200 bg-violet-50/70",
-  "Yoga/Pilates": "border-cyan-200 bg-cyan-50/70",
-  Jazz: "border-orange-200 bg-orange-50/70",
-  House: "border-indigo-200 bg-indigo-50/70",
-  "Commercial/Heels": "border-fuchsia-200 bg-fuchsia-50/70",
-  "Ballroom/Tango": "border-yellow-200 bg-yellow-50/70",
-  Other: "border-border bg-secondary/40"
+  Contemporary: "border-l-sky-600",
+  Ballet: "border-l-rose-600",
+  Improv: "border-l-emerald-600",
+  "Contact Improv": "border-l-teal-600",
+  "Ecstatic Dance/ 5Rythms": "border-l-amber-600",
+  Salsa: "border-l-red-600",
+  Bachata: "border-l-pink-600",
+  Butoh: "border-l-zinc-900",
+  Somatic: "border-l-lime-700",
+  "Hip Hop": "border-l-violet-700",
+  "Yoga/Pilates": "border-l-cyan-700",
+  Jazz: "border-l-orange-600",
+  House: "border-l-indigo-700",
+  "Commercial/Heels": "border-l-fuchsia-700",
+  "Ballroom/Tango": "border-l-yellow-600",
+  Other: "border-l-slate-500"
 };
+const editorialPanelClass = "border border-slate-900/80 bg-white/95 shadow-[4px_4px_0_rgba(15,23,42,0.16)]";
+const editorialInsetClass = "border border-slate-900/25 bg-white/90";
+const editorialButtonClass = "rounded-sm border-slate-900/45";
+const iconClass = "h-4 w-4 shrink-0";
 const GAGA_BOYCOTT_ARTICLE_URL = "https://www.instagram.com/p/DSXaLAIiIh2/";
 // const UK_DANCERS_FOR_PALESTINE_TICKETS_URL = "https://www.tickettailor.com/events/ukdancersforpalestine";
 const UK_DANCERS_FOR_PALESTINE_INSTAGRAM_URL = "https://www.instagram.com/uk_dancers_for_palestine/";
@@ -315,16 +334,16 @@ function getVenueStatus(venue: Props["venues"][number]) {
 
 function CalendarLoadingState() {
   return (
-    <div className="rounded-md border border-input bg-card p-3" role="status" aria-live="polite">
+    <div className={`${editorialPanelClass} p-3`} role="status" aria-live="polite">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="text-sm font-medium">Loading latest class listings</p>
           <p className="text-xs text-muted-foreground">Preparing the calendar from current venue data.</p>
         </div>
-        <Badge variant="secondary">Live schedule</Badge>
+        <Badge className="rounded-sm border-slate-900/40 bg-accent text-accent-foreground">Live schedule</Badge>
       </div>
-      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
-        <div className="h-full w-1/2 animate-pulse rounded-full bg-primary/70" />
+      <div className="mt-3 h-1.5 overflow-hidden bg-muted">
+        <div className="h-full w-1/2 animate-pulse bg-primary/80" />
       </div>
     </div>
   );
@@ -334,7 +353,7 @@ function CalendarDayLoadingSkeleton({ count }: { count: number }) {
   return (
     <div className="space-y-2" aria-hidden="true">
       {Array.from({ length: count }).map((_, index) => (
-        <div key={index} className="rounded-md border border-input bg-background/80 p-2">
+        <div key={index} className="border border-slate-900/20 bg-white/80 p-2">
           <div className="animate-pulse space-y-2">
             <div className="h-3 w-3/4 rounded bg-muted" />
             <div className="h-2.5 w-1/2 rounded bg-muted" />
@@ -402,10 +421,6 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
   const venueNames = useMemo(() => sortVenueRecordsForUi(venues).map((venue) => venue.name), [venues]);
 
-  const thisWeekHref = useMemo(
-    () => `/?mode=calendar&view=week&date=${format(startOfDay(new Date()), "yyyy-MM-dd")}`,
-    []
-  );
   const selectedDaysKey = useMemo(() => selectedDays.join(","), [selectedDays]);
 
   useEffect(() => {
@@ -675,7 +690,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     for (const date of visibleDates) {
       const iso = format(date, "yyyy-MM-dd");
       const monthDelta = differenceInCalendarMonths(startOfMonth(date), anchorMonth);
-      classes.set(iso, monthDelta % 2 === 0 ? "bg-card" : "bg-slate-100");
+      classes.set(iso, monthDelta % 2 === 0 ? "bg-white" : "bg-slate-100");
     }
     return classes;
   }, [anchorDate, view, visibleDates]);
@@ -881,7 +896,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     return getVenueMapQuery(mapVenue);
   }, [mapVenue, venues]);
 
-  const clearSummaryActionClass = "ml-auto h-8 px-3 text-xs sm:h-6 sm:px-2";
+  const clearSummaryActionClass = "ml-auto h-7 rounded-sm px-2 text-[11px] sm:h-6";
 
   const tryLegacyCopy = (text: string) => {
     const textarea = document.createElement("textarea");
@@ -956,9 +971,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
   const renderFilterSections = () => (
     <div className="space-y-3">
-      <div className="rounded-md border border-input bg-background p-2">
+      <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
             <span>Search</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -976,18 +991,20 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               Clear
             </Button>
           </summary>
-          <div className="mt-2">
+          <div className="relative mt-2">
+            <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden />
             <Input
               placeholder="Search class, teacher, style"
               value={search}
+              className="border-slate-900/35 bg-white pl-8"
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
         </details>
       </div>
-      <div className="rounded-md border border-input bg-background p-2">
+      <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
             <span>Level</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1005,7 +1022,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               Clear
             </Button>
           </summary>
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className="mt-2 flex flex-wrap gap-1.5">
             <Button
               type="button"
               size="sm"
@@ -1028,9 +1045,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </div>
         </details>
       </div>
-      <div className="rounded-md border border-input bg-background p-2">
+      <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
             <span>Type</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1048,7 +1065,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               Clear
             </Button>
           </summary>
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className="mt-2 flex flex-wrap gap-1.5">
             <Button
               type="button"
               size="sm"
@@ -1074,9 +1091,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </div>
         </details>
       </div>
-      <div className="rounded-md border border-input bg-background p-2">
+      <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
             <span>Day</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1094,7 +1111,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               Clear
             </Button>
           </summary>
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className="mt-2 flex flex-wrap gap-1.5">
             <Button
               type="button"
               size="sm"
@@ -1117,9 +1134,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </div>
         </details>
       </div>
-      <div className="rounded-md border border-input bg-background p-2">
+      <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
             <span>Venue</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1137,7 +1154,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               Clear
             </Button>
           </summary>
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className="mt-2 flex flex-wrap gap-1.5">
             <Button
               type="button"
               size="sm"
@@ -1166,9 +1183,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </div>
         </details>
       </div>
-      <div className="rounded-md border border-input bg-background p-2">
+      <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
             <span>Workshops</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1186,9 +1203,10 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               Clear
             </Button>
           </summary>
-          <label className="mt-2 flex items-center gap-2 text-sm">
+          <label className="mt-2 flex items-center gap-2 text-sm font-medium">
             <Checkbox
               aria-label="Workshops only"
+              className="border-slate-900"
               checked={workshopsOnly}
               onChange={(e) => setWorkshopsOnly(e.target.checked)}
             />
@@ -1196,9 +1214,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </label>
         </details>
       </div>
-      <div className="rounded-md border border-input bg-background p-2">
+      <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
             <span>Shortlist</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1254,79 +1272,97 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   );
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
-      <Card className="border-none bg-transparent shadow-none">
-        <CardHeader className="px-0">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-            <div className="min-w-0 max-w-2xl space-y-3">
-              <p className="text-sm font-medium text-muted-foreground">London Dance Calendar</p>
-              <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Find dance classes in London — fast</h1>
-              <p className="text-base text-muted-foreground">Filter by style, level, and location.</p>
-              {listingsUpdatedText ? <p className="text-sm text-muted-foreground">{listingsUpdatedText}</p> : null}
-              {typeof classCount === "number" && typeof venueCount === "number" ? (
-                <p className="text-sm font-medium text-foreground">
-                  {classCount.toLocaleString("en-GB")}+ classes · Across {venueCount} London venues
-                </p>
-              ) : null}
-              
-              <p className="text-sm text-muted-foreground">
-                Listings are aggregated from studio sources; occasional inaccuracies may occur.
-              </p>
-            </div>
-            <div className="flex flex-shrink-0 flex-wrap items-center gap-2 lg:pt-1">
-              <Button variant="outline" onClick={handleShare}>
-                Share
-              </Button>
-              <Button asChild>
-                <Link href="/">Calendar</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="/insights">Insights</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="/studios">Studios</Link>
-              </Button>
+    <main className="mx-auto w-full max-w-[1500px] px-3 py-5 sm:px-5 md:px-8">
+      <header className="border-y-2 border-slate-950 py-4">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div className="min-w-0">
+            <p className="text-xs font-black uppercase text-primary">London Dance Calendar</p>
+            <h1 className="mt-1 max-w-4xl text-4xl font-black leading-[0.95] tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
+              Find dance classes in London — fast
+            </h1>
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium text-slate-700">
+              <span>Filter by style, level, date, and location.</span>
+              {listingsUpdatedText ? <span>{listingsUpdatedText}</span> : null}
+              <span>Listings are aggregated from studio sources.</span>
             </div>
           </div>
-          {shareMessage ? <p className="text-sm text-muted-foreground">{shareMessage}</p> : null}
-          {shareFallbackUrl ? (
-            <Input
-              readOnly
-              value={shareFallbackUrl}
-              onFocus={(event) => event.currentTarget.select()}
-              aria-label="Share link"
-            />
-          ) : null}
-          <SiteSocialLinks className="mt-2" />
-          {seoSnapshot}
-        </CardHeader>
-        <CardContent className="space-y-4 px-0">
-          <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
+          <div className="flex flex-col gap-3 lg:items-end">
+            {typeof classCount === "number" && typeof venueCount === "number" ? (
+              <div className="grid grid-cols-2 border border-slate-950 bg-white text-center shadow-[4px_4px_0_rgba(15,23,42,0.18)]">
+                <div className="border-r border-slate-950 px-4 py-2">
+                  <p className="text-2xl font-black leading-none">{classCount.toLocaleString("en-GB")}+</p>
+                  <p className="text-[11px] font-bold uppercase text-slate-600">classes</p>
+                </div>
+                <div className="px-4 py-2">
+                  <p className="text-2xl font-black leading-none">{venueCount}</p>
+                  <p className="text-[11px] font-bold uppercase text-slate-600">venues</p>
+                </div>
+              </div>
+            ) : null}
+            <nav aria-label="Primary" className="flex flex-wrap items-center gap-2">
+              <Button variant="outline" className={editorialButtonClass} onClick={handleShare}>
+                <Share2 className={iconClass} aria-hidden />
+                Share
+              </Button>
+              <Button asChild className={editorialButtonClass}>
+                <Link href="/">
+                  <CalendarDays className={iconClass} aria-hidden />
+                  Calendar
+                </Link>
+              </Button>
+              <Button variant="outline" className={editorialButtonClass} asChild>
+                <Link href="/insights">Insights</Link>
+              </Button>
+              <Button variant="outline" className={editorialButtonClass} asChild>
+                <Link href="/studios">Studios</Link>
+              </Button>
+            </nav>
+          </div>
+        </div>
+        {shareMessage ? <p className="mt-3 text-sm font-medium text-muted-foreground">{shareMessage}</p> : null}
+        {shareFallbackUrl ? (
+          <Input
+            readOnly
+            value={shareFallbackUrl}
+            onFocus={(event) => event.currentTarget.select()}
+            aria-label="Share link"
+            className="mt-3 max-w-2xl border-slate-900 bg-white"
+          />
+        ) : null}
+        <SiteSocialLinks className="mt-3" />
+        {seoSnapshot}
+      </header>
+
+      <div className="mt-5 space-y-4">
+        <div className="grid gap-4 lg:grid-cols-[290px_minmax(0,1fr)] lg:items-start">
             <aside className="hidden lg:block">
-              <div className="sticky top-4 overflow-hidden rounded-lg border border-input bg-card shadow-sm">
-                <div className="border-b px-3 py-2">
-                  <p className="text-sm font-medium">Filters</p>
-                  <p className="text-xs text-muted-foreground">
+              <div className={`sticky top-4 overflow-hidden ${editorialPanelClass}`}>
+                <div className="border-b border-slate-950 bg-slate-950 px-3 py-2 text-white">
+                  <p className="flex items-center gap-2 text-sm font-black uppercase">
+                    <ListFilter className={iconClass} aria-hidden />
+                    Filters
+                  </p>
+                  <p className="text-xs text-white/70">
                     Narrow by class, dance type, venue, day, and saved lists.
                   </p>
                 </div>
-                <div className="p-3 transition-all duration-200 ease-out">
+                <div className="p-2 transition-all duration-200 ease-out">
                   {renderFilterSections()}
                 </div>
               </div>
             </aside>
 
             <Dialog open={filtersOpen} onOpenChange={setFiltersOpen}>
-              <DialogContent className="left-0 top-0 h-dvh w-[340px] max-w-[92vw] translate-y-0 rounded-none border-y-0 border-l-0 p-0 transition-transform duration-300 data-[state=closed]:-translate-x-full data-[state=open]:translate-x-0 lg:hidden">
+              <DialogContent className="left-0 top-0 h-dvh w-[340px] max-w-[92vw] translate-y-0 rounded-none border-y-0 border-l-0 border-r-2 border-slate-950 p-0 transition-transform duration-300 data-[state=closed]:-translate-x-full data-[state=open]:translate-x-0 lg:hidden">
                 <div className="flex h-full flex-col">
-                  <div className="flex items-start justify-between gap-3 border-b p-4">
+                  <div className="flex items-start justify-between gap-3 border-b border-slate-950 bg-slate-950 p-4 text-white">
                     <DialogHeader>
                       <DialogTitle>Filters</DialogTitle>
-                      <DialogDescription>
+                      <DialogDescription className="text-white/70">
                         Narrow by class, dance type, venue, day, and saved lists.
                       </DialogDescription>
                     </DialogHeader>
-                    <Button variant="outline" size="sm" onClick={() => setFiltersOpen(false)}>
+                    <Button variant="outline" size="sm" className="border-white/60 bg-transparent text-white hover:bg-white hover:text-slate-950" onClick={() => setFiltersOpen(false)}>
                       Close
                     </Button>
                   </div>
@@ -1338,56 +1374,68 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             </Dialog>
 
             <section id="browse-classes" className="scroll-mt-8 space-y-4">
-              <h2 className="text-xl font-semibold tracking-tight">Find dance classes</h2>
-              <div className="flex flex-wrap items-center gap-2 rounded-md border border-input bg-card px-3 py-2 text-sm">
-                <Button className="lg:hidden" variant="outline" onClick={() => setFiltersOpen(true)}>
+              <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-slate-950 pb-2">
+                <div>
+                  <h2 className="text-xl font-black uppercase tracking-normal">Find dance classes</h2>
+                  <p className="text-sm text-muted-foreground" aria-live="polite">
+                    {sessionsLoading ? "Loading latest classes" : `Showing ${filteredSessions.length} classes`}
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge className="rounded-sm border-slate-900 bg-white text-slate-950">{activeFilterCount} filters</Badge>
+                  <Button className={`lg:hidden ${editorialButtonClass}`} variant="outline" onClick={() => setFiltersOpen(true)}>
+                    <Filter className={iconClass} aria-hidden />
                   Filters
-                </Button>
-                <Badge variant="secondary">{activeFilterCount} filters</Badge>
-                <Button variant={mode === "calendar" ? "default" : "outline"} onClick={() => setMode("calendar")}>
-                  Calendar
-                </Button>
-                <Button variant={mode === "venues" ? "default" : "outline"} onClick={() => setMode("venues")}>
-                  Venues
-                </Button>
-                <Button variant={mode === "map" ? "default" : "outline"} onClick={() => setMode("map")}>
-                  Map
-                </Button>
-                <span className="w-full text-xs text-muted-foreground sm:ml-auto sm:w-auto sm:text-sm" aria-live="polite">
-                  {sessionsLoading ? "Loading latest classes" : `Showing ${filteredSessions.length} classes`}
-                </span>
+                  </Button>
+                  <Button variant={mode === "calendar" ? "default" : "outline"} className={editorialButtonClass} onClick={() => setMode("calendar")}>
+                    <CalendarDays className={iconClass} aria-hidden />
+                    Calendar
+                  </Button>
+                  <Button variant={mode === "venues" ? "default" : "outline"} className={editorialButtonClass} onClick={() => setMode("venues")}>
+                    <Building2 className={iconClass} aria-hidden />
+                    Venues
+                  </Button>
+                  <Button variant={mode === "map" ? "default" : "outline"} className={editorialButtonClass} onClick={() => setMode("map")}>
+                    <MapPin className={iconClass} aria-hidden />
+                    Map
+                  </Button>
+                </div>
               </div>
               {sessionsLoading ? <CalendarLoadingState /> : null}
               {sessionsError ? (
-                <div className="rounded-md border border-destructive/40 bg-card p-3 text-sm text-destructive" role="status">
+                <div className="border border-destructive/60 bg-white p-3 text-sm font-medium text-destructive" role="status">
                   {sessionsError}
                 </div>
               ) : null}
             {mode === "calendar" && (
               <>
-                <div className="flex flex-wrap items-center gap-2">
+                <div className={`${editorialPanelClass} flex flex-wrap items-center gap-2 p-2`}>
                   <Button
                     variant="outline"
+                    className={editorialButtonClass}
                     onClick={() => setAnchorDate((d) => (view === "week" ? subDays(d, 7) : subMonths(d, 1)))}
                   >
+                    <ChevronLeft className={iconClass} aria-hidden />
                     Previous
                   </Button>
-                  <Button variant="outline" onClick={() => setAnchorDate(startOfDay(new Date()))}>
+                  <Button variant="outline" className={editorialButtonClass} onClick={() => setAnchorDate(startOfDay(new Date()))}>
                     Today
                   </Button>
                   <Button
                     variant="outline"
+                    className={editorialButtonClass}
                     onClick={() => setAnchorDate((d) => (view === "week" ? addDays(d, 7) : addMonths(d, 1)))}
                   >
                     Next
+                    <ChevronRight className={iconClass} aria-hidden />
                   </Button>
                   {view === "week" ? (
                     <>
-                      <Badge variant="secondary">From {format(anchorDate, "EEE d MMM yyyy")}</Badge>
-                      {weekRangeLabel ? <Badge variant="outline">Showing {weekRangeLabel}</Badge> : null}
+                      <Badge className="rounded-sm border-slate-900 bg-white text-slate-950">From {format(anchorDate, "EEE d MMM yyyy")}</Badge>
+                      {weekRangeLabel ? <Badge className="rounded-sm border-slate-900 bg-secondary text-secondary-foreground">Showing {weekRangeLabel}</Badge> : null}
                     </>
                   ) : (
-                    <Badge variant="secondary">{format(anchorDate, "MMMM yyyy")}</Badge>
+                    <Badge className="rounded-sm border-slate-900 bg-white text-slate-950">{format(anchorDate, "MMMM yyyy")}</Badge>
                   )}
                   {view === "week" ? (
                     <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
@@ -1406,7 +1454,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                           setAnchorDate(startOfDay(nextAnchor));
                           setView("week");
                         }}
-                        className="w-full sm:w-[170px]"
+                        className="w-full border-slate-900/45 bg-white sm:w-[170px]"
                         aria-label="Range start date"
                       />
                       <span className="text-xs text-muted-foreground">to</span>
@@ -1428,16 +1476,16 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                           setLoadedDayCount(boundedDays);
                           setView("week");
                         }}
-                        className="w-full sm:w-[170px]"
+                        className="w-full border-slate-900/45 bg-white sm:w-[170px]"
                         aria-label="Range end date"
                       />
                     </div>
                   ) : null}
                   <div className="flex w-full gap-2 sm:ml-auto sm:w-auto">
-                    <Button variant={view === "week" ? "default" : "outline"} onClick={() => setView("week")}>
+                    <Button variant={view === "week" ? "default" : "outline"} className={editorialButtonClass} onClick={() => setView("week")}>
                       Week
                     </Button>
-                    <Button variant={view === "month" ? "default" : "outline"} onClick={() => setView("month")}>
+                    <Button variant={view === "month" ? "default" : "outline"} className={editorialButtonClass} onClick={() => setView("month")}>
                       Month
                     </Button>
                   </div>
@@ -1465,26 +1513,27 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                       return (
                         <Card
                           key={iso}
-                          className={`min-w-0 w-full ${
-                            view === "week" ? "md:min-w-[220px] md:max-w-[220px] md:shrink-0" : ""
+                          className={`min-w-0 w-full border-slate-950 bg-white shadow-none ${
+                            view === "week" ? "md:min-w-[235px] md:max-w-[235px] md:shrink-0" : ""
                           } ${
                             view === "month" && !inMonth ? "opacity-55" : ""
                           } ${
-                            view === "week" ? weekMonthBandClassByIso.get(iso) ?? "bg-card" : ""
-                          } ${isToday ? "border-primary/60 bg-primary/5 ring-1 ring-primary/40" : ""}`}
+                            view === "week" ? weekMonthBandClassByIso.get(iso) ?? "bg-white" : ""
+                          } ${isToday ? "border-primary bg-sky-50 ring-2 ring-primary" : ""}`}
                         >
-                          <CardHeader className="p-3">
-                            <CardTitle className="flex items-center gap-2 text-sm">
-                              <span>{format(date, "EEE d")}</span>
-                              {isToday ? <Badge variant="secondary">Today</Badge> : null}
+                          <CardHeader className="border-b border-slate-950 p-2">
+                            <CardTitle className="flex items-baseline justify-between gap-2 text-sm" aria-label={format(date, "EEE d")}>
+                              <span className="font-black uppercase">{format(date, "EEE")}</span>
+                              <span className="text-2xl font-black leading-none">{format(date, "d")}</span>
                             </CardTitle>
+                            {isToday ? <Badge className="w-fit rounded-sm border-slate-950 bg-accent text-accent-foreground">Today</Badge> : null}
                             {showMonthMarker ? (
-                              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                              <p className="text-[11px] font-bold uppercase text-muted-foreground">
                                 {format(date, "MMMM yyyy")}
                               </p>
                             ) : null}
                           </CardHeader>
-                          <CardContent className="space-y-2 p-3 pt-0">
+                          <CardContent className="space-y-2 p-2">
                             {sessionsLoading ? <CalendarDayLoadingSkeleton count={loadingRowCount} /> : null}
                             {!sessionsLoading && (view === "month" ? sessions.slice(0, 3) : sessions).map((session, index) => {
                               if (isGagaSession(session)) {
@@ -1502,9 +1551,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                               return (
                                 <div
                                   key={`${session.id}-${iso}-${session.bookingUrl}-${index}`}
-                                  className={`rounded-md border p-2 text-xs ${
+                                  className={`border border-l-4 border-slate-900/25 bg-white p-2 text-xs transition-colors hover:bg-secondary/45 ${
                                     featured
-                                      ? "border-amber-400 bg-amber-50 ring-1 ring-amber-300"
+                                      ? "border-amber-500 border-l-amber-500 bg-amber-50 ring-1 ring-amber-400"
                                       : DANCE_TYPE_CARD_CLASS[primaryType]
                                   }`}
                                 >
@@ -1513,31 +1562,36 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                                     className="w-full text-left hover:text-foreground/90"
                                   >
                                     {featured ? (
-                                      <span className="text-[10px] font-semibold text-amber-600">★ Featured</span>
+                                      <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase text-amber-700">
+                                        <Star className="h-3 w-3 fill-current" aria-hidden />
+                                        Featured
+                                      </span>
                                     ) : null}
-                                    <p className="font-medium">{session.title}</p>
-                                    <p className="text-muted-foreground">
+                                    <p className="font-bold leading-snug text-slate-950">{session.title}</p>
+                                    <p className="mt-1 flex items-center gap-1 font-medium text-slate-700">
+                                      <Clock className="h-3 w-3" aria-hidden />
                                       {session.startTime || session.endTime
                                         ? formatTimeRange(session.startTime, session.endTime)
                                         : session.dayOfWeek ?? "Time TBC"}
                                     </p>
-                                    <p>{session.venue}</p>
+                                    <p className="mt-0.5 text-slate-600">{session.venue}</p>
                                   </button>
                                   <div className="mt-2 flex justify-end">
                                     <Button
                                       size="sm"
                                       variant={shortlistSet.has(session.id) ? "default" : "outline"}
-                                      className="h-8 px-3 text-xs transition-colors sm:h-6 sm:px-2 sm:text-[11px]"
+                                      className="h-7 rounded-sm px-2 text-[11px] transition-colors sm:h-6"
                                       onClick={() => toggleShortlist(session.id)}
                                       aria-label={shortlistSet.has(session.id) ? `Remove from shortlist: ${session.title}` : `Add to shortlist: ${session.title}`}
                                     >
+                                      <Bookmark className="h-3 w-3" aria-hidden />
                                       {shortlistSet.has(session.id) ? "Saved" : "Shortlist"}
                                     </Button>
                                   </div>
                                 </div>
                               );
                             })}
-                            {!sessionsLoading && sessions.length === 0 && <p className="text-xs text-muted-foreground">No classes</p>}
+                            {!sessionsLoading && sessions.length === 0 && <p className="border border-dashed border-slate-900/25 p-2 text-xs text-muted-foreground">No classes</p>}
                             {!sessionsLoading && view === "month" && sessions.length > 3 && (
                               <p className="text-xs text-muted-foreground">+{sessions.length - 3} more</p>
                             )}
@@ -1556,11 +1610,11 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 </div>
 
                 {undatedSessions.length > 0 && (
-                  <Card>
-                    <CardHeader className="p-3">
-                      <CardTitle className="text-sm">Undated classes</CardTitle>
+                  <Card className="border-slate-950 bg-white shadow-none">
+                    <CardHeader className="border-b border-slate-950 p-3">
+                      <CardTitle className="text-sm font-black uppercase">Undated classes</CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-2 p-3 pt-0">
+                    <CardContent className="space-y-2 p-2">
                       {undatedSessions.map((session, index) => {
                         if (isGagaSession(session)) {
                           return (
@@ -1577,9 +1631,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                         return (
                           <div
                             key={`${session.id}-${session.bookingUrl}-${index}`}
-                            className={`rounded-md border p-2 text-xs ${
+                            className={`border border-l-4 border-slate-900/25 bg-white p-2 text-xs transition-colors hover:bg-secondary/45 ${
                               featured
-                                ? "border-amber-400 bg-amber-50 ring-1 ring-amber-300"
+                                ? "border-amber-500 border-l-amber-500 bg-amber-50 ring-1 ring-amber-400"
                                 : DANCE_TYPE_CARD_CLASS[primaryType]
                             }`}
                           >
@@ -1588,19 +1642,22 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                               className="w-full text-left hover:text-foreground/90"
                             >
                               {featured ? (
-                                <span className="text-[10px] font-semibold text-amber-600">★ Featured</span>
+                                <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase text-amber-700">
+                                  <Star className="h-3 w-3 fill-current" aria-hidden />
+                                  Featured
+                                </span>
                               ) : null}
-                              <p className="font-medium">{session.title}</p>
-                              <p className="text-muted-foreground">
+                              <p className="font-bold leading-snug text-slate-950">{session.title}</p>
+                              <p className="mt-1 text-slate-700">
                                 {session.dayOfWeek ?? "Day TBC"} • {formatTimeRange(session.startTime, session.endTime)}
                               </p>
-                              <p>{session.venue}</p>
+                              <p className="mt-0.5 text-slate-600">{session.venue}</p>
                             </button>
                             <div className="mt-2 flex justify-end">
                               <Button
                                 size="sm"
                                 variant={shortlistSet.has(session.id) ? "default" : "outline"}
-                                className="h-8 px-3 text-xs transition-colors sm:h-6 sm:px-2 sm:text-[11px]"
+                                className="h-7 rounded-sm px-2 text-[11px] transition-colors sm:h-6"
                                 onClick={() => toggleShortlist(session.id)}
                                 aria-label={
                                   shortlistSet.has(session.id)
@@ -1608,6 +1665,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                                     : `Add to shortlist: ${session.title}`
                                 }
                               >
+                                <Bookmark className="h-3 w-3" aria-hidden />
                                 {shortlistSet.has(session.id) ? "Saved" : "Shortlist"}
                               </Button>
                             </div>
@@ -1621,22 +1679,22 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             )}
 
             {mode === "calendar" && !sessionsLoading && filteredSessions.length === 0 && (
-              <div className="rounded-md border border-dashed border-input bg-card p-4 text-sm text-muted-foreground">
+              <div className="border border-dashed border-slate-950 bg-white p-4 text-sm text-muted-foreground">
                 No matching classes. Try clearing filters or broadening search.
               </div>
             )}
 
             {mode === "venues" && (
               <div className="space-y-3">
-                <Card>
-                  <CardHeader className="space-y-2">
-                    <CardTitle className="text-base">Spotted an error or missing class?</CardTitle>
+                <Card className={`${editorialPanelClass} shadow-none`}>
+                  <CardHeader className="space-y-2 border-b border-slate-950 p-3">
+                    <CardTitle className="text-base font-black uppercase">Spotted an error or missing class?</CardTitle>
                     <p className="text-xs text-muted-foreground">
                       Send feedback on the contact page and I&apos;ll try to fix issues when I can.
                     </p>
                   </CardHeader>
-                  <CardContent className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-                    <Button asChild size="sm">
+                  <CardContent className="flex flex-col gap-3 p-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                    <Button asChild size="sm" className={editorialButtonClass}>
                       <Link href={"/contact" as Route} prefetch={false}>
                         Open contact page
                       </Link>
@@ -1644,7 +1702,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                     <SiteSocialLinks />
                   </CardContent>
                 </Card>
-                <div className="grid gap-3 md:grid-cols-2">
+                <div className="grid gap-2">
                   {sortedVenues.map((venue) => {
                     const relatedCount = relatedSessionCountByVenue.get(venue.name) ?? 0;
                     const isMuted = relatedCount === 0;
@@ -1653,39 +1711,42 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                     return (
                       <Card
                         key={venue.name}
-                        className={`${isMuted ? "opacity-60" : ""} ${featured ? "border-amber-400 ring-1 ring-amber-300" : ""}`.trim()}
+                        className={`border-slate-950 bg-white shadow-none ${isMuted ? "opacity-65" : ""} ${featured ? "border-amber-500 ring-2 ring-amber-400" : ""}`.trim()}
                       >
-                        <CardHeader className="space-y-2">
-                          <div className="flex items-center justify-between gap-2">
-                            <CardTitle className="text-base">{venue.name}</CardTitle>
-                            <div className="flex items-center gap-2">
+                        <CardHeader className="grid gap-3 p-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+                          <div className="min-w-0 space-y-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <CardTitle className="text-base font-black">{venue.name}</CardTitle>
                               {featured ? (
-                                <Badge className="border-amber-400 bg-amber-50 text-amber-700">★ Featured</Badge>
+                                <Badge className="rounded-sm border-amber-500 bg-amber-50 text-amber-700">
+                                  <Star className="h-3 w-3 fill-current" aria-hidden />
+                                  Featured
+                                </Badge>
                               ) : null}
-                              <Badge variant={status.variant}>{status.label}</Badge>
+                              <Badge variant={status.variant} className="rounded-sm">{status.label}</Badge>
                             </div>
+                            <p className="text-xs text-muted-foreground">
+                              {relatedCount} matching now · {venue.count === 0 ? "No sessions found on last scrape" : `${venue.count} sessions last scrape`}
+                              {venue.lastSuccessAt
+                                ? ` · updated ${format(new Date(venue.lastSuccessAt), "d MMM yyyy, HH:mm")}`
+                                : ""}
+                            </p>
+                            {!venue.ok && venue.lastError ? (
+                              <p className="text-xs font-medium text-destructive">{venue.lastError}</p>
+                            ) : null}
                           </div>
-                          <p className="text-xs text-muted-foreground">
-                            {venue.count === 0 ? "No sessions found on last scrape" : `${venue.count} sessions last scrape`}
-                            {venue.lastSuccessAt
-                              ? ` • updated ${format(new Date(venue.lastSuccessAt), "d MMM yyyy, HH:mm")}`
-                              : ""}
-                          </p>
-                          {!venue.ok && venue.lastError ? (
-                            <p className="text-xs text-muted-foreground">{venue.lastError}</p>
-                          ) : null}
-                        </CardHeader>
-                        <CardContent className="flex flex-wrap gap-2">
-                          <Button variant="outline" asChild>
+                          <div className="flex flex-wrap gap-2 md:justify-end">
+                          <Button variant="outline" className={editorialButtonClass} asChild>
                             <TrackedOutboundLink
                               href={hrefForVenueSite(venue)}
                               analyticsKind="venue"
                               destHost={extractOutboundHostname(venue.sourceUrl)}
                             >
+                              <ExternalLink className={iconClass} aria-hidden />
                               Venue site
                             </TrackedOutboundLink>
                           </Button>
-                          <Button variant="outline" asChild>
+                          <Button variant="outline" className={editorialButtonClass} asChild>
                             <a
                               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                                 venue.mapQuery ?? getVenueMapQuery(venue.name)
@@ -1693,10 +1754,12 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                               target="_blank"
                               rel="noreferrer"
                             >
+                              <MapPin className={iconClass} aria-hidden />
                               Open map
                             </a>
                           </Button>
-                        </CardContent>
+                          </div>
+                        </CardHeader>
                       </Card>
                     );
                   })}
@@ -1708,7 +1771,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               <div className="space-y-3">
                 <div className="grid gap-3 md:grid-cols-2">
                   <Select value={mapVenue} onValueChange={setMapVenue}>
-                    <SelectTrigger>
+                    <SelectTrigger className="border-slate-950 bg-white">
                       <SelectValue placeholder="Choose venue for map" />
                     </SelectTrigger>
                     <SelectContent>
@@ -1720,24 +1783,25 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                       ))}
                     </SelectContent>
                   </Select>
-                  <Button variant="outline" asChild>
+                  <Button variant="outline" className={editorialButtonClass} asChild>
                     <a
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapSearchQuery)}`}
                       target="_blank"
                       rel="noreferrer"
                     >
+                      <MapPin className={iconClass} aria-hidden />
                       Open in Google Maps
                     </a>
                   </Button>
                 </div>
-                <div className="space-y-2 overflow-hidden rounded-md border p-3">
+                <div className={`${editorialPanelClass} space-y-2 overflow-hidden p-3`}>
                   <p className="text-xs text-muted-foreground">
                     Venue map is under construction. Locations may be incomplete or change without notice.
                   </p>
                   <iframe
                     title="Venue map"
                     src={`https://www.google.com/maps?q=${encodeURIComponent(mapSearchQuery)}&output=embed`}
-                    className="h-[360px] w-full md:h-[520px]"
+                    className="h-[360px] w-full border border-slate-950 md:h-[520px]"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
@@ -1747,13 +1811,13 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             </section>
 
             {mode !== "venues" && (
-              <section aria-label="Contact" className="mt-8 rounded-lg border border-input bg-card px-4 py-3 text-sm">
-                <p className="mb-2 text-sm font-medium">Spotted an error or missing class?</p>
+              <section aria-label="Contact" className={`${editorialPanelClass} mt-8 px-4 py-3 text-sm`}>
+                <p className="mb-2 text-sm font-black uppercase">Spotted an error or missing class?</p>
                 <p className="mb-3 text-xs text-muted-foreground">
                   Send feedback on the contact page and I&apos;ll try to fix issues when I can.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-                  <Button asChild size="sm">
+                  <Button asChild size="sm" className={editorialButtonClass}>
                     <Link href={"/contact" as Route} prefetch={false}>
                       Open contact page
                     </Link>
@@ -1762,31 +1826,46 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 </div>
               </section>
             )}
-
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
       <Dialog open={Boolean(selectedSession)} onOpenChange={(open) => !open && setSelectedSession(null)}>
-        <DialogContent className="max-h-[90dvh] overflow-y-auto p-4 sm:p-6">
+        <DialogContent className="max-h-[90dvh] overflow-y-auto border-2 border-slate-950 bg-white p-0 shadow-[8px_8px_0_rgba(15,23,42,0.22)] sm:max-w-2xl">
           {selectedSession && (
             isGagaSession(selectedSession) ? (
-              <GagaSessionDialogContent
-                session={selectedSession}
-                shortlistSet={shortlistSet}
-                toggleShortlist={toggleShortlist}
-              />
+              <div className="p-4 sm:p-6">
+                <GagaSessionDialogContent
+                  session={selectedSession}
+                  shortlistSet={shortlistSet}
+                  toggleShortlist={toggleShortlist}
+                />
+              </div>
             ) : (
               <>
-                <DialogHeader>
-                  <DialogTitle>{selectedSession.title}</DialogTitle>
-                  <DialogDescription>
-                    {selectedSession.venue} • {selectedSession.dayOfWeek ?? "Day TBC"} •{" "}
-                    {formatTimeRange(selectedSession.startTime, selectedSession.endTime)}
+                <DialogHeader className="border-b border-slate-950 bg-slate-950 p-4 text-white sm:p-5">
+                  <DialogTitle className="text-2xl font-black leading-tight sm:text-3xl">{selectedSession.title}</DialogTitle>
+                  <DialogDescription className="flex flex-wrap gap-x-3 gap-y-1 pt-2 text-sm font-medium text-white/75">
+                    <span>{selectedSession.venue}</span>
+                    <span>{selectedSession.dayOfWeek ?? "Day TBC"}</span>
+                    <span>{formatTimeRange(selectedSession.startTime, selectedSession.endTime)}</span>
                   </DialogDescription>
                 </DialogHeader>
-                <div className="space-y-3 text-sm">
-                  <p>{selectedSession.details ?? "No additional description."}</p>
+                <div className="space-y-4 p-4 text-sm sm:p-5">
+                  <div className="grid gap-2 border border-slate-950/25 bg-secondary/35 p-3 sm:grid-cols-3">
+                    <p>
+                      <span className="block text-[11px] font-black uppercase text-muted-foreground">Venue</span>
+                      {selectedSession.venue}
+                    </p>
+                    <p>
+                      <span className="block text-[11px] font-black uppercase text-muted-foreground">When</span>
+                      {selectedSession.dayOfWeek ?? "Day TBC"} · {formatTimeRange(selectedSession.startTime, selectedSession.endTime)}
+                    </p>
+                    <p>
+                      <span className="block text-[11px] font-black uppercase text-muted-foreground">Date range</span>
+                      {selectedSession.startDate ?? "Open"} to {selectedSession.endDate ?? "Open"}
+                    </p>
+                  </div>
+                  <p className="text-base leading-relaxed">{selectedSession.details ?? "No additional description."}</p>
                   <div className="flex flex-wrap gap-2">
                     {inferDanceTypes(selectedSession).map((type) => (
                       <Badge key={`${selectedSession.id}-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
@@ -1794,42 +1873,44 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                       </Badge>
                     ))}
                   </div>
-                  <p>
-                    Date range: {selectedSession.startDate ?? "Open"} to {selectedSession.endDate ?? "Open"}
-                  </p>
                   <div className="flex flex-wrap gap-2">
                     <Button
                       variant={shortlistSet.has(selectedSession.id) ? "default" : "outline"}
+                      className={editorialButtonClass}
                       onClick={() => toggleShortlist(selectedSession.id)}
                     >
+                      <Bookmark className={iconClass} aria-hidden />
                       {shortlistSet.has(selectedSession.id) ? "Remove from shortlist" : "Save to shortlist"}
                     </Button>
-                    <Button asChild>
+                    <Button asChild className={editorialButtonClass}>
                       <TrackedOutboundLink
                         href={hrefForOutboundBooking(selectedSession)}
                         analyticsKind="booking"
                         destHost={extractOutboundHostname(selectedSession.bookingUrl)}
                       >
+                        <ExternalLink className={iconClass} aria-hidden />
                         Booking
                       </TrackedOutboundLink>
                     </Button>
                     {canAddSessionToCalendar(selectedSession) ? (
-                      <Button variant="outline" asChild>
+                      <Button variant="outline" className={editorialButtonClass} asChild>
                         <a href={`/api/classes/${encodeURIComponent(selectedSession.id)}/calendar`}>
+                          <CalendarDays className={iconClass} aria-hidden />
                           Add to calendar
                         </a>
                       </Button>
                     ) : (
-                      <Button variant="outline" disabled>
+                      <Button variant="outline" className={editorialButtonClass} disabled>
                         Add to calendar unavailable
                       </Button>
                     )}
-                    <Button variant="outline" asChild>
+                    <Button variant="outline" className={editorialButtonClass} asChild>
                       <TrackedOutboundLink
                         href={hrefForOutboundSource(selectedSession)}
                         analyticsKind="source"
                         destHost={extractOutboundHostname(selectedSession.sourceUrl)}
                       >
+                        <ExternalLink className={iconClass} aria-hidden />
                         Source
                       </TrackedOutboundLink>
                     </Button>

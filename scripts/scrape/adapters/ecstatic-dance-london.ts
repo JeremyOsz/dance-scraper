@@ -9,6 +9,9 @@ const organizerUrls = [
   "https://www.eventbrite.com/o/18505959226",
   "https://www.eventbrite.co.uk/o/ecstatic-dance-uk-17916431216"
 ];
+const fallbackEventUrls = [
+  "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896"
+];
 
 const browserLikeHeaders = {
   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
@@ -55,7 +58,13 @@ function collectEvents(value: unknown): EventbriteEvent[] {
   if (typeof value !== "object") return [];
 
   const obj = value as Record<string, unknown>;
-  if (obj["@type"] === "Event") {
+  const rawType = obj["@type"];
+  const isEventType =
+    rawType === "Event" ||
+    rawType === "EducationEvent" ||
+    (typeof rawType === "string" && rawType.endsWith("Event")) ||
+    (Array.isArray(rawType) && rawType.some((entry) => typeof entry === "string" && entry.endsWith("Event")));
+  if (isEventType) {
     return [obj as EventbriteEvent];
   }
 
@@ -80,9 +89,10 @@ function extractEventsFromLd(ldEntry: unknown): CompleteEventbriteEvent[] {
 export async function scrapeEcstaticDanceLondon(): Promise<AdapterOutput> {
   try {
     const classes: AdapterOutput["classes"] = [];
+    const sourceUrls = [...organizerUrls, ...fallbackEventUrls];
 
-    for (const organizerUrl of organizerUrls) {
-      const html = await fetchHtml(organizerUrl, browserLikeHeaders);
+    for (const sourceUrl of sourceUrls) {
+      const html = await fetchHtml(sourceUrl, browserLikeHeaders);
       const ldEntries = extractJsonLd(html);
       const events = ldEntries.flatMap(extractEventsFromLd);
 
@@ -109,7 +119,7 @@ export async function scrapeEcstaticDanceLondon(): Promise<AdapterOutput> {
           startDate: format(start, "yyyy-MM-dd"),
           endDate: format(safeEnd ?? start, "yyyy-MM-dd"),
           bookingUrl: event.url,
-          sourceUrl: organizerUrl
+          sourceUrl
         });
       }
     }

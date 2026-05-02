@@ -149,20 +149,41 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Home() {
   const data = readScrapeOutput();
   const baseUrl = getBaseUrl();
+  const scrapeStatusByKey = new Map(data.venues.map((venue) => [venue.key, venue]));
   const venueMap = new Map(
-    data.venues.map((venue) => [
-      venue.venue,
-      {
-        name: venue.venue,
-        sourceUrl: venue.sourceUrl,
-        mapQuery: VENUES[venue.key]?.mapQuery,
-        count: venue.count,
-        ok: venue.ok,
-        lastSuccessAt: venue.lastSuccessAt,
-        lastError: venue.lastError
-      }
-    ])
+    (Object.keys(VENUES) as Array<keyof typeof VENUES>).map((key) => {
+      const configured = VENUES[key];
+      const scraped = scrapeStatusByKey.get(key);
+
+      return [
+        configured.label,
+        {
+          name: configured.label,
+          sourceUrl: scraped?.sourceUrl ?? configured.sourceUrl,
+          mapQuery: configured.mapQuery,
+          count: scraped?.count ?? 0,
+          ok: scraped?.ok ?? true,
+          lastSuccessAt: scraped?.lastSuccessAt ?? null,
+          lastError: scraped?.lastError ?? null
+        }
+      ];
+    })
   );
+  // Keep any extra persisted venue rows so ad-hoc sources remain visible.
+  for (const venue of data.venues) {
+    if (venueMap.has(venue.venue)) {
+      continue;
+    }
+    venueMap.set(venue.venue, {
+      name: venue.venue,
+      sourceUrl: venue.sourceUrl,
+      mapQuery: VENUES[venue.key]?.mapQuery,
+      count: venue.count,
+      ok: venue.ok,
+      lastSuccessAt: venue.lastSuccessAt,
+      lastError: venue.lastError
+    });
+  }
   const venues = sortVenueRecordsForUi(Array.from(venueMap.values())).map((venue) => ({
     ...venue,
     outboundSourceHref: signOutboundRedirectUrl(venue.sourceUrl, "venue") ?? venue.sourceUrl
@@ -223,7 +244,7 @@ export default function Home() {
       <CalendarPage
         classCount={data.sessions.length}
         listingsUpdatedText={listingsUpdatedText}
-        venueCount={data.venues.length}
+        venueCount={venues.length}
         venues={venues}
         seoSnapshot={<UpcomingClassesSnapshot occurrences={snapshotOccurrences} title={snapshotTitle} />}
       />

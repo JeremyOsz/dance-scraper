@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-27T11:39:30.169Z",
+  "generatedAt": "2026-04-27T11:54:32.668Z",
   "sessions": [
     {
       "id": "florence-trust-writers-room-bianca-scout-and-elena-isolini-daughter-mary-dance-workshop-tuesday-10-00am",
@@ -34347,6 +34347,26 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-04-27T11:39:30.169Z"
+    },
+    {
+      "id": "ecstatic-dance-london-ecstatic-dance-uk-sun-day-sunday-10-00",
+      "venue": "Ecstatic Dance London",
+      "title": "Ecstatic Dance UK - SUN•DAY",
+      "details": "AT THE BATHS - Amazing space, highest-quality sound, great hangout with saunas, cold plunge and delicious plant based food available after!",
+      "dayOfWeek": "Sunday",
+      "startTime": "10:00",
+      "endTime": "13:00",
+      "startDate": "2020-07-05",
+      "endDate": "2026-06-28",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
+      "tags": [
+        "ecstatic dance"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-04-27T11:54:32.668Z"
     }
   ],
   "venues": [
@@ -34417,9 +34437,9 @@
       "venue": "Ecstatic Dance London",
       "key": "ecstaticDanceLondon",
       "sourceUrl": "https://www.eventbrite.com/o/73047023743",
-      "count": 0,
+      "count": 1,
       "ok": true,
-      "lastSuccessAt": "2026-04-27T11:39:30.169Z",
+      "lastSuccessAt": "2026-04-27T11:54:32.668Z",
       "lastError": null
     },
     {
