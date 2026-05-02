@@ -162,7 +162,7 @@ describe("CalendarPage", () => {
   it("disables preferred/shortlist-only toggles when nothing is saved", async () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    expect(screen.getByRole("heading", { level: 1, name: "The floor is yours..." })).toBeVisible();
+    expect(screen.getByRole("heading", { level: 1, name: "The Floor Is Yours..." })).toBeVisible();
     expect(screen.getByRole("heading", { level: 2, name: "Find dance classes" })).toBeInTheDocument();
     expect(screen.queryByRole("checkbox", { name: "Preferred venues only" })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Shortlist (0)" })).toBeDisabled();
@@ -232,10 +232,10 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await user.click(screen.getByRole("button", { name: "Venues list" }));
     expect((await screen.findAllByRole("link", { name: "Venue site" })).length).toBeGreaterThan(0);
 
-    await user.click(screen.getByRole("button", { name: "Map" }));
+    await user.click(screen.getByRole("button", { name: "Map view" }));
     const mapFrame = await screen.findByTitle("Venue map");
     expect(mapFrame).toBeInTheDocument();
     expect(mapFrame).toHaveAttribute(
@@ -248,7 +248,7 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await user.click(screen.getByRole("button", { name: "Venues list" }));
     expect(screen.getAllByText("No events").length).toBeGreaterThan(0);
     expect(screen.getAllByText(/No sessions found on last scrape/i).length).toBeGreaterThan(0);
   });
@@ -257,7 +257,7 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await user.click(screen.getByRole("button", { name: "Venues list" }));
     expect(screen.getByText("Error scraping")).toBeInTheDocument();
     expect(screen.getByText("Request timed out while fetching schedule")).toBeInTheDocument();
   });
@@ -401,7 +401,7 @@ describe("CalendarPage", () => {
       expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("day=Tuesday"), { scroll: false });
     });
 
-    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await user.click(screen.getByRole("button", { name: "Venues list" }));
     await waitFor(() => {
       expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("mode=venues"), { scroll: false });
     });
