@@ -1359,10 +1359,12 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           <div className="min-w-0">
             <p className="font-display text-xs font-semibold uppercase text-primary">London Dance Calendar</p>
             <h1 className="font-display mt-2 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-normal text-foreground sm:text-5xl xl:text-[4.6rem]">
-              Find dance classes in London — fast
+              The floor is yours...
             </h1>
-            <div className="mt-4 flex max-w-4xl flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-muted-foreground">
-              <span>Filter by style, level, date, and location.</span>
+            <p className="mt-4 max-w-3xl text-base font-medium leading-snug text-muted-foreground sm:text-lg">
+              Find Dance Classes in London. Filter by style, level, date, and location.
+            </p>
+            <div className="mt-2 flex max-w-4xl flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-muted-foreground">
               {listingsUpdatedText ? <span>{listingsUpdatedText}</span> : null}
               <span>Listings are aggregated from studio sources.</span>
             </div>

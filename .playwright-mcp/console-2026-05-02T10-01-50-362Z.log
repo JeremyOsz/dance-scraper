@@ -46,3 +46,19 @@
 [  534702ms] [LOG] [Fast Refresh] done in 389ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
 [  566143ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
 [  567065ms] [LOG] [Fast Refresh] done in 923ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  698518ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  698848ms] [LOG] [Fast Refresh] done in 329ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  708726ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  710014ms] [LOG] [Fast Refresh] done in 1287ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  908661ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  909818ms] [LOG] [Fast Refresh] done in 1156ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  918819ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  921385ms] [LOG] [Fast Refresh] done in 2566ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  922977ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  924620ms] [LOG] [Fast Refresh] done in 1642ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  948782ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  949661ms] [LOG] [Fast Refresh] done in 880ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  956469ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  957877ms] [LOG] [Fast Refresh] done in 1408ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1108818ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1109905ms] [LOG] [Fast Refresh] done in 1088ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13

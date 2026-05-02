@@ -109,7 +109,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const venueNames = sortVenuesForSeo([...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))]);
   const title = buildPageTitle("London Dance Classes & Workshops");
   const description = buildMetaDescription(
-    `Find dance classes in London — fast. Browse ${classCount} adult classes from ${venueCount} venues: filter by style, level, and location. Ballet, salsa, contemporary, improv, and more.`
+    `Find Dance Classes in London. Browse ${classCount} adult classes from ${venueCount} venues — filter by style, level, date, and location. Ballet, salsa, contemporary, improv, and more.`
   );
   const keywords = [
     "London dance classes",
