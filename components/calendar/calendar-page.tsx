@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   format,
   addDays,
@@ -25,6 +25,7 @@ import {
   Bookmark,
   Building2,
   CalendarDays,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Clock,
@@ -382,6 +383,28 @@ function CalendarLoadingState() {
   );
 }
 
+const VIEWPORT_MD_MEDIA_QUERY = "(min-width: 768px)";
+
+function subscribeViewportMinMd(onStoreChange: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+  const mq = window.matchMedia(VIEWPORT_MD_MEDIA_QUERY);
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
+
+function getViewportMinMdSnapshot() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+  return window.matchMedia(VIEWPORT_MD_MEDIA_QUERY).matches;
+}
+
+function getViewportMinMdServerSnapshot() {
+  return false;
+}
+
 function CalendarDayLoadingSkeleton({ count }: { count: number }) {
   return (
     <div className="space-y-3 max-sm:space-y-4 lg:space-y-2" aria-hidden="true">
@@ -459,6 +482,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   const [appearanceDialogOpen, setAppearanceDialogOpen] = useState(false);
   const [palette, setPalette] = useState<PaletteValue>("white");
   const [fontScheme, setFontScheme] = useState<FontSchemeValue>("space");
+  const [narrowDayExpandedByIso, setNarrowDayExpandedByIso] = useState<Record<string, boolean>>({});
+
+  const isMdUp = useSyncExternalStore(subscribeViewportMinMd, getViewportMinMdSnapshot, getViewportMinMdServerSnapshot);
 
   const weekScrollRef = useRef<HTMLDivElement>(null);
   const weekLoadSentinelRef = useRef<HTMLDivElement>(null);
@@ -1837,6 +1863,10 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                       const isToday = isSameDay(date, new Date());
                       const showMonthMarker = view === "week" && (index === 0 || !isSameMonth(date, visibleDates[index - 1]));
                       const loadingRowCount = LOADING_CARD_ROW_COUNTS[index % LOADING_CARD_ROW_COUNTS.length];
+                      const narrowDayPanelOpen =
+                        isMdUp || sessionsLoading || (narrowDayExpandedByIso[iso] ?? true);
+                      const dayPanelId = `calendar-day-panel-${iso}`;
+
                       return (
                         <Card
                           key={iso}
@@ -1848,19 +1878,57 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                             view === "week" ? weekMonthBandClassByIso.get(iso) ?? "bg-[hsl(var(--ldc-surface))]" : ""
                           } ${isToday ? "border-primary bg-[hsl(var(--ldc-today))] ring-2 ring-primary" : ""}`}
                         >
-                          <CardHeader className="border-b border-border px-3 py-3 max-sm:py-4 lg:p-2 lg:py-2">
-                            <CardTitle className="flex items-baseline justify-between gap-2 text-sm" aria-label={format(date, "EEE d")}>
-                              <span className="font-display font-semibold uppercase">{format(date, "EEE")}</span>
-                              <span className="font-display text-2xl font-semibold leading-none">{format(date, "d")}</span>
-                            </CardTitle>
-                            {isToday ? <Badge className="w-fit rounded-sm border-border bg-accent text-accent-foreground">Today</Badge> : null}
-                            {showMonthMarker ? (
-                              <p className="font-display text-[11px] font-semibold uppercase text-muted-foreground">
-                                {format(date, "MMMM yyyy")}
-                              </p>
-                            ) : null}
+                          <CardHeader className={`border-border ${isMdUp ? "border-b px-3 py-3 max-sm:py-4 lg:p-2 lg:py-2" : "border-b p-0"}`}>
+                            {isMdUp ? (
+                              <>
+                                <CardTitle className="flex items-baseline justify-between gap-2 text-sm" aria-label={format(date, "EEE d")}>
+                                  <span className="font-display font-semibold uppercase">{format(date, "EEE")}</span>
+                                  <span className="font-display text-2xl font-semibold leading-none">{format(date, "d")}</span>
+                                </CardTitle>
+                                {isToday ? <Badge className="w-fit rounded-sm border-border bg-accent text-accent-foreground">Today</Badge> : null}
+                                {showMonthMarker ? (
+                                  <p className="font-display text-[11px] font-semibold uppercase text-muted-foreground">
+                                    {format(date, "MMMM yyyy")}
+                                  </p>
+                                ) : null}
+                              </>
+                            ) : (
+                              <button
+                                type="button"
+                                className="flex w-full items-start gap-3 px-3 py-3 text-left max-sm:py-4 lg:gap-2 lg:p-2 lg:py-2"
+                                aria-expanded={narrowDayPanelOpen}
+                                aria-controls={dayPanelId}
+                                onClick={() =>
+                                  setNarrowDayExpandedByIso((prev) => ({
+                                    ...prev,
+                                    [iso]: !(prev[iso] ?? true)
+                                  }))
+                                }
+                              >
+                                <div className="min-w-0 flex-1 space-y-1">
+                                  <CardTitle className="flex items-baseline justify-between gap-2 text-sm" aria-label={format(date, "EEE d")}>
+                                    <span className="font-display font-semibold uppercase">{format(date, "EEE")}</span>
+                                    <span className="font-display text-2xl font-semibold leading-none">{format(date, "d")}</span>
+                                  </CardTitle>
+                                  {isToday ? <Badge className="w-fit rounded-sm border-border bg-accent text-accent-foreground">Today</Badge> : null}
+                                  {showMonthMarker ? (
+                                    <p className="font-display text-[11px] font-semibold uppercase text-muted-foreground">
+                                      {format(date, "MMMM yyyy")}
+                                    </p>
+                                  ) : null}
+                                </div>
+                                <ChevronDown
+                                  className={`mt-0.5 h-5 w-5 shrink-0 text-muted-foreground transition-transform ${narrowDayPanelOpen ? "rotate-180" : ""}`}
+                                  aria-hidden
+                                />
+                              </button>
+                            )}
                           </CardHeader>
-                          <CardContent className="space-y-3 p-3 max-sm:space-y-4 max-sm:p-4 lg:space-y-2 lg:p-2">
+                          <CardContent
+                            id={dayPanelId}
+                            hidden={!narrowDayPanelOpen}
+                            className="space-y-3 p-3 max-sm:space-y-4 max-sm:p-4 lg:space-y-2 lg:p-2"
+                          >
                             {sessionsLoading ? <CalendarDayLoadingSkeleton count={loadingRowCount} /> : null}
                             {!sessionsLoading && (view === "month" ? sessions.slice(0, 3) : sessions).map((session, index) => {
                               if (isGagaSession(session)) {
