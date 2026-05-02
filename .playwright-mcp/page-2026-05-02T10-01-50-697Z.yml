@@ -1,0 +1,278 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - paragraph [ref=e6]: London Dance Calendar
+          - heading "Find dance classes in London — fast" [level=1] [ref=e7]
+          - generic [ref=e8]:
+            - generic [ref=e9]: Filter by style, level, date, and location.
+            - generic [ref=e10]: Listings last updated 27 Apr 2026.
+            - generic [ref=e11]: Listings are aggregated from studio sources.
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]:
+              - paragraph [ref=e15]: 1,787+
+              - paragraph [ref=e16]: classes
+            - generic [ref=e17]:
+              - paragraph [ref=e18]: "47"
+              - paragraph [ref=e19]: venues
+          - generic [ref=e20]:
+            - generic [ref=e21]:
+              - generic [ref=e22]: Appearance
+              - generic [ref=e23]:
+                - img [ref=e24]
+                - generic [ref=e30]: Colour scheme
+                - combobox "Colour scheme" [ref=e31]:
+                  - option "White"
+                  - option "Warm" [selected]
+                  - option "Coral"
+                  - option "Olive"
+                  - option "Mono"
+              - generic [ref=e32]:
+                - img [ref=e33]
+                - generic [ref=e36]: Font style
+                - combobox "Font style" [ref=e37]:
+                  - option "Space + Inter"
+                  - option "System"
+                  - option "Sora"
+                  - option "Archivo" [selected]
+                  - option "Plex Mono"
+            - navigation "Primary" [ref=e38]:
+              - button "Share" [ref=e39] [cursor=pointer]:
+                - img [ref=e40]
+                - text: Share
+              - link "Calendar" [ref=e46] [cursor=pointer]:
+                - /url: /
+                - img [ref=e47]
+                - text: Calendar
+              - link "Insights" [ref=e49] [cursor=pointer]:
+                - /url: /insights
+              - link "Studios" [ref=e50] [cursor=pointer]:
+                - /url: /studios
+      - navigation "Site maintainer social profiles" [ref=e51]:
+        - list [ref=e52]:
+          - listitem [ref=e53]:
+            - link "LinkedIn" [ref=e54] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/jeremy-osztreicher-72236a125/
+          - listitem [ref=e55]:
+            - link "Instagram (@JeremyOsz)" [ref=e56] [cursor=pointer]:
+              - /url: https://www.instagram.com/JeremyOsz/
+      - group [ref=e57]:
+        - generic "Featured upcoming classes Show" [ref=e58] [cursor=pointer]:
+          - heading "Featured upcoming classes" [level=2] [ref=e59]
+          - generic [ref=e60]: Show
+    - generic [ref=e62]:
+      - complementary [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - paragraph [ref=e66]:
+              - img [ref=e67]
+              - text: Filters
+            - paragraph [ref=e68]: Narrow by class, dance type, venue, day, and saved lists.
+          - generic [ref=e70]:
+            - group [ref=e72]:
+              - generic "Search Clear" [ref=e73] [cursor=pointer]:
+                - generic [ref=e74]: Search
+                - button "Clear" [disabled]
+              - generic [ref=e76]:
+                - img
+                - textbox "Search class, teacher, style" [ref=e77]
+            - group [ref=e79]:
+              - generic "Level Clear" [ref=e80] [cursor=pointer]:
+                - generic [ref=e81]: Level
+                - button "Clear" [disabled]
+              - generic [ref=e83]:
+                - button "Any level" [ref=e84] [cursor=pointer]
+                - button "Beginner" [ref=e85] [cursor=pointer]
+                - button "Intermediate" [ref=e86] [cursor=pointer]
+                - button "Advanced" [ref=e87] [cursor=pointer]
+                - button "Open Level" [ref=e88] [cursor=pointer]
+                - button "All Levels" [ref=e89] [cursor=pointer]
+            - group [ref=e91]:
+              - generic "Type Clear" [ref=e92] [cursor=pointer]:
+                - generic [ref=e93]: Type
+                - button "Clear" [disabled]
+              - generic [ref=e95]:
+                - button "Any type" [ref=e96] [cursor=pointer]
+                - button "Contemporary" [ref=e97] [cursor=pointer]
+                - button "Ballet" [ref=e98] [cursor=pointer]
+                - button "Improv" [ref=e99] [cursor=pointer]
+                - button "Contact Improv" [ref=e100] [cursor=pointer]
+                - button "Ecstatic Dance/ 5Rythms" [ref=e101] [cursor=pointer]
+                - button "Salsa" [ref=e102] [cursor=pointer]
+                - button "Bachata" [ref=e103] [cursor=pointer]
+                - button "Butoh" [ref=e104] [cursor=pointer]
+                - button "Somatic" [ref=e105] [cursor=pointer]
+                - button "Hip Hop" [ref=e106] [cursor=pointer]
+                - button "Yoga/Pilates" [ref=e107] [cursor=pointer]
+                - button "Jazz" [ref=e108] [cursor=pointer]
+                - button "House" [ref=e109] [cursor=pointer]
+                - button "Commercial/Heels" [ref=e110] [cursor=pointer]
+                - button "Ballroom/Tango" [ref=e111] [cursor=pointer]
+                - button "Other" [ref=e112] [cursor=pointer]
+            - group [ref=e114]:
+              - generic "Day Clear" [ref=e115] [cursor=pointer]:
+                - generic [ref=e116]: Day
+                - button "Clear" [disabled]
+              - generic [ref=e118]:
+                - button "Any day" [ref=e119] [cursor=pointer]
+                - button "Monday" [ref=e120] [cursor=pointer]
+                - button "Tuesday" [ref=e121] [cursor=pointer]
+                - button "Wednesday" [ref=e122] [cursor=pointer]
+                - button "Thursday" [ref=e123] [cursor=pointer]
+                - button "Friday" [ref=e124] [cursor=pointer]
+                - button "Saturday" [ref=e125] [cursor=pointer]
+                - button "Sunday" [ref=e126] [cursor=pointer]
+            - group [ref=e128]:
+              - generic "Venue Clear" [ref=e129] [cursor=pointer]:
+                - generic [ref=e130]: Venue
+                - button "Clear" [disabled]
+              - generic [ref=e132]:
+                - button "Any venue" [ref=e133] [cursor=pointer]
+                - button "1Syllable" [ref=e134] [cursor=pointer]
+                - button "Daniel Rodriguez" [ref=e135] [cursor=pointer]
+                - button "Look At Movement (Tanztheatre)" [ref=e136] [cursor=pointer]
+                - button "Marina Sfyridi" [ref=e137] [cursor=pointer]
+                - button "Siobhan Davies Studios" [ref=e138] [cursor=pointer]
+                - button "The Place" [ref=e139] [cursor=pointer]
+                - button "Ballet for You" [ref=e140] [cursor=pointer]
+                - button "Britannia Row" [ref=e141] [cursor=pointer]
+                - button "Butoh Mutations" [ref=e142] [cursor=pointer]
+                - button "Chisenhale Dance Space" [ref=e143] [cursor=pointer]
+                - button "CI Calendar London" [ref=e144] [cursor=pointer]
+                - button "City Academy" [ref=e145] [cursor=pointer]
+                - button "Colet House" [ref=e146] [cursor=pointer]
+                - button "cplay.cy" [ref=e147] [cursor=pointer]
+                - button "Custom listings" [ref=e148] [cursor=pointer]
+                - button "DabkeRoots" [ref=e149] [cursor=pointer]
+                - button "East London Dance" [ref=e150] [cursor=pointer]
+                - button "Ecstatic Dance London" [ref=e151] [cursor=pointer]
+                - button "Fieldworks Dance" [ref=e152] [cursor=pointer]
+                - button "Five Rhythms London" [ref=e153] [cursor=pointer]
+                - button "Florence Trust (Writers' Room)" [ref=e154] [cursor=pointer]
+                - button "Gel" [ref=e155] [cursor=pointer]
+                - button "Hackney Baths" [ref=e156] [cursor=pointer]
+                - button "JW3" [ref=e157] [cursor=pointer]
+                - button "Luminous Dance" [ref=e158] [cursor=pointer]
+                - button "Omnibus Theatre" [ref=e159] [cursor=pointer]
+                - button "Posthuman Theatre Butoh" [ref=e160] [cursor=pointer]
+                - button "Rachel Mann & Marlon Who Henry" [ref=e161] [cursor=pointer]
+                - button "Rambert" [ref=e162] [cursor=pointer]
+                - button "StreamMovement" [ref=e163] [cursor=pointer]
+                - button "Studio 66" [ref=e164] [cursor=pointer]
+                - button "The Manor / MVMT" [ref=e165] [cursor=pointer]
+                - button "TripSpace" [ref=e166] [cursor=pointer]
+                - button "UK Dancers for Palestine" [ref=e167] [cursor=pointer]
+                - button "Under the Sun Dance" [ref=e168] [cursor=pointer]
+                - button "Wednesday Moving" [ref=e169] [cursor=pointer]
+                - button "Bachata Community" [ref=e170] [cursor=pointer]
+                - button "Bar Salsa Temple" [ref=e171] [cursor=pointer]
+                - button "Con Tumbao Salsa" [ref=e172] [cursor=pointer]
+                - button "Cubaneando" [ref=e173] [cursor=pointer]
+                - button "MamboCity" [ref=e174] [cursor=pointer]
+                - button "Salsa Rueda (Rueda Libre)" [ref=e175] [cursor=pointer]
+                - button "Salsa! Soho" [ref=e176] [cursor=pointer]
+                - button "SuperMario Salsa" [ref=e177] [cursor=pointer]
+                - button "BASE Dance Studios" [ref=e178] [cursor=pointer]
+                - button "Danceworks" [ref=e179] [cursor=pointer]
+                - button "Pineapple Dance Studios" [ref=e180] [cursor=pointer]
+            - group [ref=e182]:
+              - generic "Workshops Clear" [ref=e183] [cursor=pointer]:
+                - generic [ref=e184]: Workshops
+                - button "Clear" [disabled]
+              - generic [ref=e186]:
+                - checkbox "Workshops only" [ref=e187]
+                - generic [ref=e188]: Workshops only
+            - group [ref=e190]:
+              - generic "Shortlist Clear" [ref=e191] [cursor=pointer]:
+                - generic [ref=e192]: Shortlist
+                - button "Clear" [disabled]
+              - generic [ref=e194]:
+                - generic [ref=e195]:
+                  - button "All classes" [ref=e196] [cursor=pointer]
+                  - button "Shortlist (0)" [disabled]
+                - generic [ref=e197]:
+                  - button "Clear filters" [disabled]
+                  - button "Clear shortlist (0)" [disabled]
+      - generic [ref=e198]:
+        - generic [ref=e199]:
+          - generic [ref=e200]:
+            - heading "Find dance classes" [level=2] [ref=e201]
+            - paragraph [ref=e202]: Loading latest classes
+          - generic [ref=e203]:
+            - generic [ref=e204]: 0 filters
+            - button "Calendar" [ref=e205] [cursor=pointer]:
+              - img [ref=e206]
+              - text: Calendar
+            - button "Venues" [ref=e208] [cursor=pointer]:
+              - img [ref=e209]
+              - text: Venues
+            - button "Map" [ref=e213] [cursor=pointer]:
+              - img [ref=e214]
+              - text: Map
+        - status [ref=e217]:
+          - generic [ref=e218]:
+            - generic [ref=e219]:
+              - paragraph [ref=e220]: Loading latest class listings
+              - paragraph [ref=e221]: Preparing the calendar from current venue data.
+            - generic [ref=e222]: Live schedule
+        - generic [ref=e225]:
+          - button "Previous" [ref=e226] [cursor=pointer]:
+            - img [ref=e227]
+            - text: Previous
+          - button "Today" [ref=e229] [cursor=pointer]
+          - button "Next" [ref=e230] [cursor=pointer]:
+            - text: Next
+            - img [ref=e231]
+          - generic [ref=e233]: From Sat 2 May 2026
+          - generic [ref=e234]: Showing 2 - 8 May 2026
+          - generic [ref=e235]:
+            - generic [ref=e236]: Week view range start date
+            - textbox "Range start date" [ref=e237]: 2026-05-02
+            - generic [ref=e238]: to
+            - generic [ref=e239]: Week view range end date
+            - textbox "Range end date" [ref=e240]: 2026-05-08
+          - generic [ref=e241]:
+            - button "Week" [ref=e242] [cursor=pointer]
+            - button "Month" [ref=e243] [cursor=pointer]
+        - generic [ref=e245]:
+          - generic [ref=e247]:
+            - heading "Sat 2" [level=3] [ref=e248]:
+              - generic [ref=e249]: Sat
+              - generic [ref=e250]: "2"
+            - generic [ref=e251]: Today
+            - paragraph [ref=e252]: May 2026
+          - heading "Sun 3" [level=3] [ref=e272]:
+            - generic [ref=e273]: Sun
+            - generic [ref=e274]: "3"
+          - heading "Mon 4" [level=3] [ref=e289]:
+            - generic [ref=e290]: Mon
+            - generic [ref=e291]: "4"
+          - heading "Tue 5" [level=3] [ref=e306]:
+            - generic [ref=e307]: Tue
+            - generic [ref=e308]: "5"
+          - heading "Wed 6" [level=3] [ref=e328]:
+            - generic [ref=e329]: Wed
+            - generic [ref=e330]: "6"
+          - heading "Thu 7" [level=3] [ref=e340]:
+            - generic [ref=e341]: Thu
+            - generic [ref=e342]: "7"
+          - heading "Fri 8" [level=3] [ref=e357]:
+            - generic [ref=e358]: Fri
+            - generic [ref=e359]: "8"
+      - region "Contact" [ref=e367]:
+        - paragraph [ref=e368]: Spotted an error or missing class?
+        - paragraph [ref=e369]: Send feedback on the contact page and I'll try to fix issues when I can.
+        - generic [ref=e370]:
+          - link "Open contact page" [ref=e371] [cursor=pointer]:
+            - /url: /contact
+          - navigation "Site maintainer social profiles" [ref=e372]:
+            - list [ref=e373]:
+              - listitem [ref=e374]:
+                - link "LinkedIn" [ref=e375] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/in/jeremy-osztreicher-72236a125/
+              - listitem [ref=e376]:
+                - link "Instagram (@JeremyOsz)" [ref=e377] [cursor=pointer]:
+                  - /url: https://www.instagram.com/JeremyOsz/
+  - alert [ref=e378]

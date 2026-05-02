@@ -1,9 +1,61 @@
 import type { Metadata, Viewport } from "next";
+import { Archivo, Chakra_Petch, IBM_Plex_Mono, Inter, Orbitron, Rajdhani, Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { getBaseUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/react";
 
 const baseUrl = getBaseUrl();
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+  display: "swap"
+});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space-grotesk",
+  display: "swap"
+});
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sora",
+  display: "swap"
+});
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-archivo",
+  display: "swap"
+});
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap"
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-orbitron",
+  display: "swap"
+});
+
+const chakraPetch = Chakra_Petch({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-chakra-petch",
+  display: "swap"
+});
+
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-rajdhani",
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -57,8 +109,10 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const fontLayers = `${inter.variable} ${spaceGrotesk.variable} ${sora.variable} ${archivo.variable} ${ibmPlexMono.variable} ${orbitron.variable} ${chakraPetch.variable} ${rajdhani.variable}`;
+
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={fontLayers}>
       <body>
         {children}
         <Analytics />

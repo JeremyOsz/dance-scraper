@@ -2,7 +2,43 @@
   "version": 1,
   "runs": [
     {
-      "at": "2026-05-02T11:25:05.953Z",
+      "at": "2026-04-27T11:54:32.668Z",
+      "venues": [
+        {
+          "key": "ecstaticDanceLondon",
+          "venue": "Ecstatic Dance London",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 1,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 1
+      }
+    },
+    {
+      "at": "2026-04-27T11:54:12.490Z",
+      "venues": [
+        {
+          "key": "ecstaticDanceLondon",
+          "venue": "Ecstatic Dance London",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 1,
+        "okVenues": 1,
+        "changedAmongOk": 0
+      }
+    },
+    {
+      "at": "2026-04-27T11:39:30.169Z",
       "venues": [
         {
           "key": "thePlace",

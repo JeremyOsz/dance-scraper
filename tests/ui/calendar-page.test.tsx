@@ -162,7 +162,7 @@ describe("CalendarPage", () => {
   it("disables preferred/shortlist-only toggles when nothing is saved", async () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    expect(screen.getByRole("heading", { level: 1, name: "Find dance classes in London — fast" })).toBeVisible();
+    expect(screen.getByRole("heading", { level: 1, name: "The Floor Is Yours..." })).toBeVisible();
     expect(screen.getByRole("heading", { level: 2, name: "Find dance classes" })).toBeInTheDocument();
     expect(screen.queryByRole("checkbox", { name: "Preferred venues only" })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Shortlist (0)" })).toBeDisabled();
@@ -232,10 +232,10 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await user.click(screen.getByRole("button", { name: "Venues list" }));
     expect((await screen.findAllByRole("link", { name: "Venue site" })).length).toBeGreaterThan(0);
 
-    await user.click(screen.getByRole("button", { name: "Map" }));
+    await user.click(screen.getByRole("button", { name: "Map view" }));
     const mapFrame = await screen.findByTitle("Venue map");
     expect(mapFrame).toBeInTheDocument();
     expect(mapFrame).toHaveAttribute(
@@ -248,7 +248,7 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await user.click(screen.getByRole("button", { name: "Venues list" }));
     expect(screen.getAllByText("No events").length).toBeGreaterThan(0);
     expect(screen.getAllByText(/No sessions found on last scrape/i).length).toBeGreaterThan(0);
   });
@@ -257,7 +257,7 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await user.click(screen.getByRole("button", { name: "Venues list" }));
     expect(screen.getByText("Error scraping")).toBeInTheDocument();
     expect(screen.getByText("Request timed out while fetching schedule")).toBeInTheDocument();
   });
@@ -401,30 +401,27 @@ describe("CalendarPage", () => {
       expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("day=Tuesday"), { scroll: false });
     });
 
-    await user.click(screen.getByRole("button", { name: "Venues" }));
+    await user.click(screen.getByRole("button", { name: "Venues list" }));
     await waitFor(() => {
       expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("mode=venues"), { scroll: false });
     });
   });
 
-  it("uses native share when available", async () => {
+  it("opens share modal with link and QR code", async () => {
     const user = userEvent.setup();
-    const shareMock = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(window.navigator, "share", { configurable: true, value: shareMock });
+    Object.defineProperty(window.navigator, "share", { configurable: true, value: undefined });
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
     await user.click(screen.getByRole("button", { name: "Share" }));
 
-    expect(shareMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        url: expect.stringContaining("?mode=calendar&view=week&date="),
-        title: "London Dance Calendar"
-      })
+    expect(await screen.findByRole("dialog", { name: "Share this view" })).toBeInTheDocument();
+    expect((screen.getByRole("textbox", { name: "Share link" }) as HTMLInputElement).value).toMatch(
+      /mode=calendar&view=week&date=\d{4}-\d{2}-\d{2}/
     );
-    expect(await screen.findByText("Shared")).toBeInTheDocument();
+    expect(screen.getByTitle("QR code for this calendar view")).toBeInTheDocument();
   });
 
-  it("copies the current URL when native share is unavailable", async () => {
+  it("copies share URL from the modal", async () => {
     const user = userEvent.setup();
     const writeTextMock = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(window.navigator, "share", { configurable: true, value: undefined });
@@ -435,8 +432,30 @@ describe("CalendarPage", () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
     await user.click(screen.getByRole("button", { name: "Share" }));
+    await screen.findByRole("dialog");
+
+    await user.click(screen.getByRole("button", { name: "Copy link" }));
 
     expect(writeTextMock).toHaveBeenCalledWith(expect.stringContaining("?mode=calendar&view=week&date="));
-    expect(await screen.findByText("Link copied")).toBeInTheDocument();
+    expect(await screen.findByText("Copied")).toBeInTheDocument();
+  });
+
+  it("invokes native share from the modal when available", async () => {
+    const user = userEvent.setup();
+    const shareMock = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(window.navigator, "share", { configurable: true, value: shareMock });
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Share" }));
+    await screen.findByRole("dialog");
+    await user.click(screen.getByRole("button", { name: "Share using device…" }));
+
+    expect(shareMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        url: expect.stringContaining("?mode=calendar&view=week&date="),
+        title: "London Dance Calendar"
+      })
+    );
+    expect(await screen.findByText("Shared")).toBeInTheDocument();
   });
 });

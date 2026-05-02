@@ -69,19 +69,19 @@ function UpcomingClassesSnapshot({ occurrences, title }: { occurrences: Upcoming
   }
 
   return (
-    <details className="group mt-4 rounded-lg border border-input bg-card px-4 py-3">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
-        <h2 id="upcoming-classes-heading" className="text-base font-semibold tracking-tight">
+    <details className="group rounded-lg border border-input bg-card px-5 py-5 max-sm:px-6 max-sm:py-6 sm:px-4 sm:py-3">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-1">
+        <h2 id="upcoming-classes-heading" className="text-base font-semibold leading-snug tracking-tight max-sm:text-[1.05rem]">
           {title}
         </h2>
-        <span className="text-sm text-muted-foreground group-open:hidden">Show</span>
-        <span className="hidden text-sm text-muted-foreground group-open:inline">Hide</span>
+        <span className="shrink-0 text-sm leading-none text-muted-foreground group-open:hidden max-sm:text-base">Show</span>
+        <span className="hidden shrink-0 text-sm leading-none text-muted-foreground group-open:inline max-sm:text-base">Hide</span>
       </summary>
-      <ol className="mt-3 grid gap-2 md:grid-cols-2" aria-labelledby="upcoming-classes-heading">
+      <ol className="mt-5 grid gap-3 sm:mt-3 sm:gap-2 md:grid-cols-2" aria-labelledby="upcoming-classes-heading">
         {occurrences.map(({ session, dateIso, date }) => {
           const types = inferDanceTypes(session).slice(0, 2);
           return (
-            <li key={`${session.id}-${dateIso}`} className="rounded-md border border-input bg-background p-3 text-sm">
+            <li key={`${session.id}-${dateIso}`} className="rounded-md border border-input bg-background p-5 text-sm leading-relaxed sm:p-3 sm:leading-normal">
               <h3 className="font-medium">{formatSnapshotTitle(session.title)}</h3>
               <p className="text-muted-foreground">
                 <time dateTime={dateIso}>{format(date, "EEE d MMM yyyy")}</time>
@@ -109,7 +109,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const venueNames = sortVenuesForSeo([...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))]);
   const title = buildPageTitle("London Dance Classes & Workshops");
   const description = buildMetaDescription(
-    `Find dance classes in London — fast. Browse ${classCount} adult classes from ${venueCount} venues: filter by style, level, and location. Ballet, salsa, contemporary, improv, and more.`
+    `Find Dance Classes in London. Browse ${classCount} adult classes from ${venueCount} venues — filter by style, level, date, and location. Ballet, salsa, contemporary, improv, and more.`
   );
   const keywords = [
     "London dance classes",
@@ -149,20 +149,41 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Home() {
   const data = readScrapeOutput();
   const baseUrl = getBaseUrl();
+  const scrapeStatusByKey = new Map(data.venues.map((venue) => [venue.key, venue]));
   const venueMap = new Map(
-    data.venues.map((venue) => [
-      venue.venue,
-      {
-        name: venue.venue,
-        sourceUrl: venue.sourceUrl,
-        mapQuery: VENUES[venue.key]?.mapQuery,
-        count: venue.count,
-        ok: venue.ok,
-        lastSuccessAt: venue.lastSuccessAt,
-        lastError: venue.lastError
-      }
-    ])
+    (Object.keys(VENUES) as Array<keyof typeof VENUES>).map((key) => {
+      const configured = VENUES[key];
+      const scraped = scrapeStatusByKey.get(key);
+
+      return [
+        configured.label,
+        {
+          name: configured.label,
+          sourceUrl: scraped?.sourceUrl ?? configured.sourceUrl,
+          mapQuery: configured.mapQuery,
+          count: scraped?.count ?? 0,
+          ok: scraped?.ok ?? true,
+          lastSuccessAt: scraped?.lastSuccessAt ?? null,
+          lastError: scraped?.lastError ?? null
+        }
+      ];
+    })
   );
+  // Keep any extra persisted venue rows so ad-hoc sources remain visible.
+  for (const venue of data.venues) {
+    if (venueMap.has(venue.venue)) {
+      continue;
+    }
+    venueMap.set(venue.venue, {
+      name: venue.venue,
+      sourceUrl: venue.sourceUrl,
+      mapQuery: VENUES[venue.key]?.mapQuery,
+      count: venue.count,
+      ok: venue.ok,
+      lastSuccessAt: venue.lastSuccessAt,
+      lastError: venue.lastError
+    });
+  }
   const venues = sortVenueRecordsForUi(Array.from(venueMap.values())).map((venue) => ({
     ...venue,
     outboundSourceHref: signOutboundRedirectUrl(venue.sourceUrl, "venue") ?? venue.sourceUrl
@@ -223,9 +244,13 @@ export default function Home() {
       <CalendarPage
         classCount={data.sessions.length}
         listingsUpdatedText={listingsUpdatedText}
-        venueCount={data.venues.length}
+        venueCount={venues.length}
         venues={venues}
-        seoSnapshot={<UpcomingClassesSnapshot occurrences={snapshotOccurrences} title={snapshotTitle} />}
+        seoSnapshot={
+          snapshotOccurrences.length > 0 ? (
+            <UpcomingClassesSnapshot occurrences={snapshotOccurrences} title={snapshotTitle} />
+          ) : undefined
+        }
       />
     </>
   );

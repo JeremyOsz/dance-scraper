@@ -270,11 +270,14 @@ function mergeVenueRowsWithInferredCounts(
   if (!persisted || persisted.length === 0) {
     return inferred;
   }
-  const byName = new Map(persisted.map((v) => [v.venue, v]));
-  return inferred.map((row) => {
-    const prev = byName.get(row.venue);
-    if (!prev) {
-      return row;
+  const inferredByName = new Map(inferred.map((v) => [v.venue, v]));
+  const merged = persisted.map((prev) => {
+    const row = inferredByName.get(prev.venue);
+    if (!row) {
+      return {
+        ...prev,
+        count: 0
+      };
     }
     return {
       ...row,
@@ -285,6 +288,15 @@ function mergeVenueRowsWithInferredCounts(
       sourceUrl: prev.sourceUrl || row.sourceUrl
     };
   });
+
+  const persistedNames = new Set(persisted.map((v) => v.venue));
+  for (const row of inferred) {
+    if (!persistedNames.has(row.venue)) {
+      merged.push(row);
+    }
+  }
+
+  return merged;
 }
 
 /** Session cleanup applied when loading merged or hand-edited `classes.normalized.json`. Exported for tests. */

@@ -3,23 +3,356 @@
 @tailwind utilities;
 
 :root {
-  --background: 48 33% 97%;
-  --foreground: 18 16% 16%;
+  --background: 44 20% 96%;
+  --foreground: 214 35% 12%;
   --card: 0 0% 100%;
-  --card-foreground: 18 16% 16%;
+  --card-foreground: 214 35% 12%;
   --popover: 0 0% 100%;
-  --popover-foreground: 18 16% 16%;
-  --primary: 196 91% 28%;
+  --popover-foreground: 214 35% 12%;
+  --primary: 202 100% 21%;
   --primary-foreground: 0 0% 98%;
-  --secondary: 35 55% 90%;
-  --secondary-foreground: 18 16% 16%;
-  --muted: 36 24% 92%;
-  --muted-foreground: 20 10% 38%;
-  --accent: 161 49% 82%;
-  --accent-foreground: 18 16% 16%;
-  --border: 30 18% 80%;
-  --input: 30 18% 80%;
-  --ring: 196 91% 28%;
+  --secondary: 199 32% 88%;
+  --secondary-foreground: 214 35% 12%;
+  --muted: 210 17% 90%;
+  --muted-foreground: 215 18% 31%;
+  --accent: 31 94% 56%;
+  --accent-foreground: 214 35% 12%;
+  --border: 214 24% 22%;
+  --input: 214 18% 48%;
+  --ring: 31 94% 46%;
+  --ldc-surface: 0 0% 100%;
+  --ldc-surface-soft: 0 0% 100%;
+  --ldc-lane-alt: 210 17% 94%;
+  --ldc-today: 202 76% 94%;
+  --ldc-featured: 43 96% 89%;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="system"] {
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+[data-font="sora"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="archivo"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="mono"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-ibm-plex-mono), var(--font-inter), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+[data-font="cyber"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-orbitron), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="chakra"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-chakra-petch), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="rajdhani"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-rajdhani), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-palette="warm"] {
+  --background: 38 43% 92%;
+  --card: 44 68% 96%;
+  --popover: 44 68% 96%;
+  --primary: 17 82% 35%;
+  --secondary: 34 56% 86%;
+  --muted: 33 26% 84%;
+  --accent: 25 95% 58%;
+  --ring: 17 82% 35%;
+  --ldc-surface: 44 68% 96%;
+  --ldc-surface-soft: 40 72% 94%;
+  --ldc-lane-alt: 32 45% 88%;
+  --ldc-today: 25 96% 89%;
+  --ldc-featured: 44 96% 86%;
+}
+
+[data-palette="coral"] {
+  --background: 9 55% 93%;
+  --card: 15 68% 97%;
+  --popover: 15 68% 97%;
+  --primary: 344 75% 32%;
+  --secondary: 352 52% 89%;
+  --muted: 5 30% 86%;
+  --accent: 13 92% 62%;
+  --ring: 344 75% 32%;
+  --ldc-surface: 15 68% 97%;
+  --ldc-surface-soft: 6 66% 96%;
+  --ldc-lane-alt: 352 48% 91%;
+  --ldc-today: 13 92% 88%;
+  --ldc-featured: 39 95% 87%;
+}
+
+[data-palette="olive"] {
+  --background: 76 25% 89%;
+  --card: 62 44% 95%;
+  --popover: 62 44% 95%;
+  --primary: 93 42% 24%;
+  --secondary: 71 34% 84%;
+  --muted: 74 18% 82%;
+  --accent: 39 82% 54%;
+  --ring: 93 42% 24%;
+  --ldc-surface: 62 44% 95%;
+  --ldc-surface-soft: 70 48% 93%;
+  --ldc-lane-alt: 80 28% 86%;
+  --ldc-today: 92 42% 86%;
+  --ldc-featured: 43 88% 84%;
+}
+
+[data-palette="mono"] {
+  --background: 38 8% 91%;
+  --card: 40 12% 97%;
+  --popover: 40 12% 97%;
+  --primary: 214 35% 12%;
+  --secondary: 38 7% 84%;
+  --muted: 38 6% 82%;
+  --accent: 31 88% 58%;
+  --ring: 214 35% 12%;
+  --ldc-surface: 40 12% 97%;
+  --ldc-surface-soft: 36 12% 94%;
+  --ldc-lane-alt: 38 8% 88%;
+  --ldc-today: 36 10% 84%;
+  --ldc-featured: 40 80% 86%;
+}
+
+/* Bold / high-contrast */
+
+/* Bright yellow field, black ink, orange punch */
+[data-palette="citrine"] {
+  --background: 52 100% 72%;
+  --foreground: 0 0% 5%;
+  --card: 54 100% 82%;
+  --card-foreground: 0 0% 6%;
+  --popover: 54 100% 88%;
+  --popover-foreground: 0 0% 6%;
+  --primary: 0 0% 7%;
+  --primary-foreground: 52 100% 92%;
+  --secondary: 48 90% 62%;
+  --secondary-foreground: 0 0% 8%;
+  --muted: 50 55% 58%;
+  --muted-foreground: 0 0% 18%;
+  --accent: 28 100% 48%;
+  --accent-foreground: 0 0% 98%;
+  --border: 45 100% 22%;
+  --input: 40 35% 28%;
+  --ring: 28 100% 42%;
+  --ldc-surface: 54 100% 84%;
+  --ldc-surface-soft: 53 100% 78%;
+  --ldc-lane-alt: 51 85% 68%;
+  --ldc-today: 43 100% 58%;
+  --ldc-featured: 35 100% 52%;
+}
+
+/* Red on black — poster / warning tape */
+[data-palette="inferno"] {
+  --background: 0 0% 4%;
+  --foreground: 0 0% 96%;
+  --card: 0 0% 7%;
+  --card-foreground: 0 0% 95%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 0 90% 54%;
+  --primary-foreground: 0 0% 4%;
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 0 0% 92%;
+  --muted: 0 0% 14%;
+  --muted-foreground: 0 12% 72%;
+  --accent: 48 100% 52%;
+  --accent-foreground: 0 0% 6%;
+  --border: 0 65% 28%;
+  --input: 0 40% 35%;
+  --ring: 0 90% 54%;
+  --ldc-surface: 0 0% 8%;
+  --ldc-surface-soft: 0 0% 5%;
+  --ldc-lane-alt: 0 0% 11%;
+  --ldc-today: 0 70% 16%;
+  --ldc-featured: 38 90% 18%;
+}
+
+/* Catppuccin Latte — soft mauve / teal / rose (community palette, approximated) */
+[data-palette="latte"] {
+  --background: 220 23% 95%;
+  --foreground: 234 16% 35%;
+  --card: 220 22% 97%;
+  --card-foreground: 234 16% 32%;
+  --popover: 220 22% 98%;
+  --popover-foreground: 234 16% 32%;
+  --primary: 266 85% 48%;
+  --primary-foreground: 220 38% 98%;
+  --secondary: 223 16% 88%;
+  --secondary-foreground: 234 16% 28%;
+  --muted: 223 14% 90%;
+  --muted-foreground: 233 12% 41%;
+  --accent: 11 59% 67%;
+  --accent-foreground: 234 16% 22%;
+  --border: 230 17% 72%;
+  --input: 228 18% 58%;
+  --ring: 266 85% 48%;
+  --ldc-surface: 220 24% 97%;
+  --ldc-surface-soft: 220 22% 95%;
+  --ldc-lane-alt: 223 16% 91%;
+  --ldc-today: 197 55% 88%;
+  --ldc-featured: 183 35% 86%;
+}
+
+/*
+ * Harmonic — same disciplined palette in two modes:
+ * Accent ≈ rgb(235,10,10); greys carry hierarchy; no extra hues in chrome.
+ */
+
+[data-palette="harmonic-dark"] {
+  --background: 0 0% 4%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 7%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 358 88% 49%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 13%;
+  --secondary-foreground: 0 0% 93%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 61%;
+  --accent: 358 88% 49%;
+  --accent-foreground: 0 0% 100%;
+  --border: 0 0% 22%;
+  --input: 0 0% 38%;
+  --ring: 358 88% 49%;
+  --ldc-surface: 0 0% 10%;
+  --ldc-surface-soft: 0 0% 6%;
+  --ldc-lane-alt: 0 0% 12%;
+  --ldc-today: 0 45% 16%;
+  --ldc-featured: 0 55% 15%;
+}
+
+[data-palette="harmonic-light"] {
+  --background: 0 0% 99%;
+  --foreground: 0 0% 8%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 10%;
+  --primary: 358 88% 49%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 93%;
+  --secondary-foreground: 0 0% 12%;
+  --muted: 0 0% 92%;
+  --muted-foreground: 0 0% 43%;
+  --accent: 358 88% 49%;
+  --accent-foreground: 0 0% 100%;
+  --border: 0 0% 87%;
+  --input: 0 0% 52%;
+  --ring: 358 88% 49%;
+  --ldc-surface: 0 0% 100%;
+  --ldc-surface-soft: 0 0% 97%;
+  --ldc-lane-alt: 0 0% 94%;
+  --ldc-today: 358 32% 94%;
+  --ldc-featured: 358 40% 92%;
+}
+
+[data-palette="harmonic-light"] body {
+  background-image:
+    linear-gradient(90deg, rgba(15, 32, 46, 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(15, 32, 46, 0.04) 1px, transparent 1px);
+}
+
+/* Maximal chroma — cyan / magenta / lime clash (still readable body text) */
+[data-palette="insane"] {
+  --background: 285 48% 8%;
+  --foreground: 75 100% 94%;
+  --card: 280 42% 11%;
+  --card-foreground: 82 96% 92%;
+  --popover: 280 40% 12%;
+  --popover-foreground: 82 96% 92%;
+  --primary: 322 100% 58%;
+  --primary-foreground: 285 60% 6%;
+  --secondary: 195 95% 22%;
+  --secondary-foreground: 190 100% 92%;
+  --muted: 275 35% 16%;
+  --muted-foreground: 265 65% 78%;
+  --accent: 85 96% 58%;
+  --accent-foreground: 285 55% 5%;
+  --border: 305 95% 45%;
+  --input: 195 55% 32%;
+  --ring: 185 100% 52%;
+  --ldc-surface: 278 44% 12%;
+  --ldc-surface-soft: 283 42% 9%;
+  --ldc-lane-alt: 268 38% 16%;
+  --ldc-today: 322 72% 22%;
+  --ldc-featured: 185 80% 20%;
+}
+
+[data-palette="noir"] {
+  --background: 262 22% 5%;
+  --foreground: 270 55% 98%;
+  --card: 258 18% 9%;
+  --card-foreground: 275 35% 97%;
+  --popover: 258 18% 9%;
+  --popover-foreground: 275 35% 97%;
+  --primary: 289 92% 72%;
+  --primary-foreground: 258 35% 6%;
+  --secondary: 256 14% 14%;
+  --secondary-foreground: 272 45% 95%;
+  --muted: 255 12% 17%;
+  --muted-foreground: 265 12% 70%;
+  --accent: 316 100% 62%;
+  --accent-foreground: 258 25% 5%;
+  --border: 255 14% 32%;
+  --input: 255 12% 40%;
+  --ring: 316 100% 62%;
+  --ldc-surface: 258 17% 10%;
+  --ldc-surface-soft: 258 14% 7%;
+  --ldc-lane-alt: 256 13% 14%;
+  --ldc-today: 285 62% 20%;
+  --ldc-featured: 318 52% 16%;
+}
+
+[data-palette="volt"] {
+  --background: 168 24% 5%;
+  --foreground: 86 72% 97%;
+  --card: 168 20% 8%;
+  --card-foreground: 82 56% 95%;
+  --popover: 168 20% 8%;
+  --popover-foreground: 82 56% 95%;
+  --primary: 154 94% 48%;
+  --primary-foreground: 168 85% 4%;
+  --secondary: 166 18% 13%;
+  --secondary-foreground: 80 42% 92%;
+  --muted: 165 14% 15%;
+  --muted-foreground: 148 14% 64%;
+  --accent: 82 96% 55%;
+  --accent-foreground: 168 50% 5%;
+  --border: 162 18% 24%;
+  --input: 164 14% 32%;
+  --ring: 154 94% 50%;
+  --ldc-surface: 168 18% 9%;
+  --ldc-surface-soft: 169 18% 6%;
+  --ldc-lane-alt: 166 16% 13%;
+  --ldc-today: 154 65% 16%;
+  --ldc-featured: 82 65% 18%;
+}
+
+[data-palette="harmonic-dark"] body,
+[data-palette="noir"] body,
+[data-palette="volt"] body,
+[data-palette="inferno"] body,
+[data-palette="insane"] body {
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
 }
 
 * {
@@ -28,8 +361,14 @@
 
 body {
   @apply bg-background text-foreground;
+  font-family: var(--font-body);
   min-height: 100vh;
   background-image:
-    radial-gradient(circle at 100% 0%, rgba(255, 187, 92, 0.18), transparent 42%),
-    radial-gradient(circle at 0% 100%, rgba(0, 145, 199, 0.12), transparent 36%);
+    linear-gradient(90deg, rgba(15, 32, 46, 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(15, 32, 46, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.font-display {
+  font-family: var(--font-display);
 }
