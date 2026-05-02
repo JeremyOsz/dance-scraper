@@ -107,6 +107,8 @@ const editorialButtonClass = "rounded-sm border-border/55";
 const iconClass = "h-4 w-4 shrink-0";
 const PALETTES = [
   { value: "white", label: "White" },
+  { value: "harmonic-dark", label: "Harmonic Dark" },
+  { value: "harmonic-light", label: "Harmonic Light" },
   { value: "warm", label: "Warm" },
   { value: "coral", label: "Coral" },
   { value: "olive", label: "Olive" },
@@ -121,6 +123,9 @@ const PALETTES = [
 type PaletteValue = (typeof PALETTES)[number]["value"];
 const FONT_SCHEMES = [
   { value: "space", label: "Space + Inter" },
+  { value: "cyber", label: "Cyber (Orbitron)" },
+  { value: "chakra", label: "Chakra Petch" },
+  { value: "rajdhani", label: "Rajdhani" },
   { value: "system", label: "System" },
   { value: "sora", label: "Sora" },
   { value: "archivo", label: "Archivo" },
@@ -516,8 +521,12 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       return;
     }
     const storedPalette = window.localStorage.getItem(PALETTE_STORAGE_KEY);
-    if (isPaletteValue(storedPalette)) {
-      setPalette(storedPalette);
+    const effectivePalette = storedPalette === "harmonic" ? "harmonic-dark" : storedPalette;
+    if (effectivePalette !== storedPalette && effectivePalette !== null) {
+      window.localStorage.setItem(PALETTE_STORAGE_KEY, effectivePalette);
+    }
+    if (isPaletteValue(effectivePalette)) {
+      setPalette(effectivePalette);
     }
   }, []);
 
@@ -1376,24 +1385,26 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
   return (
     <main className="mx-auto w-full max-w-[1500px] px-3 py-4 sm:px-5 md:px-8">
-      <header className="border-b-2 border-border pb-6 pt-4">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.55fr)] lg:items-start">
-          <div className="min-w-0">
-            <p className="font-display text-xs font-semibold uppercase text-primary">London Dance Calendar</p>
-            <h1 className="font-display mt-2 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-normal text-foreground sm:text-5xl xl:text-[4.6rem]">
-              The floor is yours...
+      <header className="border-b-2 border-border pb-8 pt-5 tracking-[0.1rem]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.55fr)] lg:gap-8 lg:items-stretch">
+          <div className="flex min-w-0 flex-col gap-y-4 sm:gap-y-5">
+            <p className="font-display text-xs font-semibold uppercase text-primary">
+              London Dance Calendar
+            </p>
+            <h1 className="font-display max-w-3xl text-4xl font-semibold leading-tight text-foreground sm:text-5xl xl:text-[4.6rem]">
+              The Floor Is <br></br>Yours...
             </h1>
-            <p className="mt-4 max-w-3xl text-base font-medium leading-snug text-muted-foreground sm:text-lg">
+            <p className="max-w-3xl text-base font-medium leading-snug text-muted-foreground sm:text-lg">
               Find Dance Classes in London. Filter by style, level, date, and location.
             </p>
-            <p className="mt-4 max-w-4xl text-sm font-medium leading-relaxed text-muted-foreground">
+            <p className="max-w-4xl text-sm font-medium leading-snug text-muted-foreground">
               {listingsUpdatedText ? `${listingsUpdatedText.trimEnd()} ` : null}
               Aggregated from studio sources.
             </p>
           </div>
-          <div className="flex min-w-0 flex-col gap-3 lg:items-end">
+          <div className="flex min-w-0 flex-col gap-5 lg:h-full lg:items-end">
             {typeof classCount === "number" && typeof venueCount === "number" ? (
-              <div className="grid w-full max-w-[330px] grid-cols-2 border border-border bg-[hsl(var(--ldc-surface))] text-center shadow-[4px_4px_0_hsl(var(--foreground)/0.14)]">
+              <div className="grid w-full max-w-[330px] grid-cols-2 shrink-0 self-end border border-border bg-[hsl(var(--ldc-surface))] text-center shadow-[4px_4px_0_hsl(var(--foreground)/0.14)]">
                 <div className="border-r border-border px-4 py-2.5">
                   <p className="font-display text-2xl font-semibold leading-none">{classCount.toLocaleString("en-GB")}+</p>
                   <p className="font-display text-[11px] font-semibold uppercase text-muted-foreground">classes</p>
@@ -1404,7 +1415,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 </div>
               </div>
             ) : null}
-            <div className="flex w-full max-w-3xl flex-col gap-2">
+            <div className="flex w-full max-w-3xl flex-col gap-2 lg:mt-auto lg:shrink-0 lg:self-end">
               <div className="flex flex-wrap items-center justify-end gap-2">
                 <span className="font-display text-xs font-semibold uppercase text-muted-foreground">Appearance</span>
                 <label className="inline-flex h-9 items-center gap-2 rounded-sm border border-border/50 bg-[hsl(var(--ldc-surface))] px-2.5 text-sm font-semibold">
@@ -1413,7 +1424,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   <select
                     value={palette}
                     onChange={(event) => setPalette(event.currentTarget.value as PaletteValue)}
-                    className="max-w-[150px] bg-transparent font-semibold outline-none"
+                    className="max-w-[188px] bg-transparent font-semibold outline-none"
                     aria-label="Colour scheme"
                   >
                     {PALETTES.map((item) => (
@@ -1429,7 +1440,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   <select
                     value={fontScheme}
                     onChange={(event) => setFontScheme(event.currentTarget.value as FontSchemeValue)}
-                    className="max-w-[145px] bg-transparent font-semibold outline-none"
+                    className="max-w-[200px] bg-transparent font-semibold outline-none"
                     aria-label="Font style"
                   >
                     {FONT_SCHEMES.map((item) => (
@@ -1531,9 +1542,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
         </DialogContent>
       </Dialog>
 
-      {seoSnapshot ? <div className="mt-8">{seoSnapshot}</div> : null}
+      {seoSnapshot ? <div className="mt-5">{seoSnapshot}</div> : null}
 
-      <div className="mt-8 space-y-4">
+      <div className={`space-y-4 ${seoSnapshot ? "mt-6" : "mt-8"}`}>
         <div className="grid gap-4 lg:grid-cols-[290px_minmax(0,1fr)] lg:items-start">
             <aside className="hidden lg:block">
               <div className={`sticky top-4 overflow-hidden ${editorialPanelClass}`}>

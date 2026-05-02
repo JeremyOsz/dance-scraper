@@ -49,6 +49,21 @@
   --font-display: var(--font-ibm-plex-mono), var(--font-inter), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+[data-font="cyber"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-orbitron), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="chakra"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-chakra-petch), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="rajdhani"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-rajdhani), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
 [data-palette="warm"] {
   --background: 38 43% 92%;
   --card: 44 68% 96%;
@@ -193,6 +208,67 @@
   --ldc-featured: 183 35% 86%;
 }
 
+/*
+ * Harmonic — same disciplined palette in two modes:
+ * Accent ≈ rgb(235,10,10); greys carry hierarchy; no extra hues in chrome.
+ */
+
+[data-palette="harmonic-dark"] {
+  --background: 0 0% 4%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 7%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 358 88% 49%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 13%;
+  --secondary-foreground: 0 0% 93%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 61%;
+  --accent: 358 88% 49%;
+  --accent-foreground: 0 0% 100%;
+  --border: 0 0% 22%;
+  --input: 0 0% 38%;
+  --ring: 358 88% 49%;
+  --ldc-surface: 0 0% 10%;
+  --ldc-surface-soft: 0 0% 6%;
+  --ldc-lane-alt: 0 0% 12%;
+  --ldc-today: 0 45% 16%;
+  --ldc-featured: 0 55% 15%;
+}
+
+[data-palette="harmonic-light"] {
+  --background: 0 0% 99%;
+  --foreground: 0 0% 8%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 10%;
+  --primary: 358 88% 49%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 93%;
+  --secondary-foreground: 0 0% 12%;
+  --muted: 0 0% 92%;
+  --muted-foreground: 0 0% 43%;
+  --accent: 358 88% 49%;
+  --accent-foreground: 0 0% 100%;
+  --border: 0 0% 87%;
+  --input: 0 0% 52%;
+  --ring: 358 88% 49%;
+  --ldc-surface: 0 0% 100%;
+  --ldc-surface-soft: 0 0% 97%;
+  --ldc-lane-alt: 0 0% 94%;
+  --ldc-today: 358 32% 94%;
+  --ldc-featured: 358 40% 92%;
+}
+
+[data-palette="harmonic-light"] body {
+  background-image:
+    linear-gradient(90deg, rgba(15, 32, 46, 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(15, 32, 46, 0.04) 1px, transparent 1px);
+}
+
 /* Maximal chroma — cyan / magenta / lime clash (still readable body text) */
 [data-palette="insane"] {
   --background: 285 48% 8%;
@@ -269,6 +345,7 @@
   --ldc-featured: 82 65% 18%;
 }
 
+[data-palette="harmonic-dark"] body,
 [data-palette="noir"] body,
 [data-palette="volt"] body,
 [data-palette="inferno"] body,

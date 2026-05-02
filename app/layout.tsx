@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono, Inter, Sora, Space_Grotesk } from "next/font/google";
+import { Archivo, Chakra_Petch, IBM_Plex_Mono, Inter, Orbitron, Rajdhani, Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { getBaseUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/react";
@@ -33,6 +33,27 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-ibm-plex-mono",
+  display: "swap"
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-orbitron",
+  display: "swap"
+});
+
+const chakraPetch = Chakra_Petch({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-chakra-petch",
+  display: "swap"
+});
+
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-rajdhani",
   display: "swap"
 });
 
@@ -88,7 +109,7 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const fontLayers = `${inter.variable} ${spaceGrotesk.variable} ${sora.variable} ${archivo.variable} ${ibmPlexMono.variable}`;
+  const fontLayers = `${inter.variable} ${spaceGrotesk.variable} ${sora.variable} ${archivo.variable} ${ibmPlexMono.variable} ${orbitron.variable} ${chakraPetch.variable} ${rajdhani.variable}`;
 
   return (
     <html lang="en-GB" className={fontLayers}>
