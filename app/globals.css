@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -20,6 +22,97 @@
   --border: 214 24% 22%;
   --input: 214 18% 48%;
   --ring: 31 94% 46%;
+  --ldc-surface: 0 0% 100%;
+  --ldc-surface-soft: 0 0% 100%;
+  --ldc-lane-alt: 210 17% 94%;
+  --ldc-today: 202 76% 94%;
+  --ldc-featured: 43 96% 89%;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="system"] {
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+[data-font="sora"] {
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="archivo"] {
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="mono"] {
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "IBM Plex Mono", "Inter", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+[data-palette="warm"] {
+  --background: 38 43% 92%;
+  --card: 44 68% 96%;
+  --popover: 44 68% 96%;
+  --primary: 17 82% 35%;
+  --secondary: 34 56% 86%;
+  --muted: 33 26% 84%;
+  --accent: 25 95% 58%;
+  --ring: 17 82% 35%;
+  --ldc-surface: 44 68% 96%;
+  --ldc-surface-soft: 40 72% 94%;
+  --ldc-lane-alt: 32 45% 88%;
+  --ldc-today: 25 96% 89%;
+  --ldc-featured: 44 96% 86%;
+}
+
+[data-palette="coral"] {
+  --background: 9 55% 93%;
+  --card: 15 68% 97%;
+  --popover: 15 68% 97%;
+  --primary: 344 75% 32%;
+  --secondary: 352 52% 89%;
+  --muted: 5 30% 86%;
+  --accent: 13 92% 62%;
+  --ring: 344 75% 32%;
+  --ldc-surface: 15 68% 97%;
+  --ldc-surface-soft: 6 66% 96%;
+  --ldc-lane-alt: 352 48% 91%;
+  --ldc-today: 13 92% 88%;
+  --ldc-featured: 39 95% 87%;
+}
+
+[data-palette="olive"] {
+  --background: 76 25% 89%;
+  --card: 62 44% 95%;
+  --popover: 62 44% 95%;
+  --primary: 93 42% 24%;
+  --secondary: 71 34% 84%;
+  --muted: 74 18% 82%;
+  --accent: 39 82% 54%;
+  --ring: 93 42% 24%;
+  --ldc-surface: 62 44% 95%;
+  --ldc-surface-soft: 70 48% 93%;
+  --ldc-lane-alt: 80 28% 86%;
+  --ldc-today: 92 42% 86%;
+  --ldc-featured: 43 88% 84%;
+}
+
+[data-palette="mono"] {
+  --background: 38 8% 91%;
+  --card: 40 12% 97%;
+  --popover: 40 12% 97%;
+  --primary: 214 35% 12%;
+  --secondary: 38 7% 84%;
+  --muted: 38 6% 82%;
+  --accent: 31 88% 58%;
+  --ring: 214 35% 12%;
+  --ldc-surface: 40 12% 97%;
+  --ldc-surface-soft: 36 12% 94%;
+  --ldc-lane-alt: 38 8% 88%;
+  --ldc-today: 36 10% 84%;
+  --ldc-featured: 40 80% 86%;
 }
 
 * {
@@ -28,9 +121,14 @@
 
 body {
   @apply bg-background text-foreground;
+  font-family: var(--font-body);
   min-height: 100vh;
   background-image:
     linear-gradient(90deg, rgba(15, 32, 46, 0.05) 1px, transparent 1px),
     linear-gradient(180deg, rgba(15, 32, 46, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+.font-display {
+  font-family: var(--font-display);
 }

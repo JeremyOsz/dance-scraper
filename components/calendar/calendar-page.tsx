@@ -29,8 +29,10 @@ import {
   Clock,
   ExternalLink,
   Filter,
+  CaseSensitive,
   ListFilter,
   MapPin,
+  Palette,
   Search,
   Share2,
   Star
@@ -55,6 +57,8 @@ import { getVenuePriorityBucket, sortVenueRecordsForUi } from "@/lib/venue-order
 import { SiteSocialLinks } from "@/components/site-social-links";
 
 const SHORTLIST_STORAGE_KEY = "dance-scraper.shortlist-session-ids";
+const PALETTE_STORAGE_KEY = "dance-scraper.palette";
+const FONT_STORAGE_KEY = "dance-scraper.font";
 const INITIAL_WEEK_DAY_COUNT = 7;
 const LAZY_LOAD_DAY_CHUNK = 7;
 const MAX_LOADED_CALENDAR_DAYS = 56;
@@ -95,10 +99,26 @@ const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
   "Ballroom/Tango": "border-l-yellow-600",
   Other: "border-l-slate-500"
 };
-const editorialPanelClass = "border border-slate-900/80 bg-white/95 shadow-[4px_4px_0_rgba(15,23,42,0.16)]";
-const editorialInsetClass = "border border-slate-900/25 bg-white/90";
+const editorialPanelClass = "border border-slate-900/80 bg-[hsl(var(--ldc-surface)/0.95)] shadow-[4px_4px_0_rgba(15,23,42,0.16)]";
+const editorialInsetClass = "border border-slate-900/25 bg-[hsl(var(--ldc-surface-soft)/0.9)]";
 const editorialButtonClass = "rounded-sm border-slate-900/45";
 const iconClass = "h-4 w-4 shrink-0";
+const PALETTES = [
+  { value: "white", label: "White" },
+  { value: "warm", label: "Warm" },
+  { value: "coral", label: "Coral" },
+  { value: "olive", label: "Olive" },
+  { value: "mono", label: "Mono" }
+] as const;
+type PaletteValue = (typeof PALETTES)[number]["value"];
+const FONT_SCHEMES = [
+  { value: "space", label: "Space + Inter" },
+  { value: "system", label: "System" },
+  { value: "sora", label: "Sora" },
+  { value: "archivo", label: "Archivo" },
+  { value: "mono", label: "Plex Mono" }
+] as const;
+type FontSchemeValue = (typeof FONT_SCHEMES)[number]["value"];
 const GAGA_BOYCOTT_ARTICLE_URL = "https://www.instagram.com/p/DSXaLAIiIh2/";
 // const UK_DANCERS_FOR_PALESTINE_TICKETS_URL = "https://www.tickettailor.com/events/ukdancersforpalestine";
 const UK_DANCERS_FOR_PALESTINE_INSTAGRAM_URL = "https://www.instagram.com/uk_dancers_for_palestine/";
@@ -152,7 +172,7 @@ function GagaBoycottCard({ session, onOpen }: { session: DanceSession; onOpen: (
             target="_blank"
             rel="noreferrer"
             onClick={(event) => event.stopPropagation()}
-            className="relative z-10 inline-flex cursor-pointer items-center rounded-full border border-stone-300 bg-white px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-stone-50"
+            className="relative z-10 inline-flex cursor-pointer items-center rounded-full border border-stone-300 bg-[hsl(var(--ldc-surface))] px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-stone-50"
           >
             Why Boycott
           </a>
@@ -353,7 +373,7 @@ function CalendarDayLoadingSkeleton({ count }: { count: number }) {
   return (
     <div className="space-y-2" aria-hidden="true">
       {Array.from({ length: count }).map((_, index) => (
-        <div key={index} className="border border-slate-900/20 bg-white/80 p-2">
+        <div key={index} className="border border-slate-900/20 bg-[hsl(var(--ldc-surface-soft)/0.85)] p-2">
           <div className="animate-pulse space-y-2">
             <div className="h-3 w-3/4 rounded bg-muted" />
             <div className="h-2.5 w-1/2 rounded bg-muted" />
@@ -389,6 +409,14 @@ function parseAnchorDate(value: string | null) {
   return Number.isNaN(parsed.getTime()) ? startOfDay(new Date()) : startOfDay(parsed);
 }
 
+function isPaletteValue(value: string | null): value is PaletteValue {
+  return PALETTES.some((palette) => palette.value === value);
+}
+
+function isFontSchemeValue(value: string | null): value is FontSchemeValue {
+  return FONT_SCHEMES.some((font) => font.value === value);
+}
+
 export function CalendarPage({ classCount, initialSessions, listingsUpdatedText, venues, venueCount, seoSnapshot }: Props) {
   const router = useRouter();
   const pathname = usePathname();
@@ -415,6 +443,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   const [urlReady, setUrlReady] = useState(false);
   const [shareMessage, setShareMessage] = useState<string | null>(null);
   const [shareFallbackUrl, setShareFallbackUrl] = useState<string | null>(null);
+  const [palette, setPalette] = useState<PaletteValue>("white");
+  const [fontScheme, setFontScheme] = useState<FontSchemeValue>("space");
 
   const weekScrollRef = useRef<HTMLDivElement>(null);
   const weekLoadSentinelRef = useRef<HTMLDivElement>(null);
@@ -472,6 +502,50 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     const storedShortlist = readStoredList(SHORTLIST_STORAGE_KEY);
     setShortlistSessionIds(storedShortlist);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const storedPalette = window.localStorage.getItem(PALETTE_STORAGE_KEY);
+    if (isPaletteValue(storedPalette)) {
+      setPalette(storedPalette);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const storedFontScheme = window.localStorage.getItem(FONT_STORAGE_KEY);
+    if (isFontSchemeValue(storedFontScheme)) {
+      setFontScheme(storedFontScheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined" || typeof window === "undefined") {
+      return;
+    }
+    if (palette === "white") {
+      document.documentElement.removeAttribute("data-palette");
+    } else {
+      document.documentElement.dataset.palette = palette;
+    }
+    window.localStorage.setItem(PALETTE_STORAGE_KEY, palette);
+  }, [palette]);
+
+  useEffect(() => {
+    if (typeof document === "undefined" || typeof window === "undefined") {
+      return;
+    }
+    if (fontScheme === "space") {
+      document.documentElement.removeAttribute("data-font");
+    } else {
+      document.documentElement.dataset.font = fontScheme;
+    }
+    window.localStorage.setItem(FONT_STORAGE_KEY, fontScheme);
+  }, [fontScheme]);
 
   useEffect(() => {
     const modeParam = searchParams.get("mode");
@@ -690,7 +764,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     for (const date of visibleDates) {
       const iso = format(date, "yyyy-MM-dd");
       const monthDelta = differenceInCalendarMonths(startOfMonth(date), anchorMonth);
-      classes.set(iso, monthDelta % 2 === 0 ? "bg-white" : "bg-slate-100");
+      classes.set(iso, monthDelta % 2 === 0 ? "bg-[hsl(var(--ldc-surface))]" : "bg-[hsl(var(--ldc-lane-alt))]");
     }
     return classes;
   }, [anchorDate, view, visibleDates]);
@@ -973,7 +1047,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     <div className="space-y-3">
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
             <span>Search</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -996,7 +1070,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             <Input
               placeholder="Search class, teacher, style"
               value={search}
-              className="border-slate-900/35 bg-white pl-8"
+              className="border-slate-900/35 bg-[hsl(var(--ldc-surface))] pl-8"
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
@@ -1004,7 +1078,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
             <span>Level</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1047,7 +1121,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
             <span>Type</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1093,7 +1167,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
             <span>Day</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1136,7 +1210,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
             <span>Venue</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1185,7 +1259,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
             <span>Workshops</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1216,7 +1290,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-bold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
             <span>Shortlist</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1276,8 +1350,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       <header className="border-y-2 border-slate-950 py-4">
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div className="min-w-0">
-            <p className="text-xs font-black uppercase text-primary">London Dance Calendar</p>
-            <h1 className="mt-1 max-w-4xl text-4xl font-black leading-[0.95] tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
+            <p className="font-display text-xs font-semibold uppercase text-primary">London Dance Calendar</p>
+            <h1 className="font-display mt-1 max-w-4xl text-4xl font-semibold leading-[0.95] tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
               Find dance classes in London — fast
             </h1>
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium text-slate-700">
@@ -1288,18 +1362,50 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </div>
           <div className="flex flex-col gap-3 lg:items-end">
             {typeof classCount === "number" && typeof venueCount === "number" ? (
-              <div className="grid grid-cols-2 border border-slate-950 bg-white text-center shadow-[4px_4px_0_rgba(15,23,42,0.18)]">
+              <div className="grid grid-cols-2 border border-slate-950 bg-[hsl(var(--ldc-surface))] text-center shadow-[4px_4px_0_rgba(15,23,42,0.18)]">
                 <div className="border-r border-slate-950 px-4 py-2">
-                  <p className="text-2xl font-black leading-none">{classCount.toLocaleString("en-GB")}+</p>
-                  <p className="text-[11px] font-bold uppercase text-slate-600">classes</p>
+                  <p className="font-display text-2xl font-semibold leading-none">{classCount.toLocaleString("en-GB")}+</p>
+                  <p className="font-display text-[11px] font-semibold uppercase text-slate-600">classes</p>
                 </div>
                 <div className="px-4 py-2">
-                  <p className="text-2xl font-black leading-none">{venueCount}</p>
-                  <p className="text-[11px] font-bold uppercase text-slate-600">venues</p>
+                  <p className="font-display text-2xl font-semibold leading-none">{venueCount}</p>
+                  <p className="font-display text-[11px] font-semibold uppercase text-slate-600">venues</p>
                 </div>
               </div>
             ) : null}
             <nav aria-label="Primary" className="flex flex-wrap items-center gap-2">
+              <label className="inline-flex h-10 items-center gap-2 rounded-sm border border-slate-900/45 bg-[hsl(var(--ldc-surface))] px-3 text-sm font-semibold">
+                <Palette className={iconClass} aria-hidden />
+                <span className="sr-only">Colour scheme</span>
+                <select
+                  value={palette}
+                  onChange={(event) => setPalette(event.currentTarget.value as PaletteValue)}
+                  className="bg-transparent font-semibold outline-none"
+                  aria-label="Colour scheme"
+                >
+                  {PALETTES.map((item) => (
+                    <option key={item.value} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="inline-flex h-10 items-center gap-2 rounded-sm border border-slate-900/45 bg-[hsl(var(--ldc-surface))] px-3 text-sm font-semibold">
+                <CaseSensitive className={iconClass} aria-hidden />
+                <span className="sr-only">Font style</span>
+                <select
+                  value={fontScheme}
+                  onChange={(event) => setFontScheme(event.currentTarget.value as FontSchemeValue)}
+                  className="bg-transparent font-semibold outline-none"
+                  aria-label="Font style"
+                >
+                  {FONT_SCHEMES.map((item) => (
+                    <option key={item.value} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <Button variant="outline" className={editorialButtonClass} onClick={handleShare}>
                 <Share2 className={iconClass} aria-hidden />
                 Share
@@ -1326,7 +1432,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             value={shareFallbackUrl}
             onFocus={(event) => event.currentTarget.select()}
             aria-label="Share link"
-            className="mt-3 max-w-2xl border-slate-900 bg-white"
+            className="mt-3 max-w-2xl border-slate-900 bg-[hsl(var(--ldc-surface))]"
           />
         ) : null}
         <SiteSocialLinks className="mt-3" />
@@ -1338,7 +1444,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             <aside className="hidden lg:block">
               <div className={`sticky top-4 overflow-hidden ${editorialPanelClass}`}>
                 <div className="border-b border-slate-950 bg-slate-950 px-3 py-2 text-white">
-                  <p className="flex items-center gap-2 text-sm font-black uppercase">
+                  <p className="font-display flex items-center gap-2 text-sm font-semibold uppercase">
                     <ListFilter className={iconClass} aria-hidden />
                     Filters
                   </p>
@@ -1362,7 +1468,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                         Narrow by class, dance type, venue, day, and saved lists.
                       </DialogDescription>
                     </DialogHeader>
-                    <Button variant="outline" size="sm" className="border-white/60 bg-transparent text-white hover:bg-white hover:text-slate-950" onClick={() => setFiltersOpen(false)}>
+                    <Button variant="outline" size="sm" className="border-white/60 bg-transparent text-white hover:bg-[hsl(var(--ldc-surface))] hover:text-slate-950" onClick={() => setFiltersOpen(false)}>
                       Close
                     </Button>
                   </div>
@@ -1376,13 +1482,13 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             <section id="browse-classes" className="scroll-mt-8 space-y-4">
               <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-slate-950 pb-2">
                 <div>
-                  <h2 className="text-xl font-black uppercase tracking-normal">Find dance classes</h2>
+                  <h2 className="font-display text-xl font-semibold uppercase tracking-normal">Find dance classes</h2>
                   <p className="text-sm text-muted-foreground" aria-live="polite">
                     {sessionsLoading ? "Loading latest classes" : `Showing ${filteredSessions.length} classes`}
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge className="rounded-sm border-slate-900 bg-white text-slate-950">{activeFilterCount} filters</Badge>
+                  <Badge className="rounded-sm border-slate-900 bg-[hsl(var(--ldc-surface))] text-slate-950">{activeFilterCount} filters</Badge>
                   <Button className={`lg:hidden ${editorialButtonClass}`} variant="outline" onClick={() => setFiltersOpen(true)}>
                     <Filter className={iconClass} aria-hidden />
                   Filters
@@ -1403,7 +1509,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               </div>
               {sessionsLoading ? <CalendarLoadingState /> : null}
               {sessionsError ? (
-                <div className="border border-destructive/60 bg-white p-3 text-sm font-medium text-destructive" role="status">
+                <div className="border border-destructive/60 bg-[hsl(var(--ldc-surface))] p-3 text-sm font-medium text-destructive" role="status">
                   {sessionsError}
                 </div>
               ) : null}
@@ -1431,11 +1537,11 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   </Button>
                   {view === "week" ? (
                     <>
-                      <Badge className="rounded-sm border-slate-900 bg-white text-slate-950">From {format(anchorDate, "EEE d MMM yyyy")}</Badge>
+                      <Badge className="rounded-sm border-slate-900 bg-[hsl(var(--ldc-surface))] text-slate-950">From {format(anchorDate, "EEE d MMM yyyy")}</Badge>
                       {weekRangeLabel ? <Badge className="rounded-sm border-slate-900 bg-secondary text-secondary-foreground">Showing {weekRangeLabel}</Badge> : null}
                     </>
                   ) : (
-                    <Badge className="rounded-sm border-slate-900 bg-white text-slate-950">{format(anchorDate, "MMMM yyyy")}</Badge>
+                    <Badge className="rounded-sm border-slate-900 bg-[hsl(var(--ldc-surface))] text-slate-950">{format(anchorDate, "MMMM yyyy")}</Badge>
                   )}
                   {view === "week" ? (
                     <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
@@ -1454,7 +1560,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                           setAnchorDate(startOfDay(nextAnchor));
                           setView("week");
                         }}
-                        className="w-full border-slate-900/45 bg-white sm:w-[170px]"
+                        className="w-full border-slate-900/45 bg-[hsl(var(--ldc-surface))] sm:w-[170px]"
                         aria-label="Range start date"
                       />
                       <span className="text-xs text-muted-foreground">to</span>
@@ -1476,7 +1582,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                           setLoadedDayCount(boundedDays);
                           setView("week");
                         }}
-                        className="w-full border-slate-900/45 bg-white sm:w-[170px]"
+                        className="w-full border-slate-900/45 bg-[hsl(var(--ldc-surface))] sm:w-[170px]"
                         aria-label="Range end date"
                       />
                     </div>
@@ -1513,22 +1619,22 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                       return (
                         <Card
                           key={iso}
-                          className={`min-w-0 w-full border-slate-950 bg-white shadow-none ${
+                          className={`min-w-0 w-full border-slate-950 bg-[hsl(var(--ldc-surface))] shadow-none ${
                             view === "week" ? "md:min-w-[235px] md:max-w-[235px] md:shrink-0" : ""
                           } ${
                             view === "month" && !inMonth ? "opacity-55" : ""
                           } ${
-                            view === "week" ? weekMonthBandClassByIso.get(iso) ?? "bg-white" : ""
-                          } ${isToday ? "border-primary bg-sky-50 ring-2 ring-primary" : ""}`}
+                            view === "week" ? weekMonthBandClassByIso.get(iso) ?? "bg-[hsl(var(--ldc-surface))]" : ""
+                          } ${isToday ? "border-primary bg-[hsl(var(--ldc-today))] ring-2 ring-primary" : ""}`}
                         >
                           <CardHeader className="border-b border-slate-950 p-2">
                             <CardTitle className="flex items-baseline justify-between gap-2 text-sm" aria-label={format(date, "EEE d")}>
-                              <span className="font-black uppercase">{format(date, "EEE")}</span>
-                              <span className="text-2xl font-black leading-none">{format(date, "d")}</span>
+                              <span className="font-display font-semibold uppercase">{format(date, "EEE")}</span>
+                              <span className="font-display text-2xl font-semibold leading-none">{format(date, "d")}</span>
                             </CardTitle>
                             {isToday ? <Badge className="w-fit rounded-sm border-slate-950 bg-accent text-accent-foreground">Today</Badge> : null}
                             {showMonthMarker ? (
-                              <p className="text-[11px] font-bold uppercase text-muted-foreground">
+                              <p className="font-display text-[11px] font-semibold uppercase text-muted-foreground">
                                 {format(date, "MMMM yyyy")}
                               </p>
                             ) : null}
@@ -1551,9 +1657,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                               return (
                                 <div
                                   key={`${session.id}-${iso}-${session.bookingUrl}-${index}`}
-                                  className={`border border-l-4 border-slate-900/25 bg-white p-2 text-xs transition-colors hover:bg-secondary/45 ${
+                                  className={`border border-l-4 border-slate-900/25 bg-[hsl(var(--ldc-surface))] p-2 text-xs transition-colors hover:bg-[hsl(var(--ldc-lane-alt))] ${
                                     featured
-                                      ? "border-amber-500 border-l-amber-500 bg-amber-50 ring-1 ring-amber-400"
+                                      ? "border-amber-500 border-l-amber-500 bg-[hsl(var(--ldc-featured))] ring-1 ring-amber-400"
                                       : DANCE_TYPE_CARD_CLASS[primaryType]
                                   }`}
                                 >
@@ -1610,9 +1716,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 </div>
 
                 {undatedSessions.length > 0 && (
-                  <Card className="border-slate-950 bg-white shadow-none">
+                  <Card className="border-slate-950 bg-[hsl(var(--ldc-surface))] shadow-none">
                     <CardHeader className="border-b border-slate-950 p-3">
-                      <CardTitle className="text-sm font-black uppercase">Undated classes</CardTitle>
+                      <CardTitle className="font-display text-sm font-semibold uppercase">Undated classes</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-2 p-2">
                       {undatedSessions.map((session, index) => {
@@ -1631,9 +1737,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                         return (
                           <div
                             key={`${session.id}-${session.bookingUrl}-${index}`}
-                            className={`border border-l-4 border-slate-900/25 bg-white p-2 text-xs transition-colors hover:bg-secondary/45 ${
+                            className={`border border-l-4 border-slate-900/25 bg-[hsl(var(--ldc-surface))] p-2 text-xs transition-colors hover:bg-[hsl(var(--ldc-lane-alt))] ${
                               featured
-                                ? "border-amber-500 border-l-amber-500 bg-amber-50 ring-1 ring-amber-400"
+                                ? "border-amber-500 border-l-amber-500 bg-[hsl(var(--ldc-featured))] ring-1 ring-amber-400"
                                 : DANCE_TYPE_CARD_CLASS[primaryType]
                             }`}
                           >
@@ -1679,7 +1785,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             )}
 
             {mode === "calendar" && !sessionsLoading && filteredSessions.length === 0 && (
-              <div className="border border-dashed border-slate-950 bg-white p-4 text-sm text-muted-foreground">
+              <div className="border border-dashed border-slate-950 bg-[hsl(var(--ldc-surface))] p-4 text-sm text-muted-foreground">
                 No matching classes. Try clearing filters or broadening search.
               </div>
             )}
@@ -1688,7 +1794,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               <div className="space-y-3">
                 <Card className={`${editorialPanelClass} shadow-none`}>
                   <CardHeader className="space-y-2 border-b border-slate-950 p-3">
-                    <CardTitle className="text-base font-black uppercase">Spotted an error or missing class?</CardTitle>
+                    <CardTitle className="font-display text-base font-semibold uppercase">Spotted an error or missing class?</CardTitle>
                     <p className="text-xs text-muted-foreground">
                       Send feedback on the contact page and I&apos;ll try to fix issues when I can.
                     </p>
@@ -1711,14 +1817,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                     return (
                       <Card
                         key={venue.name}
-                        className={`border-slate-950 bg-white shadow-none ${isMuted ? "opacity-65" : ""} ${featured ? "border-amber-500 ring-2 ring-amber-400" : ""}`.trim()}
+                        className={`border-slate-950 bg-[hsl(var(--ldc-surface))] shadow-none ${isMuted ? "opacity-65" : ""} ${featured ? "border-amber-500 ring-2 ring-amber-400" : ""}`.trim()}
                       >
                         <CardHeader className="grid gap-3 p-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
                           <div className="min-w-0 space-y-1">
                             <div className="flex flex-wrap items-center gap-2">
-                              <CardTitle className="text-base font-black">{venue.name}</CardTitle>
+                              <CardTitle className="font-display text-base font-semibold">{venue.name}</CardTitle>
                               {featured ? (
-                                <Badge className="rounded-sm border-amber-500 bg-amber-50 text-amber-700">
+                                <Badge className="rounded-sm border-amber-500 bg-[hsl(var(--ldc-featured))] text-amber-700">
                                   <Star className="h-3 w-3 fill-current" aria-hidden />
                                   Featured
                                 </Badge>
@@ -1771,7 +1877,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               <div className="space-y-3">
                 <div className="grid gap-3 md:grid-cols-2">
                   <Select value={mapVenue} onValueChange={setMapVenue}>
-                    <SelectTrigger className="border-slate-950 bg-white">
+                    <SelectTrigger className="border-slate-950 bg-[hsl(var(--ldc-surface))]">
                       <SelectValue placeholder="Choose venue for map" />
                     </SelectTrigger>
                     <SelectContent>
@@ -1812,7 +1918,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
             {mode !== "venues" && (
               <section aria-label="Contact" className={`${editorialPanelClass} mt-8 px-4 py-3 text-sm`}>
-                <p className="mb-2 text-sm font-black uppercase">Spotted an error or missing class?</p>
+                <p className="font-display mb-2 text-sm font-semibold uppercase">Spotted an error or missing class?</p>
                 <p className="mb-3 text-xs text-muted-foreground">
                   Send feedback on the contact page and I&apos;ll try to fix issues when I can.
                 </p>
@@ -1830,7 +1936,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
         </div>
 
       <Dialog open={Boolean(selectedSession)} onOpenChange={(open) => !open && setSelectedSession(null)}>
-        <DialogContent className="max-h-[90dvh] overflow-y-auto border-2 border-slate-950 bg-white p-0 shadow-[8px_8px_0_rgba(15,23,42,0.22)] sm:max-w-2xl">
+        <DialogContent className="max-h-[90dvh] overflow-y-auto border-2 border-slate-950 bg-[hsl(var(--ldc-surface))] p-0 shadow-[8px_8px_0_rgba(15,23,42,0.22)] sm:max-w-2xl">
           {selectedSession && (
             isGagaSession(selectedSession) ? (
               <div className="p-4 sm:p-6">
@@ -1843,7 +1949,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             ) : (
               <>
                 <DialogHeader className="border-b border-slate-950 bg-slate-950 p-4 text-white sm:p-5">
-                  <DialogTitle className="text-2xl font-black leading-tight sm:text-3xl">{selectedSession.title}</DialogTitle>
+                  <DialogTitle className="font-display text-2xl font-semibold leading-tight sm:text-3xl">{selectedSession.title}</DialogTitle>
                   <DialogDescription className="flex flex-wrap gap-x-3 gap-y-1 pt-2 text-sm font-medium text-white/75">
                     <span>{selectedSession.venue}</span>
                     <span>{selectedSession.dayOfWeek ?? "Day TBC"}</span>
