@@ -1346,83 +1346,88 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   );
 
   return (
-    <main className="mx-auto w-full max-w-[1500px] px-3 py-5 sm:px-5 md:px-8">
+    <main className="mx-auto w-full max-w-[1500px] px-3 py-4 sm:px-5 md:px-8">
       <header className="border-y-2 border-slate-950 py-4">
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.55fr)] lg:items-end">
           <div className="min-w-0">
             <p className="font-display text-xs font-semibold uppercase text-primary">London Dance Calendar</p>
-            <h1 className="font-display mt-1 max-w-4xl text-4xl font-semibold leading-[0.95] tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
+            <h1 className="font-display mt-2 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-normal text-slate-950 sm:text-5xl xl:text-[4.6rem]">
               Find dance classes in London — fast
             </h1>
-            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium text-slate-700">
+            <div className="mt-4 flex max-w-4xl flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-slate-700">
               <span>Filter by style, level, date, and location.</span>
               {listingsUpdatedText ? <span>{listingsUpdatedText}</span> : null}
               <span>Listings are aggregated from studio sources.</span>
             </div>
           </div>
-          <div className="flex flex-col gap-3 lg:items-end">
+          <div className="flex min-w-0 flex-col gap-3 lg:items-end">
             {typeof classCount === "number" && typeof venueCount === "number" ? (
-              <div className="grid grid-cols-2 border border-slate-950 bg-[hsl(var(--ldc-surface))] text-center shadow-[4px_4px_0_rgba(15,23,42,0.18)]">
-                <div className="border-r border-slate-950 px-4 py-2">
+              <div className="grid w-full max-w-[330px] grid-cols-2 border border-slate-950 bg-[hsl(var(--ldc-surface))] text-center shadow-[4px_4px_0_rgba(15,23,42,0.18)]">
+                <div className="border-r border-slate-950 px-4 py-2.5">
                   <p className="font-display text-2xl font-semibold leading-none">{classCount.toLocaleString("en-GB")}+</p>
                   <p className="font-display text-[11px] font-semibold uppercase text-slate-600">classes</p>
                 </div>
-                <div className="px-4 py-2">
+                <div className="px-4 py-2.5">
                   <p className="font-display text-2xl font-semibold leading-none">{venueCount}</p>
                   <p className="font-display text-[11px] font-semibold uppercase text-slate-600">venues</p>
                 </div>
               </div>
             ) : null}
-            <nav aria-label="Primary" className="flex flex-wrap items-center gap-2">
-              <label className="inline-flex h-10 items-center gap-2 rounded-sm border border-slate-900/45 bg-[hsl(var(--ldc-surface))] px-3 text-sm font-semibold">
-                <Palette className={iconClass} aria-hidden />
-                <span className="sr-only">Colour scheme</span>
-                <select
-                  value={palette}
-                  onChange={(event) => setPalette(event.currentTarget.value as PaletteValue)}
-                  className="bg-transparent font-semibold outline-none"
-                  aria-label="Colour scheme"
-                >
-                  {PALETTES.map((item) => (
-                    <option key={item.value} value={item.value}>
-                      {item.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="inline-flex h-10 items-center gap-2 rounded-sm border border-slate-900/45 bg-[hsl(var(--ldc-surface))] px-3 text-sm font-semibold">
-                <CaseSensitive className={iconClass} aria-hidden />
-                <span className="sr-only">Font style</span>
-                <select
-                  value={fontScheme}
-                  onChange={(event) => setFontScheme(event.currentTarget.value as FontSchemeValue)}
-                  className="bg-transparent font-semibold outline-none"
-                  aria-label="Font style"
-                >
-                  {FONT_SCHEMES.map((item) => (
-                    <option key={item.value} value={item.value}>
-                      {item.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <Button variant="outline" className={editorialButtonClass} onClick={handleShare}>
-                <Share2 className={iconClass} aria-hidden />
-                Share
-              </Button>
-              <Button asChild className={editorialButtonClass}>
-                <Link href="/">
-                  <CalendarDays className={iconClass} aria-hidden />
-                  Calendar
-                </Link>
-              </Button>
-              <Button variant="outline" className={editorialButtonClass} asChild>
-                <Link href="/insights">Insights</Link>
-              </Button>
-              <Button variant="outline" className={editorialButtonClass} asChild>
-                <Link href="/studios">Studios</Link>
-              </Button>
-            </nav>
+            <div className="flex w-full max-w-3xl flex-col gap-2">
+              <div className="flex flex-wrap items-center justify-end gap-2">
+                <span className="font-display text-xs font-semibold uppercase text-muted-foreground">Appearance</span>
+                <label className="inline-flex h-9 items-center gap-2 rounded-sm border border-slate-900/45 bg-[hsl(var(--ldc-surface))] px-2.5 text-sm font-semibold">
+                  <Palette className={iconClass} aria-hidden />
+                  <span className="sr-only">Colour scheme</span>
+                  <select
+                    value={palette}
+                    onChange={(event) => setPalette(event.currentTarget.value as PaletteValue)}
+                    className="max-w-[125px] bg-transparent font-semibold outline-none"
+                    aria-label="Colour scheme"
+                  >
+                    {PALETTES.map((item) => (
+                      <option key={item.value} value={item.value}>
+                        {item.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="inline-flex h-9 items-center gap-2 rounded-sm border border-slate-900/45 bg-[hsl(var(--ldc-surface))] px-2.5 text-sm font-semibold">
+                  <CaseSensitive className={iconClass} aria-hidden />
+                  <span className="sr-only">Font style</span>
+                  <select
+                    value={fontScheme}
+                    onChange={(event) => setFontScheme(event.currentTarget.value as FontSchemeValue)}
+                    className="max-w-[145px] bg-transparent font-semibold outline-none"
+                    aria-label="Font style"
+                  >
+                    {FONT_SCHEMES.map((item) => (
+                      <option key={item.value} value={item.value}>
+                        {item.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <nav aria-label="Primary" className="flex flex-wrap items-center justify-end gap-2">
+                <Button variant="outline" className={editorialButtonClass} onClick={handleShare}>
+                  <Share2 className={iconClass} aria-hidden />
+                  Share
+                </Button>
+                <Button asChild className={editorialButtonClass}>
+                  <Link href="/">
+                    <CalendarDays className={iconClass} aria-hidden />
+                    Calendar
+                  </Link>
+                </Button>
+                <Button variant="outline" className={editorialButtonClass} asChild>
+                  <Link href="/insights">Insights</Link>
+                </Button>
+                <Button variant="outline" className={editorialButtonClass} asChild>
+                  <Link href="/studios">Studios</Link>
+                </Button>
+              </nav>
+            </div>
           </div>
         </div>
         {shareMessage ? <p className="mt-3 text-sm font-medium text-muted-foreground">{shareMessage}</p> : null}
