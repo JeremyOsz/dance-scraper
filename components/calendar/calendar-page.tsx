@@ -99,16 +99,23 @@ const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
   "Ballroom/Tango": "border-l-yellow-600",
   Other: "border-l-slate-500"
 };
-const editorialPanelClass = "border border-slate-900/80 bg-[hsl(var(--ldc-surface)/0.95)] shadow-[4px_4px_0_rgba(15,23,42,0.16)]";
-const editorialInsetClass = "border border-slate-900/25 bg-[hsl(var(--ldc-surface-soft)/0.9)]";
-const editorialButtonClass = "rounded-sm border-slate-900/45";
+const editorialPanelClass =
+  "border border-border bg-[hsl(var(--ldc-surface)/0.95)] shadow-[4px_4px_0_hsl(var(--foreground)/0.12)]";
+const editorialInsetClass = "border border-border/35 bg-[hsl(var(--ldc-surface-soft)/0.9)]";
+const editorialButtonClass = "rounded-sm border-border/55";
 const iconClass = "h-4 w-4 shrink-0";
 const PALETTES = [
   { value: "white", label: "White" },
   { value: "warm", label: "Warm" },
   { value: "coral", label: "Coral" },
   { value: "olive", label: "Olive" },
-  { value: "mono", label: "Mono" }
+  { value: "mono", label: "Mono" },
+  { value: "citrine", label: "Citrine" },
+  { value: "inferno", label: "Inferno" },
+  { value: "latte", label: "Catppuccin" },
+  { value: "insane", label: "Insane" },
+  { value: "noir", label: "Noir" },
+  { value: "volt", label: "Volt" }
 ] as const;
 type PaletteValue = (typeof PALETTES)[number]["value"];
 const FONT_SCHEMES = [
@@ -360,7 +367,7 @@ function CalendarLoadingState() {
           <p className="text-sm font-medium">Loading latest class listings</p>
           <p className="text-xs text-muted-foreground">Preparing the calendar from current venue data.</p>
         </div>
-        <Badge className="rounded-sm border-slate-900/40 bg-accent text-accent-foreground">Live schedule</Badge>
+        <Badge className="rounded-sm border-border/50 bg-accent text-accent-foreground">Live schedule</Badge>
       </div>
       <div className="mt-3 h-1.5 overflow-hidden bg-muted">
         <div className="h-full w-1/2 animate-pulse bg-primary/80" />
@@ -373,7 +380,7 @@ function CalendarDayLoadingSkeleton({ count }: { count: number }) {
   return (
     <div className="space-y-2" aria-hidden="true">
       {Array.from({ length: count }).map((_, index) => (
-        <div key={index} className="border border-slate-900/20 bg-[hsl(var(--ldc-surface-soft)/0.85)] p-2">
+        <div key={index} className="border border-border/30 bg-[hsl(var(--ldc-surface-soft)/0.85)] p-2">
           <div className="animate-pulse space-y-2">
             <div className="h-3 w-3/4 rounded bg-muted" />
             <div className="h-2.5 w-1/2 rounded bg-muted" />
@@ -1047,7 +1054,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     <div className="space-y-3">
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-foreground">
             <span>Search</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1066,11 +1073,11 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             </Button>
           </summary>
           <div className="relative mt-2">
-            <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden />
+            <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
             <Input
               placeholder="Search class, teacher, style"
               value={search}
-              className="border-slate-900/35 bg-[hsl(var(--ldc-surface))] pl-8"
+              className="border-border/45 bg-[hsl(var(--ldc-surface))] pl-8"
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
@@ -1078,7 +1085,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-foreground">
             <span>Level</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1121,7 +1128,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-foreground">
             <span>Type</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1167,7 +1174,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-foreground">
             <span>Day</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1210,7 +1217,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-foreground">
             <span>Venue</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1259,7 +1266,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-foreground">
             <span>Workshops</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1280,7 +1287,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           <label className="mt-2 flex items-center gap-2 text-sm font-medium">
             <Checkbox
               aria-label="Workshops only"
-              className="border-slate-900"
+              className="border-border"
               checked={workshopsOnly}
               onChange={(e) => setWorkshopsOnly(e.target.checked)}
             />
@@ -1290,7 +1297,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       </div>
       <div className={`${editorialInsetClass} p-2`}>
         <details open>
-          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-slate-800">
+          <summary className="font-display flex cursor-pointer list-none items-center gap-2 text-xs font-semibold uppercase text-foreground">
             <span>Shortlist</span>
             <span className="h-px flex-1 bg-border" />
             <Button
@@ -1347,14 +1354,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
   return (
     <main className="mx-auto w-full max-w-[1500px] px-3 py-4 sm:px-5 md:px-8">
-      <header className="border-y-2 border-slate-950 py-4">
+      <header className="border-y-2 border-border py-4">
         <div className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.55fr)] lg:items-end">
           <div className="min-w-0">
             <p className="font-display text-xs font-semibold uppercase text-primary">London Dance Calendar</p>
-            <h1 className="font-display mt-2 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-normal text-slate-950 sm:text-5xl xl:text-[4.6rem]">
+            <h1 className="font-display mt-2 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-normal text-foreground sm:text-5xl xl:text-[4.6rem]">
               Find dance classes in London — fast
             </h1>
-            <div className="mt-4 flex max-w-4xl flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-slate-700">
+            <div className="mt-4 flex max-w-4xl flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-muted-foreground">
               <span>Filter by style, level, date, and location.</span>
               {listingsUpdatedText ? <span>{listingsUpdatedText}</span> : null}
               <span>Listings are aggregated from studio sources.</span>
@@ -1362,27 +1369,27 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </div>
           <div className="flex min-w-0 flex-col gap-3 lg:items-end">
             {typeof classCount === "number" && typeof venueCount === "number" ? (
-              <div className="grid w-full max-w-[330px] grid-cols-2 border border-slate-950 bg-[hsl(var(--ldc-surface))] text-center shadow-[4px_4px_0_rgba(15,23,42,0.18)]">
-                <div className="border-r border-slate-950 px-4 py-2.5">
+              <div className="grid w-full max-w-[330px] grid-cols-2 border border-border bg-[hsl(var(--ldc-surface))] text-center shadow-[4px_4px_0_hsl(var(--foreground)/0.14)]">
+                <div className="border-r border-border px-4 py-2.5">
                   <p className="font-display text-2xl font-semibold leading-none">{classCount.toLocaleString("en-GB")}+</p>
-                  <p className="font-display text-[11px] font-semibold uppercase text-slate-600">classes</p>
+                  <p className="font-display text-[11px] font-semibold uppercase text-muted-foreground">classes</p>
                 </div>
                 <div className="px-4 py-2.5">
                   <p className="font-display text-2xl font-semibold leading-none">{venueCount}</p>
-                  <p className="font-display text-[11px] font-semibold uppercase text-slate-600">venues</p>
+                  <p className="font-display text-[11px] font-semibold uppercase text-muted-foreground">venues</p>
                 </div>
               </div>
             ) : null}
             <div className="flex w-full max-w-3xl flex-col gap-2">
               <div className="flex flex-wrap items-center justify-end gap-2">
                 <span className="font-display text-xs font-semibold uppercase text-muted-foreground">Appearance</span>
-                <label className="inline-flex h-9 items-center gap-2 rounded-sm border border-slate-900/45 bg-[hsl(var(--ldc-surface))] px-2.5 text-sm font-semibold">
+                <label className="inline-flex h-9 items-center gap-2 rounded-sm border border-border/50 bg-[hsl(var(--ldc-surface))] px-2.5 text-sm font-semibold">
                   <Palette className={iconClass} aria-hidden />
                   <span className="sr-only">Colour scheme</span>
                   <select
                     value={palette}
                     onChange={(event) => setPalette(event.currentTarget.value as PaletteValue)}
-                    className="max-w-[125px] bg-transparent font-semibold outline-none"
+                    className="max-w-[150px] bg-transparent font-semibold outline-none"
                     aria-label="Colour scheme"
                   >
                     {PALETTES.map((item) => (
@@ -1392,7 +1399,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                     ))}
                   </select>
                 </label>
-                <label className="inline-flex h-9 items-center gap-2 rounded-sm border border-slate-900/45 bg-[hsl(var(--ldc-surface))] px-2.5 text-sm font-semibold">
+                <label className="inline-flex h-9 items-center gap-2 rounded-sm border border-border/50 bg-[hsl(var(--ldc-surface))] px-2.5 text-sm font-semibold">
                   <CaseSensitive className={iconClass} aria-hidden />
                   <span className="sr-only">Font style</span>
                   <select
@@ -1437,7 +1444,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             value={shareFallbackUrl}
             onFocus={(event) => event.currentTarget.select()}
             aria-label="Share link"
-            className="mt-3 max-w-2xl border-slate-900 bg-[hsl(var(--ldc-surface))]"
+            className="mt-3 max-w-2xl border-border bg-[hsl(var(--ldc-surface))]"
           />
         ) : null}
         <SiteSocialLinks className="mt-3" />
@@ -1448,12 +1455,12 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
         <div className="grid gap-4 lg:grid-cols-[290px_minmax(0,1fr)] lg:items-start">
             <aside className="hidden lg:block">
               <div className={`sticky top-4 overflow-hidden ${editorialPanelClass}`}>
-                <div className="border-b border-slate-950 bg-slate-950 px-3 py-2 text-white">
+                <div className="border-b border-border bg-foreground px-3 py-2 text-background">
                   <p className="font-display flex items-center gap-2 text-sm font-semibold uppercase">
                     <ListFilter className={iconClass} aria-hidden />
                     Filters
                   </p>
-                  <p className="text-xs text-white/70">
+                  <p className="text-xs text-background/75">
                     Narrow by class, dance type, venue, day, and saved lists.
                   </p>
                 </div>
@@ -1464,16 +1471,21 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             </aside>
 
             <Dialog open={filtersOpen} onOpenChange={setFiltersOpen}>
-              <DialogContent className="left-0 top-0 h-dvh w-[340px] max-w-[92vw] translate-y-0 rounded-none border-y-0 border-l-0 border-r-2 border-slate-950 p-0 transition-transform duration-300 data-[state=closed]:-translate-x-full data-[state=open]:translate-x-0 lg:hidden">
+              <DialogContent className="left-0 top-0 h-dvh w-[340px] max-w-[92vw] translate-y-0 rounded-none border-y-0 border-l-0 border-r-2 border-border p-0 transition-transform duration-300 data-[state=closed]:-translate-x-full data-[state=open]:translate-x-0 lg:hidden">
                 <div className="flex h-full flex-col">
-                  <div className="flex items-start justify-between gap-3 border-b border-slate-950 bg-slate-950 p-4 text-white">
+                  <div className="flex items-start justify-between gap-3 border-b border-border bg-foreground p-4 text-background">
                     <DialogHeader>
-                      <DialogTitle>Filters</DialogTitle>
-                      <DialogDescription className="text-white/70">
+                      <DialogTitle className="text-background">Filters</DialogTitle>
+                      <DialogDescription className="text-background/75">
                         Narrow by class, dance type, venue, day, and saved lists.
                       </DialogDescription>
                     </DialogHeader>
-                    <Button variant="outline" size="sm" className="border-white/60 bg-transparent text-white hover:bg-[hsl(var(--ldc-surface))] hover:text-slate-950" onClick={() => setFiltersOpen(false)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-background/50 bg-transparent text-background hover:bg-background/15 hover:text-foreground"
+                      onClick={() => setFiltersOpen(false)}
+                    >
                       Close
                     </Button>
                   </div>
@@ -1485,7 +1497,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             </Dialog>
 
             <section id="browse-classes" className="scroll-mt-8 space-y-4">
-              <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-slate-950 pb-2">
+              <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-border pb-2">
                 <div>
                   <h2 className="font-display text-xl font-semibold uppercase tracking-normal">Find dance classes</h2>
                   <p className="text-sm text-muted-foreground" aria-live="polite">
@@ -1493,7 +1505,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge className="rounded-sm border-slate-900 bg-[hsl(var(--ldc-surface))] text-slate-950">{activeFilterCount} filters</Badge>
+                  <Badge className="rounded-sm border-border bg-[hsl(var(--ldc-surface))] text-foreground">{activeFilterCount} filters</Badge>
                   <Button className={`lg:hidden ${editorialButtonClass}`} variant="outline" onClick={() => setFiltersOpen(true)}>
                     <Filter className={iconClass} aria-hidden />
                   Filters
@@ -1542,11 +1554,11 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   </Button>
                   {view === "week" ? (
                     <>
-                      <Badge className="rounded-sm border-slate-900 bg-[hsl(var(--ldc-surface))] text-slate-950">From {format(anchorDate, "EEE d MMM yyyy")}</Badge>
-                      {weekRangeLabel ? <Badge className="rounded-sm border-slate-900 bg-secondary text-secondary-foreground">Showing {weekRangeLabel}</Badge> : null}
+                      <Badge className="rounded-sm border-border bg-[hsl(var(--ldc-surface))] text-foreground">From {format(anchorDate, "EEE d MMM yyyy")}</Badge>
+                      {weekRangeLabel ? <Badge className="rounded-sm border-border bg-secondary text-secondary-foreground">Showing {weekRangeLabel}</Badge> : null}
                     </>
                   ) : (
-                    <Badge className="rounded-sm border-slate-900 bg-[hsl(var(--ldc-surface))] text-slate-950">{format(anchorDate, "MMMM yyyy")}</Badge>
+                    <Badge className="rounded-sm border-border bg-[hsl(var(--ldc-surface))] text-foreground">{format(anchorDate, "MMMM yyyy")}</Badge>
                   )}
                   {view === "week" ? (
                     <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
@@ -1565,7 +1577,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                           setAnchorDate(startOfDay(nextAnchor));
                           setView("week");
                         }}
-                        className="w-full border-slate-900/45 bg-[hsl(var(--ldc-surface))] sm:w-[170px]"
+                        className="w-full border-border/50 bg-[hsl(var(--ldc-surface))] sm:w-[170px]"
                         aria-label="Range start date"
                       />
                       <span className="text-xs text-muted-foreground">to</span>
@@ -1587,7 +1599,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                           setLoadedDayCount(boundedDays);
                           setView("week");
                         }}
-                        className="w-full border-slate-900/45 bg-[hsl(var(--ldc-surface))] sm:w-[170px]"
+                        className="w-full border-border/50 bg-[hsl(var(--ldc-surface))] sm:w-[170px]"
                         aria-label="Range end date"
                       />
                     </div>
@@ -1624,7 +1636,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                       return (
                         <Card
                           key={iso}
-                          className={`min-w-0 w-full border-slate-950 bg-[hsl(var(--ldc-surface))] shadow-none ${
+                          className={`min-w-0 w-full border-border bg-[hsl(var(--ldc-surface))] shadow-none ${
                             view === "week" ? "md:min-w-[235px] md:max-w-[235px] md:shrink-0" : ""
                           } ${
                             view === "month" && !inMonth ? "opacity-55" : ""
@@ -1632,12 +1644,12 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                             view === "week" ? weekMonthBandClassByIso.get(iso) ?? "bg-[hsl(var(--ldc-surface))]" : ""
                           } ${isToday ? "border-primary bg-[hsl(var(--ldc-today))] ring-2 ring-primary" : ""}`}
                         >
-                          <CardHeader className="border-b border-slate-950 p-2">
+                          <CardHeader className="border-b border-border p-2">
                             <CardTitle className="flex items-baseline justify-between gap-2 text-sm" aria-label={format(date, "EEE d")}>
                               <span className="font-display font-semibold uppercase">{format(date, "EEE")}</span>
                               <span className="font-display text-2xl font-semibold leading-none">{format(date, "d")}</span>
                             </CardTitle>
-                            {isToday ? <Badge className="w-fit rounded-sm border-slate-950 bg-accent text-accent-foreground">Today</Badge> : null}
+                            {isToday ? <Badge className="w-fit rounded-sm border-border bg-accent text-accent-foreground">Today</Badge> : null}
                             {showMonthMarker ? (
                               <p className="font-display text-[11px] font-semibold uppercase text-muted-foreground">
                                 {format(date, "MMMM yyyy")}
@@ -1662,7 +1674,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                               return (
                                 <div
                                   key={`${session.id}-${iso}-${session.bookingUrl}-${index}`}
-                                  className={`border border-l-4 border-slate-900/25 bg-[hsl(var(--ldc-surface))] p-2 text-xs transition-colors hover:bg-[hsl(var(--ldc-lane-alt))] ${
+                                  className={`border border-l-4 border-border/35 bg-[hsl(var(--ldc-surface))] p-2 text-xs transition-colors hover:bg-[hsl(var(--ldc-lane-alt))] ${
                                     featured
                                       ? "border-amber-500 border-l-amber-500 bg-[hsl(var(--ldc-featured))] ring-1 ring-amber-400"
                                       : DANCE_TYPE_CARD_CLASS[primaryType]
@@ -1678,14 +1690,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                                         Featured
                                       </span>
                                     ) : null}
-                                    <p className="font-bold leading-snug text-slate-950">{session.title}</p>
-                                    <p className="mt-1 flex items-center gap-1 font-medium text-slate-700">
+                                    <p className="font-bold leading-snug text-foreground">{session.title}</p>
+                                    <p className="mt-1 flex items-center gap-1 font-medium text-muted-foreground">
                                       <Clock className="h-3 w-3" aria-hidden />
                                       {session.startTime || session.endTime
                                         ? formatTimeRange(session.startTime, session.endTime)
                                         : session.dayOfWeek ?? "Time TBC"}
                                     </p>
-                                    <p className="mt-0.5 text-slate-600">{session.venue}</p>
+                                    <p className="mt-0.5 text-muted-foreground">{session.venue}</p>
                                   </button>
                                   <div className="mt-2 flex justify-end">
                                     <Button
@@ -1702,7 +1714,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                                 </div>
                               );
                             })}
-                            {!sessionsLoading && sessions.length === 0 && <p className="border border-dashed border-slate-900/25 p-2 text-xs text-muted-foreground">No classes</p>}
+                            {!sessionsLoading && sessions.length === 0 && <p className="border border-dashed border-border/35 p-2 text-xs text-muted-foreground">No classes</p>}
                             {!sessionsLoading && view === "month" && sessions.length > 3 && (
                               <p className="text-xs text-muted-foreground">+{sessions.length - 3} more</p>
                             )}
@@ -1721,8 +1733,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 </div>
 
                 {undatedSessions.length > 0 && (
-                  <Card className="border-slate-950 bg-[hsl(var(--ldc-surface))] shadow-none">
-                    <CardHeader className="border-b border-slate-950 p-3">
+                  <Card className="border-border bg-[hsl(var(--ldc-surface))] shadow-none">
+                    <CardHeader className="border-b border-border p-3">
                       <CardTitle className="font-display text-sm font-semibold uppercase">Undated classes</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-2 p-2">
@@ -1742,7 +1754,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                         return (
                           <div
                             key={`${session.id}-${session.bookingUrl}-${index}`}
-                            className={`border border-l-4 border-slate-900/25 bg-[hsl(var(--ldc-surface))] p-2 text-xs transition-colors hover:bg-[hsl(var(--ldc-lane-alt))] ${
+                            className={`border border-l-4 border-border/35 bg-[hsl(var(--ldc-surface))] p-2 text-xs transition-colors hover:bg-[hsl(var(--ldc-lane-alt))] ${
                               featured
                                 ? "border-amber-500 border-l-amber-500 bg-[hsl(var(--ldc-featured))] ring-1 ring-amber-400"
                                 : DANCE_TYPE_CARD_CLASS[primaryType]
@@ -1758,11 +1770,11 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                                   Featured
                                 </span>
                               ) : null}
-                              <p className="font-bold leading-snug text-slate-950">{session.title}</p>
-                              <p className="mt-1 text-slate-700">
+                              <p className="font-bold leading-snug text-foreground">{session.title}</p>
+                              <p className="mt-1 text-muted-foreground">
                                 {session.dayOfWeek ?? "Day TBC"} • {formatTimeRange(session.startTime, session.endTime)}
                               </p>
-                              <p className="mt-0.5 text-slate-600">{session.venue}</p>
+                              <p className="mt-0.5 text-muted-foreground">{session.venue}</p>
                             </button>
                             <div className="mt-2 flex justify-end">
                               <Button
@@ -1790,7 +1802,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             )}
 
             {mode === "calendar" && !sessionsLoading && filteredSessions.length === 0 && (
-              <div className="border border-dashed border-slate-950 bg-[hsl(var(--ldc-surface))] p-4 text-sm text-muted-foreground">
+              <div className="border border-dashed border-border bg-[hsl(var(--ldc-surface))] p-4 text-sm text-muted-foreground">
                 No matching classes. Try clearing filters or broadening search.
               </div>
             )}
@@ -1798,7 +1810,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             {mode === "venues" && (
               <div className="space-y-3">
                 <Card className={`${editorialPanelClass} shadow-none`}>
-                  <CardHeader className="space-y-2 border-b border-slate-950 p-3">
+                  <CardHeader className="space-y-2 border-b border-border p-3">
                     <CardTitle className="font-display text-base font-semibold uppercase">Spotted an error or missing class?</CardTitle>
                     <p className="text-xs text-muted-foreground">
                       Send feedback on the contact page and I&apos;ll try to fix issues when I can.
@@ -1822,7 +1834,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                     return (
                       <Card
                         key={venue.name}
-                        className={`border-slate-950 bg-[hsl(var(--ldc-surface))] shadow-none ${isMuted ? "opacity-65" : ""} ${featured ? "border-amber-500 ring-2 ring-amber-400" : ""}`.trim()}
+                        className={`border-border bg-[hsl(var(--ldc-surface))] shadow-none ${isMuted ? "opacity-65" : ""} ${featured ? "border-amber-500 ring-2 ring-amber-400" : ""}`.trim()}
                       >
                         <CardHeader className="grid gap-3 p-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
                           <div className="min-w-0 space-y-1">
@@ -1882,7 +1894,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               <div className="space-y-3">
                 <div className="grid gap-3 md:grid-cols-2">
                   <Select value={mapVenue} onValueChange={setMapVenue}>
-                    <SelectTrigger className="border-slate-950 bg-[hsl(var(--ldc-surface))]">
+                    <SelectTrigger className="border-border bg-[hsl(var(--ldc-surface))]">
                       <SelectValue placeholder="Choose venue for map" />
                     </SelectTrigger>
                     <SelectContent>
@@ -1912,7 +1924,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   <iframe
                     title="Venue map"
                     src={`https://www.google.com/maps?q=${encodeURIComponent(mapSearchQuery)}&output=embed`}
-                    className="h-[360px] w-full border border-slate-950 md:h-[520px]"
+                    className="h-[360px] w-full border border-border md:h-[520px]"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
@@ -1941,7 +1953,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
         </div>
 
       <Dialog open={Boolean(selectedSession)} onOpenChange={(open) => !open && setSelectedSession(null)}>
-        <DialogContent className="max-h-[90dvh] overflow-y-auto border-2 border-slate-950 bg-[hsl(var(--ldc-surface))] p-0 shadow-[8px_8px_0_rgba(15,23,42,0.22)] sm:max-w-2xl">
+        <DialogContent className="max-h-[90dvh] overflow-y-auto border-2 border-border bg-[hsl(var(--ldc-surface))] p-0 shadow-[8px_8px_0_hsl(var(--foreground)/0.16)] sm:max-w-2xl">
           {selectedSession && (
             isGagaSession(selectedSession) ? (
               <div className="p-4 sm:p-6">
@@ -1953,16 +1965,18 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               </div>
             ) : (
               <>
-                <DialogHeader className="border-b border-slate-950 bg-slate-950 p-4 text-white sm:p-5">
-                  <DialogTitle className="font-display text-2xl font-semibold leading-tight sm:text-3xl">{selectedSession.title}</DialogTitle>
-                  <DialogDescription className="flex flex-wrap gap-x-3 gap-y-1 pt-2 text-sm font-medium text-white/75">
+                <DialogHeader className="border-b border-border bg-foreground p-4 text-background sm:p-5">
+                  <DialogTitle className="font-display text-2xl font-semibold leading-tight text-background sm:text-3xl">
+                    {selectedSession.title}
+                  </DialogTitle>
+                  <DialogDescription className="flex flex-wrap gap-x-3 gap-y-1 pt-2 text-sm font-medium text-background/75">
                     <span>{selectedSession.venue}</span>
                     <span>{selectedSession.dayOfWeek ?? "Day TBC"}</span>
                     <span>{formatTimeRange(selectedSession.startTime, selectedSession.endTime)}</span>
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 p-4 text-sm sm:p-5">
-                  <div className="grid gap-2 border border-slate-950/25 bg-secondary/35 p-3 sm:grid-cols-3">
+                  <div className="grid gap-2 border border-border/30 bg-secondary/35 p-3 sm:grid-cols-3">
                     <p>
                       <span className="block text-[11px] font-black uppercase text-muted-foreground">Venue</span>
                       {selectedSession.venue}

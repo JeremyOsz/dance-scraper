@@ -88,9 +88,11 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const fontLayers = `${inter.variable} ${spaceGrotesk.variable} ${sora.variable} ${archivo.variable} ${ibmPlexMono.variable}`;
+
   return (
-    <html lang="en-GB">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${sora.variable} ${archivo.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en-GB" className={fontLayers}>
+      <body>
         {children}
         <Analytics />
       </body>
