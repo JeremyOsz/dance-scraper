@@ -62,3 +62,34 @@
 [  957877ms] [LOG] [Fast Refresh] done in 1408ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
 [ 1108818ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
 [ 1109905ms] [LOG] [Fast Refresh] done in 1088ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1252256ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1254042ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1254346ms] [LOG] [Fast Refresh] done in 305ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1254848ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1255262ms] [LOG] [Fast Refresh] done in 413ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1256366ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1256468ms] [LOG] [Fast Refresh] done in 103ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1260172ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1260969ms] [LOG] [Fast Refresh] done in 797ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1264113ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1266087ms] [LOG] [Fast Refresh] done in 1974ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1271705ms] [LOG] [Fast Refresh] done in 7592ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1280384ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1281774ms] [LOG] [Fast Refresh] done in 1391ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1284024ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1285124ms] [LOG] [Fast Refresh] done in 1099ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1293118ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1294489ms] [LOG] [Fast Refresh] done in 1372ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1405958ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1406068ms] [ERROR] Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406069ms] [ERROR] Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406069ms] [ERROR] Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406069ms] [ERROR] Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406069ms] [ERROR] Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406069ms] [ERROR] Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406070ms] [ERROR] Module not found: Error: Can't resolve 'next-app-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406070ms] [ERROR] Module not found: Error: Can't resolve 'next-app-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406070ms] [ERROR] Module not found: Error: Can't resolve 'next-app-loader' in '/Users/jeremy/Documents/Code/code-projects/dance-scraper' @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1406106ms] [LOG] {file: Object} @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/next-devtools/index.js:1630
+[ 1406172ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/__nextjs_font/geist-latin.woff2:0
+[ 1406220ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/__nextjs_font/geist-mono-latin.woff2:0

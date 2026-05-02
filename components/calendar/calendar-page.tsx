@@ -18,6 +18,7 @@ import {
 } from "date-fns";
 import Link from "next/link";
 import Image from "next/image";
+import QRCode from "react-qr-code";
 import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
@@ -448,8 +449,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [mapVenue, setMapVenue] = useState<string>("all");
   const [urlReady, setUrlReady] = useState(false);
-  const [shareMessage, setShareMessage] = useState<string | null>(null);
-  const [shareFallbackUrl, setShareFallbackUrl] = useState<string | null>(null);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [shareCopyFeedback, setShareCopyFeedback] = useState<string | null>(null);
   const [palette, setPalette] = useState<PaletteValue>("white");
   const [fontScheme, setFontScheme] = useState<FontSchemeValue>("space");
 
@@ -648,15 +649,12 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   }, [shortlistOnly, shortlistSessionIds.length]);
 
   useEffect(() => {
-    if (!shareMessage) {
+    if (!shareCopyFeedback) {
       return;
     }
-    if (shareFallbackUrl) {
-      return;
-    }
-    const timeoutId = window.setTimeout(() => setShareMessage(null), 2500);
+    const timeoutId = window.setTimeout(() => setShareCopyFeedback(null), 2000);
     return () => window.clearTimeout(timeoutId);
-  }, [shareMessage, shareFallbackUrl]);
+  }, [shareCopyFeedback]);
 
   const filteredSessions = useMemo(() => {
     return sessions.filter((session) => {
@@ -979,22 +977,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
   const clearSummaryActionClass = "ml-auto h-7 rounded-sm px-2 text-[11px] sm:h-6";
 
-  const tryLegacyCopy = (text: string) => {
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    textarea.setAttribute("readonly", "true");
-    textarea.style.position = "fixed";
-    textarea.style.top = "-1000px";
-    document.body.appendChild(textarea);
-    textarea.select();
-    const copied = document.execCommand("copy");
-    document.body.removeChild(textarea);
-    return copied;
-  };
-
-  const handleShare = async () => {
+  const shareUrl = useMemo(() => {
     if (typeof window === "undefined") {
-      return;
+      return "";
     }
     const params = new URLSearchParams();
     params.set("mode", mode);
@@ -1008,45 +993,82 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     if (workshopsOnly) params.set("workshops", "1");
     if (shortlistOnly) params.set("shortlist", "1");
     if (mapVenue !== "all") params.set("map", mapVenue);
-    const shareUrl = `${window.location.origin}${pathname}?${params.toString()}`;
-    try {
-      if (typeof navigator.share === "function") {
-        await navigator.share({
-          title: "London Dance Calendar",
-          text: "London dance and movement classes",
-          url: shareUrl
-        });
-        setShareFallbackUrl(null);
-        setShareMessage("Shared");
-        return;
-      }
+    return `${window.location.origin}${pathname}?${params.toString()}`;
+  }, [
+    anchorDate,
+    mapVenue,
+    mode,
+    pathname,
+    search,
+    selectedDays,
+    selectedLevels,
+    selectedTypes,
+    selectedVenues,
+    shortlistOnly,
+    view,
+    workshopsOnly
+  ]);
 
+  const canUseNavigatorShare =
+    typeof navigator !== "undefined" && typeof navigator.share === "function";
+
+  const tryLegacyCopy = (text: string) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "true");
+    textarea.style.position = "fixed";
+    textarea.style.top = "-1000px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const copied = document.execCommand("copy");
+    document.body.removeChild(textarea);
+    return copied;
+  };
+
+  const handleShareOpen = () => {
+    setShareModalOpen(true);
+  };
+
+  const copyShareLink = async () => {
+    if (!shareUrl) {
+      return;
+    }
+    try {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(shareUrl);
-        setShareFallbackUrl(null);
-        setShareMessage("Link copied");
+        setShareCopyFeedback("Copied");
         return;
       }
-
       if (tryLegacyCopy(shareUrl)) {
-        setShareFallbackUrl(null);
-        setShareMessage("Link copied");
+        setShareCopyFeedback("Copied");
         return;
       }
+      setShareCopyFeedback("Could not copy — select the link and copy manually");
+    } catch {
+      if (tryLegacyCopy(shareUrl)) {
+        setShareCopyFeedback("Copied");
+      } else {
+        setShareCopyFeedback("Could not copy — select the link and copy manually");
+      }
+    }
+  };
 
-      setShareFallbackUrl(shareUrl);
-      setShareMessage("Copy link manually");
+  const shareWithDevice = async () => {
+    if (!shareUrl || !canUseNavigatorShare) {
+      return;
+    }
+    try {
+      await navigator.share({
+        title: "London Dance Calendar",
+        text: "London dance and movement classes",
+        url: shareUrl
+      });
+      setShareCopyFeedback("Shared");
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") {
         return;
       }
-      if (tryLegacyCopy(shareUrl)) {
-        setShareFallbackUrl(null);
-        setShareMessage("Link copied");
-        return;
-      }
-      setShareFallbackUrl(shareUrl);
-      setShareMessage("Copy link manually");
+      setShareCopyFeedback("Sharing failed — try copying the link");
     }
   };
 
@@ -1354,8 +1376,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
   return (
     <main className="mx-auto w-full max-w-[1500px] px-3 py-4 sm:px-5 md:px-8">
-      <header className="border-y-2 border-border py-4">
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.55fr)] lg:items-end">
+      <header className="border-b-2 border-border pb-6 pt-4">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.55fr)] lg:items-start">
           <div className="min-w-0">
             <p className="font-display text-xs font-semibold uppercase text-primary">London Dance Calendar</p>
             <h1 className="font-display mt-2 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-normal text-foreground sm:text-5xl xl:text-[4.6rem]">
@@ -1364,10 +1386,10 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             <p className="mt-4 max-w-3xl text-base font-medium leading-snug text-muted-foreground sm:text-lg">
               Find Dance Classes in London. Filter by style, level, date, and location.
             </p>
-            <div className="mt-2 flex max-w-4xl flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-muted-foreground">
-              {listingsUpdatedText ? <span>{listingsUpdatedText}</span> : null}
-              <span>Listings are aggregated from studio sources.</span>
-            </div>
+            <p className="mt-4 max-w-4xl text-sm font-medium leading-relaxed text-muted-foreground">
+              {listingsUpdatedText ? `${listingsUpdatedText.trimEnd()} ` : null}
+              Aggregated from studio sources.
+            </p>
           </div>
           <div className="flex min-w-0 flex-col gap-3 lg:items-end">
             {typeof classCount === "number" && typeof venueCount === "number" ? (
@@ -1419,16 +1441,18 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 </label>
               </div>
               <nav aria-label="Primary" className="flex flex-wrap items-center justify-end gap-2">
-                <Button variant="outline" className={editorialButtonClass} onClick={handleShare}>
+                <Button variant="outline" size="sm" className={editorialButtonClass} onClick={handleShareOpen}>
                   <Share2 className={iconClass} aria-hidden />
                   Share
                 </Button>
-                <Button asChild className={editorialButtonClass}>
-                  <Link href="/">
-                    <CalendarDays className={iconClass} aria-hidden />
-                    Calendar
-                  </Link>
-                </Button>
+                {pathname !== "/" ? (
+                  <Button asChild className={editorialButtonClass}>
+                    <Link href="/">
+                      <CalendarDays className={iconClass} aria-hidden />
+                      Calendar
+                    </Link>
+                  </Button>
+                ) : null}
                 <Button variant="outline" className={editorialButtonClass} asChild>
                   <Link href="/insights">Insights</Link>
                 </Button>
@@ -1439,21 +1463,77 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             </div>
           </div>
         </div>
-        {shareMessage ? <p className="mt-3 text-sm font-medium text-muted-foreground">{shareMessage}</p> : null}
-        {shareFallbackUrl ? (
-          <Input
-            readOnly
-            value={shareFallbackUrl}
-            onFocus={(event) => event.currentTarget.select()}
-            aria-label="Share link"
-            className="mt-3 max-w-2xl border-border bg-[hsl(var(--ldc-surface))]"
-          />
-        ) : null}
-        <SiteSocialLinks className="mt-3" />
-        {seoSnapshot}
       </header>
 
-      <div className="mt-5 space-y-4">
+      <Dialog
+        open={shareModalOpen}
+        onOpenChange={(open) => {
+          setShareModalOpen(open);
+          if (!open) {
+            setShareCopyFeedback(null);
+          }
+        }}
+      >
+        <DialogContent className="border-border bg-[hsl(var(--ldc-surface))] sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Share this view</DialogTitle>
+            <DialogDescription>
+              Anyone with this link sees the same calendar filters and date. Scan the QR code on a phone or copy the
+              URL.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-6">
+            <div className="flex min-w-0 flex-col gap-3">
+              <div className="space-y-1.5">
+                <label className="font-display text-xs font-semibold uppercase text-muted-foreground" htmlFor="share-url-field">
+                  Link
+                </label>
+                <div className="flex flex-col gap-2">
+                  <Input
+                    id="share-url-field"
+                    readOnly
+                    value={shareUrl}
+                    onFocus={(event) => event.currentTarget.select()}
+                    aria-label="Share link"
+                    className="min-h-10 border-border bg-background font-mono text-xs"
+                  />
+                  <Button type="button" className={`shrink-0 self-start ${editorialButtonClass}`} onClick={() => void copyShareLink()}>
+                    Copy link
+                  </Button>
+                </div>
+              </div>
+              {shareCopyFeedback ? (
+                <p
+                  className={`text-sm font-medium ${
+                    shareCopyFeedback.startsWith("Could not") || shareCopyFeedback.startsWith("Sharing failed")
+                      ? "text-destructive"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {shareCopyFeedback}
+                </p>
+              ) : null}
+              {canUseNavigatorShare ? (
+                <Button type="button" variant="outline" className={editorialButtonClass} onClick={() => void shareWithDevice()}>
+                  Share using device…
+                </Button>
+              ) : null}
+            </div>
+            {shareUrl ? (
+              <div className="flex flex-col items-center gap-2 border-t border-border pt-6">
+                <span className="font-display text-xs font-semibold uppercase text-muted-foreground">QR code</span>
+                <div className="rounded-md border border-border bg-white p-3 shadow-[2px_2px_0_hsl(var(--foreground)/0.08)]">
+                  <QRCode value={shareUrl} size={168} level="M" title="QR code for this calendar view" />
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {seoSnapshot ? <div className="mt-8">{seoSnapshot}</div> : null}
+
+      <div className="mt-8 space-y-4">
         <div className="grid gap-4 lg:grid-cols-[290px_minmax(0,1fr)] lg:items-start">
             <aside className="hidden lg:block">
               <div className={`sticky top-4 overflow-hidden ${editorialPanelClass}`}>
@@ -1824,7 +1904,6 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                         Open contact page
                       </Link>
                     </Button>
-                    <SiteSocialLinks />
                   </CardContent>
                 </Card>
                 <div className="grid gap-2">
@@ -1947,12 +2026,15 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                       Open contact page
                     </Link>
                   </Button>
-                  <SiteSocialLinks />
                 </div>
               </section>
             )}
           </div>
         </div>
+
+      <footer className="mt-14 border-t border-border pt-10">
+        <SiteSocialLinks />
+      </footer>
 
       <Dialog open={Boolean(selectedSession)} onOpenChange={(open) => !open && setSelectedSession(null)}>
         <DialogContent className="max-h-[90dvh] overflow-y-auto border-2 border-border bg-[hsl(var(--ldc-surface))] p-0 shadow-[8px_8px_0_hsl(var(--foreground)/0.16)] sm:max-w-2xl">

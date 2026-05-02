@@ -69,7 +69,7 @@ function UpcomingClassesSnapshot({ occurrences, title }: { occurrences: Upcoming
   }
 
   return (
-    <details className="group mt-4 rounded-lg border border-input bg-card px-4 py-3">
+    <details className="group rounded-lg border border-input bg-card px-4 py-3">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
         <h2 id="upcoming-classes-heading" className="text-base font-semibold tracking-tight">
           {title}
@@ -246,7 +246,11 @@ export default function Home() {
         listingsUpdatedText={listingsUpdatedText}
         venueCount={venues.length}
         venues={venues}
-        seoSnapshot={<UpcomingClassesSnapshot occurrences={snapshotOccurrences} title={snapshotTitle} />}
+        seoSnapshot={
+          snapshotOccurrences.length > 0 ? (
+            <UpcomingClassesSnapshot occurrences={snapshotOccurrences} title={snapshotTitle} />
+          ) : undefined
+        }
       />
     </>
   );
