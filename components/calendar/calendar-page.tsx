@@ -161,12 +161,12 @@ function isGagaSession(session: Pick<DanceSession, "title" | "details" | "tags">
 function GagaBoycottCard({ session, onOpen }: { session: DanceSession; onOpen: () => void }) {
   return (
     <div className="overflow-hidden rounded-[18px] border-[3px] border-emerald-700 bg-[#ff5b76] text-xs text-zinc-900 shadow-sm">
-      <div className="relative h-20 w-full overflow-hidden bg-black" aria-hidden>
+      <div className="relative h-20 w-full overflow-hidden" aria-hidden>
         <Image
           src="/palestine-flag.svg"
           alt=""
           fill
-          className="object-contain object-center"
+          className="object-fill object-left"
           sizes="100vw"
         />
       </div>
