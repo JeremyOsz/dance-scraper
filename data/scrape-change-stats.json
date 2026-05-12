@@ -2,6 +2,64 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-05-12T06:29:15.180Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 258,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": true,
+          "previousSessionCount": 24,
+          "newSessionCount": 22,
+          "changed": true
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": true,
+          "previousSessionCount": 4,
+          "newSessionCount": 5,
+          "changed": true
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "oneSyllable",
+          "venue": "1Syllable",
+          "scrapeOk": true,
+          "previousSessionCount": 5,
+          "newSessionCount": 3,
+          "changed": true
+        },
+        {
+          "key": "coletHouse",
+          "venue": "Colet House",
+          "scrapeOk": true,
+          "previousSessionCount": 14,
+          "newSessionCount": 14,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 6,
+        "okVenues": 4,
+        "changedAmongOk": 3
+      }
+    },
+    {
       "at": "2026-05-11T06:47:47.655Z",
       "venues": [
         {
