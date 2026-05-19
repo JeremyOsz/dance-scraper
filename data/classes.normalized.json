@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-18T06:50:34.492Z",
+  "generatedAt": "2026-05-19T06:49:04.015Z",
   "sessions": [
     {
       "id": "florence-trust-writers-room-bianca-scout-and-elena-isolini-daughter-mary-dance-workshop-tuesday-10-00am",
@@ -5248,26 +5248,6 @@
       "lastSeenAt": "2026-05-17T06:35:02.588Z"
     },
     {
-      "id": "ecstatic-dance-london-ecstatic-dance-uk-sun-day-sunday-09-00",
-      "venue": "Ecstatic Dance London",
-      "title": "Ecstatic Dance UK - SUN•DAY",
-      "details": "AT THE BATHS - Amazing space, highest-quality sound, great hangout with saunas, cold plunge and delicious plant based food available after!",
-      "dayOfWeek": "Sunday",
-      "startTime": "09:00",
-      "endTime": "12:00",
-      "startDate": "2020-07-05",
-      "endDate": "2026-06-28",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
-      "tags": [
-        "ecstatic dance"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-05-17T06:35:02.588Z"
-    },
-    {
       "id": "five-rhythms-london-5rhythms-london-class-na-na",
       "venue": "Five Rhythms London",
       "title": "5Rhythms London Class",
@@ -5375,143 +5355,6 @@
       "tags": [],
       "audience": "adult",
       "isWorkshop": true,
-      "lastSeenAt": "2026-05-17T06:35:02.588Z"
-    },
-    {
-      "id": "wednesday-moving-wednesday-moving-juan-sanchez-plaza-wednesday-18-45",
-      "venue": "Wednesday Moving",
-      "title": "Wednesday Moving - Juan Sanchez Plaza",
-      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Juan is the founder of The 5 Elements Practice, a holistic platform where movement, sound and meditation meet. This is an invitation into a transformative journey; to move, to sense, and to reconnect with yourself beyond the thinking mind. We begin with a guided meditation, from which movement unfolds. As always, the session is open to everyone and the space is held as an inclusive, welcoming and queer-friend environment where all bodies and identities are respected.",
-      "dayOfWeek": "Wednesday",
-      "startTime": "18:45",
-      "endTime": "20:00",
-      "startDate": "2026-04-15",
-      "endDate": "2026-04-15",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
-      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-17T06:35:02.588Z"
-    },
-    {
-      "id": "wednesday-moving-wednesday-moving-olly-otley-wednesday-18-45",
-      "venue": "Wednesday Moving",
-      "title": "Wednesday Moving - Olly Otley",
-      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • As a community dance artist and forest school leader, Olly brings a natural playfulness and a love of nature to her work. Olly moves because it makes her feel good and her mission is to share that feeling with others. She teaches a mix of guided improvisation, partner work and simple skill-building sequences.",
-      "dayOfWeek": "Wednesday",
-      "startTime": "18:45",
-      "endTime": "20:00",
-      "startDate": "2026-04-22",
-      "endDate": "2026-04-22",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
-      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
-      "tags": [
-        "improvisation"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-17T06:35:02.588Z"
-    },
-    {
-      "id": "wednesday-moving-wednesday-moving-galit-criden-wednesday-18-45",
-      "venue": "Wednesday Moving",
-      "title": "Wednesday Moving - Galit Criden",
-      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Galit's RESET movement method blends elements of somatic practices, contemporary dance, disco, and free improvisation. It's designed to take you on a transformative journey where you tap into your own power, explore movement and experience a sense of liberation.",
-      "dayOfWeek": "Wednesday",
-      "startTime": "18:45",
-      "endTime": "20:00",
-      "startDate": "2026-04-29",
-      "endDate": "2026-04-29",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
-      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
-      "tags": [
-        "contemporary",
-        "improvisation"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-17T06:35:02.588Z"
-    },
-    {
-      "id": "wednesday-moving-wednesday-moving-julia-testas-wednesday-18-45",
-      "venue": "Wednesday Moving",
-      "title": "Wednesday Moving - Julia Testas",
-      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Julia's improvisation sessions are inspired by a combination of her own somatic research, 'dissolving', and David Zambrano's concept of 'passing through', a philosophy that suggests that movement neeeds no leader in creation. Connecting, sharing and collaborating, Julia invites you to tap into your body's intelligence and enhance your self-awareness towards cultivating greater confidence and freedom in your movement.",
-      "dayOfWeek": "Wednesday",
-      "startTime": "18:45",
-      "endTime": "20:00",
-      "startDate": "2026-05-06",
-      "endDate": "2026-05-06",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
-      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
-      "tags": [
-        "improvisation"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-05-17T06:35:02.588Z"
-    },
-    {
-      "id": "wednesday-moving-wednesday-moving-marianna-sfyridi-wednesday-18-45",
-      "venue": "Wednesday Moving",
-      "title": "Wednesday Moving - Marianna Sfyridi",
-      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Marianna is a dancer, performer, movement specialist and pharmacist. The development of her 'Circadian Bodies' embodiment practice is rooted in her interdisciplinery background and her research into cultural narratives. The practice prepares each different body for the day ahead, weaving together principles of capoeira, dance and somatics and fostering a deep connection with bodily sensations and movement through plaful integration of mind and body.",
-      "dayOfWeek": "Wednesday",
-      "startTime": "18:45",
-      "endTime": "20:00",
-      "startDate": "2026-05-13",
-      "endDate": "2026-05-13",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://square.link/u/UrX2bpAX",
-      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-17T06:35:02.588Z"
-    },
-    {
-      "id": "wednesday-moving-wednesday-moving-cat-jones-wednesday-18-45",
-      "venue": "Wednesday Moving",
-      "title": "Wednesday Moving - Cat Jones",
-      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Cat draws from her experience and research into release-based dance practices to encourage fluid-limbed movement in and out of the floor. Her classes are often guided by nature embedded imagery as an underscore for improvisation. Come as you are and find ways to be both porous and curious whilst moving. Then take this feeling out and beyond the studio into your week.",
-      "dayOfWeek": "Wednesday",
-      "startTime": "18:45",
-      "endTime": "20:00",
-      "startDate": "2026-05-20",
-      "endDate": "2026-05-20",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://square.link/u/5FhuyGUK",
-      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
-      "tags": [
-        "improvisation"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-17T06:35:02.588Z"
-    },
-    {
-      "id": "marina-sfyridi-circadian-bodies-march-dance-classes-thursday-18-00",
-      "venue": "Marina Sfyridi",
-      "title": "Circadian Bodies March Dance Classes",
-      "details": "Circadian Bodies / Mar 2026 / In Person Dance Classes in East London. Improvisation, Capoeira & Writing",
-      "dayOfWeek": "Thursday",
-      "startTime": "18:00",
-      "endTime": "20:30",
-      "startDate": "2026-03-05",
-      "endDate": "2026-03-26",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
-      "tags": [
-        "improvisation"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
       "lastSeenAt": "2026-05-17T06:35:02.588Z"
     },
     {
@@ -34327,6 +34170,163 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-05-18T06:50:34.492Z"
+    },
+    {
+      "id": "ecstatic-dance-london-ecstatic-dance-uk-sun-day-sunday-09-00",
+      "venue": "Ecstatic Dance London",
+      "title": "Ecstatic Dance UK - SUN•DAY",
+      "details": "AT THE BATHS - Amazing space, highest-quality sound, great hangout with saunas, cold plunge and delicious plant based food available after!",
+      "dayOfWeek": "Sunday",
+      "startTime": "09:00",
+      "endTime": "12:00",
+      "startDate": "2020-07-05",
+      "endDate": "2026-06-28",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
+      "tags": [
+        "ecstatic dance"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-05-19T06:49:04.015Z"
+    },
+    {
+      "id": "wednesday-moving-wednesday-moving-juan-sanchez-plaza-wednesday-18-45",
+      "venue": "Wednesday Moving",
+      "title": "Wednesday Moving - Juan Sanchez Plaza",
+      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Juan is the founder of The 5 Elements Practice, a holistic platform where movement, sound and meditation meet. This is an invitation into a transformative journey; to move, to sense, and to reconnect with yourself beyond the thinking mind. We begin with a guided meditation, from which movement unfolds. As always, the session is open to everyone and the space is held as an inclusive, welcoming and queer-friend environment where all bodies and identities are respected.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "18:45",
+      "endTime": "20:00",
+      "startDate": "2026-04-15",
+      "endDate": "2026-04-15",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-05-19T06:49:04.015Z"
+    },
+    {
+      "id": "wednesday-moving-wednesday-moving-olly-otley-wednesday-18-45",
+      "venue": "Wednesday Moving",
+      "title": "Wednesday Moving - Olly Otley",
+      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • As a community dance artist and forest school leader, Olly brings a natural playfulness and a love of nature to her work. Olly moves because it makes her feel good and her mission is to share that feeling with others. She teaches a mix of guided improvisation, partner work and simple skill-building sequences.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "18:45",
+      "endTime": "20:00",
+      "startDate": "2026-04-22",
+      "endDate": "2026-04-22",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-05-19T06:49:04.015Z"
+    },
+    {
+      "id": "wednesday-moving-wednesday-moving-galit-criden-wednesday-18-45",
+      "venue": "Wednesday Moving",
+      "title": "Wednesday Moving - Galit Criden",
+      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Galit's RESET movement method blends elements of somatic practices, contemporary dance, disco, and free improvisation. It's designed to take you on a transformative journey where you tap into your own power, explore movement and experience a sense of liberation.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "18:45",
+      "endTime": "20:00",
+      "startDate": "2026-04-29",
+      "endDate": "2026-04-29",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "tags": [
+        "contemporary",
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-05-19T06:49:04.015Z"
+    },
+    {
+      "id": "wednesday-moving-wednesday-moving-julia-testas-wednesday-18-45",
+      "venue": "Wednesday Moving",
+      "title": "Wednesday Moving - Julia Testas",
+      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Julia's improvisation sessions are inspired by a combination of her own somatic research, 'dissolving', and David Zambrano's concept of 'passing through', a philosophy that suggests that movement neeeds no leader in creation. Connecting, sharing and collaborating, Julia invites you to tap into your body's intelligence and enhance your self-awareness towards cultivating greater confidence and freedom in your movement.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "18:45",
+      "endTime": "20:00",
+      "startDate": "2026-05-06",
+      "endDate": "2026-05-06",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-05-19T06:49:04.015Z"
+    },
+    {
+      "id": "wednesday-moving-wednesday-moving-marianna-sfyridi-wednesday-18-45",
+      "venue": "Wednesday Moving",
+      "title": "Wednesday Moving - Marianna Sfyridi",
+      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Marianna is a dancer, performer, movement specialist and pharmacist. The development of her 'Circadian Bodies' embodiment practice is rooted in her interdisciplinery background and her research into cultural narratives. The practice prepares each different body for the day ahead, weaving together principles of capoeira, dance and somatics and fostering a deep connection with bodily sensations and movement through plaful integration of mind and body.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "18:45",
+      "endTime": "20:00",
+      "startDate": "2026-05-13",
+      "endDate": "2026-05-13",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.wednesdaymoving.co.uk/",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "tags": [],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-05-19T06:49:04.015Z"
+    },
+    {
+      "id": "wednesday-moving-wednesday-moving-cat-jones-wednesday-18-45",
+      "venue": "Wednesday Moving",
+      "title": "Wednesday Moving - Cat Jones",
+      "details": "Round Chapel Old School Rooms, Powerscroft Road, Hackney E5 0PU • Cat draws from her experience and research into release-based dance practices to encourage fluid movement in and out of the floor. Her classes are often guided by nature embedded imagery as an underscore for improvisation. Come as you are and find ways to be both porous and curious whilst moving. Then take this feeling out and beyond the studio into your week.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "18:45",
+      "endTime": "20:00",
+      "startDate": "2026-05-20",
+      "endDate": "2026-05-20",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://square.link/u/5FhuyGUK",
+      "sourceUrl": "https://www.wednesdaymoving.co.uk/",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-05-19T06:49:04.015Z"
+    },
+    {
+      "id": "marina-sfyridi-circadian-bodies-march-dance-classes-thursday-18-00",
+      "venue": "Marina Sfyridi",
+      "title": "Circadian Bodies March Dance Classes",
+      "details": "Circadian Bodies / Mar 2026 / In Person Dance Classes in East London. Improvisation, Capoeira & Writing",
+      "dayOfWeek": "Thursday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "startDate": "2026-03-05",
+      "endDate": "2026-03-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
+      "tags": [
+        "improvisation"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-05-19T06:49:04.015Z"
     }
   ],
   "venues": [
@@ -34399,7 +34399,7 @@
       "sourceUrl": "https://www.eventbrite.com/o/73047023743",
       "count": 1,
       "ok": true,
-      "lastSuccessAt": "2026-05-17T06:35:02.588Z",
+      "lastSuccessAt": "2026-05-19T06:49:04.015Z",
       "lastError": null
     },
     {
@@ -34480,7 +34480,7 @@
       "sourceUrl": "https://www.wednesdaymoving.co.uk/",
       "count": 6,
       "ok": true,
-      "lastSuccessAt": "2026-05-17T06:35:02.588Z",
+      "lastSuccessAt": "2026-05-19T06:49:04.015Z",
       "lastError": null
     },
     {
@@ -34561,7 +34561,7 @@
       "sourceUrl": "https://www.eventbrite.co.uk/e/circadian-bodies-march-dance-classes-tickets-1984132482667",
       "count": 1,
       "ok": true,
-      "lastSuccessAt": "2026-05-17T06:35:02.588Z",
+      "lastSuccessAt": "2026-05-19T06:49:04.015Z",
       "lastError": null
     },
     {
@@ -34642,7 +34642,7 @@
       "sourceUrl": "https://www.eventbrite.co.uk/o/daniel-rodriguez-88584641013",
       "count": 0,
       "ok": true,
-      "lastSuccessAt": "2026-05-17T06:35:02.588Z",
+      "lastSuccessAt": "2026-05-19T06:49:04.015Z",
       "lastError": null
     },
     {
@@ -34651,7 +34651,7 @@
       "sourceUrl": "https://www.eventbrite.com/o/79771578413",
       "count": 0,
       "ok": true,
-      "lastSuccessAt": "2026-05-17T06:35:02.588Z",
+      "lastSuccessAt": "2026-05-19T06:49:04.015Z",
       "lastError": null
     },
     {
@@ -34671,12 +34671,9 @@
       "key": "oneSyllable",
       "sourceUrl": "https://1syllable.org/events/category/classes-and-training/",
       "count": 3,
-      "ok": true,
+      "ok": false,
       "lastSuccessAt": "2026-05-17T06:35:02.588Z",
-      "lastError": null,
-      "replacedVenueLabels": [
-        "Laban Building"
-      ]
+      "lastError": ""
     },
     {
       "venue": "Colet House",
