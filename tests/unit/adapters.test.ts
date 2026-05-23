@@ -103,6 +103,7 @@ const testedVenueKeys = [
   "oneSyllable",
   "coletHouse",
   "studio66",
+  "tangoFever",
   "customEvents"
 ] as const;
 
@@ -184,6 +185,74 @@ describe("scraper adapters", () => {
     const output = await scrapeRambert();
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBeGreaterThan(0);
+  });
+
+  it("parses Tango Fever Punchpass calendar events", async () => {
+    fetchHtml.mockResolvedValue(`
+      <div class="page__heading"><h1>May 2026</h1></div>
+      <table>
+        <td class="calendar__week__day">
+          <div class="h3"><strong>5</strong></div>
+          <div class="calendar__week__day__event">
+            <div class="calendar__week__day__event__details">
+              <div class="calendar__week__day__event__details__hour">19:30</div>
+              <a class="box" href="/classes/19884782?embed=true&amp;source=cal"></a>
+              <div class="calendar__week__day__event__details__classname">Beginners class - tuesdays</div>
+              <div class="text--dark-gray">Exmouth Market 24 Exmouth Market London EC1R 4QE</div>
+              <div class="text--dark-gray">Rene &amp; Silvia</div>
+            </div>
+          </div>
+        </td>
+      </table>
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "Event",
+                "name": "Beginners class - tuesdays",
+                "startDate": "2026-05-05T19:30:00+01:00",
+                "endDate": "2026-05-05T20:30:00+01:00",
+                "description": "Argentine tango class at Exmouth Market",
+                "performer": { "@type": "Person", "name": "Rene & Silvia" }
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "Event",
+                "name": "5x Weekend Workshops pass - Pablo & Antonella",
+                "startDate": "2026-05-09T13:50:00+01:00",
+                "endDate": "2026-05-09T13:55:00+01:00"
+              }
+            }
+          ]
+        }
+      </script>
+    `);
+
+    const { scrapeTangoFever } = await import("../../scripts/scrape/adapters/tango-fever");
+    const output = await scrapeTangoFever();
+    expect(output.ok).toBe(true);
+    expect(output.venueKey).toBe("tangoFever");
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]).toMatchObject({
+      venue: "Tango Fever",
+      title: "Beginners class - tuesdays",
+      dayOfWeek: "Tuesday",
+      time: "19:30 - 20:30",
+      startDate: "2026-05-05",
+      endDate: "2026-05-05",
+      bookingUrl: "https://tango-fever.punchpass.com/classes/19884782?embed=true&source=cal",
+      sourceUrl: "https://www.tango-fever.com/classes-2/"
+    });
+    expect(output.classes[0]?.details).toContain("Location: Exmouth Market");
+    expect(output.classes[0]?.details).toContain("Teacher: Rene & Silvia");
   });
 
   it("parses Rambert Momence schedule sessions when host widget is present", async () => {

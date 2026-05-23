@@ -129,7 +129,7 @@ function isInScope(raw: ScrapedClass): boolean {
 }
 
 function inferTags(raw: ScrapedClass): string[] {
-  const text = `${raw.title} ${raw.details ?? ""}`.toLowerCase();
+  const text = `${raw.venue} ${raw.title} ${raw.details ?? ""}`.toLowerCase();
   const tagMatchers: Array<{ tag: string; pattern: RegExp }> = [
     { tag: "contemporary", pattern: /\bcontemporary\b/i },
     { tag: "ballet", pattern: /\bballet\b/i },
@@ -145,7 +145,8 @@ function inferTags(raw: ScrapedClass): string[] {
     { tag: "pilates", pattern: /\bpilates\b/i },
     { tag: "gaga", pattern: /\bgaga\b/i },
     { tag: "afro", pattern: /\bafro\b/i },
-    { tag: "floorwork", pattern: /\bfloorwork\b/i }
+    { tag: "floorwork", pattern: /\bfloorwork\b/i },
+    { tag: "tango", pattern: /\btango\b/i }
   ];
   return tagMatchers.filter(({ pattern }) => pattern.test(text)).map(({ tag }) => tag);
 }

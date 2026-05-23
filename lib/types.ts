@@ -39,6 +39,7 @@ export type VenueKey =
   | "oneSyllable"
   | "coletHouse"
   | "studio66"
+  | "tangoFever"
   | "customEvents";
 
 export type DayOfWeek =

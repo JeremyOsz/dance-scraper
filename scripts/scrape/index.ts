@@ -39,6 +39,7 @@ import { scrapeGelNow } from "./adapters/gel-now";
 import { scrapeOneSyllable } from "./adapters/one-syllable";
 import { scrapeColetHouse } from "./adapters/colet-house";
 import { scrapeStudio66 } from "./adapters/studio66";
+import { scrapeTangoFever } from "./adapters/tango-fever";
 import type { ScrapeOutput, VenueKey } from "../../lib/types";
 import { VENUES } from "../../lib/venues";
 import { buildOutput, dedupeSessionsByStableBookingUrl, writeOutput } from "./normalize";
@@ -101,6 +102,7 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "oneSyllable", scrape: scrapeOneSyllable },
   { key: "coletHouse", scrape: scrapeColetHouse },
   { key: "studio66", scrape: scrapeStudio66 },
+  { key: "tangoFever", scrape: scrapeTangoFever },
   { key: "customEvents", scrape: scrapeCustomEvents }
 ];
 

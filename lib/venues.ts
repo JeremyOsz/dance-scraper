@@ -202,6 +202,11 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://online.wellyx.com/studiosixtysix/londonuk/classes",
     mapQuery: "Studio 66 London"
   },
+  tangoFever: {
+    label: "Tango Fever",
+    sourceUrl: "https://www.tango-fever.com/classes-2/",
+    mapQuery: "Tango Fever London"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",
