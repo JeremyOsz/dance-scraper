@@ -775,6 +775,9 @@ describe("scraper adapters", () => {
     expect(output.classes.map((item) => item.title)).not.toContain("Rise Up (6-7 Years)");
     expect(mondayClass?.startDate).toBe("2026-01-12");
     expect(mondayClass?.endDate).toBe("2026-07-06");
+    expect(output.classes.filter((item) => item.title === "Class Lab - Casual Ceilidh with Gay Gordon")).toHaveLength(4);
+    expect(output.classes.filter((item) => item.title === "Class Lab - Feel Good")).toHaveLength(4);
+    expect(output.classes.find((item) => item.title === "Class Lab - Moving Through Yoga")?.time).toBe("19:30 - 21:00");
   });
 
   it("parses CI Calendar London adapter", async () => {
@@ -1253,7 +1256,7 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.bookingUrl).toContain("/mvmt");
   });
 
-  it("returns empty class list when The Manor / MVMT has no upcoming sessions", async () => {
+  it("keeps The Manor / MVMT manual listings when the booking API has no upcoming sessions", async () => {
     fetchJson.mockResolvedValue({
       "2026-03-10": [],
       "2026-03-11": []
@@ -1261,7 +1264,9 @@ describe("scraper adapters", () => {
     const { scrapeTheManorMvmt } = await import("../../scripts/scrape/adapters/the-manor-mvmt");
     const output = await scrapeTheManorMvmt();
     expect(output.ok).toBe(true);
-    expect(output.classes).toHaveLength(0);
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]?.title).toBe("Birthday Fundraiser for Palestine: Beginner Commercial");
+    expect(output.classes[0]?.startDate).toBe("2026-05-30");
   });
 
   it("parses East London Dance adapter", async () => {

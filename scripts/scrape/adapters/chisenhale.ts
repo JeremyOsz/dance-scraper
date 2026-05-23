@@ -11,6 +11,42 @@ const twentyFourHourRangePattern = /\b(?:[01]?\d|2[0-3]):[0-5]\d\s*(?:-|–|to)\
 const fullDateRangePattern =
   /\b(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})\s*(?:-|–|—|to)\s*(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})\b/i;
 const parseFormats = ["d MMMM yyyy", "d MMM yyyy"];
+const ticketTailorSourceUrl = "https://whatson.chisenhaledancespace.co.uk/";
+const classLabListings: AdapterOutput["classes"] = [
+  {
+    venue: "Chisenhale Dance Space",
+    title: "Class Lab - Moving Through Yoga",
+    details: "Class Lab workshop development scheme at Chisenhale Dance Space.",
+    dayOfWeek: "Tuesday",
+    time: "19:30 - 21:00",
+    startDate: "2026-05-26",
+    endDate: "2026-05-26",
+    bookingUrl: "https://whatson.chisenhaledancespace.co.uk/events/chisenhaledancespace/2150928",
+    sourceUrl: ticketTailorSourceUrl
+  },
+  ...["2026-06-02", "2026-06-09", "2026-06-16", "2026-06-23"].map((startDate) => ({
+    venue: "Chisenhale Dance Space",
+    title: "Class Lab - Casual Ceilidh with Gay Gordon",
+    details: "Class Lab workshop development scheme at Chisenhale Dance Space.",
+    dayOfWeek: "Tuesday",
+    time: "19:30 - 21:00",
+    startDate,
+    endDate: startDate,
+    bookingUrl: "https://whatson.chisenhaledancespace.co.uk/events/chisenhaledancespace/2150957",
+    sourceUrl: ticketTailorSourceUrl
+  })),
+  ...["2026-07-07", "2026-07-14", "2026-07-21", "2026-07-28"].map((startDate) => ({
+    venue: "Chisenhale Dance Space",
+    title: "Class Lab - Feel Good",
+    details: "Class Lab workshop development scheme at Chisenhale Dance Space.",
+    dayOfWeek: "Tuesday",
+    time: "19:30 - 21:00",
+    startDate,
+    endDate: startDate,
+    bookingUrl: "https://whatson.chisenhaledancespace.co.uk/events/chisenhaledancespace/2151038",
+    sourceUrl: ticketTailorSourceUrl
+  }))
+];
 
 function parseToIsoDate(raw: string): string | null {
   const value = raw.replace(/\s+/g, " ").trim();
@@ -73,11 +109,13 @@ export async function scrapeChisenhale(): Promise<AdapterOutput> {
       });
     });
 
+    classes.push(...classLabListings);
+
     return {
       venueKey: "chisenhaleDanceSpace",
       venue: "Chisenhale Dance Space",
       sourceUrl,
-      classes: Array.from(new Map(classes.map((c) => [c.title + c.bookingUrl, c])).values()),
+      classes: Array.from(new Map(classes.map((c) => [`${c.title}|${c.bookingUrl}|${c.startDate ?? ""}`, c])).values()),
       ok: true,
       error: null
     };

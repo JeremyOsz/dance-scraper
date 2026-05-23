@@ -7,6 +7,20 @@ const bookingApiBase = "https://api.lemonbar.uk/api/admin/booking_sessions";
 const bookingDaysToFetch = 7;
 const locationId = 1;
 const businessTypeIds = [4];
+const manualListings: AdapterOutput["classes"] = [
+  {
+    venue: "The Manor / MVMT",
+    title: "Birthday Fundraiser for Palestine: Beginner Commercial",
+    details:
+      "HausOf Hurriyah birthday fundraiser for Palestine, raising money for Smoud for Gaza. Beginner Commercial at The Manor LDN.",
+    dayOfWeek: "Saturday",
+    time: "15:00 - 16:00",
+    startDate: "2026-05-30",
+    endDate: "2026-05-30",
+    bookingUrl: sourceUrl,
+    sourceUrl
+  }
+];
 
 type BookingSession = {
   id: number;
@@ -96,9 +110,12 @@ export async function scrapeTheManorMvmt(): Promise<AdapterOutput> {
       type: "mvmt"
     });
     const response = await fetchJson<BookingSessionsResponse>(`${bookingApiBase}?${params.toString()}`);
-    const classes = Object.entries(response).flatMap(([dateKey, sessions]) =>
-      sessions.map((session) => toClass(dateKey, session)).filter((entry): entry is ScrapedClass => Boolean(entry))
-    );
+    const classes = [
+      ...Object.entries(response).flatMap(([dateKey, sessions]) =>
+        sessions.map((session) => toClass(dateKey, session)).filter((entry): entry is ScrapedClass => Boolean(entry))
+      ),
+      ...manualListings
+    ];
 
     return {
       venueKey: "theManorMvmt",

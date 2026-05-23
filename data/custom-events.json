@@ -44,6 +44,16 @@
       "endDate": "2026-03-27",
       "bookingUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
       "sourceUrl": "https://www.tickettailor.com/events/zeroquality/2067242"
+    },
+    {
+      "title": "Beginner Level Waacking Class with The Lioness",
+      "venue": "HOST Studios",
+      "details": "Beginner level waacking class with The Lioness. HOST Studios, 143 Mare Street, E8 3FW. £12.",
+      "dayOfWeek": "Friday",
+      "time": "7:00pm - 8:30pm",
+      "startDate": "2026-05-29",
+      "bookingUrl": "https://www.hoststudios.co.uk/",
+      "sourceUrl": "https://www.hoststudios.co.uk/"
     }
   ]
 }

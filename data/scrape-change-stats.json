@@ -2,6 +2,40 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-05-23T10:13:07.423Z",
+      "venues": [
+        {
+          "key": "chisenhaleDanceSpace",
+          "venue": "Chisenhale Dance Space",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 10,
+          "changed": true
+        },
+        {
+          "key": "theManorMvmt",
+          "venue": "The Manor / MVMT",
+          "scrapeOk": true,
+          "previousSessionCount": 36,
+          "newSessionCount": 37,
+          "changed": true
+        },
+        {
+          "key": "customEvents",
+          "venue": "JW3",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 3,
+        "okVenues": 3,
+        "changedAmongOk": 2
+      }
+    },
+    {
       "at": "2026-05-23T06:25:50.034Z",
       "venues": [
         {

@@ -10,6 +10,8 @@ type CustomEventEntry = {
   title: string;
   /** Overrides top-level `venue` for this row (e.g. a different theatre). */
   venue?: string | null;
+  /** Set false for additive manual listings that should not evict scraper rows for the same venue. */
+  replaceVenue?: boolean | null;
   details?: string | null;
   dayOfWeek?: string | null;
   time?: string | null;
@@ -47,6 +49,9 @@ function collectReplacedVenueLabels(file: CustomEventsFile): string[] {
   const labels = new Set<string>();
   if (defaultVenue) labels.add(defaultVenue);
   for (const entry of file.events) {
+    if (entry.replaceVenue === false) {
+      continue;
+    }
     const v = entry.venue?.trim() || defaultVenue;
     if (v) labels.add(v);
   }
