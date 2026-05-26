@@ -2,6 +2,96 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-05-26T06:48:40.592Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 258,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "ecstaticDanceLondon",
+          "venue": "Ecstatic Dance London",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "mamboCity",
+          "venue": "MamboCity",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "adrianOutsavvy",
+          "venue": "StreamMovement",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "marinaSfyridi",
+          "venue": "Marina Sfyridi",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "danielRodriguezEventbrite",
+          "venue": "Daniel Rodriguez",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "rachelMannMarlonWhoHenry",
+          "venue": "Rachel Mann & Marlon Who Henry",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "coletHouse",
+          "venue": "Colet House",
+          "scrapeOk": true,
+          "previousSessionCount": 15,
+          "newSessionCount": 15,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 10,
+        "okVenues": 7,
+        "changedAmongOk": 0
+      }
+    },
+    {
       "at": "2026-05-25T06:57:29.471Z",
       "venues": [
         {
