@@ -2,6 +2,144 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-05-29T06:50:02.930Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 258,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "rambert",
+          "venue": "Rambert",
+          "scrapeOk": true,
+          "previousSessionCount": 90,
+          "newSessionCount": 83,
+          "changed": true
+        },
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 49,
+          "newSessionCount": 0,
+          "changed": true
+        },
+        {
+          "key": "tripSpace",
+          "venue": "TripSpace",
+          "scrapeOk": true,
+          "previousSessionCount": 209,
+          "newSessionCount": 296,
+          "changed": true
+        },
+        {
+          "key": "ciCalendarLondon",
+          "venue": "CI Calendar London",
+          "scrapeOk": true,
+          "previousSessionCount": 336,
+          "newSessionCount": 339,
+          "changed": true
+        },
+        {
+          "key": "bachataCommunity",
+          "venue": "Bachata Community",
+          "scrapeOk": true,
+          "previousSessionCount": 170,
+          "newSessionCount": 188,
+          "changed": true
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": true,
+          "previousSessionCount": 24,
+          "newSessionCount": 25,
+          "changed": true
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": true,
+          "previousSessionCount": 6,
+          "newSessionCount": 6,
+          "changed": false
+        },
+        {
+          "key": "danceworks",
+          "venue": "Danceworks",
+          "scrapeOk": true,
+          "previousSessionCount": 128,
+          "newSessionCount": 128,
+          "changed": true
+        },
+        {
+          "key": "pineappleDanceStudios",
+          "venue": "Pineapple Dance Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 310,
+          "newSessionCount": 308,
+          "changed": true
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "theManorMvmt",
+          "venue": "The Manor / MVMT",
+          "scrapeOk": true,
+          "previousSessionCount": 33,
+          "newSessionCount": 33,
+          "changed": true
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "rachelMannMarlonWhoHenry",
+          "venue": "Rachel Mann & Marlon Who Henry",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "studio66",
+          "venue": "Studio 66",
+          "scrapeOk": true,
+          "previousSessionCount": 31,
+          "newSessionCount": 28,
+          "changed": true
+        },
+        {
+          "key": "tangoFever",
+          "venue": "Tango Fever",
+          "scrapeOk": true,
+          "previousSessionCount": 12,
+          "newSessionCount": 12,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 16,
+        "okVenues": 13,
+        "changedAmongOk": 11
+      }
+    },
+    {
       "at": "2026-05-28T06:50:11.087Z",
       "venues": [
         {
