@@ -2,6 +2,96 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-06-06T06:39:54.729Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "rambert",
+          "venue": "Rambert",
+          "scrapeOk": true,
+          "previousSessionCount": 74,
+          "newSessionCount": 72,
+          "changed": true
+        },
+        {
+          "key": "ciCalendarLondon",
+          "venue": "CI Calendar London",
+          "scrapeOk": true,
+          "previousSessionCount": 335,
+          "newSessionCount": 335,
+          "changed": true
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": true,
+          "previousSessionCount": 23,
+          "newSessionCount": 24,
+          "changed": true
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": true,
+          "previousSessionCount": 5,
+          "newSessionCount": 5,
+          "changed": true
+        },
+        {
+          "key": "wednesdayMoving",
+          "venue": "Wednesday Moving",
+          "scrapeOk": true,
+          "previousSessionCount": 7,
+          "newSessionCount": 7,
+          "changed": false
+        },
+        {
+          "key": "danceworks",
+          "venue": "Danceworks",
+          "scrapeOk": true,
+          "previousSessionCount": 130,
+          "newSessionCount": 131,
+          "changed": true
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "oneSyllable",
+          "venue": "1Syllable",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 10,
+        "okVenues": 7,
+        "changedAmongOk": 6
+      }
+    },
+    {
       "at": "2026-06-05T06:54:44.246Z",
       "venues": [
         {
@@ -9016,24 +9106,6 @@
       "summary": {
         "scrapedVenues": 2,
         "okVenues": 2,
-        "changedAmongOk": 1
-      }
-    },
-    {
-      "at": "2026-04-01T11:48:03.668Z",
-      "venues": [
-        {
-          "key": "tripSpace",
-          "venue": "TripSpace",
-          "scrapeOk": true,
-          "previousSessionCount": 1402,
-          "newSessionCount": 317,
-          "changed": true
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 1,
-        "okVenues": 1,
         "changedAmongOk": 1
       }
     }
