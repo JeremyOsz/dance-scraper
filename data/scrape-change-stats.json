@@ -2,6 +2,40 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-06-23T06:49:34.135Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 3,
+        "okVenues": 0,
+        "changedAmongOk": 0
+      }
+    },
+    {
       "at": "2026-06-22T07:19:51.803Z",
       "venues": [
         {
@@ -11289,24 +11323,6 @@
         "scrapedVenues": 1,
         "okVenues": 1,
         "changedAmongOk": 0
-      }
-    },
-    {
-      "at": "2026-04-09T16:53:26.049Z",
-      "venues": [
-        {
-          "key": "siobhanDavies",
-          "venue": "Siobhan Davies Studios",
-          "scrapeOk": true,
-          "previousSessionCount": 17,
-          "newSessionCount": 19,
-          "changed": true
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 1,
-        "okVenues": 1,
-        "changedAmongOk": 1
       }
     }
   ]
