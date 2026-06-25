@@ -2,6 +2,128 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-06-25T06:48:55.760Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "chisenhaleDanceSpace",
+          "venue": "Chisenhale Dance Space",
+          "scrapeOk": true,
+          "previousSessionCount": 10,
+          "newSessionCount": 10,
+          "changed": false
+        },
+        {
+          "key": "luminousDance",
+          "venue": "Luminous Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 13,
+          "newSessionCount": 13,
+          "changed": false
+        },
+        {
+          "key": "fiveRhythmsLondon",
+          "venue": "Five Rhythms London",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "butohMutations",
+          "venue": "Butoh Mutations",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "wednesdayMoving",
+          "venue": "Wednesday Moving",
+          "scrapeOk": true,
+          "previousSessionCount": 7,
+          "newSessionCount": 7,
+          "changed": true
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "adrianOutsavvy",
+          "venue": "StreamMovement",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "eastLondonDance",
+          "venue": "East London Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 26,
+          "newSessionCount": 26,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "cplayCy",
+          "venue": "cplay.cy",
+          "scrapeOk": true,
+          "previousSessionCount": 2,
+          "newSessionCount": 2,
+          "changed": false
+        },
+        {
+          "key": "danielRodriguezEventbrite",
+          "venue": "Daniel Rodriguez",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "oneSyllable",
+          "venue": "1Syllable",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "coletHouse",
+          "venue": "Colet House",
+          "scrapeOk": true,
+          "previousSessionCount": 18,
+          "newSessionCount": 19,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 14,
+        "okVenues": 11,
+        "changedAmongOk": 2
+      }
+    },
+    {
       "at": "2026-06-24T06:49:07.999Z",
       "venues": [
         {
@@ -11426,24 +11548,6 @@
           "scrapeOk": true,
           "previousSessionCount": 0,
           "newSessionCount": 0,
-          "changed": false
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 1,
-        "okVenues": 1,
-        "changedAmongOk": 0
-      }
-    },
-    {
-      "at": "2026-04-13T14:04:17.261Z",
-      "venues": [
-        {
-          "key": "customEvents",
-          "venue": "JW3",
-          "scrapeOk": true,
-          "previousSessionCount": 1,
-          "newSessionCount": 1,
           "changed": false
         }
       ],
