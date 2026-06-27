@@ -2,6 +2,48 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-06-27T06:39:11.340Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "conTumbaoSalsa",
+          "venue": "Con Tumbao Salsa",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 4,
+        "okVenues": 1,
+        "changedAmongOk": 0
+      }
+    },
+    {
       "at": "2026-06-26T06:50:03.724Z",
       "venues": [
         {
@@ -11697,24 +11739,6 @@
         "scrapedVenues": 1,
         "okVenues": 1,
         "changedAmongOk": 1
-      }
-    },
-    {
-      "at": "2026-04-14T12:48:19.381Z",
-      "venues": [
-        {
-          "key": "oneSyllable",
-          "venue": "1Syllable",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": false
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 1,
-        "okVenues": 1,
-        "changedAmongOk": 0
       }
     }
   ]
