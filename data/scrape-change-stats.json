@@ -2,6 +2,80 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-07-04T08:11:16.129Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "fiveRhythmsLondon",
+          "venue": "Five Rhythms London",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": false,
+          "previousSessionCount": 23,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": false,
+          "previousSessionCount": 6,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "eastLondonDance",
+          "venue": "East London Dance",
+          "scrapeOk": true,
+          "previousSessionCount": 26,
+          "newSessionCount": 26,
+          "changed": false
+        },
+        {
+          "key": "conTumbaoSalsa",
+          "venue": "Con Tumbao Salsa",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "danielRodriguezEventbrite",
+          "venue": "Daniel Rodriguez",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 8,
+        "okVenues": 4,
+        "changedAmongOk": 0
+      }
+    },
+    {
       "at": "2026-07-03T08:36:03.476Z",
       "venues": [
         {
@@ -12185,88 +12259,6 @@
         "scrapedVenues": 1,
         "okVenues": 1,
         "changedAmongOk": 1
-      }
-    },
-    {
-      "at": "2026-04-22T06:11:37.236Z",
-      "venues": [
-        {
-          "key": "thePlace",
-          "venue": "The Place",
-          "scrapeOk": false,
-          "previousSessionCount": 40,
-          "newSessionCount": 0,
-          "changed": null
-        },
-        {
-          "key": "ecstaticDanceLondon",
-          "venue": "Ecstatic Dance London",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": false
-        },
-        {
-          "key": "baseDanceStudios",
-          "venue": "BASE Dance Studios",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": false
-        },
-        {
-          "key": "salsaSoho",
-          "venue": "Salsa! Soho",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": false
-        },
-        {
-          "key": "barSalsaTemple",
-          "venue": "Bar Salsa Temple",
-          "scrapeOk": false,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": null
-        },
-        {
-          "key": "cityAcademy",
-          "venue": "City Academy",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": false
-        },
-        {
-          "key": "conTumbaoSalsa",
-          "venue": "Con Tumbao Salsa",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": false
-        },
-        {
-          "key": "underTheSunDance",
-          "venue": "Under the Sun Dance",
-          "scrapeOk": false,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": null
-        },
-        {
-          "key": "gelNow",
-          "venue": "Gel",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": false
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 9,
-        "okVenues": 6,
-        "changedAmongOk": 0
       }
     }
   ]
