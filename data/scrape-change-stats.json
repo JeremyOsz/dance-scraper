@@ -2,6 +2,80 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-07-07T08:50:17.871Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "ciCalendarLondon",
+          "venue": "CI Calendar London",
+          "scrapeOk": true,
+          "previousSessionCount": 326,
+          "newSessionCount": 333,
+          "changed": true
+        },
+        {
+          "key": "fiveRhythmsLondon",
+          "venue": "Five Rhythms London",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": false,
+          "previousSessionCount": 23,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": false,
+          "previousSessionCount": 6,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "salsaSoho",
+          "venue": "Salsa! Soho",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "danielRodriguezEventbrite",
+          "venue": "Daniel Rodriguez",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 8,
+        "okVenues": 4,
+        "changedAmongOk": 1
+      }
+    },
+    {
       "at": "2026-07-06T09:36:51.743Z",
       "venues": [
         {
@@ -12337,24 +12411,6 @@
         "scrapedVenues": 1,
         "okVenues": 1,
         "changedAmongOk": 0
-      }
-    },
-    {
-      "at": "2026-04-23T10:40:47.855Z",
-      "venues": [
-        {
-          "key": "oneSyllable",
-          "venue": "1Syllable",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 6,
-          "changed": true
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 1,
-        "okVenues": 1,
-        "changedAmongOk": 1
       }
     }
   ]
