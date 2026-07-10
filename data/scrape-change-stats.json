@@ -2,6 +2,80 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-07-10T08:49:27.584Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "ecstaticDanceLondon",
+          "venue": "Ecstatic Dance London",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": false,
+          "previousSessionCount": 23,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": false,
+          "previousSessionCount": 6,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "marinaSfyridi",
+          "venue": "Marina Sfyridi",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "lookAtMovement",
+          "venue": "Look At Movement (Tanztheatre)",
+          "scrapeOk": true,
+          "previousSessionCount": 9,
+          "newSessionCount": 9,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "balletForYou",
+          "venue": "Ballet for You",
+          "scrapeOk": true,
+          "previousSessionCount": 29,
+          "newSessionCount": 29,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 8,
+        "okVenues": 4,
+        "changedAmongOk": 0
+      }
+    },
+    {
       "at": "2026-07-09T08:51:48.337Z",
       "venues": [
         {
@@ -12697,24 +12771,6 @@
         "scrapedVenues": 3,
         "okVenues": 3,
         "changedAmongOk": 2
-      }
-    },
-    {
-      "at": "2026-04-23T16:26:30.196Z",
-      "venues": [
-        {
-          "key": "siobhanDavies",
-          "venue": "Siobhan Davies Studios",
-          "scrapeOk": true,
-          "previousSessionCount": 27,
-          "newSessionCount": 71,
-          "changed": true
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 1,
-        "okVenues": 1,
-        "changedAmongOk": 1
       }
     }
   ]
