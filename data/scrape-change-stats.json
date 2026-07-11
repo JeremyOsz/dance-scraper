@@ -2,6 +2,152 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-07-11T07:25:39.011Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "rambert",
+          "venue": "Rambert",
+          "scrapeOk": true,
+          "previousSessionCount": 7,
+          "newSessionCount": 4,
+          "changed": true
+        },
+        {
+          "key": "siobhanDavies",
+          "venue": "Siobhan Davies Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 17,
+          "changed": true
+        },
+        {
+          "key": "tripSpace",
+          "venue": "TripSpace",
+          "scrapeOk": true,
+          "previousSessionCount": 193,
+          "newSessionCount": 283,
+          "changed": true
+        },
+        {
+          "key": "ciCalendarLondon",
+          "venue": "CI Calendar London",
+          "scrapeOk": true,
+          "previousSessionCount": 332,
+          "newSessionCount": 331,
+          "changed": true
+        },
+        {
+          "key": "bachataCommunity",
+          "venue": "Bachata Community",
+          "scrapeOk": true,
+          "previousSessionCount": 259,
+          "newSessionCount": 264,
+          "changed": true
+        },
+        {
+          "key": "fiveRhythmsLondon",
+          "venue": "Five Rhythms London",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": false,
+          "previousSessionCount": 23,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": false,
+          "previousSessionCount": 6,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "danceworks",
+          "venue": "Danceworks",
+          "scrapeOk": true,
+          "previousSessionCount": 128,
+          "newSessionCount": 127,
+          "changed": true
+        },
+        {
+          "key": "pineappleDanceStudios",
+          "venue": "Pineapple Dance Studios",
+          "scrapeOk": true,
+          "previousSessionCount": 300,
+          "newSessionCount": 303,
+          "changed": true
+        },
+        {
+          "key": "mamboCity",
+          "venue": "MamboCity",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 2,
+          "changed": true
+        },
+        {
+          "key": "theManorMvmt",
+          "venue": "The Manor / MVMT",
+          "scrapeOk": true,
+          "previousSessionCount": 31,
+          "newSessionCount": 32,
+          "changed": true
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "danielRodriguezEventbrite",
+          "venue": "Daniel Rodriguez",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "studio66",
+          "venue": "Studio 66",
+          "scrapeOk": true,
+          "previousSessionCount": 53,
+          "newSessionCount": 51,
+          "changed": true
+        },
+        {
+          "key": "tangoFever",
+          "venue": "Tango Fever",
+          "scrapeOk": true,
+          "previousSessionCount": 43,
+          "newSessionCount": 43,
+          "changed": true
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 17,
+        "okVenues": 13,
+        "changedAmongOk": 11
+      }
+    },
+    {
       "at": "2026-07-10T08:49:27.584Z",
       "venues": [
         {
@@ -12737,40 +12883,6 @@
         "scrapedVenues": 1,
         "okVenues": 1,
         "changedAmongOk": 1
-      }
-    },
-    {
-      "at": "2026-04-23T16:38:24.143Z",
-      "venues": [
-        {
-          "key": "luminousDance",
-          "venue": "Luminous Dance",
-          "scrapeOk": true,
-          "previousSessionCount": 2,
-          "newSessionCount": 2,
-          "changed": true
-        },
-        {
-          "key": "adrianOutsavvy",
-          "venue": "StreamMovement",
-          "scrapeOk": true,
-          "previousSessionCount": 1,
-          "newSessionCount": 1,
-          "changed": true
-        },
-        {
-          "key": "danielRodriguezEventbrite",
-          "venue": "Daniel Rodriguez",
-          "scrapeOk": true,
-          "previousSessionCount": 0,
-          "newSessionCount": 0,
-          "changed": false
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 3,
-        "okVenues": 3,
-        "changedAmongOk": 2
       }
     }
   ]
