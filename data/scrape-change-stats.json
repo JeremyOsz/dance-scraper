@@ -2,6 +2,80 @@
   "version": 1,
   "runs": [
     {
+      "at": "2026-07-24T07:55:04.706Z",
+      "venues": [
+        {
+          "key": "thePlace",
+          "venue": "The Place",
+          "scrapeOk": false,
+          "previousSessionCount": 257,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "ecstaticDanceLondon",
+          "venue": "Ecstatic Dance London",
+          "scrapeOk": true,
+          "previousSessionCount": 1,
+          "newSessionCount": 1,
+          "changed": false
+        },
+        {
+          "key": "salsaRuedaRuedaLibre",
+          "venue": "Salsa Rueda (Rueda Libre)",
+          "scrapeOk": false,
+          "previousSessionCount": 23,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "cubaneando",
+          "venue": "Cubaneando",
+          "scrapeOk": false,
+          "previousSessionCount": 6,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "cityAcademy",
+          "venue": "City Academy",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        },
+        {
+          "key": "underTheSunDance",
+          "venue": "Under the Sun Dance",
+          "scrapeOk": false,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": null
+        },
+        {
+          "key": "balletForYou",
+          "venue": "Ballet for You",
+          "scrapeOk": true,
+          "previousSessionCount": 29,
+          "newSessionCount": 29,
+          "changed": false
+        },
+        {
+          "key": "danielRodriguezEventbrite",
+          "venue": "Daniel Rodriguez",
+          "scrapeOk": true,
+          "previousSessionCount": 0,
+          "newSessionCount": 0,
+          "changed": false
+        }
+      ],
+      "summary": {
+        "scrapedVenues": 8,
+        "okVenues": 4,
+        "changedAmongOk": 0
+      }
+    },
+    {
       "at": "2026-07-23T07:57:45.173Z",
       "venues": [
         {
@@ -14089,24 +14163,6 @@
         "scrapedVenues": 31,
         "okVenues": 28,
         "changedAmongOk": 13
-      }
-    },
-    {
-      "at": "2026-04-26T21:52:13.545Z",
-      "venues": [
-        {
-          "key": "eastLondonDance",
-          "venue": "East London Dance",
-          "scrapeOk": true,
-          "previousSessionCount": 41,
-          "newSessionCount": 26,
-          "changed": true
-        }
-      ],
-      "summary": {
-        "scrapedVenues": 1,
-        "okVenues": 1,
-        "changedAmongOk": 1
       }
     }
   ]

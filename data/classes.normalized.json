@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T07:57:45.173Z",
+  "generatedAt": "2026-07-24T07:55:04.706Z",
   "sessions": [
     {
       "id": "florence-trust-writers-room-bianca-scout-and-elena-isolini-daughter-mary-dance-workshop-tuesday-10-00am",
@@ -5890,608 +5890,6 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-07-18T07:14:33.521Z"
-    },
-    {
-      "id": "ecstatic-dance-london-ecstatic-dance-uk-sun-day-sunday-09-00",
-      "venue": "Ecstatic Dance London",
-      "title": "Ecstatic Dance UK - SUN•DAY",
-      "details": "AT THE BATHS - Amazing space, highest-quality sound, great hangout with saunas, cold plunge and delicious plant based food available after!",
-      "dayOfWeek": "Sunday",
-      "startTime": "09:00",
-      "endTime": "12:00",
-      "startDate": "2020-07-05",
-      "endDate": "2026-09-27",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
-      "tags": [
-        "ecstatic dance"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-beginners-level-1-ballet-thursday-6-30-pm",
-      "venue": "Ballet for You",
-      "title": "Beginners Level 1 Ballet",
-      "details": "For adults with little or no experience in Ballet, or for those who stopped ballet in their early teens. Each class builds form the last for true progress and there are handouts for each lesson with supporting videos. • Place: New City Fitness, Redvers St, London, N1 6NE • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: £170 • Teacher: Serena Cundari",
-      "dayOfWeek": "Thursday",
-      "startTime": "6.30 pm",
-      "endTime": "7.30pm",
-      "startDate": "2026-09-17",
-      "endDate": "2026-12-03",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/level-1",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-beginners-level-2-ballet-tuesday-6-30-pm",
-      "venue": "Ballet for You",
-      "title": "Beginners Level 2 Ballet",
-      "details": "For those who have completed Level 1 and are competent with its content including balance's (non-turning waltzes), chaine's (travelling turns on 2 feet) and some basic jumps; you will be able to confidently demonstrate the basics and have a good understanding of correct posture, placement, use of turnout and weight distribution. Also suitable for those who did lots of ballet until their mid to late teens and need to start back a little more slowly. There are handouts and supporting videos for each lesson. • Place: New City Fitness (Studio A), Redvers St, London, N1 6NE • Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £170 • Teacher: Louise Blair",
-      "dayOfWeek": "Tuesday",
-      "startTime": "6.30 pm",
-      "endTime": "7.30pm",
-      "startDate": "2026-09-15",
-      "endDate": "2026-12-01",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/level-2",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-beginners-level-2-ballet-wednesday-6-30-pm",
-      "venue": "Ballet for You",
-      "title": "Beginners Level 2 Ballet",
-      "details": "For those who have completed Level 1 and are competent with its content including balance's (non-turning waltzes), chaine's (travelling turns on 2 feet) and some basic jumps; you will be able to confidently demonstrate the basics and have a good understanding of correct posture, placement, use of turnout and weight distribution. Also suitable for those who did lots of ballet until their mid to late teens and need to start back a little more slowly. There are handouts and supporting videos for each lesson. • Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP (corner of Caledonian & Camden Roads) • Dates: 16th September - 2nd December 2026(11 lessons; no class 28 Oct) • Cost: £175 • Teacher: Serena Cundari",
-      "dayOfWeek": "Wednesday",
-      "startTime": "6.30 pm",
-      "endTime": "7.30pm",
-      "startDate": "2026-09-16",
-      "endDate": "2026-12-02",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/level-2",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-beginners-level-3-ballet-monday-monday-6-30-pm",
-      "venue": "Ballet for You",
-      "title": "Beginners Level 3 Ballet (Monday)",
-      "details": "For those who have competently completed Level 2 or for those at a similar stage who are confident with pas de valse en tournant (turning waltzes) and pique's turns (travelling turns on 1 leg) and able to perform continuous rises and releve's on one leg retaining placement and stability without the barre. This level introduces pirouettes and linking steps such as pas de bourree's and glissades and more allegro such as assemble', pas de chat and jete' ordinaire with faster allegro combinations. There are handouts and supporting videos for each lesson. • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 14th September - 30th November 2026(11 lessons; no class 26 Oct) • Cost: £170 • Teacher: Serena Cundari",
-      "dayOfWeek": "Monday",
-      "startTime": "6.30 pm",
-      "endTime": "7.30pm",
-      "startDate": "2026-09-14",
-      "endDate": "2026-11-30",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/level-3",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-beginners-level-3-ballet-thursday-6-30-pm",
-      "venue": "Ballet for You",
-      "title": "Beginners Level 3 Ballet",
-      "details": "For those who have competently completed Level 2 or for those at a similar stage who are confident with pas de valse en tournant (turning waltzes) and pique's turns (travelling turns on 1 leg) and able to perform continuous rises and releve's on one leg retaining placement and stability without the barre. This level introduces pirouettes and linking steps such as pas de bourree's and glissades and more allegro such as assemble', pas de chat and jete' ordinaire with faster allegro combinations. There are handouts and supporting videos for each lesson. • Place: The Fourth Monkey, 97-101 Seven Sisters Rd, London, N7 7QP (Bausch’s Box) • Dates: 17th September - 3rd December 2026 (11 lessons; no class 29 Oct) • Cost: £170 • Teacher: Louise Blair",
-      "dayOfWeek": "Thursday",
-      "startTime": "6.30 pm",
-      "endTime": "7.30pm",
-      "startDate": "2026-09-17",
-      "endDate": "2026-12-03",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/level-3",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-beginners-level-3-ballet-saturday-12-30-pm",
-      "venue": "Ballet for You",
-      "title": "Beginners Level 3 Ballet",
-      "details": "For those who have competently completed Level 2 or for those at a similar stage who are confident with pas de valse en tournant (turning waltzes) and pique's turns (travelling turns on 1 leg) and able to perform continuous rises and releve's on one leg retaining placement and stability without the barre. This level introduces pirouettes and linking steps such as pas de bourree's and glissades and more allegro such as assemble', pas de chat and jete' ordinaire with faster allegro combinations. There are handouts and supporting videos for each lesson. • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £170 • Teacher: Serena Cundari",
-      "dayOfWeek": "Saturday",
-      "startTime": "12.30 pm",
-      "endTime": "1.30pm",
-      "startDate": "2026-09-19",
-      "endDate": "2026-12-05",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/level-3",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-beginner-general-ballet-tuesday-7-30-pm",
-      "venue": "Ballet for You",
-      "title": "Beginner-General Ballet",
-      "details": "For those who have all the material from Beginners 3 competently under their belt including single pirouettes en dehors, quicker allegro and enough strength to rise and releve' continuously on one leg without the barre. This course focuses less on technique and more on polishing your movements to help you gain confidence and dance your enchainements more fluidly. • Place: New City Fitness (Studio A), Redvers St, London, N1 6NE • Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £185 • Teacher: Louise Blair",
-      "dayOfWeek": "Tuesday",
-      "startTime": "7.30 pm",
-      "endTime": "8.45pm",
-      "startDate": "2026-09-15",
-      "endDate": "2026-12-01",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/beginnergeneral",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-beginner-general-ballet-wednesday-online-wednesday-7-15-pm",
-      "venue": "Ballet for You",
-      "title": "Beginner-General Ballet (Wednesday Online)",
-      "details": "For those who have all the material from Beginners 3 competently under their belt including single pirouettes en dehors, quicker allegro and enough strength to rise and releve' continuously on one leg without the barre. This course focuses less on technique and more on polishing your movements to help you gain confidence and dance your enchainements more fluidly. • Dates: 16th September - 2nd December 2026(11 lessons; no class 28 Oct) • Cost: £155 • Teacher: Sarai Neale",
-      "dayOfWeek": "Wednesday",
-      "startTime": "7.15 pm",
-      "endTime": "8.15pm",
-      "startDate": "2026-09-16",
-      "endDate": "2026-12-02",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/beginnergeneral",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pre-improvers-monday-7-30-pm",
-      "venue": "Ballet for You",
-      "title": "Pre-Improvers",
-      "details": "This class focuses on building technical strength and confidence while polishing arm, head & leg coordination in preparation for Improvers 1. The Monday studio class will start with 10-15 mins of foot mobilising and strengthening exercises and body conditioning, particluarly good for those en pointe or training towards it. Suitable for those who are confident and polished with all Beginners 3 material (including Beginner-General) or for those already attending Improvers 1 who need a little extra help. \nThere are supporting handouts and videos for each lesson.A 30 min add-on Pointe class for Complete Beginners follows the 90 minute class. • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 14th September - 30th November 2026(11 lessons; no class 26 Oct) • Cost: £190 / £255 • Teacher: Serena Cundari",
-      "dayOfWeek": "Monday",
-      "startTime": "7.30 pm",
-      "endTime": "9.00pm",
-      "startDate": "2026-09-14",
-      "endDate": "2026-11-30",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/preimprovers-1",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pre-improvers-thursday-thursday-7-30-pm",
-      "venue": "Ballet for You",
-      "title": "Pre-Improvers (Thursday)",
-      "details": "This class focuses on building technical strength and confidence while polishing arm, head & leg coordination in preparation for Improvers 1. The Monday studio class will start with 10-15 mins of foot mobilising and strengthening exercises and body conditioning, particluarly good for those en pointe or training towards it. Suitable for those who are confident and polished with all Beginners 3 material (including Beginner-General) or for those already attending Improvers 1 who need a little extra help. \nThere are supporting handouts and videos for each lesson.A 30 min add-on Pointe class for Complete Beginners follows the 90 minute class. • Place: The Fourth Monkey, 97-101 Seven Sisters Rd, London, N7 7QP (Bausch’s Box) • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: £185 / £250 • Teacher: Louise Blair",
-      "dayOfWeek": "Thursday",
-      "startTime": "7.30 pm",
-      "endTime": "8.45pm",
-      "startDate": "2026-09-17",
-      "endDate": "2026-12-03",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/preimprovers-1",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pre-improvers-friday-online-friday-12-00-pm",
-      "venue": "Ballet for You",
-      "title": "Pre-Improvers (Friday Online)",
-      "details": "This class focuses on building technical strength and confidence while polishing arm, head & leg coordination in preparation for Improvers 1. The Monday studio class will start with 10-15 mins of foot mobilising and strengthening exercises and body conditioning, particluarly good for those en pointe or training towards it. Suitable for those who are confident and polished with all Beginners 3 material (including Beginner-General) or for those already attending Improvers 1 who need a little extra help. \nThere are supporting handouts and videos for each lesson.A 30 min add-on Pointe class for Complete Beginners follows the 90 minute class. • Dates: 18th September - 4th December 2026(11 lessons; no class 30 Oct) • Cost: £155Online via Zoom • Teacher: Sarai Neale",
-      "dayOfWeek": "Friday",
-      "startTime": "12.00 pm",
-      "endTime": "1.00pm",
-      "startDate": "2026-09-18",
-      "endDate": "2026-12-04",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/preimprovers-1",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-improvers-1-wednesday-7-35-pm",
-      "venue": "Ballet for You",
-      "title": "Improvers 1",
-      "details": "Improvers 1 is for adults who are confident and polished with all the Beginners material up to and including Pre-Improvers and are ready to build on pirouettes, work on more challenging adage in the centre and start batterie. Some will benefit from attending Pre-Improvers alongside or instead, if not quite strong or polished enough yet.  There are supporting handouts and videos for each lesson. \n\n You should already have attended the Complete Beginners Pointe course after Pre-Improvers on Mondays and/or be confident with relevé in retiré sideways at the barre and echappé sin the centre, before booking the Beginners Pointe class that follows. Those assessed as ready for Pointework should attend the Complete Beginners Pointe add-on with Pre-Improvers on Mondays first. • Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP • Dates: 16th September - 2nd December 2026(11 lessons; no class 28 Oct) • Cost: £185 / £250 • Teacher: Serena Cundari",
-      "dayOfWeek": "Wednesday",
-      "startTime": "7.35 pm",
-      "endTime": "8.50pm",
-      "startDate": "2026-09-16",
-      "endDate": "2026-12-02",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/improvers-1",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-improvers-1-saturday-3-45-pm",
-      "venue": "Ballet for You",
-      "title": "Improvers 1",
-      "details": "Improvers 1 is for adults who are confident and polished with all the Beginners material up to and including Pre-Improvers and are ready to build on pirouettes, work on more challenging adage in the centre and start batterie. Some will benefit from attending Pre-Improvers alongside or instead, if not quite strong or polished enough yet.  There are supporting handouts and videos for each lesson. \n\n You should already have attended the Complete Beginners Pointe course after Pre-Improvers on Mondays and/or be confident with relevé in retiré sideways at the barre and echappé sin the centre, before booking the Beginners Pointe class that follows. Those assessed as ready for Pointework should attend the Complete Beginners Pointe add-on with Pre-Improvers on Mondays first. • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £185 / £250 • Teacher: Louise Blair",
-      "dayOfWeek": "Saturday",
-      "startTime": "3.45 pm",
-      "endTime": "5.00pm",
-      "startDate": "2026-09-19",
-      "endDate": "2026-12-05",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/improvers-1",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-improvers-2-tuesday-7-35-pm",
-      "venue": "Ballet for You",
-      "title": "Improvers 2",
-      "details": "This class is for adults who have successfully mastered all the elements in Improvers 1 and are competent with double pirouettes and ready to learn fouettés, more complex batterie such as brisé and entrechat trois and more challenging grand allegro such as grand jeté en tournant, grand fouetté sauté and saut de basque. You should attend at least twice a week to be strong enough for this level; can also be taken with Improvers 1 if less advanced or with Advanced 1 if more experienced. Those attending pointework afterwards must already be sufficiently skilled and strong enough for relevés on one leg in the centre. This course is also suitable for ballet-fit returning dancers who received vocational training to a high level. A special discount package is available on Tuesdays which starts at 6.30pm with Ballet Floor-barre, followed by Improvers 2 Class & Elementary Pointe which comes with a saving of £35. (Repertoire will return in the Autumn term) • Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP • Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £185 / £250 • Teacher: Serena Cundari",
-      "dayOfWeek": "Tuesday",
-      "startTime": "7.35 pm",
-      "endTime": "8.50pm",
-      "startDate": "2026-09-15",
-      "endDate": "2026-12-01",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/improvers-2",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-improvers-2-friday-7-00-pm",
-      "venue": "Ballet for You",
-      "title": "Improvers 2",
-      "details": "This class is for adults who have successfully mastered all the elements in Improvers 1 and are competent with double pirouettes and ready to learn fouettés, more complex batterie such as brisé and entrechat trois and more challenging grand allegro such as grand jeté en tournant, grand fouetté sauté and saut de basque. You should attend at least twice a week to be strong enough for this level; can also be taken with Improvers 1 if less advanced or with Advanced 1 if more experienced. Those attending pointework afterwards must already be sufficiently skilled and strong enough for relevés on one leg in the centre. This course is also suitable for ballet-fit returning dancers who received vocational training to a high level. A special discount package is available on Tuesdays which starts at 6.30pm with Ballet Floor-barre, followed by Improvers 2 Class & Elementary Pointe which comes with a saving of £35. (Repertoire will return in the Autumn term) • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 18th September - 4th December 2026 (11 lessons; no class 30 Oct) • Cost: £185 / £250 • Teacher: Louise Blair",
-      "dayOfWeek": "Friday",
-      "startTime": "7.00 pm",
-      "endTime": "8.15pm",
-      "startDate": "2026-09-18",
-      "endDate": "2026-12-04",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/improvers-2",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-advanced-1-thursday-7-35-pm",
-      "venue": "Ballet for You",
-      "title": "Advanced 1",
-      "details": "Advanced 1 teaches complex steps and enchainements such as pirouettes in attitude, brisé volé, cabrioles and jeté elancé and is the ideal pre-cursor to Advanced 2 suiting higher skilled dancers. Classes are sometimes taken without the barre for added strength. Supporting videos are provided. Combine with Advanced 2 if more experienced and / or Improvers 2. Intermediate Pointe follows. • Place: New City Fitness, Redvers St, London, N1 6NE • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: £185 / £250 • Teacher: Serena Cundari",
-      "dayOfWeek": "Thursday",
-      "startTime": "7.35 pm",
-      "endTime": "8.50pm",
-      "startDate": "2026-09-17",
-      "endDate": "2026-12-03",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/advanced-1-2",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-advanced-2-saturday-saturday-1-40-pm",
-      "venue": "Ballet for You",
-      "title": "Advanced 2 (Saturday)",
-      "details": "Advanced 2 is ideal for dancers at a high level of skill, professionals, returning dancers who are ballet-fit and vocational students who wish to work on strength, technique and developing their artistry. Variations en Pointe follows. Combine with Advanced 1 (which teaches many of the complex steps in Advanced 2) and Improvers 2. • Place: New City Fitness, Redvers St, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £185 / £255 • Teacher: Serena Cundari",
-      "dayOfWeek": "Saturday",
-      "startTime": "1.40 pm",
-      "endTime": "2.55pm",
-      "startDate": "2026-09-19",
-      "endDate": "2026-12-05",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/advanced-2",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-tuesdays-in-islington-tuesday-6-30-pm",
-      "venue": "Ballet for You",
-      "title": "Tuesdays in Islington",
-      "details": "Serena's Ballet Floor-Barre (BFB) consists of exercises based on Ballet steps performed lying and sitting on the floor. It's an ideal way to prepare and maintain the body for Ballet - strengthening, lengthening and toning, whilst increasing your turnout, flexibility and elasticity. It is a great complement to Ballet training. Some PBT (Progressing Ballet Technique) exercises using the small pilates ball (supplied) are included. • Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £160 • Teacher: Serena CundariImprovers 2 follows at 7.35pm Save £35 when taken as part of the Tuesday Improvers 2 Discount Package",
-      "dayOfWeek": "Tuesday",
-      "startTime": "6.30 pm",
-      "endTime": "7.30pm",
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/ballet-floor-barre",
-      "tags": [
-        "ballet",
-        "pilates"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-ballet-floor-barre-with-pbt-saturday-11-15am",
-      "venue": "Ballet for You",
-      "title": "Ballet Floor-barre with PBT",
-      "details": "Serena's Ballet Floor-Barre (BFB) consists of exercises based on Ballet steps performed lying and sitting on the floor. It's an ideal way to prepare and maintain the body for Ballet - strengthening, lengthening and toning, whilst increasing your turnout, flexibility and elasticity. It is a great complement to Ballet training. Some PBT (Progressing Ballet Technique) exercises using the small pilates ball (supplied) are included. • Place: New City Fitness, Studio A, Redvers St, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £165 • Teacher: Serena CundariBeginners 3 Ballet follows at 12.30pm; attend both and receive a discount!",
-      "dayOfWeek": "Saturday",
-      "startTime": "11.15am",
-      "endTime": "12.25pm",
-      "startDate": "2026-09-19",
-      "endDate": "2026-12-05",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/ballet-floor-barre",
-      "tags": [
-        "ballet",
-        "pilates"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-progressing-ballet-technique-pbt-tuesday-12-00-pm",
-      "venue": "Ballet for You",
-      "title": "Progressing Ballet Technique (PBT)",
-      "details": "Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £155 • Teacher: Serena Cundari",
-      "dayOfWeek": "Tuesday",
-      "startTime": "12.00 pm",
-      "endTime": "1.00pm",
-      "startDate": "2026-09-15",
-      "endDate": "2026-12-01",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/progressing-ballet-technique-1",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-mondays-in-shoreditch-after-pre-improvers-monday-8-45-pm",
-      "venue": "Ballet for You",
-      "title": "Mondays in Shoreditch after Pre-Improvers",
-      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 14th September - 30th November 2026(11 lessons; no class 26 Oct) • Cost: +£65 • Teacher: Serena Cundari",
-      "dayOfWeek": "Monday",
-      "startTime": "8.45 pm",
-      "endTime": "9.15pm",
-      "startDate": "2026-09-14",
-      "endDate": "2026-11-30",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pointe-thursday-8-45-pm",
-      "venue": "Ballet for You",
-      "title": "Pointe",
-      "details": "Place: The Fourth Monkey, 97-101 Seven Sisters Rd, London, N7 7QP (Bausch’s Box) • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: + £65 • Teacher: Louise Blair",
-      "dayOfWeek": "Thursday",
-      "startTime": "8.45 pm",
-      "endTime": "9.15pm",
-      "startDate": "2026-09-17",
-      "endDate": "2026-12-03",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pointe-wednesday-8-55-pm",
-      "venue": "Ballet for You",
-      "title": "Pointe",
-      "details": "Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP • Dates: 16th September - 2nd December 2026(11 lessons; no class 28 Oct) • Cost: +£65 • Teacher: Serena Cundari",
-      "dayOfWeek": "Wednesday",
-      "startTime": "8.55 pm",
-      "endTime": "9.25pm",
-      "startDate": "2026-09-16",
-      "endDate": "2026-12-02",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pointe-saturday-5-00-pm",
-      "venue": "Ballet for You",
-      "title": "Pointe",
-      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: +£65 • Teacher: Louise BlairYou must attend Improvers 1 beforehand at 7.35pm",
-      "dayOfWeek": "Saturday",
-      "startTime": "5.00 pm",
-      "endTime": "5.30pm",
-      "startDate": "2026-09-19",
-      "endDate": "2026-12-05",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pointe-tuesday-8-20-pm",
-      "venue": "Ballet for You",
-      "title": "Pointe",
-      "details": "Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP • Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: +£65 • Teacher: Serena Cundari",
-      "dayOfWeek": "Tuesday",
-      "startTime": "8.20 pm",
-      "endTime": "8.50pm",
-      "startDate": "2026-09-15",
-      "endDate": "2026-12-01",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pointe-friday-8-15-pm",
-      "venue": "Ballet for You",
-      "title": "Pointe",
-      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 18th September - 4th December 2026(11 lessons; no class 30 Oct) • Cost: +£65 • Teacher: Louise Blair",
-      "dayOfWeek": "Friday",
-      "startTime": "8.15 pm",
-      "endTime": "8.45pm",
-      "startDate": "2026-09-18",
-      "endDate": "2026-12-04",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pointe-thursday-9-00-pm",
-      "venue": "Ballet for You",
-      "title": "Pointe",
-      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: +£65 • Teacher: Serena Cundari",
-      "dayOfWeek": "Thursday",
-      "startTime": "9.00 pm",
-      "endTime": "9.30pm",
-      "startDate": "2026-09-17",
-      "endDate": "2026-12-03",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-pointe-saturday-3-00-pm",
-      "venue": "Ballet for You",
-      "title": "Pointe",
-      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: +£70 • Teacher: Serena Cundari",
-      "dayOfWeek": "Saturday",
-      "startTime": "3.00 pm",
-      "endTime": "3.40pm",
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
-    },
-    {
-      "id": "ballet-for-you-variations-en-pointe-saturday-3-00-pm",
-      "venue": "Ballet for You",
-      "title": "Variations en Pointe",
-      "details": "Ballet for You offers Pas de Deux for Advanced 2 level ladies and for men who are at Beginners 3 level at a minimum.\n      \n    Variations en Pointe is for Advanced Ladies and follows directly after their Advanced 2 Ballet class. • Place: New City Fitness, Redvers St, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £70 • Teacher: Serena Cundari",
-      "dayOfWeek": "Saturday",
-      "startTime": "3.00 pm",
-      "endTime": "3.40pm",
-      "startDate": "2026-09-19",
-      "endDate": "2026-12-05",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
-      "sourceUrl": "https://www.balletforyou.co.uk/pas-de-deux-variations",
-      "tags": [
-        "ballet"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-07-20T08:25:29.986Z"
     },
     {
       "id": "supermario-salsa-supermario-salsa-monday-monday-na",
@@ -32123,6 +31521,608 @@
       "audience": "adult",
       "isWorkshop": false,
       "lastSeenAt": "2026-07-23T07:57:45.173Z"
+    },
+    {
+      "id": "ecstatic-dance-london-ecstatic-dance-uk-sun-day-sunday-09-00",
+      "venue": "Ecstatic Dance London",
+      "title": "Ecstatic Dance UK - SUN•DAY",
+      "details": "AT THE BATHS - Amazing space, highest-quality sound, great hangout with saunas, cold plunge and delicious plant based food available after!",
+      "dayOfWeek": "Sunday",
+      "startTime": "09:00",
+      "endTime": "12:00",
+      "startDate": "2020-07-05",
+      "endDate": "2026-09-27",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/ecstatic-dance-uk-sunday-tickets-111553290896",
+      "tags": [
+        "ecstatic dance"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-beginners-level-1-ballet-thursday-6-30-pm",
+      "venue": "Ballet for You",
+      "title": "Beginners Level 1 Ballet",
+      "details": "For adults with little or no experience in Ballet, or for those who stopped ballet in their early teens. Each class builds form the last for true progress and there are handouts for each lesson with supporting videos. • Place: New City Fitness, Redvers St, London, N1 6NE • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: £170 • Teacher: Serena Cundari",
+      "dayOfWeek": "Thursday",
+      "startTime": "6.30 pm",
+      "endTime": "7.30pm",
+      "startDate": "2026-09-17",
+      "endDate": "2026-12-03",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/level-1",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-beginners-level-2-ballet-tuesday-6-30-pm",
+      "venue": "Ballet for You",
+      "title": "Beginners Level 2 Ballet",
+      "details": "For those who have completed Level 1 and are competent with its content including balance's (non-turning waltzes), chaine's (travelling turns on 2 feet) and some basic jumps; you will be able to confidently demonstrate the basics and have a good understanding of correct posture, placement, use of turnout and weight distribution. Also suitable for those who did lots of ballet until their mid to late teens and need to start back a little more slowly. There are handouts and supporting videos for each lesson. • Place: New City Fitness (Studio A), Redvers St, London, N1 6NE • Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £170 • Teacher: Louise Blair",
+      "dayOfWeek": "Tuesday",
+      "startTime": "6.30 pm",
+      "endTime": "7.30pm",
+      "startDate": "2026-09-15",
+      "endDate": "2026-12-01",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/level-2",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-beginners-level-2-ballet-wednesday-6-30-pm",
+      "venue": "Ballet for You",
+      "title": "Beginners Level 2 Ballet",
+      "details": "For those who have completed Level 1 and are competent with its content including balance's (non-turning waltzes), chaine's (travelling turns on 2 feet) and some basic jumps; you will be able to confidently demonstrate the basics and have a good understanding of correct posture, placement, use of turnout and weight distribution. Also suitable for those who did lots of ballet until their mid to late teens and need to start back a little more slowly. There are handouts and supporting videos for each lesson. • Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP (corner of Caledonian & Camden Roads) • Dates: 16th September - 2nd December 2026(11 lessons; no class 28 Oct) • Cost: £175 • Teacher: Serena Cundari",
+      "dayOfWeek": "Wednesday",
+      "startTime": "6.30 pm",
+      "endTime": "7.30pm",
+      "startDate": "2026-09-16",
+      "endDate": "2026-12-02",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/level-2",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-beginners-level-3-ballet-monday-monday-6-30-pm",
+      "venue": "Ballet for You",
+      "title": "Beginners Level 3 Ballet (Monday)",
+      "details": "For those who have competently completed Level 2 or for those at a similar stage who are confident with pas de valse en tournant (turning waltzes) and pique's turns (travelling turns on 1 leg) and able to perform continuous rises and releve's on one leg retaining placement and stability without the barre. This level introduces pirouettes and linking steps such as pas de bourree's and glissades and more allegro such as assemble', pas de chat and jete' ordinaire with faster allegro combinations. There are handouts and supporting videos for each lesson. • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 14th September - 30th November 2026(11 lessons; no class 26 Oct) • Cost: £170 • Teacher: Serena Cundari",
+      "dayOfWeek": "Monday",
+      "startTime": "6.30 pm",
+      "endTime": "7.30pm",
+      "startDate": "2026-09-14",
+      "endDate": "2026-11-30",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/level-3",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-beginners-level-3-ballet-thursday-6-30-pm",
+      "venue": "Ballet for You",
+      "title": "Beginners Level 3 Ballet",
+      "details": "For those who have competently completed Level 2 or for those at a similar stage who are confident with pas de valse en tournant (turning waltzes) and pique's turns (travelling turns on 1 leg) and able to perform continuous rises and releve's on one leg retaining placement and stability without the barre. This level introduces pirouettes and linking steps such as pas de bourree's and glissades and more allegro such as assemble', pas de chat and jete' ordinaire with faster allegro combinations. There are handouts and supporting videos for each lesson. • Place: The Fourth Monkey, 97-101 Seven Sisters Rd, London, N7 7QP (Bausch’s Box) • Dates: 17th September - 3rd December 2026 (11 lessons; no class 29 Oct) • Cost: £170 • Teacher: Louise Blair",
+      "dayOfWeek": "Thursday",
+      "startTime": "6.30 pm",
+      "endTime": "7.30pm",
+      "startDate": "2026-09-17",
+      "endDate": "2026-12-03",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/level-3",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-beginners-level-3-ballet-saturday-12-30-pm",
+      "venue": "Ballet for You",
+      "title": "Beginners Level 3 Ballet",
+      "details": "For those who have competently completed Level 2 or for those at a similar stage who are confident with pas de valse en tournant (turning waltzes) and pique's turns (travelling turns on 1 leg) and able to perform continuous rises and releve's on one leg retaining placement and stability without the barre. This level introduces pirouettes and linking steps such as pas de bourree's and glissades and more allegro such as assemble', pas de chat and jete' ordinaire with faster allegro combinations. There are handouts and supporting videos for each lesson. • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £170 • Teacher: Serena Cundari",
+      "dayOfWeek": "Saturday",
+      "startTime": "12.30 pm",
+      "endTime": "1.30pm",
+      "startDate": "2026-09-19",
+      "endDate": "2026-12-05",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/level-3",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-beginner-general-ballet-tuesday-7-30-pm",
+      "venue": "Ballet for You",
+      "title": "Beginner-General Ballet",
+      "details": "For those who have all the material from Beginners 3 competently under their belt including single pirouettes en dehors, quicker allegro and enough strength to rise and releve' continuously on one leg without the barre. This course focuses less on technique and more on polishing your movements to help you gain confidence and dance your enchainements more fluidly. • Place: New City Fitness (Studio A), Redvers St, London, N1 6NE • Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £185 • Teacher: Louise Blair",
+      "dayOfWeek": "Tuesday",
+      "startTime": "7.30 pm",
+      "endTime": "8.45pm",
+      "startDate": "2026-09-15",
+      "endDate": "2026-12-01",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/beginnergeneral",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-beginner-general-ballet-wednesday-online-wednesday-7-15-pm",
+      "venue": "Ballet for You",
+      "title": "Beginner-General Ballet (Wednesday Online)",
+      "details": "For those who have all the material from Beginners 3 competently under their belt including single pirouettes en dehors, quicker allegro and enough strength to rise and releve' continuously on one leg without the barre. This course focuses less on technique and more on polishing your movements to help you gain confidence and dance your enchainements more fluidly. • Dates: 16th September - 2nd December 2026(11 lessons; no class 28 Oct) • Cost: £155 • Teacher: Sarai Neale",
+      "dayOfWeek": "Wednesday",
+      "startTime": "7.15 pm",
+      "endTime": "8.15pm",
+      "startDate": "2026-09-16",
+      "endDate": "2026-12-02",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/beginnergeneral",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pre-improvers-monday-7-30-pm",
+      "venue": "Ballet for You",
+      "title": "Pre-Improvers",
+      "details": "This class focuses on building technical strength and confidence while polishing arm, head & leg coordination in preparation for Improvers 1. The Monday studio class will start with 10-15 mins of foot mobilising and strengthening exercises and body conditioning, particluarly good for those en pointe or training towards it. Suitable for those who are confident and polished with all Beginners 3 material (including Beginner-General) or for those already attending Improvers 1 who need a little extra help. \nThere are supporting handouts and videos for each lesson.A 30 min add-on Pointe class for Complete Beginners follows the 90 minute class. • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 14th September - 30th November 2026(11 lessons; no class 26 Oct) • Cost: £190 / £255 • Teacher: Serena Cundari",
+      "dayOfWeek": "Monday",
+      "startTime": "7.30 pm",
+      "endTime": "9.00pm",
+      "startDate": "2026-09-14",
+      "endDate": "2026-11-30",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/preimprovers-1",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pre-improvers-thursday-thursday-7-30-pm",
+      "venue": "Ballet for You",
+      "title": "Pre-Improvers (Thursday)",
+      "details": "This class focuses on building technical strength and confidence while polishing arm, head & leg coordination in preparation for Improvers 1. The Monday studio class will start with 10-15 mins of foot mobilising and strengthening exercises and body conditioning, particluarly good for those en pointe or training towards it. Suitable for those who are confident and polished with all Beginners 3 material (including Beginner-General) or for those already attending Improvers 1 who need a little extra help. \nThere are supporting handouts and videos for each lesson.A 30 min add-on Pointe class for Complete Beginners follows the 90 minute class. • Place: The Fourth Monkey, 97-101 Seven Sisters Rd, London, N7 7QP (Bausch’s Box) • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: £185 / £250 • Teacher: Louise Blair",
+      "dayOfWeek": "Thursday",
+      "startTime": "7.30 pm",
+      "endTime": "8.45pm",
+      "startDate": "2026-09-17",
+      "endDate": "2026-12-03",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/preimprovers-1",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pre-improvers-friday-online-friday-12-00-pm",
+      "venue": "Ballet for You",
+      "title": "Pre-Improvers (Friday Online)",
+      "details": "This class focuses on building technical strength and confidence while polishing arm, head & leg coordination in preparation for Improvers 1. The Monday studio class will start with 10-15 mins of foot mobilising and strengthening exercises and body conditioning, particluarly good for those en pointe or training towards it. Suitable for those who are confident and polished with all Beginners 3 material (including Beginner-General) or for those already attending Improvers 1 who need a little extra help. \nThere are supporting handouts and videos for each lesson.A 30 min add-on Pointe class for Complete Beginners follows the 90 minute class. • Dates: 18th September - 4th December 2026(11 lessons; no class 30 Oct) • Cost: £155Online via Zoom • Teacher: Sarai Neale",
+      "dayOfWeek": "Friday",
+      "startTime": "12.00 pm",
+      "endTime": "1.00pm",
+      "startDate": "2026-09-18",
+      "endDate": "2026-12-04",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/preimprovers-1",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-improvers-1-wednesday-7-35-pm",
+      "venue": "Ballet for You",
+      "title": "Improvers 1",
+      "details": "Improvers 1 is for adults who are confident and polished with all the Beginners material up to and including Pre-Improvers and are ready to build on pirouettes, work on more challenging adage in the centre and start batterie. Some will benefit from attending Pre-Improvers alongside or instead, if not quite strong or polished enough yet.  There are supporting handouts and videos for each lesson. \n\n You should already have attended the Complete Beginners Pointe course after Pre-Improvers on Mondays and/or be confident with relevé in retiré sideways at the barre and echappé sin the centre, before booking the Beginners Pointe class that follows. Those assessed as ready for Pointework should attend the Complete Beginners Pointe add-on with Pre-Improvers on Mondays first. • Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP • Dates: 16th September - 2nd December 2026(11 lessons; no class 28 Oct) • Cost: £185 / £250 • Teacher: Serena Cundari",
+      "dayOfWeek": "Wednesday",
+      "startTime": "7.35 pm",
+      "endTime": "8.50pm",
+      "startDate": "2026-09-16",
+      "endDate": "2026-12-02",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/improvers-1",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-improvers-1-saturday-3-45-pm",
+      "venue": "Ballet for You",
+      "title": "Improvers 1",
+      "details": "Improvers 1 is for adults who are confident and polished with all the Beginners material up to and including Pre-Improvers and are ready to build on pirouettes, work on more challenging adage in the centre and start batterie. Some will benefit from attending Pre-Improvers alongside or instead, if not quite strong or polished enough yet.  There are supporting handouts and videos for each lesson. \n\n You should already have attended the Complete Beginners Pointe course after Pre-Improvers on Mondays and/or be confident with relevé in retiré sideways at the barre and echappé sin the centre, before booking the Beginners Pointe class that follows. Those assessed as ready for Pointework should attend the Complete Beginners Pointe add-on with Pre-Improvers on Mondays first. • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £185 / £250 • Teacher: Louise Blair",
+      "dayOfWeek": "Saturday",
+      "startTime": "3.45 pm",
+      "endTime": "5.00pm",
+      "startDate": "2026-09-19",
+      "endDate": "2026-12-05",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/improvers-1",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-improvers-2-tuesday-7-35-pm",
+      "venue": "Ballet for You",
+      "title": "Improvers 2",
+      "details": "This class is for adults who have successfully mastered all the elements in Improvers 1 and are competent with double pirouettes and ready to learn fouettés, more complex batterie such as brisé and entrechat trois and more challenging grand allegro such as grand jeté en tournant, grand fouetté sauté and saut de basque. You should attend at least twice a week to be strong enough for this level; can also be taken with Improvers 1 if less advanced or with Advanced 1 if more experienced. Those attending pointework afterwards must already be sufficiently skilled and strong enough for relevés on one leg in the centre. This course is also suitable for ballet-fit returning dancers who received vocational training to a high level. A special discount package is available on Tuesdays which starts at 6.30pm with Ballet Floor-barre, followed by Improvers 2 Class & Elementary Pointe which comes with a saving of £35. (Repertoire will return in the Autumn term) • Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP • Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £185 / £250 • Teacher: Serena Cundari",
+      "dayOfWeek": "Tuesday",
+      "startTime": "7.35 pm",
+      "endTime": "8.50pm",
+      "startDate": "2026-09-15",
+      "endDate": "2026-12-01",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/improvers-2",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-improvers-2-friday-7-00-pm",
+      "venue": "Ballet for You",
+      "title": "Improvers 2",
+      "details": "This class is for adults who have successfully mastered all the elements in Improvers 1 and are competent with double pirouettes and ready to learn fouettés, more complex batterie such as brisé and entrechat trois and more challenging grand allegro such as grand jeté en tournant, grand fouetté sauté and saut de basque. You should attend at least twice a week to be strong enough for this level; can also be taken with Improvers 1 if less advanced or with Advanced 1 if more experienced. Those attending pointework afterwards must already be sufficiently skilled and strong enough for relevés on one leg in the centre. This course is also suitable for ballet-fit returning dancers who received vocational training to a high level. A special discount package is available on Tuesdays which starts at 6.30pm with Ballet Floor-barre, followed by Improvers 2 Class & Elementary Pointe which comes with a saving of £35. (Repertoire will return in the Autumn term) • Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 18th September - 4th December 2026 (11 lessons; no class 30 Oct) • Cost: £185 / £250 • Teacher: Louise Blair",
+      "dayOfWeek": "Friday",
+      "startTime": "7.00 pm",
+      "endTime": "8.15pm",
+      "startDate": "2026-09-18",
+      "endDate": "2026-12-04",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/improvers-2",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-advanced-1-thursday-7-35-pm",
+      "venue": "Ballet for You",
+      "title": "Advanced 1",
+      "details": "Advanced 1 teaches complex steps and enchainements such as pirouettes in attitude, brisé volé, cabrioles and jeté elancé and is the ideal pre-cursor to Advanced 2 suiting higher skilled dancers. Classes are sometimes taken without the barre for added strength. Supporting videos are provided. Combine with Advanced 2 if more experienced and / or Improvers 2. Intermediate Pointe follows. • Place: New City Fitness, Redvers St, London, N1 6NE • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: £185 / £250 • Teacher: Serena Cundari",
+      "dayOfWeek": "Thursday",
+      "startTime": "7.35 pm",
+      "endTime": "8.50pm",
+      "startDate": "2026-09-17",
+      "endDate": "2026-12-03",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/advanced-1-2",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-advanced-2-saturday-saturday-1-40-pm",
+      "venue": "Ballet for You",
+      "title": "Advanced 2 (Saturday)",
+      "details": "Advanced 2 is ideal for dancers at a high level of skill, professionals, returning dancers who are ballet-fit and vocational students who wish to work on strength, technique and developing their artistry. Variations en Pointe follows. Combine with Advanced 1 (which teaches many of the complex steps in Advanced 2) and Improvers 2. • Place: New City Fitness, Redvers St, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £185 / £255 • Teacher: Serena Cundari",
+      "dayOfWeek": "Saturday",
+      "startTime": "1.40 pm",
+      "endTime": "2.55pm",
+      "startDate": "2026-09-19",
+      "endDate": "2026-12-05",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/advanced-2",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-tuesdays-in-islington-tuesday-6-30-pm",
+      "venue": "Ballet for You",
+      "title": "Tuesdays in Islington",
+      "details": "Serena's Ballet Floor-Barre (BFB) consists of exercises based on Ballet steps performed lying and sitting on the floor. It's an ideal way to prepare and maintain the body for Ballet - strengthening, lengthening and toning, whilst increasing your turnout, flexibility and elasticity. It is a great complement to Ballet training. Some PBT (Progressing Ballet Technique) exercises using the small pilates ball (supplied) are included. • Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £160 • Teacher: Serena CundariImprovers 2 follows at 7.35pm Save £35 when taken as part of the Tuesday Improvers 2 Discount Package",
+      "dayOfWeek": "Tuesday",
+      "startTime": "6.30 pm",
+      "endTime": "7.30pm",
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/ballet-floor-barre",
+      "tags": [
+        "ballet",
+        "pilates"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-ballet-floor-barre-with-pbt-saturday-11-15am",
+      "venue": "Ballet for You",
+      "title": "Ballet Floor-barre with PBT",
+      "details": "Serena's Ballet Floor-Barre (BFB) consists of exercises based on Ballet steps performed lying and sitting on the floor. It's an ideal way to prepare and maintain the body for Ballet - strengthening, lengthening and toning, whilst increasing your turnout, flexibility and elasticity. It is a great complement to Ballet training. Some PBT (Progressing Ballet Technique) exercises using the small pilates ball (supplied) are included. • Place: New City Fitness, Studio A, Redvers St, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £165 • Teacher: Serena CundariBeginners 3 Ballet follows at 12.30pm; attend both and receive a discount!",
+      "dayOfWeek": "Saturday",
+      "startTime": "11.15am",
+      "endTime": "12.25pm",
+      "startDate": "2026-09-19",
+      "endDate": "2026-12-05",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/ballet-floor-barre",
+      "tags": [
+        "ballet",
+        "pilates"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-progressing-ballet-technique-pbt-tuesday-12-00-pm",
+      "venue": "Ballet for You",
+      "title": "Progressing Ballet Technique (PBT)",
+      "details": "Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: £155 • Teacher: Serena Cundari",
+      "dayOfWeek": "Tuesday",
+      "startTime": "12.00 pm",
+      "endTime": "1.00pm",
+      "startDate": "2026-09-15",
+      "endDate": "2026-12-01",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/progressing-ballet-technique-1",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-mondays-in-shoreditch-after-pre-improvers-monday-8-45-pm",
+      "venue": "Ballet for You",
+      "title": "Mondays in Shoreditch after Pre-Improvers",
+      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 14th September - 30th November 2026(11 lessons; no class 26 Oct) • Cost: +£65 • Teacher: Serena Cundari",
+      "dayOfWeek": "Monday",
+      "startTime": "8.45 pm",
+      "endTime": "9.15pm",
+      "startDate": "2026-09-14",
+      "endDate": "2026-11-30",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pointe-thursday-8-45-pm",
+      "venue": "Ballet for You",
+      "title": "Pointe",
+      "details": "Place: The Fourth Monkey, 97-101 Seven Sisters Rd, London, N7 7QP (Bausch’s Box) • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: + £65 • Teacher: Louise Blair",
+      "dayOfWeek": "Thursday",
+      "startTime": "8.45 pm",
+      "endTime": "9.15pm",
+      "startDate": "2026-09-17",
+      "endDate": "2026-12-03",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pointe-wednesday-8-55-pm",
+      "venue": "Ballet for You",
+      "title": "Pointe",
+      "details": "Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP • Dates: 16th September - 2nd December 2026(11 lessons; no class 28 Oct) • Cost: +£65 • Teacher: Serena Cundari",
+      "dayOfWeek": "Wednesday",
+      "startTime": "8.55 pm",
+      "endTime": "9.25pm",
+      "startDate": "2026-09-16",
+      "endDate": "2026-12-02",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pointe-saturday-5-00-pm",
+      "venue": "Ballet for You",
+      "title": "Pointe",
+      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: +£65 • Teacher: Louise BlairYou must attend Improvers 1 beforehand at 7.35pm",
+      "dayOfWeek": "Saturday",
+      "startTime": "5.00 pm",
+      "endTime": "5.30pm",
+      "startDate": "2026-09-19",
+      "endDate": "2026-12-05",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pointe-tuesday-8-20-pm",
+      "venue": "Ballet for You",
+      "title": "Pointe",
+      "details": "Place: Capital City College (Holloway), 444 Camden Road, London, N7 0SP • Dates: 15th September - 1st December 2026(11 lessons; no class 27 Oct) • Cost: +£65 • Teacher: Serena Cundari",
+      "dayOfWeek": "Tuesday",
+      "startTime": "8.20 pm",
+      "endTime": "8.50pm",
+      "startDate": "2026-09-15",
+      "endDate": "2026-12-01",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pointe-friday-8-15-pm",
+      "venue": "Ballet for You",
+      "title": "Pointe",
+      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 18th September - 4th December 2026(11 lessons; no class 30 Oct) • Cost: +£65 • Teacher: Louise Blair",
+      "dayOfWeek": "Friday",
+      "startTime": "8.15 pm",
+      "endTime": "8.45pm",
+      "startDate": "2026-09-18",
+      "endDate": "2026-12-04",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pointe-thursday-9-00-pm",
+      "venue": "Ballet for You",
+      "title": "Pointe",
+      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE • Dates: 17th September - 3rd December 2026(11 lessons; no class 29 Oct) • Cost: +£65 • Teacher: Serena Cundari",
+      "dayOfWeek": "Thursday",
+      "startTime": "9.00 pm",
+      "endTime": "9.30pm",
+      "startDate": "2026-09-17",
+      "endDate": "2026-12-03",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-pointe-saturday-3-00-pm",
+      "venue": "Ballet for You",
+      "title": "Pointe",
+      "details": "Place: New City Fitness (Studio A), Redvers Street, London, N1 6NE19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: +£70 • Teacher: Serena Cundari",
+      "dayOfWeek": "Saturday",
+      "startTime": "3.00 pm",
+      "endTime": "3.40pm",
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pointe",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
+    },
+    {
+      "id": "ballet-for-you-variations-en-pointe-saturday-3-00-pm",
+      "venue": "Ballet for You",
+      "title": "Variations en Pointe",
+      "details": "Ballet for You offers Pas de Deux for Advanced 2 level ladies and for men who are at Beginners 3 level at a minimum.\n      \n    Variations en Pointe is for Advanced Ladies and follows directly after their Advanced 2 Ballet class. • Place: New City Fitness, Redvers St, London, N1 6NE • Dates: 19th September - 5th December 2026(11 lessons; no class 31 Oct) • Cost: £70 • Teacher: Serena Cundari",
+      "dayOfWeek": "Saturday",
+      "startTime": "3.00 pm",
+      "endTime": "3.40pm",
+      "startDate": "2026-09-19",
+      "endDate": "2026-12-05",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.balletforyou.co.uk/enrol-now",
+      "sourceUrl": "https://www.balletforyou.co.uk/pas-de-deux-variations",
+      "tags": [
+        "ballet"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "lastSeenAt": "2026-07-24T07:55:04.706Z"
     }
   ],
   "venues": [
@@ -32195,7 +32195,7 @@
       "sourceUrl": "https://www.eventbrite.com/o/73047023743",
       "count": 1,
       "ok": true,
-      "lastSuccessAt": "2026-07-20T08:25:29.986Z",
+      "lastSuccessAt": "2026-07-24T07:55:04.706Z",
       "lastError": null
     },
     {
@@ -32339,7 +32339,7 @@
       "sourceUrl": "https://www.city-academy.com/Dance-Classes",
       "count": 0,
       "ok": true,
-      "lastSuccessAt": "2026-07-17T07:34:09.937Z",
+      "lastSuccessAt": "2026-07-24T07:55:04.706Z",
       "lastError": null
     },
     {
@@ -32411,7 +32411,7 @@
       "sourceUrl": "https://www.balletforyou.co.uk/",
       "count": 29,
       "ok": true,
-      "lastSuccessAt": "2026-07-20T08:25:29.986Z",
+      "lastSuccessAt": "2026-07-24T07:55:04.706Z",
       "lastError": null
     },
     {
@@ -32438,7 +32438,7 @@
       "sourceUrl": "https://www.eventbrite.co.uk/o/daniel-rodriguez-88584641013",
       "count": 0,
       "ok": true,
-      "lastSuccessAt": "2026-07-17T07:34:09.937Z",
+      "lastSuccessAt": "2026-07-24T07:55:04.706Z",
       "lastError": null
     },
     {
