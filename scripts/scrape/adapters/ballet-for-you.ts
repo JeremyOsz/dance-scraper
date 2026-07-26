@@ -143,7 +143,7 @@ function extractClassesFromPage(pageHtml: string, pageUrl: string): ScrapedClass
     const day = parseField(text, "Day");
     const time = parseField(text, "Time") ?? parseField(text, "Times");
     const place = parseField(text, "Place");
-    const dates = parseField(text, "Dates");
+    const dates = parseField(text, "Dates") ?? text.match(dateRangePattern)?.[0] ?? null;
     const cost = parseField(text, "Cost");
     const teacher = parseField(text, "Teacher");
     const { startDate, endDate } = parseDateRange(dates);

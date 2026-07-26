@@ -1,17 +1,21 @@
 import * as cheerio from "cheerio";
 import type { AdapterOutput } from "../types";
 import { absoluteUrl, fetchHtml } from "./common";
+import { runPool } from "./the-place-fetch-pool";
 
 const archiveUrl = "https://www.siobhandavies.com/events/";
 const legacySourceUrl = "https://www.siobhandavies.com/events/classes-2/";
 const independentDanceClassesUrl = "https://independentdance.co.uk/programme/category/classes/";
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const;
 const excludedClassPattern = /\b(yoga|pilates)\b/i;
-const toMoveTogetherPathPattern = /\/classes\/to-move-together\/?$/i;
 const mondayNightImprovisationTitlePattern = /\bmonday\s+night\s+improvisation\b/i;
 const morningClassTitlePattern = /^morning class$/i;
 const timeRangePattern =
   /\d{1,2}(?::|\.)?\d{0,2}\s*(?:am|pm)?\s*(?:-|–|—|to)\s*(?:\d{1,2}(?::|\.)?\d{0,2}\s*(?:am|pm)|\d{1,2}\s*(?:noon|midnight)|noon|midnight)/i;
+const timetableWeekdayPattern =
+  "(?:Mon(?:day)?s?|Tue(?:sday)?s?|Wed(?:nesday)?s?|Thu(?:rsday)?s?|Fri(?:day)?s?|Sat(?:urday)?s?|Sun(?:day)?s?)";
+const timetableMonthPattern =
+  "(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)";
 
 export async function scrapeSiobhanDavies(): Promise<AdapterOutput> {
   try {
@@ -36,8 +40,8 @@ export async function scrapeSiobhanDavies(): Promise<AdapterOutput> {
     );
     const cleaned = unique.filter((item) => !(item.dayOfWeek === null && weekdayKeys.has(`${item.title}|${item.bookingUrl}`)));
     const filtered = cleaned.filter((item) => !excludedClassPattern.test(`${item.title} ${item.details ?? ""}`));
-    const withMonthlyExpansion = await expandMonthlyOneOffs(filtered, sourceUrl);
-    const withLeaderInfo = await enrichMondayNightImprovisationLeaders(withMonthlyExpansion, sourceUrl);
+    const withDetailSchedules = await expandClassDetailSchedules(filtered, sourceUrl);
+    const withLeaderInfo = await enrichMondayNightImprovisationLeaders(withDetailSchedules, sourceUrl);
 
     return {
       venueKey: "siobhanDavies",
@@ -69,6 +73,7 @@ async function enrichMondayNightImprovisationLeaders(
 
   try {
     const html = await fetchHtml(independentDanceClassesUrl);
+    const independentScheduleWasLoaded = /<h1[^>]*>\s*Classes\s*<\/h1>/i.test(html) || /Morning Class|Monday Night Improvisation/i.test(html);
     const seasonYear = inferSeasonYear(sourceUrl);
     let result = classes;
 
@@ -85,6 +90,8 @@ async function enrichMondayNightImprovisationLeaders(
           bookingUrl: session.bookingUrl
         }));
       });
+    } else if (independentScheduleWasLoaded) {
+      result = result.filter((item) => !mondayNightImprovisationTitlePattern.test(item.title));
     }
 
     const morningSessions = extractMorningClassSessions(html, seasonYear);
@@ -102,6 +109,8 @@ async function enrichMondayNightImprovisationLeaders(
         }));
         result = [...nonMorning, ...expandedMorning];
       }
+    } else if (independentScheduleWasLoaded) {
+      result = result.filter((item) => !morningClassTitlePattern.test(item.title));
     }
 
     return result;
@@ -133,6 +142,25 @@ function extractMondayNightImprovisationSessions(
     sessions.push({ leader, startDate, bookingUrl });
   });
 
+  $("h2, h3").each((_, heading) => {
+    if (!/^Monday Night Improvisation$/i.test($(heading).text().replace(/\s+/g, " ").trim())) return;
+    $(heading)
+      .nextUntil("h2, h3")
+      .filter("p, li")
+      .each((__, row) => {
+        const text = $(row).text().replace(/\s+/g, " ").trim();
+        const link = $(row).find("a[href]").first();
+        const leader = link.text().replace(/\s+/g, " ").trim().replace(/:$/, "");
+        const startDate = parseIndependentDanceDayMonth(text, seasonYear);
+        const bookingUrl = absoluteUrl(independentDanceClassesUrl, link.attr("href"));
+        if (!leader || !startDate || !bookingUrl) return;
+        const dedupeKey = `${leader}|${startDate}|${bookingUrl}`;
+        if (seen.has(dedupeKey)) return;
+        seen.add(dedupeKey);
+        sessions.push({ leader, startDate, bookingUrl });
+      });
+  });
+
   return sessions;
 }
 
@@ -161,6 +189,28 @@ function extractMorningClassSessions(
     }
   });
 
+  $("h2, h3").each((_, heading) => {
+    if (!/^Morning Class$/i.test($(heading).text().replace(/\s+/g, " ").trim())) return;
+    $(heading)
+      .nextUntil("h2, h3")
+      .filter("p, li")
+      .each((__, row) => {
+        const text = $(row).text().replace(/\s+/g, " ").trim();
+        const link = $(row).find("a[href]").first();
+        const leader = link.text().replace(/\s+/g, " ").trim().replace(/:$/, "");
+        const bookingUrl = absoluteUrl(independentDanceClassesUrl, link.attr("href"));
+        if (!leader || !bookingUrl) return;
+        for (const startDate of parseIndependentDanceDateRange(text, seasonYear)) {
+          const dayName = isoToDayName(startDate);
+          if (dayName === "Saturday" || dayName === "Sunday") continue;
+          const dedupeKey = `${leader}|${startDate}|${bookingUrl}`;
+          if (seen.has(dedupeKey)) continue;
+          seen.add(dedupeKey);
+          sessions.push({ leader, startDate, bookingUrl });
+        }
+      });
+  });
+
   return sessions;
 }
 
@@ -174,16 +224,40 @@ function parseIndependentDanceDayMonth(value: string, year: number): string | nu
 }
 
 function parseIndependentDanceDateRange(value: string, year: number): string[] {
-  const rangeMatch = value.match(/\b(\d{1,2})\s+([A-Za-z]{3,9})\s*(?:-|–|—|to)\s*(\d{1,2})\s+([A-Za-z]{3,9})\b/i);
+  const sameMonthMatch = value.match(/\b(\d{1,2})\s*(?:-|–|—|to)\s*(\d{1,2})\s+([A-Za-z]{3,9})\b/i);
+  if (sameMonthMatch) {
+    return enumerateIsoDateRange(
+      Number(sameMonthMatch[1]),
+      sameMonthMatch[3],
+      Number(sameMonthMatch[2]),
+      sameMonthMatch[3],
+      year
+    );
+  }
+  const rangeMatch = value.match(/\b(\d{1,2})\s+([A-Za-z]{3,9})\s*(?:-|–|—|to)\s*(\d{1,2})(?:\s+([A-Za-z]{3,9}))?\b/i);
   if (!rangeMatch) {
     const single = parseIndependentDanceDayMonth(value, year);
     return single ? [single] : [];
   }
 
-  const startDay = Number(rangeMatch[1]);
-  const startMonth = monthIndex(rangeMatch[2].toLowerCase());
-  const endDay = Number(rangeMatch[3]);
-  const endMonth = monthIndex(rangeMatch[4].toLowerCase());
+  return enumerateIsoDateRange(
+    Number(rangeMatch[1]),
+    rangeMatch[2],
+    Number(rangeMatch[3]),
+    rangeMatch[4] ?? rangeMatch[2],
+    year
+  );
+}
+
+function enumerateIsoDateRange(
+  startDay: number,
+  startMonthToken: string,
+  endDay: number,
+  endMonthToken: string,
+  year: number
+): string[] {
+  const startMonth = monthIndex(startMonthToken.toLowerCase());
+  const endMonth = monthIndex(endMonthToken.toLowerCase());
   if (
     Number.isNaN(startDay) ||
     Number.isNaN(endDay) ||
@@ -331,6 +405,7 @@ function parseClasses(html: string, sourceUrl: string): AdapterOutput["classes"]
     const details = $el.find("p").first().text().trim() || null;
     const text = $el.text().replace(/\s+/g, " ").trim();
     const time = text.match(timeRangePattern)?.[0] ?? null;
+    const bounds = parseDateRangeBounds(text, inferSeasonYear(sourceUrl));
     const bookingUrl = absoluteUrl(
       sourceUrl,
       $el.find('a[href*="/classes/"], a[href*="bookwhen"], a[href*="siobhandavies.com/classes"]').first().attr("href")
@@ -345,8 +420,8 @@ function parseClasses(html: string, sourceUrl: string): AdapterOutput["classes"]
         details,
         dayOfWeek,
         time,
-        startDate: null,
-        endDate: null,
+        startDate: bounds?.startDate ?? null,
+        endDate: bounds?.endDate ?? null,
         bookingUrl,
         sourceUrl
       });
@@ -403,46 +478,165 @@ function parseArchiveTimeRange(text: string): string | null {
   return text.match(timeRangePattern)?.[0] ?? null;
 }
 
-async function expandMonthlyOneOffs(classes: AdapterOutput["classes"], sourceUrl: string): Promise<AdapterOutput["classes"]> {
-  const expanded = await Promise.all(classes.map((item) => expandClassMonthlyInstances(item, sourceUrl)));
+async function expandClassDetailSchedules(
+  classes: AdapterOutput["classes"],
+  sourceUrl: string
+): Promise<AdapterOutput["classes"]> {
+  const expanded: AdapterOutput["classes"][] = new Array(classes.length);
+  await runPool(classes.map((_, index) => index), 4, async (index) => {
+    expanded[index] = await expandClassFromDetailTimetable(classes[index], sourceUrl);
+  });
   return expanded.flat();
 }
 
-async function expandClassMonthlyInstances(
+async function expandClassFromDetailTimetable(
   klass: AdapterOutput["classes"][number],
   sourceUrl: string
 ): Promise<AdapterOutput["classes"]> {
-  if (!toMoveTogetherPathPattern.test(klass.bookingUrl)) {
+  if (
+    mondayNightImprovisationTitlePattern.test(klass.title) ||
+    morningClassTitlePattern.test(klass.title) ||
+    !/siobhandavies\.com\/classes\//i.test(klass.bookingUrl)
+  ) {
     return [klass];
   }
 
   try {
     const html = await fetchHtml(klass.bookingUrl);
     const $ = cheerio.load(html);
-    const timetableText = $(".entry-content h3, .entry-content p")
-      .toArray()
-      .map((el) => $(el).text().replace(/\s+/g, " ").trim())
-      .find((text) => /\bmonthly\b/i.test(text) && /\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b/i.test(text));
-
-    if (!timetableText) {
-      return [klass];
-    }
-
     const year = inferSeasonYear(sourceUrl);
-    const dates = parseMonthDayInstances(timetableText, year);
-    if (dates.length === 0) {
-      return [klass];
+    const blocks: string[] = [];
+    $(".entry-content h2").each((_, heading) => {
+      if (!/timetable/i.test($(heading).text())) return;
+      const block = [$(heading).text(), ...$(heading).nextUntil("h2").toArray().map((node) => $(node).text())]
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (block) blocks.push(block);
+    });
+    if (blocks.length === 0) {
+      const fallback = $(".entry-content").text().replace(/\s+/g, " ").trim();
+      if (fallback) blocks.push(fallback);
     }
 
-    return dates.map((iso) => ({
-      ...klass,
-      dayOfWeek: isoToDayName(iso),
-      startDate: iso,
-      endDate: iso
-    }));
+    const scheduled: AdapterOutput["classes"] = [];
+    for (const block of blocks) {
+      const blockTime = block.match(timeRangePattern)?.[0] ?? klass.time;
+      const dayFirstDates = parseDayMonthInstances(block, year, false);
+      const explicitDates = dayFirstDates.length > 0 ? dayFirstDates : parseMonthDayInstances(block, year);
+      if (/\bmonthly\b/i.test(block) && explicitDates.length > 0) {
+        for (const iso of explicitDates) {
+          scheduled.push({
+            ...klass,
+            time: blockTime,
+            dayOfWeek: isoToDayName(iso),
+            startDate: iso,
+            endDate: iso,
+            excludedDateRanges: undefined
+          });
+        }
+        continue;
+      }
+
+      const bounds = parseDateRangeBounds(block, year);
+      if (!bounds) continue;
+      const exclusions = parseExcludedDates(block, year);
+      scheduled.push({
+        ...klass,
+        time: blockTime,
+        startDate: bounds.startDate,
+        endDate: bounds.endDate,
+        excludedDateRanges: exclusions
+      });
+      const excludedDates = new Set((exclusions ?? []).flatMap((range) => [range.start, range.end]));
+      for (const iso of parseWeekdayDateInstances(block, year)) {
+        if (iso === bounds.startDate || iso === bounds.endDate || excludedDates.has(iso)) continue;
+        scheduled.push({
+          ...klass,
+          time: blockTime,
+          dayOfWeek: isoToDayName(iso),
+          startDate: iso,
+          endDate: iso,
+          excludedDateRanges: undefined
+        });
+      }
+    }
+
+    return scheduled.length > 0
+      ? Array.from(new Map(scheduled.map((item) => [`${item.startDate}|${item.endDate}|${item.time ?? ""}`, item])).values())
+      : [klass];
   } catch {
     return [klass];
   }
+}
+
+function parseDateRangeBounds(text: string, fallbackYear: number): { startDate: string; endDate: string } | null {
+  const match = text.match(
+    new RegExp(
+      `(?:${timetableWeekdayPattern})?\\s*(\\d{1,2})(?:st|nd|rd|th)?\\s+([A-Za-z]{3,9})\\s*(?:-|–|—|to)\\s*(?:${timetableWeekdayPattern})?\\s*(\\d{1,2})(?:st|nd|rd|th)?\\s+([A-Za-z]{3,9})(?:\\s+(20\\d{2}))?`,
+      "i"
+    )
+  );
+  if (!match) return null;
+  const year = Number(match[5] ?? fallbackYear);
+  const startMonth = monthIndex(match[2].toLowerCase());
+  const endMonth = monthIndex(match[4].toLowerCase());
+  if (startMonth === null || endMonth === null) return null;
+  return {
+    startDate: `${year}-${String(startMonth + 1).padStart(2, "0")}-${String(Number(match[1])).padStart(2, "0")}`,
+    endDate: `${year}-${String(endMonth + 1).padStart(2, "0")}-${String(Number(match[3])).padStart(2, "0")}`
+  };
+}
+
+function parseWeekdayDateInstances(text: string, fallbackYear: number): string[] {
+  const dates = new Set<string>();
+  const regex = new RegExp(
+    `${timetableWeekdayPattern}\\s*,?\\s*(\\d{1,2})(?:st|nd|rd|th)?\\s+(${timetableMonthPattern})(?:\\s+(20\\d{2}))?`,
+    "gi"
+  );
+  for (const match of text.matchAll(regex)) {
+    const month = monthIndex(match[2].toLowerCase());
+    if (month === null) continue;
+    const year = Number(match[3] ?? fallbackYear);
+    dates.add(`${year}-${String(month + 1).padStart(2, "0")}-${String(Number(match[1])).padStart(2, "0")}`);
+  }
+  return [...dates];
+}
+
+function parseDayMonthInstances(text: string, fallbackYear: number, includeMonthFirst = true): string[] {
+  const dates = new Set<string>();
+  for (const match of text.matchAll(/\b(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]{3,9})(?:\s+(20\d{2}))?/gi)) {
+    const month = monthIndex(match[2].toLowerCase());
+    if (month === null) continue;
+    const year = Number(match[3] ?? fallbackYear);
+    dates.add(`${year}-${String(month + 1).padStart(2, "0")}-${String(Number(match[1])).padStart(2, "0")}`);
+  }
+  if (includeMonthFirst) {
+    for (const iso of parseMonthDayInstances(text, fallbackYear)) dates.add(iso);
+  }
+  return [...dates];
+}
+
+function parseExcludedDates(text: string, fallbackYear: number): { start: string; end: string }[] | undefined {
+  const ranges: { start: string; end: string }[] = [];
+  const noClass =
+    text.match(
+      new RegExp(
+        `no (?:class|session)s?\\s+(?:on\\s+)?(.+?)(?=${timetableWeekdayPattern}\\s*\\d|book\\b|prices?\\b|$)`,
+        "i"
+      )
+    )?.[1] ?? "";
+  for (const match of noClass.matchAll(/(?:(\d{1,2})(?:st|nd|rd|th)?\s*(?:&|,|and)\s*)?(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]{3,9})(?:\s+(20\d{2}))?/gi)) {
+    const month = monthIndex(match[3].toLowerCase());
+    if (month === null) continue;
+    const year = Number(match[4] ?? fallbackYear);
+    for (const dayToken of [match[1], match[2]]) {
+      if (!dayToken) continue;
+      const iso = `${year}-${String(month + 1).padStart(2, "0")}-${String(Number(dayToken)).padStart(2, "0")}`;
+      ranges.push({ start: iso, end: iso });
+    }
+  }
+  return ranges.length > 0 ? ranges : undefined;
 }
 
 function inferSeasonYear(sourceUrl: string): number {

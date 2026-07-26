@@ -74,4 +74,23 @@ describe("isSessionActiveOnDate", () => {
     expect(isSessionActiveOnDate(session, "2026-03-18")).toBe(true);
     expect(isSessionActiveOnDate(session, "2026-03-19")).toBe(false);
   });
+
+  it("does not project ended summer terms into August or autumn terms before their start", () => {
+    const endedSummer = makeSession({
+      title: "Ended summer class",
+      dayOfWeek: "Tuesday",
+      startDate: "2026-04-14",
+      endDate: "2026-07-28"
+    });
+    const autumn = makeSession({
+      title: "Autumn class",
+      dayOfWeek: "Tuesday",
+      startDate: "2026-09-15",
+      endDate: "2026-12-01"
+    });
+
+    expect(isSessionActiveOnDate(endedSummer, "2026-08-04")).toBe(false);
+    expect(isSessionActiveOnDate(autumn, "2026-08-04")).toBe(false);
+    expect(isSessionActiveOnDate(autumn, "2026-09-15")).toBe(true);
+  });
 });

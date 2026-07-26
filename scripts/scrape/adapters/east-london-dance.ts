@@ -53,10 +53,6 @@ function toText(html: string | null | undefined): string {
   return normalizeText($.text());
 }
 
-function isDatedOneOffEvent(title: string, descriptionText: string): boolean {
-  return /\btaster\b/i.test(`${title} ${descriptionText}`);
-}
-
 function toIsoDate(value: Date | null): string | null {
   return value && !Number.isNaN(value.getTime()) ? format(value, "yyyy-MM-dd") : null;
 }
@@ -82,10 +78,9 @@ function parseClassesFromEvents(events: NonNullable<TeamUpEventsResponse["result
     const descriptionText = toText(event.description);
     const start = event.starts_at ? parseISO(event.starts_at) : null;
     const end = event.ends_at ? parseISO(event.ends_at) : null;
-    const isOneOff = isDatedOneOffEvent(title, descriptionText);
-    const startDate = isOneOff ? toIsoDate(start) : null;
-    const endDate = isOneOff ? toIsoDate(end) ?? startDate : null;
-    if (isOneOff && (endDate ?? startDate) && (endDate ?? startDate)! < todayIso) {
+    const startDate = toIsoDate(start);
+    const endDate = toIsoDate(end) ?? startDate;
+    if (!startDate || (endDate && endDate < todayIso)) {
       continue;
     }
 
@@ -110,7 +105,14 @@ function parseClassesFromEvents(events: NonNullable<TeamUpEventsResponse["result
     });
   }
 
-  const dedupedClasses = Array.from(new Map(classes.map((item) => [`${item.title}|${item.dayOfWeek ?? "na"}|${item.time ?? "na"}`, item])).values());
+  const dedupedClasses = Array.from(
+    new Map(
+      classes.map((item) => [
+        `${item.bookingUrl}|${item.startDate ?? "na"}|${item.time ?? "na"}`,
+        item
+      ])
+    ).values()
+  );
   return removeRedundantBookingOptions(dedupedClasses);
 }
 

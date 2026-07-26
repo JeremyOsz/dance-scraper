@@ -179,6 +179,83 @@ describe("scraper adapters", () => {
     expect(output.classes[1]?.dayOfWeek).toBe("Wednesday");
   });
 
+  it("parses current The Place cards into bounded adult sessions and excludes youth listings", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <a class="c-event-card" href="/classes-courses/adult-autumn">
+          <p class="c-event-card__header">Wednesdays</p>
+          <h3 class="c-event-card__title">Contemporary Introduction with Sarah Miller</h3>
+          <p class="c-event-card__subtitle">Autumn 2026</p>
+          <div class="c-event-card__date">
+            <time datetime="2026-09-16T18:30:00+01:00" itemprop="startDate">Wed 16 Sept</time>
+            <time datetime="2026-12-09T18:30:00+00:00" itemprop="endDate">Wed 9 Dec</time>
+          </div>
+        </a>
+        <a class="c-event-card" href="/classes-courses/adult-intensive">
+          <p class="c-event-card__header">Mondays, Tuesdays, Wednesdays, Thursdays, Fridays</p>
+          <h3 class="c-event-card__title">Professional Class with Luke Birch</h3>
+          <p class="c-event-card__subtitle">Summer Intensives 2026</p>
+          <div class="c-event-card__date">
+            <time datetime="2026-08-10T16:15:00+01:00" itemprop="startDate">Mon 10 Aug</time>
+            <time datetime="2026-08-14T16:15:00+01:00" itemprop="endDate">Fri 14 Aug</time>
+          </div>
+        </a>
+        <a class="c-event-card" href="/classes-courses/children">
+          <p class="c-event-card__header">Saturdays</p>
+          <h3 class="c-event-card__title">Creative Dance for Ages 7-10</h3>
+          <p class="c-event-card__subtitle">Autumn 2026</p>
+          <div class="c-event-card__date">
+            <time datetime="2026-09-19T10:00:00+01:00" itemprop="startDate">Sat 19 Sep</time>
+            <time datetime="2026-12-05T10:00:00+00:00" itemprop="endDate">Sat 5 Dec</time>
+          </div>
+        </a>
+      `)
+      .mockResolvedValueOnce(`
+        "startDate": "2026-09-16T18:30:00+01:00"
+        <dt class="c-meta__title">Duration</dt><dd class="c-meta__value">18:30 - 20:00 (90 mins)</dd>
+        <dt class="c-meta__title">Age</dt><dd class="c-meta__value">Adult (18+)</dd>
+      `)
+      .mockResolvedValueOnce(`
+        "startDate": "2026-08-10T16:15:00+01:00"
+        "startDate": "2026-08-11T16:15:00+01:00"
+        <dt class="c-meta__title">Duration</dt><dd class="c-meta__value">16:15 - 17:45 (90 mins)</dd>
+        <dt class="c-meta__title">Age</dt><dd class="c-meta__value">Adult (18+)</dd>
+      `)
+      .mockResolvedValueOnce(`
+        <dt class="c-meta__title">Age</dt><dd class="c-meta__value">Ages 7-10</dd>
+      `);
+
+    const { scrapeThePlace } = await import("../../scripts/scrape/adapters/the-place");
+    const output = await scrapeThePlace();
+
+    expect(output.classes.some((item) => /Ages 7-10/.test(item.title))).toBe(false);
+    expect(output.classes.find((item) => item.title.includes("Contemporary Introduction"))).toMatchObject({
+      startDate: "2026-09-16",
+      endDate: "2026-09-16",
+      time: "18:30 - 20:00"
+    });
+    expect(output.classes.filter((item) => item.title.includes("Professional Class"))).toHaveLength(2);
+    expect(output.classes.filter((item) => item.title.includes("Professional Class")).map((item) => item.startDate)).toEqual([
+      "2026-08-10",
+      "2026-08-11"
+    ]);
+  });
+
+  it("filters multi-digit age-banded The Place cards before detail fetching", async () => {
+    fetchHtml.mockResolvedValueOnce(`
+      <a class="c-event-card" href="/classes-courses/summer-youth">
+        <div class="c-event-card__header">Monday</div>
+        <div class="c-event-card__title">Summer Dance Week for Ages 15-18</div>
+        <div class="c-event-card__date"><time itemprop="startDate" datetime="2026-07-27"></time><time itemprop="endDate" datetime="2026-07-31"></time></div>
+      </a>
+    `);
+    const { scrapeThePlace } = await import("../../scripts/scrape/adapters/the-place");
+    const output = await scrapeThePlace();
+
+    expect(output.classes).toHaveLength(0);
+    expect(fetchHtml).toHaveBeenCalledTimes(1);
+  });
+
   it("parses Rambert adapter", async () => {
     fetchHtml.mockResolvedValue(fixture("rambert.html"));
     const { scrapeRambert } = await import("../../scripts/scrape/adapters/rambert");
@@ -420,6 +497,139 @@ describe("scraper adapters", () => {
       "2026-04-30",
       "2026-05-01"
     ]);
+  });
+
+  it("parses Independent Dance summary lists when event cards have been archived", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <article class="event"><h2 class="entry-title"><a href="/events/summer-2026-dance-classes-at-sds/">
+          Summer 2026 | Dance Classes at SDS <span>Thu 9 Apr - Sun 26 Jul 2026</span>
+        </a></h2></article>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Weekdays</h3><div><h4>MORNING CLASS</h4><h3>10am - 12pm</h3><a href="https://bookwhen.com/independentdance">Book</a></div>
+          <h3>Mondays</h3><div><h4>MONDAY NIGHT IMPROVISATION</h4><h3>6.30 - 8pm</h3><a href="/classes/id-improvisation/">More</a></div>
+        </div>
+      `)
+      .mockResolvedValueOnce(`
+        <h2>Morning Class</h2>
+        <p>27 April – 1 May: <a href="/event/morning-class-fernanda/">Fernanda Muñoz Newsome</a></p>
+        <p>6-10 July: <a href="/event/morning-class-jose/">Jose Agudo</a></p>
+        <h2>Monday Night Improvisation</h2>
+        <p>13 July: <a href="/event/monday-night-improvisation-chevon/">Chevon Edwards</a></p>
+        <p>No upcoming results</p>
+      `);
+
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+
+    expect(output.classes.filter((item) => item.title === "MORNING CLASS with Jose Agudo").map((item) => item.startDate)).toEqual([
+      "2026-07-06",
+      "2026-07-07",
+      "2026-07-08",
+      "2026-07-09",
+      "2026-07-10"
+    ]);
+    expect(output.classes.find((item) => item.title === "MONDAY NIGHT IMPROVISATION with Chevon Edwards")).toMatchObject({
+      startDate: "2026-07-13",
+      endDate: "2026-07-13"
+    });
+    expect(output.classes.some((item) => item.title === "MORNING CLASS" && item.startDate === null)).toBe(false);
+    expect(output.classes.some((item) => item.title === "MONDAY NIGHT IMPROVISATION" && item.startDate === null)).toBe(false);
+  });
+
+  it("removes generic Independent Dance recurrences when no dated sessions are published", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <article class="event"><h2 class="entry-title"><a href="/events/summer-2026-dance-classes-at-sds/">
+          Summer 2026 | Dance Classes at SDS <span>Thu 9 Apr - Sun 26 Jul 2026</span>
+        </a></h2></article>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Weekdays</h3><div><h4>MORNING CLASS</h4><h3>10am - 12pm</h3><a href="https://bookwhen.com/independentdance">Book</a></div>
+          <h3>Mondays</h3><div><h4>MONDAY NIGHT IMPROVISATION</h4><h3>6.30 - 8pm</h3><a href="/classes/id-improvisation/">More</a></div>
+        </div>
+      `)
+      .mockResolvedValueOnce(`<h2>Morning Class</h2><p>No upcoming results</p><h2>Monday Night Improvisation</h2><p>No upcoming results</p>`);
+
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+
+    expect(output.classes.some((item) => item.title === "MORNING CLASS")).toBe(false);
+    expect(output.classes.some((item) => item.title === "MONDAY NIGHT IMPROVISATION")).toBe(false);
+  });
+
+  it("prefers Siobhan class detail timetables and expands published monthly dates", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <article class="event"><h2 class="entry-title"><a href="/events/summer-2026-dance-classes-at-sds/">
+          Summer 2026 | Dance Classes at SDS <span>Thu 9 Apr - Sun 26 Jul 2026</span>
+        </a></h2></article>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h3>Mondays</h3><div><h4>MOVE.</h4><h3>20 Apr - 27 Jul<br>6.30 - 8pm</h3><a href="/classes/move/">More</a></div>
+          <h3>Sundays</h3><div><h4>SWEET SPOT SUNDAZE: THE SESSIONS</h4><h3>First Sunday<br>5 - 8pm</h3><a href="/classes/sweetspot-sundaze/">More</a></div>
+        </div>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content"><h2>summer Timetable</h2><h3>Mondays</h3><p>20 Apr - 29 Jun</p><p>6.30-8pm</p><p>*no class on 4 &amp; 25 May</p></div>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content"><h2>autumn TIMETABLE</h2><h3>Monthly Sundays</h3><p>6 Sep, 4 Oct, 1 Nov, 6 Dec</p><p>5 - 8pm</p></div>
+      `);
+
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    const move = output.classes.find((item) => item.title === "MOVE.");
+    const sweetSpot = output.classes.filter((item) => item.title === "SWEET SPOT SUNDAZE: THE SESSIONS");
+
+    expect(move).toMatchObject({ startDate: "2026-04-20", endDate: "2026-06-29" });
+    expect(move?.excludedDateRanges).toEqual([
+      { start: "2026-05-04", end: "2026-05-04" },
+      { start: "2026-05-25", end: "2026-05-25" }
+    ]);
+    expect(sweetSpot.map((item) => item.startDate)).toEqual([
+      "2026-09-06",
+      "2026-10-04",
+      "2026-11-01",
+      "2026-12-06"
+    ]);
+    expect(sweetSpot.every((item) => item.endDate === item.startDate)).toBe(true);
+  });
+
+  it("parses compact Siobhan timetable markup and keeps supplementary one-off dates", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <article class="event"><h2 class="entry-title"><a href="/events/summer-2026-dance-classes-at-sds/">
+          Summer 2026 | Dance Classes at SDS <span>Thu 9 Apr - Sun 26 Jul 2026</span>
+        </a></h2></article>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content"><h3>Sundays</h3><div><h4>KLEIN TECHNIQUE</h4><h3>12 Apr - 14 Jun</h3><a href="/classes/klein/">More</a></div></div>
+      `)
+      .mockResolvedValueOnce(`
+        <div class="entry-content">
+          <h2>Summer Timetable</h2><p>Sundays12 Apr – 14 Jun</p><p>*no sessions 19 Apr &amp; 31 May</p><p>Sunday 26 JulDouble session</p>
+          <h2>autumn Timetable</h2><p>Sundays11 Oct – 8 Nov</p><p>Sunday 27 Sep &amp; Sunday 22 NovDouble session</p>
+        </div>
+      `);
+
+    const { scrapeSiobhanDavies } = await import("../../scripts/scrape/adapters/siobhan-davies");
+    const output = await scrapeSiobhanDavies();
+    const klein = output.classes.filter((item) => item.title === "KLEIN TECHNIQUE");
+
+    expect(klein).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ startDate: "2026-04-12", endDate: "2026-06-14" }),
+        expect.objectContaining({ startDate: "2026-07-26", endDate: "2026-07-26" }),
+        expect.objectContaining({ startDate: "2026-09-27", endDate: "2026-09-27" }),
+        expect.objectContaining({ startDate: "2026-10-11", endDate: "2026-11-08" }),
+        expect.objectContaining({ startDate: "2026-11-22", endDate: "2026-11-22" })
+      ])
+    );
   });
 
   it("prefers the most recent Siobhan season when archive lists multiple Dance Classes at SDS pages", async () => {
@@ -1246,6 +1456,51 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.venue).toBe("Look At Movement (Tanztheatre)");
   });
 
+  it("bounds Look At Movement classes to the published term and expands explicit performance dates", async () => {
+    fetchHtml.mockResolvedValueOnce(`
+      <p>The term runs from Tue 14 Apr - Sat 4 July 2026</p>
+      <div class="e-n-accordion-item">
+        <div class="e-n-accordion-item-title-text">Technique | Improvisation (TUE)</div>
+        <div class="elementor-widget-text-editor">From Tue Apr 14th Time and date Tuesdays 14.00 - 15.30 Morley College</div>
+        <div class="elementor-button-wrapper"><a href="/technique">Tickets</a></div>
+      </div>
+      <div class="e-n-accordion-item">
+        <div class="e-n-accordion-item-title-text">Acosta Performance Group (SUN)</div>
+        <div class="elementor-widget-text-editor">Sun 24 May | 12-4pm Sat 27 June | 12-4pm Sun 5 July | 12-4pm</div>
+        <div class="elementor-button-wrapper"><a href="/acosta">Tickets</a></div>
+      </div>
+    `);
+    const { scrapeLookAtMovement } = await import("../../scripts/scrape/adapters/look-at-movement");
+    const output = await scrapeLookAtMovement();
+
+    expect(output.classes.find((item) => item.title === "Technique | Improvisation")).toMatchObject({
+      startDate: "2026-04-14",
+      endDate: "2026-07-04"
+    });
+    expect(output.classes.filter((item) => item.title === "Acosta Performance Group").map((item) => item.startDate)).toEqual([
+      "2026-05-24",
+      "2026-06-27",
+      "2026-07-05"
+    ]);
+  });
+
+  it("prefers a linked Look At Movement course range over the page-wide term", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <p>The term runs from Tue 14 Apr - Sat 4 July 2026</p>
+        <div class="e-n-accordion-item">
+          <div class="e-n-accordion-item-title-text">Tanztheater Open Level (WED)</div>
+          <div class="elementor-widget-text-editor">From Wed Apr 22nd Wednesdays 20.15 - 21.45 The Place</div>
+          <div class="elementor-button-wrapper"><a href="https://theplace.org.uk/open-level">Tickets</a></div>
+        </div>
+      `)
+      .mockResolvedValueOnce(`Summer term classes start on Wednesday 22 April and run until Wednesday 15 July 2026.`);
+    const { scrapeLookAtMovement } = await import("../../scripts/scrape/adapters/look-at-movement");
+    const output = await scrapeLookAtMovement();
+
+    expect(output.classes[0]).toMatchObject({ startDate: "2026-04-22", endDate: "2026-07-15" });
+  });
+
   it("parses The Manor / MVMT adapter", async () => {
     fetchJson.mockResolvedValue(JSON.parse(fixture("manor-mvmt-booking-sessions.json")));
     const { scrapeTheManorMvmt } = await import("../../scripts/scrape/adapters/the-manor-mvmt");
@@ -1286,8 +1541,17 @@ describe("scraper adapters", () => {
         {
           name: "Popping",
           description: "<p>Mondays, 7pm - 8:20pm - Beginner Level</p>",
-          starts_at: "2026-03-23T19:00:00+00:00",
-          ends_at: "2026-03-23T20:20:00+00:00",
+          starts_at: "2099-03-23T19:00:00+00:00",
+          ends_at: "2099-03-23T20:20:00+00:00",
+          customer_url: "/p/5799650-east-london-dance/e/57985420-popping/",
+          venue: 43266,
+          status: "active"
+        },
+        {
+          name: "Popping",
+          description: "<p>Mondays, 7pm - 8:20pm - Beginner Level</p>",
+          starts_at: "2099-03-30T19:00:00+00:00",
+          ends_at: "2099-03-30T20:20:00+00:00",
           customer_url: "/p/5799650-east-london-dance/e/57985420-popping/",
           venue: 43266,
           status: "active"
@@ -1314,8 +1578,8 @@ describe("scraper adapters", () => {
           name: "Krump",
           description:
             "<p>Mondays, 8:30pm - 9:50pm - All Levels, beginners welcome with Toby Jackman - This session is a 30 minute class followed by a 50 minute Jam.</p>",
-          starts_at: "2026-04-27T20:30:00+01:00",
-          ends_at: "2026-04-27T21:50:00+01:00",
+          starts_at: "2099-04-27T20:30:00+01:00",
+          ends_at: "2099-04-27T21:50:00+01:00",
           customer_url: "/p/5799650-east-london-dance/e/97729217-krump/",
           venue: 43266,
           status: "active"
@@ -1324,8 +1588,8 @@ describe("scraper adapters", () => {
           name: "Krump (Class & Jam)",
           description:
             "<p>Mondays, 8:30pm - 9:50pm - All Levels, beginners welcome with Toby Jackman - This session is a 30 minute class followed by a 50 minute Jam.</p>",
-          starts_at: "2026-04-27T20:30:00+01:00",
-          ends_at: "2026-04-27T21:50:00+01:00",
+          starts_at: "2099-04-27T20:30:00+01:00",
+          ends_at: "2099-04-27T21:50:00+01:00",
           customer_url: "/p/5799650-east-london-dance/e/102141295-krump-class-jam/",
           venue: 43266,
           status: "active"
@@ -1333,8 +1597,8 @@ describe("scraper adapters", () => {
         {
           name: "Krump (Jam)",
           description: "<p>Mondays, 9pm - 9:50pm - Recommended for intermediate/advanced level Krumpers.</p>",
-          starts_at: "2026-04-27T21:00:00+01:00",
-          ends_at: "2026-04-27T21:50:00+01:00",
+          starts_at: "2099-04-27T21:00:00+01:00",
+          ends_at: "2099-04-27T21:50:00+01:00",
           customer_url: "/p/5799650-east-london-dance/e/102319176-krump-jam/",
           venue: 43266,
           status: "active"
@@ -1348,7 +1612,10 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.venue).toBe("East London Dance");
     expect(output.classes[0]?.time).toBe("7pm - 8:20pm");
     expect(output.classes[0]?.bookingUrl).toContain("/p/5799650-east-london-dance/e/");
-    expect(output.classes.find((klass) => klass.title === "Popping")?.startDate).toBeNull();
+    expect(output.classes.filter((klass) => klass.title === "Popping").map((klass) => klass.startDate)).toEqual([
+      "2099-03-23",
+      "2099-03-30"
+    ]);
     expect(output.classes.find((klass) => klass.title === "Krump Taster")).toMatchObject({
       startDate: "2099-09-28",
       endDate: "2099-09-28",
@@ -1446,6 +1713,31 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.bookingUrl).toBe("https://www.balletforyou.co.uk/enrol-now");
   });
 
+  it("parses Ballet for You date ranges when the Dates label is omitted", async () => {
+    fetchHtml
+      .mockResolvedValueOnce(`
+        <div id="mainNavWrapper"><div class="folder"><div class="folder-toggle">Special Courses</div>
+          <div class="subnav"><a href="/pointe">Pointe</a></div>
+        </div></div>
+      `)
+      .mockResolvedValueOnce(`
+        <meta property="og:title" content="Pointe - Ballet for You" />
+        <div class="sqs-code-container"><div class="boxed"><h1>Pointe</h1></div></div>
+        <div class="sqs-html-content"><p>
+          <strong>Day:</strong> Saturdays <strong>Time:</strong> 3.00-3.40pm
+          <strong>Place:</strong> New City Fitness 19th September - 5th December 2026 (no class 31 Oct)
+          <strong>Cost:</strong> £70 <strong>Teacher:</strong> Serena Cundari
+        </p><a href="/enrol-now">Enrol</a></div>
+      `);
+    const { scrapeBalletForYou } = await import("../../scripts/scrape/adapters/ballet-for-you");
+    const output = await scrapeBalletForYou();
+
+    expect(output.classes[0]).toMatchObject({
+      startDate: "2026-09-19",
+      endDate: "2026-12-05"
+    });
+  });
+
   it("parses Fieldworks Dance adapter and keeps adult classes only", async () => {
     fetchHtml.mockResolvedValue(fixture("fieldworks-book-online.html"));
     const { scrapeFieldworksDance } = await import("../../scripts/scrape/adapters/fieldworks-dance");
@@ -1458,6 +1750,24 @@ describe("scraper adapters", () => {
     );
     expect(output.classes.some((item) => /tiny dancer|year olds/i.test(`${item.title} ${item.details ?? ""}`))).toBe(false);
     expect(output.classes[0]?.venue).toBe("Fieldworks Dance");
+  });
+
+  it("bounds Fieldworks limited-run promotions while keeping evergreen classes undated", async () => {
+    fetchHtml.mockResolvedValue(`
+      <li><p>Absolute Beginner Ballet</p><p>Mondays 6:30-7:30pm</p><p>Weekly adult class</p><a href="https://fieldworksdance.as.me/ballet">Book</a></li>
+      <li><p>Intro to Broadway Jazz</p><p>Tuesdays 7:30-8:30pm</p><p>07/07-28/07 Bring a friend</p><a href="https://fieldworksdance.as.me/jazz">Book</a></li>
+    `);
+    const { scrapeFieldworksDance } = await import("../../scripts/scrape/adapters/fieldworks-dance");
+    const output = await scrapeFieldworksDance();
+
+    expect(output.classes.find((item) => item.title === "Absolute Beginner Ballet")).toMatchObject({
+      startDate: null,
+      endDate: null
+    });
+    expect(output.classes.find((item) => item.title === "Intro to Broadway Jazz")).toMatchObject({
+      startDate: "2026-07-07",
+      endDate: "2026-07-28"
+    });
   });
 
   it("handles malformed HTML gracefully", async () => {

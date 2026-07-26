@@ -14,5 +14,11 @@ export const THE_PLACE_CAMDEN_TERM_CLOSURES: SessionExcludedDateRange[] = [
   { start: "2026-03-30", end: "2026-04-10" },
   { start: "2026-05-25", end: "2026-05-29" },
   /** After summer term ends (~20 Jul); through day before autumn 2026/27 pupil start (typically first Mon in Sep). */
-  { start: "2026-07-21", end: "2026-09-06" }
+  { start: "2026-07-21", end: "2026-09-01" },
+  { start: "2026-10-26", end: "2026-10-30" },
+  { start: "2026-12-21", end: "2027-01-01" },
+  { start: "2027-02-15", end: "2027-02-19" },
+  { start: "2027-03-26", end: "2027-04-09" },
+  { start: "2027-05-31", end: "2027-06-04" },
+  { start: "2027-07-23", end: "2027-09-01" }
 ];
