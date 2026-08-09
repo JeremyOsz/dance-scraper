@@ -21,7 +21,8 @@ const SALSA_BACHATA_FOCUSED_VENUE_NAMES = new Set([
   "Salsa! Soho",
   "Bar Salsa Temple",
   "MamboCity",
-  "Con Tumbao Salsa"
+  "Con Tumbao Salsa",
+  "Queer Salsa"
 ]);
 
 export function isBigStudioVenueName(name: string): boolean {

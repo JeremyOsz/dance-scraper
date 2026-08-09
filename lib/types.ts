@@ -40,6 +40,8 @@ export type VenueKey =
   | "coletHouse"
   | "studio66"
   | "tangoFever"
+  | "queerSalsa"
+  | "londonSchoolOfCapoeira"
   | "customEvents";
 
 export type DayOfWeek =

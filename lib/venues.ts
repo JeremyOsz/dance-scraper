@@ -207,6 +207,16 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://www.tango-fever.com/classes-2/",
     mapQuery: "Tango Fever London"
   },
+  queerSalsa: {
+    label: "Queer Salsa",
+    sourceUrl: "https://linktr.ee/queersalsaldn",
+    mapQuery: "Queer Salsa London"
+  },
+  londonSchoolOfCapoeira: {
+    label: "London School of Capoeira Herança",
+    sourceUrl: "https://www.londonschoolofcapoeira.com/timetable",
+    mapQuery: "London School of Capoeira, Unit 1-2 Leeds Place, London N4 3RF"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",

@@ -104,6 +104,8 @@ const testedVenueKeys = [
   "coletHouse",
   "studio66",
   "tangoFever",
+  "queerSalsa",
+  "londonSchoolOfCapoeira",
   "customEvents"
 ] as const;
 
@@ -1189,6 +1191,136 @@ describe("scraper adapters", () => {
     expect(output.ok).toBe(true);
     expect(output.classes.map((item) => item.dayOfWeek)).toContain("Monday");
     expect(output.classes.map((item) => item.dayOfWeek)).toContain("Tuesday");
+  });
+
+  it("parses Queer Salsa Linktree courses and upcoming events into dated sessions", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-08-07T12:00:00Z"));
+    try {
+      fetchHtml
+        .mockResolvedValueOnce(`
+          <a href="https://www.queersalsa.co.uk/queersalsa-courses/p/cuban-salsa-beginners-course">Course</a>
+          <a href="https://www.outsavvy.com/event/36450/queer-minds-movement-sessions-complete-beginners-salsa">Workshop</a>
+        `)
+        .mockResolvedValueOnce(`
+          <main>
+            <h1 class="product-title">Cuban Salsa Beginners Course</h1>
+            <span>Image 1 of 1</span>
+            <div class="product-description">
+              <p>A 5-week progressive Cuban Salsa course for complete beginners and beyond.</p>
+              <p>Dates: 5 Thursdays: 10/9, 17/9, 24/9, 1/10 and 8/10</p>
+              <p>Time: 19:00–21:00</p>
+              <p>Location: Bishopsgate Institute, 230 Bishopsgate, London EC2M 4QH</p>
+              <p>10/09 Week 1: Foundational Rhythms</p>
+              <p>17/09 Week 2: Enchufla</p>
+              <p>24/09 Week 3: Sácala</p>
+              <p>01/10 Week 4: Prima</p>
+              <p>08/10 Week 5: Vacilala</p>
+            </div>
+          </main>
+        `)
+        .mockResolvedValueOnce(`
+          <script type="application/ld+json">
+            ${JSON.stringify([
+              {
+                "@type": "Event",
+                name: "Queer Minds Movement Sessions: Complete Beginners Salsa",
+                description: "A free LGBTQIA+ beginners salsa class.",
+                startDate: "2026-07-20T18:00:00+01:00",
+                endDate: "2026-07-20T20:00:00+01:00"
+              },
+              {
+                "@type": "Event",
+                name: "Queer Minds Movement Sessions: Complete Beginners Salsa",
+                description: "A free LGBTQIA+ beginners salsa class.",
+                startDate: "2026-08-17T18:00:00+01:00",
+                endDate: "2026-08-17T20:00:00+01:00"
+              }
+            ])}
+          </script>
+        `);
+
+      const { scrapeQueerSalsa } = await import("../../scripts/scrape/adapters/queer-salsa");
+      const output = await scrapeQueerSalsa();
+
+      expect(output.ok).toBe(true);
+      expect(output.classes).toHaveLength(6);
+      expect(output.classes.filter((item) => item.title === "Cuban Salsa Beginners Course").map((item) => item.startDate)).toEqual([
+        "2026-09-10",
+        "2026-09-17",
+        "2026-09-24",
+        "2026-10-01",
+        "2026-10-08"
+      ]);
+      expect(output.classes.find((item) => item.startDate === "2026-08-17")).toMatchObject({
+        venue: "Queer Salsa",
+        dayOfWeek: "Monday",
+        time: "18:00 - 20:00"
+      });
+      expect(output.classes.some((item) => item.startDate === "2026-07-20")).toBe(false);
+      expect(output.classes[0]?.details).not.toContain("Image 1 of 1");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("parses London School of Capoeira weekly classes and its dated beginners course", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-08-07T12:00:00Z"));
+    try {
+      fetchHtml
+        .mockResolvedValueOnce(`
+          <div class="sqs-html-content">
+            <h2>Monday 7:00–8:30 PM</h2>
+            <h3>Extended Regular Capoeira Class</h3>
+            <p>Suitable for students of all levels. Partner training and roda practice.</p>
+            <h2>Tuesday 7:00–8:00 PM</h2>
+            <h3>Beginners' Capoeira Course</h3>
+            <p>Designed for complete beginners.</p>
+            <h3>Tuesday 8:00–9:00 PM</h3>
+            <h3>Capoeira Music</h3>
+            <p>Develop your musical skills.</p>
+            <h2>Wednesday 7:00–8:30 PM</h2>
+            <h3>Extended Regular Capoeira Class</h3>
+            <p>Suitable for students of all levels.</p>
+            <h2>Thursday 7:00–8:00 PM</h2>
+            <h3>Beginners' Capoeira Course</h3>
+            <p>A second weekly beginners session.</p>
+            <h3>Thursday 8:00–9:00 PM</h3>
+            <h3>Live Roda</h3>
+            <p>Traditional Capoeira games and live music.</p>
+          </div>
+        `)
+        .mockResolvedValueOnce(`
+          <main>
+            <h1 class="product-title">Beginners Course - September, 8 sessions</h1>
+            <div class="product-description">
+              <p>When: Tuesday and Thursday 7-8pm</p><p>Next Course: 3rd, 8th, 10th, 15th, 17th, 22nd, 24th and 29th of September</p><p>Where: London School of Capoeira, unit 1-2 Leeds Place, London N4 3RF</p>
+            </div>
+          </main>
+        `);
+
+      const { scrapeLondonSchoolOfCapoeira } = await import("../../scripts/scrape/adapters/london-school-of-capoeira");
+      const output = await scrapeLondonSchoolOfCapoeira();
+
+      expect(output.ok).toBe(true);
+      expect(output.classes).toHaveLength(11);
+      expect(output.classes.filter((item) => item.title === "Beginners Course - September, 8 sessions")).toHaveLength(8);
+      expect(output.classes.find((item) => item.startDate === "2026-09-03")).toMatchObject({
+        dayOfWeek: "Thursday",
+        time: "7pm - 8pm"
+      });
+      expect(output.classes).toContainEqual(expect.objectContaining({
+        title: "Extended Regular Capoeira Class",
+        dayOfWeek: "Monday",
+        time: "7:00–8:30 PM",
+        startDate: null
+      }));
+      expect(output.classes.some((item) => item.title === "Capoeira Music")).toBe(false);
+      expect(output.classes.some((item) => item.title === "Beginners' Capoeira Course")).toBe(false);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("parses Salsa Rueda (Rueda Libre) adapter", async () => {

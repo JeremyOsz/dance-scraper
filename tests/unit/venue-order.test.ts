@@ -1,11 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { isBigStudioVenueName, sortVenueNamesForUi, sortVenueRecordsForUi } from "@/lib/venue-order";
+import {
+  isBigStudioVenueName,
+  isSalsaBachataFocusedVenueName,
+  sortVenueNamesForUi,
+  sortVenueRecordsForUi
+} from "@/lib/venue-order";
 
 describe("venue-order", () => {
   it("detects big studio venue names", () => {
     expect(isBigStudioVenueName("Danceworks")).toBe(true);
     expect(isBigStudioVenueName("Pineapple Dance Studios")).toBe(true);
     expect(isBigStudioVenueName("Chisenhale Dance Space")).toBe(false);
+  });
+
+  it("keeps Queer Salsa with the other salsa-focused venues", () => {
+    expect(isSalsaBachataFocusedVenueName("Queer Salsa")).toBe(true);
   });
 
   it("sorts independent venues ahead of big studios", () => {
