@@ -4,9 +4,7 @@
   "ticketTailorOrganizers": [
     {
       "venue": "UK Dancers for Palestine",
-      "organizerUrl": "https://www.tickettailor.com/events/ukdancersforpalestine",
-      "fallbackTitle": "UK Dancers for Palestine events",
-      "fallbackDetails": "Campaign updates, ticketed events, and community actions from UK Dancers for Palestine. Check the organiser page or Instagram for the latest activity."
+      "organizerUrl": "https://www.tickettailor.com/events/ukdancersforpalestine"
     },
     {
       "venue": "DabkeRoots",
@@ -15,6 +13,46 @@
     }
   ],
   "events": [
+    {
+      "title": "Beginner Forró",
+      "venue": "Forró Academy",
+      "locationName": "Forró Academy King's Cross",
+      "details": "Weekly beginner (Level 1) Forró class. Drop-in price £15; check the organiser page before travelling.",
+      "dayOfWeek": "Wednesday",
+      "time": "7.00pm - 8.00pm",
+      "bookingUrl": "https://www.forroacademy.co.uk/classes/",
+      "sourceUrl": "https://www.forroacademy.co.uk/classes/"
+    },
+    {
+      "title": "Beginner Forró",
+      "venue": "Forró Academy",
+      "locationName": "Forró Academy King's Cross",
+      "details": "Weekly beginner (Level 1) Forró class. Drop-in price £15; check the organiser page before travelling.",
+      "dayOfWeek": "Sunday",
+      "time": "5.00pm - 6.00pm",
+      "bookingUrl": "https://www.forroacademy.co.uk/classes/",
+      "sourceUrl": "https://www.forroacademy.co.uk/classes/"
+    },
+    {
+      "title": "Upper Intermediate Forró",
+      "venue": "Forró Academy",
+      "locationName": "Forró Academy Angel",
+      "details": "Weekly upper-intermediate (Level 3) Forró class for members; check the organiser page before travelling.",
+      "dayOfWeek": "Friday",
+      "time": "7.00pm - 8.30pm",
+      "bookingUrl": "https://www.forroacademy.co.uk/classes/",
+      "sourceUrl": "https://www.forroacademy.co.uk/classes/"
+    },
+    {
+      "title": "Advanced Forró",
+      "venue": "Forró Academy",
+      "locationName": "Forró Academy Waterloo",
+      "details": "Weekly advanced (Level 4) Forró class for members; check the organiser page before travelling.",
+      "dayOfWeek": "Thursday",
+      "time": "7.00pm - 8.30pm",
+      "bookingUrl": "https://www.forroacademy.co.uk/classes/",
+      "sourceUrl": "https://www.forroacademy.co.uk/classes/"
+    },
     {
       "title": "Move & Reset",
       "details": "Lunchtime movement class (60 min) with Yael Flexer. Open to adults of all ages and abilities; improvisation, guided exercises, and gentle movement. £12 per session; £40 for the 4-week course (booking fee applies on site).",

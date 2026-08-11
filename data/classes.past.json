@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-11T09:56:55.539Z",
+  "updatedAt": "2026-08-11T14:31:33.811Z",
   "sessions": [
     {
       "id": "pineapple-dance-studios-jazz-musical-theatre-pro-theatre-jazz-adv-pro-13-george-beet-monday-15-00",
@@ -39553,7 +39553,13 @@
     },
     {
       "id": "host-studios-beginner-level-waacking-class-with-the-lioness-friday-7-00pm",
+      "sourceKey": "customEvents",
+      "organizer": "HOST Studios",
       "venue": "HOST Studios",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
       "title": "Beginner Level Waacking Class with The Lioness",
       "details": "Beginner level waacking class with The Lioness. HOST Studios, 143 Mare Street, E8 3FW. £12.",
       "dayOfWeek": "Friday",
@@ -39565,9 +39571,13 @@
       "bookingUrl": "https://www.hoststudios.co.uk/",
       "sourceUrl": "https://www.hoststudios.co.uk/",
       "tags": [],
+      "styles": [
+        "Waacking"
+      ],
       "audience": "adult",
       "isWorkshop": false,
-      "lastSeenAt": "2026-07-26T16:08:33.898Z"
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:02.356Z"
     },
     {
       "id": "tripspace-moving-together-improvisation-connection-expression-friday-18-30",

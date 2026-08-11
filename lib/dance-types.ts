@@ -116,7 +116,7 @@ const STYLE_PATTERNS: Record<Exclude<DanceStyle, "Other">, RegExp[]> = {
   "Lindy Hop/Swing": [/\blindy\s*hop\b/i, /\blindyhopeastldn\b/i, /\bswing\s+danc/i, /\bbalboa\b/i, /\bsolo\s+charleston\b/i],
   "Kizomba/Semba": [/\bkizomba\b/i, /\bsemba\b/i, /\burban\s+kiz\b/i],
   "Brazilian Zouk": [/\bbrazilian\s+zouk\b/i, /\bzouk\b/i],
-  Forró: [/\bforr[oó]\b/i],
+  Forró: [/\bforr[oó](?![\p{L}\p{N}_])/iu],
   "Modern Jive/Ceroc": [/\bmodern\s+jive\b/i, /\bceroc\b/i, /\bleroc\b/i],
   "African Contemporary": [/\bafrican\s+contemporary\b/i, /\bcontemporary\s+african\b/i],
   "Afro Fusion/Afrobeats": [/\bafro(?:\s*fusion|beats?)?\b/i, /\bafricanistic\b/i],

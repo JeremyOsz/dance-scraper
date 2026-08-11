@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-11T10:03:49.447Z",
+  "generatedAt": "2026-08-11T15:36:05.607Z",
   "sessions": [
     {
       "id": "florence-trust-writers-room-bianca-scout-and-elena-isolini-daughter-mary-dance-workshop-tuesday-10-00am",
@@ -200,235 +200,6 @@
       "borough": null,
       "styles": [
         "Salsa"
-      ],
-      "isCourse": false
-    },
-    {
-      "id": "butoh-mutations-butoh-mutations-classes-workshops-na-na",
-      "venue": "Butoh Mutations",
-      "title": "Butoh Mutations Classes & Workshops",
-      "details": "Butoh UK has operated for over 30 years and organises Butoh Workshops,  London Butoh Classes and Butoh Performances and Butoh Events, produced by Marie-Gabrielle Rotie since 1997. Butoh in London and Butoh in UK.",
-      "dayOfWeek": null,
-      "startTime": null,
-      "endTime": null,
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.butohuk.com/",
-      "sourceUrl": "https://www.butohuk.com/",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-08-03T08:48:42.763Z",
-      "sourceKey": "butohMutations",
-      "organizer": "Butoh Mutations",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "styles": [
-        "Butoh"
-      ],
-      "isCourse": false
-    },
-    {
-      "id": "posthuman-theatre-butoh-posthuman-theatre-butoh-class-na-na",
-      "venue": "Posthuman Theatre Butoh",
-      "title": "Posthuman Theatre Butoh Class",
-      "details": "Source currently unavailable. Check venue page for latest schedule.",
-      "dayOfWeek": null,
-      "startTime": null,
-      "endTime": null,
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://posthuman.works/butoh-classes-workshops",
-      "sourceUrl": "https://posthuman.works/butoh-classes-workshops",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-08-03T08:48:42.763Z",
-      "sourceKey": "posthumanTheatreButoh",
-      "organizer": "Posthuman Theatre Butoh",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "styles": [
-        "Butoh"
-      ],
-      "isCourse": false
-    },
-    {
-      "id": "hackney-baths-hackney-baths-dance-events-na-na",
-      "venue": "Hackney Baths",
-      "title": "Hackney Baths Dance Events",
-      "details": "Source currently unavailable. Check venue page for latest schedule.",
-      "dayOfWeek": null,
-      "startTime": null,
-      "endTime": null,
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.the-baths.co.uk/",
-      "sourceUrl": "https://www.the-baths.co.uk/",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-08-03T08:48:42.763Z",
-      "sourceKey": "hackneyBaths",
-      "organizer": "Hackney Baths",
-      "locationName": "Hackney Baths",
-      "address": "11-17 Hackney Road",
-      "postcode": "E2 7NX",
-      "borough": "Tower Hamlets",
-      "styles": [
-        "Other"
-      ],
-      "isCourse": false
-    },
-    {
-      "id": "jw3-move-reset-thursday-12-30pm",
-      "venue": "JW3",
-      "title": "Move & Reset",
-      "details": "Lunchtime movement class (60 min) with Yael Flexer. Open to adults of all ages and abilities; improvisation, guided exercises, and gentle movement. £12 per session; £40 for the 4-week course (booking fee applies on site).",
-      "dayOfWeek": "Thursday",
-      "startTime": "12.30pm",
-      "endTime": "1.30pm",
-      "startDate": "2026-01-22",
-      "endDate": "2026-03-26",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.jw3.org.uk/whats-on/move-reset",
-      "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
-      "tags": [
-        "improvisation"
-      ],
-      "audience": "all-ages",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-08-03T08:48:42.763Z",
-      "sourceKey": "customEvents",
-      "organizer": "JW3",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "styles": [
-        "Improv"
-      ],
-      "isCourse": true
-    },
-    {
-      "id": "dabkeroots-dabkeroots-na-na",
-      "venue": "DabkeRoots",
-      "title": "DABKEROOTS",
-      "details": "DabkeRoots class on 11 April 2026. Check the organiser page for the current time and venue details.",
-      "dayOfWeek": null,
-      "startTime": null,
-      "endTime": null,
-      "startDate": "2026-04-11",
-      "endDate": "2026-04-11",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.tickettailor.com/events/dabkeroots",
-      "sourceUrl": "https://www.tickettailor.com/events/dabkeroots",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-08-03T08:48:42.763Z",
-      "sourceKey": "customEvents",
-      "organizer": "DabkeRoots",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "styles": [
-        "Other"
-      ],
-      "isCourse": false
-    },
-    {
-      "id": "omnibus-theatre-how-the-voice-moves-a-poetry-dance-improv-workshop-friday-7-00pm",
-      "venue": "Omnibus Theatre",
-      "title": "How the voice moves: a poetry & dance improv workshop",
-      "details": "Poetry and dance improvisation workshop. Omnibus Theatre, SW4 0QW.",
-      "dayOfWeek": "Friday",
-      "startTime": "7:00pm",
-      "endTime": "9:00pm",
-      "startDate": "2026-03-27",
-      "endDate": "2026-03-27",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
-      "sourceUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
-      "tags": [
-        "improv",
-        "improvisation"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "lastSeenAt": "2026-08-03T08:48:42.763Z",
-      "sourceKey": "customEvents",
-      "organizer": "Omnibus Theatre",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "styles": [
-        "Improv"
-      ],
-      "isCourse": false
-    },
-    {
-      "id": "host-studios-beginner-level-waacking-class-with-the-lioness-friday-7-00pm",
-      "venue": "HOST Studios",
-      "title": "Beginner Level Waacking Class with The Lioness",
-      "details": "Beginner level waacking class with The Lioness. HOST Studios, 143 Mare Street, E8 3FW. £12.",
-      "dayOfWeek": "Friday",
-      "startTime": "7:00pm",
-      "endTime": "8:30pm",
-      "startDate": "2026-05-29",
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.hoststudios.co.uk/",
-      "sourceUrl": "https://www.hoststudios.co.uk/",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-08-03T08:48:42.763Z",
-      "sourceKey": "customEvents",
-      "organizer": "HOST Studios",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "styles": [
-        "Waacking"
-      ],
-      "isCourse": false
-    },
-    {
-      "id": "uk-dancers-for-palestine-uk-dancers-for-palestine-events-na-na",
-      "venue": "UK Dancers for Palestine",
-      "title": "UK Dancers for Palestine events",
-      "details": "Campaign updates, ticketed events, and community actions from UK Dancers for Palestine. Check the organiser page or Instagram for the latest activity.",
-      "dayOfWeek": null,
-      "startTime": null,
-      "endTime": null,
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.tickettailor.com/events/ukdancersforpalestine",
-      "sourceUrl": "https://www.tickettailor.com/events/ukdancersforpalestine",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-08-03T08:48:42.763Z",
-      "sourceKey": "customEvents",
-      "organizer": "UK Dancers for Palestine",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "styles": [
-        "Other"
       ],
       "isCourse": false
     },
@@ -65321,36 +65092,6 @@
       "lastSeenAt": "2026-08-11T09:56:55.539Z"
     },
     {
-      "id": "five-rhythms-london-5rhythms-london-class-na-na",
-      "sourceKey": "fiveRhythmsLondon",
-      "organizer": "Five Rhythms London",
-      "venue": "Five Rhythms London",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "title": "5Rhythms London Class",
-      "details": "Led by: Location: Organizer: Phone:",
-      "dayOfWeek": null,
-      "startTime": null,
-      "endTime": null,
-      "startDate": null,
-      "endDate": null,
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.5rhythms.com/classes/London",
-      "sourceUrl": "https://www.5rhythms.com/classes/London",
-      "tags": [
-        "5rhythms"
-      ],
-      "styles": [
-        "5Rhythms"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "isCourse": false,
-      "lastSeenAt": "2026-08-11T09:56:55.539Z"
-    },
-    {
       "id": "mambocity-weekly-class-friday-7-30pm",
       "sourceKey": "mamboCity",
       "organizer": "MamboCity",
@@ -76599,7 +76340,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-09-30",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76629,7 +76370,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-10-07",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76659,7 +76400,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-10-14",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76689,7 +76430,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-10-21",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76719,7 +76460,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-11-04",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76749,7 +76490,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-11-11",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76779,7 +76520,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-11-18",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76809,7 +76550,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-11-25",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76839,7 +76580,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-12-02",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76869,7 +76610,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-18-45--2026-12-09",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76929,7 +76670,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-09-30",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76959,7 +76700,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-10-07",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -76989,7 +76730,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-10-14",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77019,7 +76760,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-10-21",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77049,7 +76790,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-11-04",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77079,7 +76820,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-11-11",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77109,7 +76850,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-11-18",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77139,7 +76880,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-11-25",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77169,7 +76910,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-12-02",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77199,7 +76940,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-wednesday-20-00--2026-12-09",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77259,7 +77000,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-09-29",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77289,7 +77030,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-10-06",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77319,7 +77060,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-10-13",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77349,7 +77090,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-10-20",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77379,7 +77120,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-11-03",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77409,7 +77150,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-11-10",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77439,7 +77180,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-11-17",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77469,7 +77210,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-11-24",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77499,7 +77240,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-12-01",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77529,7 +77270,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00",
+      "id": "english-national-ballet-introduction-to-ballet-tuesday-20-00--2026-12-08",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77589,7 +77330,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-09-29",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77619,7 +77360,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-10-06",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77649,7 +77390,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-10-13",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77679,7 +77420,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-10-20",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77709,7 +77450,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-11-03",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77739,7 +77480,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-11-10",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77769,7 +77510,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-11-17",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77799,7 +77540,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-11-24",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77829,7 +77570,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-12-01",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77859,7 +77600,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-tuesday-20-00",
+      "id": "english-national-ballet-beginners-ballet-tuesday-20-00--2026-12-08",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77919,7 +77660,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-09-30",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77949,7 +77690,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-10-07",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -77979,7 +77720,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-10-14",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78009,7 +77750,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-10-21",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78039,7 +77780,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-11-04",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78069,7 +77810,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-11-11",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78099,7 +77840,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-11-18",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78129,7 +77870,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-11-25",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78159,7 +77900,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-12-02",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78189,7 +77930,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-beginners-ballet-wednesday-18-45",
+      "id": "english-national-ballet-beginners-ballet-wednesday-18-45--2026-12-09",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78249,7 +77990,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-09-29",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78279,7 +78020,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-10-06",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78309,7 +78050,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-10-13",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78339,7 +78080,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-10-20",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78369,7 +78110,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-11-03",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78399,7 +78140,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-11-10",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78429,7 +78170,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-11-17",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78459,7 +78200,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-11-24",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78489,7 +78230,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-12-01",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78519,7 +78260,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-tuesday-20-00",
+      "id": "english-national-ballet-improver-ballet-tuesday-20-00--2026-12-08",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78579,7 +78320,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-09-30",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78609,7 +78350,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-10-07",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78639,7 +78380,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-10-14",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78669,7 +78410,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-10-21",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78699,7 +78440,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-11-04",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78729,7 +78470,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-11-11",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78759,7 +78500,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-11-18",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78789,7 +78530,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-11-25",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78819,7 +78560,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-12-02",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78849,7 +78590,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-improver-ballet-wednesday-20-00",
+      "id": "english-national-ballet-improver-ballet-wednesday-20-00--2026-12-09",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78909,7 +78650,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-09-29",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78939,7 +78680,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-10-06",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78969,7 +78710,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-10-13",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -78999,7 +78740,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-10-20",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79029,7 +78770,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-11-03",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79059,7 +78800,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-11-10",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79089,7 +78830,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-11-17",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79119,7 +78860,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-11-24",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79149,7 +78890,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-12-01",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79179,7 +78920,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45",
+      "id": "english-national-ballet-intermediate-ballet-tuesday-18-45--2026-12-08",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79239,7 +78980,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-09-30",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79269,7 +79010,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-10-07",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79299,7 +79040,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-10-14",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79329,7 +79070,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-10-21",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79359,7 +79100,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-11-04",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79389,7 +79130,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-11-11",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79419,7 +79160,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-11-18",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79449,7 +79190,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-11-25",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79479,7 +79220,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-12-02",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79509,7 +79250,7 @@
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
     },
     {
-      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00",
+      "id": "english-national-ballet-intermediate-ballet-wednesday-20-00--2026-12-09",
       "sourceKey": "englishNationalBallet",
       "organizer": "English National Ballet",
       "venue": "English National Ballet",
@@ -79537,6 +79278,1171 @@
       "isWorkshop": false,
       "isCourse": false,
       "lastSeenAt": "2026-08-11T10:03:49.447Z"
+    },
+    {
+      "id": "five-rhythms-london-simply-being-5rhythms-new-moon-eclipse-garden-special-2026-wednesday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Simply Being 5Rhythms New Moon Eclipse Garden Special 2026 🌑☀️🌅",
+      "details": "Teacher: Richard Wiltshire.",
+      "dayOfWeek": "Wednesday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-08-12",
+      "endDate": "2026-08-12",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/SimplyBeingRhythmsNewMoonEclipseGardenSpecial-298605",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [
+        "5rhythms"
+      ],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-sacr-w-ed-wednesday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "SACR(w)ED",
+      "details": "Teacher: Flow Vulk.",
+      "dayOfWeek": "Wednesday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/SACRwED-294781",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-the-rhythms-club-for-over-60s-friends-thursday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "The Rhythms Club for over 60s & Friends",
+      "details": "Teacher: Nikki Ashley.",
+      "dayOfWeek": "Thursday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-02-05",
+      "endDate": "2026-08-20",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/TheRhythmsClubforoversFriends-297495",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-t-w-c-formerly-thursday-waves-thursday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "T.W.C (formerly Thursday Waves)",
+      "details": "Teacher: Jason RoweFlow Vulk Judit Juhasz.",
+      "dayOfWeek": "Thursday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/TWCformerlyThursdayWaves-329",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-friday-beat-friday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Friday Beat",
+      "details": "Teacher: Stuart Phillips.",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/FridayBeat-290782",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-in-person-baresouls-5rhythms-class-friday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "In person BareSouls 5Rhythms ® class",
+      "details": "Teacher: Katarzyna Kat Pugowska.",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/InpersonBareSoulsRhythmsregclass-136",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [
+        "5rhythms"
+      ],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-sunday-mornings-5rhythms-body-prayer-sunday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Sunday Mornings 5Rhythms BODY PRAYER",
+      "details": "Teacher: Ruth Hirst.",
+      "dayOfWeek": "Sunday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/SundayMorningsRhythmsBODYPRAYER-288024",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [
+        "5rhythms"
+      ],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-body-song-for-wom-n-sunday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Body Song - For Wom*n",
+      "details": "Teacher: Chloe de Sousa.",
+      "dayOfWeek": "Sunday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-08-16",
+      "endDate": "2026-08-16",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/BodySongForWomn-298807",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-simply-being-5rhythms-friday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Simply Being 5Rhythms",
+      "details": "Teacher: Richard Wiltshire.",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/SimplyBeingRhythms-291541",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [
+        "5rhythms"
+      ],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-kew-friday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves Kew",
+      "details": "Teacher: Mayra Vivo (Teacher In Training).",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-08-21",
+      "endDate": "2026-08-28",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWavesKew-298286",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-embodiment-monday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "EMBODIMENT",
+      "details": "Teacher: Catherine Bessin.",
+      "dayOfWeek": "Monday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EMBODIMENT-298103",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-kingston-monday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves Kingston",
+      "details": "Teacher: Mayra Vivo (Teacher In Training).",
+      "dayOfWeek": "Monday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-08-24",
+      "endDate": "2026-10-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWavesKingston-298543",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-dancekew-friday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "DanceKew",
+      "details": "Teacher: Flow Vulk.",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-09-04",
+      "endDate": "2026-12-04",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/DanceKew-298722",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-dance-kew-friday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Dance Kew",
+      "details": "Teacher: Irem Luqman.",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-09-11",
+      "endDate": "2026-12-11",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/DanceKew-297191",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-saturday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves",
+      "details": "Teacher: Gabriella De Pasquale (Teacher In Training).",
+      "dayOfWeek": "Saturday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-12",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWaves-298388",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-5rhythms-south-london-dance-community-wednesday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "5Rhythms @ South London Dance Community",
+      "details": "Teacher: Ruth Hirst.",
+      "dayOfWeek": "Wednesday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-09-16",
+      "endDate": "2026-09-16",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/RhythmsSouthLondonDanceCommunity-298646",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [
+        "5rhythms"
+      ],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-saturday-na--2026-09-26",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves",
+      "details": "Teacher: Gabriella De Pasquale (Teacher In Training).",
+      "dayOfWeek": "Saturday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-09-26",
+      "endDate": "2026-09-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWaves-298387",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-saturday-na--2026-10-10",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves",
+      "details": "Teacher: Gabriella De Pasquale (Teacher In Training).",
+      "dayOfWeek": "Saturday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWaves-298556",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-kew-friday-na--2026-10-16",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves Kew",
+      "details": "Teacher: Mayra Vivo (Teacher In Training).",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-16",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWavesKew-298542",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-dance-kew-live-friday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Dance Kew LIVE",
+      "details": "Teacher: Jason Rowe.",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-10-30",
+      "endDate": "2026-10-30",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/DanceKewLIVE-298668",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-saturday-na--2026-10-31",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging waves",
+      "details": "Teacher: Gabriella De Pasquale (Teacher In Training).",
+      "dayOfWeek": "Saturday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-10-31",
+      "endDate": "2026-10-31",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/Emergingwaves-298558",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-saturday-na--2026-11-07",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves",
+      "details": "Teacher: Gabriella De Pasquale (Teacher In Training).",
+      "dayOfWeek": "Saturday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-11-07",
+      "endDate": "2026-11-07",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWaves-298559",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-5rhythms-south-london-dance-community-wednesday-na--2026-11-11",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "5Rhythms @ South London Dance Community",
+      "details": "Teacher: Jason Rowe.",
+      "dayOfWeek": "Wednesday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-11-11",
+      "endDate": "2026-11-11",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/RhythmsSouthLondonDanceCommunity-298690",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [
+        "5rhythms"
+      ],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-dance-kew-friday-na--2026-11-20",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Dance Kew!",
+      "details": "Teacher: Neil Pinnock.",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-11-20",
+      "endDate": "2026-12-11",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/DanceKew-298933",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "five-rhythms-london-south-london-waves-wednesday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "South London Waves",
+      "details": "Teacher: Tim Barnes.",
+      "dayOfWeek": "Wednesday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-12-09",
+      "endDate": "2026-12-09",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/SouthLondonWaves-298772",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
+    },
+    {
+      "id": "forr-academy-beginner-forr-wednesday-7-00pm",
+      "sourceKey": "customEvents",
+      "organizer": "Forró Academy",
+      "venue": "Forró Academy",
+      "locationName": "Forró Academy King's Cross",
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Beginner Forró",
+      "details": "Weekly beginner (Level 1) Forró class. Drop-in price £15; check the organiser page before travelling.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "7.00pm",
+      "endTime": "8.00pm",
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.forroacademy.co.uk/classes/",
+      "sourceUrl": "https://www.forroacademy.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Forró"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "forr-academy-beginner-forr-sunday-5-00pm",
+      "sourceKey": "customEvents",
+      "organizer": "Forró Academy",
+      "venue": "Forró Academy",
+      "locationName": "Forró Academy King's Cross",
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Beginner Forró",
+      "details": "Weekly beginner (Level 1) Forró class. Drop-in price £15; check the organiser page before travelling.",
+      "dayOfWeek": "Sunday",
+      "startTime": "5.00pm",
+      "endTime": "6.00pm",
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.forroacademy.co.uk/classes/",
+      "sourceUrl": "https://www.forroacademy.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Forró"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "forr-academy-upper-intermediate-forr-friday-7-00pm",
+      "sourceKey": "customEvents",
+      "organizer": "Forró Academy",
+      "venue": "Forró Academy",
+      "locationName": "Forró Academy Angel",
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Upper Intermediate Forró",
+      "details": "Weekly upper-intermediate (Level 3) Forró class for members; check the organiser page before travelling.",
+      "dayOfWeek": "Friday",
+      "startTime": "7.00pm",
+      "endTime": "8.30pm",
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.forroacademy.co.uk/classes/",
+      "sourceUrl": "https://www.forroacademy.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Forró"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "forr-academy-advanced-forr-thursday-7-00pm",
+      "sourceKey": "customEvents",
+      "organizer": "Forró Academy",
+      "venue": "Forró Academy",
+      "locationName": "Forró Academy Waterloo",
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Advanced Forró",
+      "details": "Weekly advanced (Level 4) Forró class for members; check the organiser page before travelling.",
+      "dayOfWeek": "Thursday",
+      "startTime": "7.00pm",
+      "endTime": "8.30pm",
+      "startDate": null,
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.forroacademy.co.uk/classes/",
+      "sourceUrl": "https://www.forroacademy.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Forró"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "jw3-move-reset-thursday-12-30pm",
+      "sourceKey": "customEvents",
+      "organizer": "JW3",
+      "venue": "JW3",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Move & Reset",
+      "details": "Lunchtime movement class (60 min) with Yael Flexer. Open to adults of all ages and abilities; improvisation, guided exercises, and gentle movement. £12 per session; £40 for the 4-week course (booking fee applies on site).",
+      "dayOfWeek": "Thursday",
+      "startTime": "12.30pm",
+      "endTime": "1.30pm",
+      "startDate": "2026-01-22",
+      "endDate": "2026-03-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+      "sourceUrl": "https://www.jw3.org.uk/whats-on/move-reset",
+      "tags": [
+        "improvisation"
+      ],
+      "styles": [
+        "Improv"
+      ],
+      "audience": "all-ages",
+      "isWorkshop": false,
+      "isCourse": true,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "dabkeroots-dabkeroots-na-na",
+      "sourceKey": "customEvents",
+      "organizer": "DabkeRoots",
+      "venue": "DabkeRoots",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "DABKEROOTS",
+      "details": "DabkeRoots class on 11 April 2026. Check the organiser page for the current time and venue details.",
+      "dayOfWeek": null,
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-04-11",
+      "endDate": "2026-04-11",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "sourceUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "tags": [],
+      "styles": [
+        "Other"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "omnibus-theatre-how-the-voice-moves-a-poetry-dance-improv-workshop-friday-7-00pm",
+      "sourceKey": "customEvents",
+      "organizer": "Omnibus Theatre",
+      "venue": "Omnibus Theatre",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "How the voice moves: a poetry & dance improv workshop",
+      "details": "Poetry and dance improvisation workshop. Omnibus Theatre, SW4 0QW.",
+      "dayOfWeek": "Friday",
+      "startTime": "7:00pm",
+      "endTime": "9:00pm",
+      "startDate": "2026-03-27",
+      "endDate": "2026-03-27",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
+      "sourceUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
+      "tags": [
+        "improv",
+        "improvisation"
+      ],
+      "styles": [
+        "Improv"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "host-studios-beginner-level-waacking-class-with-the-lioness-friday-7-00pm",
+      "sourceKey": "customEvents",
+      "organizer": "HOST Studios",
+      "venue": "HOST Studios",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Beginner Level Waacking Class with The Lioness",
+      "details": "Beginner level waacking class with The Lioness. HOST Studios, 143 Mare Street, E8 3FW. £12.",
+      "dayOfWeek": "Friday",
+      "startTime": "7:00pm",
+      "endTime": "8:30pm",
+      "startDate": "2026-05-29",
+      "endDate": null,
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.hoststudios.co.uk/",
+      "sourceUrl": "https://www.hoststudios.co.uk/",
+      "tags": [],
+      "styles": [
+        "Waacking"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "dabkeroots-dabkeroots-saturday-17-00",
+      "sourceKey": "customEvents",
+      "organizer": "DabkeRoots",
+      "venue": "DabkeRoots",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "DABKEROOTS",
+      "details": "DANCE WORKS, W1K 6TN",
+      "dayOfWeek": "Saturday",
+      "startTime": "17:00",
+      "endTime": "19:00",
+      "startDate": "2026-08-15",
+      "endDate": "2026-08-15",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/dabkeroots/2332812",
+      "sourceUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "tags": [],
+      "styles": [
+        "Other"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "dabkeroots-dabkeroots-saturday-17-00--2026-08-29",
+      "sourceKey": "customEvents",
+      "organizer": "DabkeRoots",
+      "venue": "DabkeRoots",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "DABKEROOTS",
+      "details": "DANCE WORKS, W1K 6TN",
+      "dayOfWeek": "Saturday",
+      "startTime": "17:00",
+      "endTime": "19:00",
+      "startDate": "2026-08-29",
+      "endDate": "2026-08-29",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/dabkeroots/2344254",
+      "sourceUrl": "https://www.tickettailor.com/events/dabkeroots",
+      "tags": [],
+      "styles": [
+        "Other"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:31:33.811Z"
+    },
+    {
+      "id": "butoh-mutations-butoh-mutations-workshop-4-saturday-11-00",
+      "sourceKey": "butohMutations",
+      "organizer": "Butoh Mutations",
+      "venue": "Butoh Mutations",
+      "locationName": "Colet House",
+      "address": "151 Talgarth Road",
+      "postcode": "W14 9DA",
+      "borough": "Hammersmith and Fulham",
+      "title": "Butoh Mutations Workshop 4",
+      "details": "Butoh Mutations London workshop exploring dance, embodied imagination, myth, and ritual.",
+      "dayOfWeek": "Saturday",
+      "startTime": "11.00",
+      "endTime": "18.00",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-04",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/thestudysociety/2025925",
+      "sourceUrl": "https://butoh.co.uk/workshops",
+      "tags": [],
+      "styles": [
+        "Butoh"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T15:36:05.607Z"
+    },
+    {
+      "id": "butoh-mutations-butoh-mutations-workshop-5-sunday-10-30",
+      "sourceKey": "butohMutations",
+      "organizer": "Butoh Mutations",
+      "venue": "Butoh Mutations",
+      "locationName": "Colet House",
+      "address": "151 Talgarth Road",
+      "postcode": "W14 9DA",
+      "borough": "Hammersmith and Fulham",
+      "title": "Butoh Mutations Workshop 5",
+      "details": "Butoh Mutations London workshop exploring dance, embodied imagination, myth, and ritual.",
+      "dayOfWeek": "Sunday",
+      "startTime": "10.30",
+      "endTime": "17.30",
+      "startDate": "2026-12-13",
+      "endDate": "2026-12-13",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.tickettailor.com/events/thestudysociety/2025925",
+      "sourceUrl": "https://butoh.co.uk/workshops",
+      "tags": [],
+      "styles": [
+        "Butoh"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T15:36:05.607Z"
+    },
+    {
+      "id": "butoh-uk-dancing-butoh-fu-the-poetic-body-of-transformation-saturday-11am",
+      "sourceKey": "butohUk",
+      "organizer": "Butoh UK",
+      "venue": "Butoh UK",
+      "locationName": "London School of Capoeira",
+      "address": "Unit 1 and 2, Leeds Place",
+      "postcode": "N4 3RF",
+      "borough": "Islington",
+      "title": "Dancing Butoh-Fu: the poetic body of transformation",
+      "details": "london butoh workshops, London Butoh Classes. London Butoh performances, butoh UK, marie-gabrielle rotie, London Butoh classes",
+      "dayOfWeek": "Saturday",
+      "startTime": "11am",
+      "endTime": "5pm",
+      "startDate": "2026-10-24",
+      "endDate": "2026-10-25",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.butohuk.com/londonbutohworkshops#anchor3",
+      "sourceUrl": "https://www.butohuk.com/londonbutohworkshops",
+      "tags": [],
+      "styles": [
+        "Butoh"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T15:36:05.607Z"
+    },
+    {
+      "id": "butoh-uk-butoh-and-costume-dance-with-the-dead-saturday-11am",
+      "sourceKey": "butohUk",
+      "organizer": "Butoh UK",
+      "venue": "Butoh UK",
+      "locationName": "London School of Capoeira",
+      "address": "Unit 1 and 2, Leeds Place",
+      "postcode": "N4 3RF",
+      "borough": "Islington",
+      "title": "Butoh and Costume: Dance with the Dead",
+      "details": "london butoh workshops, London Butoh Classes. London Butoh performances, butoh UK, marie-gabrielle rotie, London Butoh classes",
+      "dayOfWeek": "Saturday",
+      "startTime": "11am",
+      "endTime": "5pm",
+      "startDate": "2026-12-12",
+      "endDate": "2026-12-13",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.butohuk.com/londonbutohworkshops#december",
+      "sourceUrl": "https://www.butohuk.com/londonbutohworkshops",
+      "tags": [],
+      "styles": [
+        "Butoh"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T15:36:05.607Z"
+    },
+    {
+      "id": "posthuman-theatre-butoh-vangeline-in-london-saturday-na",
+      "sourceKey": "posthumanTheatreButoh",
+      "organizer": "Posthuman Theatre Butoh",
+      "venue": "Posthuman Theatre Butoh",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Vangeline In London",
+      "details": null,
+      "dayOfWeek": "Saturday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.com/e/vangeline-in-london-butoh-workshop-tickets-1994403822521?aff=oddtdtcreator",
+      "sourceUrl": "https://www.posthumantheatre.com/workshops",
+      "tags": [],
+      "styles": [
+        "Butoh"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T15:36:05.607Z"
+    },
+    {
+      "id": "posthuman-theatre-butoh-ken-mai-s-sacred-butoh-intensive-workshop-saturday-na",
+      "sourceKey": "posthumanTheatreButoh",
+      "organizer": "Posthuman Theatre Butoh",
+      "venue": "Posthuman Theatre Butoh",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Ken Mai's Sacred Butoh Intensive workshop",
+      "details": null,
+      "dayOfWeek": "Saturday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-08-22",
+      "endDate": "2026-08-24",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.eventbrite.com/e/1425642257369?aff=oddtdtcreator",
+      "sourceUrl": "https://www.posthumantheatre.com/workshops",
+      "tags": [],
+      "styles": [
+        "Butoh"
+      ],
+      "audience": "adult",
+      "isWorkshop": true,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T15:36:05.607Z"
     }
   ],
   "venues": [
@@ -79624,10 +80530,10 @@
     {
       "venue": "Five Rhythms London",
       "key": "fiveRhythmsLondon",
-      "sourceUrl": "https://www.5rhythms.com/classes/London",
-      "count": 1,
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "count": 25,
       "ok": true,
-      "lastSuccessAt": "2026-08-11T09:56:55.539Z",
+      "lastSuccessAt": "2026-08-11T14:30:08.198Z",
       "lastError": null
     },
     {
@@ -79660,29 +80566,38 @@
     {
       "venue": "Butoh Mutations",
       "key": "butohMutations",
-      "sourceUrl": "https://www.butohuk.com/",
-      "count": 1,
+      "sourceUrl": "https://butoh.co.uk/workshops",
+      "count": 2,
       "ok": true,
-      "lastSuccessAt": "2026-08-03T08:48:42.763Z",
+      "lastSuccessAt": "2026-08-11T15:36:05.607Z",
+      "lastError": null
+    },
+    {
+      "venue": "Butoh UK",
+      "key": "butohUk",
+      "sourceUrl": "https://www.butohuk.com/londonbutohworkshops",
+      "count": 2,
+      "ok": true,
+      "lastSuccessAt": "2026-08-11T15:36:05.607Z",
       "lastError": null
     },
     {
       "venue": "Posthuman Theatre Butoh",
       "key": "posthumanTheatreButoh",
-      "sourceUrl": "https://posthuman.works/butoh-classes-workshops",
-      "count": 1,
+      "sourceUrl": "https://www.posthumantheatre.com/workshops",
+      "count": 2,
       "ok": true,
-      "lastSuccessAt": "2026-08-03T08:48:42.763Z",
+      "lastSuccessAt": "2026-08-11T15:36:05.607Z",
       "lastError": null
     },
     {
       "venue": "Hackney Baths",
       "key": "hackneyBaths",
       "sourceUrl": "https://www.the-baths.co.uk/",
-      "count": 1,
-      "ok": true,
+      "count": 0,
+      "ok": false,
       "lastSuccessAt": "2026-08-03T08:48:42.763Z",
-      "lastError": null
+      "lastError": "write EPROTO 4022EDF201000000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:918:SSL alert number 80\n"
     },
     {
       "venue": "Wednesday Moving",
@@ -79918,7 +80833,7 @@
       "sourceUrl": "https://www.tickettailor.com/events/zeroquality/2067242",
       "count": 1,
       "ok": true,
-      "lastSuccessAt": "2026-08-11T10:02:03.617Z",
+      "lastSuccessAt": "2026-08-11T14:31:33.811Z",
       "lastError": null
     }
   ]

@@ -1,121 +1,64 @@
-import { format } from "date-fns";
 import * as cheerio from "cheerio";
+import { endOfDay, format, isBefore, parse } from "date-fns";
 import type { AdapterOutput } from "../types";
 import { fetchHtml } from "./common";
 
-const sourceUrl = "https://www.butohuk.com/";
-const ticketTailorUrl = "https://www.tickettailor.com/events/thestudysociety/2025925";
-const browserLikeHeaders = {
-  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
-};
+const sourceUrl = "https://butoh.co.uk/workshops";
+const bookingUrl = "https://www.tickettailor.com/events/thestudysociety/2025925";
+const WORKSHOP_DATE = /(?:Weekend\s+)?Workshop\s+(\d+):\s+(\d{1,2})(?:\s*[-–]\s*(\d{1,2}))?\s+(January|February|March|April|May|June|July|August|September|October|November|December)/i;
+const TIME_RANGE = /(?<!\d)(\d{1,2}(?:[.:]\d{2})?)\s*[-–]\s*(\d{1,2}(?:[.:]\d{2})?)(?!\d)/;
 
-type JsonLdEvent = {
-  "@type"?: string;
-  name?: string;
-  description?: string;
-  url?: string;
-  startDate?: string;
-  endDate?: string;
-};
-
-function toKey(title: string, startDate: string | null, time: string | null) {
-  return `${title.trim().toLowerCase()}|${startDate ?? "na"}|${time ?? "na"}`;
-}
-
-function extractJsonLd(html: string): unknown[] {
+export function parseButohMutationHtml(html: string, now = new Date()): AdapterOutput["classes"] {
   const $ = cheerio.load(html);
-  const entries: unknown[] = [];
-  $('script[type="application/ld+json"]').each((_, el) => {
-    const raw = $(el).text().trim();
-    if (!raw) return;
-    try {
-      entries.push(JSON.parse(raw));
-    } catch {
-      // Ignore invalid JSON-LD fragments.
-    }
+  const pageText = $("body").text().replace(/\s+/g, " ").trim();
+  const year = Number(pageText.match(/\bSeries\s+(20\d{2})\b/i)?.[1] ?? now.getFullYear());
+  const classes: AdapterOutput["classes"] = [];
+
+  $("h1, h2, h3, h4, h5, h6").each((_, heading) => {
+    const headingText = $(heading).text().replace(/\s+/g, " ").trim();
+    const match = headingText.match(WORKSHOP_DATE);
+    if (!match) return;
+
+    const start = parse(`${match[2]} ${match[4]} ${year}`, "d MMMM yyyy", now);
+    const end = parse(`${match[3] ?? match[2]} ${match[4]} ${year}`, "d MMMM yyyy", now);
+    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || isBefore(endOfDay(end), now)) return;
+
+    const scheduleText = $(heading).nextUntil("h1, h2, h3, h4, h5, h6").text().replace(/\s+/g, " ").trim();
+    const timeMatch = scheduleText.match(TIME_RANGE);
+    classes.push({
+      venue: "Butoh Mutations",
+      organizer: "Butoh Mutations",
+      locationName: "Colet House",
+      address: "151 Talgarth Road",
+      postcode: "W14 9DA",
+      borough: "Hammersmith and Fulham",
+      styles: ["Butoh"],
+      title: `Butoh Mutations Workshop ${match[1]}`,
+      details: "Butoh Mutations London workshop exploring dance, embodied imagination, myth, and ritual.",
+      dayOfWeek: format(start, "EEEE"),
+      time: timeMatch ? `${timeMatch[1]} - ${timeMatch[2]}` : null,
+      startDate: format(start, "yyyy-MM-dd"),
+      endDate: format(end, "yyyy-MM-dd"),
+      bookingUrl,
+      sourceUrl
+    });
   });
-  return entries;
-}
 
-function collectEvents(value: unknown): JsonLdEvent[] {
-  if (!value) return [];
-  if (Array.isArray(value)) {
-    return value.flatMap((item) => collectEvents(item));
-  }
-  if (typeof value !== "object") return [];
-
-  const obj = value as Record<string, unknown>;
-  if (obj["@type"] === "Event") {
-    return [obj as JsonLdEvent];
-  }
-
-  return Object.values(obj).flatMap((next) => collectEvents(next));
-}
-
-function fallbackClass(details: string | null): AdapterOutput["classes"][number] {
-  return {
-    venue: "Butoh Mutations",
-    title: "Butoh Mutations Classes & Workshops",
-    details: details ?? "Source currently unavailable. Check venue page for latest schedule.",
-    dayOfWeek: null,
-    time: null,
-    startDate: null,
-    endDate: null,
-    bookingUrl: sourceUrl,
-    sourceUrl
-  };
+  return classes;
 }
 
 export async function scrapeButohMutation(): Promise<AdapterOutput> {
-  let metaDescription: string | null = null;
   try {
-    const html = await fetchHtml(sourceUrl);
-    const $ = cheerio.load(html);
-    metaDescription = $('meta[name="description"]').attr("content")?.trim() ?? null;
-  } catch {
-    // Keep going and try TicketTailor.
+    const classes = parseButohMutationHtml(await fetchHtml(sourceUrl));
+    return { venueKey: "butohMutations", venue: "Butoh Mutations", sourceUrl, classes, ok: true, error: null };
+  } catch (error) {
+    return {
+      venueKey: "butohMutations",
+      venue: "Butoh Mutations",
+      sourceUrl,
+      classes: [],
+      ok: false,
+      error: error instanceof Error ? error.message : "Unknown error"
+    };
   }
-
-  const classes: AdapterOutput["classes"] = [];
-  try {
-    const html = await fetchHtml(ticketTailorUrl, browserLikeHeaders);
-    const events = extractJsonLd(html).flatMap((entry) => collectEvents(entry));
-
-    for (const event of events) {
-      const text = `${event.name ?? ""} ${event.description ?? ""}`;
-      if (!/butoh/i.test(text)) continue;
-      if (!event.startDate) continue;
-
-      const start = new Date(event.startDate);
-      if (Number.isNaN(start.getTime())) continue;
-      const end = event.endDate ? new Date(event.endDate) : null;
-      const safeEnd = end && !Number.isNaN(end.getTime()) ? end : null;
-
-      classes.push({
-        venue: "Butoh Mutations",
-        title: event.name?.trim() || "Butoh Mutations Classes & Workshops",
-        details: (event.description ?? "").replace(/\s+/g, " ").trim() || metaDescription,
-        dayOfWeek: format(start, "EEEE"),
-        time: `${format(start, "HH:mm")}${safeEnd ? ` - ${format(safeEnd, "HH:mm")}` : ""}`,
-        startDate: format(start, "yyyy-MM-dd"),
-        endDate: format(safeEnd ?? start, "yyyy-MM-dd"),
-        bookingUrl: event.url ?? ticketTailorUrl,
-        sourceUrl: ticketTailorUrl
-      });
-    }
-  } catch {
-    // Keep fallback record when TicketTailor is unavailable.
-  }
-
-  return {
-    venueKey: "butohMutations",
-    venue: "Butoh Mutations",
-    sourceUrl,
-    classes:
-      classes.length > 0
-        ? Array.from(new Map(classes.map((session) => [toKey(session.title, session.startDate, session.time), session])).values())
-        : [fallbackClass(metaDescription)],
-    ok: true,
-    error: null
-  };
 }

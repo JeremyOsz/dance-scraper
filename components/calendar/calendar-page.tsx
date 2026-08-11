@@ -1668,6 +1668,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   </Button>
                 ) : null}
                 <Button variant="outline" className={`max-md:hidden ${editorialButtonClass}`} asChild>
+                  <Link href={"/styles" as Route}>Dance styles</Link>
+                </Button>
+                <Button variant="outline" className={`max-md:hidden ${editorialButtonClass}`} asChild>
                   <Link href="/insights">Insights</Link>
                 </Button>
                 <Button variant="outline" className={`max-md:hidden ${editorialButtonClass}`} asChild>

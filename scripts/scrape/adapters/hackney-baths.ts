@@ -1,43 +1,16 @@
-import * as cheerio from "cheerio";
 import type { AdapterOutput } from "../types";
 import { fetchHtml } from "./common";
 
 const sourceUrl = "https://www.the-baths.co.uk/";
 
-function firstNonEmpty(values: Array<string | undefined | null>): string | null {
-  for (const value of values) {
-    if (value && value.trim()) return value.trim();
-  }
-  return null;
-}
-
 export async function scrapeHackneyBaths(): Promise<AdapterOutput> {
   try {
-    const html = await fetchHtml(sourceUrl);
-    const $ = cheerio.load(html);
-    const details = firstNonEmpty([
-      $('meta[name="description"]').attr("content"),
-      $("h1").first().text(),
-      $("title").text()
-    ]);
-
+    await fetchHtml(sourceUrl);
     return {
       venueKey: "hackneyBaths",
       venue: "Hackney Baths",
       sourceUrl,
-      classes: [
-        {
-          venue: "Hackney Baths",
-          title: "Hackney Baths Dance Events",
-          details,
-          dayOfWeek: null,
-          time: null,
-          startDate: null,
-          endDate: null,
-          bookingUrl: sourceUrl,
-          sourceUrl
-        }
-      ],
+      classes: [],
       ok: true,
       error: null
     };
@@ -46,21 +19,9 @@ export async function scrapeHackneyBaths(): Promise<AdapterOutput> {
       venueKey: "hackneyBaths",
       venue: "Hackney Baths",
       sourceUrl,
-      classes: [
-        {
-          venue: "Hackney Baths",
-          title: "Hackney Baths Dance Events",
-          details: "Source currently unavailable. Check venue page for latest schedule.",
-          dayOfWeek: null,
-          time: null,
-          startDate: null,
-          endDate: null,
-          bookingUrl: sourceUrl,
-          sourceUrl
-        }
-      ],
-      ok: true,
-      error: null
+      classes: [],
+      ok: false,
+      error: error instanceof Error ? error.message : "Unknown error"
     };
   }
 }

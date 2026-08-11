@@ -3,12 +3,14 @@ import { readScrapeOutput } from "@/lib/data-store";
 import { getBaseUrl } from "@/lib/seo";
 import { getStudioProfiles } from "@/lib/studios";
 import { getLocationProfiles } from "@/lib/locations";
+import { getDanceStyleGuides } from "@/lib/style-guides";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl();
   const data = readScrapeOutput();
   const studios = getStudioProfiles(data);
   const locations = getLocationProfiles(data);
+  const styleGuides = getDanceStyleGuides();
   const parsedGeneratedAt = new Date(data.generatedAt);
   const dataLastModified = Number.isNaN(parsedGeneratedAt.getTime()) ? new Date() : parsedGeneratedAt;
 
@@ -43,6 +45,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.7
     },
+    {
+      url: `${baseUrl}/styles`,
+      lastModified: dataLastModified,
+      changeFrequency: "monthly",
+      priority: 0.75
+    },
+    ...styleGuides.map((guide) => ({
+      url: `${baseUrl}/styles/${guide.slug}`,
+      lastModified: dataLastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.7
+    })),
     ...studios.map((studio) => ({
       url: `${baseUrl}/studios/${studio.slug}`,
       lastModified: studio.latestSeenAt ? new Date(studio.latestSeenAt) : dataLastModified,

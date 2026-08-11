@@ -68,12 +68,17 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
   },
   butohMutations: {
     label: "Butoh Mutations",
-    sourceUrl: "https://www.butohuk.com/",
-    mapQuery: "Butoh Mutations London"
+    sourceUrl: "https://butoh.co.uk/workshops",
+    mapQuery: "Colet House, 151 Talgarth Road, London W14 9DA"
+  },
+  butohUk: {
+    label: "Butoh UK",
+    sourceUrl: "https://www.butohuk.com/londonbutohworkshops",
+    mapQuery: "London School of Capoeira, Unit 1-2 Leeds Place, London N4 3RF"
   },
   posthumanTheatreButoh: {
     label: "Posthuman Theatre Butoh",
-    sourceUrl: "https://posthuman.works/butoh-classes-workshops",
+    sourceUrl: "https://www.posthumantheatre.com/workshops",
     mapQuery: "Posthuman Theatre Butoh London"
   },
   hackneyBaths: {
@@ -265,5 +270,7 @@ export const SOURCE_LOCATIONS: Partial<Record<VenueKey, {
   coletHouse: { locationName: "Colet House", address: "151 Talgarth Road", postcode: "W14 9DA", borough: "Hammersmith and Fulham" },
   londonSchoolOfCapoeira: { locationName: "London School of Capoeira", address: "Unit 1-2 Leeds Place", postcode: "N4 3RF", borough: "Islington" },
   trinityLaban: { locationName: "Laban Building", address: "Creekside", postcode: "SE8 3DZ", borough: "Lewisham" },
-  englishNationalBallet: { locationName: "Mulryan Centre for Dance", address: "41 Hopewell Square", postcode: "E14 0SY", borough: "Newham" }
+  englishNationalBallet: { locationName: "Mulryan Centre for Dance", address: "41 Hopewell Square", postcode: "E14 0SY", borough: "Newham" },
+  butohMutations: { locationName: "Colet House", address: "151 Talgarth Road", postcode: "W14 9DA", borough: "Hammersmith and Fulham" },
+  butohUk: { locationName: "London School of Capoeira", address: "Unit 1-2 Leeds Place", postcode: "N4 3RF", borough: "Islington" }
 };

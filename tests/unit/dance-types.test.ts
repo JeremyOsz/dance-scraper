@@ -27,6 +27,7 @@ describe("dance style taxonomy", () => {
   });
 
   it("infers culturally specific and embodied-performance styles", () => {
+    expect(inferDanceStyles({ title: "Beginner Forró", details: null, tags: [] })).toEqual(["Forró"]);
     expect(inferDanceStyles({ title: "Beginner Kathak", details: null, tags: [] })).toEqual(["Kathak"]);
     expect(inferDanceStyles({ title: "Called queer ceilidh", details: null, tags: [] })).toEqual([
       "Ceilidh/Scottish Country Dance"

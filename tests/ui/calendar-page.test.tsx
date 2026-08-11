@@ -180,6 +180,7 @@ describe("CalendarPage", () => {
 
     expect(screen.getByRole("heading", { level: 1, name: "The Floor Is Yours..." })).toBeVisible();
     expect(screen.getByRole("heading", { level: 2, name: "Find dance classes" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Dance styles" })).toHaveAttribute("href", "/styles");
     expect(screen.queryByRole("checkbox", { name: "Preferred venues only" })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Shortlist (0)" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Clear filters" })).toBeDisabled();

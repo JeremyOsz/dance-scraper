@@ -79,6 +79,7 @@ const testedVenueKeys = [
   "salsaRuedaRuedaLibre",
   "cubaneando",
   "butohMutations",
+  "butohUk",
   "posthumanTheatreButoh",
   "hackneyBaths",
   "wednesdayMoving",
@@ -1237,12 +1238,27 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.sourceUrl).toBe("https://www.eventbrite.com/o/79771578413");
   });
 
-  it("parses Five Rhythms London adapter", async () => {
+  it("keeps London 5Rhythms listings with a usable date or weekday and excludes online and other cities", async () => {
     fetchHtml.mockResolvedValue(fixture("five-rhythms.html"));
     const { scrapeFiveRhythmsLondon } = await import("../../scripts/scrape/adapters/five-rhythms-london");
     const output = await scrapeFiveRhythmsLondon();
     expect(output.ok).toBe(true);
-    expect(output.classes[0]?.venue).toBe("Five Rhythms London");
+    expect(output.classes).toHaveLength(2);
+    expect(output.classes).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        venue: "Five Rhythms London",
+        title: "Simply Being 5Rhythms New Moon Eclipse Garden Special 2026",
+        dayOfWeek: "Wednesday",
+        startDate: "2026-08-12",
+        endDate: "2026-08-12"
+      }),
+      expect.objectContaining({
+        title: "T.W.C (formerly Thursday Waves)",
+        dayOfWeek: "Thursday",
+        startDate: null,
+        endDate: null
+      })
+    ]));
   });
 
   it("parses SuperMario Salsa adapter", async () => {
@@ -1446,32 +1462,56 @@ describe("scraper adapters", () => {
     expect(output.classes.map((item) => item.title)).toContain("Cubaneando");
   });
 
-  it("parses Butoh Mutations adapter", async () => {
-    fetchHtml
-      .mockResolvedValueOnce(fixture("butoh-mutation.html"))
-      .mockResolvedValueOnce(fixture("butoh-mutation-tickettailor.html"));
-    const { scrapeButohMutation } = await import("../../scripts/scrape/adapters/butoh-mutation");
-    const output = await scrapeButohMutation();
-    expect(output.ok).toBe(true);
-    expect(output.classes[0]?.venue).toBe("Butoh Mutations");
-    expect(output.classes.map((item) => item.startDate)).toContain("2026-03-15");
-    expect(output.classes.map((item) => item.startDate)).toContain("2026-07-05");
+  it("parses the future Butoh Mutations workshops at Colet House", async () => {
+    const { parseButohMutationHtml } = await import("../../scripts/scrape/adapters/butoh-mutation");
+    const classes = parseButohMutationHtml(fixture("butoh-mutation.html"), new Date("2026-08-11T12:00:00Z"));
+    expect(classes).toHaveLength(2);
+    expect(classes).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        venue: "Butoh Mutations",
+        locationName: "Colet House",
+        title: "Butoh Mutations Workshop 4",
+        startDate: "2026-10-03",
+        endDate: "2026-10-04",
+        time: "11.00 - 18.00"
+      }),
+      expect.objectContaining({
+        title: "Butoh Mutations Workshop 5",
+        startDate: "2026-12-13",
+        endDate: "2026-12-13",
+        time: "10.30 - 17.30"
+      })
+    ]));
   });
 
-  it("parses Posthuman Theatre Butoh adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("posthuman-butoh.html"));
-    const { scrapePosthumanTheatreButoh } = await import("../../scripts/scrape/adapters/posthuman-theatre-butoh");
-    const output = await scrapePosthumanTheatreButoh();
-    expect(output.ok).toBe(true);
-    expect(output.classes[0]?.venue).toBe("Posthuman Theatre Butoh");
+  it("keeps Butoh UK separate from Butoh Mutations", async () => {
+    const { parseButohUkHtml } = await import("../../scripts/scrape/adapters/butoh-uk");
+    const classes = parseButohUkHtml(fixture("butoh-uk.html"), new Date("2026-08-11T12:00:00Z"));
+    expect(classes).toHaveLength(2);
+    expect(classes[0]).toMatchObject({
+      venue: "Butoh UK",
+      title: "Dancing Butoh-Fu: the poetic body of transformation",
+      startDate: "2026-10-24",
+      endDate: "2026-10-25"
+    });
   });
 
-  it("parses Hackney Baths adapter", async () => {
+  it("parses upcoming Posthuman Theatre workshops from the replacement domain", async () => {
+    const { parsePosthumanWorkshopsHtml } = await import("../../scripts/scrape/adapters/posthuman-theatre-butoh");
+    const classes = parsePosthumanWorkshopsHtml(fixture("posthuman-butoh.html"), new Date("2026-08-11T12:00:00Z"));
+    expect(classes).toHaveLength(2);
+    expect(classes).toEqual(expect.arrayContaining([
+      expect.objectContaining({ title: "Ken Mai's Sacred Butoh Intensive workshop", startDate: "2026-08-22", endDate: "2026-08-24" }),
+      expect.objectContaining({ title: "Vangeline In London", startDate: "2026-09-19", endDate: "2026-09-19" })
+    ]));
+  });
+
+  it("does not turn the Hackney Baths venue homepage into an undated event", async () => {
     fetchHtml.mockResolvedValue(fixture("hackney-baths.html"));
     const { scrapeHackneyBaths } = await import("../../scripts/scrape/adapters/hackney-baths");
     const output = await scrapeHackneyBaths();
     expect(output.ok).toBe(true);
-    expect(output.classes[0]?.venue).toBe("Hackney Baths");
+    expect(output.classes).toEqual([]);
   });
 
   it("parses Wednesday Moving adapter", async () => {
@@ -2226,9 +2266,13 @@ describe("scraper adapters", () => {
     expect(moveReset?.bookingUrl).toContain("jw3.org.uk");
     expect(moveReset?.dayOfWeek).toBe("Thursday");
     expect(moveReset?.isCourse).toBe(true);
-    const ukDancers = output.classes.find((c) => c.venue === "UK Dancers for Palestine");
-    expect(ukDancers?.title).toBe("UK Dancers for Palestine events");
-    expect(ukDancers?.startDate).toBeNull();
+    expect(output.classes.some((c) => c.venue === "UK Dancers for Palestine")).toBe(false);
+    const forro = output.classes.filter((c) => c.venue === "Forró Academy");
+    expect(forro).toHaveLength(4);
+    expect(forro).toEqual(expect.arrayContaining([
+      expect.objectContaining({ title: "Beginner Forró", dayOfWeek: "Wednesday", time: "7.00pm - 8.00pm" }),
+      expect.objectContaining({ title: "Advanced Forró", dayOfWeek: "Thursday", time: "7.00pm - 8.30pm" })
+    ]));
     const dabke = output.classes.find((c) => c.bookingUrl.includes("/dabkeroots/2104687"));
     expect(dabke?.venue).toBe("DabkeRoots");
     expect(dabke?.title).toBe("DABKEROOTS");

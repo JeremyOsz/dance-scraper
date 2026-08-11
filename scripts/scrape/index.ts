@@ -11,6 +11,7 @@ import { scrapeSuperMarioSalsa } from "./adapters/supermario-salsa";
 import { scrapeSalsaRuedaRuedaLibre } from "./adapters/salsa-rueda-rueda-libre";
 import { scrapeCubaneando } from "./adapters/cubaneando";
 import { scrapeButohMutation } from "./adapters/butoh-mutation";
+import { scrapeButohUk } from "./adapters/butoh-uk";
 import { scrapePosthumanTheatreButoh } from "./adapters/posthuman-theatre-butoh";
 import { scrapeHackneyBaths } from "./adapters/hackney-baths";
 import { scrapeWednesdayMoving } from "./adapters/wednesday-moving";
@@ -81,6 +82,7 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "salsaRuedaRuedaLibre", scrape: scrapeSalsaRuedaRuedaLibre },
   { key: "cubaneando", scrape: scrapeCubaneando },
   { key: "butohMutations", scrape: scrapeButohMutation },
+  { key: "butohUk", scrape: scrapeButohUk },
   { key: "posthumanTheatreButoh", scrape: scrapePosthumanTheatreButoh },
   { key: "hackneyBaths", scrape: scrapeHackneyBaths },
   { key: "wednesdayMoving", scrape: scrapeWednesdayMoving },
