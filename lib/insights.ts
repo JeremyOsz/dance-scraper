@@ -1,4 +1,4 @@
-import { DANCE_TYPES, type DanceType, inferDanceTypes } from "@/lib/dance-types";
+import { DANCE_STYLES, type DanceStyle, inferDanceStyles } from "@/lib/dance-types";
 import { ORDERED_DAYS } from "@/lib/date";
 import type { DanceSession, DayOfWeek } from "@/lib/types";
 
@@ -12,11 +12,11 @@ export type DayTotal = {
 
 export type TopTypeByDay = {
   day: KnownDay;
-  topTypes: Array<{ type: DanceType; count: number }>;
+  topTypes: Array<{ type: DanceStyle; count: number }>;
 };
 
 export type TypeRow = {
-  type: DanceType;
+  type: DanceStyle;
   total: number;
   byDay: Record<KnownDay, number>;
   peakDay: KnownDay | null;
@@ -42,7 +42,7 @@ function makeDayRecord(): Record<KnownDay, number> {
   );
 }
 
-function sortTypeCounts(entries: Array<{ type: DanceType; count: number }>) {
+function sortTypeCounts(entries: Array<{ type: DanceStyle; count: number }>) {
   return entries.sort((a, b) => {
     if (b.count !== a.count) return b.count - a.count;
     return a.type.localeCompare(b.type);
@@ -51,14 +51,14 @@ function sortTypeCounts(entries: Array<{ type: DanceType; count: number }>) {
 
 export function buildInsights(sessions: DanceSession[]): InsightsSnapshot {
   const dayCounts = makeDayRecord();
-  const typeCountsByDay = new Map<KnownDay, Map<DanceType, number>>();
-  const typeRows = new Map<DanceType, TypeRow>();
+  const typeCountsByDay = new Map<KnownDay, Map<DanceStyle, number>>();
+  const typeRows = new Map<DanceStyle, TypeRow>();
 
   for (const day of ORDERED_DAYS) {
     typeCountsByDay.set(day, new Map());
   }
 
-  for (const type of DANCE_TYPES) {
+  for (const type of DANCE_STYLES) {
     typeRows.set(type, {
       type,
       total: 0,
@@ -77,7 +77,7 @@ export function buildInsights(sessions: DanceSession[]): InsightsSnapshot {
     sessionsWithKnownDay += 1;
     dayCounts[day] += 1;
 
-    const detectedTypes = inferDanceTypes(session);
+    const detectedTypes = inferDanceStyles(session);
     const dayTypeCounts = typeCountsByDay.get(day);
     if (!dayTypeCounts) continue;
 
@@ -97,7 +97,7 @@ export function buildInsights(sessions: DanceSession[]): InsightsSnapshot {
   }));
 
   const topTypesByDay: TopTypeByDay[] = ORDERED_DAYS.map((day) => {
-    const counts = typeCountsByDay.get(day) ?? new Map<DanceType, number>();
+    const counts = typeCountsByDay.get(day) ?? new Map<DanceStyle, number>();
     const sorted = sortTypeCounts(Array.from(counts.entries()).map(([type, count]) => ({ type, count })));
     return { day, topTypes: sorted };
   });

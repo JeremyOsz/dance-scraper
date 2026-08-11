@@ -20,9 +20,9 @@ function pluralize(value: number, singular: string, plural = `${singular}s`) {
 export function generateMetadata(): Metadata {
   const data = readScrapeOutput();
   const studios = getStudioProfiles(data);
-  const title = buildPageTitle("London Dance Studios");
+  const title = buildPageTitle("London Dance Organisers & Locations");
   const description = buildMetaDescription(
-    `Browse ${studios.length} London dance studios and organisers with current class counts, styles, scrape status, and links to filtered listings.`
+    `Browse ${studios.length} London dance organisers with current class counts, styles, source status, and links to physical locations.`
   );
   return {
     title: {
@@ -53,7 +53,7 @@ export default function StudiosPage() {
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader className="space-y-4 px-0">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <h1 className="text-3xl font-semibold tracking-tight">London Dance Studios</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">Organisers &amp; locations</h1>
             <div className="flex items-center gap-2">
               <Button variant="outline" asChild>
                 <Link href="/">Calendar</Link>
@@ -64,20 +64,23 @@ export default function StudiosPage() {
               <Button asChild>
                 <Link href="/studios">Studios</Link>
               </Button>
+              <Button variant="outline" asChild>
+                <Link href={"/locations" as Route}>Locations</Link>
+              </Button>
             </div>
           </div>
           <p className="text-sm text-muted-foreground">
-            Content-first profiles for each studio and organiser in London Dance Calendar. Use these pages to compare
-            class mix, browse example sessions, and jump to filtered results.
+            These existing stable pages describe organisers. Physical venues are listed separately so classes run by
+            different organisations at the same place can be discovered together.
           </p>
           <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary">Studios: {studios.length}</Badge>
+            <Badge variant="secondary">Organisers: {studios.length}</Badge>
             <Badge variant="secondary">Total listed classes: {data.sessions.length}</Badge>
           </div>
           <SiteSocialLinks className="mt-1" />
         </CardHeader>
         <CardContent className="grid gap-3 px-0 md:grid-cols-2">
-          <h2 className="sr-only">Studio profiles</h2>
+          <h2 className="sr-only">Organiser profiles</h2>
           {studios.map((studio) => {
             const studioLink = `/studios/${studio.slug}`;
             return (
@@ -106,7 +109,7 @@ export default function StudiosPage() {
                 </CardHeader>
                 <CardContent className="flex flex-wrap gap-2">
                   <Button asChild size="sm">
-                    <Link href={studioLink as Route}>Open studio page</Link>
+                    <Link href={studioLink as Route}>Open organiser page</Link>
                   </Button>
                   <CalendarVenueFilterButton venue={studio.name} variant="outline" size="sm">
                     View classes

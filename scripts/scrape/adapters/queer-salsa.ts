@@ -110,6 +110,7 @@ function parseCoursePage(html: string, bookingUrl: string, now: Date): ScrapedCl
       time: `${timeMatch[1]} - ${timeMatch[2]}`,
       startDate: date,
       endDate: date,
+      isCourse: true,
       bookingUrl,
       sourceUrl
     });
@@ -168,6 +169,7 @@ function parseEventPage(html: string, bookingUrl: string, now: Date): ScrapedCla
       time: `${londonTime(start)} - ${londonTime(end)}`,
       startDate,
       endDate: londonDate(end),
+      isCourse: false,
       bookingUrl,
       sourceUrl
     }];

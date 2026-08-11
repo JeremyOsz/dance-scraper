@@ -10,6 +10,11 @@ type CustomEventEntry = {
   title: string;
   /** Overrides top-level `venue` for this row (e.g. a different theatre). */
   venue?: string | null;
+  organizer?: string | null;
+  locationName?: string | null;
+  address?: string | null;
+  postcode?: string | null;
+  borough?: string | null;
   /** Set false for additive manual listings that should not evict scraper rows for the same venue. */
   replaceVenue?: boolean | null;
   details?: string | null;
@@ -17,6 +22,7 @@ type CustomEventEntry = {
   time?: string | null;
   startDate?: string | null;
   endDate?: string | null;
+  isCourse?: boolean | null;
   bookingUrl: string;
   sourceUrl?: string | null;
 };
@@ -52,7 +58,7 @@ function collectReplacedVenueLabels(file: CustomEventsFile): string[] {
     if (entry.replaceVenue === false) {
       continue;
     }
-    const v = entry.venue?.trim() || defaultVenue;
+    const v = entry.organizer?.trim() || entry.venue?.trim() || defaultVenue;
     if (v) labels.add(v);
   }
   for (const organizer of file.ticketTailorOrganizers ?? []) {
@@ -67,17 +73,23 @@ function toRow(entry: CustomEventEntry, defaultVenue: string, fallbackSourceUrl:
   const bookingUrl = entry.bookingUrl?.trim();
   if (!title || !bookingUrl) return null;
 
-  const venue = (entry.venue?.trim() || defaultVenue).trim();
-  if (!venue) return null;
+  const organizer = (entry.organizer?.trim() || entry.venue?.trim() || defaultVenue).trim();
+  if (!organizer) return null;
 
   return {
-    venue,
+    venue: organizer,
+    organizer,
+    locationName: entry.locationName?.trim() || null,
+    address: entry.address?.trim() || null,
+    postcode: entry.postcode?.trim() || null,
+    borough: entry.borough?.trim() || null,
     title,
     details: entry.details?.trim() || null,
     dayOfWeek: entry.dayOfWeek?.trim() || null,
     time: entry.time?.trim() || null,
     startDate: entry.startDate?.trim() || null,
     endDate: entry.endDate?.trim() || null,
+    isCourse: entry.isCourse ?? undefined,
     bookingUrl,
     sourceUrl: entry.sourceUrl?.trim() || fallbackSourceUrl
   };

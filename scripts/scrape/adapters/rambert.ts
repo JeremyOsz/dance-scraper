@@ -5,6 +5,7 @@ import { fetchHtml } from "./common";
 
 const sourceUrl = "https://rambert.org.uk/classes/";
 const momenceReadonlyApiBase = "https://readonly-api.momence.com";
+const rambertMomenceHostId = "48546";
 
 type MomenceSessionsResponse = {
   payload?: Array<{
@@ -66,12 +67,18 @@ async function fetchMomenceSessions(hostId: string): Promise<NonNullable<Momence
 
 export async function scrapeRambert(): Promise<AdapterOutput> {
   try {
-    const html = await fetchHtml(sourceUrl);
+    let html = "";
+    try {
+      html = await fetchHtml(sourceUrl);
+    } catch {
+      // Rambert's Cloudflare transparent challenge can redirect non-browser clients in a loop.
+      // The public read-only Momence schedule remains the first-party booking feed.
+    }
     const $ = cheerio.load(html);
     const classes: AdapterOutput["classes"] = [];
     const momenceHostId = $('script[src*="momence.com/plugin/host-schedule/host-schedule.js"][host_id]')
       .first()
-      .attr("host_id");
+      .attr("host_id") ?? rambertMomenceHostId;
 
     if (momenceHostId) {
       try {
@@ -92,6 +99,11 @@ export async function scrapeRambert(): Promise<AdapterOutput> {
 
           classes.push({
             venue: "Rambert",
+            organizer: "Rambert",
+            locationName: "Rambert Studios",
+            address: "99 Upper Ground",
+            postcode: "SE1 9PP",
+            borough: "Southwark",
             title: session.sessionName.trim(),
             details: session.level?.replace(/\s+/g, " ").trim() || null,
             dayOfWeek: format(startsAt, "EEEE"),

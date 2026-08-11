@@ -3,7 +3,7 @@ import { format, isValid, parseISO } from "date-fns";
 import { CalendarPage } from "@/components/calendar/calendar-page";
 import { readScrapeOutput } from "@/lib/data-store";
 import { formatTimeRange } from "@/lib/date";
-import { inferDanceTypes } from "@/lib/dance-types";
+import { inferDanceStyles } from "@/lib/dance-types";
 import { isFeaturedSession } from "@/lib/featured";
 import { signOutboundRedirectUrl } from "@/lib/outbound-redirect";
 import {
@@ -79,7 +79,7 @@ function UpcomingClassesSnapshot({ occurrences, title }: { occurrences: Upcoming
       </summary>
       <ol className="mt-5 grid gap-3 sm:mt-3 sm:gap-2 md:grid-cols-2" aria-labelledby="upcoming-classes-heading">
         {occurrences.map(({ session, dateIso, date }) => {
-          const types = inferDanceTypes(session).slice(0, 2);
+          const styles = inferDanceStyles(session).slice(0, 2);
           return (
             <li key={`${session.id}-${dateIso}`} className="rounded-md border border-input bg-background p-5 text-sm leading-relaxed sm:p-3 sm:leading-normal">
               <h3 className="font-medium">{formatSnapshotTitle(session.title)}</h3>
@@ -89,8 +89,9 @@ function UpcomingClassesSnapshot({ occurrences, title }: { occurrences: Upcoming
                 {formatTimeRange(session.startTime, session.endTime)}
               </p>
               <p className="text-muted-foreground">
-                {session.venue}
-                {types.length > 0 ? ` • ${types.join(", ")}` : ""}
+                {session.organizer ?? session.venue}
+                {session.locationName ? ` • ${session.locationName}` : " • Location TBC"}
+                {styles.length > 0 ? ` • ${styles.join(", ")}` : ""}
                 {session.isWorkshop ? " • Workshop" : ""}
               </p>
             </li>

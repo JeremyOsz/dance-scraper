@@ -23,6 +23,7 @@ import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Bookmark,
+  BookOpen,
   Building2,
   CalendarDays,
   ChevronDown,
@@ -50,10 +51,18 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { canAddSessionToCalendar } from "@/lib/calendar-export";
-import { DANCE_TYPES, inferDanceTypes, matchesDanceType, type DanceType } from "@/lib/dance-types";
+import {
+  DANCE_STYLE_GROUPS,
+  DANCE_STYLES,
+  expandLegacyDanceTypes,
+  inferDanceStyles,
+  matchesDanceStyle,
+  type DanceStyle
+} from "@/lib/dance-types";
 import { ORDERED_DAYS, formatTimeRange, getForwardDayWindow, getMonthGridDates, isSessionActiveOnDate } from "@/lib/date";
+import { buildCourseListings, excerptCourseDetails } from "@/lib/courses";
 import { isFeaturedSession, isFeaturedVenueName } from "@/lib/featured";
-import { LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
+import { inferSessionLevels, LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
 import { getVenueMapQuery } from "@/lib/venues";
 import { getVenuePriorityBucket, sortVenueRecordsForUi } from "@/lib/venue-order";
 import { SiteSocialLinks } from "@/components/site-social-links";
@@ -65,42 +74,40 @@ const INITIAL_WEEK_DAY_COUNT = 7;
 const LAZY_LOAD_DAY_CHUNK = 7;
 const MAX_LOADED_CALENDAR_DAYS = 56;
 const LOADING_CARD_ROW_COUNTS = [3, 2, 2, 3, 1, 2, 1] as const;
-const DANCE_TYPE_BADGE_CLASS: Record<DanceType, string> = {
-  Contemporary: "border-transparent bg-sky-100 text-sky-800",
-  Ballet: "border-transparent bg-rose-100 text-rose-800",
-  Improv: "border-transparent bg-emerald-100 text-emerald-800",
-  "Contact Improv": "border-transparent bg-teal-100 text-teal-800",
-  "Ecstatic Dance/ 5Rythms": "border-transparent bg-amber-100 text-amber-900",
-  Salsa: "border-transparent bg-red-100 text-red-800",
-  Bachata: "border-transparent bg-pink-100 text-pink-800",
-  Butoh: "border-transparent bg-zinc-200 text-zinc-900",
-  Somatic: "border-transparent bg-lime-100 text-lime-800",
-  "Hip Hop": "border-transparent bg-violet-100 text-violet-800",
-  "Yoga/Pilates": "border-transparent bg-cyan-100 text-cyan-800",
-  Jazz: "border-transparent bg-orange-100 text-orange-800",
-  House: "border-transparent bg-indigo-100 text-indigo-800",
-  "Commercial/Heels": "border-transparent bg-fuchsia-100 text-fuchsia-800",
-  "Ballroom/Tango": "border-transparent bg-yellow-100 text-yellow-800",
-  Other: "border-transparent bg-stone-200 text-stone-800"
-};
-const DANCE_TYPE_CARD_CLASS: Record<DanceType, string> = {
-  Contemporary: "border-l-sky-600",
-  Ballet: "border-l-rose-600",
-  Improv: "border-l-emerald-600",
-  "Contact Improv": "border-l-teal-600",
-  "Ecstatic Dance/ 5Rythms": "border-l-amber-600",
-  Salsa: "border-l-red-600",
-  Bachata: "border-l-pink-600",
-  Butoh: "border-l-zinc-900",
-  Somatic: "border-l-lime-700",
-  "Hip Hop": "border-l-violet-700",
-  "Yoga/Pilates": "border-l-cyan-700",
-  Jazz: "border-l-orange-600",
-  House: "border-l-indigo-700",
-  "Commercial/Heels": "border-l-fuchsia-700",
-  "Ballroom/Tango": "border-l-yellow-600",
-  Other: "border-l-slate-500"
-};
+const STYLE_BADGE_CLASSES = [
+  "border-transparent bg-sky-100 text-sky-800",
+  "border-transparent bg-emerald-100 text-emerald-800",
+  "border-transparent bg-violet-100 text-violet-800",
+  "border-transparent bg-red-100 text-red-800",
+  "border-transparent bg-orange-100 text-orange-800",
+  "border-transparent bg-pink-100 text-pink-800",
+  "border-transparent bg-yellow-100 text-yellow-900",
+  "border-transparent bg-cyan-100 text-cyan-800"
+] as const;
+const STYLE_CARD_CLASSES = [
+  "border-l-sky-600",
+  "border-l-emerald-600",
+  "border-l-violet-700",
+  "border-l-red-600",
+  "border-l-orange-600",
+  "border-l-pink-600",
+  "border-l-yellow-600",
+  "border-l-cyan-700"
+] as const;
+
+function styleGroupIndex(style: DanceStyle) {
+  return DANCE_STYLE_GROUPS.findIndex((group) => (group.styles as readonly string[]).includes(style));
+}
+
+function danceStyleBadgeClass(style: DanceStyle) {
+  const index = styleGroupIndex(style);
+  return index >= 0 ? STYLE_BADGE_CLASSES[index] : "border-transparent bg-stone-200 text-stone-800";
+}
+
+function danceStyleCardClass(style: DanceStyle) {
+  const index = styleGroupIndex(style);
+  return index >= 0 ? STYLE_CARD_CLASSES[index] : "border-l-slate-500";
+}
 const editorialPanelClass =
   "border border-border bg-[hsl(var(--ldc-surface)/0.95)] shadow-[4px_4px_0_hsl(var(--foreground)/0.12)]";
 const editorialInsetClass = "border border-border/35 bg-[hsl(var(--ldc-surface-soft)/0.9)]";
@@ -158,6 +165,22 @@ function isGagaSession(session: Pick<DanceSession, "title" | "details" | "tags">
   return /\bgaga\b/i.test(`${session.title} ${session.details ?? ""}`) || session.tags.some((tag) => /\bgaga\b/i.test(tag));
 }
 
+function SessionFormatBadges({ session }: { session: Pick<DanceSession, "isCourse" | "isWorkshop"> }) {
+  if (!session.isCourse && !session.isWorkshop) return null;
+  return (
+    <span className="flex flex-wrap gap-1.5">
+      {session.isCourse ? <Badge className="rounded-sm border-indigo-300 bg-indigo-50 text-indigo-800">Course</Badge> : null}
+      {session.isWorkshop ? <Badge className="rounded-sm border-orange-300 bg-orange-50 text-orange-800">Workshop</Badge> : null}
+    </span>
+  );
+}
+
+function formatCourseDateRange(startDate: string | null, endDate: string | null): string {
+  if (!startDate) return "Dates TBC";
+  if (!endDate || endDate === startDate) return format(parseISO(startDate), "d MMM yyyy");
+  return `${format(parseISO(startDate), "d MMM yyyy")} – ${format(parseISO(endDate), "d MMM yyyy")}`;
+}
+
 function GagaBoycottCard({ session, onOpen }: { session: DanceSession; onOpen: () => void }) {
   return (
     <div className="overflow-hidden rounded-[18px] border-[3px] border-emerald-700 bg-[#ff5b76] text-xs text-zinc-900 shadow-sm">
@@ -173,13 +196,14 @@ function GagaBoycottCard({ session, onOpen }: { session: DanceSession; onOpen: (
       <div className="space-y-2.5 bg-[linear-gradient(180deg,rgba(255,246,248,0.98)_0%,rgba(255,239,242,0.98)_100%)] px-5 py-4">
         <button onClick={onOpen} className="block w-full text-left hover:text-foreground/90">
           <div className="space-y-1">
+            <SessionFormatBadges session={session} />
             <p className="font-medium text-foreground">{session.title}</p>
             <p className="text-muted-foreground">
               {session.startTime || session.endTime
                 ? formatTimeRange(session.startTime, session.endTime)
                 : session.dayOfWeek ?? "Time TBC"}
             </p>
-            <p>{session.venue}</p>
+            <p>{sessionOrganizer(session)} · {session.locationName ?? "Location TBC"}</p>
           </div>
           <p className="leading-relaxed text-foreground/90">
             <strong>Boycott of Batsheva/ Gaga called by Dancers for Palestine.</strong>{" "}<br />
@@ -218,16 +242,17 @@ function GagaSessionDialogContent({
         <DialogDescription asChild>
           <div className="space-y-1 pt-1 text-base not-italic text-foreground/70">
             <div>
-              {session.venue} • {session.dayOfWeek ?? "Day TBC"} • {formatTimeRange(session.startTime, session.endTime)}
+              {sessionOrganizer(session)} • {session.locationName ?? "Location TBC"} • {session.dayOfWeek ?? "Day TBC"} • {formatTimeRange(session.startTime, session.endTime)}
             </div>
           </div>
         </DialogDescription>
       </DialogHeader>
       <div className="space-y-5 pt-2 text-sm">
+        <SessionFormatBadges session={session} />
         <div className="flex flex-wrap gap-2">
-          {inferDanceTypes(session).map((type) => (
-            <Badge key={`${session.id}-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
-              {type}
+          {inferDanceStyles(session).map((style) => (
+            <Badge key={`${session.id}-${style}`} className={danceStyleBadgeClass(style)}>
+              {style}
             </Badge>
           ))}
         </div>
@@ -292,6 +317,26 @@ function readStoredList(key: string): string[] {
 
 function toggleValue(values: string[], value: string) {
   return values.includes(value) ? values.filter((item) => item !== value) : [...values, value];
+}
+
+function sessionOrganizer(session: DanceSession) {
+  return session.organizer ?? session.venue;
+}
+
+function sessionMatchesSearch(session: DanceSession, rawSearch: string) {
+  const term = rawSearch.trim().toLowerCase();
+  if (!term) return true;
+  return [
+    session.title,
+    session.details,
+    sessionOrganizer(session),
+    session.locationName,
+    session.address,
+    session.postcode,
+    session.borough,
+    ...(session.tags ?? []),
+    ...inferDanceStyles(session)
+  ].some((value) => (value ?? "").toLowerCase().includes(term));
 }
 
 function sortSessionsForDisplay(sessions: DanceSession[], countByVenue: Map<string, number>) {
@@ -467,13 +512,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   const [sessions, setSessions] = useState<DanceSessionOutbound[]>(() => initialSessions ?? []);
   const [sessionsLoading, setSessionsLoading] = useState(!hasInitialSessions);
   const [sessionsError, setSessionsError] = useState<string | null>(null);
-  const [mode, setMode] = useState<"calendar" | "venues" | "map">("calendar");
+  const [mode, setMode] = useState<"calendar" | "courses" | "venues" | "map">("calendar");
   const [view, setView] = useState<"week" | "month">("week");
   const [anchorDate, setAnchorDate] = useState(() => startOfDay(new Date()));
   const [loadedDayCount, setLoadedDayCount] = useState(INITIAL_WEEK_DAY_COUNT);
   const [selectedSession, setSelectedSession] = useState<DanceSessionOutbound | null>(null);
   const [search, setSearch] = useState("");
   const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
@@ -496,6 +542,10 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   const weekLoadSentinelRef = useRef<HTMLDivElement>(null);
 
   const venueNames = useMemo(() => sortVenueRecordsForUi(venues).map((venue) => venue.name), [venues]);
+  const locationNames = useMemo(
+    () => [...new Set(sessions.map((session) => session.locationName).filter((name): name is string => Boolean(name)))].sort(),
+    [sessions]
+  );
 
   const selectedDaysKey = useMemo(() => selectedDays.join(","), [selectedDays]);
 
@@ -599,7 +649,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
   useEffect(() => {
     const modeParam = searchParams.get("mode");
-    const nextMode = modeParam === "venues" || modeParam === "map" ? modeParam : "calendar";
+    const nextMode = modeParam === "courses" || modeParam === "venues" || modeParam === "map" ? modeParam : "calendar";
     setMode(nextMode);
 
     const viewParam = searchParams.get("view");
@@ -609,17 +659,23 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     setAnchorDate(parseAnchorDate(searchParams.get("date")));
     setSearch(searchParams.get("q") ?? "");
 
-    const nextVenues = parseCsvParam(searchParams, "venue").filter((venue) => venueNames.includes(venue));
+    const organizerParam = searchParams.has("organizer") ? "organizer" : "venue";
+    const nextVenues = parseCsvParam(searchParams, organizerParam).filter((venue) => venueNames.includes(venue));
     setSelectedVenues(nextVenues);
+
+    setSelectedLocations(parseCsvParam(searchParams, "location").filter((location) => locationNames.includes(location)));
 
     const nextDays = parseCsvParam(searchParams, "day").filter((day): day is Exclude<DayOfWeek, null> =>
       ORDERED_DAYS.includes(day as Exclude<DayOfWeek, null>)
     );
     setSelectedDays(nextDays);
 
-    const nextTypes = parseCsvParam(searchParams, "type").filter((type): type is DanceType =>
-      DANCE_TYPES.includes(type as DanceType)
+    const canonicalStyles = parseCsvParam(searchParams, "style").filter((style): style is DanceStyle =>
+      DANCE_STYLES.includes(style as DanceStyle)
     );
+    const nextTypes = canonicalStyles.length
+      ? canonicalStyles
+      : expandLegacyDanceTypes(parseCsvParam(searchParams, "type"));
     setSelectedTypes(nextTypes);
 
     const nextLevels = parseCsvParam(searchParams, "level").filter((level): level is Level =>
@@ -631,14 +687,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     setShortlistOnly(parseBooleanParam(searchParams, "shortlist"));
 
     const mapParam = searchParams.get("map");
-    if (mapParam === "all" || (mapParam && venueNames.includes(mapParam))) {
+    if (mapParam === "all" || (mapParam && (locationNames.includes(mapParam) || venueNames.includes(mapParam)))) {
       setMapVenue(mapParam);
     } else {
       setMapVenue("all");
     }
 
     setUrlReady(true);
-  }, [searchParams, venueNames]);
+  }, [locationNames, searchParams, venueNames]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -655,12 +711,13 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     params.set("mode", mode);
     params.set("view", view);
     if (search.trim()) params.set("q", search.trim());
-    if (selectedVenues.length > 0) params.set("venue", selectedVenues.join(","));
+    if (selectedVenues.length > 0) params.set("organizer", selectedVenues.join(","));
+    if (selectedLocations.length > 0) params.set("location", selectedLocations.join(","));
     if (selectedDays.length > 0) params.set("day", selectedDays.join(","));
-    if (selectedTypes.length > 0) params.set("type", selectedTypes.join(","));
+    if (selectedTypes.length > 0) params.set("style", selectedTypes.join(","));
     if (selectedLevels.length > 0) params.set("level", selectedLevels.join(","));
     if (workshopsOnly) params.set("workshops", "1");
-    if (shortlistOnly) params.set("shortlist", "1");
+    if (mode !== "courses" && shortlistOnly) params.set("shortlist", "1");
     if (mapVenue !== "all") params.set("map", mapVenue);
 
     const nextQuery = params.toString();
@@ -676,6 +733,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     searchParams,
     selectedDays,
     selectedLevels,
+    selectedLocations,
     selectedTypes,
     selectedVenues,
     shortlistOnly,
@@ -700,13 +758,16 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
 
   const filteredSessions = useMemo(() => {
     return sessions.filter((session) => {
-      if (selectedVenues.length > 0 && !selectedVenues.includes(session.venue)) {
+      if (selectedVenues.length > 0 && !selectedVenues.includes(sessionOrganizer(session))) {
+        return false;
+      }
+      if (selectedLocations.length > 0 && (!session.locationName || !selectedLocations.includes(session.locationName))) {
         return false;
       }
       if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) {
         return false;
       }
-      if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {
+      if (selectedTypes.length > 0 && !selectedTypes.some((style) => matchesDanceStyle(session, style))) {
         return false;
       }
       if (selectedLevels.length > 0 && !selectedLevels.some((level) => matchesSessionLevel(session, level))) {
@@ -715,37 +776,52 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       if (workshopsOnly && !session.isWorkshop) {
         return false;
       }
-      if (shortlistOnly && !shortlistSessionIds.includes(session.id)) {
+      if (mode !== "courses" && shortlistOnly && !shortlistSessionIds.includes(session.id)) {
         return false;
       }
-      if (search.trim()) {
-        const term = search.toLowerCase();
-        const hit =
-          session.title.toLowerCase().includes(term) ||
-          (session.details ?? "").toLowerCase().includes(term) ||
-          session.tags.some((tag) => tag.toLowerCase().includes(term));
-        if (!hit) return false;
-      }
+      if (!sessionMatchesSearch(session, search)) return false;
       return true;
     });
   }, [
     sessions,
     search,
     selectedVenues,
+    selectedLocations,
     selectedDays,
     selectedTypes,
     selectedLevels,
     workshopsOnly,
     shortlistOnly,
-    shortlistSessionIds
+    shortlistSessionIds,
+    mode
   ]);
+  const courseListings = useMemo(() => {
+    const today = format(startOfDay(new Date()), "yyyy-MM-dd");
+    return buildCourseListings(sessions, today).filter((listing) =>
+      listing.members.some((session) => {
+        if (selectedVenues.length > 0 && !selectedVenues.includes(sessionOrganizer(session))) return false;
+        if (selectedLocations.length > 0 && (!session.locationName || !selectedLocations.includes(session.locationName))) return false;
+        if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) return false;
+        if (selectedTypes.length > 0 && !selectedTypes.some((style) => matchesDanceStyle(session, style))) return false;
+        if (selectedLevels.length > 0 && !selectedLevels.some((level) => matchesSessionLevel(session, level))) return false;
+        if (workshopsOnly && !session.isWorkshop) return false;
+        return sessionMatchesSearch(session, search);
+      })
+    );
+  }, [sessions, search, selectedVenues, selectedLocations, selectedDays, selectedTypes, selectedLevels, workshopsOnly]);
   const relatedSessionCountByVenue = useMemo(() => {
     const counts = new Map<string, number>();
     for (const session of sessions) {
+      if (mode === "courses" && !session.isCourse) {
+        continue;
+      }
       if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) {
         continue;
       }
-      if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {
+      if (selectedLocations.length > 0 && (!session.locationName || !selectedLocations.includes(session.locationName))) {
+        continue;
+      }
+      if (selectedTypes.length > 0 && !selectedTypes.some((style) => matchesDanceStyle(session, style))) {
         continue;
       }
       if (selectedLevels.length > 0 && !selectedLevels.some((level) => matchesSessionLevel(session, level))) {
@@ -754,23 +830,15 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       if (workshopsOnly && !session.isWorkshop) {
         continue;
       }
-      if (shortlistOnly && !shortlistSessionIds.includes(session.id)) {
+      if (mode !== "courses" && shortlistOnly && !shortlistSessionIds.includes(session.id)) {
         continue;
       }
-      if (search.trim()) {
-        const term = search.toLowerCase();
-        const hit =
-          session.title.toLowerCase().includes(term) ||
-          (session.details ?? "").toLowerCase().includes(term) ||
-          session.tags.some((tag) => tag.toLowerCase().includes(term));
-        if (!hit) {
-          continue;
-        }
-      }
-      counts.set(session.venue, (counts.get(session.venue) ?? 0) + 1);
+      if (!sessionMatchesSearch(session, search)) continue;
+      const organizer = sessionOrganizer(session);
+      counts.set(organizer, (counts.get(organizer) ?? 0) + 1);
     }
     return counts;
-  }, [sessions, search, selectedDays, selectedTypes, selectedLevels, workshopsOnly, shortlistOnly, shortlistSessionIds]);
+  }, [sessions, search, selectedDays, selectedLocations, selectedTypes, selectedLevels, workshopsOnly, shortlistOnly, shortlistSessionIds, mode]);
 
   const dates = useMemo(
     () =>
@@ -818,10 +886,16 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   const venueOptionCountByVenue = useMemo(() => {
     const counts = new Map<string, number>();
     for (const session of sessions) {
+      if (mode === "courses" && !session.isCourse) {
+        continue;
+      }
       if (selectedDays.length > 0 && (!session.dayOfWeek || !selectedDays.includes(session.dayOfWeek))) {
         continue;
       }
-      if (selectedTypes.length > 0 && !selectedTypes.some((type) => matchesDanceType(session, type))) {
+      if (selectedLocations.length > 0 && (!session.locationName || !selectedLocations.includes(session.locationName))) {
+        continue;
+      }
+      if (selectedTypes.length > 0 && !selectedTypes.some((style) => matchesDanceStyle(session, style))) {
         continue;
       }
       if (selectedLevels.length > 0 && !selectedLevels.some((level) => matchesSessionLevel(session, level))) {
@@ -830,35 +904,29 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       if (workshopsOnly && !session.isWorkshop) {
         continue;
       }
-      if (shortlistOnly && !shortlistSessionIds.includes(session.id)) {
+      if (mode !== "courses" && shortlistOnly && !shortlistSessionIds.includes(session.id)) {
         continue;
       }
-      if (search.trim()) {
-        const term = search.toLowerCase();
-        const hit =
-          session.title.toLowerCase().includes(term) ||
-          (session.details ?? "").toLowerCase().includes(term) ||
-          session.tags.some((tag) => tag.toLowerCase().includes(term));
-        if (!hit) {
-          continue;
-        }
-      }
-      if (!visibleDateIsos.some((iso) => isSessionActiveOnDate(session, iso))) {
+      if (!sessionMatchesSearch(session, search)) continue;
+      if (mode !== "courses" && !visibleDateIsos.some((iso) => isSessionActiveOnDate(session, iso))) {
         continue;
       }
-      counts.set(session.venue, (counts.get(session.venue) ?? 0) + 1);
+      const organizer = sessionOrganizer(session);
+      counts.set(organizer, (counts.get(organizer) ?? 0) + 1);
     }
     return counts;
   }, [
     sessions,
     search,
     selectedDays,
+    selectedLocations,
     selectedLevels,
     selectedTypes,
     shortlistOnly,
     shortlistSessionIds,
     visibleDateIsos,
-    workshopsOnly
+    workshopsOnly,
+    mode
   ]);
   const sortedVenueNamesByRelatedCount = useMemo(() => {
     return [...venueNames].sort((a, b) => {
@@ -944,7 +1012,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   const listingVenueCountByVenue = useMemo(() => {
     const counts = new Map<string, number>();
     for (const session of filteredSessions) {
-      counts.set(session.venue, (counts.get(session.venue) ?? 0) + 1);
+      const organizer = sessionOrganizer(session);
+      counts.set(organizer, (counts.get(organizer) ?? 0) + 1);
     }
     return counts;
   }, [filteredSessions]);
@@ -983,6 +1052,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
   const clearFilters = () => {
     setSearch("");
     setSelectedVenues([]);
+    setSelectedLocations([]);
     setSelectedDays([]);
     setSelectedTypes([]);
     setSelectedLevels([]);
@@ -996,13 +1066,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     let count = 0;
     if (search.trim()) count += 1;
     if (selectedVenues.length > 0) count += 1;
+    if (selectedLocations.length > 0) count += 1;
     if (selectedDays.length > 0) count += 1;
     if (selectedTypes.length > 0) count += 1;
     if (selectedLevels.length > 0) count += 1;
     if (workshopsOnly) count += 1;
-    if (shortlistOnly) count += 1;
+    if (mode !== "courses" && shortlistOnly) count += 1;
     return count;
-  }, [search, selectedVenues.length, selectedDays.length, selectedTypes.length, selectedLevels.length, workshopsOnly, shortlistOnly]);
+  }, [search, selectedVenues.length, selectedLocations.length, selectedDays.length, selectedTypes.length, selectedLevels.length, workshopsOnly, shortlistOnly, mode]);
 
   const mapSearchQuery = useMemo(() => {
     if (mapVenue === "all") {
@@ -1010,12 +1081,15 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       // Keep "all" as a citywide overview and use exact venue queries when a single venue is selected.
       return "London dance classes";
     }
-    const selectedVenueConfig = venues.find((venue) => venue.name === mapVenue);
-    if (selectedVenueConfig) {
-      return selectedVenueConfig.mapQuery ?? getVenueMapQuery(selectedVenueConfig.name);
+    const locationSession = sessions.find((session) => session.locationName === mapVenue);
+    if (locationSession) {
+      return [locationSession.locationName, locationSession.address, locationSession.postcode]
+        .filter(Boolean)
+        .join(", ");
     }
-    return getVenueMapQuery(mapVenue);
-  }, [mapVenue, venues]);
+    const selectedVenueConfig = venues.find((venue) => venue.name === mapVenue);
+    return selectedVenueConfig?.mapQuery ?? getVenueMapQuery(mapVenue);
+  }, [mapVenue, sessions, venues]);
 
   const clearSummaryActionClass = "ml-auto h-7 rounded-sm px-2 text-[11px] sm:h-6";
 
@@ -1028,12 +1102,13 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     params.set("view", view);
     params.set("date", format(anchorDate, "yyyy-MM-dd"));
     if (search.trim()) params.set("q", search.trim());
-    if (selectedVenues.length > 0) params.set("venue", selectedVenues.join(","));
+    if (selectedVenues.length > 0) params.set("organizer", selectedVenues.join(","));
+    if (selectedLocations.length > 0) params.set("location", selectedLocations.join(","));
     if (selectedDays.length > 0) params.set("day", selectedDays.join(","));
-    if (selectedTypes.length > 0) params.set("type", selectedTypes.join(","));
+    if (selectedTypes.length > 0) params.set("style", selectedTypes.join(","));
     if (selectedLevels.length > 0) params.set("level", selectedLevels.join(","));
     if (workshopsOnly) params.set("workshops", "1");
-    if (shortlistOnly) params.set("shortlist", "1");
+    if (mode !== "courses" && shortlistOnly) params.set("shortlist", "1");
     if (mapVenue !== "all") params.set("map", mapVenue);
     return `${window.location.origin}${pathname}?${params.toString()}`;
   }, [
@@ -1044,6 +1119,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
     search,
     selectedDays,
     selectedLevels,
+    selectedLocations,
     selectedTypes,
     selectedVenues,
     shortlistOnly,
@@ -1193,7 +1269,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       <div className={`${editorialInsetClass} p-4 max-sm:py-5 lg:p-2`}>
         <details open>
           <summary className="font-display flex min-h-11 cursor-pointer list-none items-center gap-2 py-2 text-xs font-semibold uppercase text-foreground max-sm:py-3 lg:min-h-0 lg:py-1">
-            <span>Type</span>
+            <span>Style</span>
             <span className="h-px flex-1 bg-border" />
             <Button
               type="button"
@@ -1210,29 +1286,56 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               Clear
             </Button>
           </summary>
-          <div className="mt-3 flex flex-wrap gap-2 max-sm:gap-y-2.5 lg:mt-2 lg:gap-1.5">
+          <div className="mt-3 space-y-2 lg:mt-2">
             <Button
               type="button"
               size="sm"
               variant={selectedTypes.length === 0 ? "default" : "outline"}
               onClick={() => setSelectedTypes([])}
             >
-              Any type
+              Any style
             </Button>
-            {DANCE_TYPES.map((type) => (
-              <Button
-                key={type}
-                type="button"
-                size="sm"
-                variant="outline"
-                className={`${DANCE_TYPE_BADGE_CLASS[type]} ${
-                  selectedTypes.includes(type) ? "ring-2 ring-primary ring-offset-1" : ""
-                }`}
-                onClick={() => setSelectedTypes((current) => toggleValue(current, type))}
-              >
-                {type}
-              </Button>
-            ))}
+            {DANCE_STYLE_GROUPS.map((group) => {
+              const groupStyles = [...group.styles];
+              const groupStyleSet = new Set<string>(groupStyles);
+              const allSelected = groupStyles.every((style) => selectedTypes.includes(style));
+              return (
+                <details key={group.label} className="border-t border-border/25 pt-2">
+                  <summary className="cursor-pointer text-xs font-semibold text-foreground">{group.label}</summary>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant={allSelected ? "default" : "outline"}
+                      aria-label={`${allSelected ? "Clear" : "Select"} ${group.label}`}
+                      onClick={() =>
+                        setSelectedTypes((current) =>
+                          allSelected
+                            ? current.filter((style) => !groupStyleSet.has(style))
+                            : [...new Set([...current, ...groupStyles])]
+                        )
+                      }
+                    >
+                      All {group.label}
+                    </Button>
+                    {group.styles.map((style) => (
+                      <Button
+                        key={style}
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        className={`${danceStyleBadgeClass(style)} ${
+                          selectedTypes.includes(style) ? "ring-2 ring-primary ring-offset-1" : ""
+                        }`}
+                        onClick={() => setSelectedTypes((current) => toggleValue(current, style))}
+                      >
+                        {style}
+                      </Button>
+                    ))}
+                  </div>
+                </details>
+              );
+            })}
           </div>
         </details>
       </div>
@@ -1282,7 +1385,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
       <div className={`${editorialInsetClass} p-4 max-sm:py-5 lg:p-2`}>
         <details open>
           <summary className="font-display flex min-h-11 cursor-pointer list-none items-center gap-2 py-2 text-xs font-semibold uppercase text-foreground max-sm:py-3 lg:min-h-0 lg:py-1">
-            <span>Venue</span>
+            <span>Organiser</span>
             <span className="h-px flex-1 bg-border" />
             <Button
               type="button"
@@ -1306,7 +1409,7 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               variant={selectedVenues.length === 0 ? "default" : "outline"}
               onClick={() => setSelectedVenues([])}
             >
-              Any venue
+              Any organiser
             </Button>
             {sortedVenueNamesByRelatedCount.map((venue) => {
               const relatedCount = venueOptionCountByVenue.get(venue) ?? 0;
@@ -1328,6 +1431,51 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </div>
         </details>
       </div>
+      {locationNames.length > 0 ? (
+        <div className={`${editorialInsetClass} p-4 max-sm:py-5 lg:p-2`}>
+          <details open>
+            <summary className="font-display flex min-h-11 cursor-pointer list-none items-center gap-2 py-2 text-xs font-semibold uppercase text-foreground max-sm:py-3 lg:min-h-0 lg:py-1">
+              <span>Location</span>
+              <span className="h-px flex-1 bg-border" />
+              <Button
+                type="button"
+                size="sm"
+                variant="ghost"
+                className={clearSummaryActionClass}
+                disabled={selectedLocations.length === 0}
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  setSelectedLocations([]);
+                }}
+              >
+                Clear
+              </Button>
+            </summary>
+            <div className="mt-3 flex flex-wrap gap-2 max-sm:gap-y-2.5 lg:mt-2 lg:gap-1.5">
+              <Button
+                type="button"
+                size="sm"
+                variant={selectedLocations.length === 0 ? "default" : "outline"}
+                onClick={() => setSelectedLocations([])}
+              >
+                Any location
+              </Button>
+              {locationNames.map((location) => (
+                <Button
+                  key={location}
+                  type="button"
+                  size="sm"
+                  variant={selectedLocations.includes(location) ? "default" : "outline"}
+                  onClick={() => setSelectedLocations((current) => toggleValue(current, location))}
+                >
+                  {location}
+                </Button>
+              ))}
+            </div>
+          </details>
+        </div>
+      ) : null}
       <div className={`${editorialInsetClass} p-4 max-sm:py-5 lg:p-2`}>
         <details open>
           <summary className="font-display flex min-h-11 cursor-pointer list-none items-center gap-2 py-2 text-xs font-semibold uppercase text-foreground max-sm:py-3 lg:min-h-0 lg:py-1">
@@ -1359,10 +1507,11 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
           </label>
         </details>
       </div>
-      <div className={`${editorialInsetClass} p-4 max-sm:py-5 lg:p-2`}>
-        <details open>
-          <summary className="font-display flex min-h-11 cursor-pointer list-none items-center gap-2 py-2 text-xs font-semibold uppercase text-foreground max-sm:py-3 lg:min-h-0 lg:py-1">
-            <span>Shortlist</span>
+      {mode !== "courses" ? (
+        <div className={`${editorialInsetClass} p-4 max-sm:py-5 lg:p-2`}>
+          <details open>
+            <summary className="font-display flex min-h-11 cursor-pointer list-none items-center gap-2 py-2 text-xs font-semibold uppercase text-foreground max-sm:py-3 lg:min-h-0 lg:py-1">
+              <span>Shortlist</span>
             <span className="h-px flex-1 bg-border" />
             <Button
               type="button"
@@ -1378,8 +1527,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
             >
               Clear
             </Button>
-          </summary>
-          <div className="mt-3 space-y-3 lg:mt-2 lg:space-y-2">
+            </summary>
+            <div className="mt-3 space-y-3 lg:mt-2 lg:space-y-2">
             <div className="flex flex-wrap items-center gap-2 max-sm:gap-3">
               <Button
                 size="sm"
@@ -1410,9 +1559,10 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 Clear shortlist ({shortlistSessionIds.length})
               </Button>
             </div>
-          </div>
-        </details>
-      </div>
+            </div>
+          </details>
+        </div>
+      ) : null}
     </div>
   );
 
@@ -1693,10 +1843,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               <div className="flex flex-col gap-5 border-b-2 border-border pb-5 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-3 sm:pb-3">
                 <div className="space-y-1.5">
                   <h2 className="font-display text-xl font-semibold uppercase tracking-normal md:text-[1.35rem]">
-                    Find dance classes
+                    {mode === "courses" ? "Find dance courses" : "Find dance classes"}
                   </h2>
                   <p className="text-sm leading-relaxed text-muted-foreground sm:text-sm" aria-live="polite">
-                    {sessionsLoading ? "Loading latest classes" : `Showing ${filteredSessions.length} classes`}
+                    {sessionsLoading
+                      ? mode === "courses" ? "Loading latest courses" : "Loading latest classes"
+                      : mode === "courses"
+                        ? `Showing ${courseListings.length} ${courseListings.length === 1 ? "course" : "courses"}`
+                        : `Showing ${filteredSessions.length} classes`}
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 max-sm:justify-between max-sm:[&_button]:min-h-11 sm:gap-2">
@@ -1725,6 +1879,16 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                   >
                     <CalendarDays className={iconClass} aria-hidden />
                     <span className="hidden sm:inline">Calendar</span>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={mode === "courses" ? "default" : "outline"}
+                    className={`touch-manipulation sm:min-h-10 ${editorialButtonClass}`}
+                    aria-label="Courses list"
+                    onClick={() => setMode("courses")}
+                  >
+                    <BookOpen className={iconClass} aria-hidden />
+                    <span className="hidden sm:inline">Courses</span>
                   </Button>
                   <Button
                     type="button"
@@ -1946,8 +2110,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                                   />
                                 );
                               }
-                              const types = inferDanceTypes(session);
-                              const primaryType = types[0] ?? "Other";
+                              const styles = inferDanceStyles(session);
+                              const primaryStyle = styles[0] ?? "Other";
                               const featured = isFeaturedSession(session);
                               return (
                                 <div
@@ -1955,13 +2119,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                                   className={`border border-l-4 border-border/35 bg-[hsl(var(--ldc-surface))] p-3 text-xs transition-colors hover:bg-[hsl(var(--ldc-lane-alt))] max-sm:p-4 max-sm:leading-relaxed lg:p-2 lg:leading-normal ${
                                     featured
                                       ? "border-amber-500 border-l-amber-500 bg-[hsl(var(--ldc-featured))] ring-1 ring-amber-400"
-                                      : DANCE_TYPE_CARD_CLASS[primaryType]
+                                      : danceStyleCardClass(primaryStyle)
                                   }`}
                                 >
                                   <button
                                     onClick={() => setSelectedSession(session)}
                                     className="w-full text-left hover:text-foreground/90"
                                   >
+                                    <SessionFormatBadges session={session} />
                                     {featured ? (
                                       <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase text-amber-700">
                                         <Star className="h-3 w-3 fill-current" aria-hidden />
@@ -1975,7 +2140,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                                         ? formatTimeRange(session.startTime, session.endTime)
                                         : session.dayOfWeek ?? "Time TBC"}
                                     </p>
-                                    <p className="mt-1.5 text-muted-foreground max-sm:mt-2 lg:mt-0.5">{session.venue}</p>
+                                    <p className="mt-1.5 text-muted-foreground max-sm:mt-2 lg:mt-0.5">
+                                      {sessionOrganizer(session)} · {session.locationName ?? "Location TBC"}
+                                    </p>
                                   </button>
                                   <div className="mt-3 flex justify-end max-sm:mt-4 lg:mt-2">
                                     <Button
@@ -2028,8 +2195,8 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                             />
                           );
                         }
-                        const types = inferDanceTypes(session);
-                        const primaryType = types[0] ?? "Other";
+                        const styles = inferDanceStyles(session);
+                        const primaryStyle = styles[0] ?? "Other";
                         const featured = isFeaturedSession(session);
                         return (
                           <div
@@ -2037,13 +2204,14 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                             className={`border border-l-4 border-border/35 bg-[hsl(var(--ldc-surface))] p-3 text-xs transition-colors hover:bg-[hsl(var(--ldc-lane-alt))] max-sm:p-4 max-sm:leading-relaxed lg:p-2 lg:leading-normal ${
                               featured
                                 ? "border-amber-500 border-l-amber-500 bg-[hsl(var(--ldc-featured))] ring-1 ring-amber-400"
-                                : DANCE_TYPE_CARD_CLASS[primaryType]
+                                : danceStyleCardClass(primaryStyle)
                             }`}
                           >
                             <button
                               onClick={() => setSelectedSession(session)}
                               className="w-full text-left hover:text-foreground/90"
                             >
+                              <SessionFormatBadges session={session} />
                               {featured ? (
                                 <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase text-amber-700">
                                   <Star className="h-3 w-3 fill-current" aria-hidden />
@@ -2054,7 +2222,9 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                               <p className="mt-2 text-muted-foreground lg:mt-1">
                                 {session.dayOfWeek ?? "Day TBC"} • {formatTimeRange(session.startTime, session.endTime)}
                               </p>
-                              <p className="mt-1.5 text-muted-foreground max-sm:mt-2 lg:mt-0.5">{session.venue}</p>
+                              <p className="mt-1.5 text-muted-foreground max-sm:mt-2 lg:mt-0.5">
+                                {sessionOrganizer(session)} · {session.locationName ?? "Location TBC"}
+                              </p>
                             </button>
                             <div className="mt-3 flex justify-end max-sm:mt-4 lg:mt-2">
                               <Button
@@ -2085,6 +2255,82 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
               <div className="border border-dashed border-border bg-[hsl(var(--ldc-surface))] p-5 py-6 text-sm leading-relaxed text-muted-foreground max-sm:px-6 sm:p-4 sm:py-4">
                 No matching classes. Try clearing filters or broadening search.
               </div>
+            )}
+
+            {mode === "courses" && !sessionsLoading && (
+              courseListings.length > 0 ? (
+                <div className="grid gap-4 md:grid-cols-2">
+                  {courseListings.map((course) => {
+                    const danceStyles = inferDanceStyles(course.representative);
+                    const levels = inferSessionLevels(course.representative);
+                    const statusLabel =
+                      course.status === "in-progress" ? "In progress" : course.status === "dates-tbc" ? "Dates TBC" : "Upcoming";
+                    return (
+                      <Card key={course.id} className={`${editorialPanelClass} flex h-full flex-col shadow-none`}>
+                        <CardHeader className="space-y-3 border-b border-border p-4 sm:p-5">
+                          <div className="flex flex-wrap gap-2">
+                            <Badge className="rounded-sm border-indigo-300 bg-indigo-50 text-indigo-800">Course</Badge>
+                            {course.isWorkshop ? (
+                              <Badge className="rounded-sm border-orange-300 bg-orange-50 text-orange-800">Workshop</Badge>
+                            ) : null}
+                            <Badge variant="outline" className="rounded-sm">{statusLabel}</Badge>
+                          </div>
+                          <div className="space-y-1.5">
+                            <CardTitle className="font-display text-lg font-semibold leading-snug">{course.title}</CardTitle>
+                            <p className="text-sm font-medium text-muted-foreground">
+                              {sessionOrganizer(course.representative)} · {course.representative.locationName ?? "Location TBC"}
+                            </p>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="flex flex-1 flex-col gap-4 p-4 sm:p-5">
+                          <div className="grid gap-3 border border-border/30 bg-secondary/35 p-3 text-sm sm:grid-cols-2">
+                            <div>
+                              <span className="block text-[11px] font-black uppercase text-muted-foreground">Dates</span>
+                              <span>{formatCourseDateRange(course.startDate, course.endDate)}</span>
+                            </div>
+                            <div>
+                              <span className="block text-[11px] font-black uppercase text-muted-foreground">Schedule</span>
+                              <span>{course.schedules.length > 0 ? course.schedules.join(", ") : "Schedule TBC"}</span>
+                            </div>
+                          </div>
+                          {course.status === "in-progress" ? (
+                            <p className="text-xs font-medium text-muted-foreground">
+                              This course has started. Check with the venue whether late enrolment is available.
+                            </p>
+                          ) : null}
+                          {course.details ? (
+                            <p className="text-sm leading-relaxed text-muted-foreground">
+                              {excerptCourseDetails(course.details)}
+                            </p>
+                          ) : null}
+                          <div className="flex flex-wrap gap-2">
+                            {danceStyles.map((style) => (
+                              <Badge key={`${course.id}-${style}`} className={danceStyleBadgeClass(style)}>{style}</Badge>
+                            ))}
+                            {levels.map((level) => <Badge key={`${course.id}-${level}`} variant="outline">{level}</Badge>)}
+                          </div>
+                          <div className="mt-auto pt-1">
+                            <Button asChild className={editorialButtonClass}>
+                              <TrackedOutboundLink
+                                href={hrefForOutboundBooking(course.representative)}
+                                analyticsKind="booking"
+                                destHost={extractOutboundHostname(course.bookingUrl)}
+                              >
+                                <ExternalLink className={iconClass} aria-hidden />
+                                View course
+                              </TrackedOutboundLink>
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="border border-dashed border-border bg-[hsl(var(--ldc-surface))] p-5 py-6 text-sm leading-relaxed text-muted-foreground max-sm:px-6 sm:p-4 sm:py-4">
+                  No matching courses. Try clearing filters or broadening search.
+                </div>
+              )
             )}
 
             {mode === "venues" && (
@@ -2174,13 +2420,13 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 <div className="grid gap-4 max-lg:gap-5 md:grid-cols-2 md:gap-3">
                   <Select value={mapVenue} onValueChange={setMapVenue}>
                     <SelectTrigger className="border-border bg-[hsl(var(--ldc-surface))]">
-                      <SelectValue placeholder="Choose venue for map" />
+                      <SelectValue placeholder="Choose location for map" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All venues (London dance classes)</SelectItem>
-                      {sortedVenueNamesByRelatedCount.map((venue) => (
-                        <SelectItem key={venue} value={venue}>
-                          {venue}
+                      <SelectItem value="all">All locations (London dance classes)</SelectItem>
+                      {locationNames.map((location) => (
+                        <SelectItem key={location} value={location}>
+                          {location}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -2198,10 +2444,10 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                 </div>
                 <div className={`${editorialPanelClass} space-y-3 overflow-hidden p-4 max-lg:space-y-3 max-lg:p-4 lg:space-y-2 lg:p-3`}>
                   <p className="text-xs text-muted-foreground">
-                    Venue map is under construction. Locations may be incomplete or change without notice.
+                    Location map is under construction. Addresses may be incomplete or change without notice.
                   </p>
                   <iframe
-                    title="Venue map"
+                    title="Location map"
                     src={`https://www.google.com/maps?q=${encodeURIComponent(mapSearchQuery)}&output=embed`}
                     className="h-[360px] w-full border border-border md:h-[520px]"
                     loading="lazy"
@@ -2254,16 +2500,26 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                     {selectedSession.title}
                   </DialogTitle>
                   <DialogDescription className="flex flex-wrap gap-x-3 gap-y-1 pt-2 text-sm font-medium text-background/75">
-                    <span>{selectedSession.venue}</span>
+                    <span>{sessionOrganizer(selectedSession)}</span>
+                    <span>{selectedSession.locationName ?? "Location TBC"}</span>
                     <span>{selectedSession.dayOfWeek ?? "Day TBC"}</span>
                     <span>{formatTimeRange(selectedSession.startTime, selectedSession.endTime)}</span>
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 p-4 text-sm sm:p-5">
-                  <div className="grid gap-2 border border-border/30 bg-secondary/35 p-3 sm:grid-cols-3">
+                  <div className="grid gap-2 border border-border/30 bg-secondary/35 p-3 sm:grid-cols-4">
                     <p>
-                      <span className="block text-[11px] font-black uppercase text-muted-foreground">Venue</span>
-                      {selectedSession.venue}
+                      <span className="block text-[11px] font-black uppercase text-muted-foreground">Organiser</span>
+                      {sessionOrganizer(selectedSession)}
+                    </p>
+                    <p>
+                      <span className="block text-[11px] font-black uppercase text-muted-foreground">Location</span>
+                      {selectedSession.locationName ?? "Location TBC"}
+                      {[selectedSession.borough, selectedSession.postcode].filter(Boolean).length > 0 ? (
+                        <span className="block text-xs text-muted-foreground">
+                          {[selectedSession.borough, selectedSession.postcode].filter(Boolean).join(" · ")}
+                        </span>
+                      ) : null}
                     </p>
                     <p>
                       <span className="block text-[11px] font-black uppercase text-muted-foreground">When</span>
@@ -2275,10 +2531,11 @@ export function CalendarPage({ classCount, initialSessions, listingsUpdatedText,
                     </p>
                   </div>
                   <p className="text-base leading-relaxed">{selectedSession.details ?? "No additional description."}</p>
+                  <SessionFormatBadges session={selectedSession} />
                   <div className="flex flex-wrap gap-2">
-                    {inferDanceTypes(selectedSession).map((type) => (
-                      <Badge key={`${selectedSession.id}-${type}`} className={DANCE_TYPE_BADGE_CLASS[type]}>
-                        {type}
+                    {inferDanceStyles(selectedSession).map((style) => (
+                      <Badge key={`${selectedSession.id}-${style}`} className={danceStyleBadgeClass(style)}>
+                        {style}
                       </Badge>
                     ))}
                   </div>

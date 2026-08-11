@@ -2,6 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import type { DanceSession, ScrapeOutput, VenueStatus } from "../../lib/types";
 import type { AdapterOutput, ScrapedClass } from "./types";
+import { inferIsCourse } from "../../lib/courses";
+import { inferDanceStyles } from "../../lib/dance-types";
+import type { VenueKey } from "../../lib/types";
+import { SOURCE_LOCATIONS } from "../../lib/venues";
 
 const DAY_MATCH = /(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/i;
 const TIME_RANGE = /(\d{1,2}(?::|\.)?\d{0,2}\s*[ap]m?)\s*(?:-|–|to)\s*(\d{1,2}(?::|\.)?\d{0,2}\s*[ap]m?)/i;
@@ -88,6 +92,33 @@ function normalizeTimeRange(input: string | null): { start: string | null; end: 
   };
 }
 
+function clockMinutes(value: string | null): number | null {
+  if (!value) return null;
+  const match = value.trim().match(/^(\d{1,2})(?::|\.)?(\d{2})?\s*([ap])?m?$/i);
+  if (!match) return null;
+  let hours = Number(match[1]);
+  const minutes = Number(match[2] ?? 0);
+  if (match[3]) {
+    hours %= 12;
+    if (match[3].toLowerCase() === "p") hours += 12;
+  }
+  return hours * 60 + minutes;
+}
+
+function isZeroDuration(session: Pick<DanceSession, "startTime" | "endTime">) {
+  const start = clockMinutes(session.startTime);
+  const end = clockMinutes(session.endTime);
+  return start !== null && end !== null && start === end;
+}
+
+function hasMultipleExplicitDates(title: string) {
+  const month = "(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)";
+  const dayMonth = new RegExp(`\\b\\d{1,2}(?:st|nd|rd|th)?\\s+${month}\\b`, "gi");
+  const monthDay = new RegExp(`\\b${month}\\s+\\d{1,2}(?:st|nd|rd|th)?\\b`, "gi");
+  const iso = title.match(/\b\d{4}-\d{2}-\d{2}\b/g) ?? [];
+  return iso.length + (title.match(dayMonth) ?? []).length + (title.match(monthDay) ?? []).length > 1;
+}
+
 function inferAudience(text: string): DanceSession["audience"] {
   const v = text.toLowerCase();
   if (v.includes("all ages") || v.includes("family")) return "all-ages";
@@ -123,7 +154,7 @@ function isNoiseTitle(rawTitle: string): boolean {
 function isInScope(raw: ScrapedClass): boolean {
   const text = `${raw.title} ${raw.details ?? ""}`.toLowerCase();
   const looksChildOnly = /(children|kids|youth|infants|juniors|ages?\s*\d)/i.test(text);
-  const explicitlyOpen = /(all ages|family|open to all|open level|adult)/i.test(text);
+  const explicitlyOpen = /(all ages|family|open to all|open level|adult|ages?\s*(?:1[89]|[2-9]\d)\s*\+?)/i.test(text);
   if (isNoiseTitle(raw.title)) return false;
   return !looksChildOnly || explicitlyOpen;
 }
@@ -219,15 +250,27 @@ function pickPreferredDuplicateSession(group: DanceSession[]): DanceSession {
   });
 }
 
-function toSession(raw: ScrapedClass, seenAt: string): DanceSession {
+function toSession(raw: ScrapedClass, seenAt: string, sourceKey: VenueKey): DanceSession {
   const time = normalizeTimeRange(raw.time);
   const text = `${raw.title} ${raw.details ?? ""}`;
   const day = normalizeDay(raw.dayOfWeek ?? raw.details ?? null);
-  const key = `${raw.venue}|${raw.title}|${day ?? "na"}|${time.start ?? "na"}`;
+  const organizer = raw.organizer?.trim() || raw.venue.trim();
+  const sourceLocation = SOURCE_LOCATIONS[sourceKey];
+  const key = `${organizer}|${raw.title}|${day ?? "na"}|${time.start ?? "na"}`;
+  const tags = inferTags(raw);
 
+  const dataQualityWarnings = hasMultipleExplicitDates(raw.title) && raw.startDate === raw.endDate
+    ? ["Possible missing occurrences: title contains multiple dates"]
+    : undefined;
   return {
     id: slugify(key),
-    venue: raw.venue,
+    sourceKey,
+    organizer,
+    venue: organizer,
+    locationName: raw.locationName?.trim() || sourceLocation?.locationName || null,
+    address: raw.address?.trim() || sourceLocation?.address || null,
+    postcode: raw.postcode?.trim() || sourceLocation?.postcode || null,
+    borough: raw.borough?.trim() || sourceLocation?.borough || null,
     title: raw.title.trim(),
     details: raw.details?.trim() || null,
     dayOfWeek: day,
@@ -239,9 +282,14 @@ function toSession(raw: ScrapedClass, seenAt: string): DanceSession {
     timezone: "Europe/London",
     bookingUrl: raw.bookingUrl,
     sourceUrl: raw.sourceUrl,
-    tags: inferTags(raw),
+    tags,
+    styles: raw.styles?.length
+      ? [...new Set(raw.styles)]
+      : inferDanceStyles({ title: raw.title, details: raw.details, tags, venue: organizer, organizer }),
+    dataQualityWarnings,
     audience: inferAudience(text),
     isWorkshop: inferWorkshop(text),
+    isCourse: inferIsCourse(raw),
     lastSeenAt: seenAt
   };
 }
@@ -271,7 +319,8 @@ export function buildOutput(results: AdapterOutput[]): ScrapeOutput {
       if (!isInScope(klass)) {
         continue;
       }
-      const session = toSession(klass, generatedAt);
+      const session = toSession(klass, generatedAt, result.venueKey);
+      if (isZeroDuration(session)) continue;
       const dedupeKey = [
         session.venue.toLowerCase(),
         normalizeTitleForDedupe(session.title),

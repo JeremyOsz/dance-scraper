@@ -103,7 +103,7 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
   },
   salsaSoho: {
     label: "Salsa! Soho",
-    sourceUrl: "https://www.salsa-soho.com/",
+    sourceUrl: "https://www.barsalsa.com/soho/",
     mapQuery: "Salsa Soho London"
   },
   barSalsaTemple: {
@@ -217,6 +217,21 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
     sourceUrl: "https://www.londonschoolofcapoeira.com/timetable",
     mapQuery: "London School of Capoeira, Unit 1-2 Leeds Place, London N4 3RF"
   },
+  swingland: {
+    label: "Swingland",
+    sourceUrl: "https://www.swingland.com/",
+    mapQuery: "Swingland dance classes London"
+  },
+  trinityLaban: {
+    label: "Trinity Laban",
+    sourceUrl: "https://www.trinitylaban.ac.uk/courses/professional-dance-classes/",
+    mapQuery: "Laban Building, Creekside, London SE8 3DZ"
+  },
+  englishNationalBallet: {
+    label: "English National Ballet",
+    sourceUrl: "https://www.ballet.org.uk/move-with-us/dance-classes/ballet/",
+    mapQuery: "Mulryan Centre for Dance, 41 Hopewell Square, London E14 0SY"
+  },
   customEvents: {
     label: "Custom listings",
     sourceUrl: "https://www.jw3.org.uk/whats-on",
@@ -229,3 +244,26 @@ const VENUE_MAP_QUERY_BY_LABEL = new Map(Object.values(VENUES).map((venue) => [v
 export function getVenueMapQuery(venueName: string) {
   return VENUE_MAP_QUERY_BY_LABEL.get(venueName) ?? `${venueName} London`;
 }
+
+export const SOURCE_LOCATIONS: Partial<Record<VenueKey, {
+  locationName: string;
+  address: string;
+  postcode: string;
+  borough: string | null;
+}>> = {
+  thePlace: { locationName: "The Place", address: "17 Duke's Road", postcode: "WC1H 9PY", borough: "Camden" },
+  rambert: { locationName: "Rambert Studios", address: "99 Upper Ground", postcode: "SE1 9PP", borough: "Southwark" },
+  siobhanDavies: { locationName: "Siobhan Davies Studios", address: "85 St George's Road", postcode: "SE1 6ER", borough: "Southwark" },
+  tripSpace: { locationName: "TripSpace Arch", address: "339-340 Acton Mews", postcode: "E8 4EA", borough: "Hackney" },
+  chisenhaleDanceSpace: { locationName: "Chisenhale Dance Space", address: "64-84 Chisenhale Road", postcode: "E3 5QZ", borough: "Tower Hamlets" },
+  hackneyBaths: { locationName: "Hackney Baths", address: "11-17 Hackney Road", postcode: "E2 7NX", borough: "Tower Hamlets" },
+  wednesdayMoving: { locationName: "Round Chapel Old School Rooms", address: "Powerscroft Road", postcode: "E5 0PU", borough: "Hackney" },
+  danceworks: { locationName: "Danceworks", address: "16 Balderton Street", postcode: "W1K 6TN", borough: "Westminster" },
+  pineappleDanceStudios: { locationName: "Pineapple Dance Studios", address: "7 Langley Street", postcode: "WC2H 9JA", borough: "Camden" },
+  baseDanceStudios: { locationName: "BASE Dance Studios", address: "4 Tinworth Street", postcode: "SE11 5EJ", borough: "Lambeth" },
+  barSalsaTemple: { locationName: "Bar Salsa Temple", address: "Victoria Embankment", postcode: "WC2R 2PH", borough: "Westminster" },
+  coletHouse: { locationName: "Colet House", address: "151 Talgarth Road", postcode: "W14 9DA", borough: "Hammersmith and Fulham" },
+  londonSchoolOfCapoeira: { locationName: "London School of Capoeira", address: "Unit 1-2 Leeds Place", postcode: "N4 3RF", borough: "Islington" },
+  trinityLaban: { locationName: "Laban Building", address: "Creekside", postcode: "SE8 3DZ", borough: "Lewisham" },
+  englishNationalBallet: { locationName: "Mulryan Centre for Dance", address: "41 Hopewell Square", postcode: "E14 0SY", borough: "Newham" }
+};

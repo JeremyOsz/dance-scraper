@@ -12,6 +12,8 @@ export type VenueScrapeChangeStat = {
   newSessionCount: number;
   /** Only defined when scrapeOk; compares normalized session fingerprints before vs after this run. */
   changed: boolean | null;
+  /** Large count swings are retained but explicitly flagged for manual verification. */
+  implausibleCountChange: boolean;
 };
 
 export type ScrapeStatsFile = {
@@ -45,16 +47,19 @@ export function buildVenueChangeStats(
         scrapeOk: false,
         previousSessionCount: prev.length,
         newSessionCount: next.length,
-        changed: null
+        changed: null,
+        implausibleCountChange: false
       };
     }
+    const ratio = prev.length > 0 ? next.length / prev.length : null;
     return {
       key: r.venueKey,
       venue: r.venue,
       scrapeOk: true,
       previousSessionCount: prev.length,
       newSessionCount: next.length,
-      changed: fingerprintVenueSessions(prev) !== fingerprintVenueSessions(next)
+      changed: fingerprintVenueSessions(prev) !== fingerprintVenueSessions(next),
+      implausibleCountChange: prev.length >= 10 && (next.length === 0 || (ratio !== null && (ratio < 0.2 || ratio > 5)))
     };
   });
 }

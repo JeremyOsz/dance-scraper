@@ -2,8 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import type { DanceSession, ScrapeOutput, VenueKey } from "../../lib/types";
 import type { AdapterOutput } from "./types";
+import { coerceScrapeOutput } from "../../lib/data-store";
 
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const FAILED_VENUE_RETENTION_MS = 7 * ONE_DAY_MS;
 
 export type ScrapeCliOptions = {
   onlyEmptyVenues: boolean;
@@ -77,7 +79,7 @@ export function readPreviousOutput(
     if (!parsed || !Array.isArray(parsed.sessions) || !Array.isArray(parsed.venues)) {
       return null;
     }
-    return parsed as ScrapeOutput;
+    return coerceScrapeOutput(parsed);
   } catch {
     return null;
   }
@@ -218,6 +220,17 @@ export function mergeOutputWithPrevious(
     for (const label of previousStatus?.replacedVenueLabels ?? []) {
       staleSessionVenues.add(label);
     }
+  }
+
+  const generatedAtMs = Date.parse(freshOutput.generatedAt);
+  for (const freshStatus of freshOutput.venues.filter((status) => !status.ok)) {
+    const previousStatus = previousStatusByKey.get(freshStatus.key);
+    const lastSuccessMs = previousStatus?.lastSuccessAt ? Date.parse(previousStatus.lastSuccessAt) : Number.NaN;
+    if (!Number.isFinite(generatedAtMs) || !Number.isFinite(lastSuccessMs)) continue;
+    if (generatedAtMs - lastSuccessMs <= FAILED_VENUE_RETENTION_MS) continue;
+    staleSessionVenues.add(freshStatus.venue);
+    if (previousStatus?.venue) staleSessionVenues.add(previousStatus.venue);
+    for (const label of previousStatus?.replacedVenueLabels ?? []) staleSessionVenues.add(label);
   }
 
   const evictedSessions = previousOutput.sessions.filter((session) => staleSessionVenues.has(session.venue));

@@ -6,6 +6,12 @@ const sample: DanceSession[] = [
   {
     id: "1",
     venue: "TripSpace",
+    organizer: "TripSpace",
+    locationName: "TripSpace Arch",
+    address: "339 Acton Mews",
+    postcode: "E8 4EA",
+    borough: "Hackney",
+    styles: ["Improv"],
     title: "Open Level Workshop",
     details: "Improvisation",
     dayOfWeek: "Monday",
@@ -19,11 +25,18 @@ const sample: DanceSession[] = [
     tags: ["improvisation"],
     audience: "open",
     isWorkshop: true,
+    isCourse: true,
     lastSeenAt: "2026-03-10T00:00:00.000Z"
   },
   {
     id: "2",
     venue: "Rambert",
+    organizer: "Rambert",
+    locationName: "Rambert Studios",
+    address: "99 Upper Ground",
+    postcode: "SE1 9PP",
+    borough: "Lambeth",
+    styles: ["Contemporary"],
     title: "Evening Class",
     details: "Intermediate technique",
     dayOfWeek: "Tuesday",
@@ -37,11 +50,27 @@ const sample: DanceSession[] = [
     tags: ["contemporary"],
     audience: "adult",
     isWorkshop: false,
+    isCourse: false,
     lastSeenAt: "2026-03-10T00:00:00.000Z"
   }
 ];
 
 describe("filterSessions", () => {
+  it("filters organisers and physical locations independently", () => {
+    expect(filterSessions(sample, { organizer: ["TripSpace"] }).map((session) => session.id)).toEqual(["1"]);
+    expect(filterSessions(sample, { location: ["Rambert Studios"] }).map((session) => session.id)).toEqual(["2"]);
+  });
+
+  it("uses OR within styles and AND across filter dimensions", () => {
+    expect(filterSessions(sample, { style: ["Improv", "Contemporary"] })).toHaveLength(2);
+    expect(filterSessions(sample, { organizer: ["TripSpace"], style: ["Contemporary"] })).toHaveLength(0);
+  });
+
+  it("searches structured location and style metadata", () => {
+    expect(filterSessions(sample, { q: "hackney" }).map((session) => session.id)).toEqual(["1"]);
+    expect(filterSessions(sample, { q: "contemporary" }).map((session) => session.id)).toEqual(["2"]);
+  });
+
   it("filters by venue and workshop flag", () => {
     const filtered = filterSessions(sample, {
       venue: ["TripSpace"],
@@ -49,6 +78,12 @@ describe("filterSessions", () => {
     });
     expect(filtered).toHaveLength(1);
     expect(filtered[0]?.id).toBe("1");
+  });
+
+  it("filters course occurrences", () => {
+    const courses = filterSessions(sample, { coursesOnly: true });
+
+    expect(courses.map((session) => session.id)).toEqual(["1"]);
   });
 
   it("filters by date range", () => {

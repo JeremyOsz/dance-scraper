@@ -19,7 +19,7 @@ async function selectVenue(page: import("@playwright/test").Page, venue: string)
   if (await clearFilters.isEnabled()) {
     await clearFilters.click();
   }
-  await page.getByRole("button", { name: venue, exact: true }).click();
+  await page.getByRole("button", { name: venue, exact: true }).first().click();
   await expect(page.getByText(/Showing \d+ classes/)).toBeVisible();
 }
 

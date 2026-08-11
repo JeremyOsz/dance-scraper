@@ -67,6 +67,124 @@ describe("dedupeSessionsByStableBookingUrl", () => {
 });
 
 describe("buildOutput", () => {
+  it("persists source, organiser, physical location and canonical styles", () => {
+    const output = buildOutput([
+      {
+        venueKey: "customEvents",
+        venue: "Example Organiser",
+        sourceUrl: "https://example.com",
+        ok: true,
+        error: null,
+        classes: [
+          {
+            venue: "Example Organiser",
+            organizer: "Example Organiser",
+            locationName: "Example Hall",
+            address: "1 Example Road",
+            postcode: "E1 1AA",
+            borough: "Tower Hamlets",
+            title: "Called Community Ceilidh",
+            details: "All dances are taught by a caller",
+            dayOfWeek: "Friday",
+            time: "7pm - 9pm",
+            startDate: "2026-09-04",
+            endDate: "2026-09-04",
+            bookingUrl: "https://example.com/ceilidh",
+            sourceUrl: "https://example.com"
+          }
+        ]
+      }
+    ]);
+
+    expect(output.sessions[0]).toMatchObject({
+      sourceKey: "customEvents",
+      venue: "Example Organiser",
+      organizer: "Example Organiser",
+      locationName: "Example Hall",
+      address: "1 Example Road",
+      postcode: "E1 1AA",
+      borough: "Tower Hamlets",
+      styles: ["Ceilidh/Scottish Country Dance"]
+    });
+  });
+
+  it("rejects zero-duration timed records", () => {
+    const output = buildOutput([
+      {
+        venueKey: "customEvents",
+        venue: "Example Organiser",
+        sourceUrl: "https://example.com",
+        ok: true,
+        error: null,
+        classes: [{
+          venue: "Example Organiser",
+          title: "Broken timed class",
+          details: null,
+          dayOfWeek: "Friday",
+          time: "7pm - 7pm",
+          startDate: "2026-09-04",
+          endDate: "2026-09-04",
+          bookingUrl: "https://example.com/broken",
+          sourceUrl: "https://example.com"
+        }]
+      }
+    ]);
+
+    expect(output.sessions).toHaveLength(0);
+  });
+
+  it("flags an explicit multi-date title represented by one occurrence", () => {
+    const output = buildOutput([
+      {
+        venueKey: "customEvents",
+        venue: "Example Organiser",
+        sourceUrl: "https://example.com",
+        ok: true,
+        error: null,
+        classes: [{
+          venue: "Example Organiser",
+          title: "Workshop 4 September and 11 September",
+          details: null,
+          dayOfWeek: "Friday",
+          time: "7pm - 9pm",
+          startDate: "2026-09-04",
+          endDate: "2026-09-04",
+          bookingUrl: "https://example.com/workshop",
+          sourceUrl: "https://example.com"
+        }]
+      }
+    ]);
+
+    expect(output.sessions[0]?.dataQualityWarnings).toContain("Possible missing occurrences: title contains multiple dates");
+  });
+
+  it("keeps explicitly adult classes whose description says ages 18+", () => {
+    const output = buildOutput([
+      {
+        venueKey: "rambert",
+        venue: "Rambert",
+        sourceUrl: "https://rambert.org.uk/classes/",
+        ok: true,
+        error: null,
+        classes: [
+          {
+            venue: "Rambert",
+            title: "Gaga/people",
+            details: "Classes are open to people ages 18+ regardless of dance background.",
+            dayOfWeek: "Wednesday",
+            time: "18:20 - 19:20",
+            startDate: "2026-07-15",
+            endDate: "2026-07-15",
+            bookingUrl: "https://momence.com/s/example",
+            sourceUrl: "https://rambert.org.uk/classes/"
+          }
+        ]
+      }
+    ]);
+
+    expect(output.sessions).toHaveLength(1);
+  });
+
   it("deduplicates by normalized id", () => {
     const output = buildOutput([
       {

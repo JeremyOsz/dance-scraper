@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import type { DanceSession, ScrapeOutput, VenueKey, VenueStatus } from "../../lib/types";
-import { mergeOutputWithPrevious, parseScrapeCliArgs, resolveForcedVenueKeys, selectVenueKeys } from "../../scripts/scrape/cli";
+import { mergeOutputWithPrevious, parseScrapeCliArgs, readPreviousOutput, resolveForcedVenueKeys, selectVenueKeys } from "../../scripts/scrape/cli";
 
 function makeSession(id: string, venue: string): DanceSession {
   return {
@@ -19,6 +22,7 @@ function makeSession(id: string, venue: string): DanceSession {
     tags: [],
     audience: "adult",
     isWorkshop: false,
+    isCourse: false,
     lastSeenAt: "2026-03-10T10:00:00.000Z"
   };
 }
@@ -46,6 +50,22 @@ describe("parseScrapeCliArgs", () => {
 
   it("throws on unknown args", () => {
     expect(() => parseScrapeCliArgs(["--unknown"])).toThrow(/Unknown argument/);
+  });
+});
+
+describe("readPreviousOutput", () => {
+  it("backfills course classification before a partial scrape merge", () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), "dance-scraper-course-"));
+    const file = path.join(directory, "classes.normalized.json");
+    const legacySession = { ...makeSession("legacy-course", "Example Studio"), title: "Six-week ballet course" } as Partial<DanceSession>;
+    delete legacySession.isCourse;
+    fs.writeFileSync(file, JSON.stringify({ generatedAt: "2026-08-11T00:00:00.000Z", sessions: [legacySession], venues: [] }));
+
+    try {
+      expect(readPreviousOutput(file)?.sessions[0]?.isCourse).toBe(true);
+    } finally {
+      fs.rmSync(directory, { recursive: true, force: true });
+    }
   });
 });
 
@@ -190,6 +210,42 @@ describe("mergeOutputWithPrevious", () => {
     expect(merged.sessions.map((session) => session.id).sort()).toEqual(["prev-rambert", "prev-theplace"]);
     expect(rambertStatus?.ok).toBe(false);
     expect(rambertStatus?.lastSuccessAt).toBe("2026-03-10T10:00:00.000Z");
+  });
+
+  it("quarantines retained sessions after a venue has failed for more than seven days", () => {
+    const previous: ScrapeOutput = {
+      generatedAt: "2026-06-03T10:00:00.000Z",
+      sessions: [makeSession("stale-theplace", "The Place"), makeSession("fresh-rambert", "Rambert")],
+      venues: [
+        makeStatus({
+          key: "thePlace",
+          venue: "The Place",
+          count: 1,
+          ok: true,
+          lastSuccessAt: "2026-06-03T10:00:00.000Z"
+        }),
+        makeStatus({ key: "rambert", venue: "Rambert", count: 1, lastSuccessAt: "2026-07-10T10:00:00.000Z" })
+      ]
+    };
+    const fresh: ScrapeOutput = {
+      generatedAt: "2026-07-11T10:00:00.000Z",
+      sessions: [],
+      venues: [
+        makeStatus({
+          key: "thePlace",
+          venue: "The Place",
+          count: 0,
+          ok: false,
+          lastSuccessAt: null,
+          lastError: "403"
+        })
+      ]
+    };
+
+    const { merged, evictedSessions } = mergeOutputWithPrevious(previous, fresh, ["thePlace", "rambert"]);
+
+    expect(merged.sessions.map((session) => session.id)).toEqual(["fresh-rambert"]);
+    expect(evictedSessions.map((session) => session.id)).toEqual(["stale-theplace"]);
   });
 
   it("replaces previous venue sessions when fresh scrape succeeds", () => {

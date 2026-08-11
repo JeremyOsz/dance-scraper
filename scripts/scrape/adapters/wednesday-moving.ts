@@ -54,11 +54,12 @@ function parseCsv(csv: string): string[][] {
 }
 
 function parseDate(raw: string): Date | null {
-  const match = raw.trim().match(/^(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})$/);
+  const match = raw.trim().match(/^(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{2}|\d{4})$/);
   if (!match) return null;
   const day = Number(match[1]);
   const month = Number(match[2]);
-  const year = Number(match[3]);
+  const rawYear = Number(match[3]);
+  const year = match[3].length === 2 ? 2000 + rawYear : rawYear;
   const date = new Date(year, month - 1, day);
   if (Number.isNaN(date.getTime())) return null;
   if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) return null;

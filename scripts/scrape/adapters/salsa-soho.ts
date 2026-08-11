@@ -1,12 +1,13 @@
 import type { AdapterOutput } from "../types";
-import { scrapeSimpleScheduleVenue } from "./simple-schedule-venue";
-
-const sourceUrl = "https://www.bar-salsa.com/soho";
+const sourceUrl = "https://www.barsalsa.com/soho/";
 
 export async function scrapeSalsaSoho(): Promise<AdapterOutput> {
-  return scrapeSimpleScheduleVenue({
+  return {
     venueKey: "salsaSoho",
     venue: "Salsa! Soho",
-    sourceUrl
-  });
+    sourceUrl,
+    classes: [],
+    ok: true,
+    error: null
+  };
 }

@@ -5,13 +5,15 @@ import { VENUES } from "@/lib/venues";
 
 const fetchHtml = vi.fn();
 const fetchJson = vi.fn();
+const postJson = vi.fn();
 
 vi.mock("../../scripts/scrape/adapters/common", async () => {
   const actual = await vi.importActual<object>("../../scripts/scrape/adapters/common");
   return {
     ...actual,
     fetchHtml,
-    fetchJson
+    fetchJson,
+    postJson
   };
 });
 
@@ -106,6 +108,9 @@ const testedVenueKeys = [
   "tangoFever",
   "queerSalsa",
   "londonSchoolOfCapoeira",
+  "swingland",
+  "trinityLaban",
+  "englishNationalBallet",
   "customEvents"
 ] as const;
 
@@ -139,6 +144,7 @@ describe("scraper adapters", () => {
   beforeEach(() => {
     fetchHtml.mockReset();
     fetchJson.mockReset();
+    postJson.mockReset();
   });
 
   it("keeps adapter tests aligned with every supported venue", () => {
@@ -177,6 +183,7 @@ describe("scraper adapters", () => {
     expect(output.classes.map((c) => c.startDate)).toEqual(["2026-03-25", "2026-04-22"]);
     expect(output.classes.map((c) => c.endDate)).toEqual(["2026-03-25", "2026-04-22"]);
     expect(output.classes.every((c) => c.excludedDateRanges === undefined)).toBe(true);
+    expect(output.classes.every((c) => c.isCourse === true)).toBe(true);
     expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
     expect(output.classes[1]?.dayOfWeek).toBe("Wednesday");
   });
@@ -234,13 +241,15 @@ describe("scraper adapters", () => {
     expect(output.classes.find((item) => item.title.includes("Contemporary Introduction"))).toMatchObject({
       startDate: "2026-09-16",
       endDate: "2026-09-16",
-      time: "18:30 - 20:00"
+      time: "18:30 - 20:00",
+      isCourse: true
     });
     expect(output.classes.filter((item) => item.title.includes("Professional Class"))).toHaveLength(2);
     expect(output.classes.filter((item) => item.title.includes("Professional Class")).map((item) => item.startDate)).toEqual([
       "2026-08-10",
       "2026-08-11"
     ]);
+    expect(output.classes.filter((item) => item.title.includes("Professional Class")).every((item) => item.isCourse === false)).toBe(true);
   });
 
   it("filters multi-digit age-banded The Place cards before detail fetching", async () => {
@@ -1095,6 +1104,58 @@ describe("scraper adapters", () => {
     }
   });
 
+  it("formats Luminous ICS events in London time and deduplicates the same event across sources", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-01T00:00:00Z"));
+    try {
+      const eventbrite = organizerFixture(
+        "Luminous x The Sanctuary &Soul",
+        "https://www.eventbrite.com/e/luminous-sanctuary",
+        "2026-07-18T19:00:00+01:00"
+      );
+      const ics = [
+        "BEGIN:VCALENDAR",
+        "BEGIN:VEVENT",
+        "DTSTART:20260718T180000Z",
+        "DTEND:20260718T201500Z",
+        "DESCRIPTION:https://dandelion.events/e/w23ue",
+        "LOCATION:114 Cheshire Street, London",
+        "SUMMARY:Luminous x The Sanctuary &Soul",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\n");
+      fetchHtml
+        .mockResolvedValueOnce(eventbrite)
+        .mockResolvedValueOnce(eventbrite)
+        .mockResolvedValueOnce(eventbrite)
+        .mockResolvedValueOnce(eventbrite)
+        .mockResolvedValueOnce(ics);
+
+      const { scrapeLuminousDance } = await import("../../scripts/scrape/adapters/luminous-dance");
+      const output = await scrapeLuminousDance();
+      const matches = output.classes.filter((item) => item.title === "Luminous x The Sanctuary &Soul");
+
+      expect(matches).toHaveLength(1);
+      expect(matches[0]?.time).toBe("19:00 - 21:15");
+      expect(matches[0]?.bookingUrl).toBe("https://dandelion.events/e/w23ue");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("parses a two-day cplay.cy intensive as a date range", async () => {
+    fetchHtml.mockResolvedValue(`
+      <a href="https://forms.gle/example">Genie &amp; Simpson Partnering Intensive - 19&amp;20 July 2026 | @The Place</a>
+    `);
+    const { scrapeCplayCyLinktree } = await import("../../scripts/scrape/adapters/cplay-cy-linktree");
+    const output = await scrapeCplayCyLinktree();
+
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]?.startDate).toBe("2026-07-19");
+    expect(output.classes[0]?.endDate).toBe("2026-07-20");
+    expect(output.classes[0]?.dayOfWeek).toBe("Sunday");
+  });
+
   it("queries each Ecstatic Dance organiser and keeps per-organiser events", async () => {
     fetchHtml
       .mockResolvedValueOnce(
@@ -1255,8 +1316,10 @@ describe("scraper adapters", () => {
       expect(output.classes.find((item) => item.startDate === "2026-08-17")).toMatchObject({
         venue: "Queer Salsa",
         dayOfWeek: "Monday",
-        time: "18:00 - 20:00"
+        time: "18:00 - 20:00",
+        isCourse: false
       });
+      expect(output.classes.filter((item) => item.title === "Cuban Salsa Beginners Course").every((item) => item.isCourse === true)).toBe(true);
       expect(output.classes.some((item) => item.startDate === "2026-07-20")).toBe(false);
       expect(output.classes[0]?.details).not.toContain("Image 1 of 1");
     } finally {
@@ -1308,13 +1371,15 @@ describe("scraper adapters", () => {
       expect(output.classes.filter((item) => item.title === "Beginners Course - September, 8 sessions")).toHaveLength(8);
       expect(output.classes.find((item) => item.startDate === "2026-09-03")).toMatchObject({
         dayOfWeek: "Thursday",
-        time: "7pm - 8pm"
+        time: "7pm - 8pm",
+        isCourse: true
       });
       expect(output.classes).toContainEqual(expect.objectContaining({
         title: "Extended Regular Capoeira Class",
         dayOfWeek: "Monday",
         time: "7:00–8:30 PM",
-        startDate: null
+        startDate: null,
+        isCourse: false
       }));
       expect(output.classes.some((item) => item.title === "Capoeira Music")).toBe(false);
       expect(output.classes.some((item) => item.title === "Beginners' Capoeira Course")).toBe(false);
@@ -1329,6 +1394,48 @@ describe("scraper adapters", () => {
     const output = await scrapeSalsaRuedaRuedaLibre();
     expect(output.ok).toBe(true);
     expect(output.classes.map((item) => item.title)).toContain("Rueda Libre Wednesday");
+  });
+
+  it("parses instructive Swingland events and excludes dance-only socials", async () => {
+    fetchHtml.mockResolvedValue(fixture("swingland.html"));
+    const { scrapeSwingland } = await import("../../scripts/scrape/adapters/swingland");
+    const output = await scrapeSwingland();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]).toMatchObject({
+      organizer: "Swingland",
+      locationName: "The Hammersmith Club",
+      postcode: "W6 9DH",
+      startDate: "2026-09-14"
+    });
+  });
+
+  it("expands Trinity Laban professional-class weeks into dated occurrences", async () => {
+    fetchHtml.mockResolvedValue(fixture("trinity-laban.html"));
+    const { scrapeTrinityLaban } = await import("../../scripts/scrape/adapters/trinity-laban");
+    const output = await scrapeTrinityLaban();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(5);
+    expect(output.classes[0]).toMatchObject({
+      organizer: "Trinity Laban",
+      locationName: "Laban Building",
+      styles: ["Contemporary"],
+      startDate: "2099-09-07"
+    });
+  });
+
+  it("expands English National Ballet bookable dates and excludes cancellations", async () => {
+    fetchHtml.mockResolvedValueOnce(fixture("english-national-ballet-listing.html")).mockResolvedValueOnce(fixture("english-national-ballet-detail.html"));
+    const { scrapeEnglishNationalBallet } = await import("../../scripts/scrape/adapters/english-national-ballet");
+    const output = await scrapeEnglishNationalBallet();
+    expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(2);
+    expect(output.classes[0]).toMatchObject({
+      organizer: "English National Ballet",
+      locationName: "Mulryan Centre for Dance",
+      styles: ["Ballet"],
+      startDate: "2026-09-22"
+    });
   });
 
   it("parses Cubaneando adapter", async () => {
@@ -1374,6 +1481,19 @@ describe("scraper adapters", () => {
     expect(output.ok).toBe(true);
     expect(output.classes.length).toBe(2);
     expect(output.classes[0]?.venue).toBe("Wednesday Moving");
+    expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
+  });
+
+  it("parses Wednesday Moving CSV dates with a two-digit year", async () => {
+    fetchHtml.mockResolvedValueOnce(fixture("wednesday-moving-home.html")).mockResolvedValueOnce([
+      "date,name,link,description,image,booking_link",
+      "9 / 9 / 26,Orley Quick,https://example.com/profile,Passing Through,https://example.com/img.jpg,https://square.link/u/test"
+    ].join("\n"));
+    const { scrapeWednesdayMoving } = await import("../../scripts/scrape/adapters/wednesday-moving");
+    const output = await scrapeWednesdayMoving();
+
+    expect(output.classes).toHaveLength(1);
+    expect(output.classes[0]?.startDate).toBe("2026-09-09");
     expect(output.classes[0]?.dayOfWeek).toBe("Wednesday");
   });
 
@@ -1462,13 +1582,12 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.venue).toBe("BASE Dance Studios");
   });
 
-  it("parses Salsa! Soho adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+  it("keeps the retired Salsa! Soho source disabled without fetching it", async () => {
     const { scrapeSalsaSoho } = await import("../../scripts/scrape/adapters/salsa-soho");
     const output = await scrapeSalsaSoho();
     expect(output.ok).toBe(true);
-    expect(output.classes.length).toBeGreaterThan(0);
-    expect(output.classes[0]?.venue).toBe("Salsa! Soho");
+    expect(output.classes).toEqual([]);
+    expect(fetchHtml).not.toHaveBeenCalled();
   });
 
   it("parses Bar Salsa Temple adapter", async () => {
@@ -1490,20 +1609,64 @@ describe("scraper adapters", () => {
   });
 
   it("parses City Academy adapter", async () => {
-    fetchHtml.mockResolvedValue(fixture("generic-venue-schedule.html"));
+    postJson.mockResolvedValueOnce({
+      success: true,
+      data: [
+        {
+          parent_code: "DBT-1",
+          location_name: "City Academy, Farringdon",
+          tutor_name: "Justyna Sochaj",
+          duration: "8 weeks",
+          event_date: "2026-08-11 18:00:00",
+          event_end_date: "2026-09-29 19:30:00",
+          individual_price: "160.00",
+          venue_discount: "",
+          dateTxt: "11 Aug 2026 - 29 Sep 2026",
+          timeTxt: "6:00 PM - 7:30 PM",
+          course_name: "Ballet Classes - Beginners",
+          course_pageurl: "https://www.city-academy.com/ballet-classes-beginners"
+        }
+      ]
+    });
     const { scrapeCityAcademy } = await import("../../scripts/scrape/adapters/city-academy");
     const output = await scrapeCityAcademy();
     expect(output.ok).toBe(true);
-    expect(output.classes.length).toBeGreaterThan(0);
+    expect(output.classes).toHaveLength(1);
     expect(output.classes[0]?.venue).toBe("City Academy");
+    expect(output.classes[0]?.dayOfWeek).toBe("Tuesday");
+    expect(output.classes[0]?.time).toBe("6:00 PM - 7:30 PM");
+    expect(output.classes[0]?.startDate).toBe("2026-08-11");
+    expect(output.classes[0]?.endDate).toBe("2026-09-29");
+    expect(output.classes[0]?.details).toContain("Justyna Sochaj");
+    expect(output.classes[0]?.isCourse).toBe(true);
   });
 
-  it("ignores City Academy marketing tiles without schedule metadata", async () => {
-    fetchHtml.mockResolvedValue(fixture("city-academy-no-schedule.html"));
+  it("paginates City Academy timetable results until the API returns a short page", async () => {
+    const event = {
+      parent_code: "DBT-1",
+      location_name: "City Academy, Farringdon",
+      tutor_name: "Tutor",
+      duration: "8 weeks",
+      event_date: "2026-08-11 18:00:00",
+      event_end_date: "2026-09-29 19:30:00",
+      individual_price: "160.00",
+      venue_discount: "",
+      dateTxt: "11 Aug 2026 - 29 Sep 2026",
+      timeTxt: "6:00 PM - 7:30 PM",
+      course_name: "Ballet Classes - Beginners",
+      course_pageurl: "https://www.city-academy.com/ballet-classes-beginners"
+    };
+    postJson.mockResolvedValueOnce({
+      success: true,
+      data: Array.from({ length: 100 }, (_, i) => ({ ...event, parent_code: `DBT-${i}`, course_name: `Ballet Class ${i}` }))
+    });
+    postJson.mockResolvedValueOnce({ success: true, data: [{ ...event, parent_code: "DBT-last", event_date: "2026-08-12 18:00:00" }] });
     const { scrapeCityAcademy } = await import("../../scripts/scrape/adapters/city-academy");
     const output = await scrapeCityAcademy();
+
     expect(output.ok).toBe(true);
-    expect(output.classes).toHaveLength(0);
+    expect(output.classes).toHaveLength(101);
+    expect(postJson).toHaveBeenNthCalledWith(2, expect.any(String), expect.objectContaining({ offset: 100 }));
   });
 
   it("parses Adrian Outsavvy adapter", async () => {
@@ -1607,7 +1770,8 @@ describe("scraper adapters", () => {
 
     expect(output.classes.find((item) => item.title === "Technique | Improvisation")).toMatchObject({
       startDate: "2026-04-14",
-      endDate: "2026-07-04"
+      endDate: "2026-07-04",
+      isCourse: true
     });
     expect(output.classes.filter((item) => item.title === "Acosta Performance Group").map((item) => item.startDate)).toEqual([
       "2026-05-24",
@@ -2061,6 +2225,7 @@ describe("scraper adapters", () => {
     const moveReset = output.classes.find((c) => c.title.includes("Move & Reset"));
     expect(moveReset?.bookingUrl).toContain("jw3.org.uk");
     expect(moveReset?.dayOfWeek).toBe("Thursday");
+    expect(moveReset?.isCourse).toBe(true);
     const ukDancers = output.classes.find((c) => c.venue === "UK Dancers for Palestine");
     expect(ukDancers?.title).toBe("UK Dancers for Palestine events");
     expect(ukDancers?.startDate).toBeNull();

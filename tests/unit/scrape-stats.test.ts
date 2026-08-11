@@ -63,6 +63,12 @@ describe("scrape change stats", () => {
     );
     expect(stats2[0].changed).toBe(true);
   });
+
+  it("flags implausible count collapses for manual verification", () => {
+    const previous = Array.from({ length: 20 }, (_, index) => makeSession("V", `Class ${index}`, null));
+    const stats = buildVenueChangeStats([{ venueKey: "rambert", venue: "V", ok: true }], previous, []);
+    expect(stats[0].implausibleCountChange).toBe(true);
+  });
 });
 
 function okRow(key: VenueKey, changed: boolean) {
@@ -72,7 +78,8 @@ function okRow(key: VenueKey, changed: boolean) {
     scrapeOk: true as const,
     previousSessionCount: 1,
     newSessionCount: 1,
-    changed
+    changed,
+    implausibleCountChange: false
   };
 }
 
