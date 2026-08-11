@@ -19,6 +19,12 @@ const sessions: DanceSession[] = [
   {
     id: "s1",
     venue: "TripSpace",
+    organizer: "TripSpace",
+    locationName: "TripSpace Arch",
+    address: "339 Acton Mews",
+    postcode: "E8 4EA",
+    borough: "Hackney",
+    styles: ["Improv"],
     title: "Embodied Workshop",
     details: "Open",
     dayOfWeek: "Monday",
@@ -32,11 +38,18 @@ const sessions: DanceSession[] = [
     tags: ["improvisation"],
     audience: "open",
     isWorkshop: true,
+    isCourse: true,
     lastSeenAt: "2026-03-10T00:00:00.000Z"
   },
   {
     id: "s2",
     venue: "Rambert",
+    organizer: "Rambert",
+    locationName: "Rambert Studios",
+    address: "99 Upper Ground",
+    postcode: "SE1 9PP",
+    borough: "Southwark",
+    styles: ["Contemporary"],
     title: "Evening Technique",
     details: "Intermediate",
     dayOfWeek: "Tuesday",
@@ -50,6 +63,7 @@ const sessions: DanceSession[] = [
     tags: ["contemporary"],
     audience: "adult",
     isWorkshop: false,
+    isCourse: false,
     lastSeenAt: "2026-03-10T00:00:00.000Z"
   },
   {
@@ -68,6 +82,7 @@ const sessions: DanceSession[] = [
     tags: [],
     audience: "adult",
     isWorkshop: true,
+    isCourse: false,
     lastSeenAt: "2026-03-10T00:00:00.000Z"
   },
   {
@@ -86,6 +101,7 @@ const sessions: DanceSession[] = [
     tags: ["gaga", "somatic"],
     audience: "adult",
     isWorkshop: false,
+    isCourse: false,
     lastSeenAt: "2026-03-10T00:00:00.000Z"
   }
 ];
@@ -184,16 +200,31 @@ describe("CalendarPage", () => {
     expect(await screen.findByRole("heading", { name: "Embodied Workshop" })).toBeInTheDocument();
   });
 
-  it("uses colour-coded buttons for dance types in the type filter", () => {
+  it("groups canonical styles into collapsible families", () => {
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
+    expect(screen.getByText("Technique & Stage")).toBeInTheDocument();
+    expect(screen.getByText("Movement & Performance")).toBeInTheDocument();
     const contemporaryTypeButton = screen.getAllByRole("button", { name: "Contemporary" })[0];
     const yogaPilatesTypeButton = screen.getAllByRole("button", { name: "Yoga/Pilates" })[0];
-    const commercialHeelsTypeButton = screen.getAllByRole("button", { name: "Commercial/Heels" })[0];
+    const commercialTypeButton = screen.getAllByRole("button", { name: "Commercial" })[0];
 
     expect(contemporaryTypeButton).toHaveClass("bg-sky-100", "text-sky-800");
-    expect(yogaPilatesTypeButton).toHaveClass("bg-cyan-100", "text-cyan-800");
-    expect(commercialHeelsTypeButton).toHaveClass("bg-fuchsia-100", "text-fuchsia-800");
+    expect(yogaPilatesTypeButton).toHaveClass("bg-emerald-100", "text-emerald-800");
+    expect(commercialTypeButton).toHaveClass("bg-violet-100", "text-violet-800");
+  });
+
+  it("separates organiser and physical-location filters in shareable URL state", async () => {
+    const user = userEvent.setup();
+    render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Rambert Studios" }));
+    expect(screen.queryByText("Embodied Workshop")).not.toBeInTheDocument();
+    expect(screen.getAllByText("Evening Technique").length).toBeGreaterThan(0);
+
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("location=Rambert+Studios"), { scroll: false });
+    });
   });
 
   it("loads class listings from the API when sessions are not embedded", async () => {
@@ -236,12 +267,46 @@ describe("CalendarPage", () => {
     expect((await screen.findAllByRole("link", { name: "Venue site" })).length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole("button", { name: "Map view" }));
-    const mapFrame = await screen.findByTitle("Venue map");
+    const mapFrame = await screen.findByTitle("Location map");
     expect(mapFrame).toBeInTheDocument();
     expect(mapFrame).toHaveAttribute(
       "src",
       expect.stringContaining(encodeURIComponent("London dance classes"))
     );
+  });
+
+  it("groups repeated sessions in Courses mode and returns to Calendar", async () => {
+    const user = userEvent.setup();
+    const repeatedCourse: DanceSession = {
+      ...sessions[0],
+      id: "s1-second-date",
+      dayOfWeek: "Thursday",
+      startTime: "7pm",
+      endTime: "9pm"
+    };
+    render(<CalendarPage initialSessions={[...sessions, repeatedCourse]} venues={venues} />);
+
+    await user.click(screen.getByRole("button", { name: "Courses list" }));
+
+    expect(screen.getByRole("heading", { level: 2, name: "Find dance courses" })).toBeInTheDocument();
+    expect(screen.getByText("Showing 1 course")).toBeInTheDocument();
+    expect(screen.getAllByRole("heading", { name: "Embodied Workshop" })).toHaveLength(1);
+    expect(screen.getAllByText("Dates TBC").length).toBeGreaterThan(0);
+    expect(screen.queryByRole("button", { name: /^Shortlist/ })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Calendar view" }));
+    expect(screen.getByRole("heading", { level: 2, name: "Find dance classes" })).toBeInTheDocument();
+  });
+
+  it("loads Courses mode from the URL and labels courses in the calendar", async () => {
+    mockSearchParams = new URLSearchParams("mode=courses");
+    const { rerender } = render(<CalendarPage initialSessions={sessions} venues={venues} />);
+
+    expect(await screen.findByRole("heading", { level: 2, name: "Find dance courses" })).toBeInTheDocument();
+
+    mockSearchParams = new URLSearchParams("mode=calendar");
+    rerender(<CalendarPage initialSessions={sessions} venues={venues} />);
+    expect((await screen.findAllByText("Course")).length).toBeGreaterThan(0);
   });
 
   it("shows explicit no-events status for successful zero-count venues", async () => {
@@ -357,8 +422,7 @@ describe("CalendarPage", () => {
     const user = userEvent.setup();
     render(<CalendarPage initialSessions={sessions} venues={venues} />);
 
-    const addButtons = screen.getAllByRole("button", { name: /add to shortlist/i });
-    await user.click(addButtons[0]);
+    await user.click(screen.getByRole("button", { name: "Add to shortlist: Embodied Workshop" }));
 
     expect(screen.getByRole("button", { name: "Clear shortlist (1)" })).not.toBeDisabled();
     await user.click(screen.getByRole("button", { name: "Shortlist (1)" }));

@@ -116,6 +116,7 @@ function extractAccordionClass(element: AnyNode, $: cheerio.CheerioAPI): Scraped
     time,
     startDate: null,
     endDate: null,
+    isCourse: true,
     bookingUrl,
     sourceUrl
   };

@@ -23,6 +23,19 @@ const base = (over: Partial<DanceSession>): DanceSession => ({
 });
 
 describe("dedupeSessionsByCanonicalBooking", () => {
+  it("hydrates canonical organiser and styles on legacy persisted sessions", () => {
+    const out = coerceScrapeOutput({
+      generatedAt: "2026-01-01T00:00:00.000Z",
+      sessions: [base({ venue: "Tango Fever", title: "Argentine Tango Beginners", tags: ["tango"] })],
+      venues: []
+    });
+
+    expect(out.sessions[0]).toMatchObject({
+      organizer: "Tango Fever",
+      styles: ["Argentine Tango"]
+    });
+  });
+
   it("merges duplicate GoTeamUp rows that share the same /e/{eventId}- booking but differ in parsed times", () => {
     const url = "https://goteamup.com/p/5799650-east-london-dance/e/90432252-salsa-x-soca-road-to-carnival/";
     const sessions = [

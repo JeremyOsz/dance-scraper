@@ -156,6 +156,13 @@ export default async function StudioPage({ params }: PageProps) {
               <p>
                 Last seen in feed: <strong>{studio.latestSeenAt ? new Date(studio.latestSeenAt).toLocaleString("en-GB") : "Unknown"}</strong>
               </p>
+              <p>
+                Last successful source check:{" "}
+                <strong>{studio.lastSuccessAt ? new Date(studio.lastSuccessAt).toLocaleString("en-GB") : "Never"}</strong>
+              </p>
+              {!studio.ok && studio.lastError ? (
+                <p className="text-destructive">Error scraping: {studio.lastError}</p>
+              ) : null}
             </CardContent>
           </Card>
 

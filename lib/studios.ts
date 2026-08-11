@@ -1,5 +1,5 @@
 import { ORDERED_DAYS } from "@/lib/date";
-import { inferDanceTypes } from "@/lib/dance-types";
+import { inferDanceStyles } from "@/lib/dance-types";
 import type { ScrapeOutput, VenueStatus } from "@/lib/types";
 import { slugify } from "@/lib/utils";
 import { getVenueMapQuery, VENUES } from "@/lib/venues";
@@ -74,8 +74,8 @@ export function getStudioProfiles(data: ScrapeOutput): StudioProfile[] {
     let workshopCount = 0;
 
     for (const session of sessions) {
-      for (const type of inferDanceTypes(session)) {
-        countByType.set(type, (countByType.get(type) ?? 0) + 1);
+      for (const style of inferDanceStyles(session)) {
+        countByType.set(style, (countByType.get(style) ?? 0) + 1);
       }
       if (session.dayOfWeek) {
         countByDay.set(session.dayOfWeek, (countByDay.get(session.dayOfWeek) ?? 0) + 1);

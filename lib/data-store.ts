@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { DanceSession, ScrapeOutput, VenueKey, VenueStatus } from "@/lib/types";
-import { VENUES } from "@/lib/venues";
+import { SOURCE_LOCATIONS, VENUES } from "@/lib/venues";
+import { inferIsCourse } from "@/lib/courses";
+import { inferDanceStyles } from "@/lib/dance-types";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "classes.normalized.json");
@@ -301,7 +303,29 @@ function mergeVenueRowsWithInferredCounts(
 
 /** Session cleanup applied when loading merged or hand-edited `classes.normalized.json`. Exported for tests. */
 export function normalizeSessionsForCoerce(sessions: DanceSession[]): DanceSession[] {
-  let s = disambiguateDuplicateSessionIds(sessions);
+  let s: DanceSession[] = sessions.map((session) => {
+    const organizer = session.organizer?.trim() || session.venue?.trim() || "Unknown";
+    const sourceKey = session.sourceKey ?? VENUE_LABEL_TO_KEY.get(organizer.toLowerCase()) ?? "customEvents";
+    const sourceLocation = SOURCE_LOCATIONS[sourceKey];
+    return {
+      ...session,
+      sourceKey,
+      organizer,
+      venue: organizer,
+      locationName: session.locationName ?? sourceLocation?.locationName ?? null,
+      address: session.address ?? sourceLocation?.address ?? null,
+      postcode: session.postcode ?? sourceLocation?.postcode ?? null,
+      borough: session.borough ?? sourceLocation?.borough ?? null,
+      styles: session.styles?.length ? session.styles : inferDanceStyles({ ...session, organizer, venue: organizer }),
+      isCourse: inferIsCourse({
+        title: session.title,
+        details: session.details,
+        bookingUrl: session.bookingUrl,
+        isCourse: (session as Partial<DanceSession>).isCourse
+      })
+    };
+  });
+  s = disambiguateDuplicateSessionIds(s);
   s = dedupeSameBookingUrlCalendarDay(s);
   s = dedupeSessionsByCanonicalBooking(s);
   s = dedupeLuminousNewMoonMondaySameDate(s);

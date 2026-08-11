@@ -1,3 +1,5 @@
+import type { DanceStyle } from "@/lib/dance-types";
+
 export type VenueKey =
   | "thePlace"
   | "rambert"
@@ -42,6 +44,9 @@ export type VenueKey =
   | "tangoFever"
   | "queerSalsa"
   | "londonSchoolOfCapoeira"
+  | "swingland"
+  | "trinityLaban"
+  | "englishNationalBallet"
   | "customEvents";
 
 export type DayOfWeek =
@@ -59,7 +64,15 @@ export type SessionExcludedDateRange = { start: string; end: string };
 
 export type DanceSession = {
   id: string;
+  /** Stable source adapter key. Optional only for legacy persisted rows. */
+  sourceKey?: VenueKey;
+  /** Canonical provider name. `venue` remains its legacy alias. */
+  organizer?: string;
   venue: string;
+  locationName?: string | null;
+  address?: string | null;
+  postcode?: string | null;
+  borough?: string | null;
   title: string;
   details: string | null;
   dayOfWeek: DayOfWeek;
@@ -73,8 +86,12 @@ export type DanceSession = {
   bookingUrl: string;
   sourceUrl: string;
   tags: string[];
+  styles?: DanceStyle[];
+  /** Non-fatal parser checks retained for diagnostics and manual verification. */
+  dataQualityWarnings?: string[];
   audience: "adult" | "open" | "all-ages";
   isWorkshop: boolean;
+  isCourse: boolean;
   lastSeenAt: string;
 };
 

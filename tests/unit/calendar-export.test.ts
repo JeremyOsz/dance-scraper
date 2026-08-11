@@ -75,6 +75,22 @@ describe("calendar export", () => {
     expect(ics).toContain("https://example.com/book");
   });
 
+  it("uses the physical location in calendar exports and keeps the organiser separate", () => {
+    const ics = buildSessionIcs(
+      {
+        ...baseSession,
+        organizer: "Test Organiser",
+        locationName: "The Shared Hall",
+        address: "1 Dance Street",
+        postcode: "E8 1AA"
+      },
+      new Date("2026-03-10T12:00:00.000Z")
+    );
+
+    expect(ics).toContain("LOCATION:The Shared Hall\\, 1 Dance Street\\, E8 1AA");
+    expect(ics).toContain("Organiser: Test Organiser");
+  });
+
   it("prefers next dayOfWeek occurrence over stale startDate", () => {
     const session: DanceSession = {
       ...baseSession,

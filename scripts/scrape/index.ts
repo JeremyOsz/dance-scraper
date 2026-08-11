@@ -42,6 +42,9 @@ import { scrapeStudio66 } from "./adapters/studio66";
 import { scrapeTangoFever } from "./adapters/tango-fever";
 import { scrapeQueerSalsa } from "./adapters/queer-salsa";
 import { scrapeLondonSchoolOfCapoeira } from "./adapters/london-school-of-capoeira";
+import { scrapeSwingland } from "./adapters/swingland";
+import { scrapeTrinityLaban } from "./adapters/trinity-laban";
+import { scrapeEnglishNationalBallet } from "./adapters/english-national-ballet";
 import type { ScrapeOutput, VenueKey } from "../../lib/types";
 import { VENUES } from "../../lib/venues";
 import { buildOutput, dedupeSessionsByStableBookingUrl, writeOutput } from "./normalize";
@@ -107,16 +110,30 @@ const SCRAPERS: ScraperDefinition[] = [
   { key: "tangoFever", scrape: scrapeTangoFever },
   { key: "queerSalsa", scrape: scrapeQueerSalsa },
   { key: "londonSchoolOfCapoeira", scrape: scrapeLondonSchoolOfCapoeira },
+  { key: "swingland", scrape: scrapeSwingland },
+  { key: "trinityLaban", scrape: scrapeTrinityLaban },
+  { key: "englishNationalBallet", scrape: scrapeEnglishNationalBallet },
   { key: "customEvents", scrape: scrapeCustomEvents }
 ];
 
-const HIDDEN_VENUE_KEYS = new Set<VenueKey>();
+const ALWAYS_HIDDEN_VENUE_KEYS = new Set<VenueKey>(["salsaSoho"]);
+const HIDE_WHILE_EMPTY_VENUE_KEYS = new Set<VenueKey>([
+  "baseDanceStudios",
+  "barSalsaTemple",
+  "mamboCity",
+  "eastLondonDance",
+  "conTumbaoSalsa"
+]);
 const HIDDEN_SESSION_TITLE_PATTERNS = [/\bvinyasa\s*flow\b/i];
 
 function applyOutputCuration(output: ScrapeOutput): ScrapeOutput {
   const dedupedSessions = dedupeSessionsByStableBookingUrl(output.sessions);
+  const hiddenVenueKeys = new Set<VenueKey>(ALWAYS_HIDDEN_VENUE_KEYS);
+  for (const venue of output.venues) {
+    if (HIDE_WHILE_EMPTY_VENUE_KEYS.has(venue.key) && venue.count === 0) hiddenVenueKeys.add(venue.key);
+  }
   const hiddenVenueLabels = new Set(
-    output.venues.filter((venue) => HIDDEN_VENUE_KEYS.has(venue.key)).map((venue) => venue.venue)
+    output.venues.filter((venue) => hiddenVenueKeys.has(venue.key)).map((venue) => venue.venue)
   );
 
   const curatedSessions = dedupedSessions.filter((session) => {
@@ -135,7 +152,7 @@ function applyOutputCuration(output: ScrapeOutput): ScrapeOutput {
   }
 
   const curatedVenues = output.venues
-    .filter((venue) => !HIDDEN_VENUE_KEYS.has(venue.key) && !hiddenVenueLabels.has(venue.venue))
+    .filter((venue) => !hiddenVenueKeys.has(venue.key) && !hiddenVenueLabels.has(venue.venue))
     .map((venue) => ({
       ...venue,
       count: sessionCountByVenue.get(venue.venue) ?? 0
@@ -221,6 +238,9 @@ async function main() {
     if (venue.lastError) {
       console.error(`  error: ${venue.lastError}`);
     }
+  }
+  for (const stat of venueStats.filter((row) => row.implausibleCountChange)) {
+    console.warn(`  warning: implausible count change for ${stat.venue}: ${stat.previousSessionCount} -> ${stat.newSessionCount}`);
   }
 
   if (output.sessions.length === 0) {

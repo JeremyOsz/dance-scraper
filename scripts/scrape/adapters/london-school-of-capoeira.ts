@@ -63,6 +63,7 @@ function parseTimetable(html: string): ScrapedClass[] {
       time: current.time,
       startDate: null,
       endDate: null,
+      isCourse: false,
       bookingUrl: sourceUrl,
       sourceUrl
     });
@@ -122,6 +123,7 @@ function parseBeginnerCourse(html: string, now: Date): ScrapedClass[] {
       time,
       startDate: date,
       endDate: date,
+      isCourse: true,
       bookingUrl: beginnerCourseUrl,
       sourceUrl
     }];

@@ -71,7 +71,7 @@ export default function InsightsPage() {
             </div>
           </div>
           <p className="text-sm text-muted-foreground">
-            Trends from the latest scrape: compare day popularity, then see which class types lead on each day.
+            Trends from the latest scrape: compare day popularity, then see which canonical styles lead on each day.
           </p>
           <SiteSocialLinks className="mt-1" />
           <div className="flex flex-wrap gap-2">
@@ -107,7 +107,7 @@ export default function InsightsPage() {
 
           <Card>
             <CardHeader>
-              <h2 className="text-xl font-semibold leading-none tracking-tight">Top Class Types By Day</h2>
+              <h2 className="text-xl font-semibold leading-none tracking-tight">Top Styles By Day</h2>
             </CardHeader>
             <CardContent className="space-y-3">
               {insights.topTypesByDay.map((entry) => (

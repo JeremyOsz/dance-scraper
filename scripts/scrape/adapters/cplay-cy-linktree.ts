@@ -92,6 +92,25 @@ function parseDateInfo(text: string, now: Date): DateInfo {
   const slash = cleaned.match(/\b(\d{1,2})[\/.-](\d{1,2})(?:[\/.-](\d{2,4}))?\b/);
   const dayOfWeek = cleaned.match(DAY_REGEX)?.[1] ?? null;
 
+  const sharedMonthRange = cleaned.match(
+    /\b(\d{1,2})(?:st|nd|rd|th)?\s*(?:&|and|–|—|-)\s*(\d{1,2})(?:st|nd|rd|th)?\s+(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)(?:\s+(\d{4}))?\b/i
+  );
+  if (sharedMonthRange) {
+    const firstDay = Number(sharedMonthRange[1]);
+    const lastDay = Number(sharedMonthRange[2]);
+    const monthIndex = MONTH_INDEX[sharedMonthRange[3].toLowerCase()];
+    const year = sharedMonthRange[4] ? Number(sharedMonthRange[4]) : inferYear(monthIndex, now);
+    const startDate = toIsoDate(year, monthIndex, firstDay);
+    const endDate = toIsoDate(year, monthIndex, lastDay);
+    if (startDate && endDate && startDate <= endDate) {
+      return {
+        dayOfWeek: dayOfWeek ?? format(new Date(`${startDate}T00:00:00`), "EEEE"),
+        startDate,
+        endDate
+      };
+    }
+  }
+
   if (explicit) {
     const day = Number(explicit[1]);
     const monthIndex = MONTH_INDEX[explicit[2].toLowerCase()];

@@ -1,5 +1,51 @@
 import { describe, expect, it } from "vitest";
-import { inferDanceTypes, matchesDanceType } from "../../lib/dance-types";
+import {
+  DANCE_STYLE_GROUPS,
+  inferDanceStyles,
+  inferDanceTypes,
+  matchesDanceStyle,
+  matchesDanceType
+} from "../../lib/dance-types";
+
+describe("dance style taxonomy", () => {
+  it("exposes every planned style exactly once in grouped filters", () => {
+    const styles = DANCE_STYLE_GROUPS.flatMap((group) => group.styles);
+
+    expect(new Set(styles).size).toBe(styles.length);
+    expect(styles).toEqual(
+      expect.arrayContaining([
+        "Tap",
+        "Musical Theatre",
+        "5Rhythms",
+        "Lindy Hop/Swing",
+        "Kizomba/Semba",
+        "Ceilidh/Scottish Country Dance",
+        "Physical Theatre",
+        "Pole/Aerial"
+      ])
+    );
+  });
+
+  it("infers culturally specific and embodied-performance styles", () => {
+    expect(inferDanceStyles({ title: "Beginner Kathak", details: null, tags: [] })).toEqual(["Kathak"]);
+    expect(inferDanceStyles({ title: "Called queer ceilidh", details: null, tags: [] })).toEqual([
+      "Ceilidh/Scottish Country Dance"
+    ]);
+    expect(inferDanceStyles({ title: "Lecoq physical theatre lab", details: null, tags: [] })).toEqual([
+      "Physical Theatre"
+    ]);
+    expect(inferDanceStyles({ title: "Pole and aerial hoop flow", details: null, tags: [] })).toEqual([
+      "Pole/Aerial"
+    ]);
+  });
+
+  it("keeps legacy broad type links working through aliases", () => {
+    const session = { title: "Lindy Hop beginners", details: null, tags: [], styles: ["Lindy Hop/Swing"] };
+
+    expect(matchesDanceStyle(session, "Lindy Hop/Swing")).toBe(true);
+    expect(matchesDanceType(session, "Ballroom/Tango")).toBe(true);
+  });
+});
 
 describe("dance type inference", () => {
   it("infers multiple dance types from title/details/tags", () => {
@@ -9,7 +55,7 @@ describe("dance type inference", () => {
       tags: ["5rhythms"]
     };
 
-    expect(inferDanceTypes(session)).toEqual(["Improv", "Contact Improv", "Ecstatic Dance/ 5Rythms"]);
+    expect(inferDanceTypes(session)).toEqual(["Improv", "Contact Improv", "Ecstatic Dance/ 5Rhythms"]);
   });
 
   it("falls back to Other when no known dance type is matched", () => {
@@ -133,18 +179,19 @@ describe("dance type inference", () => {
       tags: []
     };
 
+    expect(matchesDanceType(session, "Ecstatic Dance/ 5Rhythms")).toBe(true);
     expect(matchesDanceType(session, "Ecstatic Dance/ 5Rythms")).toBe(true);
   });
 
-  it("classifies Luminous events as Ecstatic Dance/ 5Rythms", () => {
+  it("classifies Luminous events as Ecstatic Dance/ 5Rhythms", () => {
     const session = {
       title: "Luminous New Moon Dance",
       details: "Conscious dance journey",
       tags: []
     };
 
-    expect(matchesDanceType(session, "Ecstatic Dance/ 5Rythms")).toBe(true);
-    expect(inferDanceTypes(session)).toContain("Ecstatic Dance/ 5Rythms");
+    expect(matchesDanceType(session, "Ecstatic Dance/ 5Rhythms")).toBe(true);
+    expect(inferDanceTypes(session)).toContain("Ecstatic Dance/ 5Rhythms");
   });
 
   it("uses venue context for sparse titles", () => {

@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import type { AdapterOutput } from "../types";
 import { fetchHtml } from "./common";
+import { fetchTribeClasses } from "./tribe-events";
 
 const sourceUrl = "https://ruedalibre.co.uk/events/?ical=1";
 const browserLikeHeaders = {
@@ -59,6 +60,22 @@ function isRuedaOrSalsaEvent(text: string): boolean {
 
 export async function scrapeSalsaRuedaRuedaLibre(): Promise<AdapterOutput> {
   try {
+    try {
+      const classes = await fetchTribeClasses({
+        apiUrl: "https://ruedalibre.co.uk/wp-json/tribe/events/v1/events?per_page=50",
+        organizer: "Salsa Rueda (Rueda Libre)",
+        sourceUrl: "https://ruedalibre.co.uk/classes/",
+        include: ({ title, details, organizers, categories }) => {
+          const value = `${title} ${details} ${organizers.join(" ")} ${categories.join(" ")}`;
+          return /(rueda|casino|cuban|salsa)/i.test(value) && !/social only/i.test(value);
+        }
+      });
+      if (classes.length > 0) {
+        return { venueKey: "salsaRuedaRuedaLibre", venue: "Salsa Rueda (Rueda Libre)", sourceUrl, classes, ok: true, error: null };
+      }
+    } catch {
+      // Retain the ICS fallback for feed outages and fixture compatibility.
+    }
     const icsRaw = await fetchHtml(sourceUrl, browserLikeHeaders);
     const unfolded = icsRaw.replace(/\r\n[ \t]/g, "").replace(/\r/g, "\n");
     const blocks = unfolded.split("BEGIN:VEVENT").slice(1);

@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import type { AdapterOutput } from "../types";
 import { fetchHtml } from "./common";
+import { fetchTribeClasses } from "./tribe-events";
 
 const sourceUrl = "https://ruedalibre.co.uk/events/?ical=1";
 const browserLikeHeaders = {
@@ -51,6 +52,19 @@ function toTimeString(date: Date | null): string | null {
 
 export async function scrapeCubaneando(): Promise<AdapterOutput> {
   try {
+    try {
+      const classes = await fetchTribeClasses({
+        apiUrl: "https://ruedalibre.co.uk/wp-json/tribe/events/v1/events?per_page=50",
+        organizer: "Cubaneando",
+        sourceUrl: "https://ruedalibre.co.uk/classes/",
+        include: ({ title, details, organizers }) => /cubaneando/i.test(`${title} ${details} ${organizers.join(" ")}`)
+      });
+      if (classes.length > 0) {
+        return { venueKey: "cubaneando", venue: "Cubaneando", sourceUrl, classes, ok: true, error: null };
+      }
+    } catch {
+      // Retain the ICS fallback for feed outages and fixture compatibility.
+    }
     const icsRaw = await fetchHtml(sourceUrl, browserLikeHeaders);
     const unfolded = icsRaw.replace(/\r\n[ \t]/g, "").replace(/\r/g, "\n");
     const blocks = unfolded.split("BEGIN:VEVENT").slice(1);

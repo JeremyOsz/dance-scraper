@@ -88,6 +88,11 @@ export async function scrapeThePlace(): Promise<AdapterOutput> {
       if (childOnlyByUrl.get(row.link)) continue;
       const sessionDates = sessionDatesByUrl.get(row.link) ?? [];
       const time = detailTimeByUrl.get(row.link) ?? row.time;
+      const isCourse =
+        !/\bprofessional\s+class(?:es)?\b/i.test(row.title) &&
+        (sessionDates.length > 1 ||
+          Boolean(row.startDate && row.endDate && row.startDate !== row.endDate) ||
+          /\b(?:course|term)\b/i.test(row.details ?? ""));
 
       if (sessionDates.length > 0) {
         for (const d of sessionDates) {
@@ -99,6 +104,7 @@ export async function scrapeThePlace(): Promise<AdapterOutput> {
             time,
             startDate: d,
             endDate: d,
+            isCourse,
             bookingUrl: row.link,
             sourceUrl
           });
@@ -115,6 +121,7 @@ export async function scrapeThePlace(): Promise<AdapterOutput> {
             startDate: row.startDate,
             endDate: row.endDate,
             excludedDateRanges: THE_PLACE_CAMDEN_TERM_CLOSURES,
+            isCourse,
             bookingUrl: row.link,
             sourceUrl
           });

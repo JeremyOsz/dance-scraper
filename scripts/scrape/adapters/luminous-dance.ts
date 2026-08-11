@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import * as cheerio from "cheerio";
 import type { AdapterOutput } from "../types";
 import { fetchHtml } from "./common";
@@ -64,8 +63,40 @@ function parseIcsDate(value: string | undefined): Date | null {
   return new Date(Number(y), Number(m) - 1, Number(d), Number(hh), Number(mm), Number(ss));
 }
 
+function normalizeEventTitle(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
 function toKey(title: string, startDate: string | null, time: string | null) {
-  return `${title.trim().toLowerCase()}|${startDate ?? "na"}|${time ?? "na"}`;
+  const startTime = time?.split(/\s+(?:-|–|—|to)\s+/)[0]?.trim() ?? "na";
+  return `${normalizeEventTitle(title)}|${startDate ?? "na"}|${startTime}`;
+}
+
+function londonPart(date: Date, options: Intl.DateTimeFormatOptions): string {
+  return new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", ...options }).format(date);
+}
+
+function londonDate(date: Date): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/London",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(date);
+  const part = (type: Intl.DateTimeFormatPartTypes) => parts.find((entry) => entry.type === type)?.value ?? "";
+  return `${part("year")}-${part("month")}-${part("day")}`;
+}
+
+function londonTime(date: Date): string {
+  return londonPart(date, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+}
+
+function londonWeekday(date: Date): string {
+  return londonPart(date, { weekday: "long" });
 }
 
 function extractJsonLd(html: string): unknown[] {
@@ -179,10 +210,10 @@ export async function scrapeLuminousDance(): Promise<AdapterOutput> {
           venue: "Luminous Dance",
           title: event.name ?? "Luminous Dance",
           details: (event.description ?? "").replace(/\s+/g, " ").trim() || null,
-          dayOfWeek: format(start, "EEEE"),
-          time: `${format(start, "HH:mm")}${safeEnd ? ` - ${format(safeEnd, "HH:mm")}` : ""}`,
-          startDate: format(start, "yyyy-MM-dd"),
-          endDate: format(safeEnd ?? start, "yyyy-MM-dd"),
+          dayOfWeek: londonWeekday(start),
+          time: `${londonTime(start)}${safeEnd && safeEnd.getTime() > start.getTime() ? ` - ${londonTime(safeEnd)}` : ""}`,
+          startDate: londonDate(start),
+          endDate: londonDate(safeEnd ?? start),
           bookingUrl: event.url ?? organizerUrl,
           sourceUrl: organizerUrl
         });
@@ -208,10 +239,10 @@ export async function scrapeLuminousDance(): Promise<AdapterOutput> {
           venue: "Luminous Dance",
           title,
           details: [location, description].filter(Boolean).join(" • ") || null,
-          dayOfWeek: format(start, "EEEE"),
-          time: `${format(start, "HH:mm")}${end ? ` - ${format(end, "HH:mm")}` : ""}`,
-          startDate: format(start, "yyyy-MM-dd"),
-          endDate: format(end ?? start, "yyyy-MM-dd"),
+          dayOfWeek: londonWeekday(start),
+          time: `${londonTime(start)}${end && end.getTime() > start.getTime() ? ` - ${londonTime(end)}` : ""}`,
+          startDate: londonDate(start),
+          endDate: londonDate(end ?? start),
           bookingUrl: description?.match(/^https?:\/\/\S+$/)?.[0] ?? luminousDandelionIcsUrl,
           sourceUrl: luminousDandelionPageUrl
         });

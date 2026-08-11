@@ -175,7 +175,9 @@ export function buildSessionIcs(session: DanceSession, now = new Date()) {
     throw new Error("Session does not have enough date information for calendar export.");
   }
 
-  const description = [session.details, `Booking: ${session.bookingUrl}`, `Source: ${session.sourceUrl}`]
+  const organizer = session.organizer ?? session.venue;
+  const physicalLocation = [session.locationName, session.address, session.postcode].filter(Boolean).join(", ");
+  const description = [session.details, `Organiser: ${organizer}`, `Booking: ${session.bookingUrl}`, `Source: ${session.sourceUrl}`]
     .filter(Boolean)
     .join("\n");
 
@@ -190,7 +192,7 @@ export function buildSessionIcs(session: DanceSession, now = new Date()) {
     `DTSTAMP:${toUtcStamp(now)}`,
     `SUMMARY:${escapeText(session.title)}`,
     `DESCRIPTION:${escapeText(description)}`,
-    `LOCATION:${escapeText(session.venue)}`,
+    `LOCATION:${escapeText(physicalLocation)}`,
     timing.allDay
       ? `DTSTART;VALUE=DATE:${format(timing.start, "yyyyMMdd")}`
       : `DTSTART;TZID=Europe/London:${toLocalStamp(timing.start)}`,
