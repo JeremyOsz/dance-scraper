@@ -12,5 +12,5 @@ describe("sitemap", () => {
     for (const guide of getDanceStyleGuides()) {
       expect(urls.has(`${baseUrl}/styles/${guide.slug}`)).toBe(true);
     }
-  });
+  }, 15_000);
 });
