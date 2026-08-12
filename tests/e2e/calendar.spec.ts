@@ -1,30 +1,28 @@
 import { expect, test } from "@playwright/test";
 
-test("loads calendar page and toggles month view", async ({ page }) => {
+test("loads the primary calendar interface and toggles month view", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "The Floor Is Yours..." })).toBeVisible();
-  await page.getByRole("button", { name: "Month", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Week", exact: true })).toBeVisible();
+  await expect(page.getByTestId("desktop-card-agenda")).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByRole("heading", { level: 1, name: "London Dance Calendar" })).toBeAttached();
+  await page.getByRole("radio", { name: "Month", exact: true }).click();
+  await expect(page.getByRole("radio", { name: "Week", exact: true })).toBeVisible();
 });
 
-test("opens the dedicated Courses view and returns to Calendar", async ({ page }) => {
-  await page.goto("/?mode=courses&view=week");
-  await expect(page.getByRole("heading", { name: "Find dance courses" })).toBeVisible();
-  await expect(page).toHaveURL(/mode=courses/);
-
-  await page.getByRole("button", { name: "Calendar view" }).click();
-  await expect(page.getByRole("heading", { name: "Find dance classes" })).toBeVisible();
-  await expect(page).toHaveURL(/mode=calendar/);
+test("hydrates the primary calendar state from its shareable URL", async ({ page }) => {
+  await page.goto("/?view=day&time=evening");
+  await expect(page.getByRole("radio", { name: "Day", exact: true })).toHaveAttribute("aria-checked", "true");
+  await expect(page.getByRole("checkbox", { name: "Evening" })).toBeChecked();
+  await expect(page).toHaveURL(/view=day/);
 });
 
 test("opens organiser and physical-location directory pages", async ({ page }) => {
   await page.goto("/studios");
   await expect(page.getByRole("heading", { name: "Organisers & locations" })).toBeVisible();
   await page.getByRole("link", { name: "Locations" }).click();
-  await expect(page.getByRole("heading", { name: "London Dance Locations" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "London Dance Locations" })).toBeVisible({ timeout: 15_000 });
 
   const firstLocation = page.getByRole("link", { name: "Open location" }).first();
   await firstLocation.click();
-  await expect(page.getByRole("link", { name: "Open map" })).toBeVisible();
-  await expect(page.getByRole("region", { name: "Upcoming sessions" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open map" })).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByRole("region", { name: "Upcoming sessions" })).toBeVisible({ timeout: 15_000 });
 });

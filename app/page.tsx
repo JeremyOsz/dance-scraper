@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { format, isValid, parseISO } from "date-fns";
-import { CalendarPage } from "@/components/calendar/calendar-page";
+import { CalendarNextPage } from "@/components/calendar-next/calendar-next-page";
 import { readScrapeOutput } from "@/lib/data-store";
-import { formatTimeRange } from "@/lib/date";
-import { inferDanceStyles } from "@/lib/dance-types";
-import { isFeaturedSession } from "@/lib/featured";
+import { getLocationProfiles } from "@/lib/locations";
 import { signOutboundRedirectUrl } from "@/lib/outbound-redirect";
 import {
   buildCanonicalRobots,
@@ -16,14 +14,10 @@ import {
   SITE_DESCRIPTION,
   SITE_NAME
 } from "@/lib/seo";
-import { getUpcomingSessionOccurrences, type UpcomingSessionOccurrence } from "@/lib/upcoming-sessions";
-import { VENUES } from "@/lib/venues";
-import { sortVenueRecordsForUi } from "@/lib/venue-order";
+import { sortVenueNamesForUi } from "@/lib/venue-order";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-const SEO_SNAPSHOT_ITEMS = 6;
-const SEO_SNAPSHOT_DAYS = 56;
 
 /** Order = biggest typical search/brand impact first (metadata snippet + keywords). */
 const PRIORITY_VENUES = [
@@ -36,7 +30,7 @@ const PRIORITY_VENUES = [
   "TripSpace",
   "BASE Dance Studios",
   "East London Dance",
-  "Chisenhale Dance Space",
+  "Chisenhale Dance Space"
 ] as const;
 
 function sortVenuesForSeo(venueNames: string[]) {
@@ -44,73 +38,20 @@ function sortVenuesForSeo(venueNames: string[]) {
   return [...venueNames].sort((a, b) => {
     const aPriority = priorityOrder.get(a.toLowerCase());
     const bPriority = priorityOrder.get(b.toLowerCase());
-
-    if (aPriority !== undefined && bPriority !== undefined) {
-      return aPriority - bPriority;
-    }
-    if (aPriority !== undefined) {
-      return -1;
-    }
-    if (bPriority !== undefined) {
-      return 1;
-    }
-
+    if (aPriority !== undefined && bPriority !== undefined) return aPriority - bPriority;
+    if (aPriority !== undefined) return -1;
+    if (bPriority !== undefined) return 1;
     return a.localeCompare(b);
   });
-}
-
-function formatSnapshotTitle(title: string) {
-  return title.replace(/^\*\*(.*)\*\*$/, "$1");
-}
-
-function UpcomingClassesSnapshot({ occurrences, title }: { occurrences: UpcomingSessionOccurrence[]; title: string }) {
-  if (occurrences.length === 0) {
-    return null;
-  }
-
-  return (
-    <details className="group rounded-lg border border-input bg-card px-5 py-5 max-sm:px-6 max-sm:py-6 sm:px-4 sm:py-3">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-1">
-        <h2 id="upcoming-classes-heading" className="text-base font-semibold leading-snug tracking-tight max-sm:text-[1.05rem]">
-          {title}
-        </h2>
-        <span className="shrink-0 text-sm leading-none text-muted-foreground group-open:hidden max-sm:text-base">Show</span>
-        <span className="hidden shrink-0 text-sm leading-none text-muted-foreground group-open:inline max-sm:text-base">Hide</span>
-      </summary>
-      <ol className="mt-5 grid gap-3 sm:mt-3 sm:gap-2 md:grid-cols-2" aria-labelledby="upcoming-classes-heading">
-        {occurrences.map(({ session, dateIso, date }) => {
-          const styles = inferDanceStyles(session).slice(0, 2);
-          return (
-            <li key={`${session.id}-${dateIso}`} className="rounded-md border border-input bg-background p-5 text-sm leading-relaxed sm:p-3 sm:leading-normal">
-              <h3 className="font-medium">{formatSnapshotTitle(session.title)}</h3>
-              <p className="text-muted-foreground">
-                <time dateTime={dateIso}>{format(date, "EEE d MMM yyyy")}</time>
-                {" • "}
-                {formatTimeRange(session.startTime, session.endTime)}
-              </p>
-              <p className="text-muted-foreground">
-                {session.organizer ?? session.venue}
-                {session.locationName ? ` • ${session.locationName}` : " • Location TBC"}
-                {styles.length > 0 ? ` • ${styles.join(", ")}` : ""}
-                {session.isWorkshop ? " • Workshop" : ""}
-              </p>
-            </li>
-          );
-        })}
-      </ol>
-    </details>
-  );
 }
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = readScrapeOutput();
   const baseUrl = getBaseUrl();
-  const venueCount = data.venues.length;
-  const classCount = data.sessions.length;
   const venueNames = sortVenuesForSeo([...new Set(data.venues.map((venue) => venue.venue).filter(Boolean))]);
   const title = buildPageTitle("London Dance Classes & Workshops");
   const description = buildMetaDescription(
-    `Find Dance Classes in London. Browse ${classCount} adult classes from ${venueCount} venues — filter by style, level, date, and location. Ballet, salsa, contemporary, improv, and more.`
+    `Find Dance Classes in London. Browse ${data.sessions.length} adult classes from ${data.venues.length} venues — filter by style, level, date, and location. Ballet, salsa, contemporary, improv, and more.`
   );
   const keywords = [
     "London dance classes",
@@ -126,89 +67,33 @@ export async function generateMetadata(): Promise<Metadata> {
   ];
 
   return {
-    title: {
-      absolute: title
-    },
+    title: { absolute: title },
     description,
     keywords,
-    alternates: {
-      canonical: "/"
-    },
+    alternates: { canonical: "/" },
     robots: buildCanonicalRobots({ isProduction: isIndexableDeployment(baseUrl), hasQuery: false }),
-    openGraph: {
-      title,
-      description,
-      url: "/"
-    },
-    twitter: {
-      title,
-      description
-    }
+    openGraph: { title, description, url: "/" },
+    twitter: { title, description }
   };
 }
 
 export default function Home() {
   const data = readScrapeOutput();
   const baseUrl = getBaseUrl();
-  const scrapeStatusByKey = new Map(data.venues.map((venue) => [venue.key, venue]));
-  const venueMap = new Map(
-    (Object.keys(VENUES) as Array<keyof typeof VENUES>).map((key) => {
-      const configured = VENUES[key];
-      const scraped = scrapeStatusByKey.get(key);
-
-      return [
-        configured.label,
-        {
-          name: configured.label,
-          sourceUrl: scraped?.sourceUrl ?? configured.sourceUrl,
-          mapQuery: configured.mapQuery,
-          count: scraped?.count ?? 0,
-          ok: scraped?.ok ?? true,
-          lastSuccessAt: scraped?.lastSuccessAt ?? null,
-          lastError: scraped?.lastError ?? null
-        }
-      ];
-    })
-  );
-  // Keep any extra persisted venue rows so ad-hoc sources remain visible.
-  for (const venue of data.venues) {
-    if (venueMap.has(venue.venue)) {
-      continue;
-    }
-    venueMap.set(venue.venue, {
-      name: venue.venue,
-      sourceUrl: venue.sourceUrl,
-      mapQuery: VENUES[venue.key]?.mapQuery,
-      count: venue.count,
-      ok: venue.ok,
-      lastSuccessAt: venue.lastSuccessAt,
-      lastError: venue.lastError
-    });
-  }
-  const venues = sortVenueRecordsForUi(Array.from(venueMap.values())).map((venue) => ({
-    ...venue,
-    outboundSourceHref: signOutboundRedirectUrl(venue.sourceUrl, "venue") ?? venue.sourceUrl
+  const sessions = data.sessions.map((session) => ({
+    ...session,
+    outboundBookingHref: signOutboundRedirectUrl(session.bookingUrl, "booking") ?? session.bookingUrl,
+    outboundSourceHref: signOutboundRedirectUrl(session.sourceUrl, "source") ?? session.sourceUrl
   }));
-  const featuredOccurrences = getUpcomingSessionOccurrences(data.sessions.filter(isFeaturedSession), new Date(), {
-    maxDays: SEO_SNAPSHOT_DAYS,
-    maxItems: SEO_SNAPSHOT_ITEMS,
-    uniqueSessions: true
-  });
-  const fallbackOccurrences =
-    featuredOccurrences.length > 0
-      ? []
-      : getUpcomingSessionOccurrences(data.sessions, new Date(), {
-          maxDays: 14,
-          maxItems: SEO_SNAPSHOT_ITEMS
-        });
-  const snapshotOccurrences = featuredOccurrences.length > 0 ? featuredOccurrences : fallbackOccurrences;
-  const snapshotTitle = featuredOccurrences.length > 0 ? "Featured upcoming classes" : "Upcoming classes";
-
-  const generatedDate = parseISO(data.generatedAt);
-  const listingsUpdatedText = isValid(generatedDate)
-    ? `Listings last updated ${format(generatedDate, "d MMM yyyy")}.`
-    : undefined;
-
+  const venueNames = sortVenueNamesForUi([
+    ...new Set([
+      ...data.venues.map((venue) => venue.venue),
+      ...data.sessions.map((session) => session.organizer?.trim() || session.venue)
+    ].filter(Boolean))
+  ]);
+  const locationNames = getLocationProfiles(data).map((location) => location.name);
+  const generated = parseISO(data.generatedAt);
+  const listingsUpdatedText = isValid(generated) ? `Updated ${format(generated, "d MMM yyyy")}` : undefined;
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -232,26 +117,19 @@ export default function Home() {
       license: DATASET_LICENSE_URL,
       inLanguage: "en-GB",
       dateModified: data.generatedAt,
-      creator: {
-        "@type": "Organization",
-        name: SITE_NAME
-      }
+      creator: { "@type": "Organization", name: SITE_NAME }
     }
   ];
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <CalendarPage
-        classCount={data.sessions.length}
+      <CalendarNextPage
+        classCount={sessions.length}
+        venueNames={venueNames}
+        locationNames={locationNames}
+        initialSessions={sessions}
         listingsUpdatedText={listingsUpdatedText}
-        venueCount={venues.length}
-        venues={venues}
-        seoSnapshot={
-          snapshotOccurrences.length > 0 ? (
-            <UpcomingClassesSnapshot occurrences={snapshotOccurrences} title={snapshotTitle} />
-          ) : undefined
-        }
       />
     </>
   );
