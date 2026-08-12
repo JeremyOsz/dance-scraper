@@ -4,6 +4,8 @@ out
 coverage
 playwright-report
 test-results
+.playwright-cli
+output
 .DS_Store
 .env
 .env.local
