@@ -66,8 +66,11 @@ function EventFlags({ session }: { session: DanceSessionOutbound }) {
 
 export function DesktopAgenda({ dates, sessions, view, shortlistSet, onSelect, onToggleShortlist, onNearEnd }: Props) {
   const [collapsedVenues, setCollapsedVenues] = React.useState<Set<string>>(() => new Set());
+  const dateHeaderScrollRef = React.useRef<HTMLDivElement>(null);
+  const agendaScrollRef = React.useRef<HTMLDivElement>(null);
   const venueBands = React.useMemo(() => buildVenueBands(dates, sessions), [dates, sessions]);
   const gridTemplateColumns = view === "day" ? "minmax(0, 1fr)" : `repeat(${dates.length}, minmax(184px, 1fr))`;
+  const agendaWidth = view === "day" ? "100%" : `max(100%, ${dates.length * 184}px)`;
 
   const toggleVenue = (venue: string) => {
     setCollapsedVenues((current) => {
@@ -80,39 +83,52 @@ export function DesktopAgenda({ dates, sessions, view, shortlistSet, onSelect, o
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const node = event.currentTarget;
+    if (dateHeaderScrollRef.current) dateHeaderScrollRef.current.scrollLeft = node.scrollLeft;
     if (node.scrollWidth - node.scrollLeft - node.clientWidth < 320) onNearEnd();
+  };
+
+  const handleDateHeaderScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    if (agendaScrollRef.current) agendaScrollRef.current.scrollLeft = event.currentTarget.scrollLeft;
   };
 
   return (
     <div data-testid="desktop-card-agenda" data-day-count={dates.length} className="hidden min-w-0 md:block">
       <div
-        className="overflow-x-auto border border-[#cecac2] bg-[#fffefa] outline-none focus-visible:ring-2 focus-visible:ring-[#075178] focus-visible:ring-offset-2"
+        ref={dateHeaderScrollRef}
+        data-testid="desktop-date-row"
+        className="calendar-date-scrollbar sticky top-[72px] z-30 overflow-x-auto border border-[#cecac2] bg-[#fbfaf7]"
+        onScroll={handleDateHeaderScroll}
+      >
+        <div className="grid min-w-full border-b border-[#bdb9b1]" style={{ width: agendaWidth, gridTemplateColumns }}>
+          {dates.map((date) => {
+            const iso = format(date, "yyyy-MM-dd");
+            const dayCount = sessions.filter((session) => isSessionActiveOnDate(session, iso)).length;
+            const today = isSameDay(date, new Date());
+            return (
+              <header key={iso} className={`min-w-0 border-r border-[#dedbd4] px-3 py-3 last:border-r-0 ${today ? "bg-[#eef5f7]" : ""}`}>
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#6f6a65]">{format(date, "EEEE")}</p>
+                    <h3 id={`desktop-agenda-${iso}`} className="font-display mt-0.5 text-[15px] font-semibold leading-tight text-[#073d5b]">{format(date, "d MMMM")}</h3>
+                  </div>
+                  {today ? <span className="shrink-0 border border-[#ec5b2a] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-[0.1em] text-[#d94414]">Today</span> : null}
+                </div>
+                <p className="mt-1 text-[10px] text-[#7c7771]">{dayCount} {dayCount === 1 ? "class" : "classes"}</p>
+              </header>
+            );
+          })}
+        </div>
+      </div>
+
+      <div
+        ref={agendaScrollRef}
+        className="overflow-x-auto border-x border-b border-[#cecac2] bg-[#fffefa] outline-none focus-visible:ring-2 focus-visible:ring-[#075178] focus-visible:ring-offset-2"
         onScroll={handleScroll}
         tabIndex={0}
         role="region"
         aria-label={view === "day" ? "Classes for the selected day" : "Classes by day; scroll horizontally for more dates"}
       >
-        <div className={view === "day" ? "min-w-full" : "min-w-full"} style={{ width: view === "day" ? "100%" : `max(100%, ${dates.length * 184}px)` }}>
-          <div className="sticky top-0 z-20 grid border-b border-[#bdb9b1] bg-[#fbfaf7]" style={{ gridTemplateColumns }}>
-            {dates.map((date) => {
-              const iso = format(date, "yyyy-MM-dd");
-              const dayCount = sessions.filter((session) => isSessionActiveOnDate(session, iso)).length;
-              const today = isSameDay(date, new Date());
-              return (
-                <header key={iso} className={`min-w-0 border-r border-[#dedbd4] px-3 py-3 last:border-r-0 ${today ? "bg-[#eef5f7]" : ""}`}>
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#6f6a65]">{format(date, "EEEE")}</p>
-                      <h3 id={`desktop-agenda-${iso}`} className="font-display mt-0.5 text-[15px] font-semibold leading-tight text-[#073d5b]">{format(date, "d MMMM")}</h3>
-                    </div>
-                    {today ? <span className="shrink-0 border border-[#ec5b2a] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-[0.1em] text-[#d94414]">Today</span> : null}
-                  </div>
-                  <p className="mt-1 text-[10px] text-[#7c7771]">{dayCount} {dayCount === 1 ? "class" : "classes"}</p>
-                </header>
-              );
-            })}
-          </div>
-
+        <div className="min-w-full" style={{ width: agendaWidth }}>
           {venueBands.map((band) => {
             const collapsed = collapsedVenues.has(band.venue);
             const venueId = `desktop-venue-${band.venue.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`;

@@ -384,6 +384,14 @@ body {
   background-size: 36px 36px;
 }
 
+.calendar-date-scrollbar {
+  scrollbar-width: none;
+}
+
+.calendar-date-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .calendar-next-detail-sheet,
 .calendar-next-filter-sheet {
   position: fixed;

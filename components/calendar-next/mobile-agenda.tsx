@@ -49,7 +49,7 @@ export function MobileAgenda({ dates, activeDate, sessions, view, shortlistSet, 
   return (
     <div data-testid="mobile-agenda" data-day-count={dates.length} className="md:hidden">
       {view === "week" ? (
-        <div className="-mx-4 overflow-x-auto border-y border-[#cbc7bf] bg-[#fffefa]" onScroll={handleScroll}>
+        <div data-testid="mobile-date-row" className="sticky top-[72px] z-30 -mx-4 overflow-x-auto border-y border-[#cbc7bf] bg-[#fffefa]" onScroll={handleScroll}>
           <div className="flex min-w-max px-4">
             {dates.map((date) => {
               const selected = isSameDay(date, activeDate);

@@ -159,6 +159,13 @@ describe("CalendarNextPage", () => {
     expect(within(agenda).queryByRole("button", { name: /more classes/i })).not.toBeInTheDocument();
   });
 
+  it("pins the date rows below the site header", () => {
+    render(<CalendarNextPage initialSessions={sessions} classCount={2} venueNames={["The Place", "Rambert"]} />);
+
+    expect(screen.getByTestId("desktop-date-row")).toHaveClass("sticky", "top-[72px]");
+    expect(screen.getByTestId("mobile-date-row")).toHaveClass("sticky", "top-[72px]");
+  });
+
   it("collapses and restores a venue without changing the rest of the day", async () => {
     const user = userEvent.setup();
     render(<CalendarNextPage initialSessions={sessions} classCount={2} venueNames={["The Place", "Rambert"]} />);

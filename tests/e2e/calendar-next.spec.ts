@@ -17,8 +17,10 @@ test.describe("redesigned calendar", () => {
     await page.evaluate(() => window.scrollTo(0, 700));
     const headerBox = await page.locator("main > header").boundingBox();
     const sidebarBox = await page.getByRole("complementary", { name: "Filters" }).boundingBox();
+    const dateRowBox = await page.getByTestId("desktop-date-row").boundingBox();
     expect(headerBox?.y).toBe(0);
     expect(sidebarBox?.y).toBe(72);
+    expect(dateRowBox?.y).toBe(72);
     expect((sidebarBox?.y ?? 0) + (sidebarBox?.height ?? 0)).toBeLessThanOrEqual(1000);
 
     const venueToggle = page.getByTestId("desktop-card-agenda").locator('button[aria-controls^="desktop-venue-"]').first();
