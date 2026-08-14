@@ -1,24 +1,6 @@
 {
-  "updatedAt": "2026-08-13T06:57:47.884Z",
+  "updatedAt": "2026-08-14T06:55:05.531Z",
   "sessions": [
-    {
-      "id": "pineapple-dance-studios-world-k-pop-all-13-tyler-avery-friday-19-00",
-      "venue": "Pineapple Dance Studios",
-      "title": "World - K-Pop (All) £13 Tyler Avery",
-      "details": "Instructor: Tyler Avery | Level: All | Room: Studio 6 | Location: In Studio Classes | Introduction to K-Pop choreography. Will do warm up for 10 min then head straight into learning the chosen",
-      "dayOfWeek": "Friday",
-      "startTime": "19:00",
-      "endTime": "20:00",
-      "startDate": "2026-05-08",
-      "endDate": "2026-05-08",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Fri.+May++8%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=728080&item%5Bmbo_location_id%5D=2&item%5Bname%5D=K-Pop+%28All%29+%C2%A313+Tyler+Avery&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-08T06:11:06.534Z"
-    },
     {
       "id": "pineapple-dance-studios-contemporary-contemporary-floorwork-int-adv-12-fluidflow-friday-19-15",
       "venue": "Pineapple Dance Studios",
@@ -157582,6 +157564,36 @@
       "isWorkshop": false,
       "isCourse": false,
       "lastSeenAt": "2026-08-12T06:54:53.577Z"
+    },
+    {
+      "id": "five-rhythms-london-simply-being-5rhythms-new-moon-eclipse-garden-special-2026-wednesday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Simply Being 5Rhythms New Moon Eclipse Garden Special 2026 🌑☀️🌅",
+      "details": "Teacher: Richard Wiltshire.",
+      "dayOfWeek": "Wednesday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-08-12",
+      "endDate": "2026-08-12",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/SimplyBeingRhythmsNewMoonEclipseGardenSpecial-298605",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [
+        "5rhythms"
+      ],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-11T14:30:08.198Z"
     }
   ]
 }
