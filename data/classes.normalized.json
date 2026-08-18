@@ -24957,34 +24957,6 @@
       "lastSeenAt": "2026-08-11T15:36:05.607Z"
     },
     {
-      "id": "posthuman-theatre-butoh-ken-mai-s-sacred-butoh-intensive-workshop-saturday-na",
-      "sourceKey": "posthumanTheatreButoh",
-      "organizer": "Posthuman Theatre Butoh",
-      "venue": "Posthuman Theatre Butoh",
-      "locationName": null,
-      "address": null,
-      "postcode": null,
-      "borough": null,
-      "title": "Ken Mai's Sacred Butoh Intensive workshop",
-      "details": null,
-      "dayOfWeek": "Saturday",
-      "startTime": null,
-      "endTime": null,
-      "startDate": "2026-08-22",
-      "endDate": "2026-08-24",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.eventbrite.com/e/1425642257369?aff=oddtdtcreator",
-      "sourceUrl": "https://www.posthumantheatre.com/workshops",
-      "tags": [],
-      "styles": [
-        "Butoh"
-      ],
-      "audience": "adult",
-      "isWorkshop": true,
-      "isCourse": false,
-      "lastSeenAt": "2026-08-11T15:36:05.607Z"
-    },
-    {
       "id": "ecstatic-dance-london-ecstatic-dance-uk-sun-day-sunday-09-00",
       "sourceKey": "ecstaticDanceLondon",
       "organizer": "Ecstatic Dance London",
@@ -81978,7 +81950,7 @@
       "venue": "Posthuman Theatre Butoh",
       "key": "posthumanTheatreButoh",
       "sourceUrl": "https://www.posthumantheatre.com/workshops",
-      "count": 2,
+      "count": 1,
       "ok": true,
       "lastSuccessAt": "2026-08-11T15:36:05.607Z",
       "lastError": null

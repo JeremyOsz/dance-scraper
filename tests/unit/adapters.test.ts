@@ -1496,14 +1496,22 @@ describe("scraper adapters", () => {
     });
   });
 
-  it("parses upcoming Posthuman Theatre workshops from the replacement domain", async () => {
+  it("parses explicitly dated upcoming Posthuman Theatre workshops from the replacement domain", async () => {
     const { parsePosthumanWorkshopsHtml } = await import("../../scripts/scrape/adapters/posthuman-theatre-butoh");
     const classes = parsePosthumanWorkshopsHtml(fixture("posthuman-butoh.html"), new Date("2026-08-11T12:00:00Z"));
-    expect(classes).toHaveLength(2);
-    expect(classes).toEqual(expect.arrayContaining([
-      expect.objectContaining({ title: "Ken Mai's Sacred Butoh Intensive workshop", startDate: "2026-08-22", endDate: "2026-08-24" }),
+    expect(classes).toEqual([
       expect.objectContaining({ title: "Vangeline In London", startDate: "2026-09-19", endDate: "2026-09-19" })
-    ]));
+    ]);
+  });
+
+  it("does not resurrect a stale yearless Posthuman Theatre workshop in the current year", async () => {
+    const { parsePosthumanWorkshopsHtml } = await import("../../scripts/scrape/adapters/posthuman-theatre-butoh");
+    const classes = parsePosthumanWorkshopsHtml(
+      `<h5><a href="https://example.com/old-workshop">Old workshop August 22-24th</a></h5>`,
+      new Date("2026-08-11T12:00:00Z")
+    );
+
+    expect(classes).toEqual([]);
   });
 
   it("does not turn the Hackney Baths venue homepage into an undated event", async () => {

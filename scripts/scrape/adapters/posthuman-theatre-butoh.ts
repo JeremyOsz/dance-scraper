@@ -5,7 +5,7 @@ import { fetchHtml } from "./common";
 
 const sourceUrl = "https://www.posthumantheatre.com/workshops";
 const NUMERIC_DATE = /\b(\d{1,2})\/(\d{1,2})\/(20\d{2})\b/;
-const MONTH_RANGE = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:st|nd|rd|th)?(?:\s*[-–]\s*(\d{1,2})(?:st|nd|rd|th)?)?/i;
+const MONTH_RANGE = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:st|nd|rd|th)?(?:\s*[-–]\s*(\d{1,2})(?:st|nd|rd|th)?)?(?:,\s*|\s+)(20\d{2})\b/i;
 
 function parseWorkshopDate(text: string, now: Date): { start: Date; end: Date; dateText: string } | null {
   const numeric = text.match(NUMERIC_DATE);
@@ -15,7 +15,7 @@ function parseWorkshopDate(text: string, now: Date): { start: Date; end: Date; d
   }
   const range = text.match(MONTH_RANGE);
   if (!range) return null;
-  const year = Number(text.match(/\b(20\d{2})\b/)?.[1] ?? now.getFullYear());
+  const year = Number(range[4]);
   const start = parse(`${range[2]} ${range[1]} ${year}`, "d MMMM yyyy", now);
   const end = parse(`${range[3] ?? range[2]} ${range[1]} ${year}`, "d MMMM yyyy", now);
   return Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())
