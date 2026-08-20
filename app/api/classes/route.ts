@@ -3,7 +3,6 @@ import { readScrapeOutput } from "@/lib/data-store";
 import { filterSessions } from "@/lib/filter-sessions";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
@@ -37,5 +36,10 @@ export async function GET(req: NextRequest) {
     generatedAt: data.generatedAt,
     count: sessions.length,
     sessions
-  }, { headers: { "cache-control": "no-store" } });
+  }, {
+    headers: {
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "Vercel-CDN-Cache-Control": "max-age=3600, stale-while-revalidate=86400"
+    }
+  });
 }

@@ -8,6 +8,8 @@ import { inferDanceStyles } from "@/lib/dance-types";
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "classes.normalized.json");
 
+let productionData: ScrapeOutput | undefined;
+
 const EMPTY_DATA: ScrapeOutput = {
   generatedAt: new Date(0).toISOString(),
   sessions: [],
@@ -352,12 +354,20 @@ export function coerceScrapeOutput(input: unknown): ScrapeOutput {
 }
 
 export function readScrapeOutput(): ScrapeOutput {
+  if (process.env.NODE_ENV === "production" && productionData) {
+    return productionData;
+  }
+
   try {
     if (!fs.existsSync(DATA_FILE)) {
       return EMPTY_DATA;
     }
     const raw = fs.readFileSync(DATA_FILE, "utf8");
-    return coerceScrapeOutput(JSON.parse(raw) as unknown);
+    const data = coerceScrapeOutput(JSON.parse(raw) as unknown);
+    if (process.env.NODE_ENV === "production") {
+      productionData = data;
+    }
+    return data;
   } catch {
     return EMPTY_DATA;
   }

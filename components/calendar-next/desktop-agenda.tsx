@@ -10,6 +10,7 @@ import type { CalendarEventSelection, CalendarView } from "./types";
 
 type Props = {
   dates: Date[];
+  today: Date;
   sessions: DanceSessionOutbound[];
   view: CalendarView;
   shortlistSet: Set<string>;
@@ -64,7 +65,7 @@ function EventFlags({ session }: { session: DanceSessionOutbound }) {
   );
 }
 
-export function DesktopAgenda({ dates, sessions, view, shortlistSet, onSelect, onToggleShortlist, onNearEnd }: Props) {
+export function DesktopAgenda({ dates, today, sessions, view, shortlistSet, onSelect, onToggleShortlist, onNearEnd }: Props) {
   const [collapsedVenues, setCollapsedVenues] = React.useState<Set<string>>(() => new Set());
   const dateHeaderScrollRef = React.useRef<HTMLDivElement>(null);
   const agendaScrollRef = React.useRef<HTMLDivElement>(null);
@@ -103,15 +104,15 @@ export function DesktopAgenda({ dates, sessions, view, shortlistSet, onSelect, o
           {dates.map((date) => {
             const iso = format(date, "yyyy-MM-dd");
             const dayCount = sessions.filter((session) => isSessionActiveOnDate(session, iso)).length;
-            const today = isSameDay(date, new Date());
+            const isToday = isSameDay(date, today);
             return (
-              <header key={iso} className={`min-w-0 border-r border-[#dedbd4] px-3 py-3 last:border-r-0 ${today ? "bg-[#eef5f7]" : ""}`}>
+              <header key={iso} className={`min-w-0 border-r border-[#dedbd4] px-3 py-3 last:border-r-0 ${isToday ? "bg-[#eef5f7]" : ""}`}>
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#6f6a65]">{format(date, "EEEE")}</p>
                     <h3 id={`desktop-agenda-${iso}`} className="font-display mt-0.5 text-[15px] font-semibold leading-tight text-[#073d5b]">{format(date, "d MMMM")}</h3>
                   </div>
-                  {today ? <span className="shrink-0 border border-[#ec5b2a] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-[0.1em] text-[#d94414]">Today</span> : null}
+                  {isToday ? <span className="shrink-0 border border-[#ec5b2a] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-[0.1em] text-[#d94414]">Today</span> : null}
                 </div>
                 <p className="mt-1 text-[10px] text-[#7c7771]">{dayCount} {dayCount === 1 ? "class" : "classes"}</p>
               </header>

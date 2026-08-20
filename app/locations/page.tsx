@@ -7,8 +7,7 @@ import { readScrapeOutput } from "@/lib/data-store";
 import { getLocationProfiles } from "@/lib/locations";
 import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "error";
 
 export function generateMetadata(): Metadata {
   const title = buildPageTitle("London Dance Locations");

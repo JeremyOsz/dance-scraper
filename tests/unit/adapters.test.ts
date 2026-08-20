@@ -17,7 +17,7 @@ vi.mock("../../scripts/scrape/adapters/common", async () => {
   };
 });
 
-vi.mock("playwright", () => {
+vi.mock("@playwright/test", () => {
   const mockFrame = {
     waitForSelector: vi.fn(async () => {}),
     evaluate: vi.fn(async () => [

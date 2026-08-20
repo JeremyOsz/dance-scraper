@@ -79,6 +79,10 @@ const data: ScrapeOutput = {
 };
 
 describe("location profiles", () => {
+  it("reuses profiles derived from the same scrape output", () => {
+    expect(getLocationProfiles(data)).toBe(getLocationProfiles(data));
+  });
+
   it("groups sessions by physical location and omits unknown locations", () => {
     const locations = getLocationProfiles(data);
 

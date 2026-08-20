@@ -1,4 +1,5 @@
 import React from "react";
+import { renderToString } from "react-dom/server";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { addDays, format } from "date-fns";
@@ -73,6 +74,19 @@ describe("CalendarNextPage", () => {
     });
   });
 
+  it("uses the serialized prerender date for server markup", () => {
+    const html = renderToString(
+      <CalendarNextPage
+        initialDate="2000-01-01"
+        initialSessions={[]}
+        classCount={0}
+        venueNames={[]}
+      />
+    );
+
+    expect(html).toContain("1 Jan – 7 Jan 2000");
+  });
+
   it("renders the new calendar shell and defaults to the rolling week", () => {
     render(<CalendarNextPage initialSessions={sessions} classCount={2} venueNames={["The Place", "Rambert"]} />);
 
@@ -101,13 +115,15 @@ describe("CalendarNextPage", () => {
 
   it("switches views and opens a month date in Day view", async () => {
     const user = userEvent.setup();
+    const replaceState = vi.spyOn(window.history, "replaceState");
     render(<CalendarNextPage initialSessions={sessions} classCount={2} venueNames={["The Place", "Rambert"]} />);
 
     await user.click(screen.getByRole("radio", { name: "Month" }));
     const todayButton = screen.getByRole("button", { name: `Open ${format(new Date(), "EEEE d MMMM")}` });
     await user.click(todayButton);
     expect(screen.getByRole("radio", { name: "Day" })).toHaveAttribute("aria-checked", "true");
-    expect(mockReplace).toHaveBeenCalledWith(expect.stringContaining("view=day"), { scroll: false });
+    await waitFor(() => expect(replaceState).toHaveBeenLastCalledWith(null, "", expect.stringContaining("view=day")));
+    expect(mockReplace).not.toHaveBeenCalled();
   });
 
   it("opens event details with reliable actions and preserves shortlist storage", async () => {

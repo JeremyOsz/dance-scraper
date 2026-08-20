@@ -45,6 +45,8 @@ describe("GET /api/classes", () => {
 
     expect(body.count).toBe(1);
     expect(body.sessions.map((item: DanceSession) => item.id)).toEqual(["course"]);
+    expect(response.headers.get("cache-control")).toBe("public, max-age=0, must-revalidate");
+    expect(response.headers.get("vercel-cdn-cache-control")).toBe("max-age=3600, stale-while-revalidate=86400");
   });
 
   it("combines course filtering with existing venue filters", async () => {

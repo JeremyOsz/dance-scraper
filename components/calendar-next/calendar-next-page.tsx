@@ -1,21 +1,22 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { Route } from "next";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addDays, addMonths, format, isValid, parseISO, startOfDay, subDays, subMonths } from "date-fns";
 import { ChevronLeft, ChevronRight, Filter, Search, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { DANCE_STYLES, expandLegacyDanceTypes, matchesDanceStyle, type DanceStyle } from "@/lib/dance-types";
-import { getForwardDayWindow, isSessionActiveOnDate, ORDERED_DAYS } from "@/lib/date";
-import { LEVELS, matchesSessionLevel, type Level } from "@/lib/levels";
-import { advanceLoadedDayCount, matchesTimeBuckets, type TimeBucket } from "@/lib/calendar-layout";
-import type { DanceSessionOutbound, DayOfWeek } from "@/lib/types";
+import { matchesDanceStyle } from "@/lib/dance-types";
+import { getForwardDayWindow, isSessionActiveOnDate } from "@/lib/date";
+import { matchesSessionLevel } from "@/lib/levels";
+import { advanceLoadedDayCount, matchesTimeBuckets } from "@/lib/calendar-layout";
+import type { DanceSessionOutbound } from "@/lib/types";
 import { CalendarFiltersPanel } from "./calendar-filters";
+import { CalendarQuerySync } from "./calendar-query-sync";
+import type { CalendarQueryState } from "./calendar-query-state";
 import { DesktopAgenda } from "./desktop-agenda";
 import { EventDetailSheet } from "./event-detail-sheet";
 import { MobileAgenda } from "./mobile-agenda";
@@ -28,6 +29,7 @@ const MAX_WEEK_DAYS = 56;
 const NO_LOCATIONS: string[] = [];
 
 type Props = {
+  initialDate?: string;
   classCount: number;
   venueNames: string[];
   locationNames?: string[];
@@ -35,13 +37,8 @@ type Props = {
   listingsUpdatedText?: string;
 };
 
-function parseCsv(searchParams: URLSearchParams, key: string) {
-  return (searchParams.get(key) ?? "").split(",").map((value) => value.trim()).filter(Boolean);
-}
-
-function parseAnchorDate(value: string | null) {
-  if (!value) return startOfDay(new Date());
-  const parsed = parseISO(value);
+function initialDay(value: string | undefined) {
+  const parsed = parseISO(value ?? "");
   return isValid(parsed) ? startOfDay(parsed) : startOfDay(new Date());
 }
 
@@ -58,22 +55,19 @@ function countFilters(filters: CalendarFilters) {
     Number(filters.shortlistOnly);
 }
 
-export function CalendarNextPage({ classCount, venueNames, locationNames = NO_LOCATIONS, initialSessions, listingsUpdatedText }: Props) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+export function CalendarNextPage({ initialDate, classCount, venueNames, locationNames = NO_LOCATIONS, initialSessions, listingsUpdatedText }: Props) {
+  const [today, setToday] = useState(() => initialDay(initialDate));
   const [sessions, setSessions] = useState<DanceSessionOutbound[]>(initialSessions ?? []);
   const [loading, setLoading] = useState(initialSessions === undefined);
   const [error, setError] = useState<string | null>(null);
   const [view, setView] = useState<CalendarView>("week");
-  const [anchorDate, setAnchorDate] = useState(() => startOfDay(new Date()));
-  const [activeMobileDate, setActiveMobileDate] = useState(() => startOfDay(new Date()));
+  const [anchorDate, setAnchorDate] = useState(() => initialDay(initialDate));
+  const [activeMobileDate, setActiveMobileDate] = useState(() => initialDay(initialDate));
   const [loadedDayCount, setLoadedDayCount] = useState(INITIAL_WEEK_DAYS);
   const [filters, setFilters] = useState<CalendarFilters>(EMPTY_FILTERS);
   const [shortlistIds, setShortlistIds] = useState<string[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEventSelection | null>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [urlReady, setUrlReady] = useState(false);
 
   const loadSessions = useCallback(async () => {
     if (initialSessions !== undefined) {
@@ -100,6 +94,10 @@ export function CalendarNextPage({ classCount, venueNames, locationNames = NO_LO
   useEffect(() => { void loadSessions(); }, [loadSessions]);
 
   useEffect(() => {
+    setToday(startOfDay(new Date()));
+  }, []);
+
+  useEffect(() => {
     try {
       const stored = JSON.parse(window.localStorage.getItem(SHORTLIST_STORAGE_KEY) ?? "[]");
       if (Array.isArray(stored)) setShortlistIds(stored.filter((item): item is string => typeof item === "string"));
@@ -112,52 +110,14 @@ export function CalendarNextPage({ classCount, venueNames, locationNames = NO_LO
     window.localStorage.setItem(SHORTLIST_STORAGE_KEY, JSON.stringify(shortlistIds));
   }, [shortlistIds]);
 
-  useEffect(() => {
-    const viewParam = searchParams.get("view");
-    const nextView: CalendarView = viewParam === "day" || viewParam === "month" ? viewParam : "week";
-    const nextDate = parseAnchorDate(searchParams.get("date"));
-    const canonicalStyles = parseCsv(searchParams, "style").filter((value): value is DanceStyle => DANCE_STYLES.includes(value as DanceStyle));
-    const nextStyles = canonicalStyles.length > 0 ? canonicalStyles : expandLegacyDanceTypes(parseCsv(searchParams, "type"));
-    const nextLevels = parseCsv(searchParams, "level").filter((value): value is Level => LEVELS.includes(value as Level));
-    const nextTimes = parseCsv(searchParams, "time").filter((value): value is TimeBucket => ["morning", "afternoon", "evening"].includes(value));
-    const nextDays = parseCsv(searchParams, "day").filter((value): value is Exclude<DayOfWeek, null> => ORDERED_DAYS.includes(value as Exclude<DayOfWeek, null>));
-    setView(nextView);
-    setAnchorDate(nextDate);
-    setActiveMobileDate(nextDate);
-    setFilters({
-      search: searchParams.get("q") ?? "",
-      venues: parseCsv(searchParams, "venue").filter((venue) => venueNames.includes(venue)),
-      locations: parseCsv(searchParams, "location").filter((location) => locationNames.includes(location)),
-      days: nextDays,
-      styles: nextStyles,
-      levels: nextLevels,
-      times: nextTimes,
-      workshopsOnly: searchParams.get("workshops") === "1",
-      coursesOnly: searchParams.get("courses") === "1",
-      shortlistOnly: searchParams.get("shortlist") === "1"
-    });
-    setUrlReady(true);
-  }, [locationNames, searchParams, venueNames]);
+  const applyQueryState = useCallback((state: CalendarQueryState) => {
+    setView(state.view);
+    setAnchorDate(state.anchorDate);
+    setActiveMobileDate(state.anchorDate);
+    setFilters(state.filters);
+  }, []);
 
-  useEffect(() => {
-    if (!urlReady) return;
-    const params = new URLSearchParams();
-    params.set("view", view);
-    params.set("date", format(anchorDate, "yyyy-MM-dd"));
-    if (filters.search.trim()) params.set("q", filters.search.trim());
-    if (filters.venues.length) params.set("venue", filters.venues.join(","));
-    if (filters.locations.length) params.set("location", filters.locations.join(","));
-    if (filters.days.length) params.set("day", filters.days.join(","));
-    if (filters.styles.length) params.set("style", filters.styles.join(","));
-    if (filters.levels.length) params.set("level", filters.levels.join(","));
-    if (filters.times.length) params.set("time", filters.times.join(","));
-    if (filters.workshopsOnly) params.set("workshops", "1");
-    if (filters.coursesOnly) params.set("courses", "1");
-    if (filters.shortlistOnly) params.set("shortlist", "1");
-    if (params.toString() !== searchParams.toString()) {
-      router.replace(`${pathname}?${params.toString()}` as Route, { scroll: false });
-    }
-  }, [anchorDate, filters, pathname, router, searchParams, urlReady, view]);
+  const queryState = useMemo<CalendarQueryState>(() => ({ view, anchorDate, filters }), [anchorDate, filters, view]);
 
   useEffect(() => {
     setLoadedDayCount(INITIAL_WEEK_DAYS);
@@ -226,6 +186,9 @@ export function CalendarNextPage({ classCount, venueNames, locationNames = NO_LO
 
   return (
     <main className="calendar-next min-h-screen text-[#17384a]">
+      <Suspense fallback={null}>
+        <CalendarQuerySync state={queryState} venueNames={venueNames} locationNames={locationNames} onQueryState={applyQueryState} />
+      </Suspense>
       <header className="sticky top-0 z-40 border-b border-[#c9c5bd] bg-[#fffefa]/95 backdrop-blur supports-[backdrop-filter]:bg-[#fffefa]/88">
         <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-5 px-4 md:px-6">
           <div className="flex min-w-0 items-center gap-8">
@@ -301,11 +264,11 @@ export function CalendarNextPage({ classCount, venueNames, locationNames = NO_LO
           ) : filteredSessions.length === 0 ? (
             <div className="rounded-xl border border-dashed border-[#cfcac0] bg-white px-6 py-16 text-center"><p className="font-bold">No matching classes</p><p className="mt-1 text-sm text-[#77717f]">Clear filters or try a broader search.</p></div>
           ) : view === "month" ? (
-            <MonthGrid anchorDate={anchorDate} sessions={filteredSessions} onOpenDate={openMonthDate} />
+            <MonthGrid anchorDate={anchorDate} today={today} sessions={filteredSessions} onOpenDate={openMonthDate} />
           ) : (
             <>
-              <DesktopAgenda dates={visibleDates} sessions={filteredSessions} view={view} shortlistSet={shortlistSet} onSelect={setSelectedEvent} onToggleShortlist={toggleShortlist} onNearEnd={loadMoreDays} />
-              <MobileAgenda dates={visibleDates} activeDate={activeMobileDate} sessions={filteredSessions} view={view} shortlistSet={shortlistSet} onDateChange={setActiveMobileDate} onSelect={setSelectedEvent} onToggleShortlist={toggleShortlist} onNearEnd={loadMoreDays} />
+              <DesktopAgenda dates={visibleDates} today={today} sessions={filteredSessions} view={view} shortlistSet={shortlistSet} onSelect={setSelectedEvent} onToggleShortlist={toggleShortlist} onNearEnd={loadMoreDays} />
+              <MobileAgenda dates={visibleDates} today={today} activeDate={activeMobileDate} sessions={filteredSessions} view={view} shortlistSet={shortlistSet} onDateChange={setActiveMobileDate} onSelect={setSelectedEvent} onToggleShortlist={toggleShortlist} onNearEnd={loadMoreDays} />
             </>
           )}
         </section>

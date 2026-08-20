@@ -16,8 +16,8 @@ import {
 } from "@/lib/seo";
 import { sortVenueNamesForUi } from "@/lib/venue-order";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "error";
+const PRERENDER_DATE = format(new Date(), "yyyy-MM-dd");
 
 /** Order = biggest typical search/brand impact first (metadata snippet + keywords). */
 const PRIORITY_VENUES = [
@@ -125,6 +125,7 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <CalendarNextPage
+        initialDate={PRERENDER_DATE}
         classCount={sessions.length}
         venueNames={venueNames}
         locationNames={locationNames}

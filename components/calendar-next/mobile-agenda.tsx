@@ -9,6 +9,7 @@ import type { CalendarEventSelection, CalendarView } from "./types";
 
 type Props = {
   dates: Date[];
+  today: Date;
   activeDate: Date;
   sessions: DanceSessionOutbound[];
   view: CalendarView;
@@ -19,7 +20,7 @@ type Props = {
   onNearEnd: () => void;
 };
 
-export function MobileAgenda({ dates, activeDate, sessions, view, shortlistSet, onDateChange, onSelect, onToggleShortlist, onNearEnd }: Props) {
+export function MobileAgenda({ dates, today, activeDate, sessions, view, shortlistSet, onDateChange, onSelect, onToggleShortlist, onNearEnd }: Props) {
   const [collapsedVenues, setCollapsedVenues] = React.useState<Set<string>>(() => new Set());
   const iso = format(activeDate, "yyyy-MM-dd");
   const daySessions = sessions.filter((session) => isSessionActiveOnDate(session, iso));
@@ -53,15 +54,15 @@ export function MobileAgenda({ dates, activeDate, sessions, view, shortlistSet, 
           <div className="flex min-w-max px-4">
             {dates.map((date) => {
               const selected = isSameDay(date, activeDate);
-              const today = isSameDay(date, new Date());
+              const isToday = isSameDay(date, today);
               return (
                 <button
                   key={date.toISOString()}
                   onClick={() => onDateChange(date)}
                   className={`relative flex h-[62px] w-[54px] flex-col items-center justify-center border-r border-[#e2ded7] text-xs first:border-l ${selected ? "bg-[#073f5d] text-white" : "bg-[#fffefa] text-[#32302d]"}`}
-                  aria-label={`Show ${format(date, "EEEE d MMMM")}${today ? ", today" : ""}`}
+                  aria-label={`Show ${format(date, "EEEE d MMMM")}${isToday ? ", today" : ""}`}
                 >
-                  {today ? <span className="absolute inset-x-0 top-0 h-0.5 bg-[#ee5b28]" aria-hidden /> : null}
+                  {isToday ? <span className="absolute inset-x-0 top-0 h-0.5 bg-[#ee5b28]" aria-hidden /> : null}
                   <span className={`text-[8px] font-bold uppercase tracking-[0.14em] ${selected ? "text-white/75" : "text-[#79736d]"}`}>{format(date, "EEE")}</span>
                   <span className="font-display mt-0.5 text-base font-semibold">{format(date, "d")}</span>
                 </button>
@@ -78,7 +79,7 @@ export function MobileAgenda({ dates, activeDate, sessions, view, shortlistSet, 
             <h2 className="font-display mt-1 text-xl font-semibold leading-tight text-[#073d5b]">{format(activeDate, "EEEE d MMMM")}</h2>
             <p className="mt-1 text-xs text-[#77716b]">{daySessions.length} {daySessions.length === 1 ? "class" : "classes"}</p>
           </div>
-          {isSameDay(activeDate, new Date()) ? <span className="border border-[#ec5b2a] px-2 py-1 text-[8px] font-bold uppercase tracking-[0.1em] text-[#d94414]">Today</span> : null}
+          {isSameDay(activeDate, today) ? <span className="border border-[#ec5b2a] px-2 py-1 text-[8px] font-bold uppercase tracking-[0.1em] text-[#d94414]">Today</span> : null}
         </div>
 
         <div className="border-t border-[#cbc7bf]">

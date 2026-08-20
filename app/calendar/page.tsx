@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
 import Home from "@/app/page";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "error";
 
 export function generateMetadata(): Metadata {
   const title = buildPageTitle("Calendar Preview");
