@@ -1,186 +1,6 @@
 {
-  "updatedAt": "2026-08-19T05:58:01.267Z",
+  "updatedAt": "2026-08-20T05:58:16.338Z",
   "sessions": [
-    {
-      "id": "pineapple-dance-studios-jazz-musical-theatre-the-actors-jazz-class-int-13-laura-hills-thursday-20-15",
-      "venue": "Pineapple Dance Studios",
-      "title": "Jazz/Musical Theatre - The Actors Jazz Class (Int) £13 Laura Hills",
-      "details": "Instructor: Laura Hills | Level: Int | Room: Studio 7 | Location: In Studio Classes | Bringing the usual care-free, high-energy vibe of a Laura Hills jazz class, this intermediate level Musical Theatre class offers a space for Actors and Singers who are looking to brush up on their movement and performance skills in a judgement-free zone. The stylised routines fall directly between advanced beginner and advanced / pro levels - where there is slightly less focus on advanced technical aspects, but the choreography will still push performance technique and style.The class consists of a relaxed warm-up, followed by an accessible routine that will differ in style each week. This class is guaranteed to bring you joy!",
-      "dayOfWeek": "Thursday",
-      "startTime": "20:15",
-      "endTime": "21:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+May+14%2C+2026++8%3A15+pm&item%5Bmbo_id%5D=737118&item%5Bmbo_location_id%5D=2&item%5Bname%5D=The+Actors+Jazz+Class+%28Int%29+%C2%A313+Laura+Hills+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "pineapple-dance-studios-street-dance-commercial-popping-13-all-brooke-fiya-house-thursday-20-15",
-      "venue": "Pineapple Dance Studios",
-      "title": "Street Dance/Commercial - Popping £13 (All) Brooke (Fiya House)",
-      "details": "Instructor: Brooke (Fiya House) | Level: All | Room: Studio 9 | Location: In Studio Classes | This class covers the fundamentals of Popping through drills, techniques, and creative exercises. Dancers of all levels are welcome. Let’s have some fun!",
-      "dayOfWeek": "Thursday",
-      "startTime": "20:15",
-      "endTime": "21:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+May+14%2C+2026++8%3A15+pm&item%5Bmbo_id%5D=722535&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Popping+%C2%A313+%28All%29+Brooke+%28Fiya+House%29+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "pineapple-dance-studios-street-dance-commercial-r-b-choreography-int-16-11-tiger-thursday-20-30",
-      "venue": "Pineapple Dance Studios",
-      "title": "Street Dance/Commercial - R&B Choreography (Int 16+) £11 Tiger",
-      "details": "Instructor: Tiger Heslop | Level: Int | Room: Studio 5 | Location: In Studio Classes | Get ready to move and groove to the smooth rhythms of R&B, feel the lyrics in your body and express yourself. This class is all about connecting to the music from the lyrics to the beats, feeling the vibe, and letting your body tell the story. I’ll break down the choreography's intricate movements, body rolls and smooth isolations, as we harness the emotional energy and groove of each song. We'll dance to slow jams, songs with more swag, to more up tempo R&B tunes. Get ready to sweat, smile, and have a good time!",
-      "dayOfWeek": "Thursday",
-      "startTime": "20:30",
-      "endTime": "21:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+May+14%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=722742&item%5Bmbo_location_id%5D=2&item%5Bname%5D=R%26B+Choreography+%28Int+16%2B%29+%C2%A311+Tiger&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "pineapple-dance-studios-world-irish-step-dancing-all-13-erin-thursday-20-30",
-      "venue": "Pineapple Dance Studios",
-      "title": "World - Irish Step Dancing (All) £13 Erin",
-      "details": "Instructor: Erin Coyle | Level: All | Room: Studio 6 | Location: In Studio Classes | Our classes are designed for dancers of any ability to learn the many forms of Irish Dancing as a group. Each week we aim to learn a new routine which could be anything from a Reel or Treble Jig to a group Ceili or Showpiece. Lesson will focus on rhythm, timing and technique and hints of Irish culture here and there, all while learning different movements and routines-Dancers of all abilities are welcome-Dancers do not need Irish Dance Shoes, trainers, dance sneakers or pumps are suitable.",
-      "dayOfWeek": "Thursday",
-      "startTime": "20:30",
-      "endTime": "21:45",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+May+14%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=644346&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Irish+Step+Dancing+%28All%29+%C2%A313+Erin+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "pineapple-dance-studios-street-dance-commercial-heels-all-12-maxy-thursday-20-30",
-      "venue": "Pineapple Dance Studios",
-      "title": "Street Dance/Commercial - Heels (All) £12 Maxy",
-      "details": "Instructor: Beth Lathem (cover) (substitute) | Level: All | Room: Studio 2 | Location: In Studio Classes | Maxy’s heels class is a fun and encouraging hour of sassy heels choreography. Designed to make you feel sexy and empowered whilst learning a different routine every week. Open to All Levels",
-      "dayOfWeek": "Thursday",
-      "startTime": "20:30",
-      "endTime": "21:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+May+14%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=711276&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Heels+%28All%29+%C2%A312+Maxy&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [],
-      "audience": "open",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "pineapple-dance-studios-world-reggaeton-int-16-12-marina-thursday-20-30",
-      "venue": "Pineapple Dance Studios",
-      "title": "World - Reggaeton (Int 16+) £12 Marina",
-      "details": "Instructor: Marina Angemi | Level: Int | Room: Studio 79 | Location: In Studio Classes | Come dance, sweat and feel amazing to Reggaeton - a high-energy, spicy, free-spirited Latin style!If you’re looking for a different experience in a safe, supportive space and want to have fun whilst learning, this class is for you!",
-      "dayOfWeek": "Thursday",
-      "startTime": "20:30",
-      "endTime": "21:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Thu.+May+14%2C+2026++8%3A30+pm&item%5Bmbo_id%5D=737659&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Reggaeton+%28Int+16%2B%29+%C2%A312+Marina+&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "the-manor-mvmt-beginners-commercial-cover-thursday-18-30",
-      "venue": "The Manor / MVMT",
-      "title": "Beginners Commercial - Cover",
-      "details": "In this commercial dance class, you'll start with an energising warm-up that includes key commercial dance drills to get your body moving and ready for the session. Afterward, we’ll dive into learning a fun and dynamic routine set to a popular, upbeat song. You'll have the opportunity to develop your style, timing, and performance skills as you work through the choreography. This class is designed to help you grow and have fun while learning the latest moves! | Melly Cardell | 16 yrs and over | Studio 4",
-      "dayOfWeek": "Thursday",
-      "startTime": "18:30",
-      "endTime": "19:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.themanorldn.com/mvmt#mvmt-timetable",
-      "sourceUrl": "https://www.themanorldn.com/mvmt",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "the-manor-mvmt-beginners-heels-thursday-19-30",
-      "venue": "The Manor / MVMT",
-      "title": "Beginners Heels",
-      "details": "Step into confidence and unleash your inner diva with our Beginners Heels Class! Perfect for those new to dancing in heels, this class focuses on foundational skills, posture, and poise.Our experienced instructor will guide you through fun and empowering routines, teaching essential techniques from basic walks to sultry combinations. No dance experience is needed—just bring your favorite heels and get ready to shine!Join us to boost your self-confidence, improve your dance skills, and have a blast. See you on the dance floor! | Cover - Tarek Khwiss | 18 yrs and over | Studio 4",
-      "dayOfWeek": "Thursday",
-      "startTime": "19:30",
-      "endTime": "20:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.themanorldn.com/mvmt#mvmt-timetable",
-      "sourceUrl": "https://www.themanorldn.com/mvmt",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "the-manor-mvmt-improvers-commercial-cover-thursday-19-30",
-      "venue": "The Manor / MVMT",
-      "title": "Improvers Commercial - Cover",
-      "details": "Ready to take your dancing to the next level? Our Improvers Commercial class is perfect for those looking for a challenge! Expect high-energy combos, industry-style movement, and a focus on musicality, performance, and execution. This class will push your technique, build confidence, and help you bring that star quality to your dancing. If you're comfortable picking up choreography and ready to level up, this one’s for you! | Melly Cardell | 16 yrs and over | Studio 3",
-      "dayOfWeek": "Thursday",
-      "startTime": "19:30",
-      "endTime": "20:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://www.themanorldn.com/mvmt#mvmt-timetable",
-      "sourceUrl": "https://www.themanorldn.com/mvmt",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
-    {
-      "id": "studio-66-pole-performance-choreo-weekly-styles-thursday-18-30",
-      "venue": "Studio 66",
-      "title": "[POLE] Performance Choreo (weekly styles)",
-      "details": "Category: The Method | Instructor: Danielle De Vito Halevy | Studio: Gallery B",
-      "dayOfWeek": "Thursday",
-      "startTime": "18:30",
-      "endTime": "19:30",
-      "startDate": "2026-05-14",
-      "endDate": "2026-05-14",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://online.wellyx.com/studiosixtysix/londonuk/classes",
-      "sourceUrl": "https://online.wellyx.com/studiosixtysix/londonuk/classes",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-14T06:37:22.450Z"
-    },
     {
       "id": "studio-66-pole-flexi-tricks-thursday-19-30",
       "venue": "Studio 66",
@@ -3409,7 +3229,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-musketeers-sunday-18-30",
@@ -4853,7 +4673,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-single-class-monday-18-30",
@@ -4881,7 +4701,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-11-classes-monday-18-30",
@@ -4914,7 +4734,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-jam-modular-music-with-rocio-ayll-n-and-sami-sabik-monday-18-30",
@@ -4948,7 +4768,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-pura-nights-monday-19-30",
@@ -6945,7 +6765,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-tuesday-intermediates-class-jam-single-class-tuesday-18-30",
@@ -6976,7 +6796,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-pura-nights-ealing-tuesday-19-30",
@@ -10427,7 +10247,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-wednesday-open-class-jam-on-the-heath-wednesday-18-30--2026-05-20",
@@ -12040,7 +11860,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-15T05:52:38.204Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-playground-friday-17-30",
@@ -12105,7 +11925,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-mojito-club-friday-19-30",
@@ -13459,7 +13279,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "the-place-professional-classes-friday-mon-20-apr-fri-17-jul",
@@ -13556,7 +13376,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-bachata-on-saturday-saturday-18-30",
@@ -18503,7 +18323,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-single-class-monday-18-30--2026-05-25",
@@ -18531,7 +18351,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-1-2-course-of-11-classes-monday-18-30--2026-05-25",
@@ -18564,7 +18384,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "chisenhale-dance-space-class-lab-moving-through-yoga-tuesday-19-30",
@@ -21913,7 +21733,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-thursday-07-00",
@@ -24861,7 +24681,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-dancing-in-the-park-saturday-11-00",
@@ -28197,7 +28017,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30",
@@ -28225,7 +28045,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-class-jam-monday-18-30",
@@ -28260,7 +28080,7 @@
       "audience": "open",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-latino-sway-monday-19-30",
@@ -29955,7 +29775,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "the-place-professional-classes-tuesday-mon-20-apr-fri-17-jul",
@@ -33351,7 +33171,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-15T05:52:38.204Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-wednesday-open-class-jam-on-the-heath-wednesday-18-30",
@@ -33492,7 +33312,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "colet-house-baduanjin-qigong-8-week-course-thursday-18-30",
@@ -35133,7 +34953,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "danceworks-ballet-classical-ballet-dmitri-gruzdev-gen-13-friday-10-00",
@@ -37660,7 +37480,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "salsa-rueda-rueda-libre-cubaneando-saturday-workshop-saturday-17-00",
@@ -38401,7 +38221,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-15T05:52:38.204Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "tripspace-gaga-people-sunday-13-00",
@@ -38494,7 +38314,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-santo-domingo-sunday-17-00",
@@ -41721,7 +41541,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30--2026-06-08",
@@ -41749,7 +41569,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30--2026-06-08",
@@ -41777,7 +41597,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-tuesday-07-00",
@@ -45316,7 +45136,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "salsa-rueda-rueda-libre-timba-unlocked-social-dance-technique-musicality-6-weeks-course-with-osbanis-anneta-thursday-20-00",
@@ -46874,7 +46694,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": true,
-      "lastSeenAt": "2026-08-15T05:52:38.204Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "the-place-professional-classes-thursday-mon-20-apr-fri-17-jul",
@@ -48475,7 +48295,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-the-place-ci-jam-friday-18-30--2026-06-12",
@@ -48503,7 +48323,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-peers-practice-session-telegraph-hill-centre-friday-15-00--2026-06-12",
@@ -48531,7 +48351,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "salsa-rueda-rueda-libre-rueda-libre-sports-day-saturday-14-00",
@@ -50239,7 +50059,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-the-village-jam-sunday-10-00",
@@ -50267,7 +50087,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-bachazouk-uk-festival-2026-sunday-17-00",
@@ -51781,7 +51601,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-pura-nights-monday-19-30",
@@ -53590,7 +53410,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30--2026-06-15",
@@ -53618,7 +53438,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30--2026-06-15",
@@ -53646,7 +53466,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "siobhan-davies-studios-morning-class-with-daniel-hay-gordon-annie-edwards-tuesday-10am",
@@ -57224,7 +57044,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-thursday-07-00",
@@ -60392,7 +60212,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-global-underscore-at-acland-burghley-saturday-14-00",
@@ -60420,7 +60240,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-makondo-saturday-21-30",
@@ -62183,7 +62003,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-15T05:52:38.204Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "the-place-contemporary-improvers-with-jenny-hayes-saturday-sat-25-apr-sat-18-jul",
@@ -62314,7 +62134,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-london-sensual-days-summer-edition-sunday-19-30",
@@ -65517,7 +65337,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30--2026-06-22",
@@ -65545,7 +65365,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30--2026-06-22",
@@ -65573,7 +65393,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-tuesday-07-00",
@@ -69275,7 +69095,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-thursday-07-00",
@@ -72259,7 +72079,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-bachata-on-saturday-saturday-18-30",
@@ -73910,7 +73730,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-london-bridge-sunday-00-35",
@@ -76850,7 +76670,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30--2026-06-29",
@@ -76878,7 +76698,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30--2026-06-29",
@@ -76906,7 +76726,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "colet-house-human-garage-fascia-maneuver-workshop-tuesday-19-00",
@@ -78481,7 +78301,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-15T05:52:38.204Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-wednesday-07-00",
@@ -80222,7 +80042,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-thursday-07-00",
@@ -88599,7 +88419,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-course-of-6-classes-monday-18-30--2026-07-06",
@@ -88627,7 +88447,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": true,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-beginners-level-2-improvers-single-class-monday-18-30--2026-07-06",
@@ -88655,7 +88475,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-monday-contact-improv-class-jam-monday-18-30--2026-07-06",
@@ -88690,7 +88510,7 @@
       "audience": "open",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-tuesday-07-00",
@@ -92193,7 +92013,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-professional-class-thursday-07-00",
@@ -96887,7 +96707,7 @@
       "audience": "open",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-bailando-sundays-sunday-18-30",
@@ -98190,7 +98010,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-latino-sway-monday-19-30",
@@ -110955,7 +110775,7 @@
       "audience": "open",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "rambert-pilates-open-level-tuesday-17-20",
@@ -113944,7 +113764,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "tripspace-mat-pilates-thursday-16-30",
@@ -122534,7 +122354,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-15T05:52:38.204Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-wednesday-17-00",
@@ -122562,7 +122382,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-corito-bachatero-wednesday-20-00",
@@ -132580,7 +132400,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-corito-bachatero-wednesday-20-00",
@@ -133957,7 +133777,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-bachata-partnerwork-thursday-18-30",
@@ -138169,7 +137989,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-styling-and-technique-sunday-14-00",
@@ -145729,7 +145549,7 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
-      "lastSeenAt": "2026-08-16T05:54:58.194Z"
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
       "id": "bachata-community-corito-bachatero-wednesday-20-00",
@@ -160638,6 +160458,62 @@
       "lastSeenAt": "2026-08-17T06:01:16.398Z"
     },
     {
+      "id": "salsa-rueda-rueda-libre-casino-libre-monday-18-00",
+      "sourceKey": "salsaRuedaRuedaLibre",
+      "organizer": "Salsa Rueda (Rueda Libre)",
+      "venue": "Salsa Rueda (Rueda Libre)",
+      "locationName": "Drake & Morgan Kings Cross",
+      "address": "6 Pancras Sq,, London",
+      "postcode": "N1C 4AG",
+      "borough": null,
+      "title": "Casino Libre",
+      "details": "Casino (Cuban Salsa) Partnerwork Classes Mondays | 6:00–11:00 PM Drop-in classes 6:00pm – Beginners Class 7:15pm – Beginners + Intro to casino + Casino Improvers 8:30pm – Intro to casino + Casino Improvers + Casino Basics 9:30pm – Free Social Join us for a focused evening of Casino (Cuban Salsa) partnerwork, dedicated to building strong foundations, clean technique, and confident social dancing all rooted in authentic Cuban style. These drop-in classes are designed to support dancers at different stages, with three progressive levels running back-to-back so you can join exactly where you feel comfortable. Class Structure Intro: For beginners and those new to Casino. Learn the essential basics of Cuban partnerwork, connection, flow, and movement in a friendly, supportive environment. Improvers: For dancers with some experience. Strengthen your foundations, refine technique, and develop better flow, timing, and partner communication. Basics. For confident dancers ready to deepen their skills. Explore more complex partnerwork, musical interpretation, variation, and technique with a strong focus on clarity, control, and social usability. What to Expect Clear, structured teaching Strong emphasis on correct Casino technique Partner rotation (no need to bring a partner change partners) A relaxed but focused atmosphere Practical material you can use immediately on the social dance floor Our approach prioritises quality over quantity, helping you build a solid technical base while staying true to the social, playful spirit of Cuban dance. Whether you’re just starting out or looking to sharpen your skills, these classes offer a consistent space to learn, practice, and grow.",
+      "dayOfWeek": "Monday",
+      "startTime": "18:00",
+      "endTime": "23:00",
+      "startDate": "2026-08-17",
+      "endDate": "2026-08-17",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://ruedalibre.co.uk/event/casino-libre-25/",
+      "sourceUrl": "https://ruedalibre.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Salsa"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "salsa-rueda-rueda-libre-salsa-cubana-classes-with-fadi-k-cristina-monday-19-30",
+      "sourceKey": "salsaRuedaRuedaLibre",
+      "organizer": "Salsa Rueda (Rueda Libre)",
+      "venue": "Salsa Rueda (Rueda Libre)",
+      "locationName": "Haverstock School",
+      "address": "Haverstock School, 24 Haverstock Hill, London",
+      "postcode": "NW3 2BQ",
+      "borough": null,
+      "title": "Salsa Cubana Classes with Fadi K & Cristina",
+      "details": "* EVERY MONDAY * ** LEVELS 1 & 2 – Monthly Courses Only ** LEVELS 3 & 4 – Courses or Walk ins * 7:30 & 8:30 PM* * LEVELS 1 & 2 Focus on * * Basics Mastering * Timing simplified * Leading * Following * Intro to musicality * Music interpretation * Posture * Connection techniques * Weight transfer techniques * Balance * Levels 3&4 Focus on * * Advanced Foot work * Advanced musicality * ⁠intro to afroCuban * Complex routines in level 4 simplified for the dance floor !! *£35 For one Course * ** Walk ins – £10 – 1 Class or £15 – 2 Hrs Haverstock School London NW3 2BQ",
+      "dayOfWeek": "Monday",
+      "startTime": "19:30",
+      "endTime": "21:30",
+      "startDate": "2026-08-17",
+      "endDate": "2026-08-17",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://ruedalibre.co.uk/event/salsa-cubana-classes-with-fadi-k-cristina/2026-08-17/",
+      "sourceUrl": "https://ruedalibre.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Salsa"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
       "id": "the-place-contemporary-open-level-for-over-60s-with-sarah-golding-tuesday-na",
       "sourceKey": "thePlace",
       "organizer": "The Place",
@@ -163172,6 +163048,235 @@
       "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "cubaneando-cubaneando-tuesday-tuesday-18-30",
+      "sourceKey": "cubaneando",
+      "organizer": "Cubaneando",
+      "venue": "Cubaneando",
+      "locationName": "Miraflores Bar & Lounge",
+      "address": "Miraflores Bar & Lounge, 60 Southwark Street, London",
+      "postcode": "SE1 1UN",
+      "borough": null,
+      "title": "Cubaneando Tuesday",
+      "details": "Payment for the sessions will be collected by cash at the door, However, you can still pay by card for your drinks at the Bar and the cloakroom. TUESDAY’S PRICES: (Classes only) FREE – from 6:30pm to 7pm £10 for 1h or £15 if you do 2h – £2 off for Students and NHS staff only when booking for 2 classes Cuban Salsa 7 & 8:15pm (2 levels each) with Esther Alvero & Antonio de Freitas Price: £15 for 2h Phone: + 0795 018 4131",
+      "dayOfWeek": "Tuesday",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "startDate": "2026-08-18",
+      "endDate": "2026-08-18",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://ruedalibre.co.uk/event/cubaneando-tuesday/2026-08-18/",
+      "sourceUrl": "https://ruedalibre.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Salsa"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "salsa-rueda-rueda-libre-flexalicious-performance-training-course-season-4-opan-night-tuesday-19-40",
+      "sourceKey": "salsaRuedaRuedaLibre",
+      "organizer": "Salsa Rueda (Rueda Libre)",
+      "venue": "Salsa Rueda (Rueda Libre)",
+      "locationName": "BGM Studios",
+      "address": "The Basement, 73 Saint John Street, London",
+      "postcode": "EC1M 4NJ",
+      "borough": null,
+      "title": "Flexalicious – Performance Training Course Season 4 Opan Night",
+      "details": "✨ FLEXALICIOUS OPEN NIGHT – TUESDAY 18TH AUGUST ✨ Have you got what it takes to be Flexalicious? We’re recruiting new team members for Season 4, starting in September 2026! Come and join us on our open night for the chance to meet our team, experience a training session with us, and if you’ve got what it takes, join our tribe and become part of the team! Flexalicious is a team that celebrates art, culture and expression. We combine passionate dancers, iconic music and powerful storytelling – and we want YOU to join us! ✅ Train in styles from salsa to hip hop ✅ Improve your technique and presence on the dance floor. ✅ Perform at major UK & international events ✅ Become a confident, versatile and expressive dancer ✨ All dance styles welcome – just bring your passion for dance & dedication 🗓️ Tuesday 18th August ⏰ 7:40PM 📍BGM Studios (near Farringdon), EC1M 4NJ 💥 Weekly training every Tuesday, 7:40–10:40PM in a Central London studio. Need more info? Contact @moeflexofficial on 07549 907049 or moeflexdance@gmail.com",
+      "dayOfWeek": "Tuesday",
+      "startTime": "19:40",
+      "endTime": "22:30",
+      "startDate": "2026-08-18",
+      "endDate": "2026-08-18",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://ruedalibre.co.uk/event/flexalicious-performance-training-course-season-4-opan-night/",
+      "sourceUrl": "https://ruedalibre.co.uk/classes/",
+      "tags": [
+        "hip hop"
+      ],
+      "styles": [
+        "Hip Hop",
+        "Salsa"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": true,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "salsa-rueda-rueda-libre-latin-kiss-tuesdays-classes-social-tuesday-20-00",
+      "sourceKey": "salsaRuedaRuedaLibre",
+      "organizer": "Salsa Rueda (Rueda Libre)",
+      "venue": "Salsa Rueda (Rueda Libre)",
+      "locationName": "The Winchmore",
+      "address": "235 Winchmore Hill Road, London",
+      "postcode": "N21 1QA",
+      "borough": null,
+      "title": "Latin Kiss Tuesdays Classes & Social",
+      "details": "💃Ready to spice up your Tuesdays? 🌶️🔥 🎉 Join us at LatinKiss for an unforgettable salsa experience! Whether you’re a beginner or already have some moves, our classes are packed with energy, passion, and fun. 💃🕺 💥 What to expect: 💥 ✅ Fun and energetic atmosphere ✅ Easy-to-follow instructions ✅ Exciting routines and footwork ✅ Partner work and social dancing ✅ Boosted confidence and fitness while having the time of your life—without even noticing! 🗓️ Mark your calendars: 📅 Date: TUESDAYS 🚪 Doors open: 7:30pm ⏰ Classes: 8pm – 9pm 💃 Social: 9pm – 11pm 📍 Location: The Winchmore – N21 1QA ✨ Don’t miss out—grab your dancing shoes and join the hottest salsa scene in town! ✨",
+      "dayOfWeek": "Tuesday",
+      "startTime": "20:00",
+      "endTime": "22:30",
+      "startDate": "2026-08-18",
+      "endDate": "2026-08-18",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://ruedalibre.co.uk/event/latin-kiss-tuesdays-classes-social/2026-08-18/",
+      "sourceUrl": "https://ruedalibre.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Salsa",
+        "Ballroom & Latin"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "city-academy-ballroom-dance-taster-tuesday-6-15-pm",
+      "sourceKey": "cityAcademy",
+      "organizer": "City Academy",
+      "venue": "City Academy",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Ballroom Dance Taster",
+      "details": "Sylvia Young Theatre School • Tutor: Giulia Settomini • 75 mins • £10.00 • 50% OFF",
+      "dayOfWeek": "Tuesday",
+      "startTime": "6:15 PM",
+      "endTime": "7:30 PM",
+      "startDate": "2026-08-18",
+      "endDate": "2026-08-18",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.city-academy.com/ballroom-dance-taster",
+      "sourceUrl": "https://www.city-academy.com/Dance-Classes",
+      "tags": [],
+      "styles": [
+        "Ballroom & Latin"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": true,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "ci-calendar-london-park-ci-jam-wednesday-17-00",
+      "sourceKey": "ciCalendarLondon",
+      "organizer": "CI Calendar London",
+      "venue": "CI Calendar London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Park CI jam",
+      "details": "<a href=\"https://www.google.com/url?q=https://ci-jams.pages.dev/&amp;sa=D&amp;source=calendar&amp;usd=2&amp;usg=AOvVaw0cHQVhrlKCYiBqgeQKiyUO\" target=\"_blank\">https://ci-jams.pages.dev/</a>",
+      "dayOfWeek": "Wednesday",
+      "startTime": "17:00",
+      "endTime": "19:45",
+      "startDate": "2026-08-19",
+      "endDate": "2026-08-19",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "sourceUrl": "https://cicalendar.uk/feeds/london-manual.ics",
+      "tags": [],
+      "styles": [
+        "Contact Improv"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "salsa-rueda-rueda-libre-rueda-night-wednesday-19-30",
+      "sourceKey": "salsaRuedaRuedaLibre",
+      "organizer": "Salsa Rueda (Rueda Libre)",
+      "venue": "Salsa Rueda (Rueda Libre)",
+      "locationName": "Strouden Park Community Centre",
+      "address": "31 Vanguard Road, Bournemouth",
+      "postcode": "BH8 9NU",
+      "borough": null,
+      "title": "Rueda Night",
+      "details": "Come and join a fun and friendly worldwide community of Rueda de Casino dancers 🛞🕺💃🏻 Bournemouth has a dedicated Rueda de Casino night 🥳 To begin with there are 2 levels of classes: ** 7:30pm Rueda Flow 💨 ** For those of us obsessed with how far we can push the rueda game. This is a closed group for regular rueda de casino dancers, please message to express interest and to receive an invite. (Arrival from 7:15pm) ** 8:30pm Rueda FUNdamentals 🤩 ** This is suitable for ALL levels of rueda dancers to practise their skills (but you must dance salsa)! We will cover the core moves needed to join social ruedas, with a focus on fun, including calls not used in the Flow class. We will also introduce a partnerwork move each week to improve your social dancing repertoire! (Arrival from 8:15pm ** 9:15pm Salsa only social ** No partner or booking needed (but an invite is needed for the Flow group, and the timing of Flow can change when beginner’s courses are running). 💷 £8 for one class, £12 for both.",
+      "dayOfWeek": "Wednesday",
+      "startTime": "19:30",
+      "endTime": "22:00",
+      "startDate": "2026-08-19",
+      "endDate": "2026-08-19",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://ruedalibre.co.uk/event/rueda-night/2026-08-19/",
+      "sourceUrl": "https://ruedalibre.co.uk/classes/",
+      "tags": [],
+      "styles": [
+        "Salsa"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "city-academy-house-shuffle-dance-taster-wednesday-6-15-pm",
+      "sourceKey": "cityAcademy",
+      "organizer": "City Academy",
+      "venue": "City Academy",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "House & Shuffle Dance Taster",
+      "details": "City Academy, Farringdon • Tutor: Daniel Seven • 60 mins • £15.00",
+      "dayOfWeek": "Wednesday",
+      "startTime": "6:15 PM",
+      "endTime": "7:15 PM",
+      "startDate": "2026-08-19",
+      "endDate": "2026-08-19",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.city-academy.com/house-shuffle-dance-taster",
+      "sourceUrl": "https://www.city-academy.com/Dance-Classes",
+      "tags": [],
+      "styles": [
+        "Hip Hop",
+        "House"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": true,
+      "lastSeenAt": "2026-08-17T06:01:16.398Z"
+    },
+    {
+      "id": "city-academy-absolute-beginners-dance-taster-wednesday-7-30-pm",
+      "sourceKey": "cityAcademy",
+      "organizer": "City Academy",
+      "venue": "City Academy",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Absolute Beginners Dance Taster",
+      "details": "City Academy, Farringdon • Tutor: Daniel Seven • 60 mins • £15.00",
+      "dayOfWeek": "Wednesday",
+      "startTime": "7:30 PM",
+      "endTime": "8:30 PM",
+      "startDate": "2026-08-19",
+      "endDate": "2026-08-19",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.city-academy.com/absolute-beginners-dance-taster",
+      "sourceUrl": "https://www.city-academy.com/Dance-Classes",
+      "tags": [],
+      "styles": [
+        "Other"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": true,
       "lastSeenAt": "2026-08-17T06:01:16.398Z"
     }
   ]
