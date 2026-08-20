@@ -14,13 +14,11 @@ const noisyLabels = [
 ];
 
 async function selectVenue(page: import("@playwright/test").Page, venue: string) {
-  await expect(page.getByText(/Showing \d+ classes/)).toBeVisible({ timeout: 10000 });
-  const clearFilters = page.getByRole("button", { name: "Clear filters" });
-  if (await clearFilters.isEnabled()) {
-    await clearFilters.click();
-  }
-  await page.getByRole("button", { name: venue, exact: true }).first().click();
-  await expect(page.getByText(/Showing \d+ classes/)).toBeVisible();
+  const filters = page.getByRole("complementary", { name: "Filters" });
+  await expect(filters.getByText(/\d+ visible classes?/)).toBeVisible({ timeout: 10000 });
+  await filters.getByRole("button", { name: "Clear all" }).click();
+  await filters.getByRole("group", { name: "Studios / organisers" }).getByRole("checkbox", { name: venue, exact: true }).check();
+  await expect.poll(() => new URL(page.url()).searchParams.get("venue")).toBe(venue);
 }
 
 test("venue pages avoid obvious nav/footer pollution", async ({ page }) => {

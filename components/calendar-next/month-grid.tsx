@@ -5,13 +5,14 @@ import type { DanceSessionOutbound } from "@/lib/types";
 
 type Props = {
   anchorDate: Date;
+  today: Date;
   sessions: DanceSessionOutbound[];
   onOpenDate: (date: Date) => void;
 };
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-export function MonthGrid({ anchorDate, sessions, onOpenDate }: Props) {
+export function MonthGrid({ anchorDate, today, sessions, onOpenDate }: Props) {
   const dates = getMonthGridDates(anchorDate);
   return (
     <div className="overflow-hidden border border-[#c9c5bd] bg-[#fffefa]">
@@ -22,7 +23,7 @@ export function MonthGrid({ anchorDate, sessions, onOpenDate }: Props) {
         {dates.map((date) => {
           const iso = format(date, "yyyy-MM-dd");
           const count = sessions.filter((session) => isSessionActiveOnDate(session, iso)).length;
-          const today = isSameDay(date, new Date());
+          const isToday = isSameDay(date, today);
           return (
             <button
               key={iso}
@@ -30,7 +31,7 @@ export function MonthGrid({ anchorDate, sessions, onOpenDate }: Props) {
               onClick={() => onOpenDate(date)}
               aria-label={`Open ${format(date, "EEEE d MMMM")}`}
             >
-              <span className={`flex h-7 w-7 items-center justify-center text-sm font-semibold ${today ? "border border-[#ee5b28] text-[#d94414]" : ""}`}>{format(date, "d")}</span>
+              <span className={`flex h-7 w-7 items-center justify-center text-sm font-semibold ${isToday ? "border border-[#ee5b28] text-[#d94414]" : ""}`}>{format(date, "d")}</span>
               {count > 0 ? (
                 <span className="mt-3 block w-fit border border-[#d9d5cd] px-2 py-1 text-[10px] font-medium text-[#625d68] max-sm:mt-1 max-sm:h-1.5 max-sm:w-1.5 max-sm:border-0 max-sm:bg-[#075178] max-sm:p-0 max-sm:text-[0px]">
                   {count} {count === 1 ? "class" : "classes"}

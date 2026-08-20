@@ -1,5 +1,5 @@
 import type { AdapterOutput, ScrapedClass } from "../types";
-import { chromium } from "playwright";
+import { chromium } from "@playwright/test";
 
 const sourceUrl = "https://www.basedancestudios.com/weekly-timetable-2";
 const dayPages = [

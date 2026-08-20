@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { coerceScrapeOutput, dedupeSessionsByCanonicalBooking } from "@/lib/data-store";
 import type { DanceSession } from "@/lib/types";
 
@@ -20,6 +20,28 @@ const base = (over: Partial<DanceSession>): DanceSession => ({
   isWorkshop: false,
   lastSeenAt: "2026-04-01T00:00:00.000Z",
   ...over
+});
+
+afterEach(() => {
+  vi.unstubAllEnvs();
+});
+
+describe("readScrapeOutput", () => {
+  it("reuses the normalized dataset in production", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.resetModules();
+    const { readScrapeOutput } = await import("@/lib/data-store");
+
+    expect(readScrapeOutput()).toBe(readScrapeOutput());
+  });
+
+  it("reloads the dataset in development", async () => {
+    vi.stubEnv("NODE_ENV", "development");
+    vi.resetModules();
+    const { readScrapeOutput } = await import("@/lib/data-store");
+
+    expect(readScrapeOutput()).not.toBe(readScrapeOutput());
+  });
 });
 
 describe("dedupeSessionsByCanonicalBooking", () => {

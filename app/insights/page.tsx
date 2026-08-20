@@ -9,8 +9,7 @@ import { buildInsights } from "@/lib/insights";
 import { SiteSocialLinks } from "@/components/site-social-links";
 import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "error";
 
 export function generateMetadata(): Metadata {
   const title = buildPageTitle("London Dance Class Insights");

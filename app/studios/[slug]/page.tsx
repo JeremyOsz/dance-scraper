@@ -9,16 +9,20 @@ import { SiteSocialLinks } from "@/components/site-social-links";
 import { readScrapeOutput } from "@/lib/data-store";
 import { signOutboundRedirectUrl } from "@/lib/outbound-redirect";
 import { buildPageTitle, buildStudioSeoText } from "@/lib/seo";
-import { getStudioBySlug } from "@/lib/studios";
+import { getStudioBySlug, getStudioProfiles } from "@/lib/studios";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "error";
+export const dynamicParams = false;
 
 type PageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export function generateStaticParams() {
+  return getStudioProfiles(readScrapeOutput()).map((studio) => ({ slug: studio.slug }));
+}
 
 function buildDescription(studioName: string, classCount: number, topTypes: string[]) {
   const typeSummary = topTypes.length > 0 ? topTypes.join(", ") : "multiple dance styles";

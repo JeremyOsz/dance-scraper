@@ -6,12 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { readScrapeOutput } from "@/lib/data-store";
 import { inferDanceStyles } from "@/lib/dance-types";
-import { getLocationBySlug } from "@/lib/locations";
+import { getLocationBySlug, getLocationProfiles } from "@/lib/locations";
 import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "error";
+export const dynamicParams = false;
 type PageProps = { params: Promise<{ slug: string }> };
+
+export function generateStaticParams() {
+  return getLocationProfiles(readScrapeOutput()).map((location) => ({ slug: location.slug }));
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const location = getLocationBySlug(readScrapeOutput(), (await params).slug);

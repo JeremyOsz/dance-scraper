@@ -10,8 +10,7 @@ import { readScrapeOutput } from "@/lib/data-store";
 import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
 import { getStudioProfiles } from "@/lib/studios";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "error";
 
 function pluralize(value: number, singular: string, plural = `${singular}s`) {
   return `${value} ${value === 1 ? singular : plural}`;

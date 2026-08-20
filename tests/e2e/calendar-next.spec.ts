@@ -2,6 +2,10 @@ import { expect, test } from "@playwright/test";
 
 test.describe("redesigned calendar", () => {
   test("provides the desktop card agenda, filters, views, and event drawer", async ({ page }) => {
+    const rscRequests: string[] = [];
+    page.on("request", (request) => {
+      if (new URL(request.url()).searchParams.has("_rsc")) rscRequests.push(request.url());
+    });
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto("/");
 
@@ -13,6 +17,13 @@ test.describe("redesigned calendar", () => {
     await expect(page.getByRole("region", { name: /scroll horizontally for more dates/i })).toBeVisible();
     await expect(page.getByTestId("mobile-agenda")).toBeHidden();
     await expect(page.getByRole("radio", { name: "Week", exact: true })).toHaveAttribute("aria-checked", "true");
+
+    await page.waitForLoadState("networkidle");
+    rscRequests.length = 0;
+    await page.getByRole("complementary", { name: "Filters" }).getByRole("checkbox", { name: "Evening" }).check();
+    await expect.poll(() => new URL(page.url()).searchParams.get("time")).toBe("evening");
+    expect(rscRequests).toEqual([]);
+    await page.getByRole("complementary", { name: "Filters" }).getByRole("button", { name: "Clear all" }).click();
 
     await page.evaluate(() => window.scrollTo(0, 700));
     const headerBox = await page.locator("main > header").boundingBox();

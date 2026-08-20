@@ -15,6 +15,8 @@ export type LocationProfile = {
   latestSeenAt: string | null;
 };
 
+const locationProfilesByData = new WeakMap<ScrapeOutput, LocationProfile[]>();
+
 function organizerOf(session: DanceSession) {
   return session.organizer ?? session.venue;
 }
@@ -29,6 +31,9 @@ function mostCommon(values: Array<string | null | undefined>) {
 }
 
 export function getLocationProfiles(data: ScrapeOutput): LocationProfile[] {
+  const cached = locationProfilesByData.get(data);
+  if (cached) return cached;
+
   const grouped = new Map<string, DanceSession[]>();
   for (const session of data.sessions) {
     const name = session.locationName?.trim();
@@ -37,7 +42,7 @@ export function getLocationProfiles(data: ScrapeOutput): LocationProfile[] {
   }
 
   const usedSlugs = new Set<string>();
-  return [...grouped.entries()]
+  const profiles = [...grouped.entries()]
     .sort(([a], [b]) => a.localeCompare(b, "en-GB"))
     .flatMap(([name, allSessions]) => {
       const anchor = new Date(data.generatedAt);
@@ -69,6 +74,8 @@ export function getLocationProfiles(data: ScrapeOutput): LocationProfile[] {
         latestSeenAt
       }];
     });
+  locationProfilesByData.set(data, profiles);
+  return profiles;
 }
 
 export function getLocationBySlug(data: ScrapeOutput, slug: string): LocationProfile | null {
