@@ -1,65 +1,6 @@
 {
-  "updatedAt": "2026-08-28T17:40:09.316Z",
+  "updatedAt": "2026-08-29T11:46:06.771Z",
   "sessions": [
-    {
-      "id": "pineapple-dance-studios-contemporary-contemporary-int-open-12-phoebe-friday-19-00",
-      "venue": "Pineapple Dance Studios",
-      "title": "Contemporary - Contemporary (Int/Open) £12 Phoebe",
-      "details": "Instructor: Phoebe Lindenbach | Level: Int | Room: Studio 12 | Location: In Studio Classes | This class is geared toward dancers who are expanding their contemporary foundations. Dancers will continue to learn while finding greater depth in their movement quality and technical skills. Modifications will be offered throughout class for those who need, as this is a safe space to explore!!",
-      "dayOfWeek": "Friday",
-      "startTime": "19:00",
-      "endTime": "20:00",
-      "startDate": "2026-05-22",
-      "endDate": "2026-05-22",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Fri.+May+22%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=702495&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Contemporary+%28Int%2FOpen%29+%C2%A312+Phoebe&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [
-        "contemporary"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-21T06:50:20.568Z"
-    },
-    {
-      "id": "pineapple-dance-studios-world-k-pop-all-13-tyler-avery-friday-19-00",
-      "venue": "Pineapple Dance Studios",
-      "title": "World - K-Pop (All) £13 Tyler Avery",
-      "details": "Instructor: Tyler Avery | Level: All | Room: Studio 6 | Location: In Studio Classes | Introduction to K-Pop choreography. Will do warm up for 10 min then head straight into learning the chosen",
-      "dayOfWeek": "Friday",
-      "startTime": "19:00",
-      "endTime": "20:00",
-      "startDate": "2026-05-22",
-      "endDate": "2026-05-22",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Fri.+May+22%2C+2026++7%3A00+pm&item%5Bmbo_id%5D=728082&item%5Bmbo_location_id%5D=2&item%5Bname%5D=K-Pop+%28All%29+%C2%A313+Tyler+Avery&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-21T06:50:20.568Z"
-    },
-    {
-      "id": "pineapple-dance-studios-contemporary-contemporary-floorwork-int-adv-12-fluidflow-friday-19-15",
-      "venue": "Pineapple Dance Studios",
-      "title": "Contemporary - Contemporary Floorwork (Int/Adv) £12 FluidFlow",
-      "details": "Instructor: Fluid Flow | Level: Int/Adv | Room: Studio 79 | Location: In Studio Classes | This class will be mainly focusing of floorwork mechanics. As the three of them have different but similar ways of approaching movement, they will find alternative pathways and explore various methods of getting in and out of the floor with efficiency and flow. The will also add an element of acrobatics to the work which they will break down, explain and focus on the technicalities. They will be sharing their vocabulary and movement practice, but will also leave space for you to bring your own individuality.",
-      "dayOfWeek": "Friday",
-      "startTime": "19:15",
-      "endTime": "20:45",
-      "startDate": "2026-05-22",
-      "endDate": "2026-05-22",
-      "timezone": "Europe/London",
-      "bookingUrl": "https://cart.mindbodyonline.com/sites/94863/cart/add_booking?item%5Binfo%5D=Fri.+May+22%2C+2026++7%3A15+pm&item%5Bmbo_id%5D=648302&item%5Bmbo_location_id%5D=2&item%5Bname%5D=Contemporary+Floorwork+%28Int%2FAdv%29+%C2%A312+FluidFlow&item%5Btype%5D=Class&theme=none&widget_type=schedule",
-      "sourceUrl": "https://www.pineapple.uk.com/pages/studio-classes-timetable",
-      "tags": [
-        "contemporary",
-        "floorwork"
-      ],
-      "audience": "adult",
-      "isWorkshop": false,
-      "lastSeenAt": "2026-05-21T06:50:20.568Z"
-    },
     {
       "id": "pineapple-dance-studios-hip-hop-hip-hop-beg-11-tiger-friday-19-30",
       "venue": "Pineapple Dance Studios",
@@ -5421,7 +5362,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "rambert-professional-class-tuesday-07-00",
@@ -16911,7 +16852,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "siobhan-davies-studios-morning-class-with-matthias-sperling-tuesday-10am",
@@ -30516,7 +30457,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "wednesday-moving-wednesday-moving-angela-andrew-wednesday-18-45",
@@ -42403,7 +42344,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "siobhan-davies-studios-morning-class-with-daniel-hay-gordon-annie-edwards-wednesday-10am",
@@ -54353,7 +54294,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "wednesday-moving-wednesday-moving-galit-criden-with-guest-juan-sanchez-wednesday-18-45",
@@ -77184,7 +77125,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "siobhan-davies-studios-morning-class-with-jose-agudo-tuesday-10am",
@@ -88466,7 +88407,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "tripspace-prodance-class-with-kieran-brown-wednesday-09-30",
@@ -99425,7 +99366,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "ci-calendar-london-regent-s-park-ci-jam-wednesday-17-00",
@@ -109353,7 +109294,7 @@
       "audience": "adult",
       "isWorkshop": true,
       "isCourse": false,
-      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
     },
     {
       "id": "colet-house-human-garage-fascia-maneuver-workshop-tuesday-19-00--2026-07-07",
@@ -169107,6 +169048,34 @@
       "lastSeenAt": "2026-08-26T06:00:51.113Z"
     },
     {
+      "id": "five-rhythms-london-emerging-waves-wednesday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves",
+      "details": "Teacher: Chad Whittlef (Teacher In Training).",
+      "dayOfWeek": "Wednesday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-08-26",
+      "endDate": "2026-08-26",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWaves-299153",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+    },
+    {
       "id": "bachata-community-london-bridge-thursday-20-00",
       "sourceKey": "bachataCommunity",
       "organizer": "Bachata Community",
@@ -170461,6 +170430,62 @@
         "Commercial"
       ],
       "audience": "open",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-27T16:40:43.713Z"
+    },
+    {
+      "id": "five-rhythms-london-emerging-waves-kew-friday-na",
+      "sourceKey": "fiveRhythmsLondon",
+      "organizer": "Five Rhythms London",
+      "venue": "Five Rhythms London",
+      "locationName": null,
+      "address": null,
+      "postcode": null,
+      "borough": null,
+      "title": "Emerging Waves Kew",
+      "details": "Teacher: Mayra Vivo (Teacher In Training).",
+      "dayOfWeek": "Friday",
+      "startTime": null,
+      "endTime": null,
+      "startDate": "2026-08-28",
+      "endDate": "2026-08-28",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.5rhythms.com/classes/EmergingWavesKew-298286",
+      "sourceUrl": "https://www.5rhythms.com/EventSearch.php?Type=1&event_country=GB",
+      "tags": [],
+      "styles": [
+        "5Rhythms"
+      ],
+      "audience": "adult",
+      "isWorkshop": false,
+      "isCourse": false,
+      "lastSeenAt": "2026-08-26T06:00:51.113Z"
+    },
+    {
+      "id": "chisenhale-dance-space-this-is-a-public-square-na-7-30-pm",
+      "sourceKey": "chisenhaleDanceSpace",
+      "organizer": "Chisenhale Dance Space",
+      "venue": "Chisenhale Dance Space",
+      "locationName": "Chisenhale Dance Space",
+      "address": "64-84 Chisenhale Road",
+      "postcode": "E3 5QZ",
+      "borough": "Tower Hamlets",
+      "title": "‘this is a public square’",
+      "details": "27 August 2026 - 28 August 2026",
+      "dayOfWeek": null,
+      "startTime": "7:30 pm",
+      "endTime": "8:30 pm",
+      "startDate": "2026-08-27",
+      "endDate": "2026-08-28",
+      "timezone": "Europe/London",
+      "bookingUrl": "https://www.chisenhaledancespace.co.uk/whatson/this-is-a-public-square/",
+      "sourceUrl": "https://www.chisenhaledancespace.co.uk/independent-events/",
+      "tags": [],
+      "styles": [
+        "Other"
+      ],
+      "audience": "adult",
       "isWorkshop": false,
       "isCourse": false,
       "lastSeenAt": "2026-08-27T16:40:43.713Z"
