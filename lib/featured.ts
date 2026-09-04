@@ -23,7 +23,7 @@ export const FEATURED_RULES: FeaturedRule[] = [
   { venueKey: "luminousDance" }
 ];
 
-export function isFeaturedSession(session: DanceSession): boolean {
+export function isFeaturedSession(session: Pick<DanceSession, "venue" | "title"> & { tags?: string[] }): boolean {
   return FEATURED_RULES.some((rule) => {
     if (rule.venueKey && VENUES[rule.venueKey].label !== session.venue) {
       return false;
@@ -31,7 +31,7 @@ export function isFeaturedSession(session: DanceSession): boolean {
     if (rule.titleContains && !session.title.toLowerCase().includes(rule.titleContains.toLowerCase())) {
       return false;
     }
-    if (rule.tag && !session.tags.includes(rule.tag)) {
+    if (rule.tag && !session.tags?.includes(rule.tag)) {
       return false;
     }
     return true;

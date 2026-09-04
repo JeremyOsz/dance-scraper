@@ -122,4 +122,18 @@ describe("sortSessionsForVenueAgenda", () => {
       "studio-early"
     ]);
   });
+
+  it("puts a venue with a featured event first, and puts that event before its other events", () => {
+    const result = sortSessionsForVenueAgenda([
+      { id: "place", venue: "The Place", title: "Place class", startTime: "09:00", endTime: "10:00" },
+      { id: "independent-early", venue: "Siobhan Davies Studios", title: "Other Independent Dance class", startTime: "09:00", endTime: "10:00" },
+      { id: "independent-featured", venue: "Siobhan Davies Studios", title: "To Move Together", startTime: "10:00", endTime: "11:00" }
+    ]);
+
+    expect(result.map((session) => session.id)).toEqual([
+      "independent-featured",
+      "independent-early",
+      "place"
+    ]);
+  });
 });

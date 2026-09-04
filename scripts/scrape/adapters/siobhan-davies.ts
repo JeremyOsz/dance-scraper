@@ -11,7 +11,7 @@ const excludedClassPattern = /\b(yoga|pilates)\b/i;
 const mondayNightImprovisationTitlePattern = /\bmonday\s+night\s+improvisation\b/i;
 const morningClassTitlePattern = /^morning class$/i;
 const timeRangePattern =
-  /\d{1,2}(?::|\.)?\d{0,2}\s*(?:am|pm)?\s*(?:-|–|—|to)\s*(?:\d{1,2}(?::|\.)?\d{0,2}\s*(?:am|pm)|\d{1,2}\s*(?:noon|midnight)|noon|midnight)/i;
+  /(?<![\d.])\d{1,2}(?::|\.)?\d{0,2}\s*(?:am|pm)?\s*(?:-|–|—|to)\s*(?:\d{1,2}(?::|\.)?\d{0,2}\s*(?:am|pm)|\d{1,2}\s*(?:noon|midnight)|noon|midnight)/i;
 const timetableWeekdayPattern =
   "(?:Mon(?:day)?s?|Tue(?:sday)?s?|Wed(?:nesday)?s?|Thu(?:rsday)?s?|Fri(?:day)?s?|Sat(?:urday)?s?|Sun(?:day)?s?)";
 const timetableMonthPattern =

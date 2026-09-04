@@ -835,6 +835,7 @@ describe("scraper adapters", () => {
     expect(sessions.map((item) => item.startDate)).toEqual(["2026-04-24", "2026-05-29", "2026-06-26", "2026-07-24"]);
     expect(sessions.every((item) => item.endDate === item.startDate)).toBe(true);
     expect(sessions.every((item) => item.dayOfWeek === "Friday")).toBe(true);
+    expect(sessions.map((item) => item.time)).toEqual(["6.30 - 8pm", "6.30 - 8pm", "6.30 - 8pm", "6.30 - 8pm"]);
   });
 
   it("includes Siobhan Unscary Saturdays events from the archive as dated sessions", async () => {

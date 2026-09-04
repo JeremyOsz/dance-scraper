@@ -1,4 +1,5 @@
 import { sortVenueRecordsForUi } from "@/lib/venue-order";
+import { isFeaturedSession } from "@/lib/featured";
 
 export type TimeBucket = "morning" | "afternoon" | "evening";
 
@@ -64,17 +65,22 @@ export function matchesTimeBuckets(value: string | null, buckets: TimeBucket[]) 
 }
 
 export function sortSessionsForVenueAgenda<
-  T extends CalendarTimeInput & { venue: string; organizer?: string | null; title: string }
+  T extends CalendarTimeInput & { venue: string; organizer?: string | null; title: string; tags?: string[] }
 >(sessions: T[]): T[] {
-  const venueCounts = new Map<string, number>();
+  const venueRecords = new Map<string, { count: number; featured: boolean }>();
   for (const session of sessions) {
     const organizer = session.organizer?.trim() || session.venue;
-    venueCounts.set(organizer, (venueCounts.get(organizer) ?? 0) + 1);
+    const current = venueRecords.get(organizer) ?? { count: 0, featured: false };
+    venueRecords.set(organizer, {
+      count: current.count + 1,
+      featured: current.featured || isFeaturedSession(session)
+    });
   }
   const venueRank = new Map(
     sortVenueRecordsForUi(
-      [...venueCounts].map(([name, count]) => ({ name, count }))
-    ).map((venue, index) => [venue.name, index])
+      [...venueRecords].map(([name, { count, featured }]) => ({ name, count, featured }))
+    ).sort((a, b) => Number(b.featured) - Number(a.featured))
+      .map((venue, index) => [venue.name, index])
   );
 
   return [...sessions].sort((a, b) => {
@@ -83,6 +89,9 @@ export function sortSessionsForVenueAgenda<
     const venueDifference = (venueRank.get(aOrganizer) ?? Number.MAX_SAFE_INTEGER) -
       (venueRank.get(bOrganizer) ?? Number.MAX_SAFE_INTEGER);
     if (venueDifference !== 0) return venueDifference;
+
+    const featuredDifference = Number(isFeaturedSession(b)) - Number(isFeaturedSession(a));
+    if (featuredDifference !== 0) return featuredDifference;
 
     const aTime = parseTimeToMinutes(a.startTime) ?? Number.MAX_SAFE_INTEGER;
     const bTime = parseTimeToMinutes(b.startTime) ?? Number.MAX_SAFE_INTEGER;

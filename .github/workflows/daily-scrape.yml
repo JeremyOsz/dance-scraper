@@ -1,8 +1,9 @@
-name: Daily Scrape
+name: Weekly Scrape
 
 on:
   schedule:
-    - cron: "30 5 * * *"
+    # Sundays at 05:30 UTC.
+    - cron: "30 5 * * 0"
   workflow_dispatch:
 
 permissions:
@@ -47,5 +48,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "chore: daily dance data refresh"
+          git commit -m "chore: weekly dance data refresh"
           git push origin HEAD:${{ github.ref_name }}
