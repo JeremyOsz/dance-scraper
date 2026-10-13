@@ -1,20 +1,21 @@
+import React from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { format, parseISO } from "date-fns";
+import type { Metadata, Route } from "next";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { readScrapeOutput } from "@/lib/data-store";
-import { ORDERED_DAYS } from "@/lib/date";
+import { StyleHeatmap } from "@/components/insights/style-heatmap";
 import { buildInsights } from "@/lib/insights";
 import { SiteSocialLinks } from "@/components/site-social-links";
 import { buildMetaDescription, buildPageTitle } from "@/lib/seo";
 
 export const dynamic = "error";
+export const revalidate = 3600;
 
 export function generateMetadata(): Metadata {
   const title = buildPageTitle("London Dance Class Insights");
   const description = buildMetaDescription(
-    "See which days are busiest and which dance styles are most popular across London Dance Calendar listings this week."
+    "Compare average daily classes and dance styles across London Dance Calendar listings over the next 28 days."
   );
   return {
     title: {
@@ -36,147 +37,103 @@ export function generateMetadata(): Metadata {
   };
 }
 
-function toPercent(value: number) {
-  return `${Math.round(value * 100)}%`;
-}
-
-function heatOpacity(value: number, max: number) {
-  if (max === 0 || value === 0) return 0;
-  return Number((value / max).toFixed(2));
-}
-
 export default function InsightsPage() {
   const data = readScrapeOutput();
   const insights = buildInsights(data.sessions);
-  const maxDayCount = Math.max(...insights.dayTotals.map((entry) => entry.count), 1);
-  const maxCellCount = Math.max(...insights.typeRows.flatMap((row) => ORDERED_DAYS.map((day) => row.byDay[day])), 1);
+  const maxDay = Math.max(...insights.dayAverages.map(entry => entry.average), 0);
+  const minDay = Math.min(...insights.dayAverages.map(entry => entry.average));
+  const busiest = insights.dayAverages.filter(entry => entry.average === maxDay);
+  const quietest = insights.dayAverages.filter(entry => entry.average === minDay);
+  const maxStyle = insights.typeRows[0]?.averagePerDay ?? 0;
+  const errors = data.venues.filter(venue => !venue.ok);
+  const summary = [
+    { label: "Daily average", value: insights.averagePerDay.toFixed(1), detail: "listed classes across all 28 days" },
+    { label: "Busiest weekday", value: maxDay > 0 ? busiest.map(entry => entry.day).join(" / ") : "No classes", detail: `${maxDay.toFixed(1)} classes per day` },
+    { label: "Quietest weekday", value: maxDay > 0 ? quietest.map(entry => entry.day).join(" / ") : "No classes", detail: `${minDay.toFixed(1)} classes per day` }
+  ];
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
-      <Card className="border-none bg-transparent shadow-none">
-        <CardHeader className="space-y-4 px-0">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <h1 className="text-3xl font-semibold tracking-tight">London Dance Class Insights</h1>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" asChild>
-                <Link href="/">Calendar</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/insights">Insights</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="/studios">Studios</Link>
-              </Button>
-            </div>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            Trends from the latest scrape: compare day popularity, then see which canonical styles lead on each day.
-          </p>
-          <SiteSocialLinks className="mt-1" />
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary">Total classes: {insights.totalSessions}</Badge>
-            <Badge variant="secondary">With known day: {insights.sessionsWithKnownDay}</Badge>
-            <Badge variant="secondary">Day unknown: {insights.sessionsWithoutKnownDay}</Badge>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-6 px-0">
-          <Card>
-            <CardHeader>
-              <h2 className="text-xl font-semibold leading-none tracking-tight">Most Popular Days Overall</h2>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {insights.dayTotals.map((entry) => (
-                <div key={entry.day} className="space-y-1">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">{entry.day}</span>
-                    <span className="text-muted-foreground">
-                      {entry.count} classes ({toPercent(entry.share)})
-                    </span>
-                  </div>
-                  <div className="h-2 rounded-full bg-muted">
-                    <div
-                      className="h-2 rounded-full bg-primary transition-all"
-                      style={{ width: `${Math.round((entry.count / maxDayCount) * 100)}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+    <main className="calendar-next min-h-screen text-[#17384a]">
+      <header className="sticky top-0 z-40 border-b border-[#c9c5bd] bg-[#fffefa]/95 backdrop-blur">
+        <div className="mx-auto flex min-h-[72px] max-w-[1800px] flex-wrap items-center gap-x-8 gap-y-3 px-4 py-4 md:px-6">
+          <Link href="/" className="font-display text-[12px] font-black uppercase leading-[0.88] tracking-[-0.03em] text-[#073d5b]" aria-label="London Dance Calendar">London<br />Dance<br />Calendar</Link>
+          <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[13px] font-medium text-[#4e5456]">
+            <Link href="/">Calendar</Link>
+            <Link href={"/styles" as Route}>Styles</Link>
+            <Link href={"/locations" as Route}>Locations</Link>
+            <Link href="/studios">Studios</Link>
+            <Link href="/insights" aria-current="page" className="border-b-2 border-[#ee5b28] pb-1 text-[#073d5b]">Insights</Link>
+            <Link href="/contact">Contact</Link>
+          </nav>
+        </div>
+      </header>
+      <div className="mx-auto max-w-7xl space-y-5 px-4 py-5 md:px-6 md:py-6">
+      <header className="space-y-4">
+        <div className="border-b border-[#c9c5bd] pb-4">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#697173]">London Dance Calendar</p>
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-[#073d5b]">Class insights</h1>
+        </div>
+        <p className="max-w-3xl text-sm text-muted-foreground">Compare listed class availability, rather than attendance or popularity. Averages cover the next 28 days, including days with no classes.</p>
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
+          <p>{format(parseISO(insights.windowStart), "d MMM yyyy")} to {format(parseISO(insights.windowEnd), "d MMM yyyy")}</p>
+          <p>Data refreshed {new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/London" }).format(new Date(data.generatedAt))} London time</p>
+        </div>
+        {errors.length > 0 && <details className="border border-[#c9c5bd] bg-[#fffefa] p-3 text-sm text-[#4e5456]">
+          <summary className="cursor-pointer font-medium text-[#073d5b]">Error scraping {errors.length} {errors.length === 1 ? "source" : "sources"}. Some listings may be older.</summary>
+          <p className="mt-2">{errors.map(venue => venue.venue).join(", ")}. The refresh date does not confirm that every source is current.</p>
+          <Link href="/studios" className="mt-2 inline-block underline underline-offset-4">View source status</Link>
+        </details>}
+      </header>
 
-          <Card>
-            <CardHeader>
-              <h2 className="text-xl font-semibold leading-none tracking-tight">Top Styles By Day</h2>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {insights.topTypesByDay.map((entry) => (
-                <div key={entry.day} className="rounded-md border border-input p-3">
-                  <p className="text-sm font-medium">{entry.day}</p>
-                  {entry.topTypes.length === 0 ? (
-                    <p className="mt-1 text-sm text-muted-foreground">No scheduled classes.</p>
-                  ) : (
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {entry.topTypes.slice(0, 3).map((typeEntry) => (
-                        <Badge key={`${entry.day}-${typeEntry.type}`} variant="secondary">
-                          {typeEntry.type}: {typeEntry.count}
-                        </Badge>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+      <div className="grid gap-3 sm:grid-cols-3">
+        {summary.map(item => <Card key={item.label} className="border-[#c9c5bd] bg-[#fffefa] shadow-none"><CardContent className="space-y-1.5 p-4">
+          <p className="text-sm text-muted-foreground">{item.label}</p>
+          <p className="font-display text-2xl font-semibold tracking-tight text-[#073d5b] tabular-nums">{item.value}</p>
+          <p className="text-sm text-muted-foreground">{item.detail}</p>
+        </CardContent></Card>)}
+      </div>
 
-          <Card>
-            <CardHeader>
-              <h2 className="text-xl font-semibold leading-none tracking-tight">Type vs Day Heatmap</h2>
-            </CardHeader>
-            <CardContent className="overflow-x-auto">
-              <table className="min-w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="px-2 py-2 text-left font-medium">Type</th>
-                    {ORDERED_DAYS.map((day) => (
-                      <th key={day} className="px-2 py-2 text-center font-medium">
-                        {day.slice(0, 3)}
-                      </th>
-                    ))}
-                    <th className="px-2 py-2 text-right font-medium">Peak day</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {insights.typeRows.map((row) => (
-                    <tr key={row.type} className="border-b last:border-0">
-                      <td className="px-2 py-2 font-medium">{row.type}</td>
-                      {ORDERED_DAYS.map((day) => {
-                        const value = row.byDay[day];
-                        const opacity = heatOpacity(value, maxCellCount);
-                        return (
-                          <td key={`${row.type}-${day}`} className="px-2 py-2 text-center">
-                            <span
-                              className="inline-flex min-w-9 items-center justify-center rounded px-2 py-1"
-                              style={{
-                                backgroundColor: `hsl(var(--primary) / ${opacity})`,
-                                color: opacity > 0.45 ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))"
-                              }}
-                            >
-                              {value}
-                            </span>
-                          </td>
-                        );
-                      })}
-                      <td className="px-2 py-2 text-right text-muted-foreground">
-                        {row.peakDay ? `${row.peakDay} (${row.peakCount})` : "None"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardContent>
-          </Card>
-        </CardContent>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card className="border-[#c9c5bd] bg-[#fffefa] shadow-none">
+          <CardHeader className="space-y-2 p-4 pb-3">
+            <h2 className="font-display text-lg font-semibold text-[#073d5b]">When are most classes listed?</h2>
+            <p className="text-sm text-muted-foreground">Each weekday averages four dates. The dashed line marks the overall average of {insights.averagePerDay.toFixed(1)}.</p>
+          </CardHeader>
+          <CardContent className="space-y-3 px-4 pb-4">
+            {insights.dayAverages.map(entry => <div key={entry.day} className="space-y-1.5">
+              <div className="flex justify-between gap-2 text-sm"><span className={entry.average === maxDay && maxDay > 0 ? "font-semibold" : "font-medium"}>{entry.day}{entry.average === maxDay && maxDay > 0 ? " · busiest" : ""}</span><span className="tabular-nums">{entry.average.toFixed(1)}</span></div>
+              <div className="relative h-2 bg-[#e6e2da]" aria-hidden="true">
+                <div className={`h-full ${entry.average === maxDay ? "bg-primary" : "bg-primary/55"}`} style={{ width: `${maxDay > 0 ? entry.average / maxDay * 100 : 0}%` }} />
+                {maxDay > 0 && <span className="absolute -top-1 h-5 border-l-2 border-dashed border-[#697173]" style={{ left: `${insights.averagePerDay / maxDay * 100}%` }} />}
+              </div>
+            </div>)}
+            <p className="text-xs text-muted-foreground">Average listed classes per day</p>
+          </CardContent>
+        </Card>
+        <Card className="border-[#c9c5bd] bg-[#fffefa] shadow-none">
+          <CardHeader className="space-y-2 p-4 pb-3">
+            <h2 className="font-display text-lg font-semibold text-[#073d5b]">Most listed styles</h2>
+            <p className="text-sm text-muted-foreground">Daily averages across the full 28-day window. A class can appear under more than one style, so these values do not add up to the overall average.</p>
+          </CardHeader>
+          <CardContent className="space-y-3 px-4 pb-4">
+            {insights.typeRows.length === 0 && <p className="text-sm text-muted-foreground">No scheduled classes in this date range.</p>}
+            {insights.typeRows.slice(0, 7).map(row => <div key={row.type} className="space-y-1.5">
+              <div className="flex justify-between gap-2 text-sm"><span className="font-medium">{row.type}</span><span className="tabular-nums">{row.averagePerDay.toFixed(1)}</span></div>
+              <div className="h-2 bg-[#e6e2da]" aria-hidden="true"><div className="h-full bg-primary/70" style={{ width: `${maxStyle > 0 ? row.averagePerDay / maxStyle * 100 : 0}%` }} /></div>
+            </div>)}
+            <p className="text-xs text-muted-foreground">Top seven styles. Explore every style in the heatmap below.</p>
+          </CardContent>
+        </Card>
+      </div>
+      <Card className="border-[#c9c5bd] bg-[#fffefa] shadow-none">
+        <CardHeader className="space-y-2 p-4 pb-3"><h2 className="font-display text-lg font-semibold text-[#073d5b]">Find the best day for your style</h2><p className="text-sm text-muted-foreground">Compare availability or reveal each style’s weekday pattern.</p></CardHeader>
+        <CardContent className="px-4 pb-4"><StyleHeatmap rows={insights.typeRows} /></CardContent>
       </Card>
+      <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-[#c9c5bd] py-4 text-sm text-[#4e5456]">
+        <SiteSocialLinks />
+        <Link href="/contact" className="underline underline-offset-4">Contact / feedback</Link>
+      </footer>
+      </div>
     </main>
   );
 }
