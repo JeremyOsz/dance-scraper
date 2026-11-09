@@ -36,6 +36,8 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Scrape and normalize
+        id: scrape
+        continue-on-error: true
         run: npm run scrape -- --outdated
 
       - name: Commit updated data
@@ -50,3 +52,9 @@ jobs:
 
           git commit -m "chore: weekly dance data refresh"
           git push origin HEAD:${{ github.ref_name }}
+
+      - name: Report crawler failures
+        if: steps.scrape.outcome == 'failure'
+        run: |
+          echo "One or more crawlers failed. Successful venue updates were saved; inspect the scrape log for errors."
+          exit 1

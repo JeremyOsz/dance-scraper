@@ -76,7 +76,7 @@ function parseJsonLdItemLists(html: string): JsonLdItemList[] {
       const parsed = JSON.parse(raw) as JsonLdItemList | { "@graph"?: JsonLdItemList[] };
       if ("@graph" in parsed && Array.isArray(parsed["@graph"])) {
         lists.push(...parsed["@graph"].filter((item) => item["@type"] === "ItemList"));
-      } else if (parsed["@type"] === "ItemList") {
+      } else if ("@type" in parsed && parsed["@type"] === "ItemList") {
         lists.push(parsed);
       }
     } catch {
@@ -167,6 +167,38 @@ function parseCalendarCells(html: string, enrichedByKey: Map<string, ScrapedClas
   return classes;
 }
 
+export function parseTangoFeverCalendarHtml(html: string): ScrapedClass[] {
+  const $ = cheerio.load(html);
+  const classes: ScrapedClass[] = [];
+  $("[data-calendar-dates] [data-day]").each((_, day) => {
+    const root = $(day);
+    const startDate = root.find("time[datetime]").first().attr("datetime");
+    if (!startDate || !/^\d{4}-\d{2}-\d{2}$/.test(startDate)) return;
+    root.find(".calendar-month-instance").each((__, instance) => {
+      const event = $(instance);
+      const title = normalizeText(event.find(".wa-heading-s").first().text());
+      if (!title || !isClassLike(title)) return;
+      const time = normalizeText(event.find(".calendar-month-instance-time").text()) || null;
+      const teacher = normalizeText(event.find('wa-icon[name="user"]').parent().text());
+      const location = normalizeText(event.find('wa-icon[name="location-dot"]').parent().text());
+      const details = [location ? `Location: ${location}` : null, teacher ? `Teacher: ${teacher}` : null]
+        .filter(Boolean).join(" - ");
+      classes.push({
+        venue: "Tango Fever",
+        title,
+        details: details || null,
+        dayOfWeek: dayOfWeekFromDate(startDate),
+        time,
+        startDate,
+        endDate: startDate,
+        bookingUrl: absoluteUrl(calendarUrl, event.closest("a[href]").attr("href")) ?? calendarUrl,
+        sourceUrl
+      });
+    });
+  });
+  return classes;
+}
+
 function isClassLike(title: string): boolean {
   if (/\bpass\b/i.test(title)) return false;
   return /(class|workshop|milonga|tango)/i.test(title);
@@ -221,7 +253,8 @@ export async function scrapeTangoFever(): Promise<AdapterOutput> {
         item
       ])
     );
-    const calendarClasses = parseCalendarCells(html, enrichedByKey);
+    const modernClasses = parseTangoFeverCalendarHtml(html);
+    const calendarClasses = modernClasses.length > 0 ? modernClasses : parseCalendarCells(html, enrichedByKey);
     const classes = dedupe(calendarClasses.length > 0 ? calendarClasses : enriched);
 
     return {

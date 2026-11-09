@@ -26,9 +26,9 @@ export function parseSwinglandHtml(html: string): AdapterOutput["classes"] {
     const addressValue = clean(option.attr("data-a"));
     const bookingUrl = option.attr("data-url");
     if (!title || !bookingUrl || !/^\d{4}-\d{2}-\d{2}$/.test(dateValue)) return [];
-    const instructionText = `${title} ${details}`;
+    const instructionText = `${title} ${details} ${clean(option.attr("data-t"))}`;
     if (!/(class|workshop|learn|teaching|beginners|improvers)/i.test(instructionText) || /social dancing/i.test(title)) return [];
-    const time = details.match(/\b\d{1,2}(?::\d{2})?\s*(?:am|pm)(?:\s*[-–]\s*\d{1,2}(?::\d{2})?\s*(?:am|pm))?/i)?.[0] ?? null;
+    const time = clean(option.text()).match(/\b\d{1,2}(?::\d{2})?\s*(?:am|pm)(?:\s*[-–]\s*\d{1,2}(?::\d{2})?\s*(?:am|pm))?/i)?.[0] ?? details.match(/\b\d{1,2}(?::\d{2})?\s*(?:am|pm)(?:\s*[-–]\s*\d{1,2}(?::\d{2})?\s*(?:am|pm))?/i)?.[0] ?? null;
     const location = splitAddress(addressValue);
     const date = parseISO(dateValue);
     return [{

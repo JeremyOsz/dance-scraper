@@ -25,6 +25,17 @@ function normalizeText(value: string | null | undefined): string {
   return (value ?? "").replace(/\s+/g, " ").trim();
 }
 
+export function parseBaseTimetableText(value: string): BaseRow[] {
+  const lines = value.split(/\r?\n/);
+  const headerIndex = lines.findIndex(line => /TEACHER/.test(line) && /CLASS/.test(line) && /STUDIO/.test(line));
+  if (headerIndex < 0) return [];
+  return lines.slice(headerIndex + 1).flatMap(line => {
+    const [time, teacher, className, level, studio, ...price] = line.split("\t").map(normalizeText);
+    if (!time || !className || !/\d{1,2}:\d{2}/.test(time)) return [];
+    return [{ time, teacher: teacher || null, className, level: level || null, studio: studio || null, price: price.join(" | ") || null }];
+  });
+}
+
 function extractUrl(value: string | null): string | null {
   const text = normalizeText(value);
   const match = text.match(/https?:\/\/\S+/i);
@@ -88,34 +99,11 @@ async function extractRowsFromPage(pageUrl: string): Promise<BaseRow[]> {
     let lastError: unknown = null;
     for (let attempt = 0; attempt < 5; attempt += 1) {
       try {
-        await frame.waitForSelector("table tr", { timeout: 25_000, state: "attached" });
-        return await frame.evaluate(`(() => {
-          const text = (value) => (value ?? "").replace(/\\s+/g, " ").trim();
-          const rows = [];
-          const lines = text(document.body ? document.body.innerText : "").split("\\n").map(text).filter(Boolean);
-          const headerIndex = lines.findIndex(
-            (line) => line.includes("TIME") && line.includes("CLASS") && line.includes("TEACHER")
-          );
-          if (headerIndex >= 0) {
-            for (let i = headerIndex + 1; i < lines.length; i += 1) {
-              const raw = lines[i];
-              if (!raw) continue;
-              const cells = raw.split("\\t").map(text).filter((cell) => cell.length > 0);
-              if (cells.length < 3) continue;
-              const [time, teacher, className, level, studio, ...rest] = cells;
-              if (!time || !className) continue;
-              rows.push({
-                time,
-                teacher: teacher || null,
-                className,
-                level: level || null,
-                studio: studio || null,
-                price: rest.length > 0 ? rest.join(" | ") : null
-              });
-            }
-          }
-          return rows;
-        })()`);
+        await frame.waitForSelector("#theTable tbody tr", { timeout: 25_000, state: "attached" });
+        const text = await frame.evaluate<string>("document.body ? document.body.innerText : ''");
+        const rows = parseBaseTimetableText(text);
+        if (!rows.length) throw new Error(`No class rows found in BASE timetable on ${pageUrl}`);
+        return rows;
       } catch (error) {
         lastError = error;
         await page.waitForTimeout(300);

@@ -6,7 +6,7 @@ import { fetchHtml } from "./common";
 const sourceUrl = "https://www.londonschoolofcapoeira.com/timetable";
 const beginnerCourseUrl = "https://www.londonschoolofcapoeira.com/courses-and-products/p/beginners-course";
 const venue = "London School of Capoeira Herança";
-const SCHEDULE_PATTERN = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(.+)$/i;
+const SCHEDULE_PATTERN = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+(.+)$/i;
 const MONTHS: Record<string, number> = {
   january: 1,
   february: 2,
@@ -42,11 +42,11 @@ function parseTimetable(html: string): ScrapedClass[] {
   const classes: ScrapedClass[] = [];
   let schedule: { dayOfWeek: string; time: string } | null = null;
 
-  $(".sqs-html-content h2, .sqs-html-content h3").each((_, heading) => {
+  $(".sqs-html-content h2, .sqs-html-content h3, .sqs-html-content p:has(> strong)").each((_, heading) => {
     const text = normalizeText($(heading).text());
     const scheduleMatch = isScheduleHeading(text);
     if (scheduleMatch) {
-      schedule = { dayOfWeek: scheduleMatch[1], time: scheduleMatch[2] };
+      schedule = { dayOfWeek: scheduleMatch[1][0].toUpperCase() + scheduleMatch[1].slice(1).toLowerCase(), time: scheduleMatch[2] };
       return;
     }
     if (!schedule || !text) return;
@@ -107,11 +107,14 @@ function parseBeginnerCourse(html: string, now: Date): ScrapedClass[] {
   const details = paragraphs.length > 0 ? paragraphs.join(" • ") : normalizeText(detailRoot.text());
   const nextCourse = details.match(/Next Course:\s*(.*?)\s+of\s+(January|February|March|April|May|June|July|August|September|October|November|December)\b/i);
   const time = courseTime(details);
-  if (!title || !nextCourse || !time) return [];
+  const monthFirst = details.replace(/,?\s*\d+\s+sessions\b.*$/i, "").match(/Next Course:\s*(January|February|March|April|May|June|July|August|September|October|November|December)\s+((?:\d{1,2}(?:st|nd|rd|th)?(?:\s*(?:,|and)\s*|\s*))+)/i);
+  const monthName = nextCourse?.[2] ?? monthFirst?.[1];
+  const dayText = nextCourse?.[1] ?? monthFirst?.[2];
+  if (!title || !monthName || !dayText || !time) return [];
 
-  const month = MONTHS[nextCourse[2].toLowerCase()];
+  const month = MONTHS[monthName.toLowerCase()];
   const year = inferYear(month, now);
-  const days = Array.from(nextCourse[1].matchAll(/\b(\d{1,2})(?:st|nd|rd|th)?\b/gi)).map((match) => Number(match[1]));
+  const days = Array.from(dayText.replace(/\b\d+\s+sessions\b.*$/i, "").matchAll(/\b(\d{1,2})(?:st|nd|rd|th)?\b/gi)).map((match) => Number(match[1]));
   return Array.from(new Set(days)).flatMap((day): ScrapedClass[] => {
     const date = isoDate(year, month, day);
     if (!date) return [];

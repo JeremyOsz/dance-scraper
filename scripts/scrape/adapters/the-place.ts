@@ -5,6 +5,7 @@ import { absoluteUrl, fetchHtml } from "./common";
 import { extractPlaceCourseSessionDates } from "./the-place-course-sessions";
 import { runPool } from "./the-place-fetch-pool";
 import { THE_PLACE_CAMDEN_TERM_CLOSURES } from "./the-place-term-exclusions";
+import { fetchPlaceBookingSessions } from "./the-place-spektrix";
 
 const sourceUrl = "https://theplace.org.uk/dance/classes-and-courses";
 
@@ -21,6 +22,9 @@ export async function scrapeThePlace(): Promise<AdapterOutput> {
   try {
     const html = await fetchHtml(sourceUrl);
     const $ = cheerio.load(html);
+    if ($("a.c-event-card, .c-event-card__header").length === 0) {
+      throw new Error("No class listings found on The Place website");
+    }
     const listingRows = $("a.c-event-card, .c-event-card__header")
       .map((_, node) => ($(node).is("a") ? node : $(node).closest("a").get(0)))
       .map((_, el) => {
@@ -138,13 +142,13 @@ export async function scrapeThePlace(): Promise<AdapterOutput> {
       error: null
     };
   } catch (error) {
-    return {
-      venueKey: "thePlace",
-      venue: "The Place",
-      sourceUrl,
-      classes: [],
-      ok: false,
-      error: error instanceof Error ? error.message : "Unknown error"
-    };
+    try {
+      return { venueKey: "thePlace", venue: "The Place", sourceUrl, classes: await fetchPlaceBookingSessions(), ok: true, error: null };
+    } catch (bookingError) {
+      return {
+        venueKey: "thePlace", venue: "The Place", sourceUrl, classes: [], ok: false,
+        error: `${error instanceof Error ? error.message : "Website unavailable"}; booking feed: ${bookingError instanceof Error ? bookingError.message : "Unknown error"}`
+      };
+    }
   }
 }

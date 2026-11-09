@@ -7,7 +7,12 @@ export function assertExpectedRedirect(requestedUrl: string, finalUrl: string | 
   const requestedHost = requested.hostname.replace(/^www\./, "");
   const finalHost = final.hostname.replace(/^www\./, "");
   const sameSite = requestedHost === finalHost || requestedHost.endsWith(`.${finalHost}`) || finalHost.endsWith(`.${requestedHost}`);
-  if (!sameSite) {
+  const publishedGoogleSheetDownload =
+    requested.protocol === "https:" && requested.hostname === "docs.google.com" &&
+    /^\/spreadsheets\/d\/e\/[^/]+\/pub$/.test(requested.pathname) && requested.searchParams.get("output") === "csv" &&
+    final.protocol === "https:" && /^doc-[a-z0-9-]+-sheets\.googleusercontent\.com$/.test(final.hostname) &&
+    final.pathname.startsWith("/pub/") && final.searchParams.get("output") === "csv";
+  if (!sameSite && !publishedGoogleSheetDownload) {
     throw new Error(`Unexpected cross-domain redirect: ${requested.hostname} -> ${final.hostname}`);
   }
 }

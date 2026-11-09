@@ -132,7 +132,7 @@ function applyOutputCuration(output: ScrapeOutput): ScrapeOutput {
   const dedupedSessions = dedupeSessionsByStableBookingUrl(output.sessions);
   const hiddenVenueKeys = new Set<VenueKey>(ALWAYS_HIDDEN_VENUE_KEYS);
   for (const venue of output.venues) {
-    if (HIDE_WHILE_EMPTY_VENUE_KEYS.has(venue.key) && venue.count === 0) hiddenVenueKeys.add(venue.key);
+    if (HIDE_WHILE_EMPTY_VENUE_KEYS.has(venue.key) && venue.ok && venue.count === 0) hiddenVenueKeys.add(venue.key);
   }
   const hiddenVenueLabels = new Set(
     output.venues.filter((venue) => hiddenVenueKeys.has(venue.key)).map((venue) => venue.venue)
@@ -245,7 +245,7 @@ async function main() {
     console.warn(`  warning: implausible count change for ${stat.venue}: ${stat.previousSessionCount} -> ${stat.newSessionCount}`);
   }
 
-  if (output.sessions.length === 0) {
+  if (output.sessions.length === 0 || results.some((result) => !result.ok)) {
     process.exitCode = 1;
   }
 }

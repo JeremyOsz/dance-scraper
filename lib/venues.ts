@@ -48,7 +48,7 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
   },
   fiveRhythmsLondon: {
     label: "Five Rhythms London",
-    sourceUrl: "https://www.5rhythms.com/classes/London",
+    sourceUrl: "https://www.5rhythms.com/who-we-are/teacher-communities/europe/england/",
     mapQuery: "5Rhythms London classes"
   },
   superMarioSalsa: {
@@ -83,8 +83,8 @@ export const VENUES: Record<VenueKey, { label: string; sourceUrl: string; mapQue
   },
   hackneyBaths: {
     label: "Hackney Baths",
-    sourceUrl: "https://www.the-baths.co.uk/",
-    mapQuery: "Hackney Baths London"
+    sourceUrl: "https://www.eastwaybaths.co.uk/events",
+    mapQuery: "Eastway Baths, 80 Eastway, London E9 5JH"
   },
   wednesdayMoving: {
     label: "Wednesday Moving",
@@ -261,7 +261,7 @@ export const SOURCE_LOCATIONS: Partial<Record<VenueKey, {
   siobhanDavies: { locationName: "Siobhan Davies Studios", address: "85 St George's Road", postcode: "SE1 6ER", borough: "Southwark" },
   tripSpace: { locationName: "TripSpace Arch", address: "339-340 Acton Mews", postcode: "E8 4EA", borough: "Hackney" },
   chisenhaleDanceSpace: { locationName: "Chisenhale Dance Space", address: "64-84 Chisenhale Road", postcode: "E3 5QZ", borough: "Tower Hamlets" },
-  hackneyBaths: { locationName: "Hackney Baths", address: "11-17 Hackney Road", postcode: "E2 7NX", borough: "Tower Hamlets" },
+  hackneyBaths: { locationName: "Eastway Baths", address: "80 Eastway", postcode: "E9 5JH", borough: "Hackney" },
   wednesdayMoving: { locationName: "Round Chapel Old School Rooms", address: "Powerscroft Road", postcode: "E5 0PU", borough: "Hackney" },
   danceworks: { locationName: "Danceworks", address: "16 Balderton Street", postcode: "W1K 6TN", borough: "Westminster" },
   pineappleDanceStudios: { locationName: "Pineapple Dance Studios", address: "7 Langley Street", postcode: "WC2H 9JA", borough: "Camden" },

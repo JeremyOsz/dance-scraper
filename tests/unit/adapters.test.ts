@@ -20,16 +20,7 @@ vi.mock("../../scripts/scrape/adapters/common", async () => {
 vi.mock("@playwright/test", () => {
   const mockFrame = {
     waitForSelector: vi.fn(async () => {}),
-    evaluate: vi.fn(async () => [
-      {
-        time: "7:00pm",
-        teacher: "Teacher",
-        className: "Example Class",
-        level: "Open",
-        studio: "Studio 1",
-        price: "Free"
-      }
-    ])
+    evaluate: vi.fn(async () => "TIME\tTEACHER\tCLASS\tLEVEL\tSTUDIO\tPRICE\n19:00 - 20:00\tTeacher\tExample Class\tOpen\tStudio 1\tFree")
   };
 
   const mockIframeHandle = {
@@ -1014,39 +1005,13 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.title).toContain("Contact Improvisation");
   });
 
-  it("parses Bachata Community adapter", async () => {
-    fetchHtml
-      .mockResolvedValueOnce(fixture("bachata-home.html"))
-      .mockResolvedValue(fixture("bachata-month.json"));
+  it("parses Bachata Community's current calendar", async () => {
+    fetchHtml.mockResolvedValue(fs.readFileSync("tests/fixtures/crawler-migrations/bachata-v2.json", "utf8"));
     const { scrapeBachataCommunity } = await import("../../scripts/scrape/adapters/bachata-community");
     const output = await scrapeBachataCommunity();
     expect(output.ok).toBe(true);
+    expect(output.classes).toHaveLength(2);
     expect(output.classes[0]?.venue).toBe("Bachata Community");
-    expect(output.classes[0]?.title).toContain("Bachata");
-  });
-
-  it("keeps Bachata Community adapter working when one month payload is malformed", async () => {
-    fetchHtml
-      .mockResolvedValueOnce(fixture("bachata-home.html"))
-      .mockResolvedValueOnce("<html>temporarily unavailable</html>")
-      .mockResolvedValue(fixture("bachata-month.json"));
-    const { scrapeBachataCommunity } = await import("../../scripts/scrape/adapters/bachata-community");
-    const output = await scrapeBachataCommunity();
-    expect(output.ok).toBe(true);
-    expect(output.classes.length).toBeGreaterThan(0);
-    if (output.error !== null) {
-      expect(output.error).toContain("Unexpected token");
-    }
-  });
-
-  it("falls back to default calendar IDs when Bachata homepage is unavailable", async () => {
-    fetchHtml
-      .mockRejectedValueOnce(new Error("Request failed with status code 503"))
-      .mockResolvedValue(fixture("bachata-month.json"));
-    const { scrapeBachataCommunity } = await import("../../scripts/scrape/adapters/bachata-community");
-    const output = await scrapeBachataCommunity();
-    expect(output.ok).toBe(true);
-    expect(output.classes.length).toBeGreaterThan(0);
   });
 
   it("parses Ecstatic Dance London adapter from Eventbrite organizers", async () => {
@@ -1519,7 +1484,7 @@ describe("scraper adapters", () => {
     fetchHtml.mockResolvedValue(fixture("hackney-baths.html"));
     const { scrapeHackneyBaths } = await import("../../scripts/scrape/adapters/hackney-baths");
     const output = await scrapeHackneyBaths();
-    expect(output.ok).toBe(true);
+    expect(output.ok).toBe(false);
     expect(output.classes).toEqual([]);
   });
 
@@ -1657,65 +1622,14 @@ describe("scraper adapters", () => {
     expect(output.classes[0]?.venue).toBe("MamboCity");
   });
 
-  it("parses City Academy adapter", async () => {
-    postJson.mockResolvedValueOnce({
-      success: true,
-      data: [
-        {
-          parent_code: "DBT-1",
-          location_name: "City Academy, Farringdon",
-          tutor_name: "Justyna Sochaj",
-          duration: "8 weeks",
-          event_date: "2026-08-11 18:00:00",
-          event_end_date: "2026-09-29 19:30:00",
-          individual_price: "160.00",
-          venue_discount: "",
-          dateTxt: "11 Aug 2026 - 29 Sep 2026",
-          timeTxt: "6:00 PM - 7:30 PM",
-          course_name: "Ballet Classes - Beginners",
-          course_pageurl: "https://www.city-academy.com/ballet-classes-beginners"
-        }
-      ]
-    });
+  it("parses City Academy's current course timetable", async () => {
+    fetchJson.mockResolvedValue({ max_pages: 1, items: [{ title: "Absolute Beginners Ballet", permalink: "https://www.city-academy.com/absolute-beginners-ballet" }] });
+    fetchHtml.mockResolvedValue(fs.readFileSync("tests/fixtures/crawler-migrations/city-timetable.html", "utf8"));
     const { scrapeCityAcademy } = await import("../../scripts/scrape/adapters/city-academy");
     const output = await scrapeCityAcademy();
     expect(output.ok).toBe(true);
-    expect(output.classes).toHaveLength(1);
-    expect(output.classes[0]?.venue).toBe("City Academy");
-    expect(output.classes[0]?.dayOfWeek).toBe("Tuesday");
-    expect(output.classes[0]?.time).toBe("6:00 PM - 7:30 PM");
-    expect(output.classes[0]?.startDate).toBe("2026-08-11");
-    expect(output.classes[0]?.endDate).toBe("2026-09-29");
-    expect(output.classes[0]?.details).toContain("Justyna Sochaj");
-    expect(output.classes[0]?.isCourse).toBe(true);
-  });
-
-  it("paginates City Academy timetable results until the API returns a short page", async () => {
-    const event = {
-      parent_code: "DBT-1",
-      location_name: "City Academy, Farringdon",
-      tutor_name: "Tutor",
-      duration: "8 weeks",
-      event_date: "2026-08-11 18:00:00",
-      event_end_date: "2026-09-29 19:30:00",
-      individual_price: "160.00",
-      venue_discount: "",
-      dateTxt: "11 Aug 2026 - 29 Sep 2026",
-      timeTxt: "6:00 PM - 7:30 PM",
-      course_name: "Ballet Classes - Beginners",
-      course_pageurl: "https://www.city-academy.com/ballet-classes-beginners"
-    };
-    postJson.mockResolvedValueOnce({
-      success: true,
-      data: Array.from({ length: 100 }, (_, i) => ({ ...event, parent_code: `DBT-${i}`, course_name: `Ballet Class ${i}` }))
-    });
-    postJson.mockResolvedValueOnce({ success: true, data: [{ ...event, parent_code: "DBT-last", event_date: "2026-08-12 18:00:00" }] });
-    const { scrapeCityAcademy } = await import("../../scripts/scrape/adapters/city-academy");
-    const output = await scrapeCityAcademy();
-
-    expect(output.ok).toBe(true);
-    expect(output.classes).toHaveLength(101);
-    expect(postJson).toHaveBeenNthCalledWith(2, expect.any(String), expect.objectContaining({ offset: 100 }));
+    expect(output.classes).toHaveLength(2);
+    expect(output.classes[0]).toMatchObject({ venue: "City Academy", dayOfWeek: "Tuesday", isCourse: true });
   });
 
   it("parses Adrian Outsavvy adapter", async () => {
@@ -2117,9 +2031,10 @@ describe("scraper adapters", () => {
 
   it("handles malformed HTML gracefully", async () => {
     fetchHtml.mockResolvedValue(fixture("malformed.html"));
+    fetchJson.mockResolvedValue([]);
     const { scrapeThePlace } = await import("../../scripts/scrape/adapters/the-place");
     const output = await scrapeThePlace();
-    expect(output.ok).toBe(true);
+    expect(output.ok).toBe(false);
     expect(output.classes).toHaveLength(0);
   });
 

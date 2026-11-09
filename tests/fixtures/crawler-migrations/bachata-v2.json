@@ -1,0 +1,170 @@
+[
+  {
+    "event_id": "4ec7a3d5-02bb-4e80-9439-9db4766b00b2",
+    "name": "Pura Nights, Ealing",
+    "photo_url": [
+      "https://media.bachatacalendar.co.uk/images/events/gallery/2026/09/dc248125-fcd3-4170-804e-121541c570fd.webp"
+    ],
+    "location": "The Drayton Court Hotel",
+    "instance_date": "2026-11-10",
+    "start_time": "2026-11-10 19:30:00+00",
+    "end_time": "2026-11-10 22:45:00+00",
+    "is_recurring": true,
+    "meta_data": {
+      "program": [
+        {
+          "end": "20:15",
+          "type": "class",
+          "start": "19:30",
+          "title": "Bachata"
+        },
+        {
+          "end": "21:00",
+          "type": "class",
+          "start": "20:15",
+          "title": "Salsa"
+        },
+        {
+          "end": "22:45",
+          "type": "party",
+          "start": "21:00",
+          "title": "Social"
+        }
+      ],
+      "music_styles": [
+        "Bachata",
+        "Salsa"
+      ]
+    },
+    "key_times": {
+      "party": {
+        "end": "22:45",
+        "start": "21:00",
+        "active": true
+      },
+      "classes": {
+        "end": "21:00",
+        "start": "19:30",
+        "active": true
+      }
+    },
+    "type": "party",
+    "has_party": true,
+    "has_class": true,
+    "class_start": "19:30",
+    "class_end": "21:00",
+    "party_start": "21:00",
+    "party_end": "22:45",
+    "city_slug": "london-gb",
+    "cover_image_url": "https://media.bachatacalendar.co.uk/images/events/gallery/2026/09/dc248125-fcd3-4170-804e-121541c570fd.webp",
+    "occurrence_id": "3a46c1af-3874-4c18-bc70-255b001aca12",
+    "occurrence_starts_at": "2026-11-10T19:30:00+00:00",
+    "occurrence_ends_at": "2026-11-10T22:45:00+00:00",
+    "city_timezone": "Europe/London",
+    "venue_lat": 51.5142304,
+    "venue_lng": -0.3192527,
+    "primary_organiser_name": "Pura",
+    "is_cancelled": false,
+    "cancellation_reason_label": null,
+    "original_class_start": null,
+    "original_class_end": null,
+    "original_party_start": null,
+    "original_party_end": null,
+    "format": "recurring",
+    "category": "party",
+    "slug": "pura-nights-ealing",
+    "has_timed_session": true,
+    "organiser_byline": "By Pura",
+    "byline_organisers": [
+      {
+        "id": "40237a6c-23df-468b-a67e-b1dcd19a63f2",
+        "display_name": "Pura"
+      }
+    ],
+    "payment_methods": null
+  },
+  {
+    "event_id": "4ec7a3d5-02bb-4e80-9439-9db4766b00b2",
+    "name": "Pura Nights, Ealing",
+    "photo_url": [
+      "https://media.bachatacalendar.co.uk/images/events/gallery/2026/09/dc248125-fcd3-4170-804e-121541c570fd.webp"
+    ],
+    "location": "The Drayton Court Hotel",
+    "instance_date": "2026-11-17",
+    "start_time": "2026-11-17 19:30:00+00",
+    "end_time": "2026-11-17 22:45:00+00",
+    "is_recurring": true,
+    "meta_data": {
+      "program": [
+        {
+          "end": "20:15",
+          "type": "class",
+          "start": "19:30",
+          "title": "Bachata"
+        },
+        {
+          "end": "21:00",
+          "type": "class",
+          "start": "20:15",
+          "title": "Salsa"
+        },
+        {
+          "end": "22:45",
+          "type": "party",
+          "start": "21:00",
+          "title": "Social"
+        }
+      ],
+      "music_styles": [
+        "Bachata",
+        "Salsa"
+      ]
+    },
+    "key_times": {
+      "party": {
+        "end": "22:45",
+        "start": "21:00",
+        "active": true
+      },
+      "classes": {
+        "end": "21:00",
+        "start": "19:30",
+        "active": true
+      }
+    },
+    "type": "party",
+    "has_party": true,
+    "has_class": true,
+    "class_start": "19:30",
+    "class_end": "21:00",
+    "party_start": "21:00",
+    "party_end": "22:45",
+    "city_slug": "london-gb",
+    "cover_image_url": "https://media.bachatacalendar.co.uk/images/events/gallery/2026/09/dc248125-fcd3-4170-804e-121541c570fd.webp",
+    "occurrence_id": "d309b314-561b-4ff7-a2be-12ffd03684f8",
+    "occurrence_starts_at": "2026-11-17T19:30:00+00:00",
+    "occurrence_ends_at": "2026-11-17T22:45:00+00:00",
+    "city_timezone": "Europe/London",
+    "venue_lat": 51.5142304,
+    "venue_lng": -0.3192527,
+    "primary_organiser_name": "Pura",
+    "is_cancelled": false,
+    "cancellation_reason_label": null,
+    "original_class_start": null,
+    "original_class_end": null,
+    "original_party_start": null,
+    "original_party_end": null,
+    "format": "recurring",
+    "category": "party",
+    "slug": "pura-nights-ealing",
+    "has_timed_session": true,
+    "organiser_byline": "By Pura",
+    "byline_organisers": [
+      {
+        "id": "40237a6c-23df-468b-a67e-b1dcd19a63f2",
+        "display_name": "Pura"
+      }
+    ],
+    "payment_methods": null
+  }
+]

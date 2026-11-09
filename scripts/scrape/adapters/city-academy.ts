@@ -1,150 +1,93 @@
-import { format } from "date-fns";
+import { format, isValid, parse } from "date-fns";
+import * as cheerio from "cheerio";
 import type { AdapterOutput, ScrapedClass } from "../types";
-import { postJson } from "./common";
+import { fetchHtml, fetchJson } from "./common";
 
 const sourceUrl = "https://www.city-academy.com/Dance-Classes";
-const timetableApiUrl = "https://www.city-academy.com/caapi/public/api/event/casearchcourse";
-const pageSize = 100;
-const danceSubjects = [
-  "Absolute Beginners",
-  "Ballet",
-  "Ballroom",
-  "Belly Dance",
-  "Bollywood",
-  "Burlesque",
-  "Commercial Dance",
-  "Contemporary",
-  "Dance Foundation",
-  "Diva Dance",
-  "Flamenco",
-  "Jazz Dance",
-  "Jive",
-  "Salsa",
-  "Street Dance",
-  "Tango",
-  "Tap Dance"
-];
+const catalogueApiUrl = "https://www.city-academy.com/wp-json/ca/v1/course-search";
+const danceDepartment = "7";
+const courseConcurrency = 4;
 
-type CityAcademyEvent = {
-  parent_code?: string;
-  location_name?: string;
-  tutor_name?: string;
-  duration?: string;
-  event_date?: string;
-  event_end_date?: string;
-  individual_price?: string;
-  venue_discount?: string;
-  timeTxt?: string;
-  course_name?: string;
-  course_pageurl?: string;
-};
+type Course = { title: string; permalink: string };
 
-type CityAcademyResponse = {
-  success?: boolean;
-  message?: string;
-  data?: CityAcademyEvent[];
-};
-
-function normalizeText(value: string | null | undefined): string {
-  return (value ?? "").replace(/\s+/g, " ").trim();
+function normalizeText(value: string): string {
+  return value.replace(/\s+/g, " ").trim();
 }
 
-function isoDate(value: string | undefined): string | null {
-  const match = value?.match(/^(\d{4}-\d{2}-\d{2})/);
-  return match?.[1] ?? null;
+function parseDate(value: string): string | null {
+  const parsed = parse(value.trim(), "dd MMM yyyy", new Date());
+  return isValid(parsed) ? format(parsed, "yyyy-MM-dd") : null;
 }
 
-function dayOfWeek(date: string | null): string | null {
-  if (!date) return null;
-  const parsed = new Date(`${date}T12:00:00`);
-  return Number.isNaN(parsed.getTime()) ? null : format(parsed, "EEEE");
-}
-
-function timeRange(event: CityAcademyEvent): string | null {
-  const published = normalizeText(event.timeTxt);
-  if (published) return published;
-  const start = event.event_date?.match(/\s(\d{2}:\d{2})/)?.[1];
-  const end = event.event_end_date?.match(/\s(\d{2}:\d{2})/)?.[1];
-  return start ? `${start}${end ? ` - ${end}` : ""}` : null;
-}
-
-function toClass(event: CityAcademyEvent): ScrapedClass | null {
-  const title = normalizeText(event.course_name);
-  const bookingUrl = normalizeText(event.course_pageurl);
-  const startDate = isoDate(event.event_date);
-  if (!title || !bookingUrl || !startDate) return null;
-
-  const endDate = isoDate(event.event_end_date) ?? startDate;
-  const details = [
-    normalizeText(event.location_name) || null,
-    normalizeText(event.tutor_name) ? `Tutor: ${normalizeText(event.tutor_name)}` : null,
-    normalizeText(event.duration) || null,
-    normalizeText(event.individual_price) ? `£${normalizeText(event.individual_price)}` : null,
-    normalizeText(event.venue_discount) || null
-  ]
-    .filter((part): part is string => Boolean(part))
-    .join(" • ");
-
-  return {
-    venue: "City Academy",
-    title,
-    details: details || null,
-    dayOfWeek: dayOfWeek(startDate),
-    time: timeRange(event),
-    startDate,
-    endDate,
-    isCourse: true,
-    bookingUrl,
-    sourceUrl
-  };
-}
-
-async function fetchAllEvents(): Promise<CityAcademyEvent[]> {
-  const events: CityAcademyEvent[] = [];
-  for (let offset = 0; ; offset += pageSize) {
-    const response = await postJson<CityAcademyResponse>(timetableApiUrl, {
-      event_subject_title: danceSubjects,
-      event_day: ["All"],
-      limit: pageSize,
-      offset
+function parseTimetable(html: string, course: Course): ScrapedClass[] {
+  const $ = cheerio.load(html);
+  const title = normalizeText($("h1").first().text()) || cheerio.load(course.title).text();
+  const classes: ScrapedClass[] = [];
+  // The site repeats upcoming courses and mobile cards. Read desktop rows, then deduplicate.
+  $(".ca-row[data-date], .ca-row-stsoon[data-date]").each((_, element) => {
+    const row = $(element);
+    const cell = (label: string) => normalizeText(row.find(`[data-label="${label}"]`).text());
+    const dates = cell("Date").split(/\s+[-–]\s+/);
+    const startDate = parseDate(dates[0] ?? "");
+    if (!startDate) return;
+    const endDate = parseDate(dates[1] ?? "") ?? startDate;
+    const tutor = cell("Tutor");
+    const details = [cell("Venue"), tutor ? `Tutor: ${tutor}` : "", cell("Duration"), cell("Price")]
+      .filter(Boolean).join(" • ");
+    classes.push({
+      venue: "City Academy",
+      title,
+      details: details || null,
+      dayOfWeek: format(new Date(`${startDate}T12:00:00`), "EEEE"),
+      time: cell("Time") || null,
+      startDate,
+      endDate,
+      isCourse: true,
+      bookingUrl: course.permalink,
+      sourceUrl
     });
-    if (!response.success || !Array.isArray(response.data)) {
-      throw new Error(response.message || "City Academy timetable API returned an invalid response");
+  });
+  return classes;
+}
+
+async function fetchCourses(): Promise<Course[]> {
+  const courses = new Map<string, Course>();
+  for (let page = 1; ; page += 1) {
+    const response = await fetchJson<unknown>(`${catalogueApiUrl}?department=${danceDepartment}&page=${page}`);
+    if (!response || typeof response !== "object" || !("items" in response) || !Array.isArray(response.items)
+      || !("max_pages" in response) || typeof response.max_pages !== "number" || !Number.isInteger(response.max_pages)) {
+      throw new Error("City Academy course catalogue returned an invalid response");
     }
-    events.push(...response.data);
-    if (response.data.length < pageSize) break;
+    for (const item of response.items) {
+      if (!item || typeof item !== "object" || typeof item.title !== "string" || typeof item.permalink !== "string") {
+        throw new Error("City Academy course catalogue returned an invalid course");
+      }
+      const url = new URL(item.permalink, sourceUrl);
+      if (url.origin !== new URL(sourceUrl).origin) throw new Error("City Academy returned an unexpected course URL");
+      courses.set(url.href, { title: item.title, permalink: url.href });
+    }
+    if (page >= response.max_pages) break;
   }
-  return events;
+  return [...courses.values()];
 }
 
 export async function scrapeCityAcademy(): Promise<AdapterOutput> {
   try {
-    const events = await fetchAllEvents();
-    const classes = events.map(toClass).filter((item): item is ScrapedClass => item !== null);
-    const unique = Array.from(
-      new Map(
-        classes.map((item) => [
-          `${item.title}|${item.startDate}|${item.endDate}|${item.time}|${item.details}`,
-          item
-        ])
-      ).values()
-    );
-
-    return {
-      venueKey: "cityAcademy",
-      venue: "City Academy",
-      sourceUrl,
-      classes: unique,
-      ok: true,
-      error: null
-    };
+    const courses = await fetchCourses();
+    const classes: ScrapedClass[] = [];
+    for (let offset = 0; offset < courses.length; offset += courseConcurrency) {
+      const batch = await Promise.all(courses.slice(offset, offset + courseConcurrency).map(async (course) =>
+        parseTimetable(await fetchHtml(course.permalink), course)
+      ));
+      classes.push(...batch.flat());
+    }
+    const unique = Array.from(new Map(classes.map((item) => [
+      `${item.bookingUrl}|${item.startDate}|${item.endDate}|${item.time}|${item.details}`, item
+    ])).values());
+    return { venueKey: "cityAcademy", venue: "City Academy", sourceUrl, classes: unique, ok: true, error: null };
   } catch (error) {
     return {
-      venueKey: "cityAcademy",
-      venue: "City Academy",
-      sourceUrl,
-      classes: [],
-      ok: false,
+      venueKey: "cityAcademy", venue: "City Academy", sourceUrl, classes: [], ok: false,
       error: error instanceof Error ? error.message : "Unknown error"
     };
   }
