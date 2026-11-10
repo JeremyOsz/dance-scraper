@@ -4,11 +4,14 @@ import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { TrackedOutboundLink } from "@/components/tracked-outbound-link";
 import { canAddSessionToCalendar } from "@/lib/calendar-export";
 import { formatTimeRange } from "@/lib/date";
 import { inferDanceStyles } from "@/lib/dance-types";
 import { isFeaturedSession } from "@/lib/featured";
 import { LEVELS, matchesSessionLevel } from "@/lib/levels";
+import { extractOutboundHostname } from "@/lib/outbound-utils";
+import { captureAppEvent, classAnalyticsProperties } from "@/lib/analytics";
 import type { CalendarEventSelection } from "./types";
 
 type Props = {
@@ -26,14 +29,23 @@ export function EventDetailSheet({ selection, shortlisted, onOpenChange, onToggl
   const levels = LEVELS.filter((level) => matchesSessionLevel(session, level));
   const bookingHref = session.outboundBookingHref ?? session.bookingUrl;
   const sourceHref = session.outboundSourceHref ?? session.sourceUrl;
+  const analyticsProperties = { ...classAnalyticsProperties(session), class_date: format(selection.date, "yyyy-MM-dd") };
 
   const shareEvent = async () => {
     const url = window.location.href;
     const text = `${session.title} — ${format(selection.date, "EEE d MMM")} at ${session.locationName ?? organizer}`;
-    if (navigator.share) {
-      await navigator.share({ title: session.title, text, url });
-    } else if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(`${text}\n${url}`);
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: session.title, text, url });
+        captureAppEvent("class_shared", { ...analyticsProperties, method: "native" });
+      } else if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(`${text}\n${url}`);
+        captureAppEvent("class_shared", { ...analyticsProperties, method: "clipboard" });
+      }
+    } catch (error) {
+      if (!(error instanceof Error && error.name === "AbortError")) {
+        captureAppEvent("app_error", { area: "class_share", reason: "share_failed" });
+      }
     }
   };
 
@@ -83,18 +95,18 @@ export function EventDetailSheet({ selection, shortlisted, onOpenChange, onToggl
             <div className="mt-7 flex flex-col gap-2">
               {canAddSessionToCalendar(session) ? (
                 <Button variant="outline" asChild className="h-12 w-full justify-between border-[#d5d1ca] bg-white">
-                  <a href={`/api/classes/${encodeURIComponent(session.id)}/calendar`}><span className="flex items-center gap-2"><CalendarPlus className="h-4 w-4" aria-hidden />Add to calendar</span><ExternalLink className="h-4 w-4" aria-hidden /></a>
+                  <a href={`/api/classes/${encodeURIComponent(session.id)}/calendar`} onClick={() => captureAppEvent("calendar_export_clicked", analyticsProperties)}><span className="flex items-center gap-2"><CalendarPlus className="h-4 w-4" aria-hidden />Add to calendar</span><ExternalLink className="h-4 w-4" aria-hidden /></a>
                 </Button>
               ) : null}
               <Button variant="outline" asChild className="h-12 w-full justify-between border-[#d5d1ca] bg-white">
-                <a href={sourceHref} target="_blank" rel="noreferrer"><span>View source</span><ExternalLink className="h-4 w-4" aria-hidden /></a>
+                <TrackedOutboundLink href={sourceHref} analyticsKind="source" destHost={extractOutboundHostname(session.sourceUrl)} analyticsProperties={analyticsProperties}><span>View source</span><ExternalLink className="h-4 w-4" aria-hidden /></TrackedOutboundLink>
               </Button>
             </div>
           </div>
 
           <div className="border-t border-[#dedbd5] bg-[#fbfaf7] p-4">
             <Button asChild className="h-14 w-full rounded-none bg-[#075178] text-base text-white hover:bg-[#063e5c]">
-              <a href={bookingHref} target="_blank" rel="noreferrer">Book now</a>
+              <TrackedOutboundLink href={bookingHref} analyticsKind="booking" destHost={extractOutboundHostname(session.bookingUrl)} analyticsProperties={analyticsProperties}>Book now</TrackedOutboundLink>
             </Button>
           </div>
         </div>

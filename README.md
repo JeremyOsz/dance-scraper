@@ -86,6 +86,29 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+## PostHog analytics
+
+Set `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and `NEXT_PUBLIC_POSTHOG_HOST` in `.env.local`
+using the project token and client API host from your PostHog project settings.
+Use `https://eu.i.posthog.com` for EU Cloud or `https://us.i.posthog.com` for US Cloud.
+These are public browser configuration values. Do not use a personal API key.
+
+For Vercel, set both variables for the deployment environments you want to track,
+then redeploy. Next.js embeds these values at build time. Leave either value blank
+to disable PostHog, including during local development.
+
+The integration captures page views, automatic interactions, and deliberate app
+usage events for discovery, class details, shortlist saves, shares, calendar export
+clicks, and outbound booking clicks. Feedback delivery outcomes are captured on
+the server with the browser's anonymous identity. Session recording is disabled.
+Existing Vercel Analytics remains enabled. See [the event definitions](docs/analytics.md).
+
+To verify delivery after configuring the variables, visit the calendar, navigate
+to another page, and click a booking link. Check PostHog's live events for
+`$pageview` and `outbound_click`.
+
+See the [PostHog Next.js documentation](https://posthog.com/docs/libraries/next-js).
+
 ## Scripts
 
 - `npm run scrape` scrape + normalize all configured organisers

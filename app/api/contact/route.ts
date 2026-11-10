@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { captureContactOutcome } from "@/lib/analytics-server";
 
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
@@ -45,17 +46,20 @@ export async function POST(request: Request) {
   const resend = new Resend(RESEND_API_KEY);
 
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: FROM_EMAIL,
       to: CONTACT_EMAIL,
       subject: "New message from London Dance Calendar",
       text: textLines.join("\n")
     });
+    if (result.error) throw new Error("Email provider rejected contact message");
   } catch (error) {
     console.error("Failed to send contact email", error);
+    captureContactOutcome(request, "contact_failed");
     return NextResponse.json({ error: "Failed to send message" }, { status: 502 });
   }
 
+  captureContactOutcome(request, "contact_sent");
   return NextResponse.json({ ok: true });
 }
 

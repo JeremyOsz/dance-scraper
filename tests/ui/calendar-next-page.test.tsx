@@ -3,9 +3,12 @@ import { renderToString } from "react-dom/server";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { addDays, format } from "date-fns";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CalendarNextPage } from "../../components/calendar-next/calendar-next-page";
 import type { DanceSession } from "../../lib/types";
+import posthog from "posthog-js";
+
+vi.mock("posthog-js", () => ({ default: { capture: vi.fn() } }));
 
 const mockReplace = vi.fn();
 let mockSearchParams = new URLSearchParams();
@@ -64,6 +67,9 @@ const sessions: DanceSession[] = [
 
 describe("CalendarNextPage", () => {
   beforeEach(() => {
+    vi.clearAllMocks();
+    vi.stubEnv("NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN", "phc_test");
+    vi.stubEnv("NEXT_PUBLIC_POSTHOG_HOST", "https://eu.i.posthog.com");
     mockReplace.mockReset();
     mockSearchParams = new URLSearchParams();
     window.localStorage.clear();
@@ -73,6 +79,8 @@ describe("CalendarNextPage", () => {
       value: { writeText: vi.fn().mockResolvedValue(undefined) }
     });
   });
+
+  afterEach(() => vi.unstubAllEnvs());
 
   it("uses the serialized prerender date for server markup", () => {
     const html = renderToString(
@@ -140,9 +148,68 @@ describe("CalendarNextPage", () => {
     );
 
     await user.click(within(dialog).getByRole("button", { name: "Save to shortlist" }));
+    expect(posthog.capture).toHaveBeenCalledWith("class_details_opened", expect.objectContaining({ class_id: "morning", organizer: "The Place", view: "week" }));
+    expect(posthog.capture).toHaveBeenCalledWith("class_saved", expect.objectContaining({ class_id: "morning", shortlist_count: 1 }));
     await waitFor(() => {
       expect(JSON.parse(window.localStorage.getItem("dance-scraper.shortlist-session-ids") ?? "[]")).toEqual(["morning"]);
     });
+  });
+
+  it("captures booking and source clicks from the current calendar", async () => {
+    vi.stubEnv("NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN", "phc_test");
+    vi.stubEnv("NEXT_PUBLIC_POSTHOG_HOST", "https://eu.i.posthog.com");
+    try {
+      const user = userEvent.setup();
+      render(<CalendarNextPage initialSessions={sessions} classCount={2} venueNames={["The Place", "Rambert"]} />);
+      await user.click(within(screen.getByTestId("desktop-card-agenda")).getByRole("button", { name: "Open details: Morning Contemporary" }));
+      const dialog = await screen.findByRole("dialog", { name: "Morning Contemporary" });
+      for (const [name, kind] of [["Book now", "booking"], ["View source", "source"]]) {
+        const link = within(dialog).getByRole("link", { name });
+        link.addEventListener("click", (event) => event.preventDefault());
+        await user.click(link);
+        expect(posthog.capture).toHaveBeenCalledWith("outbound_click", expect.objectContaining({
+          kind, dest_host: "example.com", class_id: "morning", class_title: "Morning Contemporary", organizer: "The Place"
+        }));
+      }
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
+  it("debounces search analytics and reports zero results without sending search text", async () => {
+    const user = userEvent.setup();
+    render(<CalendarNextPage initialSessions={sessions} classCount={2} venueNames={["The Place", "Rambert"]} />);
+    expect(posthog.capture).not.toHaveBeenCalled();
+    await user.type(screen.getByRole("textbox", { name: "Search classes" }), "private-search");
+    expect(posthog.capture).not.toHaveBeenCalled();
+    await waitFor(() => expect(posthog.capture).toHaveBeenCalledWith("calendar_filters_changed", expect.objectContaining({
+      has_search: true, search_length: 14, matching_class_count: 0, no_results: true
+    })), { timeout: 1500 });
+    const filterEvents = vi.mocked(posthog.capture).mock.calls.filter(([name]) => name === "calendar_filters_changed");
+    expect(filterEvents).toHaveLength(1);
+    expect(JSON.stringify(filterEvents)).not.toContain("private-search");
+  });
+
+  it("tracks real view changes without treating URL hydration as interaction", async () => {
+    mockSearchParams = new URLSearchParams("view=day");
+    const user = userEvent.setup();
+    render(<CalendarNextPage initialSessions={sessions} classCount={2} venueNames={["The Place", "Rambert"]} />);
+    expect(posthog.capture).not.toHaveBeenCalled();
+    await user.click(screen.getByRole("radio", { name: "Month" }));
+    expect(posthog.capture).toHaveBeenCalledExactlyOnceWith("calendar_view_changed", expect.objectContaining({ previous_view: "day", view: "month" }));
+  });
+
+  it("captures successful class sharing and calendar export intent", async () => {
+    const user = userEvent.setup();
+    render(<CalendarNextPage initialSessions={sessions} classCount={2} venueNames={["The Place", "Rambert"]} />);
+    await user.click(within(screen.getByTestId("desktop-card-agenda")).getByRole("button", { name: "Open details: Morning Contemporary" }));
+    const dialog = await screen.findByRole("dialog", { name: "Morning Contemporary" });
+    await user.click(within(dialog).getByRole("button", { name: "Share class" }));
+    expect(posthog.capture).toHaveBeenCalledWith("class_shared", expect.objectContaining({ class_id: "morning", method: "clipboard" }));
+    const calendarLink = within(dialog).getByRole("link", { name: "Add to calendar" });
+    calendarLink.addEventListener("click", (event) => event.preventDefault());
+    await user.click(calendarLink);
+    expect(posthog.capture).toHaveBeenCalledWith("calendar_export_clicked", expect.objectContaining({ class_id: "morning" }));
   });
 
   it("hydrates supported filters and view from the URL", async () => {

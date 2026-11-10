@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import type { Route } from "next";
 import { addDays, addMonths, format, isValid, parseISO, startOfDay, subDays, subMonths } from "date-fns";
@@ -13,6 +13,7 @@ import { matchesDanceStyle } from "@/lib/dance-types";
 import { getForwardDayWindow, isSessionActiveOnDate } from "@/lib/date";
 import { matchesSessionLevel } from "@/lib/levels";
 import { advanceLoadedDayCount, matchesTimeBuckets } from "@/lib/calendar-layout";
+import { captureAppEvent, classAnalyticsProperties } from "@/lib/analytics";
 import type { DanceSessionOutbound } from "@/lib/types";
 import { CalendarFiltersPanel } from "./calendar-filters";
 import { CalendarQuerySync } from "./calendar-query-sync";
@@ -68,6 +69,7 @@ export function CalendarNextPage({ initialDate, classCount, venueNames, location
   const [shortlistIds, setShortlistIds] = useState<string[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEventSelection | null>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const pendingFilterEvent = useRef<CalendarFilters | null>(null);
 
   const loadSessions = useCallback(async () => {
     if (initialSessions !== undefined) {
@@ -85,6 +87,7 @@ export function CalendarNextPage({ initialDate, classCount, venueNames, location
       if (!Array.isArray(payload.sessions)) throw new Error("Classes API response did not include sessions");
       setSessions(payload.sessions);
     } catch {
+      captureAppEvent("app_error", { area: "class_listings", reason: "load_failed" });
       setError("Unable to load class listings. Please try again.");
     } finally {
       setLoading(false);
@@ -156,19 +159,77 @@ export function CalendarNextPage({ initialDate, classCount, venueNames, location
     return count + filteredSessions.filter((session) => isSessionActiveOnDate(session, iso)).length;
   }, 0), [filteredSessions, visibleDates]);
 
-  const toggleShortlist = (sessionId: string) => setShortlistIds((current) => current.includes(sessionId) ? current.filter((id) => id !== sessionId) : [...current, sessionId]);
+  const updateFilters: React.Dispatch<React.SetStateAction<CalendarFilters>> = (update) => {
+    pendingFilterEvent.current ??= filters;
+    setFilters(update);
+  };
+
+  useEffect(() => {
+    if (!pendingFilterEvent.current || loading) return;
+    const previousValues = new Map(Object.entries(pendingFilterEvent.current));
+    const timer = window.setTimeout(() => {
+      pendingFilterEvent.current = null;
+      const changedFilters = Object.entries(filters)
+        .filter(([key, value]) => JSON.stringify(value) !== JSON.stringify(previousValues.get(key)))
+        .map(([key]) => key);
+      if (changedFilters.length === 0) return;
+      captureAppEvent("calendar_filters_changed", {
+        view,
+        changed_filters: changedFilters,
+        has_search: Boolean(filters.search.trim()),
+        search_length: filters.search.trim().length,
+        styles: filters.styles,
+        organizers: filters.venues,
+        locations: filters.locations,
+        levels: filters.levels,
+        times: filters.times,
+        days: filters.days,
+        workshops_only: filters.workshopsOnly,
+        courses_only: filters.coursesOnly,
+        shortlist_only: filters.shortlistOnly,
+        active_filter_count: countFilters(filters),
+        matching_class_count: filteredSessions.length,
+        no_results: filteredSessions.length === 0
+      });
+    }, 600);
+    return () => window.clearTimeout(timer);
+  }, [filters, filteredSessions.length, loading, view]);
+
+  const toggleShortlist = (sessionId: string) => {
+    const saved = shortlistSet.has(sessionId);
+    const session = sessions.find((item) => item.id === sessionId);
+    setShortlistIds((current) => saved ? current.filter((id) => id !== sessionId) : [...current, sessionId]);
+    if (session) captureAppEvent(saved ? "class_unsaved" : "class_saved", {
+      ...classAnalyticsProperties(session),
+      view,
+      shortlist_count: shortlistIds.length + (saved ? -1 : 1)
+    });
+  };
+  const openEvent = (selection: CalendarEventSelection) => {
+    setSelectedEvent(selection);
+    captureAppEvent("class_details_opened", {
+      ...classAnalyticsProperties(selection.session),
+      class_date: format(selection.date, "yyyy-MM-dd"),
+      view,
+      active_filter_count: countFilters(filters)
+    });
+  };
   const loadMoreDays = () => view === "week" && setLoadedDayCount((current) => advanceLoadedDayCount(current, 7, MAX_WEEK_DAYS));
 
   const selectView = (nextView: CalendarView) => {
+    if (nextView !== view) captureAppEvent("calendar_view_changed", { view: nextView, previous_view: view });
     setView(nextView);
     if (nextView !== "week") setLoadedDayCount(INITIAL_WEEK_DAYS);
   };
   const openMonthDate = (date: Date) => {
+    captureAppEvent("calendar_date_changed", { action: "month_date", view, date: format(date, "yyyy-MM-dd") });
+    captureAppEvent("calendar_view_changed", { view: "day", previous_view: view });
     setAnchorDate(startOfDay(date));
     setActiveMobileDate(startOfDay(date));
     setView("day");
   };
   const navigate = (direction: -1 | 1) => {
+    captureAppEvent("calendar_date_changed", { action: direction === 1 ? "next" : "previous", view });
     if (view === "month") setAnchorDate((current) => direction === 1 ? addMonths(current, 1) : subMonths(current, 1));
     else setAnchorDate((current) => direction === 1 ? addDays(current, view === "week" ? 7 : 1) : subDays(current, view === "week" ? 7 : 1));
   };
@@ -180,8 +241,19 @@ export function CalendarNextPage({ initialDate, classCount, venueNames, location
 
   const shareView = async () => {
     const url = window.location.href;
-    if (navigator.share) await navigator.share({ title: "London Dance Calendar", text: "London dance and movement classes", url });
-    else if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(url);
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "London Dance Calendar", text: "London dance and movement classes", url });
+        captureAppEvent("calendar_shared", { view, method: "native" });
+      } else if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+        captureAppEvent("calendar_shared", { view, method: "clipboard" });
+      }
+    } catch (error) {
+      if (!(error instanceof Error && error.name === "AbortError")) {
+        captureAppEvent("app_error", { area: "calendar_share", reason: "share_failed" });
+      }
+    }
   };
 
   return (
@@ -214,7 +286,7 @@ export function CalendarNextPage({ initialDate, classCount, venueNames, location
 
       <div className="mx-auto grid max-w-[1800px] lg:grid-cols-[250px_minmax(0,1fr)]">
         <aside aria-label="Filters" className="sticky top-[72px] hidden h-[calc(100svh-72px)] min-h-0 self-start overflow-hidden border-r border-[#c9c5bd] bg-[#f8f6f1]/94 lg:block">
-          <CalendarFiltersPanel filters={filters} setFilters={setFilters} venueNames={venueNames} locationNames={locationNames} resultCount={visibleOccurrenceCount} shortlistCount={shortlistIds.length} />
+          <CalendarFiltersPanel filters={filters} setFilters={updateFilters} venueNames={venueNames} locationNames={locationNames} resultCount={visibleOccurrenceCount} shortlistCount={shortlistIds.length} />
         </aside>
 
         <section className="min-w-0 px-4 py-5 md:px-6 md:py-6">
@@ -222,7 +294,10 @@ export function CalendarNextPage({ initialDate, classCount, venueNames, location
             <div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" className="h-9 w-9 rounded-none border-[#c9c5bd] bg-[#fffefa] p-0 text-[#073d5b]" aria-label="Previous period" onClick={() => navigate(-1)}><ChevronLeft className="h-4 w-4" aria-hidden /></Button>
-                <Button variant="outline" size="sm" className="h-9 rounded-none border-[#ee5b28] bg-[#fffefa] px-4 font-semibold text-[#d94414] hover:bg-[#fff3ed] hover:text-[#bd360d]" onClick={() => setAnchorDate(startOfDay(new Date()))}>Today</Button>
+                <Button variant="outline" size="sm" className="h-9 rounded-none border-[#ee5b28] bg-[#fffefa] px-4 font-semibold text-[#d94414] hover:bg-[#fff3ed] hover:text-[#bd360d]" onClick={() => {
+                  setAnchorDate(startOfDay(new Date()));
+                  captureAppEvent("calendar_date_changed", { action: "today", view });
+                }}>Today</Button>
                 <Button variant="outline" size="sm" className="h-9 w-9 rounded-none border-[#c9c5bd] bg-[#fffefa] p-0 text-[#073d5b]" aria-label="Next period" onClick={() => navigate(1)}><ChevronRight className="h-4 w-4" aria-hidden /></Button>
               </div>
               <h2 className="font-display mt-4 text-xl font-semibold tracking-[-0.02em] text-[#073d5b] md:text-[26px]">{dateLabel}</h2>
@@ -267,8 +342,11 @@ export function CalendarNextPage({ initialDate, classCount, venueNames, location
             <MonthGrid anchorDate={anchorDate} today={today} sessions={filteredSessions} onOpenDate={openMonthDate} />
           ) : (
             <>
-              <DesktopAgenda dates={visibleDates} today={today} sessions={filteredSessions} view={view} shortlistSet={shortlistSet} onSelect={setSelectedEvent} onToggleShortlist={toggleShortlist} onNearEnd={loadMoreDays} />
-              <MobileAgenda dates={visibleDates} today={today} activeDate={activeMobileDate} sessions={filteredSessions} view={view} shortlistSet={shortlistSet} onDateChange={setActiveMobileDate} onSelect={setSelectedEvent} onToggleShortlist={toggleShortlist} onNearEnd={loadMoreDays} />
+              <DesktopAgenda dates={visibleDates} today={today} sessions={filteredSessions} view={view} shortlistSet={shortlistSet} onSelect={openEvent} onToggleShortlist={toggleShortlist} onNearEnd={loadMoreDays} />
+              <MobileAgenda dates={visibleDates} today={today} activeDate={activeMobileDate} sessions={filteredSessions} view={view} shortlistSet={shortlistSet} onDateChange={(date) => {
+                setActiveMobileDate(date);
+                captureAppEvent("calendar_date_changed", { action: "mobile_date", view, date: format(date, "yyyy-MM-dd") });
+              }} onSelect={openEvent} onToggleShortlist={toggleShortlist} onNearEnd={loadMoreDays} />
             </>
           )}
         </section>
@@ -277,7 +355,7 @@ export function CalendarNextPage({ initialDate, classCount, venueNames, location
       <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
         <SheetContent side="right" className="calendar-next-filter-sheet overflow-hidden border-[#d8d4cc] bg-[#f8f6f1] p-0 [&>button]:hidden lg:hidden">
           <SheetHeader className="sr-only"><SheetTitle>Filters</SheetTitle><SheetDescription>Filter dance classes</SheetDescription></SheetHeader>
-          <CalendarFiltersPanel filters={filters} setFilters={setFilters} venueNames={venueNames} locationNames={locationNames} resultCount={visibleOccurrenceCount} shortlistCount={shortlistIds.length} onClose={() => setFiltersOpen(false)} />
+          <CalendarFiltersPanel filters={filters} setFilters={updateFilters} venueNames={venueNames} locationNames={locationNames} resultCount={visibleOccurrenceCount} shortlistCount={shortlistIds.length} onClose={() => setFiltersOpen(false)} />
         </SheetContent>
       </Sheet>
 

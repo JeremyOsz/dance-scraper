@@ -6,11 +6,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://*.posthog.com",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: https:",
       "font-src 'self' data:",
-      "connect-src 'self' https://vitals.vercel-insights.com https://*.vercel-insights.com",
+      "connect-src 'self' https://vitals.vercel-insights.com https://*.vercel-insights.com https://*.posthog.com",
       "frame-src https://www.google.com",
       "worker-src 'self' blob:",
       "manifest-src 'self'",
